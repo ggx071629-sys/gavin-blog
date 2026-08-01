@@ -9,7 +9,6 @@ Read this index first. Load only entries whose `load_when` matches the task.
 | sdd-lifecycle | L1 | Active spec 从创建、验证到压缩归档的状态转换 | spec-create, spec-close | Gavin | [_sdd/lifecycle.md](_sdd/lifecycle.md) |
 | sdd-policy | L1 | 风险触发、短生命周期的 Spec-Driven Development 规则 | behavior-change, api-change, data-change, security-change, cross-stack-change | Gavin | [_sdd/README.md](_sdd/README.md) |
 | sdd-template | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
-| spec-20260802-engineering-closeout | L1 | 将本地 MVP 收敛为可复现、可审计的发布候选基线并启动首次 Evolution 实际闭环 | task:20260802-engineering-closeout | Gavin | [active/20260802-engineering-closeout.md](active/20260802-engineering-closeout.md) |
 | archive-20260731-core-article-loop | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -27,3 +26,4 @@ Read this index first. Load only entries whose `load_when` matches the task.
 | archive-20260801-seo-discovery | L2 | 为全部公开内容补齐规范元数据、结构化数据、RSS、站点地图与爬虫入口 | task:20260801-seo-discovery | Gavin | [archive/20260801-seo-discovery.md](archive/20260801-seo-discovery.md) |
 | archive-20260801-site-search | L2 | 使用 SQLite FTS5 提供覆盖已发布内容与文章分类信息的全站搜索闭环 | task:20260801-site-search | Gavin | [archive/20260801-site-search.md](archive/20260801-site-search.md) |
 | archive-20260801-utc-time-semantics | L2 | 统一认证、内容、搜索和导出路径的 UTC 时间语义 | task:20260801-utc-time-semantics | — | [archive/20260801-utc-time-semantics.md](archive/20260801-utc-time-semantics.md) |
+| archive-20260802-engineering-closeout | L2 | 将本地 MVP 收敛为可复现、可审计的发布候选基线并启动首次 Evolution 实际闭环 | task:20260802-engineering-closeout | Gavin | [archive/20260802-engineering-closeout.md](archive/20260802-engineering-closeout.md) |
