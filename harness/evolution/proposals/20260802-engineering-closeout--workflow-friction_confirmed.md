@@ -6,7 +6,7 @@ load_when:
   - process-evolution
   - task:20260802-engineering-closeout
 task_id: 20260802-engineering-closeout
-status: proposed
+status: applied
 ---
 
 # Evolution proposal: workflow.friction_confirmed
@@ -32,3 +32,14 @@ If confirmed, set this proposal to `accepted`, implement the guard without modif
 ## Forbidden outcome
 
 This proposal must not modify `AGENTS.md` automatically.
+
+## Human decision
+
+Accepted by Gavin on 2026-08-02. Implementation is limited to the lifecycle-safe link guard, its focused tests, and the related L1 guidance described above.
+
+## Implementation result
+
+- `verification/checks/links.py` now rejects durable Markdown links into `specs/active/` while allowing spec-local coordination, the generated index, and archives.
+- Two focused Pytest cases cover rejection and allowed stable references; `quality:release` executes them.
+- The lifecycle and release-readiness L1 guidance records the stable-reference rule and updated gate.
+- Post-application verification passed: API 67, Harness tests 2, Vitest 25, quality tests 2, E2E 7, Lighthouse four categories at 100, and all Harness checks.

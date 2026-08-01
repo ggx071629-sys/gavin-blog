@@ -4,7 +4,6 @@ import re
 from pathlib import Path
 from typing import Any
 
-
 LINK = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 SKIP_PARTS = {
     ".git",
@@ -28,7 +27,10 @@ def _target(raw: str) -> str:
 def run(context: dict[str, Any]) -> dict[str, Any]:
     project_root: Path = context["project_root"]
     broken: list[str] = []
+    unstable: list[str] = []
     checked = 0
+    active_specs = project_root / "harness" / "specs" / "active"
+    specs_root = project_root / "harness" / "specs"
     for path in sorted(project_root.rglob("*.md")):
         if any(part in SKIP_PARTS for part in path.relative_to(project_root).parts):
             continue
@@ -45,5 +47,17 @@ def run(context: dict[str, Any]) -> dict[str, Any]:
             if not resolved.exists():
                 source = path.relative_to(project_root).as_posix()
                 broken.append(f"{source}: missing link target {target}")
-    details = broken or [f"{checked} local Markdown links resolve"]
-    return {"name": "links", "passed": not broken, "details": details}
+                continue
+            if (
+                resolved.is_relative_to(active_specs)
+                and not path.resolve().is_relative_to(specs_root)
+            ):
+                source = path.relative_to(project_root).as_posix()
+                unstable.append(
+                    f"{source}: durable Markdown must not link short-lived active spec {target}"
+                )
+    failures = broken + unstable
+    details = failures or [
+        f"{checked} local Markdown links resolve without durable active-spec references"
+    ]
+    return {"name": "links", "passed": not failures, "details": details}

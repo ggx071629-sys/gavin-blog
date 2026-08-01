@@ -13,7 +13,7 @@ author: Gavin
 
 ## Current status
 
-项目当前处于“本地 MVP 完成、工程收口与首发准备进行中”。`npm run quality:release` 通过只表示本地发布候选满足代码、契约、测试、构建、可访问性、性能、SEO 和 Harness 完整性门槛；在部署决策及运维演练完成前不得标记为 production-ready。
+项目当前处于“本地 MVP 与工程收口完成、首发准备等待部署决策”。`npm run quality:release` 通过只表示本地发布候选满足代码、契约、测试、构建、可访问性、性能、SEO 和 Harness 完整性门槛；在部署决策及运维演练完成前不得标记为 production-ready。
 
 ## Local release candidate gate
 
@@ -24,7 +24,7 @@ npm ci
 npm run quality:release
 ```
 
-API 虚拟环境必须位于 `apps/api/.venv`，并已安装 `.[dev]`。门禁依次执行 API Ruff、Pytest、OpenAPI 快照一致性、Web 类型检查、Vitest、生产构建、axe-core、Lighthouse、核心 Playwright E2E 和 Harness checks。任何一步失败都阻断候选版本。
+API 虚拟环境必须位于 `apps/api/.venv`，并已安装 `.[dev]`。门禁依次执行 API Ruff、Pytest、Harness check 单测、OpenAPI 快照一致性、Web 类型检查、Vitest、生产构建、axe-core、Lighthouse、核心 Playwright E2E 和 Harness checks。任何一步失败都阻断候选版本。
 
 ## Before first production release
 

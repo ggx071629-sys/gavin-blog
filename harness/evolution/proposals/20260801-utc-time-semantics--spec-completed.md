@@ -6,7 +6,7 @@ load_when:
   - process-evolution
   - task:20260801-utc-time-semantics
 task_id: 20260801-utc-time-semantics
-status: proposed
+status: reviewed-no-action
 ---
 
 # Evolution proposal: spec.completed
@@ -20,3 +20,7 @@ After human confirmation, update only relevant L1/L2 sources, templates, workflo
 ## Forbidden outcome
 
 This proposal must not modify `AGENTS.md` automatically.
+
+## Review outcome
+
+Reviewed by Gavin on 2026-08-02. Completion of this spec did not justify an additional control-plane change, so the proposal is closed with no action.

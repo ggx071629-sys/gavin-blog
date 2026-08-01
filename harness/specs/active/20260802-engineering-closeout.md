@@ -6,7 +6,7 @@ load_when:
   - task:20260802-engineering-closeout
 author: Gavin
 task_id: 20260802-engineering-closeout
-status: active
+status: verified
 ---
 
 # Engineering closeout
@@ -48,3 +48,12 @@ status: active
 - 执行 `npm run quality:release`，确认所有应用层和 Harness 门禁通过。
 - 初始化并提交包含原始 active specs 的基线，再逐项运行 `python -m tools.harness close <task_id>`。
 - 检查归档、evidence、event 与 proposal 产物，并在用户确认选定 proposal 后应用、重新生成索引和复验。
+
+## Implementation record
+
+- 初始化 `main` 并以 `d442d63` 固化不含本地数据库、媒体、日志与密钥的首个 MVP 基线；统一 LF 版本边界并配置仓库级提交身份。
+- 新增根级 `npm run quality:release`，统一 API Ruff/Pytest、Harness check 单测、OpenAPI 同步、Web 类型/Vitest/构建、axe、Lighthouse、核心 E2E 与 Harness 完整性。
+- 17 个旧 verified specs 已通过确定性 close 归档，原始 active spec 保留在 Git 历史；归档、evidence、event 与 proposal 均已生成。
+- 发布准备 L1 明确本地 RC 门禁、production No-Go 阻断项、SQLite 与媒体联合备份、迁移和平台无关回滚原则。
+- 真实 `workflow.friction_confirmed` 事件源自一次被护栏回滚的断链关闭；Gavin 人工批准提案后，已增加长期文档禁止链接 active spec 的检查、正反测试与生命周期指引。
+- 最终 `quality:release` 全绿：API 67、Harness tests 2、Vitest 25、quality 2、E2E 7，Lighthouse Performance、Accessibility、Best Practices、SEO 均为 100；Harness 96 个链接及全部结构检查通过。

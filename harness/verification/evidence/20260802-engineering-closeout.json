@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "task_id": "20260802-engineering-closeout",
-  "created_at": "2026-08-01T16:46:06.034036+00:00",
+  "created_at": "2026-08-01T16:53:32.997363+00:00",
   "command": "python -m tools.harness verify 20260802-engineering-closeout",
   "status": "passed",
   "checks": [
     {
       "name": "indexes",
       "status": "passed",
-      "duration_ms": 26.829,
+      "duration_ms": 32.266,
       "details": [
         "8 generated indexes are current"
       ]
@@ -16,7 +16,7 @@
     {
       "name": "l0",
       "status": "passed",
-      "duration_ms": 0.6,
+      "duration_ms": 0.8,
       "details": [
         "AGENTS.md is the unique L0 and stays within 60-80 lines"
       ]
@@ -24,15 +24,15 @@
     {
       "name": "links",
       "status": "passed",
-      "duration_ms": 1879.376,
+      "duration_ms": 1649.217,
       "details": [
-        "96 local Markdown links resolve"
+        "96 local Markdown links resolve without durable active-spec references"
       ]
     },
     {
       "name": "metadata",
       "status": "passed",
-      "duration_ms": 22.525,
+      "duration_ms": 21.071,
       "details": [
         "62 routed Markdown documents have valid metadata"
       ]
@@ -40,7 +40,7 @@
     {
       "name": "structure",
       "status": "passed",
-      "duration_ms": 13.515,
+      "duration_ms": 10.828,
       "details": [
         "28 required paths exist"
       ]
@@ -58,5 +58,5 @@
     "harness/verification/vdd/INDEX.md": "cc65a5bc4b412e9f861da4805542e8e9b32f3f55a9f2c9dcff2a056605504efc",
     "harness/workflows/INDEX.md": "d459625e76828cdb5c68bdcd5499eefe5ca175545ee2a0607e42d9c997124a64"
   },
-  "source_commit": "d442d637f781172f22b3b9a61822f27f78ef8778"
+  "source_commit": "3c0e14d754922b0891ed0ad4e9d64324b30a618b"
 }
