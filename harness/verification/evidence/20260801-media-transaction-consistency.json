@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "task_id": "20260801-media-transaction-consistency",
-  "created_at": "2026-08-01T12:53:47.949317+00:00",
-  "command": "python -m tools.harness verify 20260801-media-transaction-consistency",
+  "created_at": "2026-08-01T16:43:17.801631+00:00",
+  "command": "python -m tools.harness close 20260801-media-transaction-consistency",
   "status": "passed",
   "checks": [
     {
       "name": "indexes",
       "status": "passed",
-      "duration_ms": 21.401,
+      "duration_ms": 25.105,
       "details": [
         "8 generated indexes are current"
       ]
@@ -16,7 +16,7 @@
     {
       "name": "l0",
       "status": "passed",
-      "duration_ms": 1.231,
+      "duration_ms": 0.638,
       "details": [
         "AGENTS.md is the unique L0 and stays within 60-80 lines"
       ]
@@ -24,23 +24,23 @@
     {
       "name": "links",
       "status": "passed",
-      "duration_ms": 1933.185,
+      "duration_ms": 2067.301,
       "details": [
-        "55 local Markdown links resolve"
+        "81 local Markdown links resolve"
       ]
     },
     {
       "name": "metadata",
       "status": "passed",
-      "duration_ms": 16.311,
+      "duration_ms": 29.33,
       "details": [
-        "37 routed Markdown documents have valid metadata"
+        "54 routed Markdown documents have valid metadata"
       ]
     },
     {
       "name": "structure",
       "status": "passed",
-      "duration_ms": 11.539,
+      "duration_ms": 13.077,
       "details": [
         "28 required paths exist"
       ]
@@ -49,14 +49,14 @@
   "artifact_hashes": {
     "AGENTS.md": "caadfa738f4399568e20a4d9127658ff14ed494d4bbcd77d6661869980512bd8",
     "harness/config.toml": "0fe115841f0813699dfa16f3cc6523632a190ca071cad1ca011b8ce8987374a1",
-    "harness/docs/INDEX.md": "00d089a40bf4cf93bc45ad9a6849223e597091b4e8806569b7044a63e1ca0819",
-    "harness/evolution/INDEX.md": "d12499faef12b5755d5bbc5f27acf0a8a7edbd02efbecfdacba3a370b69ae2b3",
+    "harness/docs/INDEX.md": "9b168393ebe6700985667597cc78c62790b620577f5f1773c69280a3fb7c8a8f",
+    "harness/evolution/INDEX.md": "0dcf67a7e3155ba6ef5b4b5d753979e6ce88a7c9fe53141d079ebed069ea20f7",
     "harness/INDEX.md": "98783b59f3447dca9c1287441e95069c896c4785230a8ecfc461d48e842d020d",
-    "harness/specs/INDEX.md": "d37a78d555c26ec21ab629a40d8df4c870aca269d9798501bbc7d7b271495a16",
+    "harness/specs/INDEX.md": "4557abe7366184ced0d4a5813eaafc03100139ff81854ad23d10f270e4a75e4c",
     "harness/telemetry/INDEX.md": "8d68bc55bb803915cd0039ae68133fb36a8188968fddab24cab1ee9f8beb6575",
     "harness/verification/INDEX.md": "3fd54a4a2cc9bce27a32abfcf410e93ebeebac5166379e3b4f854373b0929615",
     "harness/verification/vdd/INDEX.md": "cc65a5bc4b412e9f861da4805542e8e9b32f3f55a9f2c9dcff2a056605504efc",
     "harness/workflows/INDEX.md": "d459625e76828cdb5c68bdcd5499eefe5ca175545ee2a0607e42d9c997124a64"
   },
-  "source_commit": null
+  "source_commit": "d442d637f781172f22b3b9a61822f27f78ef8778"
 }
