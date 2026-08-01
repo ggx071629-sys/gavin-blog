@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "task_id": "20260801-e2e-isolation",
+  "created_at": "2026-08-01T20:24:02+08:00",
+  "status": "passed",
+  "checks": [
+    {
+      "name": "isolated-playwright",
+      "command": "npm run test:e2e",
+      "status": "passed",
+      "tests": 3
+    },
+    {
+      "name": "persistent-database-fingerprint",
+      "command": "Get-FileHash -Algorithm SHA256 apps/api/data/e2e.db",
+      "status": "passed",
+      "sha256_before": "ABB20995AAF5A86483B9352752E291D3DAF2413159772D2F602A207681A10DD1",
+      "sha256_after": "ABB20995AAF5A86483B9352752E291D3DAF2413159772D2F602A207681A10DD1"
+    },
+    {
+      "name": "temporary-run-cleanup",
+      "command": "compare gavin-e2e-* temporary directories before and after final run",
+      "status": "passed",
+      "new_directories": 0
+    },
+    {
+      "name": "api-ruff",
+      "command": ".venv/Scripts/python -m ruff check .",
+      "status": "passed"
+    },
+    {
+      "name": "api-pytest",
+      "command": ".venv/Scripts/python -m pytest",
+      "status": "passed",
+      "tests": 23
+    },
+    {
+      "name": "web-vitest",
+      "command": "npm run test:web",
+      "status": "passed",
+      "tests": 14
+    },
+    {
+      "name": "web-typecheck",
+      "command": "npx vue-tsc --noEmit -p .nuxt/tsconfig.json",
+      "status": "passed"
+    },
+    {
+      "name": "web-build",
+      "command": "npm run build:web",
+      "status": "passed"
+    }
+  ],
+  "notes": [
+    "The first direct Playwright validation confirmed isolation but revealed that forced Windows service termination can bypass Python TemporaryDirectory cleanup; the final npm wrapper cleans after Playwright exits.",
+    "The single temporary directory produced while diagnosing the old cleanup behavior was removed after its exact path was verified.",
+    "Pytest reports the existing Starlette TestClient httpx deprecation warning.",
+    "Nuxt build reports non-blocking dependency deprecations and chunks larger than 500 kB.",
+    "Spec remains in active because the project has no Git HEAD and deterministic close requires history."
+  ]
+}

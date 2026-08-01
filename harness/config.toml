@@ -1,0 +1,113 @@
+schema_version = 1
+
+[project]
+id = "gavin-blog"
+display_name = "Gavin"
+project_root = ".."
+
+[levels]
+l0 = ["../AGENTS.md"]
+routable = ["L1", "L2"]
+
+[metadata]
+required = ["id", "level", "summary", "load_when"]
+optional = ["author", "task_id", "status"]
+
+[specs]
+active = "specs/active"
+archive = "specs/archive"
+task_id_pattern = "^[0-9]{8}-[a-z0-9]+(?:-[a-z0-9]+)*$"
+require_git_history_before_close = true
+
+[verification]
+checks = "verification/checks"
+evidence = "verification/evidence"
+heavy_artifacts = "verification/evidence/artifacts"
+
+[telemetry]
+local = "telemetry/local"
+summaries = "telemetry/summaries"
+may_influence_agent = false
+
+[evolution]
+events = "evolution/events"
+proposals = "evolution/proposals"
+allowed_events = [
+  "spec.completed",
+  "verification.repeated_failure",
+  "architecture.decision",
+  "workflow.friction_confirmed",
+]
+forbidden_targets = ["../AGENTS.md"]
+
+[indexes.docs]
+path = "docs"
+title = "Documentation Index"
+summary = "Product, architecture, domain, operations, and durable decisions."
+load_when = ["project-context", "architecture", "operations"]
+
+[indexes.specs]
+path = "specs"
+title = "Specification Index"
+summary = "SDD policy, active specifications, and compressed archives."
+load_when = ["behavior-change", "api-change", "data-change", "security-change"]
+
+[indexes.workflows]
+path = "workflows"
+title = "Workflow Index"
+summary = "Composable task workflows with explicit inputs and completion signals."
+load_when = ["task-routing"]
+
+[indexes.verification]
+path = "verification"
+title = "Verification Index"
+summary = "VDD guidance, executable checks, and compact evidence."
+load_when = ["implementation", "verification"]
+
+[indexes.telemetry]
+path = "telemetry"
+title = "Telemetry Index"
+summary = "Observation-only schemas and sanitized summaries."
+load_when = ["observability-review"]
+
+[indexes.evolution]
+path = "evolution"
+title = "Evolution Index"
+summary = "Explicit events and human-approved improvement proposals."
+load_when = ["process-evolution"]
+
+[nested_indexes.vdd]
+path = "verification/vdd"
+title = "VDD Index"
+
+[structure]
+required = [
+  "../AGENTS.md",
+  "../README.md",
+  "../apps/web",
+  "../apps/api",
+  "../packages/contracts",
+  "docs/product",
+  "docs/architecture",
+  "docs/domain",
+  "docs/operations",
+  "docs/decisions",
+  "specs/_sdd",
+  "specs/active",
+  "specs/archive",
+  "workflows",
+  "verification/vdd/tdd",
+  "verification/vdd/contract",
+  "verification/vdd/integration",
+  "verification/vdd/e2e",
+  "verification/vdd/quality",
+  "verification/vdd/INDEX.md",
+  "verification/checks",
+  "verification/evidence",
+  "telemetry/schema",
+  "telemetry/local",
+  "telemetry/summaries",
+  "evolution/events",
+  "evolution/proposals",
+  "tools",
+]
