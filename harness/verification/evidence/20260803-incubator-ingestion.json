@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "task_id": "20260803-incubator-ingestion",
+  "created_at": "2026-08-03T14:29:51.830589+00:00",
+  "command": "python -m tools.harness verify 20260803-incubator-ingestion",
+  "status": "failed",
+  "checks": [
+    {
+      "name": "indexes",
+      "status": "passed",
+      "duration_ms": 28.627,
+      "details": [
+        "8 generated indexes are current"
+      ]
+    },
+    {
+      "name": "l0",
+      "status": "passed",
+      "duration_ms": 1.876,
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ]
+    },
+    {
+      "name": "links",
+      "status": "failed",
+      "duration_ms": 2354.773,
+      "details": [
+        "WIKI/L1-启程级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/WIKI/L2-实战级.md",
+        "WIKI/L1-启程级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/WIKI/L3-架构级.md",
+        "WIKI/L1-启程级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/WIKI/L4-治理级.md",
+        "WIKI/L2-实战级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/WIKI/L1-启程级.md",
+        "WIKI/L2-实战级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/WIKI/L3-架构级.md",
+        "WIKI/L2-实战级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/WIKI/L4-治理级.md",
+        "WIKI/L3-架构级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/WIKI/L2-实战级.md",
+        "WIKI/L3-架构级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/harness/docs/decisions/0002-utc-time-semantics.md",
+        "WIKI/L3-架构级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/harness/docs/decisions/0003-media-write-consistency.md",
+        "WIKI/L3-架构级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/harness/docs/decisions/0004-markdown-import-boundary.md",
+        "WIKI/L3-架构级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/harness/docs/decisions/0005-bounded-list-pagination.md",
+        "WIKI/L3-架构级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/WIKI/L4-治理级.md",
+        "WIKI/L4-治理级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/WIKI/L3-架构级.md",
+        "WIKI/L4-治理级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/harness/specs/_sdd/README.md",
+        "WIKI/L4-治理级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/harness/specs/_sdd/lifecycle.md",
+        "WIKI/L4-治理级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/harness/specs/_sdd/template.md",
+        "WIKI/L4-治理级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/harness/evolution/policy.md",
+        "WIKI/L4-治理级.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/harness/verification/README.md",
+        "WIKI/L4-治理级.md: missing link target target",
+        "WIKI/README.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/WIKI/L1-启程级.md",
+        "WIKI/README.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/WIKI/L2-实战级.md",
+        "WIKI/README.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/WIKI/L3-架构级.md",
+        "WIKI/README.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/WIKI/L4-治理级.md",
+        "WIKI/README.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/README.md",
+        "WIKI/README.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/AGENTS.md",
+        "WIKI/README.md: missing link target file:///c:/Users/Administrator/Desktop/my_blog/harness/INDEX.md"
+      ]
+    },
+    {
+      "name": "metadata",
+      "status": "passed",
+      "duration_ms": 23.034,
+      "details": [
+        "67 routed Markdown documents have valid metadata"
+      ]
+    },
+    {
+      "name": "structure",
+      "status": "passed",
+      "duration_ms": 11.714,
+      "details": [
+        "28 required paths exist"
+      ]
+    }
+  ],
+  "artifact_hashes": {
+    "AGENTS.md": "caadfa738f4399568e20a4d9127658ff14ed494d4bbcd77d6661869980512bd8",
+    "harness/config.toml": "0fe115841f0813699dfa16f3cc6523632a190ca071cad1ca011b8ce8987374a1",
+    "harness/docs/INDEX.md": "0d23a1b37367eed22a13c3fd5aed7b52452f1722274e04f8e488410293f120ec",
+    "harness/evolution/INDEX.md": "c24c73bed76d25ece04d8cca691469c8fee1c66b9f1a6d98d674c8e141e5e830",
+    "harness/INDEX.md": "98783b59f3447dca9c1287441e95069c896c4785230a8ecfc461d48e842d020d",
+    "harness/specs/INDEX.md": "264d28aed0ab6e11598bb2c459a37cafe7755e171b04cd3a1fd4215f3567ac86",
+    "harness/telemetry/INDEX.md": "8d68bc55bb803915cd0039ae68133fb36a8188968fddab24cab1ee9f8beb6575",
+    "harness/verification/INDEX.md": "3fd54a4a2cc9bce27a32abfcf410e93ebeebac5166379e3b4f854373b0929615",
+    "harness/verification/vdd/INDEX.md": "cc65a5bc4b412e9f861da4805542e8e9b32f3f55a9f2c9dcff2a056605504efc",
+    "harness/workflows/INDEX.md": "d459625e76828cdb5c68bdcd5499eefe5ca175545ee2a0607e42d9c997124a64"
+  },
+  "source_commit": "3d5922e84050c468bf1ab4168b0d6746f85a6a01"
+}

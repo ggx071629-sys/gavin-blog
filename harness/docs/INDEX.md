@@ -14,3 +14,4 @@ Read this index first. Load only entries whose `load_when` matches the task.
 | decision-utc-time-semantics | L1 | 瞬时时间在应用边界统一为 UTC-aware，SQLite 无偏移旧值按 UTC 解释 | datetime-change, persistence-change, api-time-contract, architecture-decision | Gavin | [decisions/0002-utc-time-semantics.md](decisions/0002-utc-time-semantics.md) |
 | operations-release-readiness | L1 | 本地发布候选门禁、首发阻断项及备份回滚边界 | release, operations, deployment | Gavin | [operations/release-readiness.md](operations/release-readiness.md) |
 | product-brief | L1 | Gavin 个人技术博客的定位、能力范围、技术约束与开发顺序 | product-planning, feature-scope, content-model | Gavin | [product/brief.md](product/brief.md) |
+| product-knowledge-incubator | L1 | 单管理员知识孵化工作台的摄入、检索、审计、草稿与发布需求设计 | knowledge-incubator, ingestion, retrieval, llm-audit, article-revision | Gavin | [product/knowledge-incubator.md](product/knowledge-incubator.md) |
