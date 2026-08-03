@@ -9,7 +9,6 @@ Read this index first. Load only entries whose `load_when` matches the task.
 | sdd-lifecycle | L1 | Active spec 从创建、验证到压缩归档的状态转换 | spec-create, spec-close | Gavin | [_sdd/lifecycle.md](_sdd/lifecycle.md) |
 | sdd-policy | L1 | 风险触发、短生命周期的 Spec-Driven Development 规则 | behavior-change, api-change, data-change, security-change, cross-stack-change | Gavin | [_sdd/README.md](_sdd/README.md) |
 | sdd-template | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
-| spec-20260803-incubator-retrieval-index | L1 | 为已发布文章建立不可变发布版本、本地混合检索索引与可验证的模型准备闭环 | task:20260803-incubator-retrieval-index | Gavin | [active/20260803-incubator-retrieval-index.md](active/20260803-incubator-retrieval-index.md) |
 | archive-20260731-core-article-loop | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -29,4 +28,5 @@ Read this index first. Load only entries whose `load_when` matches the task.
 | archive-20260801-utc-time-semantics | L2 | 统一认证、内容、搜索和导出路径的 UTC 时间语义 | task:20260801-utc-time-semantics | — | [archive/20260801-utc-time-semantics.md](archive/20260801-utc-time-semantics.md) |
 | archive-20260802-engineering-closeout | L2 | 将本地 MVP 收敛为可复现、可审计的发布候选基线并启动首次 Evolution 实际闭环 | task:20260802-engineering-closeout | Gavin | [archive/20260802-engineering-closeout.md](archive/20260802-engineering-closeout.md) |
 | archive-20260803-incubator-ingestion | L2 | 建立文件与一次性网页资料的安全摄入、异步清洗、精确去重和待处理池闭环 | task:20260803-incubator-ingestion | Gavin | [archive/20260803-incubator-ingestion.md](archive/20260803-incubator-ingestion.md) |
+| archive-20260803-incubator-retrieval-index | L2 | 为已发布文章建立不可变发布版本、本地混合检索索引与可验证的模型准备闭环 | task:20260803-incubator-retrieval-index | Gavin | [archive/20260803-incubator-retrieval-index.md](archive/20260803-incubator-retrieval-index.md) |
 | archive-20260803-same-origin-auth-proxy | L2 | 通过 Nuxt 同源代理消除本地前端与 API 主机名不一致导致的登录 CSRF 失败 | task:20260803-same-origin-auth-proxy | Gavin | [archive/20260803-same-origin-auth-proxy.md](archive/20260803-same-origin-auth-proxy.md) |
