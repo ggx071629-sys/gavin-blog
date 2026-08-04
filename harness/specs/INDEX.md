@@ -9,7 +9,6 @@ Read this index first. Load only entries whose `load_when` matches the task.
 | sdd-lifecycle | L1 | Active spec 从创建、验证到压缩归档的状态转换 | spec-create, spec-close | Gavin | [_sdd/lifecycle.md](_sdd/lifecycle.md) |
 | sdd-policy | L1 | 风险触发、短生命周期的 Spec-Driven Development 规则 | behavior-change, api-change, data-change, security-change, cross-stack-change | Gavin | [_sdd/README.md](_sdd/README.md) |
 | sdd-template | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
-| spec-20260804-incubator-workbench | L1 | 整合知识孵化导航、三池筛选、全局任务进度、健康状态与端到端质量门禁 | task:20260804-incubator-workbench | Gavin | [active/20260804-incubator-workbench.md](active/20260804-incubator-workbench.md) |
 | archive-20260731-core-article-loop | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -34,3 +33,4 @@ Read this index first. Load only entries whose `load_when` matches the task.
 | archive-20260804-incubator-drafts | L2 | 将已确认审计转化为可版本化生成、人工编辑、差异预览和安全重生成的孵化草稿 | task:20260804-incubator-drafts | Gavin | [archive/20260804-incubator-drafts.md](archive/20260804-incubator-drafts.md) |
 | archive-20260804-incubator-llm-audit | L2 | 建立显式外发确认、结构化证据校验、人工裁决与 Token 留痕的 LLM 审计闭环 | task:20260804-incubator-llm-audit | Gavin | [archive/20260804-incubator-llm-audit.md](archive/20260804-incubator-llm-audit.md) |
 | archive-20260804-incubator-publishing | L2 | 以发布前复检、原子文章修订、永久来源链和有限批量处理完成知识孵化发布闭环 | task:20260804-incubator-publishing | Gavin | [archive/20260804-incubator-publishing.md](archive/20260804-incubator-publishing.md) |
+| archive-20260804-incubator-workbench | L2 | 整合知识孵化导航、三池筛选、全局任务进度、健康状态与端到端质量门禁 | task:20260804-incubator-workbench | Gavin | [archive/20260804-incubator-workbench.md](archive/20260804-incubator-workbench.md) |
