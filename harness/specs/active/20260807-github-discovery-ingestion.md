@@ -6,7 +6,9 @@ load_when:
   - task:20260807-github-discovery-ingestion
 author: Gavin
 task_id: 20260807-github-discovery-ingestion
-status: active
+status: frozen
+frozen_at: 2026-08-08
+freeze_reason: waiting for 20260807-github-source-crawler and real cross-repository E2E
 ---
 
 # Context

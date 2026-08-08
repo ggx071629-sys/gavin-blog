@@ -8,6 +8,7 @@ Read this index first. Load only entries whose `load_when` matches the task.
 | --- | --- | --- | --- | --- | --- |
 | architecture-boundaries | L1 | 当前已确认的应用、配置、存储、契约和部署边界 | architecture, cross-stack-change, deployment | Gavin | [architecture/boundaries.md](architecture/boundaries.md) |
 | decision-bounded-list-pagination | L1 | 高增长数组列表使用有界 offset 分页并由完整消费者显式分批读取 | list-api-change, cross-stack-change, architecture-decision | Gavin | [decisions/0005-bounded-list-pagination.md](decisions/0005-bounded-list-pagination.md) |
+| decision-freeze-github-discovery-ingestion-spec | L1 | 冻结 GitHub 发现摄入实现并等待爬虫与真实跨仓库验证 | task:20260807-github-discovery-ingestion, architecture-decision | Gavin | [decisions/0007-freeze-github-discovery-ingestion-spec.md](decisions/0007-freeze-github-discovery-ingestion-spec.md) |
 | decision-freeze-github-source-crawler-spec | L1 | 在 my_blog 域名部署期间冻结 GitHub 爬虫验收基线 | task:20260807-github-source-crawler, architecture-decision | Gavin | [decisions/0006-freeze-github-source-crawler-spec.md](decisions/0006-freeze-github-source-crawler-spec.md) |
 | decision-harness-control-plane | L1 | 将 Agent 治理内容集中到 harness 目录，并保留根 AGENTS.md 作为唯一 L0 | harness-change, architecture-decision | Gavin | [decisions/0001-harness-control-plane.md](decisions/0001-harness-control-plane.md) |
 | decision-markdown-import-boundary | L1 | Markdown 导入在落库前执行严格可判别元数据验证和批次资源限制 | content-import-change, security-change, architecture-decision | Gavin | [decisions/0004-markdown-import-boundary.md](decisions/0004-markdown-import-boundary.md) |
