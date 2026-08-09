@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "task_id": "20260808-electric-editorial-admin-core",
+  "created_at": "2026-08-09T19:29:36.5940188+08:00",
+  "source_commit": "c5bc051bf0bf172479581ad1788bb2339f1182f6",
+  "status": "passed",
+  "checks": [
+    {
+      "name": "admin-core-type-unit-and-build",
+      "command": "npm --workspace @gavin/web run typecheck; npm --workspace @gavin/web run test; npm --workspace @gavin/web run build",
+      "status": "passed",
+      "details": [
+        "Nuxt typecheck passed",
+        "16 Vitest files and 62 tests passed, including 6 admin navigation and static-hardening tests",
+        "Nuxt production build passed"
+      ]
+    },
+    {
+      "name": "admin-core-visual-accessibility-matrix",
+      "command": "npm --workspace @gavin/web run test:quality",
+      "status": "passed",
+      "views": 64,
+      "details": [
+        "16 non-incubator routes were covered at light/dark x 1440x1100/390x844",
+        "all quadrants passed document-level horizontal-overflow assertions",
+        "all 16 route families passed axe WCAG 2.0/2.1 A and AA checks",
+        "desktop sidebar, mobile drawer, active navigation, Escape handling, focus placement, and focus restoration passed",
+        "manual derived-design review covered login, dense lists, editors, profile preview, taxonomy, media, and content tools",
+        "the expanded matrix found a nested sr-only file-input overflow on profile; the field selector boundary was fixed and the full matrix passed on rerun"
+      ]
+    },
+    {
+      "name": "admin-business-workflows",
+      "command": "npm --workspace @gavin/web run test:e2e",
+      "status": "passed",
+      "tests": 16,
+      "details": [
+        "authentication, article/project/book creation and publication, profile editing, public navigation, SEO, and all existing incubator regression flows passed",
+        "autosave, preview, revision, conflict, destructive confirmation, and same-origin authentication behavior remained intact"
+      ]
+    },
+    {
+      "name": "production-quality",
+      "command": "npm --workspace @gavin/web run test:quality",
+      "status": "passed",
+      "tests": 6,
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      }
+    },
+    {
+      "name": "task-boundary-attribution",
+      "status": "passed",
+      "details": [
+        "admin-core owns the 16 non-incubator routes, admin-core layout, navigation, dialog, editor, media, taxonomy, and profile changes described by its active spec",
+        "the current aggregate worktree also contains later authorized incubator and hardening phases, so a historical stage-local git diff cannot be reconstructed and is not claimed",
+        "final hardening boundary checks show no changes under apps/api, packages/contracts, my_blog_fork, or the frozen GitHub specs"
+      ]
+    }
+  ],
+  "notes": [
+    "The backend has no Stitch page prototype; visual acceptance used the declared Electric Editorial derived design, real fields, information density, and cross-page consistency.",
+    "This evidence reuses the final verified implementation run rather than fabricating a missing historical command run.",
+    "Build completed with non-blocking existing plugin-timing, large-chunk, dependency export deprecation, and Nuxt public-profile async-data warnings.",
+    "No commit, close, or push had been performed when this application evidence was created."
+  ]
+}
