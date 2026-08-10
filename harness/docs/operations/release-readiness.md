@@ -32,6 +32,8 @@ API 虚拟环境必须位于 `apps/api/.venv`，并已安装 `.[dev]`。门禁�
 - 为 SQLite 指定持久卷、单写者约束、备份频率、保留周期及恢复目标。
 - 为媒体目录选择持久本地卷或对象存储适配器，并验证数据库与媒体的一致恢复点。
 - 在目标环境配置随机管理员密码、Secure Cookie、精确 CORS 来源、公开 API 地址与 canonical 站点地址。
+- 在最终 HTTPS 边缘响应验证 `Strict-Transport-Security`；应用为本地 HTTP 保持不设置 HSTS，不能用本地响应代替公网边缘检查。
+- 验证公网 HTML 保留应用的 CSP Report-Only、`X-Frame-Options`、`nosniff`、Referrer-Policy 与 Permissions-Policy；收敛字体和其他资源来源后，另行评审并启用强制 CSP。
 - 在生产数据副本或等价空库上执行 `alembic upgrade head`，验证迁移链和 FTS5 可用性。
 - 完成一次备份恢复演练和一次上一版本回滚演练，记录耗时与人工步骤。
 - 从干净检出使用锁文件安装依赖并通过 `npm run quality:release`。
