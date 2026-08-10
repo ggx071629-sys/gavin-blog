@@ -11,7 +11,6 @@ Read this index first. Load only entries whose `load_when` matches the task.
 | sdd-template | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
 | spec-20260807-github-discovery-ingestion | L1 | 为博客建立 GitHub 发现画像、私有资料仓库同步与待处理池摄入闭环 | task:20260807-github-discovery-ingestion | Gavin | [active/20260807-github-discovery-ingestion.md](active/20260807-github-discovery-ingestion.md) |
 | spec-20260807-github-source-crawler | L1 | 在独立私有仓库中用 GitHub Actions 无模型发现并保存文章型 Markdown | task:20260807-github-source-crawler | Gavin | [active/20260807-github-source-crawler.md](active/20260807-github-source-crawler.md) |
-| spec-20260809-runtime-security-boundaries | L1 | 统一运行时配置校验并加固浏览器响应头与媒体预解码边界 | task:20260809-runtime-security-boundaries | Codex | [active/20260809-runtime-security-boundaries.md](active/20260809-runtime-security-boundaries.md) |
 | archive-20260731-core-article-loop | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -47,6 +46,7 @@ Read this index first. Load only entries whose `load_when` matches the task.
 | archive-20260809-profile-contact-icons | L2 | 为个人名片接入独立网页地址并为联系方式提供一致的可访问 SVG 图标 | task:20260809-profile-contact-icons | Gavin | [archive/20260809-profile-contact-icons.md](archive/20260809-profile-contact-icons.md) |
 | archive-20260809-publishing-snapshots | L2 | 为项目与书摘建立不可变发布快照并阻止文章关联区泄露工作副本 | task:20260809-publishing-snapshots | Codex | [archive/20260809-publishing-snapshots.md](archive/20260809-publishing-snapshots.md) |
 | archive-20260809-restore-writing-desk-entry | L2 | 在公开站点桌面与移动导航中恢复受认证保护的写作台入口 | task:20260809-restore-writing-desk-entry | Gavin | [archive/20260809-restore-writing-desk-entry.md](archive/20260809-restore-writing-desk-entry.md) |
+| archive-20260809-runtime-security-boundaries | L2 | 统一运行时配置校验并加固浏览器响应头与媒体预解码边界 | task:20260809-runtime-security-boundaries | Codex | [archive/20260809-runtime-security-boundaries.md](archive/20260809-runtime-security-boundaries.md) |
 | archive-20260809-soften-light-signal-color | L2 | 以低饱和批注紫替换浅色主题中过于突兀的酸柠檬信号色 | task:20260809-soften-light-signal-color | Gavin | [archive/20260809-soften-light-signal-color.md](archive/20260809-soften-light-signal-color.md) |
 | archive-20260809-sync-light-heading-font | L2 | 将浅色主题标题字体统一为深色主题的 Hanken Grotesk | task:20260809-sync-light-heading-font | Gavin | [archive/20260809-sync-light-heading-font.md](archive/20260809-sync-light-heading-font.md) |
 | archive-20260809-sync-light-search-layout | L2 | 让桌面搜索页浅色主题复用暗色主题的居中卡片布局 | task:20260809-sync-light-search-layout | Gavin | [archive/20260809-sync-light-search-layout.md](archive/20260809-sync-light-search-layout.md) |
