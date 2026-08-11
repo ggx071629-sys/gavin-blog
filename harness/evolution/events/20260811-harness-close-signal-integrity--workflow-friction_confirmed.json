@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "event_type": "workflow.friction_confirmed",
+  "task_id": "20260811-harness-close-signal-integrity",
+  "created_at": "2026-08-11T11:18:01.566306+00:00",
+  "source": "manual",
+  "reason": "Spec closure creates unactionable evolution proposals and loses Goal and Acceptance criteria when active specs use H1 section headings.",
+  "may_modify_agents_md": false
+}
