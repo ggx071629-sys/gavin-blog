@@ -6,7 +6,7 @@ load_when:
   - process-evolution
   - task:20260811-harness-close-signal-integrity
 task_id: 20260811-harness-close-signal-integrity
-status: proposed
+status: accepted
 ---
 
 # Evolution proposal: workflow.friction_confirmed
@@ -47,3 +47,7 @@ After human confirmation, update only relevant L1/L2 sources, templates, workflo
 This proposal must not modify `AGENTS.md` automatically.
 
 It must not change product behavior, rewrite historical archives, or resume the two frozen GitHub specs.
+
+## Human decision
+
+Accepted by Gavin on 2026-08-11. Implementation is limited to lifecycle event/proposal separation, lossless required-section compression, focused tests, and the related L1 guidance described above.
