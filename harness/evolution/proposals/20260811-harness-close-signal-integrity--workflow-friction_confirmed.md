@@ -64,3 +64,10 @@ Accepted by Gavin on 2026-08-11. Implementation is limited to lifecycle event/pr
 ## Follow-up restoration decision
 
 Confirmed by Gavin on 2026-08-11 after a read-only dry-run proved all 23 affected archives recoverable from committed active specs. This decision supersedes only the earlier historical-backfill non-goal: restore exact Goal and Acceptance criteria content, record the source commit and restoration date in each archive, and leave all other archived content unchanged.
+
+## Follow-up restoration result
+
+- All 23 affected archives now contain Goal and Acceptance criteria copied exactly from their recorded Git source objects; independent comparison reported 23 exact matches, zero mismatches, and zero remaining `Not recorded.` sections.
+- Each restored archive records a full `restoration_source` commit/path and `restored_at: 2026-08-11`; Result, Evidence, and original close timestamps were left unchanged.
+- The restoration was committed independently as `ef6a7ee`, after Harness tests passed 10/10 and Harness verification passed all checks.
+- Post-restoration `quality:release` passed: API 257, Harness 10, Web unit 104, production quality 10, failure states 5, core E2E 25, and Lighthouse 99/100/100/100.
