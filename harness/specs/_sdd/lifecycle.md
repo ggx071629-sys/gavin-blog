@@ -10,12 +10,22 @@ author: Gavin
 
 # Spec lifecycle
 
-状态顺序：`draft → active → verified → compressed`。
+正常状态顺序：`draft → active → verified → compressed`。人工暂停可以走可选分支：`active → frozen → active`；冻结不是所有 spec 的必经状态，也不是关闭。
 
 - Draft：问题、目标与边界尚在收敛。
 - Active：验收标准明确，可以实现。
+- Frozen：任务尚未关闭，但当前不推进；文件继续留在 `specs/active/`，不计入正在推进的 active 数量。
 - Verified：相关自动化 checks 已通过并产生 evidence。
 - Compressed：当前工作树只保留目标、关键决策、结果和证据链接。
+
+冻结与恢复只能由人工显式执行：
+
+- `python -m tools.harness freeze <task_id> --reason "..."`
+- `python -m tools.harness resume <task_id> --reason "..."`
+
+原因必须非空，状态转换必须严格匹配当前状态，不提供强制绕过。命令追加 UTC 状态历史并重建索引；冻结不要求完整质量门禁先通过，恢复也不自动判断外部阻塞是否解除。
+
+冻结时 Harness 对 `Goal`、`Non-goals`、`Acceptance criteria` 和 `Verification plan` 建立确定性摘要。备注、阻塞信息和证据可以继续补充；核心契约如需改变，必须先恢复。合法冻结不会拖红无 task ID 的全局 verify 或 release 门禁，但 `verify <frozen-task-id>` 不能生成成功结论，`close <frozen-task-id>` 必须在产生归档、事件或证据前失败。
 
 关闭必须使用 `python -m tools.harness close <task_id>`。任一步失败时 active spec 保持不变。
 

@@ -9,6 +9,9 @@ task_id: 20260807-github-source-crawler
 status: frozen
 frozen_at: 2026-08-07
 freeze_reason: waiting for my_blog domain deployment and real cross-repository E2E
+frozen_scope_sha256: 54cb3556020ab5df1977287cd171a3ea12e1a304fcf5927938b788f656f5c106
+state_history:
+  - {"action":"freeze","at":"2026-08-07","baseline":"migration","reason":"waiting for my_blog domain deployment and real cross-repository E2E","scope_sha256":"54cb3556020ab5df1977287cd171a3ea12e1a304fcf5927938b788f656f5c106"}
 ---
 
 # Context

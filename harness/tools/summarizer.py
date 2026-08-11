@@ -65,6 +65,9 @@ def close_spec(task_id: str) -> tuple[Path, str]:
 
     source_text = source.read_text(encoding="utf-8")
     metadata, body = parse_front_matter(source)
+    status = str(metadata.get("status", ""))
+    if status != "active":
+        raise RuntimeError(f"refusing to close: spec status must be active, found {status or 'missing'}")
     goal = _required_section(body, "Goal")
     acceptance_criteria = _required_section(body, "Acceptance criteria")
     archive_dir = harness_root() / str(config["specs"]["archive"])
@@ -77,6 +80,12 @@ def close_spec(task_id: str) -> tuple[Path, str]:
     author_line = f"author: {author}\n" if author else ""
     load_when = values_as_list(metadata.get("load_when")) or [f"task:{task_id}"]
     load_lines = "\n".join(f"  - {value}" for value in load_when)
+    state_history = values_as_list(metadata.get("state_history"))
+    history_lines = "state_history:\n" + "\n".join(
+        f"  - {value}" for value in state_history
+    )
+    if state_history:
+        history_lines += "\n"
     content = (
         "---\n"
         f"id: archive-{task_id}\n"
@@ -87,6 +96,7 @@ def close_spec(task_id: str) -> tuple[Path, str]:
         f"{author_line}"
         f"task_id: {task_id}\n"
         "status: compressed\n"
+        f"{history_lines}"
         "---\n\n"
         f"# {task_id}\n\n"
         "Deterministic compressed record. The original active spec remains in Git history.\n\n"

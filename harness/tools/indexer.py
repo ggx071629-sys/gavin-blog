@@ -28,13 +28,14 @@ def _scope_rows(scope_root: Path) -> list[dict[str, str]]:
                 "summary": str(metadata.get("summary", "")),
                 "load_when": ", ".join(values_as_list(metadata.get("load_when"))),
                 "author": str(metadata.get("author", "—")),
+                "status": str(metadata.get("status", "—")),
                 "path": path.relative_to(scope_root).as_posix(),
             }
         )
     return sorted(rows, key=lambda item: (item["level"], item["id"], item["path"]))
 
 
-def render_scope(title: str, scope_root: Path) -> str:
+def render_scope(title: str, scope_root: Path, *, include_status: bool = False) -> str:
     rows = _scope_rows(scope_root)
     lines = [
         GENERATED,
@@ -43,23 +44,61 @@ def render_scope(title: str, scope_root: Path) -> str:
         "",
         "Read this index first. Load only entries whose `load_when` matches the task.",
         "",
-        "| ID | Level | Summary | Load when | Author | Path |",
-        "| --- | --- | --- | --- | --- | --- |",
     ]
+    if include_status:
+        active = sum(
+            row["path"].startswith("active/") and row["status"] == "active"
+            for row in rows
+        )
+        frozen = sum(
+            row["path"].startswith("active/") and row["status"] == "frozen"
+            for row in rows
+        )
+        lines.extend(
+            [
+                f"Open specifications: **{active} active**, **{frozen} frozen**.",
+                "",
+                "| ID | Status | Level | Summary | Load when | Author | Path |",
+                "| --- | --- | --- | --- | --- | --- | --- |",
+            ]
+        )
+    else:
+        lines.extend(
+            [
+                "| ID | Level | Summary | Load when | Author | Path |",
+                "| --- | --- | --- | --- | --- | --- |",
+            ]
+        )
     for row in rows:
         link = f"[{_cell(row['path'])}]({_cell(row['path'])})"
-        lines.append(
-            "| {id} | {level} | {summary} | {load_when} | {author} | {link} |".format(
-                id=_cell(row["id"]),
-                level=_cell(row["level"]),
-                summary=_cell(row["summary"]),
-                load_when=_cell(row["load_when"]),
-                author=_cell(row["author"]),
-                link=link,
+        if include_status:
+            lines.append(
+                "| {id} | {status} | {level} | {summary} | {load_when} | {author} | {link} |".format(
+                    id=_cell(row["id"]),
+                    status=_cell(row["status"]),
+                    level=_cell(row["level"]),
+                    summary=_cell(row["summary"]),
+                    load_when=_cell(row["load_when"]),
+                    author=_cell(row["author"]),
+                    link=link,
+                )
             )
-        )
+        else:
+            lines.append(
+                "| {id} | {level} | {summary} | {load_when} | {author} | {link} |".format(
+                    id=_cell(row["id"]),
+                    level=_cell(row["level"]),
+                    summary=_cell(row["summary"]),
+                    load_when=_cell(row["load_when"]),
+                    author=_cell(row["author"]),
+                    link=link,
+                )
+            )
     if not rows:
-        lines.append("| — | — | No indexed documents yet. | — | — | — |")
+        if include_status:
+            lines.append("| — | — | — | No indexed documents yet. | — | — | — |")
+        else:
+            lines.append("| — | — | No indexed documents yet. | — | — | — |")
     return "\n".join(lines) + "\n"
 
 
@@ -88,9 +127,11 @@ def expected_indexes() -> dict[Path, str]:
     config = load_config()
     root = harness_root()
     expected = {root / "INDEX.md": render_root(config)}
-    for item in config["indexes"].values():
+    for area, item in config["indexes"].items():
         scope_root = root / str(item["path"])
-        expected[scope_root / "INDEX.md"] = render_scope(str(item["title"]), scope_root)
+        expected[scope_root / "INDEX.md"] = render_scope(
+            str(item["title"]), scope_root, include_status=area == "specs"
+        )
     for item in config.get("nested_indexes", {}).values():
         scope_root = root / str(item["path"])
         expected[scope_root / "INDEX.md"] = render_scope(str(item["title"]), scope_root)

@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+from tools.lifecycle import validate_active_spec
 from tools.metadata import FrontMatterError, markdown_files, parse_front_matter, values_as_list
 
 
@@ -14,6 +15,7 @@ def run(context: dict[str, Any]) -> dict[str, Any]:
     details: list[str] = []
     seen: dict[str, Path] = {}
     checked = 0
+    active_root = root / str(config["specs"]["active"])
 
     for item in config["indexes"].values():
         scope = root / str(item["path"])
@@ -42,6 +44,10 @@ def run(context: dict[str, Any]) -> dict[str, Any]:
                     details.append(f"{relative}: duplicate id also used by {first}")
                 else:
                     seen[document_id] = path
+
+            if path.parent == active_root:
+                for error in validate_active_spec(path):
+                    details.append(f"{relative}: {error}")
 
     passed = not details
     if passed:

@@ -65,6 +65,7 @@ This file is the only L0 document; it is always loaded and stays a map, never an
 - Run commands from the `harness/` directory.
 - Generate indexes with `python -m tools.harness index`.
 - Verify the harness with `python -m tools.harness verify [task_id]`.
+- Freeze or resume a task with `python -m tools.harness <freeze|resume> <task_id> --reason "..."`.
 - Close a task with `python -m tools.harness close <task_id>`.
 - Emit an event with `python -m tools.harness emit-event ...`.
 - Deterministic summaries are authoritative; optional LLM annotations must cite sources.

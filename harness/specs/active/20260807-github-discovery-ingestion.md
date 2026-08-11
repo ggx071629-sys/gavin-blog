@@ -9,6 +9,9 @@ task_id: 20260807-github-discovery-ingestion
 status: frozen
 frozen_at: 2026-08-08
 freeze_reason: waiting for 20260807-github-source-crawler and real cross-repository E2E
+frozen_scope_sha256: 52c972a14206e4250224ccb44991d5c748cf8c3d0886e436db03d1f6d6ada361
+state_history:
+  - {"action":"freeze","at":"2026-08-08","baseline":"migration","reason":"waiting for 20260807-github-source-crawler and real cross-repository E2E","scope_sha256":"52c972a14206e4250224ccb44991d5c748cf8c3d0886e436db03d1f6d6ada361"}
 ---
 
 # Context

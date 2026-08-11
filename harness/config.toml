@@ -11,7 +11,15 @@ routable = ["L1", "L2"]
 
 [metadata]
 required = ["id", "level", "summary", "load_when"]
-optional = ["author", "task_id", "status"]
+optional = [
+  "author",
+  "task_id",
+  "status",
+  "frozen_at",
+  "freeze_reason",
+  "frozen_scope_sha256",
+  "state_history",
+]
 
 [specs]
 active = "specs/active"
