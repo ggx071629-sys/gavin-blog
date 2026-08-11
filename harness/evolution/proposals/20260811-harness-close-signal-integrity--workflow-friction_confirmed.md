@@ -60,3 +60,7 @@ Accepted by Gavin on 2026-08-11. Implementation is limited to lifecycle event/pr
 - Eight focused lifecycle tests cover section extraction, invalid structures, explicit proposal creation, and close event behavior; the full Harness suite passes 10 tests.
 - Full `quality:release` passed: API 257, Harness 10, Web unit 104, production quality 10, failure states 5, core E2E 25, and Lighthouse 99/100/100/100.
 - Closing `20260811-harness-close-signal-integrity` preserved its H1 Goal and Acceptance criteria, created the lifecycle event, and created no `spec.completed` proposal.
+
+## Follow-up restoration decision
+
+Confirmed by Gavin on 2026-08-11 after a read-only dry-run proved all 23 affected archives recoverable from committed active specs. This decision supersedes only the earlier historical-backfill non-goal: restore exact Goal and Acceptance criteria content, record the source commit and restoration date in each archive, and leave all other archived content unchanged.
