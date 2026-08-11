@@ -6,7 +6,7 @@ load_when:
   - process-evolution
   - task:20260811-harness-close-signal-integrity
 task_id: 20260811-harness-close-signal-integrity
-status: accepted
+status: applied
 ---
 
 # Evolution proposal: workflow.friction_confirmed
@@ -51,3 +51,12 @@ It must not change product behavior, rewrite historical archives, or resume the 
 ## Human decision
 
 Accepted by Gavin on 2026-08-11. Implementation is limited to lifecycle event/proposal separation, lossless required-section compression, focused tests, and the related L1 guidance described above.
+
+## Implementation result
+
+- Deterministic close now records its `spec.completed` event with proposal creation disabled; explicitly emitted events retain proposal creation.
+- Compression accepts exact H1 or H2 required sections, preserves deeper nested headings, and rejects missing or empty Goal/Acceptance criteria before deleting the active spec.
+- The SDD template and lifecycle guidance now define the canonical H1 structure, backward-compatible H2 handling, and close failure semantics.
+- Eight focused lifecycle tests cover section extraction, invalid structures, explicit proposal creation, and close event behavior; the full Harness suite passes 10 tests.
+- Full `quality:release` passed: API 257, Harness 10, Web unit 104, production quality 10, failure states 5, core E2E 25, and Lighthouse 99/100/100/100.
+- Closing `20260811-harness-close-signal-integrity` preserved its H1 Goal and Acceptance criteria, created the lifecycle event, and created no `spec.completed` proposal.
