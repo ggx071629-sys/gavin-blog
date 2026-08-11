@@ -62,6 +62,7 @@ def command_close(args: argparse.Namespace) -> int:
             args.task_id,
             "The active spec passed verification and was deterministically compressed.",
             "lifecycle",
+            create_proposal=False,
         )
         indexer.write_indexes()
         validator.write_evidence(
@@ -82,7 +83,8 @@ def command_close(args: argparse.Namespace) -> int:
         print(f"archive {archive}")
         print(f"evidence {evidence}")
         print(f"event {event_path}")
-        print(f"proposal {proposal_path}")
+        if proposal_path is not None:
+            print(f"proposal {proposal_path}")
         return 0
     except Exception as error:
         if source_text:
@@ -109,7 +111,8 @@ def command_emit_event(args: argparse.Namespace) -> int:
     )
     indexer.write_indexes()
     print(f"event {event_path}")
-    print(f"proposal {proposal_path}")
+    if proposal_path is not None:
+        print(f"proposal {proposal_path}")
     return 0
 
 

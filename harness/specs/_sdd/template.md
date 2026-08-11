@@ -24,5 +24,6 @@ status: active
 ---
 ~~~
 
-正文依次包含：Context、Goal、Non-goals、Acceptance criteria、Risks、Verification plan。
+正文依次包含以下非空 H1 章节：`# Context`、`# Goal`、`# Non-goals`、`# Acceptance criteria`、`# Risks`、`# Verification plan`。
 
+确定性 close 为兼容既有 spec 也接受对应 H2 章节，但新 spec 统一使用上述 H1 结构。Goal 与 Acceptance criteria 缺失或为空时必须先修复 spec，close 不会删除 active 文件或生成不完整归档。

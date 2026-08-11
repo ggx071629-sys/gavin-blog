@@ -36,13 +36,23 @@ def ensure_spec_in_git_history(path: Path) -> None:
         )
 
 
-def _section(body: str, heading: str) -> str:
-    pattern = re.compile(
-        rf"^## {re.escape(heading)}\s*$\n(?P<body>.*?)(?=^## |\Z)",
-        re.MULTILINE | re.DOTALL,
+def _required_section(body: str, heading: str) -> str:
+    heading_pattern = re.compile(
+        rf"^(?P<marks>#{{1,2}})[ \t]+{re.escape(heading)}[ \t]*$",
+        re.MULTILINE,
     )
-    match = pattern.search(body)
-    return match.group("body").strip() if match else "Not recorded."
+    match = heading_pattern.search(body)
+    if match is None:
+        raise ValueError(f"required non-empty section missing: {heading}")
+
+    level = len(match.group("marks"))
+    boundary_pattern = re.compile(rf"^#{{1,{level}}}[ \t]+", re.MULTILINE)
+    boundary = boundary_pattern.search(body, match.end())
+    end = boundary.start() if boundary else len(body)
+    section = body[match.end() : end].strip()
+    if not section:
+        raise ValueError(f"required non-empty section missing: {heading}")
+    return section
 
 
 def close_spec(task_id: str) -> tuple[Path, str]:
@@ -55,6 +65,8 @@ def close_spec(task_id: str) -> tuple[Path, str]:
 
     source_text = source.read_text(encoding="utf-8")
     metadata, body = parse_front_matter(source)
+    goal = _required_section(body, "Goal")
+    acceptance_criteria = _required_section(body, "Acceptance criteria")
     archive_dir = harness_root() / str(config["specs"]["archive"])
     archive_dir.mkdir(parents=True, exist_ok=True)
     archive = archive_dir / f"{task_id}.md"
@@ -79,9 +91,9 @@ def close_spec(task_id: str) -> tuple[Path, str]:
         f"# {task_id}\n\n"
         "Deterministic compressed record. The original active spec remains in Git history.\n\n"
         "## Goal\n\n"
-        f"{_section(body, 'Goal')}\n\n"
+        f"{goal}\n\n"
         "## Acceptance criteria\n\n"
-        f"{_section(body, 'Acceptance criteria')}\n\n"
+        f"{acceptance_criteria}\n\n"
         "## Result\n\n"
         "Verified and closed by the harness close command.\n\n"
         "## Evidence\n\n"
@@ -99,4 +111,3 @@ def restore_spec(task_id: str, source_text: str, archive: Path | None) -> None:
     source.write_text(source_text, encoding="utf-8", newline="\n")
     if archive is not None and archive.exists():
         archive.unlink()
-

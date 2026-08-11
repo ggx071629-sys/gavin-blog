@@ -8,7 +8,14 @@ from .config import harness_root, load_config
 from .summarizer import validate_task_id
 
 
-def emit_event(event_type: str, task_id: str, reason: str, source: str) -> tuple[Path, Path]:
+def emit_event(
+    event_type: str,
+    task_id: str,
+    reason: str,
+    source: str,
+    *,
+    create_proposal: bool = True,
+) -> tuple[Path, Path | None]:
     config = load_config()
     validate_task_id(task_id)
     allowed = set(config["evolution"]["allowed_events"])
@@ -41,25 +48,26 @@ def emit_event(event_type: str, task_id: str, reason: str, source: str) -> tuple
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
-    proposal_path.write_text(
-        "---\n"
-        f"id: evolution-{task_id}-{token}\n"
-        "level: L1\n"
-        f"summary: Review evolution event {event_type} for {task_id}\n"
-        "load_when:\n"
-        "  - process-evolution\n"
-        f"  - task:{task_id}\n"
-        f"task_id: {task_id}\n"
-        "status: proposed\n"
-        "---\n\n"
-        f"# Evolution proposal: {event_type}\n\n"
-        f"Reason: {reason}\n\n"
-        "## Allowed outcome\n\n"
-        "After human confirmation, update only relevant L1/L2 sources, templates, workflows, indexes, or checks.\n\n"
-        "## Forbidden outcome\n\n"
-        "This proposal must not modify `AGENTS.md` automatically.\n",
-        encoding="utf-8",
-        newline="\n",
-    )
-    return event_path, proposal_path
-
+    if create_proposal:
+        proposal_path.write_text(
+            "---\n"
+            f"id: evolution-{task_id}-{token}\n"
+            "level: L1\n"
+            f"summary: Review evolution event {event_type} for {task_id}\n"
+            "load_when:\n"
+            "  - process-evolution\n"
+            f"  - task:{task_id}\n"
+            f"task_id: {task_id}\n"
+            "status: proposed\n"
+            "---\n\n"
+            f"# Evolution proposal: {event_type}\n\n"
+            f"Reason: {reason}\n\n"
+            "## Allowed outcome\n\n"
+            "After human confirmation, update only relevant L1/L2 sources, templates, workflows, indexes, or checks.\n\n"
+            "## Forbidden outcome\n\n"
+            "This proposal must not modify `AGENTS.md` automatically.\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+        return event_path, proposal_path
+    return event_path, None
