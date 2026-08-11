@@ -1,12 +1,19 @@
 from __future__ import annotations
 
 import argparse
+import importlib
+import sys
 from pathlib import Path
 
 import pytest
 
-from tools import events, summarizer
-from tools import harness as harness_cli
+PROJECT_ROOT = Path(__file__).parents[3]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+events = importlib.import_module("harness.tools.events")
+harness_cli = importlib.import_module("harness.tools.harness")
+summarizer = importlib.import_module("harness.tools.summarizer")
 
 TASK_ID = "20260811-example-close"
 
