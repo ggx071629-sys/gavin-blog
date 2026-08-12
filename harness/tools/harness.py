@@ -43,6 +43,7 @@ def command_verify(args: argparse.Namespace) -> int:
     criteria: list[str] = []
     profile = ""
     fingerprints: dict[str, str] = {}
+    documentation: dict[str, object] = {}
     execution: dict[str, object] = {}
     if args.task_id:
         if lifecycle.task_status(args.task_id) == "frozen":
@@ -63,15 +64,16 @@ def command_verify(args: argparse.Namespace) -> int:
         else:
             try:
                 summarizer.ensure_spec_in_git_history(summarizer.active_spec(args.task_id))
-                product_verification.ensure_source_clean()
                 criteria, mappings = product_verification.verification_contract(args.task_id)
                 profile = product_verification.verification_profile(args.task_id)
                 product_verification.validate_configured_gates(mappings, profile)
+                documentation = product_verification.documentation_report(args.task_id)
                 fingerprints = product_verification.evidence_fingerprints(
                     args.task_id,
                     criteria,
                     mappings,
                     profile,
+                    documentation,
                 )
                 source_commit = product_verification.head_commit()
                 if source_commit is None:
@@ -104,6 +106,7 @@ def command_verify(args: argparse.Namespace) -> int:
             criteria,
             profile,
             fingerprints,
+            documentation,
             execution,
             results,
         )

@@ -9,7 +9,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from .config import harness_root, load_config
+from .config import harness_root, load_config, project_root
 from .metadata import FrontMatterError, parse_front_matter, values_as_list
 
 
@@ -26,6 +26,13 @@ PROTECTED_SECTIONS = (
 FROZEN_FIELDS = ("frozen_at", "freeze_reason", "frozen_scope_sha256")
 MANAGED_FIELDS = {"status", "state_history", *FROZEN_FIELDS}
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
+DOCUMENTATION_IMPACTS = {"none", "required"}
+DOCUMENTATION_FORBIDDEN_PREFIXES = (
+    "harness/specs/active/",
+    "harness/verification/evidence/",
+    "harness/evolution/events/",
+    "harness/evolution/proposals/",
+)
 
 
 def _active_spec(task_id: str) -> Path:
@@ -135,6 +142,69 @@ def parse_state_history(metadata: dict[str, Any]) -> list[dict[str, str]]:
     return events
 
 
+def documentation_contract(metadata: dict[str, Any]) -> dict[str, Any]:
+    impact = str(metadata.get("documentation_impact", "")).strip()
+    if impact not in DOCUMENTATION_IMPACTS:
+        raise LifecycleError("documentation_impact must be required or none")
+
+    reason = str(metadata.get("documentation_reason", "")).strip()
+    if not reason:
+        raise LifecycleError("documentation_reason must be non-empty")
+    if "\n" in reason or "\r" in reason:
+        raise LifecycleError("documentation_reason must be a single line")
+
+    targets = values_as_list(metadata.get("documentation_targets"))
+    if impact == "none" and targets:
+        raise LifecycleError("documentation_impact none must not declare targets")
+    if impact == "required" and not targets:
+        raise LifecycleError("documentation_impact required must declare targets")
+
+    normalized: list[str] = []
+    forbidden_targets = {
+        (harness_root() / str(value)).resolve()
+        for value in load_config().get("evolution", {}).get("forbidden_targets", [])
+    }
+    root = project_root().resolve()
+    for raw_target in targets:
+        target = raw_target.strip()
+        if not target or "\\" in target:
+            raise LifecycleError(
+                "documentation_targets must use non-empty project-relative POSIX paths"
+            )
+        parts = target.split("/")
+        if target.startswith("/") or any(part in {"", ".", ".."} for part in parts):
+            raise LifecycleError(
+                "documentation_targets must use safe project-relative paths"
+            )
+        resolved = (root / target).resolve()
+        if not resolved.is_relative_to(root):
+            raise LifecycleError("documentation_targets must stay inside the project")
+        if resolved in forbidden_targets:
+            raise LifecycleError(f"documentation target is forbidden: {target}")
+        normalized_target = "/".join(parts)
+        normalized_lower = normalized_target.lower()
+        if not normalized_lower.endswith(".md"):
+            raise LifecycleError(
+                f"documentation target must be a Markdown file: {normalized_target}"
+            )
+        if normalized_lower.endswith("/index.md") or normalized_lower == "index.md":
+            raise LifecycleError(
+                f"documentation target must not be a generated index: {normalized_target}"
+            )
+        if any(
+            normalized_lower.startswith(prefix)
+            for prefix in DOCUMENTATION_FORBIDDEN_PREFIXES
+        ):
+            raise LifecycleError(
+                f"documentation target is a generated or transient artifact: {normalized_target}"
+            )
+        if normalized_target in normalized:
+            raise LifecycleError(f"duplicate documentation target: {normalized_target}")
+        normalized.append(normalized_target)
+
+    return {"impact": impact, "reason": reason, "targets": normalized}
+
+
 def _managed_lines(
     status: str,
     history: list[dict[str, str]],
@@ -227,6 +297,11 @@ def validate_active_spec(path: Path) -> list[str]:
                 errors.append(f"active spec must not contain {field}")
         if history and history[-1].get("action") != "resume":
             errors.append("active spec state_history must end with resume")
+        if bool(load_config().get("specs", {}).get("require_documentation_impact")):
+            try:
+                documentation_contract(metadata)
+            except LifecycleError as error:
+                errors.append(str(error))
         return errors
 
     if status != "frozen":

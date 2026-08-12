@@ -120,6 +120,7 @@ def write_task_evidence(
     acceptance_criteria: list[str],
     verification_profile: str,
     fingerprints: dict[str, str],
+    documentation: dict[str, Any],
     execution: dict[str, Any],
     results: list[dict[str, Any]],
 ) -> Path:
@@ -132,6 +133,7 @@ def write_task_evidence(
         "acceptance_criteria": acceptance_criteria,
         "verification_profile": verification_profile,
         "fingerprints": fingerprints,
+        "documentation": documentation,
         "execution": execution,
         "checks": [
             {

@@ -25,6 +25,8 @@ def _write_spec(path: Path, *, plan: str = "- harness-tests => AC-1, AC-2") -> P
         f"task_id: {TASK_ID}\n"
         "status: active\n"
         "verification_profile: focused\n"
+        "documentation_impact: none\n"
+        "documentation_reason: The fixture does not change durable documentation.\n"
         "---\n\n"
         "# Acceptance criteria\n\n"
         "- AC-1: First observable outcome.\n"
@@ -173,7 +175,7 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
     monkeypatch.setattr(harness_cli.summarizer, "ensure_spec_in_git_history", lambda _: None)
     monkeypatch.setattr(harness_cli.lifecycle, "task_status", lambda _: "active")
     monkeypatch.setattr(harness_cli.validator, "run_checks", lambda: list(harness_results))
-    monkeypatch.setattr(product_verification, "ensure_source_clean", lambda: None)
+    monkeypatch.setattr(product_verification, "ensure_source_clean", lambda *_: None)
     monkeypatch.setattr(
         product_verification,
         "verification_contract",
@@ -181,6 +183,18 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
     )
     monkeypatch.setattr(product_verification, "verification_profile", lambda _: "focused")
     monkeypatch.setattr(product_verification, "validate_configured_gates", lambda *_: None)
+    documentation = {
+        "impact": "none",
+        "reason": "Fixture only.",
+        "targets": [],
+        "baseline_commit": None,
+        "target_blobs": {},
+    }
+    monkeypatch.setattr(
+        product_verification,
+        "documentation_report",
+        lambda _: documentation,
+    )
     monkeypatch.setattr(
         product_verification,
         "evidence_fingerprints",
@@ -204,6 +218,7 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
         criteria: list[str],
         profile: str,
         fingerprints: dict[str, str],
+        written_documentation: dict[str, object],
         written_execution: dict[str, object],
         results: list[dict[str, object]],
     ) -> Path:
@@ -212,6 +227,7 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
         assert criteria == ["AC-1", "AC-2"]
         assert profile == "focused"
         assert fingerprints == {"source_tree": "tree"}
+        assert written_documentation == documentation
         assert written_execution == execution
         assert results == harness_results + gate_results
         evidence.write_text("{}", encoding="utf-8")
@@ -237,6 +253,13 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
         "acceptance_criteria": ["AC-1", "AC-2"],
         "verification_profile": "focused",
         "fingerprints": {"source_tree": "tree"},
+        "documentation": {
+            "impact": "none",
+            "reason": "Fixture only.",
+            "targets": [],
+            "baseline_commit": None,
+            "target_blobs": {},
+        },
         "execution": {
             "mode": "git-worktree",
             "source_commit": "abc123",
@@ -261,6 +284,7 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
     }
     payload["summary"] = summarize_checks(payload["checks"])
     evidence.write_text(json.dumps(payload), encoding="utf-8")
+    current_documentation = dict(payload["documentation"])
     monkeypatch.setattr(
         product_verification,
         "verification_contract",
@@ -270,13 +294,26 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
     monkeypatch.setattr(product_verification, "validate_configured_gates", lambda *_: None)
     monkeypatch.setattr(
         product_verification,
+        "documentation_report",
+        lambda _: current_documentation,
+    )
+    monkeypatch.setattr(
+        product_verification,
         "evidence_fingerprints",
         lambda *_: {"source_tree": "tree"},
     )
     monkeypatch.setattr(product_verification, "head_commit", lambda: "abc123")
-    monkeypatch.setattr(product_verification, "ensure_source_clean", lambda: None)
+    monkeypatch.setattr(product_verification, "ensure_source_clean", lambda *_: None)
 
     assert product_verification.validate_evidence(TASK_ID, evidence) == []
+
+    payload["documentation"]["reason"] = "Stale fixture reason."
+    evidence.write_text(json.dumps(payload), encoding="utf-8")
+    assert any(
+        "documentation does not match" in error
+        for error in product_verification.validate_evidence(TASK_ID, evidence)
+    )
+    payload["documentation"]["reason"] = "Fixture only."
 
     payload["source_commit"] = "stale"
     payload["checks"][0]["covers"] = ["AC-1"]
@@ -360,12 +397,20 @@ def test_fingerprints_change_with_spec_contract_and_gate_configuration(
     monkeypatch.setattr(product_verification, "_git_value", lambda *_: "tree-one")
     criteria = ["AC-1", "AC-2"]
     mappings = {"harness-tests": criteria}
+    documentation = {
+        "impact": "none",
+        "reason": "Fixture only.",
+        "targets": [],
+        "baseline_commit": None,
+        "target_blobs": {},
+    }
 
     first = product_verification.evidence_fingerprints(
         TASK_ID,
         criteria,
         mappings,
         "focused",
+        documentation,
     )
     spec.write_text(spec.read_text(encoding="utf-8") + "\n", encoding="utf-8")
     second = product_verification.evidence_fingerprints(
@@ -373,6 +418,7 @@ def test_fingerprints_change_with_spec_contract_and_gate_configuration(
         criteria,
         mappings,
         "focused",
+        documentation,
     )
     gate_config["harness-tests"]["command"].append("-q")
     third = product_verification.evidence_fingerprints(
@@ -380,8 +426,24 @@ def test_fingerprints_change_with_spec_contract_and_gate_configuration(
         criteria,
         mappings,
         "focused",
+        documentation,
+    )
+    changed_documentation = {
+        **documentation,
+        "target_blobs": {"README.md": "new-blob"},
+    }
+    fourth = product_verification.evidence_fingerprints(
+        TASK_ID,
+        criteria,
+        mappings,
+        "focused",
+        changed_documentation,
     )
 
     assert first["source_tree"] == "tree-one"
     assert first["active_spec_sha256"] != second["active_spec_sha256"]
     assert second["gate_config_sha256"] != third["gate_config_sha256"]
+    assert (
+        third["documentation_targets_sha256"]
+        != fourth["documentation_targets_sha256"]
+    )

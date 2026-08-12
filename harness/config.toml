@@ -19,6 +19,9 @@ optional = [
   "freeze_reason",
   "frozen_scope_sha256",
   "verification_profile",
+  "documentation_impact",
+  "documentation_targets",
+  "documentation_reason",
   "state_history",
 ]
 
@@ -27,12 +30,14 @@ active = "specs/active"
 archive = "specs/archive"
 task_id_pattern = "^[0-9]{8}-[a-z0-9]+(?:-[a-z0-9]+)*$"
 require_git_history_before_close = true
+require_documentation_impact = true
 
 [verification]
 checks = "verification/checks"
 evidence = "verification/evidence"
 heavy_artifacts = "verification/evidence/artifacts"
 source_paths = [
+  "README.md",
   "apps",
   "packages",
   "scripts",

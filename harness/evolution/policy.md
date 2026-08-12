@@ -20,5 +20,6 @@ author: Gavin
 
 事件必须由人或确定性生命周期动作显式产生，普通 telemetry 不能直接触发。事件可以生成 proposal，但 proposal 只有在人工确认后才能修改 L1/L2、模板、workflow、index source 或 checks。
 
-`AGENTS.md` 是永久禁止的自动修改目标。确需调整 L0 时，必须开启新的人工决策任务。
+事件是不可变审计记录，不是文件监听器或内容改写回调。生命周期 close 产生的 `spec.completed` 只表示该 spec 已通过验证并压缩，不自动创建 proposal，也不修改 README。durable 文档同步由 active spec 的 `documentation_impact` 契约在 verify/close 前强制完成；如果事件暴露新的流程摩擦，应另行显式发出允许的演进事件，生成 proposal 并经人工确认后实施。
 
+`AGENTS.md` 是永久禁止的自动修改目标。确需调整 L0 时，必须开启新的人工决策任务。

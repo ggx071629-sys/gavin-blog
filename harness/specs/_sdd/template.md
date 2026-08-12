@@ -22,6 +22,10 @@ author: Gavin # optional
 task_id: YYYYMMDD-short-slug
 status: active
 verification_profile: focused # focused | stack | release
+documentation_impact: required # required | none
+documentation_targets: # required 时至少一个；none 时留空
+  - README.md
+documentation_reason: 为什么 durable 文档需要或不需要同步
 state_history:
 ---
 ~~~
@@ -33,5 +37,7 @@ state_history:
 确定性 close 为兼容既有 spec 也接受对应 H2 章节，但新 spec 统一使用上述 H1 结构。Goal 与 Acceptance criteria 缺失或为空时必须先修复 spec，close 不会删除 active 文件或生成不完整归档。
 
 `state_history` 由 Harness 的 freeze/resume 命令维护，新 spec 初始为空。不要手工改写 `status`、冻结元数据或历史记录。
+
+文档目标使用项目根目录相对的 POSIX Markdown 路径。不得指向 `AGENTS.md`、生成索引、active spec、evidence、event 或 proposal。`required` 的每个目标必须在 spec 首次提交之后完成并提交变更；spec 之前已有的修改不能作为本任务证据。`none` 不得包含目标，且必须用单行 `documentation_reason` 说明判断依据。
 
 新 spec 必须先提交并存在于 Git HEAD，之后才能开始实现和运行 task verify。

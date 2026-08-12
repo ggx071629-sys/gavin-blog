@@ -98,6 +98,17 @@ def close_spec(task_id: str) -> tuple[Path, str]:
     )
     if state_history:
         history_lines += "\n"
+    documentation_impact = str(metadata.get("documentation_impact", "")).strip()
+    documentation_reason = str(metadata.get("documentation_reason", "")).strip()
+    documentation_targets = values_as_list(metadata.get("documentation_targets"))
+    documentation_lines = ""
+    if documentation_impact:
+        documentation_lines = f"documentation_impact: {documentation_impact}\n"
+        if documentation_targets:
+            documentation_lines += "documentation_targets:\n" + "\n".join(
+                f"  - {value}" for value in documentation_targets
+            ) + "\n"
+        documentation_lines += f"documentation_reason: {documentation_reason}\n"
     content = (
         "---\n"
         f"id: archive-{task_id}\n"
@@ -108,6 +119,7 @@ def close_spec(task_id: str) -> tuple[Path, str]:
         f"{author_line}"
         f"task_id: {task_id}\n"
         "status: compressed\n"
+        f"{documentation_lines}"
         f"{history_lines}"
         "---\n\n"
         f"# {task_id}\n\n"

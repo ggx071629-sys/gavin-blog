@@ -19,3 +19,4 @@ Spec 是高风险改动的临时协调物，不是永久文档。
 
 创建 spec 前先执行 intake 与 specify workflow；实现后必须通过 VDD checks。关闭过程生成压缩归档，并要求原始 active spec 已存在于 Git 历史。
 
+每个非冻结 active spec 都必须声明文档影响。`documentation_impact: required` 需要列出项目相对、非生成型的 Markdown 目标，并说明原因；这些目标必须在 spec 首次进入 Git 的提交之后发生已提交变更。`documentation_impact: none` 不列目标，但仍需写明没有 durable 文档影响的依据。task verify 在产品 gate 之前检查该契约，close 会按当前 HEAD 与 evidence 再次复核。冻结 spec 保持原契约，不要求迁移字段；恢复为 active 前才需要满足当前规则。

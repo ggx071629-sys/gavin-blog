@@ -15,6 +15,7 @@ documentation_targets:
   - harness/specs/_sdd/template.md
   - harness/workflows/verify.md
   - harness/evolution/policy.md
+  - harness/verification/README.md
 documentation_reason: Harness 的文档迭代约束、事件边界和操作者流程发生变化。
 state_history:
 ---

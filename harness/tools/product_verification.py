@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from .config import load_config, project_root
+from .lifecycle import LifecycleError, documentation_contract as parse_documentation_contract
 from .metadata import parse_front_matter
 from .result_reporting import failure_summary, parse_test_counts, summarize_checks
 from .summarizer import active_spec
@@ -111,6 +112,17 @@ def verification_profile(task_id: str) -> str:
     return profile
 
 
+def documentation_contract(task_id: str) -> dict[str, Any]:
+    path = active_spec(task_id)
+    if not path.is_file():
+        raise ProductVerificationError(f"active spec not found: {path}")
+    metadata, _ = parse_front_matter(path)
+    try:
+        return parse_documentation_contract(metadata)
+    except LifecycleError as error:
+        raise ProductVerificationError(str(error)) from error
+
+
 def validate_configured_gates(
     mappings: dict[str, list[str]],
     profile: str | None = None,
@@ -173,6 +185,7 @@ def evidence_fingerprints(
     criteria: list[str],
     mappings: dict[str, list[str]],
     profile: str,
+    documentation: dict[str, Any] | None = None,
 ) -> dict[str, str]:
     path = active_spec(task_id)
     gates = _configured_gates()
@@ -187,18 +200,30 @@ def evidence_fingerprints(
         "acceptance_criteria": criteria,
         "mappings": mappings,
     }
+    documentation = documentation or documentation_report(task_id)
+    documentation_input = {
+        "impact": documentation["impact"],
+        "reason": documentation["reason"],
+        "targets": documentation["targets"],
+    }
     return {
         "source_tree": _git_value("rev-parse", "HEAD^{tree}"),
         "active_spec_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
         "verification_contract_sha256": _canonical_hash(verification_contract),
         "gate_config_sha256": _canonical_hash(gate_contract),
+        "documentation_contract_sha256": _canonical_hash(documentation_input),
+        "documentation_targets_sha256": _canonical_hash(
+            documentation.get("target_blobs", {})
+        ),
     }
 
 
-def source_changes() -> list[str]:
+def source_changes(extra_paths: list[str] | None = None) -> list[str]:
     config = load_config()
     raw_paths = config.get("verification", {}).get("source_paths", [])
     paths = [str(value) for value in raw_paths]
+    paths.extend(extra_paths or [])
+    paths = list(dict.fromkeys(paths))
     if not paths:
         raise ProductVerificationError("verification.source_paths must not be empty")
     result = subprocess.run(
@@ -214,14 +239,62 @@ def source_changes() -> list[str]:
     return [line for line in result.stdout.splitlines() if line.strip()]
 
 
-def ensure_source_clean() -> None:
-    changes = source_changes()
+def ensure_source_clean(extra_paths: list[str] | None = None) -> None:
+    changes = source_changes(extra_paths)
     if changes:
         shown = ", ".join(line[3:] for line in changes[:5])
         suffix = " ..." if len(changes) > 5 else ""
         raise ProductVerificationError(
             f"verification source has uncommitted changes: {shown}{suffix}"
         )
+
+
+def _spec_introduction_commit(task_id: str) -> str:
+    relative = active_spec(task_id).relative_to(project_root()).as_posix()
+    commits = _git_value("log", "--diff-filter=A", "--format=%H", "--", relative)
+    values = [line.strip() for line in commits.splitlines() if line.strip()]
+    if not values:
+        raise ProductVerificationError(
+            "active spec introduction commit is unavailable in current Git history"
+        )
+    return values[-1]
+
+
+def documentation_report(task_id: str) -> dict[str, Any]:
+    contract = documentation_contract(task_id)
+    targets = list(contract["targets"])
+    ensure_source_clean(targets)
+    report: dict[str, Any] = {
+        "impact": contract["impact"],
+        "reason": contract["reason"],
+        "targets": targets,
+        "baseline_commit": None,
+        "target_blobs": {},
+    }
+    if contract["impact"] == "none":
+        return report
+
+    baseline = _spec_introduction_commit(task_id)
+    report["baseline_commit"] = baseline
+    blobs: dict[str, str] = {}
+    for target in targets:
+        try:
+            blob = _git_value("rev-parse", f"HEAD:{target}")
+        except ProductVerificationError as error:
+            raise ProductVerificationError(
+                f"documentation target must exist in HEAD: {target}"
+            ) from error
+        changed = _git_value(
+            "diff", "--name-only", "-z", f"{baseline}..HEAD", "--", target
+        )
+        if target not in {value for value in changed.split("\0") if value}:
+            raise ProductVerificationError(
+                "documentation target has no committed change after the active spec "
+                f"baseline: {target}"
+            )
+        blobs[target] = blob
+    report["target_blobs"] = blobs
+    return report
 
 
 def _command(
@@ -388,7 +461,10 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
         criteria, mappings = verification_contract(task_id)
         profile = verification_profile(task_id)
         validate_configured_gates(mappings, profile)
-        fingerprints = evidence_fingerprints(task_id, criteria, mappings, profile)
+        documentation = documentation_report(task_id)
+        fingerprints = evidence_fingerprints(
+            task_id, criteria, mappings, profile, documentation
+        )
     except (ProductVerificationError, OSError, ValueError) as error:
         errors.append(str(error))
         return errors
@@ -406,6 +482,8 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
         errors.append("task evidence acceptance criteria do not match the active spec")
     if payload.get("verification_profile") != profile:
         errors.append("task evidence verification_profile does not match the active spec")
+    if payload.get("documentation") != documentation:
+        errors.append("task evidence documentation does not match current documentation inputs")
     if payload.get("fingerprints") != fingerprints:
         errors.append("task evidence fingerprints do not match current verification inputs")
     execution = payload.get("execution")
@@ -467,7 +545,7 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
                 if not check.get("command"):
                     errors.append(f"task evidence command missing for gate {gate}")
     try:
-        ensure_source_clean()
+        ensure_source_clean(list(documentation["targets"]))
     except ProductVerificationError as error:
         errors.append(str(error))
     return errors
