@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "event_type": "spec.completed",
+  "task_id": "20260812-public-reading-maturity",
+  "created_at": "2026-08-12T07:21:17.330777+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false
+}
