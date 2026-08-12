@@ -124,3 +124,39 @@ def test_cleanup_failure_marks_isolated_execution_failed(
     assert results[-1]["name"] == "isolated-worktree-cleanup"
     assert results[-1]["status"] == "failed"
     assert context["cleanup_status"] == "failed"
+
+
+def test_cleanup_removes_untracked_artifacts_left_after_git_worktree_remove(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    project = tmp_path / "project"
+    project.mkdir()
+    temporary = tmp_path / "gavin-task-verify-fixture"
+    monkeypatch.setattr(isolated_verification, "project_root", lambda: project)
+    monkeypatch.setattr(
+        isolated_verification,
+        "isolation_config",
+        lambda: {"mode": "git-worktree", "reuse_paths": []},
+    )
+    monkeypatch.setattr(
+        isolated_verification.tempfile,
+        "mkdtemp",
+        lambda **_: str(temporary.mkdir() or temporary),
+    )
+
+    def run_git(*args: str) -> subprocess.CompletedProcess[str]:
+        if args[:2] == ("worktree", "add"):
+            worktree = Path(args[-2])
+            worktree.mkdir()
+            worktree.joinpath(".output").mkdir()
+        return _completed(*args)
+
+    monkeypatch.setattr(isolated_verification, "_run_git", run_git)
+    monkeypatch.setattr(isolated_verification, "run_gates", lambda *_args, **_kwargs: [])
+
+    results, context = isolated_verification.run_in_worktree({}, "abc123")
+
+    assert results[-1]["name"] == "isolated-worktree"
+    assert context["cleanup_status"] == "passed"
+    assert not temporary.exists()

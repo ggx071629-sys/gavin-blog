@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import shutil
 import subprocess
 import tempfile
 import time
@@ -72,6 +73,22 @@ def _remove_directory_link(path: Path) -> None:
         path.rmdir()
     else:
         path.unlink()
+
+
+def _remove_temporary_root(path: Path) -> None:
+    last_error: OSError | None = None
+    for attempt in range(20):
+        try:
+            shutil.rmtree(path)
+            return
+        except FileNotFoundError:
+            return
+        except OSError as error:
+            last_error = error
+            if attempt < 19:
+                time.sleep(0.25)
+    assert last_error is not None
+    raise last_error
 
 
 def _failure(
@@ -155,7 +172,7 @@ def run_in_worktree(
                 _run_git("worktree", "prune")
         if temporary_root is not None and not cleanup_errors:
             try:
-                temporary_root.rmdir()
+                _remove_temporary_root(temporary_root)
             except OSError:
                 cleanup_errors.append("temporary verification root removal failed")
 
