@@ -78,6 +78,8 @@ def test_run_gates_uses_registered_argv_without_a_shell(
     def run(command: list[str], **kwargs: object) -> SimpleNamespace:
         calls.append((command, Path(str(kwargs["cwd"]))))
         assert "shell" not in kwargs
+        assert kwargs["encoding"] == "utf-8"
+        assert kwargs["errors"] == "replace"
         return SimpleNamespace(returncode=0, stdout="passed", stderr="")
 
     monkeypatch.setattr(product_verification.subprocess, "run", run)

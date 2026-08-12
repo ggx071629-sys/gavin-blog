@@ -39,6 +39,8 @@ def _run_git(*args: str) -> subprocess.CompletedProcess[str]:
         cwd=project_root(),
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         check=False,
     )
 
@@ -55,6 +57,8 @@ def _create_directory_link(source: Path, destination: Path) -> None:
         ["cmd", "/d", "/c", "mklink", "/J", str(destination), str(source)],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         check=False,
     )
     if completed.returncode != 0:
