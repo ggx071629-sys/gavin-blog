@@ -7,6 +7,7 @@ from collections.abc import Callable
 from pathlib import Path
 
 from . import (
+    assurance,
     change_enforcement,
     events,
     indexer,
@@ -323,6 +324,19 @@ def command_telemetry_summary(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_evidence_inventory(args: argparse.Namespace) -> int:
+    result = assurance.inventory()
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+    else:
+        print(
+            f"evidence tasks={result['tasks']} auxiliary={result['auxiliary_files']}"
+        )
+        for level in assurance.LEVELS:
+            print(f"  - {level}: {result['assurance'][level]}")
+    return 0
+
+
 def command_emit_event(args: argparse.Namespace) -> int:
     event_path, proposal_path = events.emit_event(
         args.event_type,
@@ -414,6 +428,13 @@ def parser() -> argparse.ArgumentParser:
     )
     telemetry_summary.add_argument("--json", action="store_true")
     telemetry_summary.set_defaults(func=command_telemetry_summary)
+
+    evidence_inventory = commands.add_parser(
+        "evidence-inventory",
+        help="classify historical evidence assurance without re-verifying it",
+    )
+    evidence_inventory.add_argument("--json", action="store_true")
+    evidence_inventory.set_defaults(func=command_evidence_inventory)
 
     freeze = commands.add_parser("freeze", help="freeze an active spec")
     freeze.add_argument("task_id")

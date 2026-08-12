@@ -169,10 +169,15 @@ path = "evolution"
 title = "Evolution Index"
 summary = "Explicit events and human-approved improvement proposals."
 load_when = ["process-evolution"]
+exclude_statuses = ["applied", "reviewed-no-action", "rejected"]
 
 [nested_indexes.vdd]
 path = "verification/vdd"
 title = "VDD Index"
+
+[nested_indexes.evolution_proposals]
+path = "evolution/proposals"
+title = "Evolution Proposal History"
 
 [structure]
 required = [
