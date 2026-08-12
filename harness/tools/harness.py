@@ -5,7 +5,7 @@ import sys
 from collections.abc import Callable
 from pathlib import Path
 
-from . import events, indexer, lifecycle, summarizer, validator
+from . import events, indexer, lifecycle, product_verification, summarizer, validator
 
 
 def _print_results(results: list[dict[str, object]]) -> None:
@@ -30,23 +30,49 @@ def command_verify(args: argparse.Namespace) -> int:
     if args.task_id:
         summarizer.validate_task_id(args.task_id)
     results = validator.run_checks()
-    if args.task_id and lifecycle.task_status(args.task_id) == "frozen":
-        results.append(
-            {
-                "name": "task-lifecycle",
-                "passed": False,
-                "status": "failed",
-                "duration_ms": 0,
-                "details": [
-                    f"{args.task_id} is frozen; resume it before task verification"
-                ],
-            }
-        )
+    criteria: list[str] = []
+    if args.task_id:
+        if lifecycle.task_status(args.task_id) == "frozen":
+            results.append(
+                {
+                    "name": "task-lifecycle",
+                    "kind": "product",
+                    "command": "",
+                    "passed": False,
+                    "status": "failed",
+                    "duration_ms": 0,
+                    "covers": [],
+                    "details": [
+                        f"{args.task_id} is frozen; resume it before task verification"
+                    ],
+                }
+            )
+        else:
+            try:
+                summarizer.ensure_spec_in_git_history(summarizer.active_spec(args.task_id))
+                product_verification.ensure_source_clean()
+                criteria, mappings = product_verification.verification_contract(args.task_id)
+                product_verification.validate_configured_gates(mappings)
+                results.extend(product_verification.run_gates(mappings))
+            except (OSError, RuntimeError, ValueError) as error:
+                results.append(
+                    {
+                        "name": "task-verification-precondition",
+                        "kind": "product",
+                        "command": "",
+                        "passed": False,
+                        "status": "failed",
+                        "duration_ms": 0,
+                        "covers": [],
+                        "details": [str(error)],
+                    }
+                )
     _print_results(results)
     if args.task_id:
-        evidence = validator.write_evidence(
+        evidence = validator.write_task_evidence(
             args.task_id,
             f"python -m tools.harness verify {args.task_id}",
+            criteria,
             results,
         )
         print(f"evidence {evidence}")
@@ -61,6 +87,13 @@ def command_close(args: argparse.Namespace) -> int:
             file=sys.stderr,
         )
         return 1
+    evidence_path = validator.evidence_path(args.task_id)
+    evidence_errors = product_verification.validate_evidence(args.task_id, evidence_path)
+    if evidence_errors:
+        print("close aborted: task evidence is not valid", file=sys.stderr)
+        for error in evidence_errors:
+            print(f"  - {error}", file=sys.stderr)
+        return 1
     before = validator.run_checks()
     _print_results(before)
     if not validator.passed(before):
@@ -70,9 +103,6 @@ def command_close(args: argparse.Namespace) -> int:
     archive: Path | None = None
     event_path: Path | None = None
     proposal_path: Path | None = None
-    evidence_path = validator.evidence_path(args.task_id)
-    previous_evidence = evidence_path.read_bytes() if evidence_path.exists() else None
-    evidence_touched = False
     source_text = ""
     try:
         archive, source_text = summarizer.close_spec(args.task_id)
@@ -84,23 +114,12 @@ def command_close(args: argparse.Namespace) -> int:
             create_proposal=False,
         )
         indexer.write_indexes()
-        validator.write_evidence(
-            args.task_id,
-            f"python -m tools.harness close {args.task_id}",
-            before,
-        )
-        evidence_touched = True
         after = validator.run_checks()
         if not validator.passed(after):
             raise RuntimeError("post-close verification failed")
-        evidence = validator.write_evidence(
-            args.task_id,
-            f"python -m tools.harness close {args.task_id}",
-            after,
-        )
         _print_results(after)
         print(f"archive {archive}")
-        print(f"evidence {evidence}")
+        print(f"evidence {evidence_path}")
         print(f"event {event_path}")
         if proposal_path is not None:
             print(f"proposal {proposal_path}")
@@ -111,11 +130,6 @@ def command_close(args: argparse.Namespace) -> int:
         for path in (event_path, proposal_path):
             if path is not None and path.exists():
                 path.unlink()
-        if evidence_touched:
-            if previous_evidence is None:
-                evidence_path.unlink(missing_ok=True)
-            else:
-                evidence_path.write_bytes(previous_evidence)
         indexer.write_indexes()
         print(f"close aborted and rolled back: {error}", file=sys.stderr)
         return 1

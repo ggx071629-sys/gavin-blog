@@ -31,6 +31,56 @@ require_git_history_before_close = true
 checks = "verification/checks"
 evidence = "verification/evidence"
 heavy_artifacts = "verification/evidence/artifacts"
+source_paths = [
+  "apps",
+  "packages",
+  "scripts",
+  "harness/config.toml",
+  "harness/tools",
+  "harness/workflows",
+  "harness/specs/_sdd",
+  "harness/specs/active",
+  "harness/specs/INDEX.md",
+  "harness/verification/README.md",
+  "harness/verification/checks",
+  "harness/verification/tests",
+  "harness/verification/vdd",
+]
+
+[verification.gates.api-lint]
+cwd = "apps/api"
+command = ["{python}", "-m", "ruff", "check", "."]
+timeout_seconds = 120
+
+[verification.gates.api-tests]
+cwd = "apps/api"
+command = ["{python}", "-m", "pytest"]
+timeout_seconds = 600
+
+[verification.gates.harness-tests]
+cwd = "."
+command = ["{python}", "-m", "pytest", "harness/verification/tests"]
+timeout_seconds = 120
+
+[verification.gates.harness-integrity]
+cwd = "harness"
+command = ["{python}", "-m", "tools.harness", "verify"]
+timeout_seconds = 120
+
+[verification.gates.web-quality]
+cwd = "."
+command = ["npm", "run", "quality:web"]
+timeout_seconds = 600
+
+[verification.gates.e2e]
+cwd = "."
+command = ["npm", "run", "test:e2e"]
+timeout_seconds = 600
+
+[verification.gates.release]
+cwd = "."
+command = ["npm", "run", "quality:release"]
+timeout_seconds = 900
 
 [telemetry]
 local = "telemetry/local"

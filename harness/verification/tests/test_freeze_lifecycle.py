@@ -212,8 +212,9 @@ def test_task_verify_reports_frozen_and_cannot_write_success_evidence(
     monkeypatch.setattr(harness_cli.lifecycle, "task_status", lambda _: "frozen")
     monkeypatch.setattr(
         harness_cli.validator,
-        "write_evidence",
-        lambda _task, _command, checks: written.append(checks) or Path("evidence.json"),
+        "write_task_evidence",
+        lambda _task, _command, _criteria, checks: written.append(checks)
+        or Path("evidence.json"),
     )
 
     result = harness_cli.command_verify(argparse.Namespace(task_id=TASK_ID))

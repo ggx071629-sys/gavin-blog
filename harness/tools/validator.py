@@ -79,7 +79,6 @@ def evidence_path(task_id: str) -> Path:
 
 def write_evidence(task_id: str, command: str, results: list[dict[str, Any]]) -> Path:
     root = harness_root()
-    config = load_config()
     artifacts: dict[str, str] = {}
     candidates = [
         project_root() / "AGENTS.md",
@@ -106,6 +105,35 @@ def write_evidence(task_id: str, command: str, results: list[dict[str, Any]]) ->
             for result in results
         ],
         "artifact_hashes": artifacts,
+        "source_commit": _source_commit(),
+    }
+    path = evidence_path(task_id)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return path
+
+
+def write_task_evidence(
+    task_id: str,
+    command: str,
+    acceptance_criteria: list[str],
+    results: list[dict[str, Any]],
+) -> Path:
+    manifest = {
+        "schema_version": 2,
+        "task_id": task_id,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "command": command,
+        "status": "passed" if passed(results) else "failed",
+        "acceptance_criteria": acceptance_criteria,
+        "checks": [
+            {
+                key: value
+                for key, value in result.items()
+                if key not in {"passed"}
+            }
+            for result in results
+        ],
         "source_commit": _source_commit(),
     }
     path = evidence_path(task_id)

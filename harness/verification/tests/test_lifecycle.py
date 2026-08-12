@@ -175,9 +175,9 @@ def test_close_requests_an_event_without_a_proposal(
     monkeypatch.setattr(harness_cli.validator, "passed", lambda _: True)
     monkeypatch.setattr(harness_cli.validator, "evidence_path", lambda _: evidence)
     monkeypatch.setattr(
-        harness_cli.validator,
-        "write_evidence",
-        lambda *_: evidence,
+        harness_cli.product_verification,
+        "validate_evidence",
+        lambda *_: [],
     )
     monkeypatch.setattr(harness_cli.indexer, "write_indexes", list)
 
@@ -193,3 +193,27 @@ def test_close_requests_an_event_without_a_proposal(
     assert result == 0
     assert requested == [False]
     assert event.is_file()
+
+
+def test_close_rejects_invalid_task_evidence_before_running_checks(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    checks_called = False
+    monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
+    monkeypatch.setattr(harness_cli.lifecycle, "task_status", lambda _: "active")
+    monkeypatch.setattr(harness_cli.validator, "evidence_path", lambda _: Path("missing.json"))
+    monkeypatch.setattr(
+        harness_cli.product_verification,
+        "validate_evidence",
+        lambda *_: ["task evidence missing"],
+    )
+
+    def run_checks() -> list[dict[str, object]]:
+        nonlocal checks_called
+        checks_called = True
+        return []
+
+    monkeypatch.setattr(harness_cli.validator, "run_checks", run_checks)
+
+    assert harness_cli.command_close(argparse.Namespace(task_id=TASK_ID)) == 1
+    assert checks_called is False
