@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "event_type": "spec.completed",
+  "task_id": "20260812-harness-verification-lifecycle",
+  "created_at": "2026-08-12T03:23:11.078177+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false
+}
