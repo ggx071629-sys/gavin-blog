@@ -18,3 +18,5 @@ Read this index first. Load only entries whose `load_when` matches the task.
 | operations-release-readiness | L1 | 本地发布候选门禁、首发阻断项及备份回滚边界 | release, operations, deployment | Gavin | [operations/release-readiness.md](operations/release-readiness.md) |
 | product-brief | L1 | Gavin 个人技术博客的定位、能力范围、技术约束与开发顺序 | product-planning, feature-scope, content-model | Gavin | [product/brief.md](product/brief.md) |
 | product-knowledge-incubator | L1 | 单管理员知识孵化工作台的摄入、检索、审计、草稿与发布需求设计 | knowledge-incubator, ingestion, retrieval, llm-audit, article-revision | Gavin | [product/knowledge-incubator.md](product/knowledge-incubator.md) |
+| review-2026-08-09-project-audit | L1 | 2026-08-09 全项目隐性功能、UI/UX、安全与发布就绪审计 | project-audit, defect-review, release-readiness | Codex | [reviews/2026-08-09-project-audit.md](reviews/2026-08-09-project-audit.md) |
+| review-2026-08-09-project-audit-remediation-plan | L1 | 2026-08-09 项目审计缺陷的分批修复、规格拆分与验收总纲 | remediation-planning, defect-fix, project-audit, release-readiness | Codex | [reviews/2026-08-09-project-audit-remediation-plan.md](reviews/2026-08-09-project-audit-remediation-plan.md) |
