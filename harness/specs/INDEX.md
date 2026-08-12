@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **0 active**, **2 frozen**.
+Open specifications: **8 active**, **2 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -13,6 +13,14 @@ Open specifications: **0 active**, **2 frozen**.
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
 | spec-20260807-github-discovery-ingestion | frozen | L1 | 为博客建立 GitHub 发现画像、私有资料仓库同步与待处理池摄入闭环 | task:20260807-github-discovery-ingestion | Gavin | [active/20260807-github-discovery-ingestion.md](active/20260807-github-discovery-ingestion.md) |
 | spec-20260807-github-source-crawler | frozen | L1 | 在独立私有仓库中用 GitHub Actions 无模型发现并保存文章型 Markdown | task:20260807-github-source-crawler | Gavin | [active/20260807-github-source-crawler.md](active/20260807-github-source-crawler.md) |
+| spec-20260811-audit-plan-retry-idempotency | active | L1 | 修复同一资料修订在终态审计计划后无法重新准备的幂等冲突 | task:20260811-audit-plan-retry-idempotency | Codex | [active/20260811-audit-plan-retry-idempotency.md](active/20260811-audit-plan-retry-idempotency.md) |
+| spec-20260811-draft-generation-json-contract | active | L1 | 修复 json_object 草稿生成契约、失败重试与错误发布链路 | task:20260811-draft-generation-json-contract | Codex | [active/20260811-draft-generation-json-contract.md](active/20260811-draft-generation-json-contract.md) |
+| spec-20260811-incubator-batch-lifecycle | active | L1 | 为知识孵化三池补齐批量丢弃、安全恢复与概览层级 | task:20260811-incubator-batch-lifecycle | Codex | [active/20260811-incubator-batch-lifecycle.md](active/20260811-incubator-batch-lifecycle.md) |
+| spec-20260811-json-object-audit-prompt | active | L1 | 为 json_object 审计请求显式发送结构契约与真实证据示例 | task:20260811-json-object-audit-prompt | Codex | [active/20260811-json-object-audit-prompt.md](active/20260811-json-object-audit-prompt.md) |
+| spec-20260811-light-codeblock-visibility | active | L1 | 修复浅色模式下正文代码块背景与文字色重叠不可见，并让 highlight.js 主题随颜色主题切换 | task:20260811-light-codeblock-visibility | Gavin | [active/20260811-light-codeblock-visibility.md](active/20260811-light-codeblock-visibility.md) |
+| spec-20260811-media-inline-lifecycle | active | L1 | 建立编辑器内媒体导入、去重、软删除恢复与可扩展管理闭环 | task:20260811-media-inline-lifecycle | Codex | [active/20260811-media-inline-lifecycle.md](active/20260811-media-inline-lifecycle.md) |
+| spec-20260811-profile-media-avatar-url | active | L1 | 允许个人名片保存媒体库生成的受限站内头像地址 | task:20260811-profile-media-avatar-url | Codex | [active/20260811-profile-media-avatar-url.md](active/20260811-profile-media-avatar-url.md) |
+| spec-20260811-public-ui-polish | active | L1 | 收敛公开导航层级、文章摘要与阅读页提示和目录布局 | task:20260811-public-ui-polish | Codex | [active/20260811-public-ui-polish.md](active/20260811-public-ui-polish.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
