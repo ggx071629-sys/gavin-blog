@@ -55,7 +55,7 @@ source_paths = [
 
 [verification.isolation]
 mode = "git-worktree"
-reuse_paths = ["node_modules", "apps/api/.venv"]
+reuse_paths = ["node_modules", "apps/web/node_modules", "apps/api/.venv"]
 
 [verification.profiles.focused]
 required_gates = []
