@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import importlib
+import json
 import sys
 from pathlib import Path
 
@@ -443,3 +444,58 @@ def test_close_cleans_partial_event_when_emission_raises(
     assert source.read_text(encoding="utf-8") == "source"
     assert not archive.exists()
     assert not event.exists()
+
+
+def test_close_all_dry_run_performs_full_preflight_without_writes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    task = "20260812-active-one"
+    source = tmp_path / f"{task}.md"
+    archive = tmp_path / f"{task}.archive.md"
+    event = tmp_path / f"{task}.event.json"
+    source.write_text("source", encoding="utf-8")
+    passed = [{"name": "fixture", "status": "passed", "duration_ms": 0}]
+    monkeypatch.setattr(harness_cli.summarizer, "active_specs", lambda: [source])
+    monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
+    monkeypatch.setattr(harness_cli.summarizer, "active_spec", lambda _: source)
+    monkeypatch.setattr(harness_cli.summarizer, "archive_spec", lambda _: archive)
+    monkeypatch.setattr(harness_cli.lifecycle, "task_status", lambda _: "active")
+    monkeypatch.setattr(harness_cli.validator, "evidence_path", lambda _: tmp_path / "evidence.json")
+    monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", lambda *_: [])
+    monkeypatch.setattr(harness_cli.events, "event_path", lambda *_: event)
+    monkeypatch.setattr(harness_cli.validator, "run_checks", lambda: passed)
+
+    def forbidden(*_: object, **__: object) -> None:
+        raise AssertionError("dry-run must not write close artifacts")
+
+    monkeypatch.setattr(harness_cli.summarizer, "close_spec", forbidden)
+    monkeypatch.setattr(harness_cli.events, "emit_event", forbidden)
+    monkeypatch.setattr(harness_cli.indexer, "write_indexes", forbidden)
+
+    assert harness_cli.command_close_all(argparse.Namespace(dry_run=True)) == 0
+    assert source.read_text(encoding="utf-8") == "source"
+    assert not archive.exists()
+    assert not event.exists()
+
+
+def test_status_json_is_read_only_and_missing_task_returns_one(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    record = {
+        "task_id": TASK_ID,
+        "state": "missing",
+        "verification_profile": None,
+        "evidence": "missing",
+        "blockers": ["not found"],
+    }
+    monkeypatch.setattr(harness_cli.task_reporting, "task_record", lambda _: record)
+
+    result = harness_cli.command_status(
+        argparse.Namespace(task_id=TASK_ID, json=True)
+    )
+
+    assert result == 1
+    payload = json.loads(capsys.readouterr().out)
+    assert payload == {"schema_version": 1, "tasks": [record]}

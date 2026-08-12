@@ -70,16 +70,24 @@ def _remove_directory_link(path: Path) -> None:
         path.unlink()
 
 
-def _failure(name: str, started: float, detail: str) -> dict[str, Any]:
+def _failure(
+    name: str,
+    duration_ms: float,
+    detail: str,
+) -> dict[str, Any]:
     return {
         "name": name,
         "kind": "isolation",
         "command": "git worktree add --detach <temporary> HEAD",
         "status": "failed",
         "passed": False,
-        "duration_ms": round((time.perf_counter() - started) * 1000, 3),
+        "duration_ms": duration_ms,
         "covers": [],
         "details": [detail],
+        "result": {
+            "exit_code": None,
+            "failure": {"kind": name, "summary": detail[:300]},
+        },
     }
 
 
@@ -147,13 +155,24 @@ def run_in_worktree(
             except OSError:
                 cleanup_errors.append("temporary verification root removal failed")
 
+    total_duration_ms = round((time.perf_counter() - started) * 1000, 3)
+    gate_duration_ms = sum(float(result.get("duration_ms", 0) or 0) for result in results)
+    isolation_duration_ms = round(max(0.0, total_duration_ms - gate_duration_ms), 3)
     if not cleanup_errors:
         context["cleanup_status"] = "passed"
         context["reused_paths"] = len(links)
     if cleanup_errors:
-        results.append(_failure("isolated-worktree-cleanup", started, cleanup_errors[0]))
+        results.append(
+            _failure(
+                "isolated-worktree-cleanup",
+                isolation_duration_ms,
+                cleanup_errors[0],
+            )
+        )
     elif setup_error is not None:
-        results.append(_failure("isolated-worktree-setup", started, setup_error))
+        results.append(
+            _failure("isolated-worktree-setup", isolation_duration_ms, setup_error)
+        )
     else:
         results.append(
             {
@@ -162,7 +181,7 @@ def run_in_worktree(
                 "command": "git worktree add --detach <temporary> HEAD",
                 "status": "passed",
                 "passed": True,
-                "duration_ms": round((time.perf_counter() - started) * 1000, 3),
+                "duration_ms": isolation_duration_ms,
                 "covers": [],
                 "details": ["temporary worktree and dependency links were removed"],
             }

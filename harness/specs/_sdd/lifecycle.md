@@ -33,6 +33,8 @@ author: Gavin
 
 批量关闭使用 `python -m tools.harness close-all`。该命令明确跳过 frozen spec，先统一验证所有 active evidence 和 Harness 完整性，再一次性生成归档与事件；任一变更或后验检查失败时整批回滚，不保留部分关闭结果。
 
+关闭前可运行 `python -m tools.harness status [task_id] [--json]` 只读查看派生状态；frozen 不触发 evidence 校验。`python -m tools.harness close-all --dry-run` 复用真实批量关闭的 evidence、目标冲突和 Harness 前置检查，但不写 spec、archive、event、evidence 或索引。
+
 关闭前必须能从精确的 H1 或 H2 `Goal` 与 `Acceptance criteria` 章节提取非空内容；否则 close 失败并回滚，禁止以 `Not recorded` 代替关键归档信息。普通 close 记录 `spec.completed` event，但不自动生成无具体改进内容的 Evolution proposal；proposal 只由显式、带理由的 event 进入人工审阅。
 
 ## Durable references

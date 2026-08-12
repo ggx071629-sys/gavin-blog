@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from collections.abc import Callable
 from pathlib import Path
@@ -12,6 +13,7 @@ from . import (
     lifecycle,
     product_verification,
     summarizer,
+    task_reporting,
     validator,
 )
 
@@ -129,9 +131,9 @@ def _preflight_close(task_ids: list[str]) -> bool:
     return valid
 
 
-def _close_tasks(task_ids: list[str]) -> int:
+def _close_preflight(task_ids: list[str]) -> list[tuple[str, Path, str, Path]] | None:
     if not _preflight_close(task_ids):
-        return 1
+        return None
     snapshots: list[tuple[str, Path, str, Path]] = []
     try:
         for task_id in task_ids:
@@ -147,11 +149,18 @@ def _close_tasks(task_ids: list[str]) -> int:
             )
     except (OSError, ValueError) as error:
         print(f"close aborted: {error}", file=sys.stderr)
-        return 1
+        return None
     before = validator.run_checks()
     _print_results(before)
     if not validator.passed(before):
         print("close aborted: pre-close verification failed", file=sys.stderr)
+        return None
+    return snapshots
+
+
+def _close_tasks(task_ids: list[str]) -> int:
+    snapshots = _close_preflight(task_ids)
+    if snapshots is None:
         return 1
 
     attempted: list[tuple[str, Path, str, Path]] = []
@@ -212,7 +221,7 @@ def command_close(args: argparse.Namespace) -> int:
     return _close_tasks([args.task_id])
 
 
-def command_close_all(_: argparse.Namespace) -> int:
+def command_close_all(args: argparse.Namespace) -> int:
     active: list[str] = []
     frozen: list[str] = []
     for path in summarizer.active_specs():
@@ -228,7 +237,34 @@ def command_close_all(_: argparse.Namespace) -> int:
         print("no active specs to close")
         return 0
     print(f"preflight {len(active)} active spec(s)")
+    if bool(getattr(args, "dry_run", False)):
+        snapshots = _close_preflight(active)
+        if snapshots is None:
+            return 1
+        print(f"dry-run ready: {len(snapshots)} active spec(s) can close atomically")
+        return 0
     return _close_tasks(active)
+
+
+def command_status(args: argparse.Namespace) -> int:
+    records = (
+        [task_reporting.task_record(args.task_id)]
+        if args.task_id
+        else task_reporting.current_task_records()
+    )
+    if args.json:
+        print(json.dumps({"schema_version": 1, "tasks": records}, ensure_ascii=False))
+    else:
+        for record in records:
+            profile = record["verification_profile"] or "—"
+            print(
+                f"[{str(record['state']).upper()}] {record['task_id']} "
+                f"profile={profile} evidence={record['evidence']}"
+            )
+            blockers = record.get("blockers") or []
+            if blockers:
+                print(f"  - {blockers[0]}")
+    return 1 if any(record["state"] == "missing" for record in records) else 0
 
 
 def command_emit_event(args: argparse.Namespace) -> int:
@@ -296,7 +332,17 @@ def parser() -> argparse.ArgumentParser:
         "close-all",
         help="preflight and atomically close all non-frozen active specs",
     )
+    close_all.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="run the complete close preflight without writing files",
+    )
     close_all.set_defaults(func=command_close_all)
+
+    status = commands.add_parser("status", help="report derived task lifecycle state")
+    status.add_argument("task_id", nargs="?")
+    status.add_argument("--json", action="store_true")
+    status.set_defaults(func=command_status)
 
     freeze = commands.add_parser("freeze", help="freeze an active spec")
     freeze.add_argument("task_id")

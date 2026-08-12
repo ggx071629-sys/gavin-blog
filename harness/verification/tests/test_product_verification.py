@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import json
+import subprocess
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 from harness.tools import harness as harness_cli
 from harness.tools import product_verification
+from harness.tools.result_reporting import summarize_checks
 
 TASK_ID = "20260812-product-evidence"
 
@@ -84,6 +86,60 @@ def test_run_gates_uses_registered_argv_without_a_shell(
     assert results[0]["covers"] == ["AC-1"]
     assert calls[0][0][0] == product_verification.sys.executable
     assert calls[0][1] == tmp_path
+
+
+def test_gate_failure_result_distinguishes_nonzero_timeout_and_execution_error(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(product_verification, "project_root", lambda: tmp_path)
+    monkeypatch.setattr(
+        product_verification,
+        "_configured_gates",
+        lambda: {
+            "fixture": {
+                "cwd": ".",
+                "command": ["{python}", "-m", "fixture"],
+                "timeout_seconds": 1,
+            }
+        },
+    )
+    root_text = str(tmp_path)
+    monkeypatch.setattr(
+        product_verification.subprocess,
+        "run",
+        lambda *_args, **_kwargs: SimpleNamespace(
+            returncode=1,
+            stdout=f"Error: failed at {root_text}\\fixture.py\n1 failed in 0.1s",
+            stderr="",
+        ),
+    )
+
+    nonzero = product_verification.run_gates(
+        {"fixture": ["AC-1"]},
+        execution_root=tmp_path,
+    )[0]
+    assert nonzero["result"]["failure"] == {
+        "kind": "nonzero-exit",
+        "summary": "Error: failed at <isolated-worktree>\\fixture.py",
+    }
+    assert nonzero["result"]["test_counts"]["failed"] == 1
+
+    def timeout(*_args: object, **_kwargs: object) -> None:
+        raise subprocess.TimeoutExpired("fixture", 1)
+
+    monkeypatch.setattr(product_verification.subprocess, "run", timeout)
+    timed_out = product_verification.run_gates({"fixture": ["AC-1"]})[0]
+    assert timed_out["result"]["failure"]["kind"] == "timeout"
+
+    monkeypatch.setattr(
+        product_verification,
+        "_configured_gates",
+        lambda: {"fixture": {"cwd": ".", "command": ["missing-fixture-command"]}},
+    )
+    monkeypatch.setattr(product_verification.shutil, "which", lambda _: None)
+    execution_error = product_verification.run_gates({"fixture": ["AC-1"]})[0]
+    assert execution_error["result"]["failure"]["kind"] == "execution-error"
 
 
 def test_task_verify_runs_product_gates_and_writes_current_evidence(
@@ -203,6 +259,7 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
             },
         ],
     }
+    payload["summary"] = summarize_checks(payload["checks"])
     evidence.write_text(json.dumps(payload), encoding="utf-8")
     monkeypatch.setattr(
         product_verification,
@@ -227,6 +284,15 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
     errors = product_verification.validate_evidence(TASK_ID, evidence)
     assert "task evidence source_commit does not match HEAD" in errors
     assert any("coverage does not match" in error for error in errors)
+
+    payload["source_commit"] = "abc123"
+    payload["checks"][0]["covers"] = ["AC-1", "AC-2"]
+    payload["summary"]["checks"]["passed"] = 1
+    evidence.write_text(json.dumps(payload), encoding="utf-8")
+    assert "task evidence summary does not match checks" in product_verification.validate_evidence(
+        TASK_ID,
+        evidence,
+    )
 
 
 def test_profile_requires_its_minimum_registered_gates(

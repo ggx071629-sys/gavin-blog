@@ -13,6 +13,7 @@ from typing import Any
 
 from .config import load_config, project_root
 from .metadata import parse_front_matter
+from .result_reporting import failure_summary, parse_test_counts, summarize_checks
 from .summarizer import active_spec
 
 CRITERION_PATTERN = re.compile(r"^-\s+(AC-[1-9][0-9]*):\s+\S", re.MULTILINE)
@@ -254,7 +255,15 @@ def _command(
     return command, cwd, timeout_seconds
 
 
-def _tail(output: str, limit: int = 2000) -> list[str]:
+def _tail(
+    output: str,
+    limit: int = 2000,
+    *,
+    redactions: list[str] | None = None,
+) -> list[str]:
+    from .result_reporting import clean_output
+
+    output = clean_output(output, redactions=redactions)
     compact = output.strip()
     if not compact:
         return []
@@ -285,28 +294,78 @@ def run_gates(
                 check=False,
                 timeout=timeout_seconds,
             )
+            duration_ms = round((time.perf_counter() - started) * 1000, 3)
             passed = completed.returncode == 0
-            details = [] if passed else _tail(completed.stdout + "\n" + completed.stderr)
+            redactions = [str(execution_root)] if execution_root is not None else []
+            details = (
+                []
+                if passed
+                else _tail(
+                    completed.stdout + "\n" + completed.stderr,
+                    redactions=redactions,
+                )
+            )
+            test_counts = parse_test_counts(completed.stdout, completed.stderr)
+            structured_result: dict[str, Any] = {"exit_code": completed.returncode}
+            if test_counts is not None:
+                structured_result["test_counts"] = test_counts
+            if not passed:
+                structured_result["failure"] = {
+                    "kind": "nonzero-exit",
+                    "summary": failure_summary(
+                        completed.stdout,
+                        completed.stderr,
+                        redactions=redactions,
+                    ),
+                }
             result = {
                 "name": gate,
                 "kind": "product",
                 "command": subprocess.list2cmdline(command),
                 "status": "passed" if passed else "failed",
                 "passed": passed,
-                "duration_ms": round((time.perf_counter() - started) * 1000, 3),
+                "duration_ms": duration_ms,
                 "covers": covered,
                 "details": details,
+                "result": structured_result,
             }
-        except (OSError, ProductVerificationError, subprocess.TimeoutExpired) as error:
+        except subprocess.TimeoutExpired:
+            duration_ms = round((time.perf_counter() - started) * 1000, 3)
             result = {
                 "name": gate,
                 "kind": "product",
                 "command": "",
                 "status": "failed",
                 "passed": False,
-                "duration_ms": round((time.perf_counter() - started) * 1000, 3),
+                "duration_ms": duration_ms,
+                "covers": covered,
+                "details": ["gate timed out"],
+                "result": {
+                    "exit_code": None,
+                    "failure": {
+                        "kind": "timeout",
+                        "summary": "gate exceeded its configured timeout",
+                    },
+                },
+            }
+        except (OSError, ProductVerificationError) as error:
+            duration_ms = round((time.perf_counter() - started) * 1000, 3)
+            result = {
+                "name": gate,
+                "kind": "product",
+                "command": "",
+                "status": "failed",
+                "passed": False,
+                "duration_ms": duration_ms,
                 "covers": covered,
                 "details": [str(error)],
+                "result": {
+                    "exit_code": None,
+                    "failure": {
+                        "kind": "execution-error",
+                        "summary": str(error)[:300],
+                    },
+                },
             }
         results.append(result)
         if not result["passed"]:
@@ -364,7 +423,21 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
     if not isinstance(checks, list) or not checks:
         errors.append("task evidence checks must be a non-empty array")
     else:
-        if any(not isinstance(check, dict) or check.get("status") != "passed" for check in checks):
+        checks_are_objects = all(isinstance(check, dict) for check in checks)
+        if not checks_are_objects:
+            errors.append("every task evidence check must be an object")
+        else:
+            try:
+                expected_summary = summarize_checks(checks)
+            except (TypeError, ValueError):
+                errors.append("task evidence checks contain invalid summary values")
+            else:
+                if payload.get("summary") != expected_summary:
+                    errors.append("task evidence summary does not match checks")
+        if any(
+            not isinstance(check, dict) or check.get("status") != "passed"
+            for check in checks
+        ):
             errors.append("every task evidence check must be passed")
         isolation = [
             check

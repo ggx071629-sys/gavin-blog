@@ -11,6 +11,7 @@ from types import ModuleType
 from typing import Any
 
 from .config import harness_root, load_config, project_root
+from .result_reporting import summarize_checks
 
 
 def _load_check(path: Path) -> ModuleType:
@@ -140,6 +141,7 @@ def write_task_evidence(
             }
             for result in results
         ],
+        "summary": summarize_checks(results),
         "source_commit": _source_commit(),
     }
     path = evidence_path(task_id)
