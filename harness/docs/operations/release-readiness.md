@@ -26,6 +26,10 @@ npm run quality:release
 
 API 虚拟环境必须位于 `apps/api/.venv`，并已安装 `.[dev]`。门禁依次执行 API Ruff、Pytest、Harness check 单测、OpenAPI 快照一致性、Web 类型检查、Vitest、生产构建、axe-core、Lighthouse、核心 Playwright E2E 和 Harness checks。任何一步失败都阻断候选版本。
 
+`quality:release` 在环境变量 `HARNESS_BASE_REF` 存在时，先从 `harness/` 执行 `python -m tools.harness change-check --base <ref> --head <ref>`。该检查只接受同一 Git diff 中的压缩 task archive 与 schema v2 passed evidence，并验证 evidence source commit 位于 base 之后且可从 head 到达。`HARNESS_HEAD_REF` 可选，默认是 `HEAD`。
+
+没有显式基线时，本地 release runner 会清楚报告 change coverage 被跳过。当前仓库没有 Git remote、CI provider 或分支保护；因此本地通过不构成不可绕过的合并证明。托管平台确定后，必须把带可信 base/head 的 change-check 和 release gate 绑定为最新提交的 required status checks，才能提升该保证等级。
+
 ## Before first production release
 
 - 通过独立 spec 确定 Web/API 运行拓扑、域名、TLS、进程管理和部署平台。

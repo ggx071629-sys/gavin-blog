@@ -7,6 +7,7 @@ from collections.abc import Callable
 from pathlib import Path
 
 from . import (
+    change_enforcement,
     events,
     indexer,
     isolated_verification,
@@ -270,6 +271,22 @@ def command_status(args: argparse.Namespace) -> int:
     return 1 if any(record["state"] == "missing" for record in records) else 0
 
 
+def command_change_check(args: argparse.Namespace) -> int:
+    try:
+        result = change_enforcement.inspect_change(args.base, args.head)
+    except (OSError, RuntimeError, ValueError) as error:
+        print(f"[FAILED] change-coverage\n  - {error}", file=sys.stderr)
+        return 1
+    status = "PASSED" if result["passed"] else "FAILED"
+    print(f"[{status}] change-coverage")
+    print(f"  - base {result['base']}")
+    print(f"  - head {result['head']}")
+    print(f"  - {len(result['risk_paths'])} risk path(s)")
+    for detail in result["details"]:
+        print(f"  - {detail}")
+    return 0 if result["passed"] else 1
+
+
 def command_emit_event(args: argparse.Namespace) -> int:
     event_path, proposal_path = events.emit_event(
         args.event_type,
@@ -346,6 +363,14 @@ def parser() -> argparse.ArgumentParser:
     status.add_argument("task_id", nargs="?")
     status.add_argument("--json", action="store_true")
     status.set_defaults(func=command_status)
+
+    change_check = commands.add_parser(
+        "change-check",
+        help="require current task evidence for configured risk changes",
+    )
+    change_check.add_argument("--base", required=True)
+    change_check.add_argument("--head", default="HEAD")
+    change_check.set_defaults(func=command_change_check)
 
     freeze = commands.add_parser("freeze", help="freeze an active spec")
     freeze.add_argument("task_id")

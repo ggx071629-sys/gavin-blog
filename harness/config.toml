@@ -101,6 +101,23 @@ cwd = "."
 command = ["npm", "run", "quality:release"]
 timeout_seconds = 900
 
+[change_enforcement]
+risk_prefixes = [
+  "apps/",
+  "packages/contracts/",
+  "scripts/",
+  "harness/tools/",
+  "harness/verification/checks/",
+  "harness/verification/tests/",
+  "harness/workflows/",
+  "harness/specs/_sdd/",
+]
+risk_files = [
+  "package.json",
+  "package-lock.json",
+  "harness/config.toml",
+]
+
 [telemetry]
 local = "telemetry/local"
 summaries = "telemetry/summaries"
