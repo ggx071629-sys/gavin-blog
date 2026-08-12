@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **1 active**, **2 frozen**.
+Open specifications: **0 active**, **2 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -13,7 +13,6 @@ Open specifications: **1 active**, **2 frozen**.
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
 | spec-20260807-github-discovery-ingestion | frozen | L1 | 为博客建立 GitHub 发现画像、私有资料仓库同步与待处理池摄入闭环 | task:20260807-github-discovery-ingestion | Gavin | [active/20260807-github-discovery-ingestion.md](active/20260807-github-discovery-ingestion.md) |
 | spec-20260807-github-source-crawler | frozen | L1 | 在独立私有仓库中用 GitHub Actions 无模型发现并保存文章型 Markdown | task:20260807-github-source-crawler | Gavin | [active/20260807-github-source-crawler.md](active/20260807-github-source-crawler.md) |
-| spec-20260812-harness-history-assurance | active | L1 | 降低终结 Evolution proposal 路由噪声并显式区分历史 evidence 保证等级 | task:20260812-harness-history-assurance | Codex | [active/20260812-harness-history-assurance.md](active/20260812-harness-history-assurance.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -69,6 +68,7 @@ Open specifications: **1 active**, **2 frozen**.
 | archive-20260811-public-ui-polish | compressed | L2 | 收敛公开导航层级、文章摘要与阅读页提示和目录布局 | task:20260811-public-ui-polish | Codex | [archive/20260811-public-ui-polish.md](archive/20260811-public-ui-polish.md) |
 | archive-20260812-documentation-impact-gate | compressed | L2 | 让 active spec 的文档影响在验证和关闭前形成确定性闭环 | task:20260812-documentation-impact-gate | Gavin | [archive/20260812-documentation-impact-gate.md](archive/20260812-documentation-impact-gate.md) |
 | archive-20260812-harness-change-enforcement | compressed | L2 | 建立基于 Git diff 的 Harness 任务覆盖门禁并统一可重复执行入口 | task:20260812-harness-change-enforcement | Codex | [archive/20260812-harness-change-enforcement.md](archive/20260812-harness-change-enforcement.md) |
+| archive-20260812-harness-history-assurance | compressed | L2 | 降低终结 Evolution proposal 路由噪声并显式区分历史 evidence 保证等级 | task:20260812-harness-history-assurance | Codex | [archive/20260812-harness-history-assurance.md](archive/20260812-harness-history-assurance.md) |
 | archive-20260812-harness-product-verification-gate | compressed | L2 | 让 task verify 运行白名单产品门禁，并让 close 强制消费当前提交的完整验收证据 | task:20260812-harness-product-verification-gate | Codex | [archive/20260812-harness-product-verification-gate.md](archive/20260812-harness-product-verification-gate.md) |
 | archive-20260812-harness-run-telemetry | compressed | L2 | 为任务验证与发布门禁建立本地追加式运行观测和确定性摘要 | task:20260812-harness-run-telemetry | Codex | [archive/20260812-harness-run-telemetry.md](archive/20260812-harness-run-telemetry.md) |
 | archive-20260812-harness-verification-lifecycle | compressed | L2 | 补齐派生 verified 状态、证据指纹、验证分层与原子批量关闭 | task:20260812-harness-verification-lifecycle | Codex | [archive/20260812-harness-verification-lifecycle.md](archive/20260812-harness-verification-lifecycle.md) |
