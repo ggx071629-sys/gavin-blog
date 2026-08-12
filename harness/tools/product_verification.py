@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -90,12 +91,106 @@ def _configured_gates() -> dict[str, Any]:
     return dict(gates) if isinstance(gates, dict) else {}
 
 
-def validate_configured_gates(mappings: dict[str, list[str]]) -> None:
+def _configured_profiles() -> dict[str, Any]:
+    verification = load_config().get("verification", {})
+    profiles = verification.get("profiles", {})
+    return dict(profiles) if isinstance(profiles, dict) else {}
+
+
+def verification_profile(task_id: str) -> str:
+    path = active_spec(task_id)
+    if not path.is_file():
+        raise ProductVerificationError(f"active spec not found: {path}")
+    metadata, _ = parse_front_matter(path)
+    profile = str(metadata.get("verification_profile", "")).strip()
+    if not profile:
+        raise ProductVerificationError("active spec must declare verification_profile")
+    if profile not in _configured_profiles():
+        raise ProductVerificationError(f"unknown verification_profile: {profile}")
+    return profile
+
+
+def validate_configured_gates(
+    mappings: dict[str, list[str]],
+    profile: str | None = None,
+) -> None:
     unknown = sorted(set(mappings) - set(_configured_gates()))
     if unknown:
         raise ProductVerificationError(
             f"Verification plan uses unregistered gates: {', '.join(unknown)}"
         )
+    if profile is None:
+        return
+    profiles = _configured_profiles()
+    definition = profiles.get(profile)
+    if not isinstance(definition, dict):
+        raise ProductVerificationError(f"unknown verification_profile: {profile}")
+    raw_required = definition.get("required_gates", [])
+    if not isinstance(raw_required, list):
+        raise ProductVerificationError(
+            f"verification profile {profile} required_gates must be an array"
+        )
+    required = {str(value) for value in raw_required}
+    unknown_required = sorted(required - set(_configured_gates()))
+    if unknown_required:
+        raise ProductVerificationError(
+            f"verification profile {profile} uses unregistered gates: "
+            + ", ".join(unknown_required)
+        )
+    missing = sorted(required - set(mappings))
+    if missing:
+        raise ProductVerificationError(
+            f"verification profile {profile} requires gates: {', '.join(missing)}"
+        )
+
+
+def _canonical_hash(value: Any) -> str:
+    encoded = json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def _git_value(*args: str) -> str:
+    result = subprocess.run(
+        ["git", *args],
+        cwd=project_root(),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise ProductVerificationError(result.stderr.strip() or "git command failed")
+    return result.stdout.strip()
+
+
+def evidence_fingerprints(
+    task_id: str,
+    criteria: list[str],
+    mappings: dict[str, list[str]],
+    profile: str,
+) -> dict[str, str]:
+    path = active_spec(task_id)
+    gates = _configured_gates()
+    profiles = _configured_profiles()
+    gate_contract = {
+        "profile": {profile: profiles[profile]},
+        "gates": {gate: gates[gate] for gate in mappings},
+    }
+    verification_contract = {
+        "profile": profile,
+        "acceptance_criteria": criteria,
+        "mappings": mappings,
+    }
+    return {
+        "source_tree": _git_value("rev-parse", "HEAD^{tree}"),
+        "active_spec_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        "verification_contract_sha256": _canonical_hash(verification_contract),
+        "gate_config_sha256": _canonical_hash(gate_contract),
+    }
 
 
 def source_changes() -> list[str]:
@@ -219,7 +314,9 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
 
     try:
         criteria, mappings = verification_contract(task_id)
-        validate_configured_gates(mappings)
+        profile = verification_profile(task_id)
+        validate_configured_gates(mappings, profile)
+        fingerprints = evidence_fingerprints(task_id, criteria, mappings, profile)
     except (ProductVerificationError, OSError, ValueError) as error:
         errors.append(str(error))
         return errors
@@ -235,6 +332,10 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
         errors.append("task evidence source_commit does not match HEAD")
     if payload.get("acceptance_criteria") != criteria:
         errors.append("task evidence acceptance criteria do not match the active spec")
+    if payload.get("verification_profile") != profile:
+        errors.append("task evidence verification_profile does not match the active spec")
+    if payload.get("fingerprints") != fingerprints:
+        errors.append("task evidence fingerprints do not match current verification inputs")
 
     checks = payload.get("checks")
     if not isinstance(checks, list) or not checks:
@@ -278,3 +379,7 @@ def _head_commit() -> str | None:
         check=False,
     )
     return result.stdout.strip() if result.returncode == 0 else None
+
+
+def derived_task_state(task_id: str, path: Path) -> str:
+    return "verified" if not validate_evidence(task_id, path) else "active"

@@ -41,6 +41,7 @@ def _write_active_spec(root: Path, body: str) -> Path:
         f"  - task:{TASK_ID}\n"
         f"task_id: {TASK_ID}\n"
         "status: active\n"
+        "verification_profile: focused\n"
         "---\n\n"
         f"{body}",
         encoding="utf-8",
@@ -162,14 +163,22 @@ def test_close_requests_an_event_without_a_proposal(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     archive = tmp_path / "archive.md"
-    archive.write_text("archive", encoding="utf-8")
+    source = tmp_path / "source.md"
+    source.write_text("source", encoding="utf-8")
     evidence = tmp_path / "evidence.json"
     event = tmp_path / "event.json"
     results = [{"name": "fixture", "status": "passed", "duration_ms": 0, "details": []}]
     requested: list[bool] = []
 
     monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
-    monkeypatch.setattr(harness_cli.summarizer, "close_spec", lambda _: (archive, "source"))
+    monkeypatch.setattr(harness_cli.summarizer, "active_spec", lambda _: source)
+    monkeypatch.setattr(harness_cli.summarizer, "archive_spec", lambda _: archive)
+
+    def close_spec(_: str) -> tuple[Path, str]:
+        archive.write_text("archive", encoding="utf-8")
+        return archive, "source"
+
+    monkeypatch.setattr(harness_cli.summarizer, "close_spec", close_spec)
     monkeypatch.setattr(harness_cli.summarizer, "restore_spec", lambda *_: None)
     monkeypatch.setattr(harness_cli.validator, "run_checks", lambda: results)
     monkeypatch.setattr(harness_cli.validator, "passed", lambda _: True)
@@ -187,6 +196,7 @@ def test_close_requests_an_event_without_a_proposal(
         return event, None
 
     monkeypatch.setattr(harness_cli.events, "emit_event", record_event)
+    monkeypatch.setattr(harness_cli.events, "event_path", lambda *_: event)
 
     result = harness_cli.command_close(argparse.Namespace(task_id=TASK_ID))
 
@@ -217,3 +227,219 @@ def test_close_rejects_invalid_task_evidence_before_running_checks(
 
     assert harness_cli.command_close(argparse.Namespace(task_id=TASK_ID)) == 1
     assert checks_called is False
+
+
+def test_close_all_skips_frozen_and_preflights_every_active_spec(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    active = tmp_path / "20260812-active-one.md"
+    invalid = tmp_path / "20260812-active-two.md"
+    frozen = tmp_path / "20260812-frozen-one.md"
+    close_calls: list[str] = []
+    checks_called = False
+    monkeypatch.setattr(harness_cli.summarizer, "active_specs", lambda: [active, invalid, frozen])
+    monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
+    monkeypatch.setattr(
+        harness_cli.lifecycle,
+        "task_status",
+        lambda task: "frozen" if task == frozen.stem else "active",
+    )
+    monkeypatch.setattr(harness_cli.validator, "evidence_path", lambda task: tmp_path / f"{task}.json")
+    monkeypatch.setattr(
+        harness_cli.product_verification,
+        "validate_evidence",
+        lambda task, _: ["stale evidence"] if task == invalid.stem else [],
+    )
+    monkeypatch.setattr(
+        harness_cli.summarizer,
+        "close_spec",
+        lambda task: close_calls.append(task),
+    )
+
+    def run_checks() -> list[dict[str, object]]:
+        nonlocal checks_called
+        checks_called = True
+        return []
+
+    monkeypatch.setattr(harness_cli.validator, "run_checks", run_checks)
+
+    assert harness_cli.command_close_all(argparse.Namespace()) == 1
+    assert close_calls == []
+    assert checks_called is False
+    assert f"[SKIPPED] {frozen.stem} is frozen" in capsys.readouterr().out
+
+
+def test_close_all_rolls_back_every_task_when_post_check_fails(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    tasks = ["20260812-active-one", "20260812-active-two"]
+    paths = [tmp_path / f"{task}.md" for task in tasks]
+    for path in paths:
+        path.write_text(f"source:{path.stem}", encoding="utf-8")
+    restored: list[str] = []
+    index_calls = 0
+    check_runs = 0
+    passed = [{"name": "fixture", "status": "passed", "duration_ms": 0}]
+    failed = [{"name": "fixture", "status": "failed", "duration_ms": 0}]
+    monkeypatch.setattr(harness_cli.summarizer, "active_specs", lambda: paths)
+    monkeypatch.setattr(
+        harness_cli.summarizer,
+        "active_spec",
+        lambda task: tmp_path / f"{task}.md",
+    )
+    monkeypatch.setattr(
+        harness_cli.summarizer,
+        "archive_spec",
+        lambda task: tmp_path / f"{task}.archive.md",
+    )
+    monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
+    monkeypatch.setattr(harness_cli.lifecycle, "task_status", lambda _: "active")
+    monkeypatch.setattr(harness_cli.validator, "evidence_path", lambda task: tmp_path / f"{task}.json")
+    monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", lambda *_: [])
+
+    def run_checks() -> list[dict[str, object]]:
+        nonlocal check_runs
+        check_runs += 1
+        return passed if check_runs == 1 else failed
+
+    monkeypatch.setattr(harness_cli.validator, "run_checks", run_checks)
+
+    def close_spec(task: str) -> tuple[Path, str]:
+        archive = tmp_path / f"{task}.archive.md"
+        archive.write_text("archive", encoding="utf-8")
+        return archive, f"source:{task}"
+
+    monkeypatch.setattr(harness_cli.summarizer, "close_spec", close_spec)
+
+    def restore_spec(task: str, source: str, archive: Path) -> None:
+        assert source == f"source:{task}"
+        archive.unlink()
+        restored.append(task)
+
+    monkeypatch.setattr(harness_cli.summarizer, "restore_spec", restore_spec)
+
+    def emit_event(*args: object, **_: object) -> tuple[Path, None]:
+        task = str(args[1])
+        event = tmp_path / f"{task}.event.json"
+        event.write_text("{}", encoding="utf-8")
+        return event, None
+
+    monkeypatch.setattr(harness_cli.events, "emit_event", emit_event)
+    monkeypatch.setattr(
+        harness_cli.events,
+        "event_path",
+        lambda _event, task: tmp_path / f"{task}.event.json",
+    )
+
+    def write_indexes() -> list[Path]:
+        nonlocal index_calls
+        index_calls += 1
+        return []
+
+    monkeypatch.setattr(harness_cli.indexer, "write_indexes", write_indexes)
+
+    assert harness_cli.command_close_all(argparse.Namespace()) == 1
+    assert restored == list(reversed(tasks))
+    assert not list(tmp_path.glob("*.archive.md"))
+    assert not list(tmp_path.glob("*.event.json"))
+    assert index_calls == 2
+
+
+def test_close_all_success_writes_every_task_and_indexes_once(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    tasks = ["20260812-active-one", "20260812-active-two"]
+    paths = [tmp_path / f"{task}.md" for task in tasks]
+    for path in paths:
+        path.write_text(f"source:{path.stem}", encoding="utf-8")
+    index_calls = 0
+    passed = [{"name": "fixture", "status": "passed", "duration_ms": 0}]
+    monkeypatch.setattr(harness_cli.summarizer, "active_specs", lambda: paths)
+    monkeypatch.setattr(
+        harness_cli.summarizer,
+        "active_spec",
+        lambda task: tmp_path / f"{task}.md",
+    )
+    monkeypatch.setattr(
+        harness_cli.summarizer,
+        "archive_spec",
+        lambda task: tmp_path / f"{task}.archive.md",
+    )
+    monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
+    monkeypatch.setattr(harness_cli.lifecycle, "task_status", lambda _: "active")
+    monkeypatch.setattr(harness_cli.validator, "evidence_path", lambda task: tmp_path / f"{task}.json")
+    monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", lambda *_: [])
+    monkeypatch.setattr(harness_cli.validator, "run_checks", lambda: passed)
+
+    def close_spec(task: str) -> tuple[Path, str]:
+        archive = tmp_path / f"{task}.archive.md"
+        archive.write_text("archive", encoding="utf-8")
+        return archive, f"source:{task}"
+
+    monkeypatch.setattr(harness_cli.summarizer, "close_spec", close_spec)
+
+    def emit_event(*args: object, **_: object) -> tuple[Path, None]:
+        event = tmp_path / f"{args[1]}.event.json"
+        event.write_text("{}", encoding="utf-8")
+        return event, None
+
+    monkeypatch.setattr(harness_cli.events, "emit_event", emit_event)
+    monkeypatch.setattr(
+        harness_cli.events,
+        "event_path",
+        lambda _event, task: tmp_path / f"{task}.event.json",
+    )
+
+    def write_indexes() -> list[Path]:
+        nonlocal index_calls
+        index_calls += 1
+        return []
+
+    monkeypatch.setattr(harness_cli.indexer, "write_indexes", write_indexes)
+
+    assert harness_cli.command_close_all(argparse.Namespace()) == 0
+    assert len(list(tmp_path.glob("*.archive.md"))) == 2
+    assert len(list(tmp_path.glob("*.event.json"))) == 2
+    assert index_calls == 1
+
+
+def test_close_cleans_partial_event_when_emission_raises(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = tmp_path / f"{TASK_ID}.md"
+    archive = tmp_path / f"{TASK_ID}.archive.md"
+    event = tmp_path / f"{TASK_ID}.event.json"
+    source.write_text("source", encoding="utf-8")
+    passed = [{"name": "fixture", "status": "passed", "duration_ms": 0}]
+    monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
+    monkeypatch.setattr(harness_cli.lifecycle, "task_status", lambda _: "active")
+    monkeypatch.setattr(harness_cli.validator, "evidence_path", lambda _: tmp_path / "evidence.json")
+    monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", lambda *_: [])
+    monkeypatch.setattr(harness_cli.summarizer, "active_spec", lambda _: source)
+    monkeypatch.setattr(harness_cli.summarizer, "archive_spec", lambda _: archive)
+    monkeypatch.setattr(harness_cli.events, "event_path", lambda *_: event)
+    monkeypatch.setattr(harness_cli.validator, "run_checks", lambda: passed)
+    monkeypatch.setattr(harness_cli.indexer, "write_indexes", list)
+
+    def close_spec(_: str) -> tuple[Path, str]:
+        archive.write_text("partial archive", encoding="utf-8")
+        source.unlink()
+        return archive, "source"
+
+    monkeypatch.setattr(harness_cli.summarizer, "close_spec", close_spec)
+
+    def emit_event(*_: object, **__: object) -> tuple[Path, None]:
+        event.write_text("partial event", encoding="utf-8")
+        raise OSError("event write failed")
+
+    monkeypatch.setattr(harness_cli.events, "emit_event", emit_event)
+
+    assert harness_cli.command_close(argparse.Namespace(task_id=TASK_ID)) == 1
+    assert source.read_text(encoding="utf-8") == "source"
+    assert not archive.exists()
+    assert not event.exists()

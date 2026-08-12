@@ -22,6 +22,7 @@ def _write_spec(path: Path, *, plan: str = "- harness-tests => AC-1, AC-2") -> P
         f"  - task:{TASK_ID}\n"
         f"task_id: {TASK_ID}\n"
         "status: active\n"
+        "verification_profile: focused\n"
         "---\n\n"
         "# Acceptance criteria\n\n"
         "- AC-1: First observable outcome.\n"
@@ -122,23 +123,34 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
         "verification_contract",
         lambda _: (["AC-1", "AC-2"], {"harness-tests": ["AC-1", "AC-2"]}),
     )
-    monkeypatch.setattr(product_verification, "validate_configured_gates", lambda _: None)
+    monkeypatch.setattr(product_verification, "verification_profile", lambda _: "focused")
+    monkeypatch.setattr(product_verification, "validate_configured_gates", lambda *_: None)
+    monkeypatch.setattr(
+        product_verification,
+        "evidence_fingerprints",
+        lambda *_: {"source_tree": "tree"},
+    )
     monkeypatch.setattr(product_verification, "run_gates", lambda _: gate_results)
 
     def write(
         task_id: str,
         command: str,
         criteria: list[str],
+        profile: str,
+        fingerprints: dict[str, str],
         results: list[dict[str, object]],
     ) -> Path:
         assert task_id == TASK_ID
         assert command.endswith(TASK_ID)
         assert criteria == ["AC-1", "AC-2"]
+        assert profile == "focused"
+        assert fingerprints == {"source_tree": "tree"}
         assert results == harness_results + gate_results
         evidence.write_text("{}", encoding="utf-8")
         return evidence
 
     monkeypatch.setattr(harness_cli.validator, "write_task_evidence", write)
+    monkeypatch.setattr(product_verification, "derived_task_state", lambda *_: "verified")
 
     assert harness_cli.command_verify(SimpleNamespace(task_id=TASK_ID)) == 0
     assert evidence.is_file()
@@ -155,6 +167,8 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
         "status": "passed",
         "source_commit": "abc123",
         "acceptance_criteria": ["AC-1", "AC-2"],
+        "verification_profile": "focused",
+        "fingerprints": {"source_tree": "tree"},
         "checks": [
             {
                 "name": "harness-tests",
@@ -171,7 +185,13 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
         "verification_contract",
         lambda _: (["AC-1", "AC-2"], {"harness-tests": ["AC-1", "AC-2"]}),
     )
-    monkeypatch.setattr(product_verification, "validate_configured_gates", lambda _: None)
+    monkeypatch.setattr(product_verification, "verification_profile", lambda _: "focused")
+    monkeypatch.setattr(product_verification, "validate_configured_gates", lambda *_: None)
+    monkeypatch.setattr(
+        product_verification,
+        "evidence_fingerprints",
+        lambda *_: {"source_tree": "tree"},
+    )
     monkeypatch.setattr(product_verification, "_head_commit", lambda: "abc123")
     monkeypatch.setattr(product_verification, "ensure_source_clean", lambda: None)
 
@@ -183,3 +203,95 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
     errors = product_verification.validate_evidence(TASK_ID, evidence)
     assert "task evidence source_commit does not match HEAD" in errors
     assert any("coverage does not match" in error for error in errors)
+
+
+def test_profile_requires_its_minimum_registered_gates(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        product_verification,
+        "_configured_gates",
+        lambda: {"api-lint": {}, "api-tests": {}, "web-quality": {}},
+    )
+    monkeypatch.setattr(
+        product_verification,
+        "_configured_profiles",
+        lambda: {
+            "stack": {
+                "required_gates": ["api-lint", "api-tests", "web-quality"]
+            }
+        },
+    )
+
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="requires gates: api-tests, web-quality",
+    ):
+        product_verification.validate_configured_gates(
+            {"api-lint": ["AC-1"]},
+            "stack",
+        )
+
+
+def test_derived_verified_state_falls_back_to_active_when_inputs_drift(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    evidence = tmp_path / "evidence.json"
+    monkeypatch.setattr(product_verification, "validate_evidence", lambda *_: [])
+    assert product_verification.derived_task_state(TASK_ID, evidence) == "verified"
+
+    monkeypatch.setattr(
+        product_verification,
+        "validate_evidence",
+        lambda *_: ["fingerprint drift"],
+    )
+    assert product_verification.derived_task_state(TASK_ID, evidence) == "active"
+
+
+def test_fingerprints_change_with_spec_contract_and_gate_configuration(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    spec = _write_spec(tmp_path / f"{TASK_ID}.md")
+    gate_config = {
+        "harness-tests": {
+            "cwd": ".",
+            "command": ["{python}", "-m", "pytest"],
+        }
+    }
+    monkeypatch.setattr(product_verification, "active_spec", lambda _: spec)
+    monkeypatch.setattr(product_verification, "_configured_gates", lambda: gate_config)
+    monkeypatch.setattr(
+        product_verification,
+        "_configured_profiles",
+        lambda: {"focused": {"required_gates": []}},
+    )
+    monkeypatch.setattr(product_verification, "_git_value", lambda *_: "tree-one")
+    criteria = ["AC-1", "AC-2"]
+    mappings = {"harness-tests": criteria}
+
+    first = product_verification.evidence_fingerprints(
+        TASK_ID,
+        criteria,
+        mappings,
+        "focused",
+    )
+    spec.write_text(spec.read_text(encoding="utf-8") + "\n", encoding="utf-8")
+    second = product_verification.evidence_fingerprints(
+        TASK_ID,
+        criteria,
+        mappings,
+        "focused",
+    )
+    gate_config["harness-tests"]["command"].append("-q")
+    third = product_verification.evidence_fingerprints(
+        TASK_ID,
+        criteria,
+        mappings,
+        "focused",
+    )
+
+    assert first["source_tree"] == "tree-one"
+    assert first["active_spec_sha256"] != second["active_spec_sha256"]
+    assert second["gate_config_sha256"] != third["gate_config_sha256"]

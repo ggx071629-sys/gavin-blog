@@ -21,6 +21,18 @@ def active_spec(task_id: str) -> Path:
     return harness_root() / str(config["specs"]["active"]) / f"{task_id}.md"
 
 
+def active_specs() -> list[Path]:
+    config = load_config()
+    root = harness_root() / str(config["specs"]["active"])
+    return sorted(root.glob("*.md"))
+
+
+def archive_spec(task_id: str) -> Path:
+    validate_task_id(task_id)
+    config = load_config()
+    return harness_root() / str(config["specs"]["archive"]) / f"{task_id}.md"
+
+
 def ensure_spec_in_git_history(path: Path) -> None:
     relative = path.relative_to(project_root()).as_posix()
     result = subprocess.run(
@@ -70,9 +82,9 @@ def close_spec(task_id: str) -> tuple[Path, str]:
         raise RuntimeError(f"refusing to close: spec status must be active, found {status or 'missing'}")
     goal = _required_section(body, "Goal")
     acceptance_criteria = _required_section(body, "Acceptance criteria")
-    archive_dir = harness_root() / str(config["specs"]["archive"])
+    archive = archive_spec(task_id)
+    archive_dir = archive.parent
     archive_dir.mkdir(parents=True, exist_ok=True)
-    archive = archive_dir / f"{task_id}.md"
     if archive.exists():
         raise FileExistsError(f"archive already exists: {archive}")
 

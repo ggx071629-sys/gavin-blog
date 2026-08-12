@@ -8,6 +8,17 @@ from .config import harness_root, load_config
 from .summarizer import validate_task_id
 
 
+def event_path(event_type: str, task_id: str) -> Path:
+    validate_task_id(task_id)
+    token = event_type.replace(".", "-")
+    config = load_config()
+    return (
+        harness_root()
+        / str(config["evolution"]["events"])
+        / f"{task_id}--{token}.json"
+    )
+
+
 def emit_event(
     event_type: str,
     task_id: str,
@@ -29,9 +40,9 @@ def emit_event(
     proposals_dir = harness_root() / str(config["evolution"]["proposals"])
     events_dir.mkdir(parents=True, exist_ok=True)
     proposals_dir.mkdir(parents=True, exist_ok=True)
-    event_path = events_dir / f"{task_id}--{token}.json"
+    target_event = event_path(event_type, task_id)
     proposal_path = proposals_dir / f"{task_id}--{token}.md"
-    if event_path.exists() or proposal_path.exists():
+    if target_event.exists() or proposal_path.exists():
         raise FileExistsError("event or proposal already exists")
 
     now = datetime.now(timezone.utc).isoformat()
@@ -44,7 +55,7 @@ def emit_event(
         "reason": reason,
         "may_modify_agents_md": False,
     }
-    event_path.write_text(
+    target_event.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
@@ -69,5 +80,5 @@ def emit_event(
             encoding="utf-8",
             newline="\n",
         )
-        return event_path, proposal_path
-    return event_path, None
+        return target_event, proposal_path
+    return target_event, None

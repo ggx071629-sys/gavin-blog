@@ -10,12 +10,12 @@ author: Gavin
 
 # Spec lifecycle
 
-正常状态顺序：`draft → active → verified → compressed`。人工暂停可以走可选分支：`active → frozen → active`；冻结不是所有 spec 的必经状态，也不是关闭。
+持久状态顺序：`draft → active → compressed`。人工暂停可以走可选分支：`active → frozen → active`；冻结不是所有 spec 的必经状态，也不是关闭。`verified` 是由当前有效 evidence 推导出的临时状态，不写入 front matter：任何源码、spec、验证合同、profile、gate 配置或 HEAD 漂移都会让任务重新表现为 active。
 
 - Draft：问题、目标与边界尚在收敛。
 - Active：验收标准明确，可以实现。
 - Frozen：任务尚未关闭，但当前不推进；文件继续留在 `specs/active/`，不计入正在推进的 active 数量。
-- Verified：active spec 与实现已进入 Git HEAD，相关白名单产品 gate 和 Harness checks 已通过，并产生覆盖全部 AC 的当前提交 evidence。
+- Verified（派生）：active spec 与实现已进入 Git HEAD，相关白名单产品 gate 和 Harness checks 已通过，并产生覆盖全部 AC 且指纹仍匹配的当前提交 evidence。
 - Compressed：当前工作树只保留目标、关键决策、结果和证据链接。
 
 冻结与恢复只能由人工显式执行：
@@ -28,6 +28,8 @@ author: Gavin
 冻结时 Harness 对 `Goal`、`Non-goals`、`Acceptance criteria` 和 `Verification plan` 建立确定性摘要。备注、阻塞信息和证据可以继续补充；核心契约如需改变，必须先恢复。合法冻结不会拖红无 task ID 的全局 verify 或 release 门禁，但 `verify <frozen-task-id>` 不能生成成功结论，`close <frozen-task-id>` 必须在产生归档、事件或证据前失败。
 
 关闭必须使用 `python -m tools.harness close <task_id>`。close 在任何写入前校验 schema v2 task evidence：状态必须通过、覆盖当前 spec 全部 AC、产品 gate 必须与验证计划一致、source commit 必须等于 HEAD，且配置的验证源码范围不能存在未提交变更。任一步失败时 active spec 保持不变；close 保留 verify 产生的 evidence，不用结构检查结果覆盖产品证据。
+
+批量关闭使用 `python -m tools.harness close-all`。该命令明确跳过 frozen spec，先统一验证所有 active evidence 和 Harness 完整性，再一次性生成归档与事件；任一变更或后验检查失败时整批回滚，不保留部分关闭结果。
 
 关闭前必须能从精确的 H1 或 H2 `Goal` 与 `Acceptance criteria` 章节提取非空内容；否则 close 失败并回滚，禁止以 `Not recorded` 代替关键归档信息。普通 close 记录 `spec.completed` event，但不自动生成无具体改进内容的 Evolution proposal；proposal 只由显式、带理由的 event 进入人工审阅。
 

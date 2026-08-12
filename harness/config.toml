@@ -18,6 +18,7 @@ optional = [
   "frozen_at",
   "freeze_reason",
   "frozen_scope_sha256",
+  "verification_profile",
   "state_history",
 ]
 
@@ -46,6 +47,15 @@ source_paths = [
   "harness/verification/tests",
   "harness/verification/vdd",
 ]
+
+[verification.profiles.focused]
+required_gates = []
+
+[verification.profiles.stack]
+required_gates = ["api-lint", "api-tests", "web-quality"]
+
+[verification.profiles.release]
+required_gates = ["release"]
 
 [verification.gates.api-lint]
 cwd = "apps/api"

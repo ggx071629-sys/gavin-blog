@@ -31,6 +31,8 @@ def command_verify(args: argparse.Namespace) -> int:
         summarizer.validate_task_id(args.task_id)
     results = validator.run_checks()
     criteria: list[str] = []
+    profile = ""
+    fingerprints: dict[str, str] = {}
     if args.task_id:
         if lifecycle.task_status(args.task_id) == "frozen":
             results.append(
@@ -52,7 +54,14 @@ def command_verify(args: argparse.Namespace) -> int:
                 summarizer.ensure_spec_in_git_history(summarizer.active_spec(args.task_id))
                 product_verification.ensure_source_clean()
                 criteria, mappings = product_verification.verification_contract(args.task_id)
-                product_verification.validate_configured_gates(mappings)
+                profile = product_verification.verification_profile(args.task_id)
+                product_verification.validate_configured_gates(mappings, profile)
+                fingerprints = product_verification.evidence_fingerprints(
+                    args.task_id,
+                    criteria,
+                    mappings,
+                    profile,
+                )
                 results.extend(product_verification.run_gates(mappings))
             except (OSError, RuntimeError, ValueError) as error:
                 results.append(
@@ -73,10 +82,104 @@ def command_verify(args: argparse.Namespace) -> int:
             args.task_id,
             f"python -m tools.harness verify {args.task_id}",
             criteria,
+            profile,
+            fingerprints,
             results,
         )
         print(f"evidence {evidence}")
+        if lifecycle.task_status(args.task_id) == "frozen":
+            print("task state frozen")
+        else:
+            state = product_verification.derived_task_state(args.task_id, evidence)
+            print(f"task state {state}")
     return 0 if validator.passed(results) else 1
+
+
+def _preflight_close(task_ids: list[str]) -> bool:
+    valid = True
+    for task_id in task_ids:
+        evidence_errors = product_verification.validate_evidence(
+            task_id,
+            validator.evidence_path(task_id),
+        )
+        if evidence_errors:
+            valid = False
+            print(f"close aborted: {task_id} evidence is not valid", file=sys.stderr)
+            for error in evidence_errors:
+                print(f"  - {error}", file=sys.stderr)
+    return valid
+
+
+def _close_tasks(task_ids: list[str]) -> int:
+    if not _preflight_close(task_ids):
+        return 1
+    snapshots: list[tuple[str, Path, str, Path]] = []
+    try:
+        for task_id in task_ids:
+            source = summarizer.active_spec(task_id)
+            archive = summarizer.archive_spec(task_id)
+            event_path = events.event_path("spec.completed", task_id)
+            if archive.exists():
+                raise FileExistsError(f"archive already exists: {archive}")
+            if event_path.exists():
+                raise FileExistsError(f"event already exists: {event_path}")
+            snapshots.append(
+                (task_id, archive, source.read_text(encoding="utf-8"), event_path)
+            )
+    except (OSError, ValueError) as error:
+        print(f"close aborted: {error}", file=sys.stderr)
+        return 1
+    before = validator.run_checks()
+    _print_results(before)
+    if not validator.passed(before):
+        print("close aborted: pre-close verification failed", file=sys.stderr)
+        return 1
+
+    attempted: list[tuple[str, Path, str, Path]] = []
+    try:
+        for task_id, expected_archive, source_text, expected_event in snapshots:
+            attempted.append((task_id, expected_archive, source_text, expected_event))
+            archive, source_text = summarizer.close_spec(task_id)
+            event_path, proposal_path = events.emit_event(
+                "spec.completed",
+                task_id,
+                "The active spec passed verification and was deterministically compressed.",
+                "lifecycle",
+                create_proposal=False,
+            )
+            if proposal_path is not None:
+                raise RuntimeError("spec.completed must not create a proposal")
+            if archive != expected_archive or event_path != expected_event:
+                raise RuntimeError("close artifacts did not match preflight targets")
+        indexer.write_indexes()
+        after = validator.run_checks()
+        if not validator.passed(after):
+            raise RuntimeError("post-close verification failed")
+        _print_results(after)
+        for task_id, archive, _, event_path in snapshots:
+            print(f"archive {archive}")
+            print(f"evidence {validator.evidence_path(task_id)}")
+            print(f"event {event_path}")
+        return 0
+    except Exception as error:
+        rollback_errors: list[str] = []
+        for task_id, archive, source_text, event_path in reversed(attempted):
+            try:
+                summarizer.restore_spec(task_id, source_text, archive)
+            except OSError as rollback_error:
+                rollback_errors.append(f"restore {task_id}: {rollback_error}")
+            try:
+                event_path.unlink(missing_ok=True)
+            except OSError as rollback_error:
+                rollback_errors.append(f"remove {event_path}: {rollback_error}")
+        try:
+            indexer.write_indexes()
+        except (OSError, ValueError) as rollback_error:
+            rollback_errors.append(f"restore indexes: {rollback_error}")
+        print(f"close aborted and rolled back: {error}", file=sys.stderr)
+        for rollback_error in rollback_errors:
+            print(f"  - rollback incomplete: {rollback_error}", file=sys.stderr)
+        return 1
 
 
 def command_close(args: argparse.Namespace) -> int:
@@ -87,52 +190,26 @@ def command_close(args: argparse.Namespace) -> int:
             file=sys.stderr,
         )
         return 1
-    evidence_path = validator.evidence_path(args.task_id)
-    evidence_errors = product_verification.validate_evidence(args.task_id, evidence_path)
-    if evidence_errors:
-        print("close aborted: task evidence is not valid", file=sys.stderr)
-        for error in evidence_errors:
-            print(f"  - {error}", file=sys.stderr)
-        return 1
-    before = validator.run_checks()
-    _print_results(before)
-    if not validator.passed(before):
-        print("close aborted: pre-close verification failed", file=sys.stderr)
-        return 1
+    return _close_tasks([args.task_id])
 
-    archive: Path | None = None
-    event_path: Path | None = None
-    proposal_path: Path | None = None
-    source_text = ""
-    try:
-        archive, source_text = summarizer.close_spec(args.task_id)
-        event_path, proposal_path = events.emit_event(
-            "spec.completed",
-            args.task_id,
-            "The active spec passed verification and was deterministically compressed.",
-            "lifecycle",
-            create_proposal=False,
-        )
-        indexer.write_indexes()
-        after = validator.run_checks()
-        if not validator.passed(after):
-            raise RuntimeError("post-close verification failed")
-        _print_results(after)
-        print(f"archive {archive}")
-        print(f"evidence {evidence_path}")
-        print(f"event {event_path}")
-        if proposal_path is not None:
-            print(f"proposal {proposal_path}")
+
+def command_close_all(_: argparse.Namespace) -> int:
+    active: list[str] = []
+    frozen: list[str] = []
+    for path in summarizer.active_specs():
+        task_id = path.stem
+        summarizer.validate_task_id(task_id)
+        if lifecycle.task_status(task_id) == "frozen":
+            frozen.append(task_id)
+        else:
+            active.append(task_id)
+    for task_id in frozen:
+        print(f"[SKIPPED] {task_id} is frozen")
+    if not active:
+        print("no active specs to close")
         return 0
-    except Exception as error:
-        if source_text:
-            summarizer.restore_spec(args.task_id, source_text, archive)
-        for path in (event_path, proposal_path):
-            if path is not None and path.exists():
-                path.unlink()
-        indexer.write_indexes()
-        print(f"close aborted and rolled back: {error}", file=sys.stderr)
-        return 1
+    print(f"preflight {len(active)} active spec(s)")
+    return _close_tasks(active)
 
 
 def command_emit_event(args: argparse.Namespace) -> int:
@@ -195,6 +272,12 @@ def parser() -> argparse.ArgumentParser:
     close = commands.add_parser("close", help="verify and compress an active spec")
     close.add_argument("task_id")
     close.set_defaults(func=command_close)
+
+    close_all = commands.add_parser(
+        "close-all",
+        help="preflight and atomically close all non-frozen active specs",
+    )
+    close_all.set_defaults(func=command_close_all)
 
     freeze = commands.add_parser("freeze", help="freeze an active spec")
     freeze.add_argument("task_id")
