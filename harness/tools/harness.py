@@ -15,6 +15,7 @@ from . import (
     product_verification,
     summarizer,
     task_reporting,
+    telemetry,
     validator,
 )
 
@@ -112,6 +113,19 @@ def command_verify(args: argparse.Namespace) -> int:
             results,
         )
         print(f"evidence {evidence}")
+        if evidence.resolve() == validator.evidence_path(args.task_id).resolve():
+            telemetry_error = telemetry.observe_task_verification_safely(
+                args.task_id,
+                profile,
+                execution,
+                results,
+                product_verification.head_commit(),
+            )
+            if telemetry_error:
+                print(
+                    f"warning: telemetry observation failed: {telemetry_error}",
+                    file=sys.stderr,
+                )
         if lifecycle.task_status(args.task_id) == "frozen":
             print("task state frozen")
         else:
@@ -287,6 +301,28 @@ def command_change_check(args: argparse.Namespace) -> int:
     return 0 if result["passed"] else 1
 
 
+def command_telemetry_summary(args: argparse.Namespace) -> int:
+    try:
+        events, source_files = telemetry.load_events()
+        summary = telemetry.summarize(events, source_files)
+    except (OSError, ValueError) as error:
+        print(f"telemetry summary failed: {error}", file=sys.stderr)
+        return 1
+    if args.json:
+        print(json.dumps(summary, ensure_ascii=False, sort_keys=True))
+    else:
+        print(
+            f"telemetry events={summary['events']} files={summary['source_files']} "
+            f"passed={summary['status']['passed']} failed={summary['status']['failed']}"
+        )
+        duration = summary["duration_ms"]
+        print(
+            f"duration count={duration['count']} p50={duration['p50']} "
+            f"p95={duration['p95']} max={duration['max']}"
+        )
+    return 0
+
+
 def command_emit_event(args: argparse.Namespace) -> int:
     event_path, proposal_path = events.emit_event(
         args.event_type,
@@ -371,6 +407,13 @@ def parser() -> argparse.ArgumentParser:
     change_check.add_argument("--base", required=True)
     change_check.add_argument("--head", default="HEAD")
     change_check.set_defaults(func=command_change_check)
+
+    telemetry_summary = commands.add_parser(
+        "telemetry-summary",
+        help="validate and deterministically summarize local telemetry",
+    )
+    telemetry_summary.add_argument("--json", action="store_true")
+    telemetry_summary.set_defaults(func=command_telemetry_summary)
 
     freeze = commands.add_parser("freeze", help="freeze an active spec")
     freeze.add_argument("task_id")
