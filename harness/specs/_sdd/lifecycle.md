@@ -29,6 +29,8 @@ author: Gavin
 
 关闭必须使用 `python -m tools.harness close <task_id>`。close 在任何写入前校验 schema v2 task evidence：状态必须通过、覆盖当前 spec 全部 AC、产品 gate 必须与验证计划一致、source commit 必须等于 HEAD，且配置的验证源码范围不能存在未提交变更。任一步失败时 active spec 保持不变；close 保留 verify 产生的 evidence，不用结构检查结果覆盖产品证据。
 
+派生 verified 还要求 evidence 的隔离执行上下文对应当前提交，且临时 Git worktree 清理状态为 passed；共享工作目录执行或残留未清理的隔离环境都不能关闭。
+
 批量关闭使用 `python -m tools.harness close-all`。该命令明确跳过 frozen spec，先统一验证所有 active evidence 和 Harness 完整性，再一次性生成归档与事件；任一变更或后验检查失败时整批回滚，不保留部分关闭结果。
 
 关闭前必须能从精确的 H1 或 H2 `Goal` 与 `Acceptance criteria` 章节提取非空内容；否则 close 失败并回滚，禁止以 `Not recorded` 代替关键归档信息。普通 close 记录 `spec.completed` event，但不自动生成无具体改进内容的 Evolution proposal；proposal 只由显式、带理由的 event 进入人工审阅。

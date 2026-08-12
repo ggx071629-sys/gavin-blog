@@ -214,7 +214,7 @@ def test_task_verify_reports_frozen_and_cannot_write_success_evidence(
     monkeypatch.setattr(
         harness_cli.validator,
         "write_task_evidence",
-        lambda _task, _command, _criteria, _profile, _fingerprints, checks: written.append(checks)
+        lambda _task, _command, _criteria, _profile, _fingerprints, _execution, checks: written.append(checks)
         or Path("evidence.json"),
     )
 

@@ -179,6 +179,7 @@ def evidence_fingerprints(
     gate_contract = {
         "profile": {profile: profiles[profile]},
         "gates": {gate: gates[gate] for gate in mappings},
+        "isolation": load_config().get("verification", {}).get("isolation", {}),
     }
     verification_contract = {
         "profile": profile,
@@ -222,7 +223,11 @@ def ensure_source_clean() -> None:
         )
 
 
-def _command(gate: str, definition: dict[str, Any]) -> tuple[list[str], Path, int]:
+def _command(
+    gate: str,
+    definition: dict[str, Any],
+    execution_root: Path | None = None,
+) -> tuple[list[str], Path, int]:
     raw_command = definition.get("command")
     if not isinstance(raw_command, list) or not raw_command:
         raise ProductVerificationError(f"gate {gate} command must be a non-empty array")
@@ -237,8 +242,8 @@ def _command(gate: str, definition: dict[str, Any]) -> tuple[list[str], Path, in
             )
         command[0] = executable
 
-    cwd = (project_root() / str(definition.get("cwd", "."))).resolve()
-    root = project_root().resolve()
+    root = (execution_root or project_root()).resolve()
+    cwd = (root / str(definition.get("cwd", "."))).resolve()
     if not cwd.is_relative_to(root) or not cwd.is_dir():
         raise ProductVerificationError(f"gate {gate} cwd must be inside the project")
     timeout_seconds = definition.get("timeout_seconds", 900)
@@ -256,13 +261,21 @@ def _tail(output: str, limit: int = 2000) -> list[str]:
     return compact[-limit:].splitlines()[-12:]
 
 
-def run_gates(mappings: dict[str, list[str]]) -> list[dict[str, Any]]:
+def run_gates(
+    mappings: dict[str, list[str]],
+    *,
+    execution_root: Path | None = None,
+) -> list[dict[str, Any]]:
     configured = _configured_gates()
     results: list[dict[str, Any]] = []
     for gate, covered in mappings.items():
         started = time.perf_counter()
         try:
-            command, cwd, timeout_seconds = _command(gate, dict(configured[gate]))
+            command, cwd, timeout_seconds = _command(
+                gate,
+                dict(configured[gate]),
+                execution_root,
+            )
             completed = subprocess.run(
                 command,
                 cwd=cwd,
@@ -327,7 +340,7 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
         errors.append("task evidence task_id does not match")
     if payload.get("status") != "passed":
         errors.append("task evidence status must be passed")
-    head = _head_commit()
+    head = head_commit()
     if payload.get("source_commit") != head:
         errors.append("task evidence source_commit does not match HEAD")
     if payload.get("acceptance_criteria") != criteria:
@@ -336,6 +349,16 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
         errors.append("task evidence verification_profile does not match the active spec")
     if payload.get("fingerprints") != fingerprints:
         errors.append("task evidence fingerprints do not match current verification inputs")
+    execution = payload.get("execution")
+    if not isinstance(execution, dict):
+        errors.append("task evidence execution context must be an object")
+    else:
+        if execution.get("mode") != "git-worktree":
+            errors.append("task evidence execution mode must be git-worktree")
+        if execution.get("source_commit") != head:
+            errors.append("task evidence execution commit does not match HEAD")
+        if execution.get("cleanup_status") != "passed":
+            errors.append("task evidence isolated worktree cleanup must be passed")
 
     checks = payload.get("checks")
     if not isinstance(checks, list) or not checks:
@@ -343,6 +366,13 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
     else:
         if any(not isinstance(check, dict) or check.get("status") != "passed" for check in checks):
             errors.append("every task evidence check must be passed")
+        isolation = [
+            check
+            for check in checks
+            if isinstance(check, dict) and check.get("kind") == "isolation"
+        ]
+        if len(isolation) != 1 or isolation[0].get("name") != "isolated-worktree":
+            errors.append("task evidence must contain one passed isolated-worktree check")
         product = {
             str(check.get("name")): check
             for check in checks
@@ -370,7 +400,7 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
     return errors
 
 
-def _head_commit() -> str | None:
+def head_commit() -> str | None:
     result = subprocess.run(
         ["git", "rev-parse", "HEAD"],
         cwd=project_root(),

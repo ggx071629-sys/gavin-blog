@@ -130,7 +130,17 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
         "evidence_fingerprints",
         lambda *_: {"source_tree": "tree"},
     )
-    monkeypatch.setattr(product_verification, "run_gates", lambda _: gate_results)
+    execution = {
+        "mode": "git-worktree",
+        "source_commit": "abc123",
+        "cleanup_status": "passed",
+    }
+    monkeypatch.setattr(product_verification, "head_commit", lambda: "abc123")
+    monkeypatch.setattr(
+        harness_cli.isolated_verification,
+        "run_in_worktree",
+        lambda *_: (gate_results, execution),
+    )
 
     def write(
         task_id: str,
@@ -138,6 +148,7 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
         criteria: list[str],
         profile: str,
         fingerprints: dict[str, str],
+        written_execution: dict[str, object],
         results: list[dict[str, object]],
     ) -> Path:
         assert task_id == TASK_ID
@@ -145,6 +156,7 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
         assert criteria == ["AC-1", "AC-2"]
         assert profile == "focused"
         assert fingerprints == {"source_tree": "tree"}
+        assert written_execution == execution
         assert results == harness_results + gate_results
         evidence.write_text("{}", encoding="utf-8")
         return evidence
@@ -169,6 +181,11 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
         "acceptance_criteria": ["AC-1", "AC-2"],
         "verification_profile": "focused",
         "fingerprints": {"source_tree": "tree"},
+        "execution": {
+            "mode": "git-worktree",
+            "source_commit": "abc123",
+            "cleanup_status": "passed",
+        },
         "checks": [
             {
                 "name": "harness-tests",
@@ -176,7 +193,14 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
                 "command": "python -m pytest",
                 "status": "passed",
                 "covers": ["AC-1", "AC-2"],
-            }
+            },
+            {
+                "name": "isolated-worktree",
+                "kind": "isolation",
+                "command": "git worktree add --detach <temporary> HEAD",
+                "status": "passed",
+                "covers": [],
+            },
         ],
     }
     evidence.write_text(json.dumps(payload), encoding="utf-8")
@@ -192,7 +216,7 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
         "evidence_fingerprints",
         lambda *_: {"source_tree": "tree"},
     )
-    monkeypatch.setattr(product_verification, "_head_commit", lambda: "abc123")
+    monkeypatch.setattr(product_verification, "head_commit", lambda: "abc123")
     monkeypatch.setattr(product_verification, "ensure_source_clean", lambda: None)
 
     assert product_verification.validate_evidence(TASK_ID, evidence) == []

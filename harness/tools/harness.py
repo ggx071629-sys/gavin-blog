@@ -5,7 +5,15 @@ import sys
 from collections.abc import Callable
 from pathlib import Path
 
-from . import events, indexer, lifecycle, product_verification, summarizer, validator
+from . import (
+    events,
+    indexer,
+    isolated_verification,
+    lifecycle,
+    product_verification,
+    summarizer,
+    validator,
+)
 
 
 def _print_results(results: list[dict[str, object]]) -> None:
@@ -33,6 +41,7 @@ def command_verify(args: argparse.Namespace) -> int:
     criteria: list[str] = []
     profile = ""
     fingerprints: dict[str, str] = {}
+    execution: dict[str, object] = {}
     if args.task_id:
         if lifecycle.task_status(args.task_id) == "frozen":
             results.append(
@@ -62,7 +71,16 @@ def command_verify(args: argparse.Namespace) -> int:
                     mappings,
                     profile,
                 )
-                results.extend(product_verification.run_gates(mappings))
+                source_commit = product_verification.head_commit()
+                if source_commit is None:
+                    raise product_verification.ProductVerificationError(
+                        "current Git HEAD is unavailable"
+                    )
+                gate_results, execution = isolated_verification.run_in_worktree(
+                    mappings,
+                    source_commit,
+                )
+                results.extend(gate_results)
             except (OSError, RuntimeError, ValueError) as error:
                 results.append(
                     {
@@ -84,6 +102,7 @@ def command_verify(args: argparse.Namespace) -> int:
             criteria,
             profile,
             fingerprints,
+            execution,
             results,
         )
         print(f"evidence {evidence}")

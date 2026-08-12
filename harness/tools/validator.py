@@ -119,6 +119,7 @@ def write_task_evidence(
     acceptance_criteria: list[str],
     verification_profile: str,
     fingerprints: dict[str, str],
+    execution: dict[str, Any],
     results: list[dict[str, Any]],
 ) -> Path:
     manifest = {
@@ -130,6 +131,7 @@ def write_task_evidence(
         "acceptance_criteria": acceptance_criteria,
         "verification_profile": verification_profile,
         "fingerprints": fingerprints,
+        "execution": execution,
         "checks": [
             {
                 key: value
