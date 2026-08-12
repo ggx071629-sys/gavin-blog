@@ -1,30 +1,24 @@
 ---
-id: spec-20260811-public-ui-polish
-level: L1
+id: archive-20260811-public-ui-polish
+level: L2
 summary: 收敛公开导航层级、文章摘要与阅读页提示和目录布局
 load_when:
   - task:20260811-public-ui-polish
 author: Codex
 task_id: 20260811-public-ui-polish
-status: active
+status: compressed
 state_history:
 ---
 
-# Context
+# 20260811-public-ui-polish
 
-公开站定位为可阅读的个人知识库。现有视觉系统保持不变，但搜索入口可发现性不足、写作台权重过高、空摘要暴露后台缺口，文章提示与目录布局需要收紧。关于页图片不得灰度化。
+Deterministic compressed record. The original active spec remains in Git history.
 
-# Goal
+## Goal
 
 在不重排首页内容和不改公开内容数据的前提下，建立明确的公开导航层级并完善文章卡片与阅读页呈现。
 
-# Non-goals
-
-- 不修改 GitHub 链接、测试文章发布状态或文章标题文本。
-- 不调整首页区块顺序，不创建新视觉系统。
-- 不修改后台业务流程。
-
-# Acceptance criteria
+## Acceptance criteria
 
 - 桌面导航将搜索显示为图标加文字，文章仍为第一栏目且当前栏目高亮；写作台保留但使用低强调细边框。
 - 移动端搜索保持独立 44×44 图标入口，移动导航中的写作台同步弱化。
@@ -34,15 +28,12 @@ state_history:
 - 桌面文章目录避免长中文标题单字孤行，正文阅读宽度不缩窄。
 - 关于页图片不应用 grayscale 或降低饱和度的效果。
 
-# Risks
+## Result
 
-- 与当前未提交的 SiteHeader 和代码高亮 CSS 修改重叠，必须增量保留。
-- 提示块兼容逻辑不能误改普通正文中的“提示”一词。
-- 导航宽度变化可能影响中等桌面断点。
+Verified and closed by the harness close command.
 
-# Verification plan
+## Evidence
 
-- Vitest 覆盖空摘要和提示块规范化。
-- Nuxt typecheck 与生产构建。
-- Playwright 覆盖桌面导航、移动导航、关于页图片与文章阅读布局。
+[20260811-public-ui-polish.json](../../verification/evidence/20260811-public-ui-polish.json)
 
+Closed at 2026-08-12T02:23:33.410806+00:00.

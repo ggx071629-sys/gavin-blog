@@ -1,30 +1,24 @@
 ---
-id: spec-20260811-incubator-batch-lifecycle
-level: L1
+id: archive-20260811-incubator-batch-lifecycle
+level: L2
 summary: 为知识孵化三池补齐批量丢弃、安全恢复与概览层级
 load_when:
   - task:20260811-incubator-batch-lifecycle
 author: Codex
 task_id: 20260811-incubator-batch-lifecycle
-status: active
+status: compressed
 state_history:
 ---
 
-# Context
+# 20260811-incubator-batch-lifecycle
 
-知识孵化概览首屏混合操作、异常和观察信息，移动端五入口横向截断。三池虽共享选择能力，但只有审计报告具备批量丢弃，审计与草稿也缺少可验证的恢复语义。
+Deterministic compressed record. The original active spec remains in Git history.
 
-# Goal
+## Goal
 
 重排工作台信息层级，并为待处理、审计报告和孵化草稿建立一致、可恢复、部分成功的当前页批量丢弃闭环。
 
-# Non-goals
-
-- 不提供批量永久删除或跨页全选。
-- 不以丢弃替代运行中任务取消。
-- 不改变审计、生成和发布的核心业务结果。
-
-# Acceptance criteria
+## Acceptance criteria
 
 - 概览按异常与操作、摄入与池状态、健康和历史观察信息分层。
 - 移动端五个工作台入口以两行完整呈现，不依赖横向滚动。
@@ -34,16 +28,12 @@ state_history:
 - 已丢弃来源、审计和草稿可逐条恢复。审计和草稿恢复前验证依赖；依赖失效时保持不可继续流转的 stale 状态。
 - 永久删除规则保持逐条执行且不扩张。
 
-# Risks
+## Result
 
-- 恢复语义涉及状态机、来源链和目标文章版本一致性。
-- 批量操作与后台任务并发，服务端必须重新验证资格，不能只信任 UI。
-- 现有审计批量丢弃契约需要兼容扩展。
+Verified and closed by the harness close command.
 
-# Verification plan
+## Evidence
 
-- Pytest 覆盖三池批量部分成功、资格拒绝、原因记录和恢复依赖校验。
-- OpenAPI 快照与 Alembic 迁移链同步。
-- Vitest 覆盖选择资格和批量结果文案。
-- Playwright 覆盖桌面三池批量栏和移动两行导航。
+[20260811-incubator-batch-lifecycle.json](../../verification/evidence/20260811-incubator-batch-lifecycle.json)
 
+Closed at 2026-08-12T02:23:00.686167+00:00.
