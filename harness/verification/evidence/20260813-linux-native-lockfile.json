@@ -1,0 +1,127 @@
+{
+  "schema_version": 2,
+  "task_id": "20260813-linux-native-lockfile",
+  "created_at": "2026-08-13T14:37:07.548755+00:00",
+  "command": "python -m tools.harness verify 20260813-linux-native-lockfile",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5"
+  ],
+  "verification_profile": "release",
+  "fingerprints": {
+    "source_tree": "0a5d233d9f29e6b0a9c178112f8e775456c9ead2",
+    "active_spec_sha256": "190cb262aefc2925d850da11555c4106c6bae0d8f229ba813b4d19edba57d1e2",
+    "verification_contract_sha256": "11807e439197b14099cf19beeb2f3d2a199531126a05d16fb3480db9dbec3f16",
+    "gate_config_sha256": "433ca8414c45297d936703612e44fe3a23ac612065458b7301b8c95a4630d0db",
+    "documentation_contract_sha256": "c622e0cc51ee5e01bd44410cfccc4a568bef697820ee90c168abe1b1fb104ad4",
+    "documentation_targets_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+  },
+  "documentation": {
+    "impact": "none",
+    "reason": "仅补齐既有 Rollup/LightningCSS 版本的 Linux 安装闭包和机器回归测试，不改变用户行为、发布流程或长期运维合同",
+    "targets": [],
+    "baseline_commit": null,
+    "target_blobs": {}
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "9dee3a0c1f483901179ed51e7f15556f1c5c28da",
+    "cleanup_status": "passed",
+    "reused_paths": 3
+  },
+  "checks": [
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 52.019
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.564
+    },
+    {
+      "name": "links",
+      "details": [
+        "319 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 3123.158
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "145 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 46.008
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 13.369
+    },
+    {
+      "name": "release",
+      "kind": "product",
+      "command": "D:\\Tool\\nodejs\\npm.CMD run quality:release",
+      "status": "passed",
+      "duration_ms": 675155.049,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 521,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1303.094,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ]
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 7,
+      "passed": 7,
+      "failed": 0
+    },
+    "duration_ms": 679693.261,
+    "failures": [],
+    "test_counts": {
+      "passed": 521,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "source_commit": "9dee3a0c1f483901179ed51e7f15556f1c5c28da"
+}
