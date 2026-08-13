@@ -123,6 +123,13 @@ local = "telemetry/local"
 summaries = "telemetry/summaries"
 may_influence_agent = false
 
+[telemetry.health]
+min_samples = 3
+baseline_samples = 3
+recent_samples = 3
+consecutive_failures = 2
+duration_ratio = 1.5
+
 [evolution]
 events = "evolution/events"
 proposals = "evolution/proposals"

@@ -324,6 +324,33 @@ def command_telemetry_summary(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_telemetry_health(args: argparse.Namespace) -> int:
+    try:
+        events, source_files = telemetry.load_events()
+        assessment = telemetry.assess_health(events, source_files)
+    except (OSError, ValueError) as error:
+        print(f"telemetry health failed: {error}", file=sys.stderr)
+        return 1
+    if args.json:
+        print(json.dumps(assessment, ensure_ascii=False, sort_keys=True))
+    else:
+        counts = assessment["series_status"]
+        print(
+            f"telemetry health={assessment['status']} "
+            f"events={assessment['events']} evaluated={assessment['evaluated_events']}"
+        )
+        print(
+            f"series stable={counts['stable']} signal={counts['signal']} "
+            f"insufficient={counts['insufficient-data']}"
+        )
+        for key, item in assessment["series"].items():
+            print(
+                f"  - {key}: {item['status']} "
+                f"samples={item['status_samples']} signals={len(item['signals'])}"
+            )
+    return 0
+
+
 def command_evidence_inventory(args: argparse.Namespace) -> int:
     result = assurance.inventory()
     if args.json:
@@ -428,6 +455,13 @@ def parser() -> argparse.ArgumentParser:
     )
     telemetry_summary.add_argument("--json", action="store_true")
     telemetry_summary.set_defaults(func=command_telemetry_summary)
+
+    telemetry_health = commands.add_parser(
+        "telemetry-health",
+        help="assess local telemetry without changing gates or evolution state",
+    )
+    telemetry_health.add_argument("--json", action="store_true")
+    telemetry_health.set_defaults(func=command_telemetry_health)
 
     evidence_inventory = commands.add_parser(
         "evidence-inventory",

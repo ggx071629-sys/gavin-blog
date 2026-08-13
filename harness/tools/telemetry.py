@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import math
 import re
+import statistics
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -18,6 +19,7 @@ class TelemetryError(ValueError):
 
 FILE_TOKEN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 EVENT_KEYS = {"schema_version", "observed_at", "kind", "task_id", "value", "source"}
+HEALTH_STATUSES = ("no-data", "insufficient-data", "stable", "signal")
 
 
 def _timestamp(value: str) -> datetime:
@@ -238,4 +240,193 @@ def summarize(events: list[dict[str, Any]], source_files: int = 0) -> dict[str, 
         "duration_ms": _duration_summary(durations),
         "by_kind": finalize(by_kind),
         "by_stage": finalize(by_stage),
+    }
+
+
+def _health_settings(config: dict[str, Any] | None = None) -> dict[str, int | float]:
+    source = config if config is not None else load_config()
+    try:
+        raw = source["telemetry"]["health"]
+        settings: dict[str, int | float] = {
+            "min_samples": raw["min_samples"],
+            "baseline_samples": raw["baseline_samples"],
+            "recent_samples": raw["recent_samples"],
+            "consecutive_failures": raw["consecutive_failures"],
+            "duration_ratio": raw["duration_ratio"],
+        }
+    except (KeyError, TypeError) as error:
+        raise TelemetryError("telemetry health configuration is incomplete") from error
+    integer_keys = (
+        "min_samples",
+        "baseline_samples",
+        "recent_samples",
+        "consecutive_failures",
+    )
+    for key in integer_keys:
+        value = settings[key]
+        if isinstance(value, bool) or not isinstance(value, int) or value < 1:
+            raise TelemetryError(f"telemetry health {key} must be a positive integer")
+    ratio = settings["duration_ratio"]
+    if (
+        isinstance(ratio, bool)
+        or not isinstance(ratio, (int, float))
+        or not math.isfinite(float(ratio))
+        or float(ratio) <= 1
+    ):
+        raise TelemetryError("telemetry health duration_ratio must be greater than 1")
+    return settings
+
+
+def _health_series_key(event: dict[str, Any]) -> str | None:
+    kind = event.get("kind")
+    if kind in {"task.verification", "release.run"}:
+        return str(kind)
+    value = event.get("value")
+    if kind == "release.stage" and isinstance(value, dict):
+        stage = value.get("stage")
+        if isinstance(stage, str) and stage.strip():
+            return f"release.stage:{stage}"
+    return None
+
+
+def _series_health(
+    series_key: str,
+    events: list[dict[str, Any]],
+    settings: dict[str, int | float],
+) -> dict[str, Any]:
+    statuses: list[str] = []
+    durations: list[float] = []
+    for event in events:
+        value = event.get("value")
+        if not isinstance(value, dict):
+            continue
+        status = value.get("status")
+        if status in {"passed", "failed"}:
+            statuses.append(str(status))
+        duration = value.get("duration_ms")
+        if (
+            isinstance(duration, (int, float))
+            and not isinstance(duration, bool)
+            and math.isfinite(float(duration))
+            and float(duration) >= 0
+        ):
+            durations.append(float(duration))
+
+    min_samples = int(settings["min_samples"])
+    failure_threshold = int(settings["consecutive_failures"])
+    consecutive = 0
+    for status in reversed(statuses):
+        if status != "failed":
+            break
+        consecutive += 1
+
+    signals: list[dict[str, Any]] = []
+    if len(statuses) >= min_samples and consecutive >= failure_threshold:
+        signals.append(
+            {
+                "kind": "consecutive-failures",
+                "observed": consecutive,
+                "threshold": failure_threshold,
+            }
+        )
+
+    duration_enabled = series_key != "task.verification"
+    baseline_count = int(settings["baseline_samples"])
+    recent_count = int(settings["recent_samples"])
+    required_durations = baseline_count + recent_count
+    duration_result: dict[str, Any] = {
+        "enabled": duration_enabled,
+        "samples": len(durations),
+        "required_samples": required_durations if duration_enabled else None,
+        "baseline_median_ms": None,
+        "recent_median_ms": None,
+        "ratio": None,
+        "threshold": float(settings["duration_ratio"]) if duration_enabled else None,
+        "zero_baseline": False,
+    }
+    duration_ready = not duration_enabled
+    if duration_enabled and len(durations) >= required_durations:
+        selected = durations[-required_durations:]
+        baseline = selected[:baseline_count]
+        recent = selected[baseline_count:]
+        baseline_median = float(statistics.median(baseline))
+        recent_median = float(statistics.median(recent))
+        duration_result["baseline_median_ms"] = round(baseline_median, 3)
+        duration_result["recent_median_ms"] = round(recent_median, 3)
+        duration_ready = True
+        if baseline_median == 0:
+            duration_result["zero_baseline"] = True
+        else:
+            ratio = recent_median / baseline_median
+            duration_result["ratio"] = round(ratio, 3)
+            if ratio >= float(settings["duration_ratio"]):
+                signals.append(
+                    {
+                        "kind": "duration-regression",
+                        "observed_ratio": round(ratio, 3),
+                        "threshold": float(settings["duration_ratio"]),
+                    }
+                )
+
+    enough_status = len(statuses) >= min_samples
+    if signals:
+        status = "signal"
+    elif enough_status and duration_ready:
+        status = "stable"
+    else:
+        status = "insufficient-data"
+    return {
+        "status": status,
+        "events": len(events),
+        "status_samples": len(statuses),
+        "consecutive_failures": consecutive,
+        "duration": duration_result,
+        "signals": signals,
+    }
+
+
+def assess_health(
+    events: list[dict[str, Any]],
+    source_files: int = 0,
+    *,
+    config: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    settings = _health_settings(config)
+    grouped: dict[str, list[tuple[datetime, int, dict[str, Any]]]] = {}
+    for position, event in enumerate(events):
+        key = _health_series_key(event)
+        if key is None:
+            continue
+        grouped.setdefault(key, []).append(
+            (_timestamp(str(event["observed_at"])), position, event)
+        )
+
+    series = {
+        key: _series_health(
+            key,
+            [item[2] for item in sorted(items, key=lambda item: (item[0], item[1]))],
+            settings,
+        )
+        for key, items in sorted(grouped.items())
+    }
+    series_status = {status: 0 for status in HEALTH_STATUSES}
+    for item in series.values():
+        series_status[item["status"]] += 1
+    if not series:
+        status = "no-data"
+    elif series_status["signal"]:
+        status = "signal"
+    elif series_status["insufficient-data"]:
+        status = "insufficient-data"
+    else:
+        status = "stable"
+    return {
+        "schema_version": 1,
+        "status": status,
+        "source_files": source_files,
+        "events": len(events),
+        "evaluated_events": sum(item["events"] for item in series.values()),
+        "settings": settings,
+        "series_status": series_status,
+        "series": series,
     }

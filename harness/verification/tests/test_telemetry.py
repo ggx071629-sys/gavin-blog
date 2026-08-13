@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from harness.tools import harness as harness_cli
 from harness.tools import telemetry
 
 
@@ -19,6 +20,20 @@ def _event(kind: str, status: str, duration: float, *, stage: str | None = None)
         "task_id": None,
         "value": value,
         "source": "fixture",
+    }
+
+
+def _health_config() -> dict[str, object]:
+    return {
+        "telemetry": {
+            "health": {
+                "min_samples": 3,
+                "baseline_samples": 3,
+                "recent_samples": 3,
+                "consecutive_failures": 2,
+                "duration_ratio": 1.5,
+            }
+        }
     }
 
 
@@ -129,3 +144,110 @@ def test_release_runner_records_stage_and_terminal_events() -> None:
     assert "finishRelease('failed'" in runner
     assert "finishRelease('passed', 0)" in runner
     assert "appendFileSync" in runner
+
+
+def test_health_distinguishes_no_data_and_insufficient_data() -> None:
+    empty = telemetry.assess_health([], config=_health_config())
+    sparse = telemetry.assess_health(
+        [_event("task.verification", "passed", 10)],
+        config=_health_config(),
+    )
+
+    assert empty["status"] == "no-data"
+    assert sparse["status"] == "insufficient-data"
+    assert sparse["series"]["task.verification"]["status"] == "insufficient-data"
+
+
+def test_health_rejects_incomplete_or_non_positive_configuration() -> None:
+    with pytest.raises(telemetry.TelemetryError, match="configuration is incomplete"):
+        telemetry.assess_health([], config={})
+
+    config = _health_config()
+    config["telemetry"]["health"]["min_samples"] = 0  # type: ignore[index]
+    with pytest.raises(telemetry.TelemetryError, match="positive integer"):
+        telemetry.assess_health([], config=config)
+
+
+def test_health_requires_minimum_samples_before_consecutive_failure_signal() -> None:
+    too_few = [
+        _event("task.verification", "failed", 10),
+        _event("task.verification", "failed", 10),
+    ]
+    enough = [
+        _event("task.verification", "passed", 10),
+        _event("task.verification", "failed", 10),
+        _event("task.verification", "failed", 10),
+    ]
+
+    assert telemetry.assess_health(too_few, config=_health_config())["status"] == "insufficient-data"
+    result = telemetry.assess_health(enough, config=_health_config())
+    assert result["status"] == "signal"
+    assert result["series"]["task.verification"]["signals"] == [
+        {"kind": "consecutive-failures", "observed": 2, "threshold": 2}
+    ]
+
+
+def test_health_compares_non_overlapping_duration_windows() -> None:
+    samples = [10, 9, 11, 20, 21, 19]
+    events = [
+        _event("release.stage", "passed", duration, stage="api-tests")
+        for duration in samples
+    ]
+
+    result = telemetry.assess_health(events, config=_health_config())
+    series = result["series"]["release.stage:api-tests"]
+
+    assert result["status"] == "signal"
+    assert series["duration"]["baseline_median_ms"] == 10.0
+    assert series["duration"]["recent_median_ms"] == 20.0
+    assert series["duration"]["ratio"] == 2.0
+    assert series["signals"][0]["kind"] == "duration-regression"
+
+
+def test_health_does_not_guess_a_ratio_from_zero_baseline() -> None:
+    events = [
+        _event("release.run", "passed", duration)
+        for duration in [0, 0, 0, 10, 10, 10]
+    ]
+
+    result = telemetry.assess_health(events, config=_health_config())
+    duration = result["series"]["release.run"]["duration"]
+
+    assert result["status"] == "stable"
+    assert duration["zero_baseline"] is True
+    assert duration["ratio"] is None
+
+
+def test_health_sorts_events_by_observed_time_before_evaluating_failures() -> None:
+    events = [
+        _event("task.verification", "failed", 10),
+        _event("task.verification", "failed", 10),
+        _event("task.verification", "passed", 10),
+    ]
+    events[0]["observed_at"] = "2026-08-12T00:00:03+00:00"
+    events[1]["observed_at"] = "2026-08-12T00:00:02+00:00"
+    events[2]["observed_at"] = "2026-08-12T00:00:01+00:00"
+
+    result = telemetry.assess_health(events, config=_health_config())
+
+    assert result["status"] == "signal"
+    assert result["series"]["task.verification"]["consecutive_failures"] == 2
+
+
+def test_health_cli_returns_success_for_signal(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    events = [
+        _event("task.verification", "passed", 10),
+        _event("task.verification", "failed", 10),
+        _event("task.verification", "failed", 10),
+    ]
+    monkeypatch.setattr(telemetry, "load_events", lambda: (events, 1))
+    monkeypatch.setattr(telemetry, "load_config", _health_config)
+
+    exit_code = harness_cli.command_telemetry_health(
+        type("Args", (), {"json": True})()
+    )
+
+    assert exit_code == 0
+    assert json.loads(capsys.readouterr().out)["status"] == "signal"
