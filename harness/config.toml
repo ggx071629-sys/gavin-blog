@@ -103,6 +103,7 @@ timeout_seconds = 900
 
 [change_enforcement]
 risk_prefixes = [
+  ".github/workflows/",
   "apps/",
   "packages/contracts/",
   "scripts/",

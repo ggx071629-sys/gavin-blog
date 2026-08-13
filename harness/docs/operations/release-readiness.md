@@ -28,7 +28,9 @@ API 虚拟环境必须位于 `apps/api/.venv`，并已安装 `.[dev]`。门禁�
 
 `quality:release` 在环境变量 `HARNESS_BASE_REF` 存在时，先从 `harness/` 执行 `python -m tools.harness change-check --base <ref> --head <ref>`。该检查只接受同一 Git diff 中的压缩 task archive 与 schema v2 passed evidence，并验证 evidence source commit 位于 base 之后且可从 head 到达。`HARNESS_HEAD_REF` 可选，默认是 `HEAD`。
 
-没有显式基线时，本地 release runner 会清楚报告 change coverage 被跳过。当前仓库没有 Git remote、CI provider 或分支保护；因此本地通过不构成不可绕过的合并证明。托管平台确定后，必须把带可信 base/head 的 change-check 和 release gate 绑定为最新提交的 required status checks，才能提升该保证等级。
+没有显式基线时，本地 release runner 会清楚报告 change coverage 被跳过。私有 GitHub 仓库 `ggx071629-sys/smart_blog` 的 `Release gate / quality-release` workflow 在面向 `main` 的 pull request、main push 与人工运行中检出完整历史：PR 使用 base SHA，push 使用 before SHA，人工运行使用 HEAD 第一父提交；全零、空、相同或不可解析的 base/head 会在安装依赖前失败。CI 随后从锁文件安装 Node 依赖，在 `apps/api/.venv` 安装 API dev 依赖与 Chromium 运行环境，并只调用权威 `npm run quality:release`，因此远端运行不能进入 local-only coverage skip。
+
+change coverage 会验证 evidence 的 source commit 从 head 可达，所以 squash/rebase 改写已验证提交后不能复用原 evidence；合并策略必须保留验证过的提交。workflow 文件本身只建立可运行 check，不自动证明 GitHub branch protection 或 ruleset 已将其设为 required；必须在首次远端运行出现 check context 后查询仓库规则并单独确认。即使 CI 与 required check 均生效，也只提升合并质量保证，不解除本页的部署、持久化、备份恢复和生产安全 No-Go。
 
 ## Before first production release
 
@@ -46,6 +48,8 @@ API 虚拟环境必须位于 `apps/api/.venv`，并已安装 `.[dev]`。门禁�
 ## Data boundaries
 
 `.env`、开发日志、SQLite 数据库、本地媒体和原始验证产物不得进入 Git。备份必须同时覆盖 SQLite 数据库与媒体对象；只有数据库或只有媒体的备份不构成可恢复备份。
+
+`.run/`、`my_image/` 和复刻项目快照 `my_blog_fork/` 永久排除于 smart_blog Git 历史与 CI checkout；不得通过强制添加、归档上传或 workflow artifact 绕过该边界。
 
 ## Rollback boundary
 
