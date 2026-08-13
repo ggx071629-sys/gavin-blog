@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "task_id": "20260813-github-ci-enforcement",
+  "created_at": "2026-08-13T14:14:06.114179+00:00",
+  "command": "python -m tools.harness verify 20260813-github-ci-enforcement",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5",
+    "AC-6"
+  ],
+  "verification_profile": "release",
+  "fingerprints": {
+    "source_tree": "3cf24d1560220a28181ac753257b1f8686d4ea1c",
+    "active_spec_sha256": "8e9f82c8ffdba39b2255c397a1dc33ebb5e75b1dd92095ddb1ccccb32be4164f",
+    "verification_contract_sha256": "c241455ef89d6aa8e749a534127858eb10ca049209f5a76587e0620133048239",
+    "gate_config_sha256": "433ca8414c45297d936703612e44fe3a23ac612065458b7301b8c95a4630d0db",
+    "documentation_contract_sha256": "2b8f8dc99e250348327b8b1f21daec2b642e208f87c58ad95521191d083ecdc3",
+    "documentation_targets_sha256": "349b77a284ca97f94e1e0a7f8e227a5bd066e620a55b41cf9eaef7023161403d"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "远端仓库、CI 运行入口、可信比较基线和合并约束改变了长期发布保证边界",
+    "targets": [
+      "README.md",
+      "harness/docs/operations/release-readiness.md"
+    ],
+    "baseline_commit": "4abb8e2a08b3d4c1caf5e25f979a94527c1af0a8",
+    "target_blobs": {
+      "README.md": "9ef04d9daa3b58eaae23a49c5480c795546b445d",
+      "harness/docs/operations/release-readiness.md": "2d78afe32bff66f265fc607321d9e5b9ee6dcc93"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "0c3cf5cbacb10dc9bf48342e2166a7c8d2937bc3",
+    "cleanup_status": "passed",
+    "reused_paths": 3
+  },
+  "checks": [
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 56.61
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.548
+    },
+    {
+      "name": "links",
+      "details": [
+        "317 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 3100.707
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "144 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 42.333
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 10.054
+    },
+    {
+      "name": "release",
+      "kind": "product",
+      "command": "D:\\Tool\\nodejs\\npm.CMD run quality:release",
+      "status": "passed",
+      "duration_ms": 672501.544,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 520,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1464.127,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ]
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 7,
+      "passed": 7,
+      "failed": 0
+    },
+    "duration_ms": 677175.923,
+    "failures": [],
+    "test_counts": {
+      "passed": 520,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "source_commit": "0c3cf5cbacb10dc9bf48342e2166a7c8d2937bc3"
+}
