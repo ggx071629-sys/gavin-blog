@@ -88,3 +88,28 @@ def test_native_optional_dependencies_are_locked_for_ci_and_windows() -> None:
             assert "libc" not in record
         else:
             assert record["libc"] == [libc]
+
+
+def test_playwright_hydration_readiness_is_shared_bounded_and_not_retried() -> None:
+    helper = ROOT / "apps" / "web" / "tests" / "support" / "hydration.ts"
+    helper_text = helper.read_text(encoding="utf-8")
+
+    assert "export const HYDRATION_TIMEOUT_MS = 30_000" in helper_text
+    assert "page.getByTestId('app-root')" in helper_text
+    assert ".toHaveAttribute('data-hydrated', 'true', { timeout: HYDRATION_TIMEOUT_MS })" in helper_text
+
+    scattered = {
+        path.relative_to(ROOT).as_posix(): path.read_text(encoding="utf-8")
+        for path in (ROOT / "apps" / "web" / "tests").rglob("*.ts")
+        if path != helper and "data-hydrated" in path.read_text(encoding="utf-8")
+    }
+    assert scattered == {}
+
+    for name in (
+        "playwright.config.ts",
+        "playwright.quality.config.ts",
+        "playwright.failure.config.ts",
+    ):
+        config = (ROOT / "apps" / "web" / name).read_text(encoding="utf-8")
+        assert "retries: 0" in config
+        assert "expect: {" not in config
