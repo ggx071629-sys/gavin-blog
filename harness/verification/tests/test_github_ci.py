@@ -53,3 +53,11 @@ def test_ci_and_local_workspace_paths_are_governed() -> None:
 
     assert '".github/workflows/"' in config
     assert {".run/", "my_image/", "my_blog_fork/"}.issubset(set(ignore))
+
+
+def test_openapi_export_forces_lf_for_cross_platform_byte_comparison() -> None:
+    exporter = (ROOT / "apps" / "api" / "scripts" / "export_openapi.py").read_text(
+        encoding="utf-8"
+    )
+
+    assert 'target.open("w", encoding="utf-8", newline="\\n")' in exporter
