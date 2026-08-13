@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -61,3 +62,29 @@ def test_openapi_export_forces_lf_for_cross_platform_byte_comparison() -> None:
     )
 
     assert 'target.open("w", encoding="utf-8", newline="\\n")' in exporter
+
+
+def test_native_optional_dependencies_are_locked_for_ci_and_windows() -> None:
+    package = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))
+    lock = json.loads((ROOT / "package-lock.json").read_text(encoding="utf-8"))
+    expected = {
+        "@rollup/rollup-linux-x64-gnu": ("4.62.3", "linux", "x64", "glibc"),
+        "@rollup/rollup-win32-x64-msvc": ("4.62.3", "win32", "x64", None),
+        "lightningcss-linux-x64-gnu": ("1.33.0", "linux", "x64", "glibc"),
+        "lightningcss-win32-x64-msvc": ("1.33.0", "win32", "x64", None),
+    }
+
+    assert package["optionalDependencies"] == {
+        name: version for name, (version, _os, _cpu, _libc) in expected.items()
+    }
+    assert lock["packages"][""]["optionalDependencies"] == package["optionalDependencies"]
+    for name, (version, operating_system, cpu, libc) in expected.items():
+        record = lock["packages"][f"node_modules/{name}"]
+        assert record["version"] == version
+        assert record["optional"] is True
+        assert record["os"] == [operating_system]
+        assert record["cpu"] == [cpu]
+        if libc is None:
+            assert "libc" not in record
+        else:
+            assert record["libc"] == [libc]
