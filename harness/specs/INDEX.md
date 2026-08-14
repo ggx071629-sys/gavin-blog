@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **1 active**, **2 frozen**.
+Open specifications: **2 active**, **2 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -13,6 +13,7 @@ Open specifications: **1 active**, **2 frozen**.
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
 | spec-20260807-github-discovery-ingestion | frozen | L1 | 为博客建立 GitHub 发现画像、私有资料仓库同步与待处理池摄入闭环 | task:20260807-github-discovery-ingestion | Gavin | [active/20260807-github-discovery-ingestion.md](active/20260807-github-discovery-ingestion.md) |
 | spec-20260807-github-source-crawler | frozen | L1 | 在独立私有仓库中用 GitHub Actions 无模型发现并保存文章型 Markdown | task:20260807-github-source-crawler | Gavin | [active/20260807-github-source-crawler.md](active/20260807-github-source-crawler.md) |
+| spec-20260814-public-knowledge-links | active | L1 | 让已发布文章、项目和书摘通过 wikilink 与可编辑参考资料形成公开反链，而不是只靠栏目标签邻近 | task:20260814-public-knowledge-links | Gavin | [active/20260814-public-knowledge-links.md](active/20260814-public-knowledge-links.md) |
 | spec-20260814-zvec-vector-index | active | L1 | 在保留现有知识孵化检索策略与契约的前提下，以可回滚的 Zvec Flat 后端替换在线 SQLite BLOB/NumPy 向量扫描 | task:20260814-zvec-vector-index | Gavin | [active/20260814-zvec-vector-index.md](active/20260814-zvec-vector-index.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
