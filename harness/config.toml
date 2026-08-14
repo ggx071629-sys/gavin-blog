@@ -139,6 +139,7 @@ timeout_seconds = 600
 cwd = "."
 command = ["npm", "run", "quality:release"]
 timeout_seconds = 900
+subsumption_contract = "scripts/release-stage-contract.json"
 
 [change_enforcement]
 risk_prefixes = [

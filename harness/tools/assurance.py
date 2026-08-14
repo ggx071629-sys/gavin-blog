@@ -6,9 +6,19 @@ from typing import Any
 
 from .config import harness_root, load_config
 
-STRUCTURAL_CHECKS = {"indexes", "l0", "links", "metadata", "structure", "supply-chain"}
+STRUCTURAL_CHECKS = {
+    "gate-subsumption",
+    "history-integrity",
+    "indexes",
+    "l0",
+    "links",
+    "metadata",
+    "structure",
+    "supply-chain",
+}
 LEVELS = (
     "v2-product-verified",
+    "v2-transitional-product-reported",
     "legacy-product-reported",
     "legacy-structure-only",
     "invalid",
@@ -57,6 +67,18 @@ def _legacy_product_reported(
     return bool(names - STRUCTURAL_CHECKS)
 
 
+def _v2_transitional_product_reported(payload: dict[str, Any]) -> bool:
+    if payload.get("status") != "passed" or payload.get("execution") is not None:
+        return False
+    checks = payload.get("checks")
+    return (
+        isinstance(checks, list)
+        and bool(checks)
+        and all(isinstance(check, dict) and check.get("status") == "passed" for check in checks)
+        and any(isinstance(check, dict) and check.get("kind") == "product" for check in checks)
+    )
+
+
 def inventory() -> dict[str, Any]:
     config = load_config()
     root = harness_root() / str(config["verification"]["evidence"])
@@ -81,7 +103,12 @@ def inventory() -> dict[str, Any]:
         if payload is None or status != "passed":
             level = "invalid"
         elif schema == 2:
-            level = "v2-product-verified" if _v2_valid(payload) else "invalid"
+            if _v2_valid(payload):
+                level = "v2-product-verified"
+            elif _v2_transitional_product_reported(payload):
+                level = "v2-transitional-product-reported"
+            else:
+                level = "invalid"
         elif schema == 1:
             level = (
                 "legacy-product-reported"

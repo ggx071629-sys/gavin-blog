@@ -97,6 +97,14 @@ def test_inventory_conservatively_classifies_evidence(
         },
     )
     _write_json(evidence / "20260812-invalid.json", {"schema_version": 2, "status": "passed"})
+    _write_json(
+        evidence / "20260812-transitional.json",
+        {
+            "schema_version": 2,
+            "status": "passed",
+            "checks": [{"kind": "product", "status": "passed"}],
+        },
+    )
 
     result = assurance.inventory()
     levels = {record["task_id"]: record["assurance"] for record in result["records"]}
@@ -105,10 +113,44 @@ def test_inventory_conservatively_classifies_evidence(
         "20260812-invalid": "invalid",
         "20260812-legacy-app": "legacy-product-reported",
         "20260812-legacy-structure": "legacy-structure-only",
+        "20260812-transitional": "v2-transitional-product-reported",
         "20260812-v2": "v2-product-verified",
     }
     assert result["auxiliary_files"] == 1
-    assert sum(result["assurance"].values()) == result["tasks"] == 4
+    assert sum(result["assurance"].values()) == result["tasks"] == 5
+
+
+def test_transitional_v2_rejects_malformed_execution_and_failed_checks(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(assurance, "harness_root", lambda: tmp_path)
+    monkeypatch.setattr(
+        assurance,
+        "load_config",
+        lambda: {"verification": {"evidence": "evidence"}},
+    )
+    _write_json(
+        tmp_path / "evidence" / "20260812-bad-execution.json",
+        {
+            "schema_version": 2,
+            "status": "passed",
+            "execution": {"mode": "shared"},
+            "checks": [{"kind": "product", "status": "passed"}],
+        },
+    )
+    _write_json(
+        tmp_path / "evidence" / "20260812-failed-check.json",
+        {
+            "schema_version": 2,
+            "status": "passed",
+            "checks": [{"kind": "product", "status": "failed"}],
+        },
+    )
+
+    result = assurance.inventory()
+
+    assert result["assurance"]["invalid"] == 2
+    assert result["assurance"]["v2-transitional-product-reported"] == 0
 
 
 def test_schema_v1_product_checks_remain_legacy(

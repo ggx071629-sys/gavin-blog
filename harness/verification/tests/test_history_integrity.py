@@ -1,0 +1,115 @@
+from __future__ import annotations
+
+import importlib.util
+import json
+from pathlib import Path
+
+import pytest
+
+CHECK_PATH = Path(__file__).parents[1] / "checks" / "history_integrity.py"
+
+
+def _load_check():
+    spec = importlib.util.spec_from_file_location("harness_history_integrity_check", CHECK_PATH)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _write(path: Path, value: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(value, encoding="utf-8")
+
+
+def _closed_task(root: Path, task_id: str) -> None:
+    _write(
+        root / "specs" / "archive" / f"{task_id}.md",
+        "---\n"
+        f"id: archive-{task_id}\n"
+        "level: L2\n"
+        "summary: fixture\n"
+        "load_when:\n"
+        "  - fixture\n"
+        f"task_id: {task_id}\n"
+        "status: compressed\n"
+        "---\n\n"
+        f"[evidence](../../verification/evidence/{task_id}.json)\n",
+    )
+    _write(
+        root / "verification" / "evidence" / f"{task_id}.json",
+        json.dumps(
+            {"schema_version": 2, "task_id": task_id, "status": "passed"}
+        ),
+    )
+    _write(
+        root / "evolution" / "events" / f"{task_id}--spec-completed.json",
+        json.dumps(
+            {
+                "schema_version": 1,
+                "event_type": "spec.completed",
+                "task_id": task_id,
+                "source": "lifecycle",
+                "may_modify_agents_md": False,
+            }
+        ),
+    )
+
+
+def _context(root: Path) -> dict[str, object]:
+    return {
+        "harness_root": root,
+        "project_root": root.parent,
+        "config": {
+            "specs": {"active": "specs/active", "archive": "specs/archive"},
+            "verification": {"evidence": "verification/evidence"},
+            "evolution": {"events": "evolution/events"},
+        },
+    }
+
+
+def test_history_integrity_accepts_complete_close_and_standalone_evidence(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    check = _load_check()
+    task_id = "20260814-closed"
+    _closed_task(tmp_path, task_id)
+    _write(
+        tmp_path / "verification" / "evidence" / "20260814-standalone.json",
+        "{}",
+    )
+    monkeypatch.setattr(
+        check,
+        "_historical_active_paths",
+        lambda _: {f"harness/specs/active/{task_id}.md"},
+    )
+
+    result = check.run(_context(tmp_path))
+
+    assert result["passed"] is True
+    assert result["details"] == [
+        "1 deterministic closes retain archive, evidence, event, and active-spec history"
+    ]
+
+
+def test_history_integrity_rejects_missing_mismatched_and_active_close_assets(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    check = _load_check()
+    task_id = "20260814-broken"
+    _closed_task(tmp_path, task_id)
+    (tmp_path / "verification" / "evidence" / f"{task_id}.json").unlink()
+    _write(tmp_path / "specs" / "active" / f"{task_id}.md", "active")
+    event = tmp_path / "evolution" / "events" / f"{task_id}--spec-completed.json"
+    payload = json.loads(event.read_text(encoding="utf-8"))
+    payload["task_id"] = "20260814-other"
+    _write(event, json.dumps(payload))
+    monkeypatch.setattr(check, "_historical_active_paths", lambda _: set())
+
+    result = check.run(_context(tmp_path))
+
+    assert result["passed"] is False
+    assert any("active task overlaps" in detail for detail in result["details"])
+    assert any("original active spec is absent" in detail for detail in result["details"])
+    assert any("main evidence is missing" in detail for detail in result["details"])
+    assert any("event contract is inconsistent" in detail for detail in result["details"])

@@ -34,9 +34,15 @@ schema v2 task evidence 为每个 gate 保存退出码、耗时、可识别的 P
 
 ## Risk-derived gate floor
 
-task verify 以 active spec 首次提交为基线，读取其后到当前 HEAD 的已提交路径，并按 `config.toml` 中有序的 `verification.risk_routes` 聚合最低 gate。API、Web、跨栈契约、依赖、CI 和 Harness 可执行控制面各自触发确定性下限；重叠 route 的 gate 稳定去重。spec 的 verification plan 必须显式映射全部推导 gate 到 AC，可以增加但不能删除系统下限，也不能通过选择较低 profile 绕过。
+task verify 以 active spec 首次提交为基线，读取其后到当前 HEAD 的已提交路径，并按 `config.toml` 中有序的 `verification.risk_routes` 聚合最低 gate。API、Web、跨栈契约、依赖、CI 和 Harness 可执行控制面各自触发确定性下限；重叠 route 的 gate 稳定去重。spec 的 verification plan 必须直接映射推导 gate，或映射一个具有有效直接 subsumption proof 的上层 gate；未证明或传递式包含不能满足下限，也不能通过选择较低 profile 绕过。
 
 推导范围、匹配 route、触发路径和最低 gate 进入 evidence 的 gate 配置指纹。风险路由配置、实现提交或 verification plan 发生漂移时，旧 evidence 失效。纯文档、生成索引与生命周期 close 产物不命中产品 route；未提交的验证源码仍由 clean-source 前置条件拒绝。
+
+## Gate subsumption
+
+`release` 可通过 `scripts/release-stage-contract.json` 直接满足其实际执行的已注册子 gate。合同逐项绑定 gate、release stage、cwd 与 argv，并必须与 `config.toml` 完全一致；全局 `gate-subsumption` check 在普通 verify 和 release 尾部都校验该关系。runner 从同一合同执行每个子 gate 恰好一次，完成 OpenAPI consistency 等非合同阶段后，才输出包含合同 SHA-256 和有序完成阶段的唯一终态 proof。
+
+task gate 只有退出 0 且 proof 唯一、可解析、hash 当前、阶段完整时才通过；最小 verified subsumption 保存到 product check result，合同内容、profile/risk 满足关系进入 gate 指纹，close 会重新计算并拒绝漂移。subsumption 只消除 plan 同时选择子 gate 与完整 release 时的重复调用，不减少 `quality:release` 内部实际阶段，也不允许多跳推导。
 
 ## Supply-chain baseline
 
@@ -49,8 +55,11 @@ task verify 以 active spec 首次提交为基线，读取其后到当前 HEAD �
 从 `harness/` 运行 `python -m tools.harness evidence-inventory [--json]` 可只读盘点主 evidence。该命令不重新执行历史 gate，只按已保存结构保守分类：
 
 - `v2-product-verified`：schema v2、passed、包含全部 passed checks、至少一个 product gate，并记录已清理的隔离 Git worktree。
+- `v2-transitional-product-reported`：schema v2 过渡期记录，全部 checks passed 且包含 product gate，但产生于隔离 execution 字段落地前；只保留当时报告，不能宣称当前隔离闭包。
 - `legacy-product-reported`：schema v1，主记录包含非结构产品检查，或存在 passed 的 `.application.json` 辅助报告；这是历史人工报告，不具有 v2 指纹、当前 HEAD 和隔离闭包保证。
-- `legacy-structure-only`：schema v1 只保存 indexes、L0、links、metadata、structure、supply-chain 等 Harness 结构或控制面检查，不能证明产品行为通过。
-- `invalid`：无法解析、未知 schema、非 passed，或声称 v2 但缺少隔离/product/check 完整结构。
+- `legacy-structure-only`：schema v1 只保存 indexes、L0、links、metadata、structure、gate-subsumption、history-integrity、supply-chain 等 Harness 结构或控制面检查，不能证明产品行为通过。
+- `invalid`：无法解析、未知 schema、非 passed、有畸形 execution，或缺少可信 product/check 结构。
 
 `.benchmark.json` 和 `.application.json` 作为辅助资产列入 inventory，但不计作独立 task。任何 assurance 标签都只描述文件中可证事实，不能替代重新验证，也不能自动触发 Evolution。
+
+全局 `history-integrity` check 以 compressed archive 为确定性关闭集合，验证同 task 的 passed 主 evidence、lifecycle `spec.completed` event、archive 标识与 evidence 链接，并用一次 Git 查询确认原 active spec 路径仍在当前 HEAD 历史。active/closed 重叠、三件套缺失或错配、历史缺口都会失败关闭；没有 completion event 的既有独立 evidence 仍只由 inventory 报告。该 check 只读且不重写、补造、迁移或删除历史资产。

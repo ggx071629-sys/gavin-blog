@@ -29,6 +29,8 @@ GATE_PATTERN = re.compile(
     r"^-\s+([a-z0-9]+(?:-[a-z0-9]+)*)\s+=>\s+(AC-[1-9][0-9]*(?:\s*,\s*AC-[1-9][0-9]*)*)\s*$",
     re.MULTILINE,
 )
+TOKEN_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+SUBSUMPTION_PROOF_PREFIX = "HARNESS_RELEASE_PROOF "
 
 
 class ProductVerificationError(ValueError):
@@ -98,6 +100,180 @@ def _configured_gates() -> dict[str, Any]:
     verification = load_config().get("verification", {})
     gates = verification.get("gates", {})
     return dict(gates) if isinstance(gates, dict) else {}
+
+
+def _load_subsumption_contract(
+    owner_gate: str,
+    configured: dict[str, Any] | None = None,
+    execution_root: Path | None = None,
+) -> dict[str, Any] | None:
+    if configured is None:
+        configured = _configured_gates()
+    definition = configured.get(owner_gate)
+    if not isinstance(definition, dict):
+        raise ProductVerificationError(f"gate {owner_gate} definition must be a table")
+    raw_path = definition.get("subsumption_contract")
+    if raw_path is None:
+        return None
+    if not isinstance(raw_path, str) or not raw_path.endswith(".json"):
+        raise ProductVerificationError(
+            f"gate {owner_gate} subsumption_contract must be a project-relative JSON path"
+        )
+    if (
+        not raw_path
+        or raw_path.startswith("/")
+        or "\\" in raw_path
+        or any(part in {"", ".", ".."} for part in raw_path.split("/"))
+    ):
+        raise ProductVerificationError(
+            f"gate {owner_gate} has unsafe subsumption contract path: {raw_path}"
+        )
+    root = (execution_root or project_root()).resolve()
+    path = root.joinpath(*raw_path.split("/")).resolve()
+    if not path.is_relative_to(root) or not path.is_file():
+        raise ProductVerificationError(
+            f"gate {owner_gate} subsumption contract is missing or outside the project"
+        )
+    try:
+        raw = path.read_bytes()
+        payload = json.loads(raw.decode("utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ProductVerificationError(
+            f"gate {owner_gate} subsumption contract is unreadable: {error}"
+        ) from error
+    if not isinstance(payload, dict):
+        raise ProductVerificationError(
+            f"gate {owner_gate} subsumption contract must be an object"
+        )
+    if payload.get("schema_version") != 1 or payload.get("owner_gate") != owner_gate:
+        raise ProductVerificationError(
+            f"gate {owner_gate} subsumption contract identity is invalid"
+        )
+    raw_stages = payload.get("stages")
+    if not isinstance(raw_stages, list) or not raw_stages:
+        raise ProductVerificationError(
+            f"gate {owner_gate} subsumption contract stages must be a non-empty array"
+        )
+
+    stages: list[dict[str, Any]] = []
+    seen_gates: set[str] = set()
+    seen_stages: set[str] = set()
+    for index, item in enumerate(raw_stages, start=1):
+        if not isinstance(item, dict) or set(item) != {"gate", "stage", "cwd", "command"}:
+            raise ProductVerificationError(
+                f"gate {owner_gate} subsumption stage {index} has invalid fields"
+            )
+        gate = item.get("gate")
+        stage = item.get("stage")
+        cwd = item.get("cwd")
+        command = item.get("command")
+        if not isinstance(gate, str) or TOKEN_PATTERN.fullmatch(gate) is None:
+            raise ProductVerificationError(
+                f"gate {owner_gate} subsumption stage {index} has invalid gate"
+            )
+        if not isinstance(stage, str) or TOKEN_PATTERN.fullmatch(stage) is None:
+            raise ProductVerificationError(
+                f"gate {owner_gate} subsumption stage {index} has invalid stage"
+            )
+        if gate == owner_gate:
+            raise ProductVerificationError(f"gate {owner_gate} cannot subsume itself")
+        if gate in seen_gates or stage in seen_stages:
+            raise ProductVerificationError(
+                f"gate {owner_gate} subsumption contract has duplicate gate or stage"
+            )
+        if (
+            not isinstance(cwd, str)
+            or not cwd
+            or "\\" in cwd
+            or cwd.startswith("/")
+            or (cwd != "." and any(part in {"", ".", ".."} for part in cwd.split("/")))
+        ):
+            raise ProductVerificationError(
+                f"gate {owner_gate} subsumption stage {stage} has unsafe cwd"
+            )
+        if (
+            not isinstance(command, list)
+            or not command
+            or not all(isinstance(value, str) and value for value in command)
+        ):
+            raise ProductVerificationError(
+                f"gate {owner_gate} subsumption stage {stage} has invalid command"
+            )
+        child = configured.get(gate)
+        if not isinstance(child, dict):
+            raise ProductVerificationError(
+                f"gate {owner_gate} subsumes unregistered gate: {gate}"
+            )
+        if child.get("command") != command or str(child.get("cwd", ".")) != cwd:
+            raise ProductVerificationError(
+                f"gate {owner_gate} subsumption stage {stage} does not match registered gate {gate}"
+            )
+        seen_gates.add(gate)
+        seen_stages.add(stage)
+        stages.append({"gate": gate, "stage": stage, "cwd": cwd, "command": command})
+    return {
+        "path": raw_path,
+        "sha256": hashlib.sha256(raw).hexdigest(),
+        "stages": stages,
+    }
+
+
+def _selected_subsumption_contracts(
+    selected_gates: list[str] | dict[str, Any],
+    *,
+    execution_root: Path | None = None,
+) -> dict[str, dict[str, Any]]:
+    configured = _configured_gates()
+    contracts: dict[str, dict[str, Any]] = {}
+    for gate in selected_gates:
+        contract = _load_subsumption_contract(gate, configured, execution_root)
+        if contract is not None:
+            contracts[gate] = contract
+    return contracts
+
+
+def configured_subsumption_contracts(
+    execution_root: Path | None = None,
+) -> dict[str, dict[str, Any]]:
+    configured = _configured_gates()
+    return _selected_subsumption_contracts(
+        list(configured),
+        execution_root=execution_root,
+    )
+
+
+def _requirement_report(
+    required_gates: list[str] | set[str],
+    selected_gates: list[str] | dict[str, Any],
+) -> dict[str, Any]:
+    selected = list(selected_gates)
+    contracts = _selected_subsumption_contracts(selected)
+    satisfied: list[dict[str, str]] = []
+    missing: list[str] = []
+    for required in sorted(set(required_gates)):
+        if required in selected:
+            satisfied.append(
+                {"gate": required, "satisfied_by": required, "mode": "direct"}
+            )
+            continue
+        owner = next(
+            (
+                gate
+                for gate in selected
+                if any(
+                    item["gate"] == required
+                    for item in contracts.get(gate, {}).get("stages", [])
+                )
+            ),
+            None,
+        )
+        if owner is None:
+            missing.append(required)
+        else:
+            satisfied.append(
+                {"gate": required, "satisfied_by": owner, "mode": "subsumed"}
+            )
+    return {"satisfied": satisfied, "missing": missing}
 
 
 def _configured_profiles() -> dict[str, Any]:
@@ -213,6 +389,7 @@ def validate_configured_gates(
         raise ProductVerificationError(
             f"Verification plan uses unregistered gates: {', '.join(unknown)}"
         )
+    _selected_subsumption_contracts(mappings)
     if profile is None:
         return
     profiles = _configured_profiles()
@@ -231,7 +408,8 @@ def validate_configured_gates(
             f"verification profile {profile} uses unregistered gates: "
             + ", ".join(unknown_required)
         )
-    missing = sorted(required - set(mappings))
+    profile_report = _requirement_report(required, mappings)
+    missing = profile_report["missing"]
     if missing:
         raise ProductVerificationError(
             f"verification profile {profile} requires gates: {', '.join(missing)}"
@@ -239,7 +417,8 @@ def validate_configured_gates(
     if task_id is None:
         return
     derived = derived_gate_requirements(task_id)
-    missing_derived = sorted(set(derived["required_gates"]) - set(mappings))
+    derived_report = _requirement_report(derived["required_gates"], mappings)
+    missing_derived = derived_report["missing"]
     if missing_derived:
         triggers = []
         for route in derived["routes"]:
@@ -286,11 +465,20 @@ def evidence_fingerprints(
     path = active_spec(task_id)
     gates = _configured_gates()
     profiles = _configured_profiles()
+    derived = derived_gate_requirements(task_id)
     gate_contract = {
         "profile": {profile: profiles[profile]},
         "gates": {gate: gates[gate] for gate in mappings},
         "isolation": load_config().get("verification", {}).get("isolation", {}),
-        "risk_derivation": derived_gate_requirements(task_id),
+        "risk_derivation": derived,
+        "requirement_satisfaction": {
+            "profile": _requirement_report(
+                {str(value) for value in profiles[profile].get("required_gates", [])},
+                mappings,
+            ),
+            "risk": _requirement_report(derived["required_gates"], mappings),
+        },
+        "subsumption_contracts": _selected_subsumption_contracts(mappings),
     }
     verification_contract = {
         "profile": profile,
@@ -469,6 +657,61 @@ def _command(
     return command, cwd, timeout_seconds
 
 
+def _verified_subsumption(contract: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "contract_sha256": contract["sha256"],
+        "verified": [
+            {"gate": item["gate"], "stage": item["stage"]}
+            for item in contract["stages"]
+        ],
+    }
+
+
+def _parse_subsumption_proof(
+    stdout: str,
+    contract: dict[str, Any],
+    owner_gate: str,
+) -> dict[str, Any]:
+    lines = [
+        line[len(SUBSUMPTION_PROOF_PREFIX) :]
+        for line in stdout.splitlines()
+        if line.startswith(SUBSUMPTION_PROOF_PREFIX)
+    ]
+    if len(lines) != 1:
+        raise ProductVerificationError(
+            f"gate {owner_gate} must emit exactly one terminal subsumption proof"
+        )
+    try:
+        payload = json.loads(lines[0])
+    except json.JSONDecodeError as error:
+        raise ProductVerificationError(
+            f"gate {owner_gate} emitted malformed subsumption proof"
+        ) from error
+    expected_completed = [
+        {"gate": item["gate"], "stage": item["stage"]}
+        for item in contract["stages"]
+    ]
+    if not isinstance(payload, dict) or set(payload) != {
+        "schema_version",
+        "owner_gate",
+        "contract_sha256",
+        "completed",
+    }:
+        raise ProductVerificationError(
+            f"gate {owner_gate} subsumption proof fields are invalid"
+        )
+    if (
+        payload.get("schema_version") != 1
+        or payload.get("owner_gate") != owner_gate
+        or payload.get("contract_sha256") != contract["sha256"]
+        or payload.get("completed") != expected_completed
+    ):
+        raise ProductVerificationError(
+            f"gate {owner_gate} subsumption proof does not match its stage contract"
+        )
+    return _verified_subsumption(contract)
+
+
 def run_gates(
     mappings: dict[str, list[str]],
     *,
@@ -479,6 +722,11 @@ def run_gates(
     for gate, covered in mappings.items():
         started = time.perf_counter()
         try:
+            contract = _load_subsumption_contract(
+                gate,
+                configured,
+                execution_root,
+            )
             command, cwd, timeout_seconds = _command(
                 gate,
                 dict(configured[gate]),
@@ -498,20 +746,33 @@ def run_gates(
             duration_ms = round((time.perf_counter() - started) * 1000, 3)
             passed = completed.returncode == 0
             redactions = [str(execution_root)] if execution_root is not None else []
-            details = (
-                []
-                if passed
-                else failure_details(
-                    completed.stdout,
-                    completed.stderr,
-                    redactions=redactions,
-                )
-            )
             test_counts = parse_test_counts(completed.stdout, completed.stderr)
             structured_result: dict[str, Any] = {"exit_code": completed.returncode}
             if test_counts is not None:
                 structured_result["test_counts"] = test_counts
-            if not passed:
+            proof_error: ProductVerificationError | None = None
+            if passed and contract is not None:
+                try:
+                    structured_result["subsumption"] = _parse_subsumption_proof(
+                        completed.stdout,
+                        contract,
+                        gate,
+                    )
+                except ProductVerificationError as error:
+                    proof_error = error
+                    passed = False
+            if proof_error is not None:
+                details = [str(proof_error)]
+                structured_result["failure"] = {
+                    "kind": "subsumption-proof",
+                    "summary": str(proof_error)[:300],
+                }
+            elif not passed:
+                details = failure_details(
+                    completed.stdout,
+                    completed.stderr,
+                    redactions=redactions,
+                )
                 structured_result["failure"] = {
                     "kind": "nonzero-exit",
                     "summary": failure_summary(
@@ -520,6 +781,8 @@ def run_gates(
                         redactions=redactions,
                     ),
                 }
+            else:
+                details = []
             result = {
                 "name": gate,
                 "kind": "product",
@@ -676,6 +939,18 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
                     errors.append(f"task evidence coverage does not match for gate {gate}")
                 if not check.get("command"):
                     errors.append(f"task evidence command missing for gate {gate}")
+                contract = _load_subsumption_contract(gate, _configured_gates())
+                result = check.get("result")
+                actual_subsumption = (
+                    result.get("subsumption") if isinstance(result, dict) else None
+                )
+                expected_subsumption = (
+                    _verified_subsumption(contract) if contract is not None else None
+                )
+                if actual_subsumption != expected_subsumption:
+                    errors.append(
+                        f"task evidence subsumption proof does not match for gate {gate}"
+                    )
     try:
         ensure_source_clean(list(documentation["targets"]))
     except ProductVerificationError as error:

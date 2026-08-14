@@ -161,6 +161,11 @@ def test_release_runner_records_stage_and_terminal_events() -> None:
     assert "finishRelease('failed'" in runner
     assert "finishRelease('passed', 0)" in runner
     assert "appendFileSync" in runner
+    assert "release-stage-contract.json" in runner
+    assert "runContractGate('api-tests'" in runner
+    assert "runContractGate('web-quality'" in runner
+    assert "emitSubsumptionProof()" in runner
+    assert "HARNESS_RELEASE_PROOF " in runner
 
 
 def test_health_distinguishes_no_data_and_insufficient_data() -> None:

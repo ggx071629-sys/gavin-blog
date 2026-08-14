@@ -370,6 +370,16 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
 
     assert product_verification.validate_evidence(TASK_ID, evidence) == []
 
+    payload["checks"][0]["result"] = {
+        "subsumption": {"contract_sha256": "forged", "verified": []}
+    }
+    evidence.write_text(json.dumps(payload), encoding="utf-8")
+    assert any(
+        "subsumption proof does not match" in error
+        for error in product_verification.validate_evidence(TASK_ID, evidence)
+    )
+    payload["checks"][0].pop("result")
+
     payload["criteria_results"][0]["status"] = "failed"
     evidence.write_text(json.dumps(payload), encoding="utf-8")
     assert (
@@ -429,6 +439,213 @@ def test_profile_requires_its_minimum_registered_gates(
             {"api-lint": ["AC-1"]},
             "stack",
         )
+
+
+def _write_subsumption_contract(
+    path: Path,
+    stages: list[dict[str, object]],
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "owner_gate": "release",
+                "stages": stages,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+
+def test_release_contract_satisfies_direct_profile_and_risk_requirements(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    stages = [
+        {
+            "gate": "api-lint",
+            "stage": "api-lint",
+            "cwd": "apps/api",
+            "command": ["{api_python}", "-m", "ruff", "check", "."],
+        },
+        {
+            "gate": "api-tests",
+            "stage": "api-tests",
+            "cwd": "apps/api",
+            "command": ["{api_python}", "-m", "pytest"],
+        },
+    ]
+    _write_subsumption_contract(tmp_path / "scripts" / "release.json", stages)
+    gates = {
+        "api-lint": {"cwd": "apps/api", "command": stages[0]["command"]},
+        "api-tests": {"cwd": "apps/api", "command": stages[1]["command"]},
+        "release": {
+            "cwd": ".",
+            "command": ["npm", "run", "quality:release"],
+            "subsumption_contract": "scripts/release.json",
+        },
+    }
+    monkeypatch.setattr(product_verification, "project_root", lambda: tmp_path)
+    monkeypatch.setattr(product_verification, "_configured_gates", lambda: gates)
+    monkeypatch.setattr(
+        product_verification,
+        "_configured_profiles",
+        lambda: {"stack": {"required_gates": ["api-lint", "api-tests"]}},
+    )
+    monkeypatch.setattr(
+        product_verification,
+        "derived_gate_requirements",
+        lambda _: {
+            "paths": ["apps/api/app/main.py"],
+            "routes": [
+                {
+                    "id": "api",
+                    "matched_paths": ["apps/api/app/main.py"],
+                    "required_gates": ["api-lint", "api-tests"],
+                }
+            ],
+            "required_gates": ["api-lint", "api-tests"],
+        },
+    )
+
+    product_verification.validate_configured_gates(
+        {"release": ["AC-1"]},
+        "stack",
+        TASK_ID,
+    )
+
+    assert product_verification._requirement_report(
+        {"api-lint", "api-tests"}, {"release": ["AC-1"]}
+    ) == {
+        "satisfied": [
+            {"gate": "api-lint", "satisfied_by": "release", "mode": "subsumed"},
+            {"gate": "api-tests", "satisfied_by": "release", "mode": "subsumed"},
+        ],
+        "missing": [],
+    }
+
+    first_hash = product_verification._selected_subsumption_contracts(["release"])[
+        "release"
+    ]["sha256"]
+    contract_path = tmp_path / "scripts" / "release.json"
+    contract_path.write_text(
+        contract_path.read_text(encoding="utf-8") + "\n",
+        encoding="utf-8",
+    )
+    second_hash = product_verification._selected_subsumption_contracts(["release"])[
+        "release"
+    ]["sha256"]
+    assert first_hash != second_hash
+
+
+def test_release_contract_rejects_registered_gate_drift(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    stage = {
+        "gate": "api-tests",
+        "stage": "api-tests",
+        "cwd": "apps/api",
+        "command": ["{api_python}", "-m", "pytest"],
+    }
+    _write_subsumption_contract(tmp_path / "scripts" / "release.json", [stage])
+    gates = {
+        "api-tests": {
+            "cwd": "apps/api",
+            "command": ["{api_python}", "-m", "pytest", "-q"],
+        },
+        "release": {
+            "cwd": ".",
+            "command": ["npm", "run", "quality:release"],
+            "subsumption_contract": "scripts/release.json",
+        },
+    }
+    monkeypatch.setattr(product_verification, "project_root", lambda: tmp_path)
+    monkeypatch.setattr(product_verification, "_configured_gates", lambda: gates)
+
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="does not match registered gate api-tests",
+    ):
+        product_verification._selected_subsumption_contracts(["release"])
+
+
+def test_subsumption_runtime_proof_is_exact_and_required() -> None:
+    contract = {
+        "sha256": "a" * 64,
+        "stages": [{"gate": "api-tests", "stage": "api-tests"}],
+    }
+    proof = {
+        "schema_version": 1,
+        "owner_gate": "release",
+        "contract_sha256": "a" * 64,
+        "completed": [{"gate": "api-tests", "stage": "api-tests"}],
+    }
+
+    assert product_verification._parse_subsumption_proof(
+        product_verification.SUBSUMPTION_PROOF_PREFIX + json.dumps(proof),
+        contract,
+        "release",
+    ) == {
+        "contract_sha256": "a" * 64,
+        "verified": [{"gate": "api-tests", "stage": "api-tests"}],
+    }
+
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="exactly one terminal",
+    ):
+        product_verification._parse_subsumption_proof("", contract, "release")
+
+    proof["contract_sha256"] = "b" * 64
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="does not match",
+    ):
+        product_verification._parse_subsumption_proof(
+            product_verification.SUBSUMPTION_PROOF_PREFIX + json.dumps(proof),
+            contract,
+            "release",
+        )
+
+
+def test_zero_exit_gate_fails_closed_without_subsumption_proof(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    stage = {
+        "gate": "child",
+        "stage": "child",
+        "cwd": ".",
+        "command": ["{python}", "-m", "child"],
+    }
+    _write_subsumption_contract(tmp_path / "scripts" / "release.json", [stage])
+    gates = {
+        "child": {"cwd": ".", "command": stage["command"]},
+        "release": {
+            "cwd": ".",
+            "command": ["{python}", "-m", "release"],
+            "subsumption_contract": "scripts/release.json",
+        },
+    }
+    monkeypatch.setattr(product_verification, "project_root", lambda: tmp_path)
+    monkeypatch.setattr(product_verification, "_configured_gates", lambda: gates)
+    monkeypatch.setattr(
+        product_verification.subprocess,
+        "run",
+        lambda *_args, **_kwargs: SimpleNamespace(
+            returncode=0,
+            stdout="release completed without proof",
+            stderr="",
+        ),
+    )
+
+    result = product_verification.run_gates({"release": ["AC-1"]})[0]
+
+    assert result["status"] == "failed"
+    assert result["result"]["exit_code"] == 0
+    assert result["result"]["failure"]["kind"] == "subsumption-proof"
 
 
 def test_risk_routes_derive_stable_gate_floor_from_committed_paths(
