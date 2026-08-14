@@ -5,6 +5,7 @@ import subprocess
 from pathlib import Path
 
 import pytest
+import tomllib
 
 from harness.tools import change_enforcement
 
@@ -41,14 +42,16 @@ def repository(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     _git(tmp_path, "config", "user.name", "Harness Test")
     (tmp_path / "harness").mkdir()
     config = {
-        "specs": {"archive": "specs/archive"},
+        "specs": {"active": "specs/active", "archive": "specs/archive"},
         "verification": {
             "evidence": "verification/evidence",
             "source_paths": ["apps", "harness/tools"],
         },
+        "evolution": {"events": "evolution/events"},
+        "indexes": {"specs": {"path": "specs"}},
         "change_enforcement": {
-            "risk_prefixes": ["apps/", "harness/tools/"],
-            "risk_files": ["package.json"],
+            "risk_prefixes": ["apps/", "harness/"],
+            "risk_files": ["AGENTS.md", "package.json"],
         },
     }
     monkeypatch.setattr(change_enforcement, "project_root", lambda: tmp_path)
@@ -60,22 +63,28 @@ def repository(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     return tmp_path
 
 
-def _closed_task(root: Path, source: str, *, schema: int = 2) -> None:
+def _closed_task(
+    root: Path,
+    source: str,
+    *,
+    task_id: str = TASK_ID,
+    schema: int = 2,
+) -> None:
     archive = (
         "---\n"
-        f"id: archive-{TASK_ID}\n"
+        f"id: archive-{task_id}\n"
         "level: L2\n"
         "summary: fixture\n"
-        f"task_id: {TASK_ID}\n"
+        f"task_id: {task_id}\n"
         "status: compressed\n"
         "load_when:\n"
-        f"  - task:{TASK_ID}\n"
+        f"  - task:{task_id}\n"
         "---\n\n# Fixture\n"
     )
     source_tree = _git(root, "rev-parse", f"{source}^{{tree}}")
     evidence = {
         "schema_version": schema,
-        "task_id": TASK_ID,
+        "task_id": task_id,
         "status": "passed",
         "source_commit": source,
         "fingerprints": {"source_tree": source_tree},
@@ -89,8 +98,8 @@ def _closed_task(root: Path, source: str, *, schema: int = 2) -> None:
             {"name": "isolated-worktree", "kind": "isolation", "status": "passed"},
         ],
     }
-    _write(root, f"harness/specs/archive/{TASK_ID}.md", archive)
-    _write(root, f"harness/verification/evidence/{TASK_ID}.json", json.dumps(evidence))
+    _write(root, f"harness/specs/archive/{task_id}.md", archive)
+    _write(root, f"harness/verification/evidence/{task_id}.json", json.dumps(evidence))
 
 
 def test_documentation_only_change_does_not_require_task(repository: Path) -> None:
@@ -127,6 +136,93 @@ def test_current_v2_task_evidence_covers_risk_change(repository: Path) -> None:
 
     assert result["passed"] is True
     assert result["tasks"] == [TASK_ID]
+
+
+def test_evidence_cannot_cover_a_later_risk_change(repository: Path) -> None:
+    base = _git(repository, "rev-parse", "HEAD")
+    _write(repository, "apps/api.py", "value = 1\n")
+    source = _commit(repository, "implementation")
+    _closed_task(repository, source)
+    _commit(repository, "close task")
+    _write(repository, "apps/api.py", "value = 2\n")
+    _commit(repository, "unverified follow-up")
+
+    result = change_enforcement.inspect_change(base)
+
+    assert result["passed"] is False
+    assert result["tasks"] == []
+    assert "risk changes after source_commit: apps/api.py" in result["details"][0]
+
+
+def test_only_exact_task_close_artifacts_and_generated_indexes_are_allowed(
+    repository: Path,
+) -> None:
+    base = _git(repository, "rev-parse", "HEAD")
+    _write(repository, "apps/api.py", "value = 1\n")
+    source = _commit(repository, "implementation")
+    _closed_task(repository, source)
+    _write(repository, f"harness/specs/active/{TASK_ID}.md", "temporary\n")
+    _write(
+        repository,
+        f"harness/evolution/events/{TASK_ID}--spec-completed.json",
+        "{}\n",
+    )
+    _write(repository, "harness/specs/INDEX.md", "generated\n")
+    _commit(repository, "close task")
+
+    result = change_enforcement.inspect_change(base)
+
+    assert result["passed"] is True
+    assert result["tasks"] == [TASK_ID]
+
+    _write(repository, "harness/evolution/events/other--spec-completed.json", "{}\n")
+    _commit(repository, "tamper with another event")
+    result = change_enforcement.inspect_change(base)
+    assert result["passed"] is False
+    assert "other--spec-completed.json" in result["details"][0]
+
+
+def test_newest_valid_task_can_cover_an_older_task_and_later_risk_change(
+    repository: Path,
+) -> None:
+    newer_task = "20260812-newer-change"
+    base = _git(repository, "rev-parse", "HEAD")
+    _write(repository, "apps/api.py", "value = 1\n")
+    first_source = _commit(repository, "first implementation")
+    _closed_task(repository, first_source)
+    _commit(repository, "close first task")
+    _write(repository, "apps/api.py", "value = 2\n")
+    second_source = _commit(repository, "second implementation")
+    _closed_task(repository, second_source, task_id=newer_task)
+    _commit(repository, "close second task")
+
+    result = change_enforcement.inspect_change(base)
+
+    assert result["passed"] is True
+    assert result["tasks"] == [newer_task]
+
+
+def test_project_risk_scope_covers_implementation_control_plane_and_root_files() -> None:
+    root = Path(__file__).resolve().parents[3]
+    with (root / "harness" / "config.toml").open("rb") as handle:
+        config = tomllib.load(handle)
+    expected = [
+        ".github/CODEOWNERS",
+        "apps/api/app/main.py",
+        "packages/example/package.json",
+        "scripts/check.mjs",
+        "harness/docs/decisions/example.md",
+        "harness/evolution/policy.md",
+        "harness/telemetry/README.md",
+        "harness/verification/README.md",
+        "AGENTS.md",
+        ".gitattributes",
+        ".gitignore",
+        "package.json",
+        "package-lock.json",
+    ]
+
+    assert change_enforcement.risk_paths(expected, config) == sorted(expected)
 
 
 def test_schema_v1_evidence_cannot_cover_change(repository: Path) -> None:

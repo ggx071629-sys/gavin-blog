@@ -22,6 +22,12 @@ task 产品 gate 默认在固定到当前 HEAD 的 detached 临时 Git worktree 
 
 schema v2 task evidence 为每个 gate 保存退出码、耗时、可识别的 Pytest／Vitest／Playwright测试数量及结构化失败类型，并在顶层汇总 checks、总耗时、测试数和失败检查。只保留一条净化后的有限失败摘要；完整 stdout/stderr、trace、截图和原始报告仍属于本地重型产物。
 
+## Change coverage closure
+
+`change-check` 不只要求比较区间内出现 task archive 与 schema v2 passed evidence，还要求至少一份有效 evidence 的 source commit 已包含最后一次风险修改。evidence source 到 change head 之间不得再出现 `.github/`、`apps/`、`packages/`、`scripts/`、`harness/` 或配置中关键根文件的修改；否则旧 evidence 不能覆盖后续变化，必须在最新树上重新验证。
+
+验证后只允许该 task 的确定性生命周期产物：active spec 删除、compressed archive、task evidence、`spec.completed` event，以及由配置声明的生成索引。例外精确到 task 文件，不能用整个 archive、evidence 或 event 目录规避风险闭包。`quality:release` 只有设置可信 `HARNESS_BASE_REF` 时执行该检查；未设置时仍明确属于 local-only coverage skip，不能作为远端变更覆盖证明。
+
 ## Historical assurance
 
 从 `harness/` 运行 `python -m tools.harness evidence-inventory [--json]` 可只读盘点主 evidence。该命令不重新执行历史 gate，只按已保存结构保守分类：

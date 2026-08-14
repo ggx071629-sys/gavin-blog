@@ -52,7 +52,7 @@ def test_ci_and_local_workspace_paths_are_governed() -> None:
     config = (ROOT / "harness" / "config.toml").read_text(encoding="utf-8")
     ignore = (ROOT / ".gitignore").read_text(encoding="utf-8").splitlines()
 
-    assert '".github/workflows/"' in config
+    assert '".github/"' in config
     assert {".run/", "my_image/", "my_blog_fork/"}.issubset(set(ignore))
 
 

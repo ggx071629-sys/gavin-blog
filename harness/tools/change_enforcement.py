@@ -91,7 +91,40 @@ def _artifact_tasks(paths: list[str], config: dict[str, Any]) -> list[str]:
     return sorted(archives & evidence)
 
 
-def _validate_task(task_id: str, base: str, head: str, config: dict[str, Any]) -> list[str]:
+def _generated_index_paths(config: dict[str, Any]) -> set[str]:
+    paths = {"harness/INDEX.md"}
+    for section in ("indexes", "nested_indexes"):
+        definitions = config.get(section, {})
+        if not isinstance(definitions, dict):
+            continue
+        for definition in definitions.values():
+            if not isinstance(definition, dict):
+                continue
+            root = str(definition.get("path", "")).strip("/")
+            if root:
+                paths.add(f"harness/{root}/INDEX.md")
+    return paths
+
+
+def _allowed_post_evidence_paths(task_id: str, config: dict[str, Any]) -> set[str]:
+    specs = config["specs"]
+    verification = config["verification"]
+    evolution = config["evolution"]
+    return {
+        *_generated_index_paths(config),
+        f"harness/{str(specs['active']).strip('/')}/{task_id}.md",
+        f"harness/{str(specs['archive']).strip('/')}/{task_id}.md",
+        f"harness/{str(verification['evidence']).strip('/')}/{task_id}.json",
+        f"harness/{str(evolution['events']).strip('/')}/{task_id}--spec-completed.json",
+    }
+
+
+def _validate_task(
+    task_id: str,
+    base: str,
+    head: str,
+    config: dict[str, Any],
+) -> tuple[list[str], str | None]:
     errors: list[str] = []
     archive = harness_root() / str(config["specs"]["archive"]) / f"{task_id}.md"
     evidence = harness_root() / str(config["verification"]["evidence"]) / f"{task_id}.json"
@@ -105,9 +138,9 @@ def _validate_task(task_id: str, base: str, head: str, config: dict[str, Any]) -
     try:
         payload = json.loads(evidence.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
-        return [*errors, f"evidence is unreadable: {error}"]
+        return [*errors, f"evidence is unreadable: {error}"], None
     if not isinstance(payload, dict):
-        return [*errors, "evidence must be a JSON object"]
+        return [*errors, "evidence must be a JSON object"], None
     if payload.get("schema_version") != 2:
         errors.append("evidence schema_version must be 2")
     if payload.get("task_id") != task_id:
@@ -118,7 +151,7 @@ def _validate_task(task_id: str, base: str, head: str, config: dict[str, Any]) -
     source = str(payload.get("source_commit", ""))
     if COMMIT.fullmatch(source) is None:
         errors.append("evidence source_commit must be a full commit SHA")
-        return errors
+        return errors, None
     try:
         if source == base or not _is_ancestor(base, source):
             errors.append("evidence source_commit must be after the change base")
@@ -127,7 +160,7 @@ def _validate_task(task_id: str, base: str, head: str, config: dict[str, Any]) -
         source_tree = _git("rev-parse", f"{source}^{{tree}}")
     except ChangeEnforcementError as error:
         errors.append(f"evidence source_commit is unavailable: {error}")
-        return errors
+        return errors, None
     fingerprints = payload.get("fingerprints")
     if not isinstance(fingerprints, dict) or fingerprints.get("source_tree") != source_tree:
         errors.append("evidence source_tree fingerprint does not match source_commit")
@@ -145,7 +178,21 @@ def _validate_task(task_id: str, base: str, head: str, config: dict[str, Any]) -
         errors.append("every evidence check must be passed")
     elif not any(check.get("kind") == "product" for check in checks):
         errors.append("evidence must contain at least one product gate")
-    return errors
+    if not errors:
+        allowed = _allowed_post_evidence_paths(task_id, config)
+        later_risk = [
+            path
+            for path in risk_paths(changed_paths(source, head), config)
+            if path not in allowed
+        ]
+        if later_risk:
+            shown = ", ".join(later_risk[:5])
+            suffix = " ..." if len(later_risk) > 5 else ""
+            errors.append(
+                "evidence does not cover risk changes after source_commit: "
+                f"{shown}{suffix}"
+            )
+    return errors, source
 
 
 def inspect_change(base_ref: str, head_ref: str = "HEAD") -> dict[str, Any]:
@@ -171,7 +218,7 @@ def inspect_change(base_ref: str, head_ref: str = "HEAD") -> dict[str, Any]:
     failures: list[str] = []
     valid: list[str] = []
     for task_id in tasks:
-        errors = _validate_task(task_id, base, head, config)
+        errors, _source = _validate_task(task_id, base, head, config)
         if errors:
             failures.extend(f"{task_id}: {error}" for error in errors)
         else:

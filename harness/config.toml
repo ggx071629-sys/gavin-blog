@@ -103,20 +103,18 @@ timeout_seconds = 900
 
 [change_enforcement]
 risk_prefixes = [
-  ".github/workflows/",
+  ".github/",
   "apps/",
-  "packages/contracts/",
+  "packages/",
   "scripts/",
-  "harness/tools/",
-  "harness/verification/checks/",
-  "harness/verification/tests/",
-  "harness/workflows/",
-  "harness/specs/_sdd/",
+  "harness/",
 ]
 risk_files = [
+  ".gitattributes",
+  ".gitignore",
+  "AGENTS.md",
   "package.json",
   "package-lock.json",
-  "harness/config.toml",
 ]
 
 [telemetry]
