@@ -27,7 +27,8 @@ def test_release_workflow_pins_actions_and_reconstructs_dependencies() -> None:
     assert "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1" in text
     assert "actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0" in text
     assert "actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0" in text
-    assert "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2" in text
+    assert "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1" in text
+    assert "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02" not in text
     assert "astral-sh/setup-uv@ae62891fec2bb8e7d6c99fc78c9fec3a63790f8d # v10.0.0" in text
     assert 'python-version: "3.11"' in text
     assert 'node-version: "22"' in text
