@@ -15,7 +15,13 @@ from .config import load_config, project_root
 from .lifecycle import LifecycleError
 from .lifecycle import documentation_contract as parse_documentation_contract
 from .metadata import parse_front_matter
-from .result_reporting import failure_summary, parse_test_counts, summarize_checks
+from .result_reporting import (
+    failure_details,
+    failure_summary,
+    parse_test_counts,
+    summarize_checks,
+    summarize_criteria,
+)
 from .summarizer import active_spec
 
 CRITERION_PATTERN = re.compile(r"^-\s+(AC-[1-9][0-9]*):\s+\S", re.MULTILINE)
@@ -463,21 +469,6 @@ def _command(
     return command, cwd, timeout_seconds
 
 
-def _tail(
-    output: str,
-    limit: int = 2000,
-    *,
-    redactions: list[str] | None = None,
-) -> list[str]:
-    from .result_reporting import clean_output
-
-    output = clean_output(output, redactions=redactions)
-    compact = output.strip()
-    if not compact:
-        return []
-    return compact[-limit:].splitlines()[-12:]
-
-
 def run_gates(
     mappings: dict[str, list[str]],
     *,
@@ -510,8 +501,9 @@ def run_gates(
             details = (
                 []
                 if passed
-                else _tail(
-                    completed.stdout + "\n" + completed.stderr,
+                else failure_details(
+                    completed.stdout,
+                    completed.stderr,
                     redactions=redactions,
                 )
             )
@@ -649,6 +641,9 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
             else:
                 if payload.get("summary") != expected_summary:
                     errors.append("task evidence summary does not match checks")
+            expected_criteria = summarize_criteria(criteria, mappings, checks)
+            if payload.get("criteria_results") != expected_criteria:
+                errors.append("task evidence criteria results do not match checks")
         if any(
             not isinstance(check, dict) or check.get("status") != "passed"
             for check in checks

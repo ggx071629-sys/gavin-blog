@@ -44,6 +44,7 @@ def command_verify(args: argparse.Namespace) -> int:
         summarizer.validate_task_id(args.task_id)
     results = validator.run_checks()
     criteria: list[str] = []
+    mappings: dict[str, list[str]] = {}
     profile = ""
     fingerprints: dict[str, str] = {}
     documentation: dict[str, object] = {}
@@ -111,6 +112,7 @@ def command_verify(args: argparse.Namespace) -> int:
             args.task_id,
             f"python -m tools.harness verify {args.task_id}",
             criteria,
+            mappings,
             profile,
             fingerprints,
             documentation,
@@ -369,11 +371,20 @@ def command_evidence_inventory(args: argparse.Namespace) -> int:
 
 
 def command_emit_event(args: argparse.Namespace) -> int:
+    run_ids = list(getattr(args, "run_id", []) or [])
+    evidence_runs: list[dict[str, object]] = []
+    if args.event_type == "verification.repeated_failure":
+        evidence_runs = telemetry.failure_run_references(args.task_id, run_ids)
+    elif run_ids:
+        raise ValueError(
+            "--run-id is only valid for verification.repeated_failure"
+        )
     event_path, proposal_path = events.emit_event(
         args.event_type,
         args.task_id,
         args.reason,
         args.source,
+        evidence_runs=evidence_runs,
     )
     indexer.write_indexes()
     print(f"event {event_path}")
@@ -489,6 +500,7 @@ def parser() -> argparse.ArgumentParser:
     emit.add_argument("task_id")
     emit.add_argument("--reason", required=True)
     emit.add_argument("--source", choices=["manual", "lifecycle"], default="manual")
+    emit.add_argument("--run-id", action="append", default=[])
     emit.set_defaults(func=command_emit_event)
     return root
 

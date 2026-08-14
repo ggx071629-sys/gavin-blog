@@ -22,7 +22,9 @@ task 产品 gate 默认在固定到当前 HEAD 的 detached 临时 Git worktree 
 
 注册为 `{api_python}` 的 gate 必须从当前执行根的 `apps/api/.venv` 解析解释器：Windows 使用 `Scripts/python.exe`，POSIX 使用 `bin/python`。隔离 worktree 通过受控依赖链接获得同一环境；缺失时失败关闭，不得退回启动 Harness 的全局 Python。`{python}` 只保留既有通用命令的调用者解释器语义。
 
-schema v2 task evidence 为每个 gate 保存退出码、耗时、可识别的 Pytest／Vitest／Playwright测试数量及结构化失败类型，并在顶层汇总 checks、总耗时、测试数和失败检查。只保留一条净化后的有限失败摘要；完整 stdout/stderr、trace、截图和原始报告仍属于本地重型产物。
+schema v2 task evidence 为每个 gate 保存退出码、耗时、可识别的 Pytest／Vitest／Playwright 测试数量及结构化失败类型，并在顶层汇总 checks、总耗时、测试数和失败检查。`criteria_results` 按 active spec 的 AC 顺序，把声明覆盖该 AC 的 gate 聚合为 `passed`、`failed` 或 `not-run`；它只证明声明映射的执行结果，不证明自然语言 AC 与测试语义必然一致。close 会从 checks 重新计算并拒绝缺失、伪造、顺序或状态漂移。
+
+非零 gate 的 `details` 第一行是净化、最长 300 字符的 `diagnostic` 锚点，随后最多保留 11 行去重尾部；结构化 failure summary 使用同一锚点。锚点优先识别 Playwright 用例、Assertion/Error/FAILED、TypeScript 和包管理器错误，完整 stdout/stderr、trace、截图和原始报告仍属于本地重型产物。有限输出提高诊断能力但不能把启发式命中当成根因证明。
 
 ## Change coverage closure
 

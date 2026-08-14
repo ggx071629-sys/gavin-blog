@@ -171,6 +171,9 @@ def test_gate_failure_result_distinguishes_nonzero_timeout_and_execution_error(
         "kind": "nonzero-exit",
         "summary": "Error: failed at <isolated-worktree>\\fixture.py",
     }
+    assert nonzero["details"][0] == (
+        "diagnostic: Error: failed at <isolated-worktree>\\fixture.py"
+    )
     assert nonzero["result"]["test_counts"]["failed"] == 1
 
     def timeout(*_args: object, **_kwargs: object) -> None:
@@ -262,6 +265,7 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
         task_id: str,
         command: str,
         criteria: list[str],
+        mappings: dict[str, list[str]],
         profile: str,
         fingerprints: dict[str, str],
         written_documentation: dict[str, object],
@@ -271,6 +275,7 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
         assert task_id == TASK_ID
         assert command.endswith(TASK_ID)
         assert criteria == ["AC-1", "AC-2"]
+        assert mappings == {"harness-tests": ["AC-1", "AC-2"]}
         assert profile == "focused"
         assert fingerprints == {"source_tree": "tree"}
         assert written_documentation == documentation
@@ -297,6 +302,18 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
         "status": "passed",
         "source_commit": "abc123",
         "acceptance_criteria": ["AC-1", "AC-2"],
+        "criteria_results": [
+            {
+                "id": "AC-1",
+                "status": "passed",
+                "gates": ["harness-tests"],
+            },
+            {
+                "id": "AC-2",
+                "status": "passed",
+                "gates": ["harness-tests"],
+            },
+        ],
         "verification_profile": "focused",
         "fingerprints": {"source_tree": "tree"},
         "documentation": {
@@ -352,6 +369,14 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
     monkeypatch.setattr(product_verification, "ensure_source_clean", lambda *_: None)
 
     assert product_verification.validate_evidence(TASK_ID, evidence) == []
+
+    payload["criteria_results"][0]["status"] = "failed"
+    evidence.write_text(json.dumps(payload), encoding="utf-8")
+    assert (
+        "task evidence criteria results do not match checks"
+        in product_verification.validate_evidence(TASK_ID, evidence)
+    )
+    payload["criteria_results"][0]["status"] = "passed"
 
     payload["documentation"]["reason"] = "Stale fixture reason."
     evidence.write_text(json.dumps(payload), encoding="utf-8")

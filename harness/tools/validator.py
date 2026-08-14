@@ -11,7 +11,7 @@ from types import ModuleType
 from typing import Any
 
 from .config import harness_root, load_config, project_root
-from .result_reporting import summarize_checks
+from .result_reporting import summarize_checks, summarize_criteria
 
 
 def _load_check(path: Path) -> ModuleType:
@@ -118,6 +118,7 @@ def write_task_evidence(
     task_id: str,
     command: str,
     acceptance_criteria: list[str],
+    mappings: dict[str, list[str]],
     verification_profile: str,
     fingerprints: dict[str, str],
     documentation: dict[str, Any],
@@ -131,6 +132,7 @@ def write_task_evidence(
         "command": command,
         "status": "passed" if passed(results) else "failed",
         "acceptance_criteria": acceptance_criteria,
+        "criteria_results": summarize_criteria(acceptance_criteria, mappings, results),
         "verification_profile": verification_profile,
         "fingerprints": fingerprints,
         "documentation": documentation,

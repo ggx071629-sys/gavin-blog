@@ -110,7 +110,11 @@ def test_close_rejects_missing_empty_or_nested_required_sections(
 def _isolate_events(monkeypatch: pytest.MonkeyPatch, root: Path) -> None:
     config = {
         "evolution": {
-            "allowed_events": ["spec.completed", "workflow.friction_confirmed"],
+            "allowed_events": [
+                "spec.completed",
+                "workflow.friction_confirmed",
+                "verification.repeated_failure",
+            ],
             "events": "evolution/events",
             "proposals": "evolution/proposals",
         }
@@ -157,6 +161,84 @@ def test_explicit_event_still_creates_a_proposal(
     assert event.is_file()
     assert proposal is not None and proposal.is_file()
     assert "Concrete friction with evidence." in proposal.read_text(encoding="utf-8")
+
+
+def test_repeated_failure_event_requires_and_persists_confirmed_runs(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = tmp_path / "harness"
+    _isolate_events(monkeypatch, root)
+    runs = [
+        {
+            "run_id": "run-one",
+            "observed_at": "2026-08-14T00:00:00+00:00",
+            "source_commit": "a" * 40,
+            "failure_kinds": ["nonzero-exit"],
+            "isolation_cleanup": "passed",
+        },
+        {
+            "run_id": "run-two",
+            "observed_at": "2026-08-14T00:01:00+00:00",
+            "source_commit": "b" * 40,
+            "failure_kinds": ["timeout"],
+            "isolation_cleanup": "passed",
+        },
+    ]
+
+    event, proposal = events.emit_event(
+        "verification.repeated_failure",
+        TASK_ID,
+        "Two comparable failures were confirmed.",
+        "manual",
+        evidence_runs=runs,
+    )
+
+    payload = json.loads(event.read_text(encoding="utf-8"))
+    assert payload["evidence_runs"] == runs
+    assert proposal is not None
+    proposal_text = proposal.read_text(encoding="utf-8")
+    assert "## Confirmed failure runs" in proposal_text
+    assert "run-one" in proposal_text and "run-two" in proposal_text
+
+
+def test_repeated_failure_event_rejects_unconfirmed_or_non_manual_input(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = tmp_path / "harness"
+    _isolate_events(monkeypatch, root)
+
+    with pytest.raises(ValueError, match="requires two confirmed"):
+        events.emit_event(
+            "verification.repeated_failure", TASK_ID, "Unconfirmed.", "manual"
+        )
+    with pytest.raises(ValueError, match="must use manual"):
+        events.emit_event(
+            "verification.repeated_failure",
+            TASK_ID,
+            "Wrong source.",
+            "lifecycle",
+            evidence_runs=[{}, {}],
+        )
+    with pytest.raises(ValueError, match="only valid"):
+        events.emit_event(
+            "workflow.friction_confirmed",
+            TASK_ID,
+            "Wrong event.",
+            "manual",
+            evidence_runs=[{}, {}],
+        )
+    with pytest.raises(ValueError, match="fields are invalid"):
+        events.emit_event(
+            "verification.repeated_failure",
+            TASK_ID,
+            "Malformed runs.",
+            "manual",
+            evidence_runs=[{}, {}],
+        )
+    assert not (root / "evolution" / "events").exists()
+    assert not (root / "evolution" / "proposals").exists()
 
 
 def test_close_requests_an_event_without_a_proposal(

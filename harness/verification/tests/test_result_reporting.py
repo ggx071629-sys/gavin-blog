@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 from harness.tools.result_reporting import (
+    failure_details,
     failure_summary,
     parse_test_counts,
     summarize_checks,
+    summarize_criteria,
 )
 
 
@@ -28,6 +30,44 @@ def test_failure_summary_removes_ansi_and_isolated_absolute_path() -> None:
 
     assert summary == "Error: failed at <isolated-worktree>\\tests\\fixture.py"
     assert "\x1b" not in summary
+
+
+def test_failure_details_preserves_diagnostic_anchor_and_bounded_tail() -> None:
+    output = "\n".join(
+        [
+            "starting",
+            "1) [quality-chromium] › site-quality.spec.ts:10:1 › fails contrast",
+            "AssertionError: expected 90",
+            *[f"tail {index}" for index in range(20)],
+        ]
+    )
+
+    details = failure_details(output, "", line_limit=5)
+
+    assert details[0] == (
+        "diagnostic: 1) [quality-chromium] › site-quality.spec.ts:10:1 › fails contrast"
+    )
+    assert details[1:] == ["tail 16", "tail 17", "tail 18", "tail 19"]
+    assert len(details) == 5
+
+
+def test_criteria_summary_distinguishes_passed_failed_and_not_run() -> None:
+    criteria = ["AC-1", "AC-2", "AC-3"]
+    mappings = {
+        "lint": ["AC-1"],
+        "tests": ["AC-1", "AC-2"],
+        "release": ["AC-3"],
+    }
+    checks = [
+        {"name": "lint", "kind": "product", "status": "passed"},
+        {"name": "tests", "kind": "product", "status": "failed"},
+    ]
+
+    assert summarize_criteria(criteria, mappings, checks) == [
+        {"id": "AC-1", "status": "failed", "gates": ["lint", "tests"]},
+        {"id": "AC-2", "status": "failed", "gates": ["tests"]},
+        {"id": "AC-3", "status": "not-run", "gates": ["release"]},
+    ]
 
 
 def test_task_summary_aggregates_counts_duration_and_failures() -> None:

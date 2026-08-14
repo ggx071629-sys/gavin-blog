@@ -35,6 +35,8 @@ GitHub `Release gate` workflow 是唯一的自动持久化例外：权威 releas
 
 CI summary/health 只是跨运行人工比较的短期输入，不是自动控制信号。下载、聚合或解释 artifact 时必须考虑 runner 性能、缓存、依赖下载与并发差异；不得据此改变 Agent 行为、gate、spec 或 Evolution 状态。私有仓库 artifact 占用 GitHub Actions 存储配额，因此内容和 14 天保留期属于受测试保护的成本边界。
 
-`telemetry-health` 只评估 `task.verification`、`release.run` 与带稳定 stage 名的 `release.stage`。默认至少 3 个状态样本才评估连续失败，最近 2 个连续失败产生 observation signal；耗时比较只用于 release run/stage，要求 3 个 baseline 与随后 3 个 recent 样本，并在 recent 中位数达到 baseline 的 1.5 倍时产生 signal。窗口、最小样本和阈值来自 `config.toml`；不完整或非法配置会失败，零耗时 baseline 只明确标记而不猜测比率。
+`telemetry-health` 只评估带 task ID 的 `task.verification`、`release.run` 与带稳定 stage 名的 `release.stage`。task verification 按 `task.verification:<task_id>` 分组，不把不同任务的失败拼成连续序列；缺少 task ID 的 task 事件不参与健康判断。默认至少 3 个同 series 状态样本才评估连续失败，最近 2 个连续失败产生 observation signal；耗时比较只用于 release run/stage，要求 3 个 baseline 与随后 3 个 recent 样本，并在 recent 中位数达到 baseline 的 1.5 倍时产生 signal。窗口、最小样本和阈值来自 `config.toml`；不完整或非法配置会失败，零耗时 baseline 只明确标记而不猜测比率。
+
+人工确认同一 task 存在至少两个可比较失败后，可以在本地 JSONL 尚存时把明确 run ID 交给 Retrospect workflow。读取和校验 run 只返回 run ID、观察时间、source commit、failure kinds 与 isolation cleanup；不会复制 reason、stdout、路径或用户内容，也不会自行写 Evolution 文件。
 
 健康状态为 `no-data`、`insufficient-data`、`stable` 或 `signal`。`signal` 仍是本机事件流的观察，不是已确认的退化：命令不会写入任何文件，发现 signal 仍返回成功，也不得直接改变 gate 或产生 Evolution event。人必须结合环境、样本可比性和原始验证证据确认问题；只有确认属于重复失败或流程摩擦后，才能按 Retrospect workflow 显式发出允许的事件。

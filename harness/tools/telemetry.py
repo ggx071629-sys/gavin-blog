@@ -163,6 +163,67 @@ def load_events(directory: Path | None = None) -> tuple[list[dict[str, Any]], in
     return events, len(files)
 
 
+def failure_run_references(
+    task_id: str,
+    run_ids: list[str],
+    *,
+    events: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
+    if len(run_ids) < 2:
+        raise TelemetryError("repeated failure requires at least two run IDs")
+    if len(run_ids) != len(set(run_ids)):
+        raise TelemetryError("repeated failure run IDs must be unique")
+    available = events if events is not None else load_events()[0]
+    matching: dict[str, dict[str, Any]] = {}
+    for event in available:
+        if event.get("kind") != "task.verification" or event.get("task_id") != task_id:
+            continue
+        value = event.get("value")
+        if not isinstance(value, dict):
+            continue
+        run_id = value.get("run_id")
+        if isinstance(run_id, str):
+            matching[run_id] = event
+
+    references: list[dict[str, Any]] = []
+    for run_id in run_ids:
+        event = matching.get(run_id)
+        if event is None:
+            raise TelemetryError(
+                f"failed verification run not found for task {task_id}: {run_id}"
+            )
+        value = event["value"]
+        assert isinstance(value, dict)
+        if value.get("status") != "failed":
+            raise TelemetryError(f"verification run is not failed: {run_id}")
+        failure_kinds = value.get("failure_kinds")
+        if (
+            not isinstance(failure_kinds, list)
+            or not failure_kinds
+            or not all(isinstance(item, str) and item for item in failure_kinds)
+        ):
+            raise TelemetryError(f"verification run has invalid failure kinds: {run_id}")
+        source_commit = value.get("source_commit")
+        if source_commit is not None and (
+            not isinstance(source_commit, str)
+            or re.fullmatch(r"[0-9a-f]{40}", source_commit) is None
+        ):
+            raise TelemetryError(f"verification run has invalid source commit: {run_id}")
+        cleanup = value.get("isolation_cleanup")
+        if cleanup not in {None, "passed", "failed"}:
+            raise TelemetryError(f"verification run has invalid cleanup status: {run_id}")
+        references.append(
+            {
+                "run_id": run_id,
+                "observed_at": str(event.get("observed_at")),
+                "source_commit": source_commit,
+                "failure_kinds": sorted(set(failure_kinds)),
+                "isolation_cleanup": cleanup,
+            }
+        )
+    return references
+
+
 def _duration_summary(values: list[float]) -> dict[str, float | int | None]:
     if not values:
         return {"count": 0, "p50": None, "p95": None, "max": None}
@@ -279,7 +340,12 @@ def _health_settings(config: dict[str, Any] | None = None) -> dict[str, int | fl
 
 def _health_series_key(event: dict[str, Any]) -> str | None:
     kind = event.get("kind")
-    if kind in {"task.verification", "release.run"}:
+    if kind == "task.verification":
+        task_id = event.get("task_id")
+        if isinstance(task_id, str) and task_id.strip():
+            return f"task.verification:{task_id}"
+        return None
+    if kind == "release.run":
         return str(kind)
     value = event.get("value")
     if kind == "release.stage" and isinstance(value, dict):
@@ -330,7 +396,7 @@ def _series_health(
             }
         )
 
-    duration_enabled = series_key != "task.verification"
+    duration_enabled = not series_key.startswith("task.verification:")
     baseline_count = int(settings["baseline_samples"])
     recent_count = int(settings["recent_samples"])
     required_durations = baseline_count + recent_count

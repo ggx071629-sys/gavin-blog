@@ -9,15 +9,32 @@ from harness.tools import harness as harness_cli
 from harness.tools import telemetry
 
 
-def _event(kind: str, status: str, duration: float, *, stage: str | None = None) -> dict[str, object]:
+def _event(
+    kind: str,
+    status: str,
+    duration: float,
+    *,
+    stage: str | None = None,
+    task_id: str | None = None,
+    run_id: str | None = None,
+) -> dict[str, object]:
     value: dict[str, object] = {"status": status, "duration_ms": duration}
     if stage:
         value["stage"] = stage
+    if run_id:
+        value.update(
+            {
+                "run_id": run_id,
+                "failure_kinds": ["nonzero-exit"] if status == "failed" else [],
+                "source_commit": "a" * 40,
+                "isolation_cleanup": "passed",
+            }
+        )
     return {
         "schema_version": 1,
         "observed_at": "2026-08-12T00:00:00+00:00",
         "kind": kind,
-        "task_id": None,
+        "task_id": task_id or ("20260812-fixture" if kind == "task.verification" else None),
         "value": value,
         "source": "fixture",
     }
@@ -155,7 +172,7 @@ def test_health_distinguishes_no_data_and_insufficient_data() -> None:
 
     assert empty["status"] == "no-data"
     assert sparse["status"] == "insufficient-data"
-    assert sparse["series"]["task.verification"]["status"] == "insufficient-data"
+    assert sparse["series"]["task.verification:20260812-fixture"]["status"] == "insufficient-data"
 
 
 def test_health_rejects_incomplete_or_non_positive_configuration() -> None:
@@ -182,7 +199,7 @@ def test_health_requires_minimum_samples_before_consecutive_failure_signal() -> 
     assert telemetry.assess_health(too_few, config=_health_config())["status"] == "insufficient-data"
     result = telemetry.assess_health(enough, config=_health_config())
     assert result["status"] == "signal"
-    assert result["series"]["task.verification"]["signals"] == [
+    assert result["series"]["task.verification:20260812-fixture"]["signals"] == [
         {"kind": "consecutive-failures", "observed": 2, "threshold": 2}
     ]
 
@@ -231,7 +248,121 @@ def test_health_sorts_events_by_observed_time_before_evaluating_failures() -> No
     result = telemetry.assess_health(events, config=_health_config())
 
     assert result["status"] == "signal"
-    assert result["series"]["task.verification"]["consecutive_failures"] == 2
+    assert result["series"]["task.verification:20260812-fixture"]["consecutive_failures"] == 2
+
+
+def test_health_does_not_combine_failures_from_different_tasks() -> None:
+    events = [
+        _event("task.verification", "passed", 10, task_id="20260812-one"),
+        _event("task.verification", "failed", 10, task_id="20260812-one"),
+        _event("task.verification", "failed", 10, task_id="20260812-two"),
+        _event("task.verification", "failed", 10, task_id="20260812-two"),
+    ]
+
+    result = telemetry.assess_health(events, config=_health_config())
+
+    assert result["status"] == "insufficient-data"
+    assert result["series"]["task.verification:20260812-one"]["consecutive_failures"] == 1
+    assert result["series"]["task.verification:20260812-two"]["consecutive_failures"] == 2
+
+
+def test_health_ignores_task_verification_without_task_id() -> None:
+    event = _event("task.verification", "failed", 10)
+    event["task_id"] = None
+
+    result = telemetry.assess_health([event], config=_health_config())
+
+    assert result["status"] == "no-data"
+    assert result["evaluated_events"] == 0
+
+
+def test_failure_run_references_require_two_unique_failed_runs_for_same_task() -> None:
+    events = [
+        _event("task.verification", "failed", 10, run_id="run-one"),
+        _event("task.verification", "failed", 20, run_id="run-two"),
+        _event("task.verification", "passed", 30, run_id="run-passed"),
+        _event(
+            "task.verification",
+            "failed",
+            40,
+            task_id="20260812-other",
+            run_id="run-other",
+        ),
+    ]
+
+    references = telemetry.failure_run_references(
+        "20260812-fixture", ["run-two", "run-one"], events=events
+    )
+
+    assert [item["run_id"] for item in references] == ["run-two", "run-one"]
+    assert set(references[0]) == {
+        "run_id",
+        "observed_at",
+        "source_commit",
+        "failure_kinds",
+        "isolation_cleanup",
+    }
+    assert references[0]["failure_kinds"] == ["nonzero-exit"]
+    with pytest.raises(telemetry.TelemetryError, match="at least two"):
+        telemetry.failure_run_references(
+            "20260812-fixture", ["run-one"], events=events
+        )
+    with pytest.raises(telemetry.TelemetryError, match="must be unique"):
+        telemetry.failure_run_references(
+            "20260812-fixture", ["run-one", "run-one"], events=events
+        )
+    with pytest.raises(telemetry.TelemetryError, match="not failed"):
+        telemetry.failure_run_references(
+            "20260812-fixture", ["run-one", "run-passed"], events=events
+        )
+    with pytest.raises(telemetry.TelemetryError, match="not found"):
+        telemetry.failure_run_references(
+            "20260812-fixture", ["run-one", "run-other"], events=events
+        )
+
+
+def test_emit_repeated_failure_cli_resolves_runs_before_writing(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    references = [
+        {"run_id": "run-one"},
+        {"run_id": "run-two"},
+    ]
+    captured: dict[str, object] = {}
+    monkeypatch.setattr(
+        telemetry,
+        "failure_run_references",
+        lambda task_id, run_ids: (
+            captured.update({"task_id": task_id, "run_ids": run_ids}) or references
+        ),
+    )
+    monkeypatch.setattr(
+        harness_cli.events,
+        "emit_event",
+        lambda *args, **kwargs: (
+            captured.update({"event_args": args, "event_kwargs": kwargs})
+            or (Path("event.json"), Path("proposal.md"))
+        ),
+    )
+    monkeypatch.setattr(harness_cli.indexer, "write_indexes", list)
+
+    result = harness_cli.command_emit_event(
+        type(
+            "Args",
+            (),
+            {
+                "event_type": "verification.repeated_failure",
+                "task_id": "20260812-fixture",
+                "reason": "Human-confirmed comparable failures.",
+                "source": "manual",
+                "run_id": ["run-one", "run-two"],
+            },
+        )()
+    )
+
+    assert result == 0
+    assert captured["run_ids"] == ["run-one", "run-two"]
+    assert captured["event_kwargs"] == {"evidence_runs": references}
 
 
 def test_health_cli_returns_success_for_signal(

@@ -13,6 +13,13 @@ PLAYWRIGHT_SUMMARY = re.compile(
     r"^\d+\s+(?:passed|failed|skipped)(?:\s+\([^)]+\))?$",
     re.IGNORECASE,
 )
+DIAGNOSTIC_PATTERNS = (
+    re.compile(r"^\d+\)\s+\[[^]]+\]"),
+    re.compile(r"(?:\bAssertionError\b|Error:|\bFAILED\b)"),
+    re.compile(r"\berror\s+TS\d+\b", re.IGNORECASE),
+    re.compile(r"^npm error (?!Lifecycle script)", re.IGNORECASE),
+    re.compile(r"\b(?:failed|error)\b", re.IGNORECASE),
+)
 
 
 def clean_output(value: str, *, redactions: list[str] | None = None) -> str:
@@ -66,11 +73,56 @@ def failure_summary(
         for line in clean_output(stdout + "\n" + stderr, redactions=redactions).splitlines()
         if line.strip()
     ]
-    for marker in ("Error:", "FAILED", "failed", "error"):
+    for pattern in DIAGNOSTIC_PATTERNS:
         for line in lines:
-            if marker in line:
+            if pattern.search(line):
                 return line[:300]
     return (lines[-1] if lines else "command exited without diagnostic output")[:300]
+
+
+def failure_details(
+    stdout: str,
+    stderr: str,
+    *,
+    redactions: list[str] | None = None,
+    line_limit: int = 12,
+) -> list[str]:
+    anchor = failure_summary(stdout, stderr, redactions=redactions)
+    lines = [
+        line.strip()
+        for line in clean_output(stdout + "\n" + stderr, redactions=redactions).splitlines()
+        if line.strip()
+    ]
+    details = [f"diagnostic: {anchor}"]
+    for line in lines[-max(0, line_limit - 1) :]:
+        bounded = line[:300]
+        if bounded != anchor and bounded not in details:
+            details.append(bounded)
+    return details[:line_limit]
+
+
+def summarize_criteria(
+    criteria: list[str],
+    mappings: dict[str, list[str]],
+    checks: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    statuses = {
+        str(check.get("name")): str(check.get("status", "failed"))
+        for check in checks
+        if isinstance(check, dict) and check.get("kind") == "product"
+    }
+    results: list[dict[str, Any]] = []
+    for criterion in criteria:
+        gates = [gate for gate, covered in mappings.items() if criterion in covered]
+        gate_statuses = [statuses.get(gate) for gate in gates]
+        if any(status == "failed" for status in gate_statuses):
+            status = "failed"
+        elif gates and all(status == "passed" for status in gate_statuses):
+            status = "passed"
+        else:
+            status = "not-run"
+        results.append({"id": criterion, "status": status, "gates": gates})
+    return results
 
 
 def summarize_checks(checks: list[dict[str, Any]]) -> dict[str, Any]:
