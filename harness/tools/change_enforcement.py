@@ -17,6 +17,7 @@ class ChangeEnforcementError(ValueError):
 
 TASK_ID = re.compile(r"^[0-9]{8}-[a-z0-9]+(?:-[a-z0-9]+)*$")
 COMMIT = re.compile(r"^[0-9a-f]{40}$")
+FAILURE_DETAIL_LIMIT = 20
 
 
 def _git(*args: str) -> str:
@@ -88,7 +89,7 @@ def _artifact_tasks(paths: list[str], config: dict[str, Any]) -> list[str]:
             task_id = Path(path).stem
             if TASK_ID.fullmatch(task_id):
                 evidence.add(task_id)
-    return sorted(archives & evidence)
+    return sorted(archives & evidence, reverse=True)
 
 
 def _generated_index_paths(config: dict[str, Any]) -> set[str]:
@@ -223,4 +224,19 @@ def inspect_change(base_ref: str, head_ref: str = "HEAD") -> dict[str, Any]:
             failures.extend(f"{task_id}: {error}" for error in errors)
         else:
             valid.append(task_id)
-    return {"passed": bool(valid), "base": base, "head": head, "changed_paths": paths, "risk_paths": risky, "tasks": valid, "details": ([f"risk changes are covered by task evidence: {', '.join(valid)}"] if valid else failures)}
+    if valid:
+        details = [f"risk changes are covered by task evidence: {', '.join(valid)}"]
+    else:
+        details = failures[:FAILURE_DETAIL_LIMIT]
+        omitted = len(failures) - len(details)
+        if omitted:
+            details.append(f"{omitted} additional task validation error(s) omitted")
+    return {
+        "passed": bool(valid),
+        "base": base,
+        "head": head,
+        "changed_paths": paths,
+        "risk_paths": risky,
+        "tasks": valid,
+        "details": details,
+    }

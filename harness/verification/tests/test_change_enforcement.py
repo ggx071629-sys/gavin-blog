@@ -225,6 +225,27 @@ def test_project_risk_scope_covers_implementation_control_plane_and_root_files()
     assert change_enforcement.risk_paths(expected, config) == sorted(expected)
 
 
+def test_failure_details_are_newest_first_and_bounded(
+    repository: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    base = _git(repository, "rev-parse", "HEAD")
+    _write(repository, "apps/api.py", "value = 1\n")
+    source = _commit(repository, "implementation")
+    task_ids = [f"20260812-fixture-{index:02d}" for index in range(6)]
+    for task_id in task_ids:
+        _closed_task(repository, source, task_id=task_id, schema=1)
+    _commit(repository, "invalid task artifacts")
+    monkeypatch.setattr(change_enforcement, "FAILURE_DETAIL_LIMIT", 3)
+
+    result = change_enforcement.inspect_change(base)
+
+    assert result["passed"] is False
+    assert len(result["details"]) == 4
+    assert task_ids[-1] in result["details"][0]
+    assert result["details"][-1].endswith("additional task validation error(s) omitted")
+
+
 def test_schema_v1_evidence_cannot_cover_change(repository: Path) -> None:
     base = _git(repository, "rev-parse", "HEAD")
     _write(repository, "apps/api.py", "value = 1\n")
