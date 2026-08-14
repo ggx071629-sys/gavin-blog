@@ -430,7 +430,19 @@ def _command(
     if not isinstance(raw_command, list) or not raw_command:
         raise ProductVerificationError(f"gate {gate} command must be a non-empty array")
     command = [str(value) for value in raw_command]
-    if command[0] == "{python}":
+    root = (execution_root or project_root()).resolve()
+    if command[0] == "{api_python}":
+        candidates = [
+            root / "apps" / "api" / ".venv" / "Scripts" / "python.exe",
+            root / "apps" / "api" / ".venv" / "bin" / "python",
+        ]
+        interpreter = next((path for path in candidates if path.is_file()), None)
+        if interpreter is None:
+            raise ProductVerificationError(
+                f"gate {gate} API virtual environment Python was not found"
+            )
+        command[0] = str(interpreter)
+    elif command[0] == "{python}":
         command[0] = sys.executable
     else:
         executable = shutil.which(command[0])
@@ -440,7 +452,6 @@ def _command(
             )
         command[0] = executable
 
-    root = (execution_root or project_root()).resolve()
     cwd = (root / str(definition.get("cwd", "."))).resolve()
     if not cwd.is_relative_to(root) or not cwd.is_dir():
         raise ProductVerificationError(f"gate {gate} cwd must be inside the project")

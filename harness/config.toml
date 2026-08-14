@@ -107,22 +107,22 @@ required_gates = ["release"]
 
 [verification.gates.api-lint]
 cwd = "apps/api"
-command = ["{python}", "-m", "ruff", "check", "."]
+command = ["{api_python}", "-m", "ruff", "check", "."]
 timeout_seconds = 120
 
 [verification.gates.api-tests]
 cwd = "apps/api"
-command = ["{python}", "-m", "pytest"]
+command = ["{api_python}", "-m", "pytest"]
 timeout_seconds = 600
 
 [verification.gates.harness-tests]
 cwd = "."
-command = ["{python}", "-m", "pytest", "harness/verification/tests"]
+command = ["{api_python}", "-m", "pytest", "harness/verification/tests"]
 timeout_seconds = 120
 
 [verification.gates.harness-integrity]
 cwd = "harness"
-command = ["{python}", "-m", "tools.harness", "verify"]
+command = ["{api_python}", "-m", "tools.harness", "verify"]
 timeout_seconds = 120
 
 [verification.gates.web-quality]

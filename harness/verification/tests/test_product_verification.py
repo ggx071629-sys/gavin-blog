@@ -93,6 +93,49 @@ def test_run_gates_uses_registered_argv_without_a_shell(
     assert calls[0][1] == tmp_path
 
 
+def test_api_python_placeholder_uses_execution_root_virtual_environment(
+    tmp_path: Path,
+) -> None:
+    execution_root = tmp_path / "isolated"
+    interpreter = (
+        execution_root / "apps" / "api" / ".venv" / "Scripts" / "python.exe"
+    )
+    interpreter.parent.mkdir(parents=True)
+    interpreter.write_bytes(b"")
+    cwd = execution_root / "apps" / "api"
+    cwd.mkdir(parents=True, exist_ok=True)
+
+    command, resolved_cwd, timeout = product_verification._command(
+        "api-lint",
+        {
+            "cwd": "apps/api",
+            "command": ["{api_python}", "-m", "ruff", "check", "."],
+            "timeout_seconds": 120,
+        },
+        execution_root,
+    )
+
+    assert command[0] == str(interpreter)
+    assert resolved_cwd == cwd.resolve()
+    assert timeout == 120
+
+
+def test_api_python_placeholder_fails_closed_without_virtual_environment(
+    tmp_path: Path,
+) -> None:
+    (tmp_path / "apps" / "api").mkdir(parents=True)
+
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="API virtual environment Python was not found",
+    ):
+        product_verification._command(
+            "api-tests",
+            {"cwd": "apps/api", "command": ["{api_python}", "-m", "pytest"]},
+            tmp_path,
+        )
+
+
 def test_gate_failure_result_distinguishes_nonzero_timeout_and_execution_error(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
