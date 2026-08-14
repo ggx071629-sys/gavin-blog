@@ -1,0 +1,259 @@
+{
+  "schema_version": 2,
+  "task_id": "20260814-evidence-gate-efficiency",
+  "created_at": "2026-08-14T06:39:25.781634+00:00",
+  "command": "python -m tools.harness verify 20260814-evidence-gate-efficiency",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5",
+    "AC-6",
+    "AC-7",
+    "AC-8",
+    "AC-9"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "release"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "release"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "release"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "release"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "status": "passed",
+      "gates": [
+        "release"
+      ]
+    },
+    {
+      "id": "AC-6",
+      "status": "passed",
+      "gates": [
+        "release"
+      ]
+    },
+    {
+      "id": "AC-7",
+      "status": "passed",
+      "gates": [
+        "release"
+      ]
+    },
+    {
+      "id": "AC-8",
+      "status": "passed",
+      "gates": [
+        "release"
+      ]
+    },
+    {
+      "id": "AC-9",
+      "status": "passed",
+      "gates": [
+        "release"
+      ]
+    }
+  ],
+  "verification_profile": "release",
+  "fingerprints": {
+    "source_tree": "2d376b193298a1b0fa9ad2e8fd6d4b788ce33161",
+    "active_spec_sha256": "3898c00a2788aeac3e61d5fb6477e1a9b0641da33fa71e01c92b2cb00cf78726",
+    "verification_contract_sha256": "c2c82459f60e21a3cadf1b0f5ad1b96bcb6d08663dfc10518b2e1e0250bc4526",
+    "gate_config_sha256": "07f18601cbe70d3840fecb70edde79195c8b02ee2dbf70268de0c40608104784",
+    "documentation_contract_sha256": "2f2d530a36daf814186f4cf392bb71a3cfa679a7342ac8eb1a70be9d3c15c82a",
+    "documentation_targets_sha256": "2280801adc8f822d7113857e5b2ee6abb7ad1894c706c3e1aaaa21e1b454382a"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "历史关闭资产的保留规则和 release gate 包含关系会长期改变验证、审查与执行成本边界",
+    "targets": [
+      "harness/verification/README.md",
+      "harness/docs/decisions/20260814-evidence-integrity-and-gate-subsumption.md"
+    ],
+    "baseline_commit": "1235ac781e724067e0993eb892cf0f2d9d9604d9",
+    "target_blobs": {
+      "harness/verification/README.md": "aa8891f1398a2239a8127949868c94693cac4e00",
+      "harness/docs/decisions/20260814-evidence-integrity-and-gate-subsumption.md": "1b2c155c9950e958ae9fc877c21612f82dd7c0e9"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "b132159d1a564a02ef9944b822dce0b927a71b04",
+    "cleanup_status": "passed",
+    "reused_paths": 3
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 6 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.468
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "71 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 174.394
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 56.357
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.568
+    },
+    {
+      "name": "links",
+      "details": [
+        "335 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 2326.012
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "154 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 45.807
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 10.161
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 43.733
+    },
+    {
+      "name": "release",
+      "kind": "product",
+      "command": "D:\\Tool\\nodejs\\npm.CMD run quality:release",
+      "status": "passed",
+      "duration_ms": 696761.437,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6",
+        "AC-7",
+        "AC-8",
+        "AC-9"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 555,
+          "failed": 0,
+          "skipped": 0
+        },
+        "subsumption": {
+          "contract_sha256": "f6cec6c9aaccc6fb8be22267b0bd735d5f14421e47cd46116194808c4af50591",
+          "verified": [
+            {
+              "gate": "api-lint",
+              "stage": "api-lint"
+            },
+            {
+              "gate": "api-tests",
+              "stage": "api-tests"
+            },
+            {
+              "gate": "harness-tests",
+              "stage": "harness-tests"
+            },
+            {
+              "gate": "web-quality",
+              "stage": "web-quality"
+            },
+            {
+              "gate": "e2e",
+              "stage": "core-e2e"
+            },
+            {
+              "gate": "harness-integrity",
+              "stage": "harness-integrity"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1540.931,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ]
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 10,
+      "passed": 10,
+      "failed": 0
+    },
+    "duration_ms": 700963.868,
+    "failures": [],
+    "test_counts": {
+      "passed": 555,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "source_commit": "b132159d1a564a02ef9944b822dce0b927a71b04"
+}
