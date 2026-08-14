@@ -28,6 +28,12 @@ schema v2 task evidence 为每个 gate 保存退出码、耗时、可识别的 P
 
 验证后只允许该 task 的确定性生命周期产物：active spec 删除、compressed archive、task evidence、`spec.completed` event，以及由配置声明的生成索引。例外精确到 task 文件，不能用整个 archive、evidence 或 event 目录规避风险闭包。`quality:release` 只有设置可信 `HARNESS_BASE_REF` 时执行该检查；未设置时仍明确属于 local-only coverage skip，不能作为远端变更覆盖证明。
 
+## Risk-derived gate floor
+
+task verify 以 active spec 首次提交为基线，读取其后到当前 HEAD 的已提交路径，并按 `config.toml` 中有序的 `verification.risk_routes` 聚合最低 gate。API、Web、跨栈契约、依赖、CI 和 Harness 可执行控制面各自触发确定性下限；重叠 route 的 gate 稳定去重。spec 的 verification plan 必须显式映射全部推导 gate 到 AC，可以增加但不能删除系统下限，也不能通过选择较低 profile 绕过。
+
+推导范围、匹配 route、触发路径和最低 gate 进入 evidence 的 gate 配置指纹。风险路由配置、实现提交或 verification plan 发生漂移时，旧 evidence 失效。纯文档、生成索引与生命周期 close 产物不命中产品 route；未提交的验证源码仍由 clean-source 前置条件拒绝。
+
 ## Historical assurance
 
 从 `harness/` 运行 `python -m tools.harness evidence-inventory [--json]` 可只读盘点主 evidence。该命令不重新执行历史 gate，只按已保存结构保守分类：

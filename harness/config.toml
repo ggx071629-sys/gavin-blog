@@ -66,6 +66,45 @@ required_gates = ["api-lint", "api-tests", "web-quality"]
 [verification.profiles.release]
 required_gates = ["release"]
 
+[[verification.risk_routes]]
+id = "api"
+prefixes = ["apps/api/"]
+files = []
+required_gates = ["api-lint", "api-tests"]
+
+[[verification.risk_routes]]
+id = "web"
+prefixes = ["apps/web/"]
+files = []
+required_gates = ["web-quality"]
+
+[[verification.risk_routes]]
+id = "cross-stack"
+prefixes = ["packages/"]
+files = []
+required_gates = ["release"]
+
+[[verification.risk_routes]]
+id = "release-control"
+prefixes = [
+  ".github/",
+  "scripts/",
+  "harness/tools/",
+  "harness/workflows/",
+  "harness/specs/_sdd/",
+  "harness/verification/checks/",
+  "harness/verification/tests/",
+]
+files = [
+  ".gitattributes",
+  ".gitignore",
+  "AGENTS.md",
+  "harness/config.toml",
+  "package.json",
+  "package-lock.json",
+]
+required_gates = ["release"]
+
 [verification.gates.api-lint]
 cwd = "apps/api"
 command = ["{python}", "-m", "ruff", "check", "."]

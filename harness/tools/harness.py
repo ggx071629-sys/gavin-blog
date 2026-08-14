@@ -69,7 +69,11 @@ def command_verify(args: argparse.Namespace) -> int:
                 summarizer.ensure_spec_in_git_history(summarizer.active_spec(args.task_id))
                 criteria, mappings = product_verification.verification_contract(args.task_id)
                 profile = product_verification.verification_profile(args.task_id)
-                product_verification.validate_configured_gates(mappings, profile)
+                product_verification.validate_configured_gates(
+                    mappings,
+                    profile,
+                    args.task_id,
+                )
                 documentation = product_verification.documentation_report(args.task_id)
                 fingerprints = product_verification.evidence_fingerprints(
                     args.task_id,

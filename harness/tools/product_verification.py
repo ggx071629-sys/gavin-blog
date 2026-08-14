@@ -12,7 +12,8 @@ from pathlib import Path
 from typing import Any
 
 from .config import load_config, project_root
-from .lifecycle import LifecycleError, documentation_contract as parse_documentation_contract
+from .lifecycle import LifecycleError
+from .lifecycle import documentation_contract as parse_documentation_contract
 from .metadata import parse_front_matter
 from .result_reporting import failure_summary, parse_test_counts, summarize_checks
 from .summarizer import active_spec
@@ -99,6 +100,79 @@ def _configured_profiles() -> dict[str, Any]:
     return dict(profiles) if isinstance(profiles, dict) else {}
 
 
+def _configured_risk_routes() -> list[dict[str, Any]]:
+    verification = load_config().get("verification", {})
+    raw_routes = verification.get("risk_routes", [])
+    if not isinstance(raw_routes, list):
+        raise ProductVerificationError("verification.risk_routes must be an array")
+    registered = set(_configured_gates())
+    seen: set[str] = set()
+    routes: list[dict[str, Any]] = []
+    for index, raw in enumerate(raw_routes, start=1):
+        if not isinstance(raw, dict):
+            raise ProductVerificationError(f"risk route {index} must be a table")
+        route_id = str(raw.get("id", "")).strip()
+        if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", route_id):
+            raise ProductVerificationError(f"risk route {index} has invalid id")
+        if route_id in seen:
+            raise ProductVerificationError(f"duplicate risk route id: {route_id}")
+        seen.add(route_id)
+        prefixes = raw.get("prefixes", [])
+        files = raw.get("files", [])
+        required_gates = raw.get("required_gates", [])
+        if not all(isinstance(value, list) for value in (prefixes, files, required_gates)):
+            raise ProductVerificationError(
+                f"risk route {route_id} prefixes, files, and required_gates must be arrays"
+            )
+        normalized_prefixes = [str(value) for value in prefixes]
+        normalized_files = [str(value) for value in files]
+        normalized_gates = [str(value) for value in required_gates]
+        if not normalized_prefixes and not normalized_files:
+            raise ProductVerificationError(
+                f"risk route {route_id} must declare prefixes or files"
+            )
+        if not normalized_gates:
+            raise ProductVerificationError(
+                f"risk route {route_id} must declare required_gates"
+            )
+        for prefix in normalized_prefixes:
+            if (
+                not prefix
+                or not prefix.endswith("/")
+                or prefix.startswith("/")
+                or "\\" in prefix
+                or any(part in {"", ".", ".."} for part in prefix[:-1].split("/"))
+            ):
+                raise ProductVerificationError(
+                    f"risk route {route_id} has invalid project-relative prefix: {prefix}"
+                )
+        for file in normalized_files:
+            if (
+                not file
+                or file.startswith("/")
+                or file.endswith("/")
+                or "\\" in file
+                or any(part in {"", ".", ".."} for part in file.split("/"))
+            ):
+                raise ProductVerificationError(
+                    f"risk route {route_id} has invalid project-relative file: {file}"
+                )
+        unknown = sorted(set(normalized_gates) - registered)
+        if unknown:
+            raise ProductVerificationError(
+                f"risk route {route_id} uses unregistered gates: {', '.join(unknown)}"
+            )
+        routes.append(
+            {
+                "id": route_id,
+                "prefixes": normalized_prefixes,
+                "files": normalized_files,
+                "required_gates": list(dict.fromkeys(normalized_gates)),
+            }
+        )
+    return routes
+
+
 def verification_profile(task_id: str) -> str:
     path = active_spec(task_id)
     if not path.is_file():
@@ -126,6 +200,7 @@ def documentation_contract(task_id: str) -> dict[str, Any]:
 def validate_configured_gates(
     mappings: dict[str, list[str]],
     profile: str | None = None,
+    task_id: str | None = None,
 ) -> None:
     unknown = sorted(set(mappings) - set(_configured_gates()))
     if unknown:
@@ -154,6 +229,21 @@ def validate_configured_gates(
     if missing:
         raise ProductVerificationError(
             f"verification profile {profile} requires gates: {', '.join(missing)}"
+        )
+    if task_id is None:
+        return
+    derived = derived_gate_requirements(task_id)
+    missing_derived = sorted(set(derived["required_gates"]) - set(mappings))
+    if missing_derived:
+        triggers = []
+        for route in derived["routes"]:
+            if set(route["required_gates"]) & set(missing_derived):
+                triggers.extend(route["matched_paths"])
+        shown = ", ".join(sorted(set(triggers))[:5])
+        suffix = " ..." if len(set(triggers)) > 5 else ""
+        raise ProductVerificationError(
+            "risk-derived verification requires gates: "
+            f"{', '.join(missing_derived)}; triggered by {shown}{suffix}"
         )
 
 
@@ -194,6 +284,7 @@ def evidence_fingerprints(
         "profile": {profile: profiles[profile]},
         "gates": {gate: gates[gate] for gate in mappings},
         "isolation": load_config().get("verification", {}).get("isolation", {}),
+        "risk_derivation": derived_gate_requirements(task_id),
     }
     verification_contract = {
         "profile": profile,
@@ -258,6 +349,39 @@ def _spec_introduction_commit(task_id: str) -> str:
             "active spec introduction commit is unavailable in current Git history"
         )
     return values[-1]
+
+
+def implementation_paths(task_id: str) -> list[str]:
+    baseline = _spec_introduction_commit(task_id)
+    changed = _git_value("diff", "--name-only", "-z", f"{baseline}..HEAD")
+    return sorted(value for value in changed.split("\0") if value)
+
+
+def derived_gate_requirements(task_id: str) -> dict[str, Any]:
+    paths = implementation_paths(task_id)
+    matched_routes: list[dict[str, Any]] = []
+    required_gates: list[str] = []
+    for route in _configured_risk_routes():
+        prefixes = tuple(route["prefixes"])
+        files = set(route["files"])
+        matched = sorted(
+            path for path in paths if path in files or path.startswith(prefixes)
+        )
+        if not matched:
+            continue
+        matched_routes.append(
+            {
+                "id": route["id"],
+                "matched_paths": matched,
+                "required_gates": route["required_gates"],
+            }
+        )
+        required_gates.extend(route["required_gates"])
+    return {
+        "paths": paths,
+        "routes": matched_routes,
+        "required_gates": list(dict.fromkeys(required_gates)),
+    }
 
 
 def documentation_report(task_id: str) -> dict[str, Any]:
@@ -462,7 +586,7 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
     try:
         criteria, mappings = verification_contract(task_id)
         profile = verification_profile(task_id)
-        validate_configured_gates(mappings, profile)
+        validate_configured_gates(mappings, profile, task_id)
         documentation = documentation_report(task_id)
         fingerprints = evidence_fingerprints(
             task_id, criteria, mappings, profile, documentation

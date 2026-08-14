@@ -6,6 +6,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+
 from harness.tools import harness as harness_cli
 from harness.tools import product_verification
 from harness.tools.result_reporting import summarize_checks
@@ -362,6 +363,159 @@ def test_profile_requires_its_minimum_registered_gates(
         )
 
 
+def test_risk_routes_derive_stable_gate_floor_from_committed_paths(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        product_verification,
+        "_configured_risk_routes",
+        lambda: [
+            {
+                "id": "api",
+                "prefixes": ["apps/api/"],
+                "files": [],
+                "required_gates": ["api-lint", "api-tests"],
+            },
+            {
+                "id": "release-control",
+                "prefixes": ["harness/tools/"],
+                "files": ["package-lock.json"],
+                "required_gates": ["release", "api-tests"],
+            },
+        ],
+    )
+    monkeypatch.setattr(
+        product_verification,
+        "implementation_paths",
+        lambda _: [
+            "README.md",
+            "apps/api/app/main.py",
+            "harness/tools/harness.py",
+            "package-lock.json",
+        ],
+    )
+
+    derived = product_verification.derived_gate_requirements(TASK_ID)
+
+    assert derived["required_gates"] == ["api-lint", "api-tests", "release"]
+    assert [route["id"] for route in derived["routes"]] == [
+        "api",
+        "release-control",
+    ]
+    assert derived["routes"][0]["matched_paths"] == ["apps/api/app/main.py"]
+    assert "README.md" not in {
+        path for route in derived["routes"] for path in route["matched_paths"]
+    }
+
+
+def test_risk_derived_gates_cannot_be_removed_by_profile_or_plan(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        product_verification,
+        "_configured_gates",
+        lambda: {"api-tests": {}, "release": {}},
+    )
+    monkeypatch.setattr(
+        product_verification,
+        "_configured_profiles",
+        lambda: {"focused": {"required_gates": []}},
+    )
+    monkeypatch.setattr(
+        product_verification,
+        "derived_gate_requirements",
+        lambda _: {
+            "paths": ["harness/tools/harness.py"],
+            "routes": [
+                {
+                    "id": "release-control",
+                    "matched_paths": ["harness/tools/harness.py"],
+                    "required_gates": ["release"],
+                }
+            ],
+            "required_gates": ["release"],
+        },
+    )
+
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match=(
+            "risk-derived verification requires gates: release; "
+            "triggered by harness/tools/harness.py"
+        ),
+    ):
+        product_verification.validate_configured_gates(
+            {"api-tests": ["AC-1"]},
+            "focused",
+            TASK_ID,
+        )
+
+    product_verification.validate_configured_gates(
+        {"api-tests": ["AC-1"], "release": ["AC-1"]},
+        "focused",
+        TASK_ID,
+    )
+
+
+def test_risk_route_configuration_rejects_unknown_gate_and_unsafe_path(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        product_verification,
+        "_configured_gates",
+        lambda: {"release": {}},
+    )
+    config = {
+        "verification": {
+            "risk_routes": [
+                {
+                    "id": "unsafe",
+                    "prefixes": ["../outside/"],
+                    "files": [],
+                    "required_gates": ["missing"],
+                }
+            ]
+        }
+    }
+    monkeypatch.setattr(product_verification, "load_config", lambda: config)
+
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="invalid project-relative prefix",
+    ):
+        product_verification._configured_risk_routes()
+
+    config["verification"]["risk_routes"][0]["prefixes"] = ["apps/"]
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="uses unregistered gates: missing",
+    ):
+        product_verification._configured_risk_routes()
+
+
+def test_implementation_paths_start_after_spec_introduction_commit(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[tuple[str, ...]] = []
+    monkeypatch.setattr(
+        product_verification,
+        "_spec_introduction_commit",
+        lambda _: "baseline",
+    )
+
+    def git_value(*args: str) -> str:
+        calls.append(args)
+        return "apps/web/app.vue\0harness/tools/harness.py\0"
+
+    monkeypatch.setattr(product_verification, "_git_value", git_value)
+
+    assert product_verification.implementation_paths(TASK_ID) == [
+        "apps/web/app.vue",
+        "harness/tools/harness.py",
+    ]
+    assert calls == [("diff", "--name-only", "-z", "baseline..HEAD")]
+
+
 def test_derived_verified_state_falls_back_to_active_when_inputs_drift(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -395,6 +549,22 @@ def test_fingerprints_change_with_spec_contract_and_gate_configuration(
         product_verification,
         "_configured_profiles",
         lambda: {"focused": {"required_gates": []}},
+    )
+    derived = {
+        "paths": ["apps/api/app/main.py"],
+        "routes": [
+            {
+                "id": "api",
+                "matched_paths": ["apps/api/app/main.py"],
+                "required_gates": ["harness-tests"],
+            }
+        ],
+        "required_gates": ["harness-tests"],
+    }
+    monkeypatch.setattr(
+        product_verification,
+        "derived_gate_requirements",
+        lambda _: derived,
     )
     monkeypatch.setattr(product_verification, "_git_value", lambda *_: "tree-one")
     criteria = ["AC-1", "AC-2"]
@@ -441,6 +611,14 @@ def test_fingerprints_change_with_spec_contract_and_gate_configuration(
         "focused",
         changed_documentation,
     )
+    derived["paths"] = ["apps/api/app/changed.py"]
+    fifth = product_verification.evidence_fingerprints(
+        TASK_ID,
+        criteria,
+        mappings,
+        "focused",
+        changed_documentation,
+    )
 
     assert first["source_tree"] == "tree-one"
     assert first["active_spec_sha256"] != second["active_spec_sha256"]
@@ -449,3 +627,4 @@ def test_fingerprints_change_with_spec_contract_and_gate_configuration(
         third["documentation_targets_sha256"]
         != fourth["documentation_targets_sha256"]
     )
+    assert fourth["gate_config_sha256"] != fifth["gate_config_sha256"]
