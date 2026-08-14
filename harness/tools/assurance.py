@@ -6,7 +6,7 @@ from typing import Any
 
 from .config import harness_root, load_config
 
-STRUCTURAL_CHECKS = {"indexes", "l0", "links", "metadata", "structure"}
+STRUCTURAL_CHECKS = {"indexes", "l0", "links", "metadata", "structure", "supply-chain"}
 LEVELS = (
     "v2-product-verified",
     "legacy-product-reported",

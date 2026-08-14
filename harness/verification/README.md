@@ -34,13 +34,19 @@ task verify 以 active spec 首次提交为基线，读取其后到当前 HEAD �
 
 推导范围、匹配 route、触发路径和最低 gate 进入 evidence 的 gate 配置指纹。风险路由配置、实现提交或 verification plan 发生漂移时，旧 evidence 失效。纯文档、生成索引与生命周期 close 产物不命中产品 route；未提交的验证源码仍由 clean-source 前置条件拒绝。
 
+## Supply-chain baseline
+
+每次全局与 task verify 都执行独立 `supply-chain` check。它只读遍历全部 GitHub workflow，要求外部 action 固定完整 40 字符提交 SHA、显式权限精确为顶层 `contents: read`、禁用 `pull_request_target`，并拒绝 CI 中的 `npm install`、`pip install` 与未带 `--locked` 的 `uv sync`。本地 action 由同一提交内容寻址；container action 必须固定 `sha256`。
+
+同一 check 还要求 Node lockfile v3 的 registry 记录具有 SHA-512 integrity，并验证 `apps/api/uv.lock` 为 uv version 1 revision 3、registry 唯一为官方 PyPI，且每个 registry 包的全部 distribution artifact 带 SHA-256。它不访问网络、不修改 lock，也不查询实时漏洞库；`uv sync --locked` 在 CI 中负责拒绝 pyproject 与 lock 漂移。仓库内 check 可以防误改并提高审查可见性，但不是不可变信任根：没有 GitHub required review/ruleset 时，拥有写权限的人仍能在同一提交修改 workflow 与 check。
+
 ## Historical assurance
 
 从 `harness/` 运行 `python -m tools.harness evidence-inventory [--json]` 可只读盘点主 evidence。该命令不重新执行历史 gate，只按已保存结构保守分类：
 
 - `v2-product-verified`：schema v2、passed、包含全部 passed checks、至少一个 product gate，并记录已清理的隔离 Git worktree。
 - `legacy-product-reported`：schema v1，主记录包含非结构产品检查，或存在 passed 的 `.application.json` 辅助报告；这是历史人工报告，不具有 v2 指纹、当前 HEAD 和隔离闭包保证。
-- `legacy-structure-only`：schema v1 只保存 indexes、L0、links、metadata、structure 等 Harness 结构检查，不能证明产品行为通过。
+- `legacy-structure-only`：schema v1 只保存 indexes、L0、links、metadata、structure、supply-chain 等 Harness 结构或控制面检查，不能证明产品行为通过。
 - `invalid`：无法解析、未知 schema、非 passed，或声称 v2 但缺少隔离/product/check 完整结构。
 
 `.benchmark.json` 和 `.application.json` 作为辅助资产列入 inventory，但不计作独立 task。任何 assurance 标签都只描述文件中可证事实，不能替代重新验证，也不能自动触发 Evolution。

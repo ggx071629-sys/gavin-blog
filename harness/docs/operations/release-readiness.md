@@ -24,13 +24,15 @@ npm ci
 npm run quality:release
 ```
 
-API 虚拟环境必须位于 `apps/api/.venv`，并已安装 `.[dev]`。门禁依次执行 API Ruff、Pytest、Harness check 单测、OpenAPI 快照一致性、Web 类型检查、Vitest、生产构建、axe-core、Lighthouse、核心 Playwright E2E 和 Harness checks。任何一步失败都阻断候选版本。
+API 虚拟环境必须位于 `apps/api/.venv`，并已安装 `.[dev]`。本地依赖升级后从 `apps/api/` 使用项目固定的 uv 版本重新生成并提交 `uv.lock`，再执行 `uv lock --check --python 3.11`；不得手工编辑锁文件。门禁依次执行 API Ruff、Pytest、Harness check 单测、OpenAPI 快照一致性、Web 类型检查、Vitest、生产构建、axe-core、Lighthouse、核心 Playwright E2E 和 Harness checks。任何一步失败都阻断候选版本。
 
 `quality:release` 在环境变量 `HARNESS_BASE_REF` 存在时，先从 `harness/` 执行 `python -m tools.harness change-check --base <ref> --head <ref>`。该检查只接受同一 Git diff 中的压缩 task archive 与 schema v2 passed evidence，并验证 evidence source commit 位于 base 之后且可从 head 到达。`HARNESS_HEAD_REF` 可选，默认是 `HEAD`。
 
-没有显式基线时，本地 release runner 会清楚报告 change coverage 被跳过。私有 GitHub 仓库 `ggx071629-sys/smart_blog` 的 `Release gate / quality-release` workflow 在面向 `main` 的 pull request、main push 与人工运行中检出完整历史：PR 使用 base SHA，push 使用 before SHA，人工运行使用 HEAD 第一父提交；全零、空、相同或不可解析的 base/head 会在安装依赖前失败。CI 随后从锁文件安装 Node 依赖，在 `apps/api/.venv` 安装 API dev 依赖与 Chromium 运行环境，并只调用权威 `npm run quality:release`，因此远端运行不能进入 local-only coverage skip。
+没有显式基线时，本地 release runner 会清楚报告 change coverage 被跳过。私有 GitHub 仓库 `ggx071629-sys/smart_blog` 的 `Release gate / quality-release` workflow 在面向 `main` 的 pull request、main push 与人工运行中检出完整历史：PR 使用 base SHA，push 使用 before SHA，人工运行使用 HEAD 第一父提交；全零、空、相同或不可解析的 base/head 会在安装依赖前失败。CI 随后以 `npm ci` 安装 Node lock、以固定 SHA 的 setup-uv 安装显式 uv 版本，并在 `apps/api/` 执行 `uv sync --locked --extra dev --python 3.11` 重建 `.venv`；lock 与 `pyproject.toml` 不一致会在 release 前失败。安装 Chromium 后 workflow 只调用权威 `npm run quality:release`，因此远端运行不能进入 local-only coverage skip。
 
 change coverage 会验证 evidence 的 source commit 从 head 可达，所以 squash/rebase 改写已验证提交后不能复用原 evidence；合并策略必须保留验证过的提交。workflow 文件本身只建立可运行 check，不自动证明 GitHub branch protection 或 ruleset 已将其设为 required；必须在首次远端运行出现 check context 后查询仓库规则并单独确认。即使 CI 与 required check 均生效，也只提升合并质量保证，不解除本页的部署、持久化、备份恢复和生产安全 No-Go。
+
+Harness `supply-chain` check 会在每次全局验证中拒绝可变 action、写权限、`pull_request_target`、非锁定安装器与不带 artifact 哈希的 lock 记录；它不执行在线漏洞查询。该仓库当前保持 private，GitHub Free 不提供此前尝试的 required ruleset/branch protection，因此仓库内门禁仍可被拥有写权限且同时修改门禁的人绕过；在升级套餐、公开仓库或迁移到具备等价外部强制能力前，这一限制必须保留为审查风险，不能宣称“不可降级”。
 
 CI 在权威 gate 结束后以 `always()` 生成脱敏 Harness telemetry summary 与 observation-only health，写入 Job Summary，并将仅含这两个 JSON 的 artifact 保留 14 天。原始 JSONL、日志、环境、工作区内容及 `.run/`、`my_image/`、`my_blog_fork/` 不上传；artifact 生成或上传失败会使 job 失败，已有的 release gate 失败也不会被后置步骤覆盖。该短期记录用于人工比较趋势，不是部署证据、自动 Evolution 输入或 production-ready 证明，并会消耗私有仓库 Actions 存储配额。
 

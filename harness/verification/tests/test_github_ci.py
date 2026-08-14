@@ -28,10 +28,14 @@ def test_release_workflow_pins_actions_and_reconstructs_dependencies() -> None:
     assert "actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0" in text
     assert "actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0" in text
     assert "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2" in text
+    assert "astral-sh/setup-uv@ae62891fec2bb8e7d6c99fc78c9fec3a63790f8d # v10.0.0" in text
     assert 'python-version: "3.11"' in text
     assert 'node-version: "22"' in text
-    assert "python -m venv apps/api/.venv" in text
-    assert 'pip install -e "./apps/api[dev]"' in text
+    assert 'version: "0.12.4"' in text
+    assert "enable-cache: false" in text
+    assert "working-directory: apps/api" in text
+    assert "uv sync --locked --extra dev --python 3.11" in text
+    assert "pip install" not in text
     assert "npm ci" in text
     assert "playwright install --with-deps chromium" in text
 
