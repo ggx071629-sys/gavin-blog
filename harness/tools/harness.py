@@ -21,6 +21,13 @@ from . import (
 )
 
 
+def _configure_console_streams() -> None:
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if callable(reconfigure):
+            reconfigure(errors="backslashreplace")
+
+
 def _print_results(results: list[dict[str, object]]) -> None:
     for result in results:
         details = result.get("details") or []
@@ -506,6 +513,7 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
+    _configure_console_streams()
     args = parser().parse_args()
     return int(args.func(args))
 

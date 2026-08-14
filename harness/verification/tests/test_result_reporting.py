@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from harness.tools.harness import _configure_console_streams, _print_results
 from harness.tools.result_reporting import (
     failure_details,
     failure_summary,
@@ -7,6 +8,29 @@ from harness.tools.result_reporting import (
     summarize_checks,
     summarize_criteria,
 )
+
+
+def test_result_output_survives_a_legacy_console_encoding(monkeypatch) -> None:
+    import io
+    import sys
+
+    buffer = io.BytesIO()
+    stream = io.TextIOWrapper(buffer, encoding="ascii", errors="strict")
+    monkeypatch.setattr(sys, "stdout", stream)
+
+    _configure_console_streams()
+    _print_results(
+        [
+            {
+                "name": "release",
+                "status": "failed",
+                "details": ["diagnostic: Playwright › failed"],
+            }
+        ]
+    )
+    stream.flush()
+
+    assert b"Playwright \\u203a failed" in buffer.getvalue()
 
 
 def test_test_count_parser_handles_project_frameworks_without_double_counting() -> None:
