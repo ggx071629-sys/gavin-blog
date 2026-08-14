@@ -19,6 +19,7 @@ optional = [
   "freeze_reason",
   "frozen_scope_sha256",
   "verification_profile",
+  "verification_escalation",
   "documentation_impact",
   "documentation_targets",
   "documentation_reason",
@@ -85,15 +86,31 @@ files = []
 required_gates = ["release"]
 
 [[verification.risk_routes]]
+id = "harness-docs"
+prefixes = [
+  "harness/docs/",
+  "harness/evolution/",
+  "harness/workflows/",
+]
+files = []
+required_gates = ["harness-integrity"]
+
+[[verification.risk_routes]]
+id = "harness-control"
+prefixes = [
+  "harness/tools/",
+  "harness/verification/checks/",
+  "harness/verification/tests/",
+  "harness/specs/_sdd/",
+]
+files = []
+required_gates = ["harness-tests", "harness-integrity"]
+
+[[verification.risk_routes]]
 id = "release-control"
 prefixes = [
   ".github/",
   "scripts/",
-  "harness/tools/",
-  "harness/workflows/",
-  "harness/specs/_sdd/",
-  "harness/verification/checks/",
-  "harness/verification/tests/",
 ]
 files = [
   ".gitattributes",

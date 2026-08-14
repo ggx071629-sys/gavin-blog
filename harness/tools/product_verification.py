@@ -368,6 +368,84 @@ def verification_profile(task_id: str) -> str:
     return profile
 
 
+def verification_escalation(task_id: str) -> str:
+    path = active_spec(task_id)
+    if not path.is_file():
+        raise ProductVerificationError(f"active spec not found: {path}")
+    metadata, _ = parse_front_matter(path)
+    raw = metadata.get("verification_escalation")
+    if raw in (None, "", []):
+        return ""
+    reason = str(raw).strip()
+    if not reason or "\n" in reason or "\r" in reason:
+        raise ProductVerificationError("verification_escalation must be a single line")
+    return reason
+
+
+def _bundle_gates(configured: dict[str, Any] | None = None) -> set[str]:
+    if configured is None:
+        configured = _configured_gates()
+    bundles: set[str] = set()
+    for name, definition in configured.items():
+        if isinstance(definition, dict) and definition.get("subsumption_contract"):
+            bundles.add(name)
+    return bundles
+
+
+def _criteria_from_mappings(mappings: dict[str, list[str]]) -> list[str]:
+    seen: list[str] = []
+    for covered in mappings.values():
+        for item in covered:
+            if item not in seen:
+                seen.append(item)
+    return seen
+
+
+def validate_mapping_policy(
+    criteria: list[str],
+    mappings: dict[str, list[str]],
+    *,
+    task_id: str | None = None,
+) -> None:
+    bundles = _bundle_gates()
+    selected_bundles = [gate for gate in mappings if gate in bundles]
+    if len(criteria) > 1 and selected_bundles:
+        missing: list[str] = []
+        for criterion in criteria:
+            leaf = [
+                gate
+                for gate, covered in mappings.items()
+                if criterion in covered and gate not in bundles
+            ]
+            if not leaf:
+                missing.append(criterion)
+        if missing:
+            raise ProductVerificationError(
+                "bundle gates cannot be the only mapping for "
+                f"{', '.join(missing)} when multiple acceptance criteria exist"
+            )
+    if task_id is None:
+        return
+    required = set(derived_gate_requirements(task_id)["required_gates"])
+    extra_bundles = [gate for gate in selected_bundles if gate not in required]
+    if extra_bundles and not verification_escalation(task_id):
+        raise ProductVerificationError(
+            "selecting bundle gates above the risk floor requires "
+            f"verification_escalation: {', '.join(extra_bundles)}"
+        )
+
+
+def lint_task_contract(task_id: str) -> tuple[list[str], dict[str, list[str]], str]:
+    from . import summarizer
+
+    path = active_spec(task_id)
+    summarizer.ensure_spec_in_git_history(path)
+    criteria, mappings = verification_contract(task_id)
+    profile = verification_profile(task_id)
+    validate_configured_gates(mappings, profile, task_id, criteria)
+    return criteria, mappings, profile
+
+
 def documentation_contract(task_id: str) -> dict[str, Any]:
     path = active_spec(task_id)
     if not path.is_file():
@@ -383,6 +461,7 @@ def validate_configured_gates(
     mappings: dict[str, list[str]],
     profile: str | None = None,
     task_id: str | None = None,
+    criteria: list[str] | None = None,
 ) -> None:
     unknown = sorted(set(mappings) - set(_configured_gates()))
     if unknown:
@@ -390,6 +469,11 @@ def validate_configured_gates(
             f"Verification plan uses unregistered gates: {', '.join(unknown)}"
         )
     _selected_subsumption_contracts(mappings)
+    validate_mapping_policy(
+        criteria or _criteria_from_mappings(mappings),
+        mappings,
+        task_id=task_id,
+    )
     if profile is None:
         return
     profiles = _configured_profiles()
@@ -484,6 +568,7 @@ def evidence_fingerprints(
         "profile": profile,
         "acceptance_criteria": criteria,
         "mappings": mappings,
+        "verification_escalation": verification_escalation(task_id),
     }
     documentation = documentation or documentation_report(task_id)
     documentation_input = {
@@ -852,7 +937,7 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
     try:
         criteria, mappings = verification_contract(task_id)
         profile = verification_profile(task_id)
-        validate_configured_gates(mappings, profile, task_id)
+        validate_configured_gates(mappings, profile, task_id, criteria)
         documentation = documentation_report(task_id)
         fingerprints = evidence_fingerprints(
             task_id, criteria, mappings, profile, documentation

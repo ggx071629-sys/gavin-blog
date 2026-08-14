@@ -81,6 +81,7 @@ def command_verify(args: argparse.Namespace) -> int:
                     mappings,
                     profile,
                     args.task_id,
+                    criteria,
                 )
                 documentation = product_verification.documentation_report(args.task_id)
                 fingerprints = product_verification.evidence_fingerprints(
@@ -145,7 +146,51 @@ def command_verify(args: argparse.Namespace) -> int:
         else:
             state = product_verification.derived_task_state(args.task_id, evidence)
             print(f"task state {state}")
+        if not validator.passed(results):
+            hint = _repeated_failure_hint(args.task_id)
+            if hint:
+                print(hint, file=sys.stderr)
     return 0 if validator.passed(results) else 1
+
+
+def _repeated_failure_hint(task_id: str) -> str:
+    try:
+        run_ids = telemetry.failed_verification_run_ids(task_id)
+    except (OSError, ValueError):
+        return ""
+    if len(run_ids) < 2:
+        return ""
+    return (
+        "repeated failure: python -m tools.harness emit-event "
+        f"verification.repeated_failure {task_id} "
+        f"--run-id {run_ids[-2]} --run-id {run_ids[-1]} --reason \"...\""
+    )
+
+
+def command_spec_lint(args: argparse.Namespace) -> int:
+    if args.task_id:
+        summarizer.validate_task_id(args.task_id)
+        task_ids = [args.task_id]
+    else:
+        task_ids = [
+            path.stem
+            for path in summarizer.active_specs()
+            if lifecycle.task_status(path.stem) != "frozen"
+        ]
+    if not task_ids:
+        print("no active specs to lint")
+        return 0
+    failed = False
+    for task_id in task_ids:
+        try:
+            product_verification.lint_task_contract(task_id)
+        except (OSError, RuntimeError, ValueError) as error:
+            failed = True
+            print(f"[FAILED] spec-lint {task_id}")
+            print(f"  - {error}")
+            continue
+        print(f"[PASSED] spec-lint {task_id}")
+    return 1 if failed else 0
 
 
 def _preflight_close(task_ids: list[str]) -> bool:
@@ -442,6 +487,13 @@ def parser() -> argparse.ArgumentParser:
     verify = commands.add_parser("verify", help="run all deterministic checks")
     verify.add_argument("task_id", nargs="?")
     verify.set_defaults(func=command_verify)
+
+    spec_lint = commands.add_parser(
+        "spec-lint",
+        help="check the active spec verification contract without product gates",
+    )
+    spec_lint.add_argument("task_id", nargs="?")
+    spec_lint.set_defaults(func=command_spec_lint)
 
     close = commands.add_parser("close", help="verify and compress an active spec")
     close.add_argument("task_id")

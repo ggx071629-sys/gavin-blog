@@ -32,7 +32,7 @@ state_history:
 
 正文依次包含以下非空 H1 章节：`# Context`、`# Goal`、`# Non-goals`、`# Acceptance criteria`、`# Risks`、`# Verification plan`。
 
-每项验收标准使用唯一标识，格式为 `- AC-1: 可观察结果`。验证计划只引用 `config.toml` 注册的白名单 gate，格式为 `- gate-name => AC-1, AC-2`；每项验收标准至少由一个 gate 覆盖，不能从 Markdown 填写或执行任意 shell 命令。`verification_profile` 选择 `focused`、`stack` 或 `release`，并强制包含该层级在 `config.toml` 注册的最低 gate。
+每项验收标准使用唯一标识，格式为 `- AC-1: 可观察结果`。验证计划只引用 `config.toml` 注册的白名单 gate，格式为 `- gate-name => AC-1, AC-2`；每项验收标准至少由一个 gate 覆盖，不能从 Markdown 填写或执行任意 shell 命令。`verification_profile` 选择 `focused`、`stack` 或 `release`，并强制包含该层级在 `config.toml` 注册的最低 gate。带 `subsumption_contract` 的 gate（当前为 `release`）是包门禁：超过一条 AC 时，每条 AC 必须至少映射一个叶子 gate，不能把全部 AC 只挂在同一个包门禁上。若计划额外选择不在风险下限内的包门禁，必须填写非空单行 `verification_escalation`。实现前可用 `python -m tools.harness spec-lint <task_id>` 做同一套合同检查，不启动产品 gate。
 
 确定性 close 为兼容既有 spec 也接受对应 H2 章节，但新 spec 统一使用上述 H1 结构。Goal 与 Acceptance criteria 缺失或为空时必须先修复 spec，close 不会删除 active 文件或生成不完整归档。
 

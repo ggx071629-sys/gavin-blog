@@ -508,6 +508,16 @@ def test_release_contract_satisfies_direct_profile_and_risk_requirements(
             "required_gates": ["api-lint", "api-tests"],
         },
     )
+    spec = _write_spec(tmp_path / f"{TASK_ID}.md")
+    spec.write_text(
+        spec.read_text(encoding="utf-8").replace(
+            "verification_profile: focused\n",
+            "verification_profile: stack\n"
+            "verification_escalation: Release subsumes the API lint and test floor.\n",
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(product_verification, "active_spec", lambda _: spec)
 
     product_verification.validate_configured_gates(
         {"release": ["AC-1"]},
@@ -913,3 +923,147 @@ def test_fingerprints_change_with_spec_contract_and_gate_configuration(
         != fourth["documentation_targets_sha256"]
     )
     assert fourth["gate_config_sha256"] != fifth["gate_config_sha256"]
+
+
+def test_live_risk_routes_rightsize_harness_docs_control_and_release(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    cases = [
+        (
+            ["harness/tools/telemetry.py"],
+            ["harness-control"],
+            ["harness-tests", "harness-integrity"],
+        ),
+        (
+            ["harness/docs/product/brief.md", "harness/workflows/verify.md"],
+            ["harness-docs"],
+            ["harness-integrity"],
+        ),
+        (
+            [".github/workflows/release.yml", "harness/config.toml"],
+            ["release-control"],
+            ["release"],
+        ),
+    ]
+    for paths, route_ids, gates in cases:
+        monkeypatch.setattr(
+            product_verification,
+            "implementation_paths",
+            lambda _task, current=paths: list(current),
+        )
+        derived = product_verification.derived_gate_requirements(TASK_ID)
+        assert [route["id"] for route in derived["routes"]] == route_ids
+        assert derived["required_gates"] == gates
+        assert "release" not in derived["required_gates"] or route_ids == ["release-control"]
+
+
+def test_bundle_gate_cannot_be_the_only_mapping_for_multiple_criteria(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        product_verification,
+        "_configured_gates",
+        lambda: {
+            "release": {"subsumption_contract": "scripts/release-stage-contract.json"},
+            "harness-tests": {},
+        },
+    )
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="bundle gates cannot be the only mapping",
+    ):
+        product_verification.validate_mapping_policy(
+            ["AC-1", "AC-2"],
+            {"release": ["AC-1", "AC-2"]},
+        )
+
+    product_verification.validate_mapping_policy(
+        ["AC-1"],
+        {"release": ["AC-1"]},
+    )
+    product_verification.validate_mapping_policy(
+        ["AC-1", "AC-2"],
+        {"harness-tests": ["AC-1", "AC-2"], "release": ["AC-2"]},
+    )
+
+
+def test_extra_bundle_gate_requires_verification_escalation(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    spec = _write_spec(tmp_path / f"{TASK_ID}.md")
+    monkeypatch.setattr(product_verification, "active_spec", lambda _: spec)
+    monkeypatch.setattr(
+        product_verification,
+        "_configured_gates",
+        lambda: {
+            "release": {"subsumption_contract": "scripts/release-stage-contract.json"},
+            "harness-tests": {},
+        },
+    )
+    monkeypatch.setattr(
+        product_verification,
+        "derived_gate_requirements",
+        lambda _: {
+            "paths": ["harness/tools/telemetry.py"],
+            "routes": [
+                {
+                    "id": "harness-control",
+                    "matched_paths": ["harness/tools/telemetry.py"],
+                    "required_gates": ["harness-tests", "harness-integrity"],
+                }
+            ],
+            "required_gates": ["harness-tests", "harness-integrity"],
+        },
+    )
+
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="requires verification_escalation: release",
+    ):
+        product_verification.validate_mapping_policy(
+            ["AC-1", "AC-2"],
+            {"harness-tests": ["AC-1", "AC-2"], "release": ["AC-1"]},
+            task_id=TASK_ID,
+        )
+
+    spec.write_text(
+        spec.read_text(encoding="utf-8").replace(
+            "verification_profile: focused\n",
+            "verification_profile: focused\n"
+            "verification_escalation: Need the full release owner for CI proof.\n",
+        ),
+        encoding="utf-8",
+    )
+    product_verification.validate_mapping_policy(
+        ["AC-1", "AC-2"],
+        {"harness-tests": ["AC-1", "AC-2"], "release": ["AC-1"]},
+        task_id=TASK_ID,
+    )
+
+
+def test_spec_lint_reuses_contract_checks_without_product_gates(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    calls: list[str] = []
+
+    def lint(task_id: str) -> tuple[list[str], dict[str, list[str]], str]:
+        calls.append(task_id)
+        return ["AC-1"], {"harness-tests": ["AC-1"]}, "focused"
+
+    monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
+    monkeypatch.setattr(product_verification, "lint_task_contract", lint)
+    monkeypatch.setattr(
+        harness_cli.isolated_verification,
+        "run_in_worktree",
+        lambda *_: (_ for _ in ()).throw(AssertionError("spec-lint must not run gates")),
+    )
+
+    exit_code = harness_cli.command_spec_lint(
+        type("Args", (), {"task_id": TASK_ID})()
+    )
+
+    assert exit_code == 0
+    assert calls == [TASK_ID]
+    assert "PASSED" in capsys.readouterr().out

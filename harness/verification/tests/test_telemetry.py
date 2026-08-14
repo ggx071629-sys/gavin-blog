@@ -387,3 +387,41 @@ def test_health_cli_returns_success_for_signal(
 
     assert exit_code == 0
     assert json.loads(capsys.readouterr().out)["status"] == "signal"
+
+
+def test_failed_verification_run_ids_are_unique_and_ordered() -> None:
+    events = [
+        _event("task.verification", "failed", 10, task_id="20260814-rightsize", run_id="run-a"),
+        _event("task.verification", "passed", 10, task_id="20260814-rightsize", run_id="run-ok"),
+        _event("task.verification", "failed", 10, task_id="other-task", run_id="run-x"),
+        _event("task.verification", "failed", 10, task_id="20260814-rightsize", run_id="run-b"),
+        _event("task.verification", "failed", 10, task_id="20260814-rightsize", run_id="run-a"),
+    ]
+
+    assert telemetry.failed_verification_run_ids(
+        "20260814-rightsize",
+        events=events,
+    ) == ["run-a", "run-b"]
+
+
+def test_failed_verify_prints_repeated_failure_command(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    monkeypatch.setattr(
+        telemetry,
+        "failed_verification_run_ids",
+        lambda _: ["run-one", "run-two"],
+    )
+
+    hint = harness_cli._repeated_failure_hint("20260814-rightsize")
+
+    assert "emit-event verification.repeated_failure 20260814-rightsize" in hint
+    assert "--run-id run-one --run-id run-two" in hint
+    assert "does-not-exist" not in hint
+    monkeypatch.setattr(
+        telemetry,
+        "failed_verification_run_ids",
+        lambda _: ["only-one"],
+    )
+    assert harness_cli._repeated_failure_hint("20260814-rightsize") == ""

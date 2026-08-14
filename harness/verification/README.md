@@ -34,7 +34,9 @@ schema v2 task evidence 为每个 gate 保存退出码、耗时、可识别的 P
 
 ## Risk-derived gate floor
 
-task verify 以 active spec 首次提交为基线，读取其后到当前 HEAD 的已提交路径，并按 `config.toml` 中有序的 `verification.risk_routes` 聚合最低 gate。API、Web、跨栈契约、依赖、CI 和 Harness 可执行控制面各自触发确定性下限；重叠 route 的 gate 稳定去重。spec 的 verification plan 必须直接映射推导 gate，或映射一个具有有效直接 subsumption proof 的上层 gate；未证明或传递式包含不能满足下限，也不能通过选择较低 profile 绕过。
+task verify 以 active spec 首次提交为基线，读取其后到当前 HEAD 的已提交路径，并按 `config.toml` 中有序的 `verification.risk_routes` 聚合最低 gate。API、Web 与跨栈契约保持原路由；Harness 文档走 `harness-docs`（`harness-integrity`），Harness 工具/检查/测试/SDD 走 `harness-control`（`harness-tests` 与 `harness-integrity`），CI、脚本、`config.toml`、锁文件与 `AGENTS.md` 走 `release-control`（`release`）。重叠 route 的 gate 稳定去重。spec 的 verification plan 必须直接映射推导 gate，或映射一个具有有效直接 subsumption proof 的上层 gate；未证明或传递式包含不能满足下限，也不能通过选择较低 profile 绕过。
+
+超过一条 AC 时，每条 AC 必须至少映射一个叶子 gate。带 `subsumption_contract` 的包门禁不能成为全部 AC 的唯一映射。额外选择不在风险下限内的包门禁时，spec 必须声明非空单行 `verification_escalation`。`python -m tools.harness spec-lint [task_id]` 复用该合同检查但不启动产品 gate。task verify 失败且本地 JSONL 已有同一 task 至少两个 failed run 时，打印可复制的 `emit-event verification.repeated_failure` 命令；提示不写 Evolution 文件，也不改变退出码。
 
 推导范围、匹配 route、触发路径和最低 gate 进入 evidence 的 gate 配置指纹。风险路由配置、实现提交或 verification plan 发生漂移时，旧 evidence 失效。纯文档、生成索引与生命周期 close 产物不命中产品 route；未提交的验证源码仍由 clean-source 前置条件拒绝。
 

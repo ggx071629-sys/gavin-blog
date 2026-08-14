@@ -163,6 +163,35 @@ def load_events(directory: Path | None = None) -> tuple[list[dict[str, Any]], in
     return events, len(files)
 
 
+def failed_verification_run_ids(
+    task_id: str,
+    *,
+    events: list[dict[str, Any]] | None = None,
+) -> list[str]:
+    available = events if events is not None else load_events()[0]
+    run_ids: list[str] = []
+    seen: set[str] = set()
+    for event in available:
+        if event.get("kind") != "task.verification" or event.get("task_id") != task_id:
+            continue
+        value = event.get("value")
+        if not isinstance(value, dict) or value.get("status") != "failed":
+            continue
+        run_id = value.get("run_id")
+        failure_kinds = value.get("failure_kinds")
+        if not isinstance(run_id, str) or not run_id.strip() or run_id in seen:
+            continue
+        if (
+            not isinstance(failure_kinds, list)
+            or not failure_kinds
+            or not all(isinstance(item, str) and item for item in failure_kinds)
+        ):
+            continue
+        seen.add(run_id)
+        run_ids.append(run_id)
+    return run_ids
+
+
 def failure_run_references(
     task_id: str,
     run_ids: list[str],
