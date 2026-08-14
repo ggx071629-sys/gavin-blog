@@ -27,12 +27,30 @@ def test_release_workflow_pins_actions_and_reconstructs_dependencies() -> None:
     assert "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1" in text
     assert "actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0" in text
     assert "actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0" in text
+    assert "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2" in text
     assert 'python-version: "3.11"' in text
     assert 'node-version: "22"' in text
     assert "python -m venv apps/api/.venv" in text
     assert 'pip install -e "./apps/api[dev]"' in text
     assert "npm ci" in text
     assert "playwright install --with-deps chromium" in text
+
+
+def test_release_workflow_persists_only_sanitized_telemetry() -> None:
+    text = WORKFLOW.read_text(encoding="utf-8")
+
+    assert text.count("if: always()") == 2
+    assert "telemetry-summary --json" in text
+    assert "telemetry-health --json" in text
+    assert "${GITHUB_STEP_SUMMARY}" in text
+    assert "${{ runner.temp }}/harness-telemetry/summary.json" in text
+    assert "${{ runner.temp }}/harness-telemetry/health.json" in text
+    assert "if-no-files-found: error" in text
+    assert "retention-days: 14" in text
+    assert "harness/telemetry/local" not in text
+    assert ".run/" not in text
+    assert "my_image/" not in text
+    assert "my_blog_fork/" not in text
 
 
 def test_release_workflow_enforces_trusted_change_coverage_refs() -> None:

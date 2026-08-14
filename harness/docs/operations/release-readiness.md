@@ -32,6 +32,8 @@ API 虚拟环境必须位于 `apps/api/.venv`，并已安装 `.[dev]`。门禁�
 
 change coverage 会验证 evidence 的 source commit 从 head 可达，所以 squash/rebase 改写已验证提交后不能复用原 evidence；合并策略必须保留验证过的提交。workflow 文件本身只建立可运行 check，不自动证明 GitHub branch protection 或 ruleset 已将其设为 required；必须在首次远端运行出现 check context 后查询仓库规则并单独确认。即使 CI 与 required check 均生效，也只提升合并质量保证，不解除本页的部署、持久化、备份恢复和生产安全 No-Go。
 
+CI 在权威 gate 结束后以 `always()` 生成脱敏 Harness telemetry summary 与 observation-only health，写入 Job Summary，并将仅含这两个 JSON 的 artifact 保留 14 天。原始 JSONL、日志、环境、工作区内容及 `.run/`、`my_image/`、`my_blog_fork/` 不上传；artifact 生成或上传失败会使 job 失败，已有的 release gate 失败也不会被后置步骤覆盖。该短期记录用于人工比较趋势，不是部署证据、自动 Evolution 输入或 production-ready 证明，并会消耗私有仓库 Actions 存储配额。
+
 ## Before first production release
 
 - 通过独立 spec 确定 Web/API 运行拓扑、域名、TLS、进程管理和部署平台。
