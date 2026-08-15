@@ -20,6 +20,8 @@ author: Gavin
 
 task 产品 gate 默认在固定到当前 HEAD 的 detached 临时 Git worktree 中运行。隔离层只链接 `config.toml` 明确允许的项目内依赖目录，gate 不得把这些依赖目录当作输出位置；测试产生的缓存、日志、截图和构建产物应留在临时 worktree 并随清理删除。隔离建立或清理失败都写为 failed check，禁止生成可关闭的 passed evidence；无 task ID 的全局 verify 不创建 worktree。
 
+产品 gate 由监督启动：子进程进入新的进程组或会话，标准输出与错误合并后边产生边写到 verify 终端，同时保留给失败摘要和测试计数。超时使用 `taskkill /T`（Windows）或进程组信号（POSIX）拆除整棵子孙进程，再返回既有 `failure.kind = timeout`，不得因残留管道阻塞 `communicate()`。evidence 仍只保存有限摘要，不提交原始日志。
+
 注册为 `{api_python}` 的 gate 必须从当前执行根的 `apps/api/.venv` 解析解释器：Windows 使用 `Scripts/python.exe`，POSIX 使用 `bin/python`。隔离 worktree 通过受控依赖链接获得同一环境；缺失时失败关闭，不得退回启动 Harness 的全局 Python。`{python}` 只保留既有通用命令的调用者解释器语义。
 
 schema v2 task evidence 为每个 gate 保存退出码、耗时、可识别的 Pytest／Vitest／Playwright 测试数量及结构化失败类型，并在顶层汇总 checks、总耗时、测试数和失败检查。`criteria_results` 按 active spec 的 AC 顺序，把声明覆盖该 AC 的 gate 聚合为 `passed`、`failed` 或 `not-run`；它只证明声明映射的执行结果，不证明自然语言 AC 与测试语义必然一致。close 会从 checks 重新计算并拒绝缺失、伪造、顺序或状态漂移。

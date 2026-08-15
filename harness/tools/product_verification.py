@@ -5,8 +5,10 @@ import json
 import os
 import re
 import shutil
+import signal
 import subprocess
 import sys
+import threading
 import time
 from pathlib import Path
 from typing import Any
@@ -742,6 +744,114 @@ def _command(
     return command, cwd, timeout_seconds
 
 
+def _pid_is_running(pid: int) -> bool:
+    if pid <= 0:
+        return False
+    if os.name == "nt":
+        completed = subprocess.run(
+            ["tasklist", "/FI", f"PID eq {pid}"],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            check=False,
+        )
+        output = f"{completed.stdout}\n{completed.stderr}"
+        return str(pid) in output and "No tasks" not in output
+    try:
+        os.kill(pid, 0)
+    except OSError:
+        return False
+    return True
+
+
+def kill_process_tree(pid: int) -> None:
+    if pid <= 0:
+        return
+    if os.name == "nt":
+        subprocess.run(
+            ["taskkill", "/F", "/T", "/PID", str(pid)],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            check=False,
+        )
+        return
+    try:
+        os.killpg(pid, signal.SIGKILL)
+    except OSError:
+        try:
+            os.kill(pid, signal.SIGKILL)
+        except OSError:
+            return
+
+
+def _run_supervised_command(
+    command: list[str],
+    *,
+    cwd: Path,
+    timeout_seconds: int,
+    env: dict[str, str] | None = None,
+) -> subprocess.CompletedProcess[str]:
+    merged_env = {**os.environ, "CI": "1", "PYTHONUNBUFFERED": "1"}
+    if env:
+        merged_env.update(env)
+    popen_kwargs: dict[str, Any] = {
+        "args": command,
+        "cwd": cwd,
+        "stdout": subprocess.PIPE,
+        "stderr": subprocess.STDOUT,
+        "text": True,
+        "encoding": "utf-8",
+        "errors": "replace",
+        "env": merged_env,
+    }
+    if os.name == "nt":
+        popen_kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
+    else:
+        popen_kwargs["start_new_session"] = True
+
+    proc = subprocess.Popen(**popen_kwargs)
+    chunks: list[str] = []
+
+    def read_stdout() -> None:
+        stream = proc.stdout
+        if stream is None:
+            return
+        try:
+            for line in iter(stream.readline, ""):
+                chunks.append(line)
+                sys.stdout.write(line)
+                sys.stdout.flush()
+        finally:
+            stream.close()
+
+    reader = threading.Thread(target=read_stdout, name="harness-gate-stdout", daemon=True)
+    reader.start()
+    timed_out = False
+    try:
+        proc.wait(timeout=timeout_seconds)
+    except subprocess.TimeoutExpired:
+        timed_out = True
+        kill_process_tree(proc.pid)
+        try:
+            proc.wait(timeout=15)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+            proc.wait(timeout=5)
+    reader.join(timeout=5)
+    output = "".join(chunks)
+    if timed_out:
+        raise subprocess.TimeoutExpired(command, timeout_seconds, output=output)
+    return subprocess.CompletedProcess(
+        command,
+        proc.returncode if proc.returncode is not None else 1,
+        output,
+        "",
+    )
+
+
 def _verified_subsumption(contract: dict[str, Any]) -> dict[str, Any]:
     return {
         "contract_sha256": contract["sha256"],
@@ -817,16 +927,10 @@ def run_gates(
                 dict(configured[gate]),
                 execution_root,
             )
-            completed = subprocess.run(
+            completed = _run_supervised_command(
                 command,
                 cwd=cwd,
-                env={**os.environ, "CI": "1"},
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-                errors="replace",
-                check=False,
-                timeout=timeout_seconds,
+                timeout_seconds=timeout_seconds,
             )
             duration_ms = round((time.perf_counter() - started) * 1000, 3)
             passed = completed.returncode == 0

@@ -79,11 +79,10 @@ def test_run_gates_uses_registered_argv_without_a_shell(
     def run(command: list[str], **kwargs: object) -> SimpleNamespace:
         calls.append((command, Path(str(kwargs["cwd"]))))
         assert "shell" not in kwargs
-        assert kwargs["encoding"] == "utf-8"
-        assert kwargs["errors"] == "replace"
+        assert kwargs["timeout_seconds"] == 900
         return SimpleNamespace(returncode=0, stdout="passed", stderr="")
 
-    monkeypatch.setattr(product_verification.subprocess, "run", run)
+    monkeypatch.setattr(product_verification, "_run_supervised_command", run)
 
     results = product_verification.run_gates({"harness-tests": ["AC-1"]})
 
@@ -154,8 +153,8 @@ def test_gate_failure_result_distinguishes_nonzero_timeout_and_execution_error(
     )
     root_text = str(tmp_path)
     monkeypatch.setattr(
-        product_verification.subprocess,
-        "run",
+        product_verification,
+        "_run_supervised_command",
         lambda *_args, **_kwargs: SimpleNamespace(
             returncode=1,
             stdout=f"Error: failed at {root_text}\\fixture.py\n1 failed in 0.1s",
@@ -179,7 +178,7 @@ def test_gate_failure_result_distinguishes_nonzero_timeout_and_execution_error(
     def timeout(*_args: object, **_kwargs: object) -> None:
         raise subprocess.TimeoutExpired("fixture", 1)
 
-    monkeypatch.setattr(product_verification.subprocess, "run", timeout)
+    monkeypatch.setattr(product_verification, "_run_supervised_command", timeout)
     timed_out = product_verification.run_gates({"fixture": ["AC-1"]})[0]
     assert timed_out["result"]["failure"]["kind"] == "timeout"
 
@@ -642,8 +641,8 @@ def test_zero_exit_gate_fails_closed_without_subsumption_proof(
     monkeypatch.setattr(product_verification, "project_root", lambda: tmp_path)
     monkeypatch.setattr(product_verification, "_configured_gates", lambda: gates)
     monkeypatch.setattr(
-        product_verification.subprocess,
-        "run",
+        product_verification,
+        "_run_supervised_command",
         lambda *_args, **_kwargs: SimpleNamespace(
             returncode=0,
             stdout="release completed without proof",
