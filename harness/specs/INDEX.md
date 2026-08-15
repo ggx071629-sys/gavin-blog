@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **2 active**, **2 frozen**.
+Open specifications: **1 active**, **2 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -13,7 +13,6 @@ Open specifications: **2 active**, **2 frozen**.
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
 | spec-20260807-github-discovery-ingestion | frozen | L1 | 为博客建立 GitHub 发现画像、私有资料仓库同步与待处理池摄入闭环 | task:20260807-github-discovery-ingestion | Gavin | [active/20260807-github-discovery-ingestion.md](active/20260807-github-discovery-ingestion.md) |
 | spec-20260807-github-source-crawler | frozen | L1 | 在独立私有仓库中用 GitHub Actions 无模型发现并保存文章型 Markdown | task:20260807-github-source-crawler | Gavin | [active/20260807-github-source-crawler.md](active/20260807-github-source-crawler.md) |
-| spec-20260814-public-knowledge-links | active | L1 | 让已发布文章、项目和书摘通过 wikilink 与可编辑参考资料形成公开反链，而不是只靠栏目标签邻近 | task:20260814-public-knowledge-links | Gavin | [active/20260814-public-knowledge-links.md](active/20260814-public-knowledge-links.md) |
 | spec-20260814-zvec-vector-index | active | L1 | 在保留现有知识孵化检索策略与契约的前提下，以可回滚的 Zvec Flat 后端替换在线 SQLite BLOB/NumPy 向量扫描 | task:20260814-zvec-vector-index | Gavin | [active/20260814-zvec-vector-index.md](active/20260814-zvec-vector-index.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
@@ -84,6 +83,7 @@ Open specifications: **2 active**, **2 frozen**.
 | archive-20260814-ci-telemetry-persistence | compressed | L2 | 在 CI 成功或失败后持久化脱敏 Harness telemetry 摘要 | task:20260814-ci-telemetry-persistence | Codex | [archive/20260814-ci-telemetry-persistence.md](archive/20260814-ci-telemetry-persistence.md) |
 | archive-20260814-evidence-gate-efficiency | compressed | L2 | 固化历史关闭证据关系，并用运行时阶段证明安全消除 release 重复 gate | task:20260814-evidence-gate-efficiency | Codex | [archive/20260814-evidence-gate-efficiency.md](archive/20260814-evidence-gate-efficiency.md) |
 | archive-20260814-harness-risk-closure | compressed | L2 | 让变更覆盖只接受验证过最后风险修改的 evidence，并封闭控制面路径漏口 | task:20260814-harness-risk-closure | Codex | [archive/20260814-harness-risk-closure.md](archive/20260814-harness-risk-closure.md) |
+| archive-20260814-public-knowledge-links | compressed | L2 | 让已发布文章、项目和书摘通过 wikilink 与可编辑参考资料形成公开反链，而不是只靠栏目标签邻近 | task:20260814-public-knowledge-links | Gavin | [archive/20260814-public-knowledge-links.md](archive/20260814-public-knowledge-links.md) |
 | archive-20260814-risk-derived-gates | compressed | L2 | 根据 spec 后的已提交变更自动推导不可降低的最低验证 gate | task:20260814-risk-derived-gates | Codex | [archive/20260814-risk-derived-gates.md](archive/20260814-risk-derived-gates.md) |
 | archive-20260814-supply-chain-baseline | compressed | L2 | 固定 Python 依赖解析并建立 CI 控制面供应链基线门禁 | task:20260814-supply-chain-baseline | Codex | [archive/20260814-supply-chain-baseline.md](archive/20260814-supply-chain-baseline.md) |
 | archive-20260814-upload-artifact-node24 | compressed | L2 | 升级 CI telemetry artifact action 到官方 Node 24 运行时并消除弃用警告 | task:20260814-upload-artifact-node24 | Codex | [archive/20260814-upload-artifact-node24.md](archive/20260814-upload-artifact-node24.md) |
