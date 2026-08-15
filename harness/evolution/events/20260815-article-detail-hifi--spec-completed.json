@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "event_type": "spec.completed",
+  "task_id": "20260815-article-detail-hifi",
+  "created_at": "2026-08-15T08:27:00.154523+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false
+}

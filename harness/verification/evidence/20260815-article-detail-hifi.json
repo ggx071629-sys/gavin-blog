@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "task_id": "20260815-article-detail-hifi",
-  "created_at": "2026-08-15T07:45:32.651274+00:00",
+  "created_at": "2026-08-15T08:26:27.425729+00:00",
   "command": "python -m tools.harness verify 20260815-article-detail-hifi",
   "status": "passed",
   "acceptance_criteria": [
@@ -82,10 +82,10 @@
   ],
   "verification_profile": "focused",
   "fingerprints": {
-    "source_tree": "9a9841478054461626de3da7e0ed2f60b303afea",
+    "source_tree": "0d7aa95533cb6f63df0449f20721d79f445984a2",
     "active_spec_sha256": "c978f9184c78301b23cff11f8308599658459029db84e7e6e6d63b8c669e5a57",
     "verification_contract_sha256": "96662b47edc86d01676683cc0f4425c893f42fae60e598c7703d9fbea6cde2ce",
-    "gate_config_sha256": "4cae0cc37742c9681a2363bb247ea6592c5ba584c42f2cbb91676a555bc8d51e",
+    "gate_config_sha256": "08d2665a2d1b920ea00c9ef42ddb4c5192242f3e5f9d0e1678921c7716237398",
     "documentation_contract_sha256": "e49da7ed9389b8af104fe7869e537c2bfcc05a5d2d61ca372640d9dcaf3f1b5a",
     "documentation_targets_sha256": "9cc2809350a8b123d351faf60364b75bb8e01f0e3af299ed2d6c5202f18ee410"
   },
@@ -102,7 +102,7 @@
   },
   "execution": {
     "mode": "git-worktree",
-    "source_commit": "015248ada6943818c7ceae86f6337f3b69190100",
+    "source_commit": "ff8ad9910335f20be8fb84fbbc008295d8c449c1",
     "cleanup_status": "passed",
     "reused_paths": 3
   },
@@ -113,7 +113,7 @@
         "1 subsumption contracts bind 6 registered child gates"
       ],
       "status": "passed",
-      "duration_ms": 7.022
+      "duration_ms": 8.02
     },
     {
       "name": "history-integrity",
@@ -121,7 +121,7 @@
         "74 deterministic closes retain archive, evidence, event, and active-spec history"
       ],
       "status": "passed",
-      "duration_ms": 142.639
+      "duration_ms": 124.914
     },
     {
       "name": "indexes",
@@ -129,7 +129,7 @@
         "9 generated indexes are current"
       ],
       "status": "passed",
-      "duration_ms": 75.01
+      "duration_ms": 66.424
     },
     {
       "name": "l0",
@@ -137,7 +137,7 @@
         "AGENTS.md is the unique L0 and stays within 60-80 lines"
       ],
       "status": "passed",
-      "duration_ms": 0.645
+      "duration_ms": 0.848
     },
     {
       "name": "links",
@@ -145,7 +145,7 @@
         "346 local Markdown links resolve without durable active-spec references"
       ],
       "status": "passed",
-      "duration_ms": 2141.208
+      "duration_ms": 3121.103
     },
     {
       "name": "metadata",
@@ -153,7 +153,7 @@
         "161 routed Markdown documents have valid metadata"
       ],
       "status": "passed",
-      "duration_ms": 83.061
+      "duration_ms": 68.5
     },
     {
       "name": "structure",
@@ -161,7 +161,7 @@
         "28 required paths exist"
       ],
       "status": "passed",
-      "duration_ms": 12.624
+      "duration_ms": 12.566
     },
     {
       "name": "supply-chain",
@@ -169,14 +169,14 @@
         "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
       ],
       "status": "passed",
-      "duration_ms": 78.65
+      "duration_ms": 64.208
     },
     {
       "name": "web-quality",
       "kind": "product",
       "command": "D:\\Tool\\nodejs\\npm.CMD run quality:web",
       "status": "passed",
-      "duration_ms": 345040.819,
+      "duration_ms": 313086.063,
       "covers": [
         "AC-1",
         "AC-2",
@@ -201,7 +201,7 @@
       "kind": "product",
       "command": "D:\\Tool\\nodejs\\npm.CMD run test:e2e",
       "status": "passed",
-      "duration_ms": 293178.136,
+      "duration_ms": 256998.154,
       "covers": [
         "AC-1",
         "AC-2",
@@ -224,9 +224,9 @@
     {
       "name": "api-lint",
       "kind": "product",
-      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-r2v8n565\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m ruff check .",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-8vgj7zd6\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m ruff check .",
       "status": "passed",
-      "duration_ms": 395.571,
+      "duration_ms": 330.305,
       "covers": [
         "AC-8"
       ],
@@ -238,9 +238,9 @@
     {
       "name": "api-tests",
       "kind": "product",
-      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-r2v8n565\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m pytest",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-8vgj7zd6\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m pytest",
       "status": "passed",
-      "duration_ms": 289379.175,
+      "duration_ms": 214691.087,
       "covers": [
         "AC-8"
       ],
@@ -259,7 +259,7 @@
       "kind": "isolation",
       "command": "git worktree add --detach <temporary> HEAD",
       "status": "passed",
-      "duration_ms": 2217.875,
+      "duration_ms": 1736.737,
       "covers": [],
       "details": [
         "temporary worktree and dependency links were removed"
@@ -272,7 +272,7 @@
       "passed": 13,
       "failed": 0
     },
-    "duration_ms": 932752.435,
+    "duration_ms": 790308.929,
     "failures": [],
     "test_counts": {
       "passed": 470,
@@ -280,5 +280,5 @@
       "skipped": 0
     }
   },
-  "source_commit": "015248ada6943818c7ceae86f6337f3b69190100"
+  "source_commit": "ff8ad9910335f20be8fb84fbbc008295d8c449c1"
 }

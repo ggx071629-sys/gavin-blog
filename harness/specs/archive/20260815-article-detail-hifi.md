@@ -1,13 +1,12 @@
 ---
-id: spec-20260815-article-detail-hifi
-level: L1
+id: archive-20260815-article-detail-hifi
+level: L2
 summary: 在公开文章契约不变的前提下，按 Penpot V1 系统合同与 V2 阅读外观重做文章详情
 load_when:
   - task:20260815-article-detail-hifi
 author: Gavin
 task_id: 20260815-article-detail-hifi
-status: active
-verification_profile: focused
+status: compressed
 documentation_impact: required
 documentation_targets:
   - apps/web/README.md
@@ -15,24 +14,15 @@ documentation_reason: 公开文章阅读页的 Hero、目录、代码块和相�
 state_history:
 ---
 
-# Context
+# 20260815-article-detail-hifi
 
-公开文章详情已有唯一 H1、标题下移、摘要可空、栏目标签、参考资料、反链、相邻、相关文章和桌面目录。Penpot 文件同时包含 V1 系统稿（`00–05`）与 V2 阅读稿（`06–11`）。终态只上线 V2 外观；V1 提供失败语义、焦点/触控和无障碍合同。公开 API 与内容模型不扩张。现有发布闭环会给补充发布挂上 URL 参考资料；修订哈希必须覆盖已写入的公开参考资料，否则回滚会被误判为脏工作副本。
+Deterministic compressed record. The original active spec remains in Git history.
 
-# Goal
+## Goal
 
 把 `/notes/{year}/{month}/{slug}` 做成单一 V2 阅读页：窄正文、宽证据块、可结束的目录、可复制的代码块和自适应相关推荐，同时保持已发布快照契约与现有知识链接。
 
-# Non-goals
-
-- 不改 OpenAPI、数据库、回滚确认语义、wikilink 解析、反链算法、SEO、RSS 或 JSON-LD。
-- 不改首页、列表、项目/书摘详情、后台或全局导航信息架构。
-- 不把 V1 Dossier、假证据徽章、超大序号 Hero 或移动 TOC sheet 带进终态。
-- 不把样稿请求链路图、VERSION 号或代码校验结果做成全站数据。
-- 不删除参考资料、反链或相邻文章区块。
-- 不并入 `20260814-public-knowledge-links`。
-
-# Acceptance criteria
+## Acceptance criteria
 
 - AC-1: 文章详情仍只读取公开文章与 `/context`。页面块顺序为 Hero、正文、参考资料、反链、相邻、相关；空块不渲染。保留 `article-updated-at`、`article-references`、`content-backlinks`、`article-neighbors`、`related-articles`。
 - AC-2: 桌面宽度至少 1280 时，正文约 760px、证据块约 820–880px、目录约 220px。Hero 提供“开始阅读”与“复制文章链接”。目录强激活且 sticky 在正文结束处停止，不覆盖相关或页脚。页面仍只有一个可见 H1。
@@ -43,17 +33,12 @@ state_history:
 - AC-7: Web 类型检查、Vitest、公开文章 E2E、axe WCAG A/AA 与现有 Lighthouse 门槛覆盖本页行为；`apps/web/README.md` 记录阅读页 chrome。
 - AC-8: 带公开 URL 参考资料的孵化发布后，工作副本与当前修订一致，现有发布闭环回滚不被 `ARTICLE_WORKING_COPY_DIRTY` 误拒绝。
 
-# Risks
+## Result
 
-- 文首图误提升会打乱阅读顺序；只提升正文开头附近的第一张块级图，否则省略。
-- 压缩顶栏若做成全局行为会改变列表和首页；压缩状态只绑定文章路由。
-- 目录若与文后区同一网格，会 sticky 进相关和页脚；目录必须与正文同列高。
-- 代码底栏若写死样稿校验文案，会把装饰当成数据；复制失败只能报告剪贴板错误。
-- 孵化发布若按尚未回填的工作副本集合计算修订哈希，带参考资料的发布会留下假脏状态并阻断回滚。
+Verified and closed by the harness close command.
 
-# Verification plan
+## Evidence
 
-- web-quality => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6, AC-7
-- e2e => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6, AC-8
-- api-lint => AC-8
-- api-tests => AC-8
+[20260815-article-detail-hifi.json](../../verification/evidence/20260815-article-detail-hifi.json)
+
+Closed at 2026-08-15T08:27:00.143279+00:00.
