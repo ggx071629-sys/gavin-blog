@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **2 active**, **2 frozen**.
+Open specifications: **3 active**, **2 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -15,6 +15,7 @@ Open specifications: **2 active**, **2 frozen**.
 | spec-20260807-github-source-crawler | frozen | L1 | 在独立私有仓库中用 GitHub Actions 无模型发现并保存文章型 Markdown | task:20260807-github-source-crawler | Gavin | [active/20260807-github-source-crawler.md](active/20260807-github-source-crawler.md) |
 | spec-20260814-public-knowledge-links | active | L1 | 让已发布文章、项目和书摘通过 wikilink 与可编辑参考资料形成公开反链，而不是只靠栏目标签邻近 | task:20260814-public-knowledge-links | Gavin | [active/20260814-public-knowledge-links.md](active/20260814-public-knowledge-links.md) |
 | spec-20260814-zvec-vector-index | active | L1 | 在保留现有知识孵化检索策略与契约的前提下，以可回滚的 Zvec Flat 后端替换在线 SQLite BLOB/NumPy 向量扫描 | task:20260814-zvec-vector-index | Gavin | [active/20260814-zvec-vector-index.md](active/20260814-zvec-vector-index.md) |
+| spec-20260815-article-detail-hifi | active | L1 | 在公开文章契约不变的前提下，按 Penpot V1 系统合同与 V2 阅读外观重做文章详情 | task:20260815-article-detail-hifi | Gavin | [active/20260815-article-detail-hifi.md](active/20260815-article-detail-hifi.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
