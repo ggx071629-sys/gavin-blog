@@ -40,3 +40,5 @@ state_history:
 # Verification plan
 
 - web-quality => AC-1, AC-2, AC-3
+- api-lint => AC-1
+- api-tests => AC-1
