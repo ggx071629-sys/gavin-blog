@@ -1,13 +1,12 @@
 ---
-id: spec-20260816-trash-incubator-residuals
-level: L1
+id: archive-20260816-trash-incubator-residuals
+level: L2
 summary: 已发布文章可永久删除，孵化草稿/发布计划失败可恢复，预览与计数不再撒谎
 load_when:
   - task:20260816-trash-incubator-residuals
 author: Gavin
 task_id: 20260816-trash-incubator-residuals
-status: active
-verification_profile: focused
+status: compressed
 documentation_impact: required
 documentation_targets:
   - apps/web/README.md
@@ -16,22 +15,15 @@ documentation_reason: 永久删除级联、发布计划确认可恢复、预览�
 state_history:
 ---
 
-# Context
+# 20260816-trash-incubator-residuals
 
-2026-08-16 审计 AUD26-024/027/029/030/033/035/036：已发布文章永久删除因修订 RESTRICT 409 且回收站无反馈；草稿详情加载失败画成空壳；重构预览无视采用标题/摘要旗标；发布计划先提交 `confirmed` 再执行，崩溃后不能恢复；已发布预览仍写未公开草稿；项目 JSON-LD `url` 是相对路径；「全部文章」漏计未分类。
+Deterministic compressed record. The original active spec remains in Git history.
 
-# Goal
+## Goal
 
 回收站永久删除已发布文章时清理修订、索引指针、孵化来源链和项目关联并成功。删除/恢复失败在回收站可见。草稿详情加载失败走失败分类。重构预览在旗标为假时对比当前发布修订的标题/摘要。已确认但未执行完的发布计划再次确认会继续执行。已发布文章预览不再写成未公开草稿。项目 JSON-LD 使用绝对 URL。「全部文章」计入未分类已发布文章。
 
-# Non-goals
-
-- 不改公开栏目读修订或文章发布 version（第二、三批已关）。
-- 不改两条 GitHub frozen spec。
-- 不新增 Alembic 迁移或改生产/CI/存储拓扑。
-- 不改发布资格判定、批量门槛或回滚语义。
-
-# Acceptance criteria
+## Acceptance criteria
 
 - AC-1: 已发布文章进入回收站后 `DELETE /api/v1/admin/trash/article/{id}` 返回 204；公开路径 404，修订与检索指针不再挡住删除。
 - AC-2: 回收站恢复/永久删除失败写入可见错误，不得只停在确认框之后无反馈。
@@ -43,12 +35,12 @@ state_history:
 - AC-8: 公开 `/articles`「全部文章」数字等于已发布且未删除文章总数，含未分类。
 - AC-9: `apps/api/README.md` 与 `apps/web/README.md` 写明永久删除级联、发布计划确认可恢复、预览与计数语义。
 
-# Risks
+## Result
 
-永久删除会拆掉孵化来源链行；这是操作者显式确认后的不可恢复清理，与产品承诺一致。项目修订快照里的 article_id 仍是非外键整数，不随删除失效。
+Verified and closed by the harness close command.
 
-# Verification plan
+## Evidence
 
-- api-lint => AC-1, AC-4, AC-5, AC-8, AC-9
-- api-tests => AC-1, AC-4, AC-5, AC-8
-- web-quality => AC-2, AC-3, AC-6, AC-7, AC-8, AC-9
+[20260816-trash-incubator-residuals.json](../../verification/evidence/20260816-trash-incubator-residuals.json)
+
+Closed at 2026-08-16T12:30:56.048369+00:00.
