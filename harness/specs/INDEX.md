@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **1 active**, **2 frozen**.
+Open specifications: **0 active**, **2 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -13,7 +13,6 @@ Open specifications: **1 active**, **2 frozen**.
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
 | spec-20260807-github-discovery-ingestion | frozen | L1 | 为博客建立 GitHub 发现画像、私有资料仓库同步与待处理池摄入闭环 | task:20260807-github-discovery-ingestion | Gavin | [active/20260807-github-discovery-ingestion.md](active/20260807-github-discovery-ingestion.md) |
 | spec-20260807-github-source-crawler | frozen | L1 | 在独立私有仓库中用 GitHub Actions 无模型发现并保存文章型 Markdown | task:20260807-github-source-crawler | Gavin | [active/20260807-github-source-crawler.md](active/20260807-github-source-crawler.md) |
-| spec-20260816-retrieval-unavailable-health | active | L1 | 检索服务不可用时概览与健康检查返回能力态，不再把整台孵化打成 500 | task:20260816-retrieval-unavailable-health | Gavin | [active/20260816-retrieval-unavailable-health.md](active/20260816-retrieval-unavailable-health.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -94,3 +93,4 @@ Open specifications: **1 active**, **2 frozen**.
 | archive-20260815-article-detail-hifi | compressed | L2 | 在公开文章契约不变的前提下，按 Penpot V1 系统合同与 V2 阅读外观重做文章详情 | task:20260815-article-detail-hifi | Gavin | [archive/20260815-article-detail-hifi.md](archive/20260815-article-detail-hifi.md) |
 | archive-20260815-related-article-copy | compressed | L2 | 去掉公开文章相关区泄漏的布局实现词，改成读者可读文案 | task:20260815-related-article-copy | Gavin | [archive/20260815-related-article-copy.md](archive/20260815-related-article-copy.md) |
 | archive-20260816-gate-process-supervision | compressed | L2 | 让 task verify 的产品 gate 超时杀整棵进程树，并把子进程输出实时写到终端 | task:20260816-gate-process-supervision | Gavin | [archive/20260816-gate-process-supervision.md](archive/20260816-gate-process-supervision.md) |
+| archive-20260816-retrieval-unavailable-health | compressed | L2 | 检索服务不可用时概览与健康检查返回能力态，不再把整台孵化打成 500 | task:20260816-retrieval-unavailable-health | Gavin | [archive/20260816-retrieval-unavailable-health.md](archive/20260816-retrieval-unavailable-health.md) |
