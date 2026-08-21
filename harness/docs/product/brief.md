@@ -47,7 +47,7 @@ author: Gavin
 - 测试：Pytest、Vitest、Playwright。
 - 目标：WCAG AA；桌面 Lighthouse 的 Performance、Accessibility、Best Practices 与 SEO 发布门槛均为 90。
 - SEO：RSS、站点地图、规范链接、Open Graph 和结构化数据。
-- 视觉：Electric Editorial 双主题技术刊物风格；标题使用 Hanken Grotesk，正文 Inter，代码 JetBrains Mono，字体自托管。
+- 视觉：Electric Editorial 双主题技术刊物风格；中文标题与正文使用自托管 Noto Sans SC（400/700，设计 800 映射 700），拉丁使用 Inter，代码 JetBrains Mono。公开站移动菜单是可访问 overlay dialog。
 
 ## 交付状态
 
