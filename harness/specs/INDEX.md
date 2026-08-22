@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **3 active**, **2 frozen**.
+Open specifications: **7 active**, **2 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -14,7 +14,11 @@ Open specifications: **3 active**, **2 frozen**.
 | spec-20260807-github-discovery-ingestion | frozen | L1 | 为博客建立 GitHub 发现画像、私有资料仓库同步与待处理池摄入闭环 | task:20260807-github-discovery-ingestion | Gavin | [active/20260807-github-discovery-ingestion.md](active/20260807-github-discovery-ingestion.md) |
 | spec-20260807-github-source-crawler | frozen | L1 | 在独立私有仓库中用 GitHub Actions 无模型发现并保存文章型 Markdown | task:20260807-github-source-crawler | Gavin | [active/20260807-github-source-crawler.md](active/20260807-github-source-crawler.md) |
 | spec-20260821-penpot-chrome-home | active | L1 | 按 Penpot Gavin_ui_v1 Chrome 与 Home 对齐公开站壳层和首页视觉，并切换中文标题字体为自托管 Noto Sans SC | task:20260821-penpot-chrome-home | Gavin | [active/20260821-penpot-chrome-home.md](active/20260821-penpot-chrome-home.md) |
+| spec-20260822-penpot-about | active | L1 | 按 Penpot Gavin_ui_v1 About 板把 /about 改为 statement+coordinates、编号原则与 colophon，资料只绑 GET /profile，并把 /about 补进失败 503 套件 | task:20260822-penpot-about | Gavin | [active/20260822-penpot-about.md](active/20260822-penpot-about.md) |
+| spec-20260822-penpot-archive | active | L1 | 按 Penpot Gavin_ui_v1 Archive 板把 /archive 改为两栏 masthead 与年脊 Title\|Meta\|Date，日期 MM.DD，无栏目显示未分类，阅读时长复用现网公式 | task:20260822-penpot-archive | Gavin | [active/20260822-penpot-archive.md](active/20260822-penpot-archive.md) |
 | spec-20260822-penpot-articles-index | active | L1 | 按 Penpot Gavin_ui_v1 Articles 板把 /articles 改为横向真实栏目筛选与 Date\|Title\|Meta 行列表，并让 taxonomy 失败与列表失败解耦 | task:20260822-penpot-articles-index | Gavin | [active/20260822-penpot-articles-index.md](active/20260822-penpot-articles-index.md) |
+| spec-20260822-penpot-books-index | active | L1 | 按 Penpot Gavin_ui_v1 Books 板把 /books 改为全宽 hero、当前页在读高亮与 Date\|书名\|状态 ledger，不发明进度或全库计数 | task:20260822-penpot-books-index | Gavin | [active/20260822-penpot-books-index.md](active/20260822-penpot-books-index.md) |
+| spec-20260822-penpot-projects-index | active | L1 | 按 Penpot Gavin_ui_v1 Projects 板把 /projects 改为全宽 hero、本页第一条 lead 与 ledger 行，去掉 sticky 网格和假状态分数 | task:20260822-penpot-projects-index | Gavin | [active/20260822-penpot-projects-index.md](active/20260822-penpot-projects-index.md) |
 | spec-20260822-penpot-search | active | L1 | 按 Penpot Gavin_ui_v1 Search 板把公开 /search 改为全页内容区，并锁死 Idle/Loading/Results/Empty 与最新请求竞态 | task:20260822-penpot-search | Gavin | [active/20260822-penpot-search.md](active/20260822-penpot-search.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
