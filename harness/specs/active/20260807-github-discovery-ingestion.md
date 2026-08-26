@@ -130,7 +130,3 @@ state_history:
 5. **Security**：断言无效签名、错误仓库／分支、缺失机器 Token、越权管理写入和恶意 Frontmatter／Markdown 均被拒绝；响应、日志和快照不出现 Secret。
 6. **Quality**：API Pytest 与 Ruff、Harness checks、OpenAPI 快照、Web Vitest、类型检查、生产构建、适用 Playwright 与 WCAG 检查通过；现有 file/url 与知识孵化闭环不回退。
 7. **Harness**：更新来源元数据后运行 `python -m tools.harness index` 与 `python -m tools.harness verify 20260807-github-discovery-ingestion`；只有应用检查和跨仓库契约证据齐全后才能关闭。
-
-## 退役处置（2026-08-26）
-
-本规格保持 frozen，原核心摘要与冻结原因不变。其消费者边界依赖的知识孵化摄入、待处理池、审计与发布链已从 `my_blog` 主项目退役；即使部署条件以后满足，也不得按本文静默恢复这些主项目能力。若继续 GitHub 资料发现，必须先提出新的独立产品与跨仓库契约规格，并明确是否使用已归档的知识孵化实现。
