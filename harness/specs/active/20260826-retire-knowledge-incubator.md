@@ -8,6 +8,7 @@ author: Gavin
 task_id: 20260826-retire-knowledge-incubator
 status: active
 verification_profile: release
+verification_escalation: 退役会同时改变 API、Web、OpenAPI、数据库迁移、依赖锁和发布脚本，最终必须用完整 release gate 证明跨栈收缩没有破坏核心内容闭环。
 documentation_impact: required
 documentation_targets:
   - README.md
