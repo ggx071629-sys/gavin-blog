@@ -1,14 +1,12 @@
 ---
-id: spec-20260826-retire-knowledge-incubator
-level: L1
+id: archive-20260826-retire-knowledge-incubator
+level: L2
 summary: 在可恢复归档知识孵化实现与数据后，从博客主项目退役其摄入、检索、审计、生成和发布工作台运行面
 load_when:
   - task:20260826-retire-knowledge-incubator
 author: Gavin
 task_id: 20260826-retire-knowledge-incubator
-status: active
-verification_profile: release
-verification_escalation: 退役会同时改变 API、Web、OpenAPI、数据库迁移、依赖锁和发布脚本，最终必须用完整 release gate 证明跨栈收缩没有破坏核心内容闭环。
+status: compressed
 documentation_impact: required
 documentation_targets:
   - README.md
@@ -24,25 +22,15 @@ documentation_reason: 退役知识孵化会改变已交付产品范围、API 与
 state_history:
 ---
 
-# Context
+# 20260826-retire-knowledge-incubator
 
-知识孵化已经形成摄入、SQLite 任务 Worker、本地混合检索、第三方 LLM 审计、孵化草稿与确认发布的完整后台子系统，但该能力不再属于博客后续产品方向。当前实现要求主 API、Worker 与 Retrieval Service 三进程，普通文章发布、删除、恢复和回滚也会登记或失效孵化索引任务；生产配置、OpenAPI、前端页面、模型依赖与数据库迁移都因此承担持续成本。
+Deterministic compressed record. The original active spec remains in Git history.
 
-当前工作区数据库已有少量 source、audit 与 draft 历史，但没有 `incubator_publish_source_links`，现有文章发布修订全部来自普通编辑器且没有非终态孵化任务。退役仍必须在任何删表前建立一致性备份与可核对的归档，且不能删除与后续核心迁移交错的旧 Alembic revision。
-
-# Goal
+## Goal
 
 建立可独立克隆和恢复的知识孵化最终归档，保存退役前的完整 Git 实现、运行说明和一致性数据备份；随后从博客主项目移除知识孵化的用户入口、API、Worker、Retrieval Service、LLM/检索配置、专属数据库对象、依赖与质量负担，同时完整保留普通内容的不可变发布修订、修订差异与回滚、公开参考资料、wikilink/反链、公开搜索和 taxonomy 语义。
 
-# Non-goals
-
-- 不把知识孵化改造成仍在线运行或与主博客实时集成的独立微服务。
-- 不删除或重写旧 Alembic revision、已压缩规格、验证证据和 Git 历史。
-- 不删除文章、项目或书摘的不可变发布 revision、公开引用快照、差异与回滚能力。
-- 不把真实数据库、模型二进制、日志、`.env` 或 API Key 提交到 Git 仓库。
-- 不借本任务改变公开站视觉、文章正文渲染、搜索排序或认证模型。
-
-# Acceptance criteria
+## Acceptance criteria
 
 - AC-1: 创建私有独立归档仓库并保存带标签的退役前完整 Git 快照；归档记录源仓库、源 commit、标签、依赖与恢复步骤，能够重新克隆并校验同一 commit，且 Git 历史不含 `.env`、真实数据库、模型二进制或日志。当前 SQLite 通过停写后的 backup API 生成独立加密备份并记录表计数与 SHA-256，恢复说明明确其与 Git 归档分离。
 - AC-2: Web 不再提供知识孵化导航、页面、组件或轮询入口；OpenAPI 不再暴露 `/api/v1/admin/incubator*` 路径，删除的管理 URL 返回不存在且公开站与普通写作台保持可用。
@@ -53,19 +41,12 @@ state_history:
 - AC-7: 长期产品、Web/API、契约和架构文档明确知识孵化已退役；Zvec 决策标记为被退役决策取代。两个冻结 GitHub 摄入规格保持冻结核心摘要不变，但追加明确的退役处置说明，禁止后续静默恢复到已移除的主项目摄入边界。
 - AC-8: 回滚边界经过验证：删表前应用可通过重新启用归档 commit 回滚；执行前向收缩迁移后只能通过已校验的一致性 SQLite 备份或结构化反向导入恢复孵化数据，不能依赖会删除核心 revision 的历史 downgrade，也不能只复制带 WAL 的主数据库文件。
 
-# Risks
+## Result
 
-- 孵化迁移与文章 revision、项目/书摘快照、媒体和知识链接迁移交错，删除旧 revision 会破坏 fresh install 与升级链。
-- `admin_publishing.py`、文章生命周期、回收站、E2E runner、Web revision 页面和共享 CSS 存在混合职责，整文件删除会损坏核心内容能力。
-- SQLite 当前存在 WAL；未停写或未使用 backup API 的裸文件复制可能得到不一致备份。
-- 外部归档仓库与本地加密数据备份是两个边界，任一缺失都不能证明可恢复。
-- 当前主工作树有独立文章页面修改，本任务必须在隔离工作树中完成并避免覆盖。
+Verified and closed by the harness close command.
 
-# Verification plan
+## Evidence
 
-- api-lint => AC-3, AC-4, AC-5, AC-6
-- api-tests => AC-3, AC-4, AC-5, AC-6, AC-8
-- web-quality => AC-2, AC-3, AC-6
-- e2e => AC-2, AC-3, AC-6
-- harness-integrity => AC-1, AC-7, AC-8
-- release => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6, AC-7, AC-8
+[20260826-retire-knowledge-incubator.json](../../verification/evidence/20260826-retire-knowledge-incubator.json)
+
+Closed at 2026-08-26T15:42:55.088417+00:00.
