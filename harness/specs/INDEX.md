@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **7 active**, **2 frozen**.
+Open specifications: **8 active**, **2 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -20,6 +20,7 @@ Open specifications: **7 active**, **2 frozen**.
 | spec-20260822-penpot-books-index | active | L1 | 按 Penpot Gavin_ui_v1 Books 板把 /books 改为全宽 hero、当前页在读高亮与 Date\|书名\|状态 ledger，不发明进度或全库计数 | task:20260822-penpot-books-index | Gavin | [active/20260822-penpot-books-index.md](active/20260822-penpot-books-index.md) |
 | spec-20260822-penpot-projects-index | active | L1 | 按 Penpot Gavin_ui_v1 Projects 板把 /projects 改为全宽 hero、本页第一条 lead 与 ledger 行，去掉 sticky 网格和假状态分数 | task:20260822-penpot-projects-index | Gavin | [active/20260822-penpot-projects-index.md](active/20260822-penpot-projects-index.md) |
 | spec-20260822-penpot-search | active | L1 | 按 Penpot Gavin_ui_v1 Search 板把公开 /search 改为全页内容区，并锁死 Idle/Loading/Results/Empty 与最新请求竞态 | task:20260822-penpot-search | Gavin | [active/20260822-penpot-search.md](active/20260822-penpot-search.md) |
+| spec-20260826-retire-knowledge-incubator | active | L1 | 在可恢复归档知识孵化实现与数据后，从博客主项目退役其摄入、检索、审计、生成和发布工作台运行面 | task:20260826-retire-knowledge-incubator | Gavin | [active/20260826-retire-knowledge-incubator.md](active/20260826-retire-knowledge-incubator.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
