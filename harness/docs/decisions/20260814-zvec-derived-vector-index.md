@@ -1,7 +1,7 @@
 ---
 id: decision-zvec-derived-vector-index
 level: L1
-summary: 用嵌入式 Zvec Flat 作为可回滚的派生存储，并由单一 Retrieval Service 持有模型与 collection
+summary: 已被知识孵化退役决策取代的 Zvec 派生向量索引方案
 load_when:
   - architecture-decision
   - retrieval-change
@@ -13,7 +13,7 @@ author: Gavin
 
 ## Status
 
-Accepted.
+Superseded by [Decision: retire the knowledge incubator](20260826-retire-knowledge-incubator.md) on 2026-08-26. 本文只解释历史实现，不再约束当前运行时。
 
 ## Context
 
