@@ -4,21 +4,13 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **10 active**, **0 frozen**.
+Open specifications: **2 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
 | sdd-lifecycle | — | L1 | Active spec 从创建、验证到压缩归档的状态转换 | spec-create, spec-close | Gavin | [_sdd/lifecycle.md](_sdd/lifecycle.md) |
 | sdd-policy | — | L1 | 风险触发、短生命周期的 Spec-Driven Development 规则 | behavior-change, api-change, data-change, security-change, cross-stack-change | Gavin | [_sdd/README.md](_sdd/README.md) |
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
-| spec-20260821-penpot-chrome-home | active | L1 | 按 Penpot Gavin_ui_v1 Chrome、Home 与 Mobile Menu 对齐公开站壳层和首页，并固化 <=639 全屏、640–1279 抽屉的响应式导航 | task:20260821-penpot-chrome-home | Gavin | [active/20260821-penpot-chrome-home.md](active/20260821-penpot-chrome-home.md) |
-| spec-20260822-penpot-about | active | L1 | 按 Penpot Gavin_ui_v1 About 板把 /about 改为 statement+coordinates、编号原则与 colophon，资料只绑 GET /profile，并把 /about 补进失败 503 套件 | task:20260822-penpot-about | Gavin | [active/20260822-penpot-about.md](active/20260822-penpot-about.md) |
-| spec-20260822-penpot-archive | active | L1 | 按 Penpot Gavin_ui_v1 Archive 板把 /archive 改为两栏 masthead 与年脊 Title\|Meta\|Date，日期 MM.DD，无栏目显示未分类，阅读时长复用现网公式 | task:20260822-penpot-archive | Gavin | [active/20260822-penpot-archive.md](active/20260822-penpot-archive.md) |
-| spec-20260822-penpot-articles-index | active | L1 | 按 Penpot Gavin_ui_v1 Articles 板把 /articles 改为横向真实栏目筛选与 Date\|Title\|Meta 行列表，并让 taxonomy 失败与列表失败解耦 | task:20260822-penpot-articles-index | Gavin | [active/20260822-penpot-articles-index.md](active/20260822-penpot-articles-index.md) |
-| spec-20260822-penpot-books-index | active | L1 | 按 Penpot Gavin_ui_v1 Books 板把 /books 改为全宽 hero、当前页在读高亮与 Date\|书名\|状态 ledger，不发明进度或全库计数 | task:20260822-penpot-books-index | Gavin | [active/20260822-penpot-books-index.md](active/20260822-penpot-books-index.md) |
-| spec-20260822-penpot-projects-index | active | L1 | 按 Penpot Gavin_ui_v1 Projects 板把 /projects 改为全宽 hero、本页第一条 lead 与 ledger 行，去掉 sticky 网格和假状态分数 | task:20260822-penpot-projects-index | Gavin | [active/20260822-penpot-projects-index.md](active/20260822-penpot-projects-index.md) |
-| spec-20260822-penpot-search | active | L1 | 按 Penpot Gavin_ui_v1 Search 板把公开 /search 改为全页内容区，并锁死 Idle/Loading/Results/Empty 与最新请求竞态 | task:20260822-penpot-search | Gavin | [active/20260822-penpot-search.md](active/20260822-penpot-search.md) |
-| spec-20260825-article-detail-penpot-alignment | active | L1 | 在现有公开文章阅读契约上，对齐 Penpot Article Long/Short 展示变体并修复代码复制与移动表格溢出 | task:20260825-article-detail-penpot-alignment | Gavin | [active/20260825-article-detail-penpot-alignment.md](active/20260825-article-detail-penpot-alignment.md) |
 | spec-20260827-admin-login-penpot-alignment | active | L1 | 按 Penpot Admin Login 桌面与移动目标重排登录页视觉，同时完整保留现有认证、安全与失败合同 | task:20260827-admin-login-penpot-alignment | Gavin | [active/20260827-admin-login-penpot-alignment.md](active/20260827-admin-login-penpot-alignment.md) |
 | spec-20260827-cancel-public-penpot-specs | active | L1 | 取消八个未完成的公开页面 Penpot 对齐规格，并从博客主项目开放规格列表移除 | task:20260827-cancel-public-penpot-specs | Gavin | [active/20260827-cancel-public-penpot-specs.md](active/20260827-cancel-public-penpot-specs.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
