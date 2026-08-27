@@ -1,7 +1,7 @@
 ---
 id: product-knowledge-incubator
 level: L1
-summary: 单管理员知识孵化工作台的摄入、检索、审计、草稿与发布需求设计
+summary: 已退役的单管理员知识孵化工作台历史需求设计
 load_when:
   - knowledge-incubator
   - ingestion
@@ -15,8 +15,10 @@ author: Gavin
 
 > 版本：v1.1  
 > 日期：2026-08-14  
-> 状态：首期六段已实现并验证；已补齐固定 L12 精排、三池批量丢弃与可恢复归档
-> 适用范围：知识孵化产品基线；后续实施必须拆分为短生命周期 active spec
+> 状态：已于 2026-08-26 从主项目退役；本文仅作历史归档
+> 适用范围：不再是当前产品基线；任何恢复都必须从独立归档重新立项
+
+退役后的主项目不再包含摄入、Worker、Retrieval Service、LLM 审计、孵化草稿、发布计划或相关数据库对象。最终实现位于私有只读归档 `my_blog-knowledge-incubator-archive` 的 `incubator-final-20260826` 标签，数据快照使用 DPAPI 加密并保存在归档仓库的忽略目录中。博客只保留与普通写作链路共享的不可变文章修订、修订差异与回滚、公开引用和内容关系能力。
 
 ## 1. 目标
 
