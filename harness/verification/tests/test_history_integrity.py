@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -68,6 +69,18 @@ def _context(root: Path) -> dict[str, object]:
     }
 
 
+def _git(root: Path, *args: str) -> None:
+    subprocess.run(
+        ["git", *args],
+        cwd=root,
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+
+
 def test_history_integrity_accepts_complete_close_and_standalone_evidence(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -113,3 +126,32 @@ def test_history_integrity_rejects_missing_mismatched_and_active_close_assets(
     assert any("original active spec is absent" in detail for detail in result["details"])
     assert any("main evidence is missing" in detail for detail in result["details"])
     assert any("event contract is inconsistent" in detail for detail in result["details"])
+
+
+def test_historical_active_paths_include_side_parent_history_after_merge(
+    tmp_path: Path,
+) -> None:
+    check = _load_check()
+    task_path = "harness/specs/active/20260827-merged.md"
+    _git(tmp_path, "init", "--initial-branch=main")
+    _git(tmp_path, "config", "user.name", "Harness Test")
+    _git(tmp_path, "config", "user.email", "harness@example.invalid")
+    _write(tmp_path / "README.md", "base\n")
+    _git(tmp_path, "add", "README.md")
+    _git(tmp_path, "commit", "-m", "base")
+
+    _git(tmp_path, "switch", "-c", "task")
+    _write(tmp_path / task_path, "active\n")
+    _git(tmp_path, "add", task_path)
+    _git(tmp_path, "commit", "-m", "add active spec")
+    (tmp_path / task_path).unlink()
+    _git(tmp_path, "add", "--update", task_path)
+    _git(tmp_path, "commit", "-m", "close active spec")
+
+    _git(tmp_path, "switch", "main")
+    _write(tmp_path / "README.md", "base\nmain\n")
+    _git(tmp_path, "add", "README.md")
+    _git(tmp_path, "commit", "-m", "advance main")
+    _git(tmp_path, "merge", "--no-ff", "task", "-m", "merge task")
+
+    assert task_path in check._historical_active_paths(tmp_path)

@@ -31,3 +31,7 @@ Harness 将冻结定义为 active spec 的可选人工暂停分支：`active →
 - 长期冻结不会永久拖红 release 门禁，也不会阻塞无关工作。
 - 恢复是继续验证、调整契约或关闭前的显式审计节点。
 - 完整状态历史随原始 spec 保存在 Git 历史中，并在压缩归档中继续保留。
+
+## Task-specific follow-up
+
+`20260807-github-source-crawler` 与 `20260807-github-discovery-ingestion` 在 2026-08-27 随已退役知识孵化边界迁入独立只读归档，不再保留在博客主项目的开放规格列表，也不能再通过 `resume` 恢复。该例外由 [Externalize the retired GitHub incubator specs](20260827-externalize-retired-github-specs.md) 明确记录；它不改变其他任务的通用 freeze/resume 生命周期。

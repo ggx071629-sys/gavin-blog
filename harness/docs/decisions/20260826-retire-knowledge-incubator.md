@@ -39,3 +39,7 @@ Accepted on 2026-08-26. Supersedes [Zvec derived vector index](20260814-zvec-der
 ## Re-evaluate when
 
 只有出现独立于博客发布链路、具备明确用户价值、运维预算、数据边界和长期维护者的新产品提案时才重新评估。不得以“代码仍在归档”为理由直接恢复主项目路由、表或依赖。
+
+## Follow-up: frozen GitHub specifications
+
+2026-08-27，两个依赖旧知识孵化运行面的 GitHub crawler/discovery 规格以“未完成并外置”的语义从博客主项目开放列表移除。它们没有经过 resume、verify 或 close，也没有被伪装成 compressed；原始 frozen 文件由独立只读归档继续保存。具体归档身份、完整性哈希和未来恢复边界见 [Externalize the retired GitHub incubator specs](20260827-externalize-retired-github-specs.md)。

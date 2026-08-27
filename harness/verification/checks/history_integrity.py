@@ -39,6 +39,7 @@ def _historical_active_paths(project_root: Path) -> set[str]:
         [
             "git",
             "log",
+            "--full-history",
             "--format=",
             "--name-only",
             "HEAD",

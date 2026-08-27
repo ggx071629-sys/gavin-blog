@@ -4,15 +4,13 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **10 active**, **2 frozen**.
+Open specifications: **10 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
 | sdd-lifecycle | — | L1 | Active spec 从创建、验证到压缩归档的状态转换 | spec-create, spec-close | Gavin | [_sdd/lifecycle.md](_sdd/lifecycle.md) |
 | sdd-policy | — | L1 | 风险触发、短生命周期的 Spec-Driven Development 规则 | behavior-change, api-change, data-change, security-change, cross-stack-change | Gavin | [_sdd/README.md](_sdd/README.md) |
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
-| spec-20260807-github-discovery-ingestion | frozen | L1 | 为博客建立 GitHub 发现画像、私有资料仓库同步与待处理池摄入闭环 | task:20260807-github-discovery-ingestion | Gavin | [active/20260807-github-discovery-ingestion.md](active/20260807-github-discovery-ingestion.md) |
-| spec-20260807-github-source-crawler | frozen | L1 | 在独立私有仓库中用 GitHub Actions 无模型发现并保存文章型 Markdown | task:20260807-github-source-crawler | Gavin | [active/20260807-github-source-crawler.md](active/20260807-github-source-crawler.md) |
 | spec-20260821-penpot-chrome-home | active | L1 | 按 Penpot Gavin_ui_v1 Chrome、Home 与 Mobile Menu 对齐公开站壳层和首页，并固化 <=639 全屏、640–1279 抽屉的响应式导航 | task:20260821-penpot-chrome-home | Gavin | [active/20260821-penpot-chrome-home.md](active/20260821-penpot-chrome-home.md) |
 | spec-20260822-penpot-about | active | L1 | 按 Penpot Gavin_ui_v1 About 板把 /about 改为 statement+coordinates、编号原则与 colophon，资料只绑 GET /profile，并把 /about 补进失败 503 套件 | task:20260822-penpot-about | Gavin | [active/20260822-penpot-about.md](active/20260822-penpot-about.md) |
 | spec-20260822-penpot-archive | active | L1 | 按 Penpot Gavin_ui_v1 Archive 板把 /archive 改为两栏 masthead 与年脊 Title\|Meta\|Date，日期 MM.DD，无栏目显示未分类，阅读时长复用现网公式 | task:20260822-penpot-archive | Gavin | [active/20260822-penpot-archive.md](active/20260822-penpot-archive.md) |

@@ -12,7 +12,7 @@ author: Gavin
 
 ## Status
 
-Accepted.
+Superseded on 2026-08-27 by [Externalize the retired GitHub incubator specs](20260827-externalize-retired-github-specs.md). The freeze rationale below remains historical; its resume and close instructions are no longer current for this task.
 
 ## Decision
 
