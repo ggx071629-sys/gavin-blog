@@ -8,6 +8,7 @@ author: Codex
 task_id: 20260827-document-module-alignment
 status: active
 verification_profile: release
+verification_escalation: 本任务会同步 Web、API、Contracts 与 Harness 的长期边界文档；虽然不改运行时，路径路由要求完整 release gate，避免只靠 Markdown 自证跨端一致性。
 documentation_impact: required
 documentation_targets:
   - README.md
