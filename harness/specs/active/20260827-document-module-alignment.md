@@ -71,7 +71,7 @@ state_history:
 - 只把文档从 L1 改成 L2但保留通用 load_when，仍会在普通检索或文章修订任务中污染上下文。
 - 清除所有孵化字符串会破坏 Alembic 单链升级、历史 evidence 和旧 revision source 兼容；本任务只清除当前知识面，不伪造历史。
 - 修改应用 README 与 contracts README 会触发 API、Web 和 release 路由门槛；必须在隔离工作树运行完整派生 gate。
-- 直接复用 3100 上的已有服务会让隔离 E2E 测试错误的构建；直接终止该进程则会破坏用户工作。端口覆盖必须同时驱动 Web origin、启动命令与同源登录测试。
+- 直接复用 3100 上的已有服务会让隔离 E2E 测试错误的构建；直接终止该进程则会破坏用户工作。端口覆盖必须同时驱动 Web origin、启动命令与同源登录测试，并拒绝固定 API 端口 8100。
 
 # Verification plan
 
