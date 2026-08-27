@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **9 active**, **2 frozen**.
+Open specifications: **10 active**, **2 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -22,6 +22,7 @@ Open specifications: **9 active**, **2 frozen**.
 | spec-20260822-penpot-search | active | L1 | 按 Penpot Gavin_ui_v1 Search 板把公开 /search 改为全页内容区，并锁死 Idle/Loading/Results/Empty 与最新请求竞态 | task:20260822-penpot-search | Gavin | [active/20260822-penpot-search.md](active/20260822-penpot-search.md) |
 | spec-20260825-article-detail-penpot-alignment | active | L1 | 在现有公开文章阅读契约上，对齐 Penpot Article Long/Short 展示变体并修复代码复制与移动表格溢出 | task:20260825-article-detail-penpot-alignment | Gavin | [active/20260825-article-detail-penpot-alignment.md](active/20260825-article-detail-penpot-alignment.md) |
 | spec-20260827-admin-login-penpot-alignment | active | L1 | 按 Penpot Admin Login 桌面与移动目标重排登录页视觉，同时完整保留现有认证、安全与失败合同 | task:20260827-admin-login-penpot-alignment | Gavin | [active/20260827-admin-login-penpot-alignment.md](active/20260827-admin-login-penpot-alignment.md) |
+| spec-20260827-externalize-retired-github-specs | active | L1 | 将两份未完成的 GitHub 知识孵化规格从主项目开放列表迁出，并以独立只读归档保留原始基线 | task:20260827-externalize-retired-github-specs | Gavin | [active/20260827-externalize-retired-github-specs.md](active/20260827-externalize-retired-github-specs.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
