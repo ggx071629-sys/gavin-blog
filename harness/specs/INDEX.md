@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **1 active**, **0 frozen**.
+Open specifications: **2 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -12,6 +12,7 @@ Open specifications: **1 active**, **0 frozen**.
 | sdd-policy | — | L1 | 风险触发、短生命周期的 Spec-Driven Development 规则 | behavior-change, api-change, data-change, security-change, cross-stack-change | Gavin | [_sdd/README.md](_sdd/README.md) |
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
 | spec-20260827-admin-login-penpot-alignment | active | L1 | 按 Penpot Admin Login 桌面与移动目标重排登录页视觉，同时完整保留现有认证、安全与失败合同 | task:20260827-admin-login-penpot-alignment | Gavin | [active/20260827-admin-login-penpot-alignment.md](active/20260827-admin-login-penpot-alignment.md) |
+| spec-20260827-document-module-alignment | active | L1 | 使当前项目文档与现有博客功能模块一一对应，并把已退役知识孵化资料隔离为冷历史 | task:20260827-document-module-alignment | Codex | [active/20260827-document-module-alignment.md](active/20260827-document-module-alignment.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
