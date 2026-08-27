@@ -1,12 +1,10 @@
 ---
 id: decision-retire-knowledge-incubator
-level: L1
-summary: 从博客主项目退役知识孵化，并以独立私有只读归档承担恢复边界
+level: L2
+summary: 旧子系统退役与独立只读归档的历史决策
 load_when:
-  - architecture-decision
-  - knowledge-incubator
-  - persistence-change
-  - article-revision
+  - historical-architecture
+  - task:20260826-retire-knowledge-incubator
 author: Gavin
 ---
 

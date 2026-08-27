@@ -1,16 +1,16 @@
 ---
 id: review-2026-08-09-project-audit-remediation-plan
-level: L1
-summary: 2026-08-09 项目审计缺陷的分批修复、规格拆分与验收总纲
+level: L2
+summary: 已闭环的 2026-08-09 项目审计历史修复计划
 load_when:
-  - remediation-planning
-  - defect-fix
-  - project-audit
-  - release-readiness
+  - historical-audit
+  - audit:2026-08-09
 author: Codex
 ---
 
 # 2026-08-09 项目审计修复总纲
+
+> 历史记录：对应修复已经闭环，本文不得作为当前待办或命令清单；现行功能以产品模块表和 active specs 为准。
 
 ## 文档定位
 

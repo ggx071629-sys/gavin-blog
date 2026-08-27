@@ -20,6 +20,7 @@ documentation_targets:
   - harness/docs/architecture/boundaries.md
   - harness/docs/decisions/0006-freeze-github-source-crawler-spec.md
   - harness/docs/decisions/0007-freeze-github-discovery-ingestion-spec.md
+  - harness/docs/decisions/0008-harness-freeze-lifecycle.md
   - harness/docs/decisions/20260814-zvec-derived-vector-index.md
   - harness/docs/decisions/20260826-retire-knowledge-incubator.md
   - harness/docs/decisions/20260827-externalize-retired-github-specs.md

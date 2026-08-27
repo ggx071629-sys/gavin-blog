@@ -1,10 +1,10 @@
 ---
 id: decision-freeze-github-discovery-ingestion-spec
-level: L1
-summary: 冻结 GitHub 发现摄入实现并等待爬虫与真实跨仓库验证
+level: L2
+summary: 已被外置决策取代的 GitHub 发现摄入冻结历史
 load_when:
+  - historical-architecture
   - task:20260807-github-discovery-ingestion
-  - architecture-decision
 author: Gavin
 ---
 

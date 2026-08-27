@@ -1,10 +1,10 @@
 ---
 id: decision-externalize-retired-github-specs
-level: L1
-summary: 将两份未完成的 GitHub 知识孵化规格从博客主项目迁出，并仅由独立只读归档保存
+level: L2
+summary: 两份未完成旧任务外置到独立只读归档的历史决策
 load_when:
-  - architecture-decision
-  - knowledge-incubator
+  - historical-architecture
+  - task:20260827-externalize-retired-github-specs
   - task:20260807-github-discovery-ingestion
   - task:20260807-github-source-crawler
 author: Gavin

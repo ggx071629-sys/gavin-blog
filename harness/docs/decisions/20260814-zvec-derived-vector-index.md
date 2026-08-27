@@ -1,11 +1,10 @@
 ---
 id: decision-zvec-derived-vector-index
-level: L1
-summary: 已被知识孵化退役决策取代的 Zvec 派生向量索引方案
+level: L2
+summary: 已被退役决策取代的派生向量索引历史方案
 load_when:
-  - architecture-decision
-  - retrieval-change
-  - persistence-change
+  - historical-architecture
+  - task:20260814-zvec-vector-index
 author: Gavin
 ---
 

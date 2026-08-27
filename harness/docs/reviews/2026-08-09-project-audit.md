@@ -1,15 +1,16 @@
 ---
 id: review-2026-08-09-project-audit
-level: L1
-summary: 2026-08-09 全项目隐性功能、UI/UX、安全与发布就绪审计
+level: L2
+summary: 2026-08-09 全项目审计历史快照
 load_when:
-  - project-audit
-  - defect-review
-  - release-readiness
+  - historical-audit
+  - audit:2026-08-09
 author: Codex
 ---
 
 # 2026-08-09 全项目隐性缺陷审计
+
+> 历史记录：结论只适用于文中固定快照，不代表当前功能、缺陷或发布状态。
 
 ## 结论（审计时点）
 

@@ -1,16 +1,20 @@
 ---
 id: review-2026-08-16-project-audit-remediation-plan
-level: L1
-summary: 2026-08-16 项目审计缺陷的分批修复与验收总纲
+level: L2
+summary: 已闭环的 2026-08-16 项目审计历史修复计划
 load_when:
-  - remediation-planning
-  - defect-fix
-  - project-audit
-  - release-readiness
+  - historical-audit
+  - audit:2026-08-16
 author: Grok
 ---
 
 # 2026-08-16 项目审计修复总纲
+
+> 历史记录：对应批次已经闭环、退役或被后续产品基线取代，本文不得作为当前待办或命令清单。
+
+## 后续处置
+
+`AUD26-021` 后续被明确重分类：搜索页范围 chips 是说明当前搜索覆盖面的装饰文本，不是筛选控件，因此保持不可点击，不再作为未修缺陷。当前交互语义以 Web README 为准。
 
 本文把 [2026-08-16 全项目缺陷审计](2026-08-16-project-audit.md) 转为修复路线。它不授权本轮修改业务代码。
 

@@ -1,10 +1,10 @@
 ---
 id: decision-freeze-github-source-crawler-spec
-level: L1
-summary: 在 my_blog 域名部署期间冻结 GitHub 爬虫验收基线
+level: L2
+summary: 已被外置决策取代的 GitHub 爬虫冻结历史
 load_when:
+  - historical-architecture
   - task:20260807-github-source-crawler
-  - architecture-decision
 author: Gavin
 ---
 

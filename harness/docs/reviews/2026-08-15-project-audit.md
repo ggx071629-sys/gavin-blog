@@ -1,15 +1,16 @@
 ---
 id: review-2026-08-15-project-audit
-level: L1
-summary: 2026-08-15 全项目缺陷快照（排除 frozen spec）
+level: L2
+summary: 2026-08-15 全项目审计历史快照
 load_when:
-  - project-audit
-  - defect-review
-  - release-readiness
+  - historical-audit
+  - audit:2026-08-15
 author: Grok
 ---
 
 # 2026-08-15 全项目缺陷审计
+
+> 历史记录：结论只适用于文中固定快照，不代表当前功能、缺陷或发布状态。
 
 ## 快照
 
