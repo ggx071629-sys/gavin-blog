@@ -41,12 +41,13 @@ state_history:
 - 717 行历史需求仍作为 L1 产品文档按通用 ingestion、retrieval、article-revision 标签路由；
 - 根 README、Web/API/Contracts 边界和架构基线持续把退役模块作为当前项目说明的一部分；
 - 2026-08-15 的 Grok 审计工作流仍调用已删除的文件、测试和运行面，日期锁定的审计与 superseded ADR 也仍挂在通用当前任务标签上。
+- 本地 release 验证发现核心 E2E 把 Web 端口固定为 3100；主工作区已有预览服务时，隔离 worktree 无法启动自己的服务器，也不能安全复用或终止该外部进程。
 
 压缩规格、schema v2 evidence、Evolution 事件、旧 Alembic revision 与只读来源枚举承担历史完整性和数据库升级兼容，不能为了“零字符串命中”而删除。当前知识面与历史审计层必须明确分离。
 
 # Goal
 
-让现行产品文档只描述当前博客模块及其 Web、API、数据、契约和 Harness 所有权；将知识孵化需求压缩为同路径 L2 历史墓碑，并把相关 ADR、审计快照和修复计划收窄为只按历史任务加载的冷资料，同时移除会执行已删除模块检查的过时 Grok 工作流。
+让现行产品文档只描述当前博客模块及其 Web、API、数据、契约和 Harness 所有权；将知识孵化需求压缩为同路径 L2 历史墓碑，并把相关 ADR、审计快照和修复计划收窄为只按历史任务加载的冷资料，同时移除会执行已删除模块检查的过时 Grok 工作流。保持 E2E 默认端口不变，但允许隔离验证显式覆盖 Web 端口，避免复用或终止主工作区服务。
 
 # Non-goals
 
@@ -62,7 +63,7 @@ state_history:
 - AC-2: 根 README、Web/API/Contracts 边界和架构边界只描述当前运行模块；过时 Grok 项目审计工作流被移除，不再有当前说明或可执行指令要求访问已删除的孵化页面、API、测试、Worker 或 Retrieval Service。
 - AC-3: harness/docs/product/knowledge-incubator.md 保留原路径但缩减为 L2 历史墓碑，只含退役结论、恢复/审计指针和已验证历史 blob；相关 superseded ADR、退役 ADR及日期审计文档不再使用通用当前任务标签。
 - AC-4: 压缩规格、evidence、Evolution 事件、Alembic 历史和兼容 source 值保持不变；生成索引、metadata、链接、历史完整性与结构检查全部通过。
-- AC-5: 应用边界文档与当前页面、FastAPI router、OpenAPI 路径和仓库文件清单一致；只保留数据库升级所需的精简旧迁移警告，不把历史子系统陈述为当前功能。
+- AC-5: 应用边界文档与当前页面、FastAPI router、OpenAPI 路径和仓库文件清单一致；只保留数据库升级所需的精简旧迁移警告，不把历史子系统陈述为当前功能；核心 E2E 可在不复用或终止已有服务的前提下覆盖 Web 端口。
 
 # Risks
 
@@ -70,6 +71,7 @@ state_history:
 - 只把文档从 L1 改成 L2但保留通用 load_when，仍会在普通检索或文章修订任务中污染上下文。
 - 清除所有孵化字符串会破坏 Alembic 单链升级、历史 evidence 和旧 revision source 兼容；本任务只清除当前知识面，不伪造历史。
 - 修改应用 README 与 contracts README 会触发 API、Web 和 release 路由门槛；必须在隔离工作树运行完整派生 gate。
+- 直接复用 3100 上的已有服务会让隔离 E2E 测试错误的构建；直接终止该进程则会破坏用户工作。端口覆盖必须同时驱动 Web origin、启动命令与同源登录测试。
 
 # Verification plan
 
