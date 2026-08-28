@@ -39,8 +39,9 @@ author: Gavin
 | 认证与个人资料 | 管理登录、路由保护、Profile 编辑与公开名片 | Session、CSRF、登录限流、Profile 持久化与字段可见性 | Web/API README、OpenAPI |
 | 内容发现输出 | canonical、Open Graph、结构化数据、RSS、站点地图与 robots | 只读公开投影和稳定内容 URL | Web README、产品基线 |
 | 工程控制面 | 同源代理、质量与 E2E 客户端 | SQLite/Alembic、配置与测试隔离 | AGENTS、Harness 索引、发布准备 |
+| 公开问答消费层（默认关闭） | 「问 Gavin」悬浮入口、懒加载面板、同源 SSE | 匿名 session／SSE、tombstone fence、公开 session view | Web/API/Contracts README、本决策 |
 
-默认关闭的匿名公开问答 API 内核已经存在于 API／Contracts，但**不是**已交付产品模块：没有 Web 气泡或管理配置页，About 静态文案未完整覆盖，OpenAPI 路由存在不等于真实供应商可用。启用前必须显式配置、provision runtime、签发 readiness receipt，且项目整体仍是生产部署 No-Go。
+默认关闭的匿名公开问答现包含 API 内核与可选 Web 消费层。Web 只有 `NUXT_PUBLIC_ASSISTANT_UI_ENABLED=true` 才渲染「问 Gavin」悬浮入口；API 仍由 `GAVIN_ASSISTANT_ONLINE_ENABLED` 控制。没有管理配置页，About 静态文案仍不是 RAG 语料，OpenAPI 路由存在不等于真实供应商可用。启用前必须显式配置两端开关、provision runtime、签发 readiness receipt，且项目整体仍是生产部署 No-Go。
 
 ## 写作与媒体
 
