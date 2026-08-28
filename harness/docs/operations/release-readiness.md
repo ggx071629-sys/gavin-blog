@@ -51,7 +51,9 @@ CI 在权威 gate 结束后以 `always()` 生成脱敏 Harness telemetry summary
 
 ## Data boundaries
 
-`.env`、开发日志、SQLite 数据库、本地媒体和原始验证产物不得进入 Git。备份必须同时覆盖 SQLite 数据库与媒体对象；只有数据库或只有媒体的备份不构成可恢复备份。
+`.env`、开发日志、SQLite 数据库、本地媒体和原始验证产物不得进入 Git。备份必须同时覆盖内容事实库 SQLite 与媒体对象，并包含其中的 index-embedding 账本；只有数据库或只有媒体的备份不构成可恢复备份。`assistant_runtime` 数据库及其 WAL/SHM、checkpoint 和临时副本明确排除于长期备份。恢复演练须先重建空 runtime schema，公开 Chat／query 至少锁到下一个北京时间零点，Qdrant 丢失时须先按 Worker 账本重建 generation 再签发新的 readiness receipt。
+
+北京时间每日 2.00 元人民币只约束按部署价格快照计算的公开 Chat 新调用准入／预留；异常 usage 的保守结算可以更高，真实供应商账单仍需供应商侧限额。通过 release gate 不等于助手已对访客开放或生产 Go。真实供应商、反向代理 SSE 与 2 vCPU／4 GB 实机验收仍是生产放行条件。
 
 `.run/`、`my_image/` 和复刻项目快照 `my_blog_fork/` 永久排除于 smart_blog Git 历史与 CI checkout；不得通过强制添加、归档上传或 workflow artifact 绕过该边界。
 

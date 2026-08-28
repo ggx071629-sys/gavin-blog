@@ -40,6 +40,8 @@ author: Gavin
 | 内容发现输出 | canonical、Open Graph、结构化数据、RSS、站点地图与 robots | 只读公开投影和稳定内容 URL | Web README、产品基线 |
 | 工程控制面 | 同源代理、质量与 E2E 客户端 | SQLite/Alembic、配置与测试隔离 | AGENTS、Harness 索引、发布准备 |
 
+默认关闭的匿名公开问答 API 内核已经存在于 API／Contracts，但**不是**已交付产品模块：没有 Web 气泡或管理配置页，About 静态文案未完整覆盖，OpenAPI 路由存在不等于真实供应商可用。启用前必须显式配置、provision runtime、签发 readiness receipt，且项目整体仍是生产部署 No-Go。
+
 ## 写作与媒体
 
 - 单管理员后台 Markdown 编辑器，支持草稿、预览、发布和自动保存。
