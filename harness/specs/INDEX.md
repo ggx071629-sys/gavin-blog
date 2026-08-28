@@ -4,14 +4,13 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **1 active**, **0 frozen**.
+Open specifications: **0 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
 | sdd-lifecycle | — | L1 | Active spec 从创建、验证到压缩归档的状态转换 | spec-create, spec-close | Gavin | [_sdd/lifecycle.md](_sdd/lifecycle.md) |
 | sdd-policy | — | L1 | 风险触发、短生命周期的 Spec-Driven Development 规则 | behavior-change, api-change, data-change, security-change, cross-stack-change | Gavin | [_sdd/README.md](_sdd/README.md) |
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
-| spec-20260828-public-qa-online-core | active | L1 | 以 LangGraph、LangChain 和既有混合检索基础构建默认关闭、费用有界且可验证的匿名公开问答后端内核 | task:20260828-public-qa-online-core | Gavin | [active/20260828-public-qa-online-core.md](active/20260828-public-qa-online-core.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -102,4 +101,5 @@ Open specifications: **1 active**, **0 frozen**.
 | archive-20260827-cancel-public-penpot-specs | compressed | L2 | 取消八个未完成的公开页面 Penpot 对齐规格，并从博客主项目开放规格列表移除 | task:20260827-cancel-public-penpot-specs | Gavin | [archive/20260827-cancel-public-penpot-specs.md](archive/20260827-cancel-public-penpot-specs.md) |
 | archive-20260827-document-module-alignment | compressed | L2 | 使当前项目文档与现有博客功能模块一一对应，并把已退役知识孵化资料隔离为冷历史 | task:20260827-document-module-alignment | Codex | [archive/20260827-document-module-alignment.md](archive/20260827-document-module-alignment.md) |
 | archive-20260827-externalize-retired-github-specs | compressed | L2 | 将两份未完成的 GitHub 知识孵化规格从主项目开放列表迁出，并以独立只读归档保留原始基线 | task:20260827-externalize-retired-github-specs | Gavin | [archive/20260827-externalize-retired-github-specs.md](archive/20260827-externalize-retired-github-specs.md) |
+| archive-20260828-public-qa-online-core | compressed | L2 | 以 LangGraph、LangChain 和既有混合检索基础构建默认关闭、费用有界且可验证的匿名公开问答后端内核 | task:20260828-public-qa-online-core | Gavin | [archive/20260828-public-qa-online-core.md](archive/20260828-public-qa-online-core.md) |
 | archive-20260828-rag-index-foundation | compressed | L2 | 为公开内容问答建立可重建、修订绑定且可降级的 SQLite FTS5 与 Qdrant 混合检索索引基础 | task:20260828-rag-index-foundation | Gavin | [archive/20260828-rag-index-foundation.md](archive/20260828-rag-index-foundation.md) |

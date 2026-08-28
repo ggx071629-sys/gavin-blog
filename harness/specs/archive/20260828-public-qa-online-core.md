@@ -1,14 +1,12 @@
 ---
-id: spec-20260828-public-qa-online-core
-level: L1
+id: archive-20260828-public-qa-online-core
+level: L2
 summary: 以 LangGraph、LangChain 和既有混合检索基础构建默认关闭、费用有界且可验证的匿名公开问答后端内核
 load_when:
   - task:20260828-public-qa-online-core
 author: Gavin
 task_id: 20260828-public-qa-online-core
-status: active
-verification_profile: release
-verification_escalation: 匿名公开模型入口同时改变 API、OpenAPI、会话持久化、外部付费调用和安全边界；即使本阶段不交付 Web UI，也必须用完整 release bundle 验证注入防护、费用并发原子性、流式契约及现有站点回归。
+status: compressed
 documentation_impact: required
 documentation_targets:
   - apps/api/README.md
@@ -21,15 +19,11 @@ documentation_reason: 本任务新增匿名公开问答 API、LangGraph 短会�
 state_history:
 ---
 
-# Context
+# 20260828-public-qa-online-core
 
-第一阶段 `20260828-rag-index-foundation` 已实现、验证并关闭：SQLite 保存当前公开内容的规范切片与助手 FTS5，Qdrant 保存可重建的稠密向量，内部 Hybrid Retriever 对文章、项目、读书笔记和公开 Profile 执行 RRF 融合及当前发布修订二次校验。该阶段没有真实生产 Embedding 适配器、聊天模型、LangGraph、匿名会话、公开问答路由、费用／限流控制、引用校验或 Prompt 注入防护；查询 runtime 也仍错误地绑定 Worker 启用条件。
+Deterministic compressed record. The original active spec remains in Git history.
 
-目标用户是低流量的招聘方访客，助手只用于了解本站公开内容和站长已公开的技能，不做岗位测评或任意通用问答。已确认的运行边界是：匿名只读、短多轮、30 分钟空闲与 24 小时绝对会话期限、不按问题数封顶、北京时间每日 2.00 元人民币的公开 Chat 新调用准入／预留上限、独立 Embedding 预算、每 IP 每分钟 3 问且每 10 分钟 10 问、每会话／每 IP／全局并发分别为 1／2／3，以及只向云端供应商发送当前问题、有限历史和必要公开证据。
-
-“全站”目前不是准确事实：Nuxt About 模板中尚无规范数据源的静态文案不在第一阶段语料中。本阶段只能回答已进入当前活动 generation 的公开文章、项目、读书笔记与 Profile；在 About 文案建立规范来源并重新索引前，不得宣称完整覆盖全部页面。项目整体仍是生产部署 No-Go，本阶段只建立默认关闭的后端在线内核，不以本地替身或 OpenAPI 路由存在冒充真实供应商已可用。
-
-# Goal
+## Goal
 
 在不改变现有公开阅读、全站搜索和管理员流程的前提下，用显式、有限状态的 LangGraph `StateGraph` 编排 LangChain 结构化模型调用与既有 Hybrid Retriever，交付可供后续悬浮气泡消费的匿名公开问答 API。在线路径必须在任何付费调用前完成同源、输入、会话、速率、并发与最坏费用准入；把检索内容视为不可信数据；只返回通过当前公开修订、结构、引用与完整性校验的整段答案；并以短期可删除状态、幂等调用账本和安全聚合指标限制隐私、重复扣费及滥用风险。
 
@@ -37,19 +31,7 @@ state_history:
 
 为保持 active spec 可执行，实现在同一 feature flag 下依次完成三个不可独立开放的内部里程碑：先完成依赖、provider、迁移、checkpoint 与准入账本；再完成 Retriever hydration、StateGraph、结构化回答和公开 API；最后完成攻击／竞态矩阵、OpenAPI、回归与长期文档。只有全部 AC 与 release bundle 通过后才允许进入部署验收，任一中间里程碑都不得打开公开入口。
 
-# Non-goals
-
-- 不实现 Nuxt 悬浮气泡、页面入口、视觉／无障碍交互、管理配置页或费用看板；这些属于后续 Web 交付阶段。
-- 不摄入 About 模板静态文案，不解析 `apps/web` 源码，也不恢复已退役知识孵化语料。
-- 不接收招聘 JD，不做岗位匹配、候选人评分、能力测评、录用建议或跨候选人比较。
-- 不提供联网搜索、任意外部知识、浏览器／代码／数据库工具、写操作、邮件或其他 agent action；不使用 Deep Agents、自由工具循环或长期 LangGraph Store。
-- 不训练、微调或比较模型，不承诺供应商之间的质量排名，也不把真实 API 调用加入自动化测试。
-- 不支持跨匿名会话记忆、公开账号、管理员聊天特权或原始会话长期审计。
-- 不在本任务创建部署目录、引入 Postgres／Redis、支持多 API 进程或完成 2 vCPU／4 GB 实机容量与反向代理验收；这些是生产放行任务。
-- 不自动发现或安装任意 LangChain 供应商集成。本阶段只定义并实现一个显式的 OpenAI-compatible Chat／Embedding 适配边界；非兼容供应商需后续独立变更。
-- 不增加模型式 query rewrite、reranker 或额外判断模型；短多轮检索查询只从已验证的当前问题和有界历史确定性构造，以优先保住 2 元预算和可审计性。
-
-# Acceptance criteria
+## Acceptance criteria
 
 - AC-1: API 依赖与 lockfile 显式加入彼此兼容的 `langchain>=1,<2`、`langchain-core>=1,<2`、`langgraph>=1.1,<2`、`langsmith>=0.3,<1`、`langgraph-checkpoint-sqlite` 和 `langchain-openai>=1,<2`，并由 lockfile 固定实际通过测试的完整解析版本；LangSmith 作为直接依赖但原始内容 tracing 仍按 AC-12 默认关闭。首个 provider 边界固定为 OpenAI-compatible Chat Completions／Embeddings，`ChatOpenAI` 显式设置 `use_responses_api=False`、`streaming=False`、`max_retries=0`，Embedding 与底层 SDK/HTTP 同样关闭重试，禁止根据 model name 或 endpoint 隐式切换 Responses API；不得引入 `langchain-community`、Deep Agents、Tavily／联网搜索或其他未使用的 agent/tool 依赖。Chat 工厂返回 LangChain `BaseChatModel`；自有 metered Embedding gateway 实现 `Embeddings` 兼容接口，同时向 Worker／query 路径暴露受各自账本约束的向量与 usage 结果，不能因标准 `embed_query` 只返回向量而丢失费用信息。development/test 使用无网络确定性替身；production 禁止替身、占位 provider/model/version、隐式默认模型和运行时自动安装包。第一阶段 Worker 获得真实 OpenAI-compatible Embedding 实现，但仍是只写内容事实库／Qdrant 的独立进程，绝不打开 `assistant_runtime`；API query runtime 与 indexing runtime、配置、预算及 owner 分离。API 未启用助手时不构造模型、不连接 Qdrant／checkpoint，也不要求任何在线助手环境变量。
 - AC-2: 内容事实库通过现有 Alembic 链新增两类不含正文或逐 turn 数据的对象：北京时间日聚合指标，以及仅由独立索引 Worker 所有、与既有 outbox/generation 同库的 index-embedding 固定点预算／reservation／attempt 账本；后者可以保存任务／generation 标识、请求指纹、价格快照、usage、费用和状态，但不得保存切片正文、向量、provider raw response 或匿名会话标识。fresh、upgrade 和 downgrade → upgrade 均可验证且旧迁移保持不变。匿名 session、turn／幂等键、Chat 与 query-embedding 费用账本、online provider attempt、readiness receipt、速率事件、并发 lease、每 turn 有界 SSE event journal 与 LangGraph saver 表全部位于独立 `assistant_runtime` SQLite；该文件只有单个 API 进程持有 owner lease，索引 Worker 绝不打开它。应用自有 runtime 表使用独立 Alembic migration chain 及独立 version table，只管理 allowlist control 表，绝不得 autogenerate、drop、rename 或迁移 Saver 固定表，Saver provisioning 也不得触碰 control 表。Saver 在 API lifespan 内独占自己的 `aiosqlite.Connection`，control 与 Alembic 使用另外的连接／engine，禁止借用 Saver 内部连接或假设同文件的 control 与 checkpoint 能跨连接原子提交。每条 Saver／control 连接建立时均设置并验证 `busy_timeout`、`secure_delete=ON`、`synchronous=FULL` 与 WAL，control 连接还须 `foreign_keys=ON`。显式 provisioning 命令必须取得与 API owner 竞争的同一个跨进程排他 mutex／OS file lock，并在无 active runner 且 Saver connection 已关闭时贯穿固定顺序的 runtime Alembic、受支持的 Saver setup、schema fingerprint／receipt 生成与复核；它不能先检查“当前无 lease”再无锁执行，也不能与 API lifespan 并存。API startup 取得同一 owner lock 后，必须先用独立只读连接严格验证已 provision 的 schema/version/fingerprint，缺失、损坏或不匹配即失败关闭，绝不实际创建、迁移、修复或自动重建 schema；验证成功后才允许 pinned `AsyncSqliteSaver` 实例执行其官方首次使用必需的幂等 `setup()`，并断言前后 schema version、表／索引 allowlist 与 fingerprint 完全不变，任何实际 schema change 都使启动失败。control 写事务必须短且不得跨 provider 请求、`graph.astream`／Saver API、节点返回或任何会触发 sync checkpoint 的 `await`；admission／budget／lease 可用短 `BEGIN IMMEDIATE`，仅在任何付费副作用前对 `SQLITE_BUSY` 做有界重试。runtime control 表中的 turn、online attempt、Chat/query 费用账本与 terminal event 是在线付费副作用、幂等恢复和客户端交付的唯一事实源：cookie／CSRF 原值只发给客户端，库中只存不可逆 HMAC/hash；provider 返回后必须先在一个短 runtime 事务中保存 TTL 内可复用的 allowlist parsed Chat result 或 query vector、finish reason、usage 与 attempt 状态，再立即丢弃 raw provider response，之后才允许 LangGraph 节点返回。checkpoint 只是同一文件中可对账、可丢弃的单个 in-flight turn 编排恢复状态；每个已接受 turn 创建一个服务端随机内部 `thread_id`，同幂等 turn 的恢复复用它，多轮历史从 runtime control 表有界加载，新 turn 不复用旧 thread，terminal control 事务提交且 runner quiescent 后调用 `adelete_thread()`，因此 checkpoint 不承担跨 turn 记忆且不能无限增长。任一 control／checkpoint 写入窗口崩溃后，都以带 fencing token 的 control attempt/terminal 状态决定复用已完成结果、恢复未开始节点或把 `sending`／未知调用安全终止，绝不凭 checkpoint 自动重复付费副作用；索引调用则只服从内容库中的 index attempt 事实源。
@@ -65,26 +47,12 @@ state_history:
 - AC-12: 匿名会话只由被接受的新问题刷新空闲时间，单纯 GET／SSE 重放不续期；最后有效活动 30 分钟后过期且创建 24 小时后绝对过期，不跨 session 记忆。只把通过守卫并得到完整终态的问答加入历史，模型上下文按 token 上限确定性裁剪且不生成隐藏摘要。query vector 在 dense candidate IDs 或降级状态持久化后立即删除；Chat parsed result 在 terminal answer/refusal 原子提交后立即删除，校验失败的 parsed result 在创建下一 attempt 前删除，均不等到 session TTL。到期或 DELETE 先原子 tombstone session、递增 fencing epoch、撤销 cookie／CSRF 与读取权、阻止新调用和迟到结果提交，并取消尚未发送付费副作用的 runner；只有 runner 已 quiescent、attempt 已知或按最坏值结算且 lease 已释放后才调用对应 `adelete_thread()`，随后复查 checkpoint 未被迟到 writer 重建。5 分钟清理 sweep 必须在 tombstone 后最迟 15 分钟内删除其余持久原始问题／答案、evidence alias、SSE journal 与 checkpoint；WAL checkpoint/truncate 只在不存在任何 active reader 且不存在任何 active writer 时执行，必须检查 SQLite 返回码及 remaining frame／WAL 已归零，`SQLITE_BUSY` 或未清空超过 SLA 视为清理失败。AC-3 的 provider timeout 加 cleanup grace 必须严格小于该 SLA，超时／删除失败会触发 cleanup circuit breaker，阻止所有新 session、新问题和新 provider 调用，只允许现有只读响应、撤销、结算与清理，不能靠继续生成原始数据降级。可能已计费的 attempt、reservation、lease 和 fencing tombstone 必须先按 AC-7 已知或最坏费用结算，不能因隐私删除而提前释放；结算或滚动清除后只含 hash／模型价格快照／usage／费用／终态的最小 billing/idempotency tombstone 最多保留 48 小时，rate event 与每日 IP HMAC 在最大窗口结束后 20 分钟内删除。只有无正文的北京时间日聚合指标可从 runtime 异步、非权威、允许缺失地复制到内容事实库长期保留，禁止使用跨文件 `ATTACH` 事务或让该投影参与准入、计费、幂等与恢复判断。`assistant_runtime` 数据库及其 WAL/SHM、checkpoint、临时副本和文件系统快照明确排除于长期备份；内容／媒体备份不得复制它。恢复演练先重建空 runtime schema并保持公开 session、Chat 与 query-embedding 全部关闭；因当日 online 账本已丢失，这三类调用至少锁至下一个北京时间零点。Qdrant 若同时丢失，则在该隔离期内仍禁止公共流量，只允许显式 operator maintenance 命令在索引 Worker readiness、内容库 index 预算／attempt 账本及独占 rebuild lease 约束下重建 staging generation；若无法证明恢复前当日 index 账本完整，也须等到下一北京时间零点才可发送 index embedding。Worker 验证并原子激活 generation 后，API 才能针对该 generation 运行最终 Chat／Embedding／Qdrant 探针并签发新的 credential-bound readiness receipt；receipt 未成功前公开助手保持关闭。这一分阶段恢复不允许 Chat、query embedding 或旧 generation 抢跑，也不要求 Worker 打开丢失的 `assistant_runtime`。应用与反向代理日志不得记录完整问题／答案、公开片段、cookie、IP、API Key、provider raw response 或 prompt；LangSmith／其他 tracing 默认关闭原始内容，启用时也只能发送显式 allowlist 的脱敏结构指标。本地删除无法撤回已经发给云端供应商的数据或改变其留存政策，该限制、实际供应商政策、外发字段以及 runtime 备份例外必须在上线前向访客／运维披露。
 - AC-13: 全部自动化测试不访问公网，以不少于 30 个按威胁／分支矩阵命名的固定案例、确定性 Chat／Embedding／Qdrant 替身和受控时钟覆盖图的每条分支，并要求输入／检索／输出安全类别各至少有正常与攻击样本。覆盖项至少包括：内容与 runtime 两条迁移／provisioning 路径，证明索引 Worker 只访问内容库 index 账本而不打开 runtime、API 是 runtime 唯一进程 owner、第二 API／非 owner runtime 访问失败关闭、provisioning 持有与 API 共用的跨进程排他锁且没有检查后启动的 TOCTOU、独立连接／version table、control migration 不碰 Saver 表、Saver setup 不碰 control 表、API 预检 schema 后允许 pinned Saver 幂等 setup 但前后 fingerprint 不变，缺表／损坏时不自动创建修复，以及长 control 事务不会跨 graph／provider／Saver await；SSE 单行 JSON/CRLF 安全、subscriber 上限、只终态输出与 cursor/410 重放；同 key 幂等、断线后 runner；provider `prepared`／`sending` 提交前后／完成落账后／checkpoint 前后的崩溃窗口、迟到旧 fencing owner；30 分钟／24 小时过期、敏感 preflight 命中时未创建 turn/thread 且未调用 graph/checkpointer、拒绝原文从未出现在数据库／WAL／checkpoint／journal／日志、query vector／parsed result 及时删除、per-turn checkpoint 删除与 purge SLA/circuit breaker、无读写者时 WAL truncate 成功及长读／`SQLITE_BUSY` 超时失败关闭；北京时间跨日的今日／昨日 IP key 合并、两个 Embedding 日桶、费用向上取整／价格快照／预算竞争；envelope／session／question 限流和并发；IP／origin／CSRF／可信代理链伪造；readiness receipt HMAC/credential fingerprint 篡改、API Key/config/manifest 失配；query-embedding 幂等与 dense 降级；generation 竞态；Prompt 注入与结构引用／完整性失败，以及 AC-4 每个 HTTP/SSE machine code。备份／恢复测试证明内容事实库、其中的 index 账本与媒体仍被覆盖，runtime/WAL/SHM 不进入长期备份；Qdrant 同时丢失时，公共 Chat/query 保持关闭，index rebuild 只在预算／attempt／maintenance lease 下运行，先激活新 generation、再签最终 receipt，缺失完整当日 index 账本时直到次日零点也不得发送；日聚合异步复制允许缺失且从不成为付费事实源。配置价格下的新调用预算超卖、私有内容泄漏、引用闭包伪造、固定语料中的高置信注入到达 provider 和答案半截输出为零容忍 release blocker。OpenAPI 快照同步新增 API 和错误／header／SSE 契约，现有 `/api/v1/search`、管理员认证与内容发布行为不变，Web 代码和 `apps/web/types/api.ts` 本阶段不修改且既有 Web／E2E 回归通过。长期文档明确本阶段只是默认关闭的后端内核、About 未完整覆盖、OpenAI-compatible 首个适配边界、runtime SQLite／AsyncSqliteSaver 与备份例外及迁移 Postgres 的触发器、2 元只是基于配置价格的公开调用准入上限而非结算／供应商账单保证，以及真实供应商、反向代理和 2 vCPU／4 GB 实机验收仍是生产放行条件。
 
-# Risks
+## Result
 
-- 2.00 元只约束按部署价格快照计算的新 Chat 调用准入／预留；异常 usage 的保守结算可以高于该值，供应商调价、汇率、缓存计价、请求结果不明或账号内其他客户端也会让真实账单不同。必须同时使用供应商侧限额／告警，不能把本账本宣传为财务保证；两个 Embedding 预算池同样是应用侧准入控制。
-- `AsyncSqliteSaver` 的官方定位偏向本地／实验，生产通常优先 Postgres。本项目例外只在单进程、低并发、独立本地磁盘和实测通过时成立；扩成多 worker／多主机、共享存储、持续锁等待或清理失败时必须先迁移 saver，不能扩大例外。
-- 外部模型请求存在“供应商已计费但响应未知”的不可消除窗口。保守扣除上限且不自动重发可以避免重复放大，但会牺牲该 turn 的可用性；供应商原生幂等键若存在只能作为附加保障。
-- Prompt 注入没有完美通用解。能力最小化、无工具、公开语料 allowlist、确定性 guard、结构化输出和发布攻击语料降低后果，但新的攻击样式仍需持续补充测试。
-- 用户问题与公开证据一旦发给云端，本地撤销只能删除本站副本，不能控制供应商日志、训练或法定留存；供应商选择、DPA／隐私政策和访客披露仍是上线前外部治理条件。
-- OpenAI-compatible 只描述协议表面，不保证所有供应商支持 structured output、usage metadata、finish reason 或相同 Embedding 语义；能力探针失败时应保持关闭，而不是用宽松解析绕过。
-- runtime SQLite 同时承载在线控制账本与 LangGraph saver，会产生连接串行化和锁竞争；目标并发很低，但仍须用独立连接、短事务、busy timeout、同步 durability 和竞争测试验证，不能通过放松预算原子性解决。它被排除于长期备份意味着灾难恢复会主动丢弃短会话并锁住当日 Chat/query 调用；index 账本改由内容库持久化虽能提供分阶段 Qdrant 重建路径，也要求该账本的备份／恢复完整性，这是隐私优先的可用性取舍。
-- 每 IP 限流会让共享 NAT 下的多位 HR 相互影响，代理配置错误也可能把所有访客归为同一 IP 或允许伪造；这是低预算站点的安全／可用性权衡，应通过指标观察而非隐式提高额度。
-- FTS5 的中文词法能力有限，dense 分支故障时答案召回质量会下降；degraded 必须可观察且证据不足时拒答，不能用模型常识补齐。
-- SSE 可能被反向代理缓冲或中断；本阶段能验证应用契约，真实代理配置与移动网络恢复仍属于部署／Web 阶段。
-- 本阶段没有 Web 消费者，也不做真实模型质量和目标服务器容量验收，因此通过 release gate 不等于助手已经对访客可用或生产 Go。
+Verified and closed by the harness close command.
 
-# Verification plan
+## Evidence
 
-- api-lint => AC-1, AC-8, AC-10, AC-11
-- api-tests => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6, AC-7, AC-8, AC-9, AC-10, AC-11, AC-12, AC-13
-- harness-tests => AC-13
-- web-quality => AC-13
-- e2e => AC-13
-- harness-integrity => AC-13
-- release => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6, AC-7, AC-8, AC-9, AC-10, AC-11, AC-12, AC-13
+[20260828-public-qa-online-core.json](../../verification/evidence/20260828-public-qa-online-core.json)
+
+Closed at 2026-08-28T18:21:08.543105+00:00.
