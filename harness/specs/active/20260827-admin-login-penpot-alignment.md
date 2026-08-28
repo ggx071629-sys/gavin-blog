@@ -7,7 +7,7 @@ load_when:
 author: Gavin
 task_id: 20260827-admin-login-penpot-alignment
 status: active
-verification_profile: focused
+verification_profile: release
 documentation_impact: required
 documentation_targets:
   - apps/web/README.md
@@ -60,3 +60,4 @@ Penpot 只约束视觉与交互表达；认证、路由、安全和失败语义�
 
 - e2e => AC-1, AC-2, AC-3, AC-4, AC-5
 - web-quality => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6
+- release => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6
