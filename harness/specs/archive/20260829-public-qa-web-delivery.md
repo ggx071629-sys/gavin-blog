@@ -1,14 +1,12 @@
 ---
-id: spec-20260829-public-qa-web-delivery
-level: L1
+id: archive-20260829-public-qa-web-delivery
+level: L2
 summary: 为默认关闭的匿名公开问答内核交付可访问、可恢复且引用可追溯的悬浮 Web 消费体验
 load_when:
   - task:20260829-public-qa-web-delivery
 author: Gavin
 task_id: 20260829-public-qa-web-delivery
-status: active
-verification_profile: release
-verification_escalation: 匿名 SSE 会话首次进入公开 Nuxt 用户旅程并同步 API、OpenAPI 与手写 Web 类型，必须用完整 release bundle 验证同源代理、幂等恢复、隐私、无障碍和现有站点回归。
+status: compressed
 documentation_impact: required
 documentation_targets:
   - README.md
@@ -23,17 +21,11 @@ documentation_reason: 本任务把默认关闭的匿名问答后端首次接入�
 state_history:
 ---
 
-# Context
+# 20260829-public-qa-web-delivery
 
-第二阶段 `20260828-public-qa-online-core` 已在当前 `feat/20260828-public-qa-online-core` 分支实现、以 release profile 验证并关闭：归档与 schema v2 evidence 覆盖 AC-1 至 AC-13，记录 16/16 checks、960 passed、0 failed、2 skipped；创建本 spec 前核验时工作树干净且无其他 active spec。该事实只证明当前叠加 feature 分支上的本地交付；本地 `main` 尚不包含阶段一／二提交，也没有证据证明已经 push、合并或生产部署。第三阶段实现必须以包含关闭提交 `57607e7` 的当前基线为前提，不能从缺少后端合同的分支假装开始。
+Deterministic compressed record. The original active spec remains in Git history.
 
-现有 API 已提供默认关闭的同源匿名 session、GET／DELETE session、POST + SSE questions、固定阶段、整段终态、引用／来源、幂等重放、费用／限流／并发和注入防护，但 `apps/web` 尚无消费者，`types/api.ts` 也未声明助手类型。面向真实浏览器消费的只读审计同时发现，Phase 2 的“已关闭”只是流程与既有 evidence 事实，并不等于全部安全语义已兑现：`SessionTurn` 缺 question／citations／sources／active turn，GET status 缺 no-store，session-create 在识别已有 session 前计限额，SSE 暴露内部 `idempotent`，DELETE 202 丢失撤销 Cookie header，session tombstone 尚未 fence 后续 provider／terminal 写入，runner 异常可留下 quiescent-but-running orphan。模型原文中的 `[n]` 也可与服务器 marker 混淆。这些是进入第三阶段前必须闭合的基线偏差；本 spec 将其限制为 Web 消费必需的 API／runner hardening，不把通过的 960 项测试误写成未发现缺陷的证明。
-
-浏览器若在一个付费 turn 运行中刷新，既不能安全保存原始 idempotency payload，也需要知道该 turn 是否仍在运行。用 `localStorage`／`sessionStorage` 或浏览器原生表单恢复保存原始问答或幂等 payload 会扩大隐私与 XSS 暴露面，因此本阶段采用 additive session-view 与服务端 recovery 合同补齐，而不绕过现有 TTL、256 KiB rolling cap 或 15 分钟 purge 上界。
-
-“第三阶段”没有既存的持久路线定义。本 spec 将它明确收敛为公开悬浮问答 Web 交付：兑现已确认的悬浮气泡，保持 Electric Editorial 双主题，并让招聘访客快速了解已收录的公开文章、项目、读书笔记与 Profile。About 模板静态品牌文案仍不是 RAG 语料，真实供应商、反向代理、备份恢复和 2 vCPU／4 GB 实机仍未放行，项目继续是 production No-Go。
-
-# Goal
+## Goal
 
 在不改变 RAG、LangGraph 图拓扑、费用／限额数值和管理员流程的前提下，先闭合 session tombstone fencing、runner 异常终结与公开 wire 投影，再为 Nuxt 默认公开布局增加独立、默认关闭的 `问 Gavin` 悬浮入口。入口只在显式开启 Web flag 后渲染，首次打开才通过同源代理建立或恢复匿名短会话；面板用现有 Electric Editorial token 呈现完整问题、四段固定进度、服务器验证后的整段答案、编号引用与来源台账，不展示 token 流或半截草稿。
 
@@ -41,16 +33,7 @@ state_history:
 
 为支持刷新恢复，对外 API 合同只做 additive 变化，内部则执行上述 fence／runner hardening：在现有最多约 15 分钟且可能受 256 KiB cap 提前清理的 terminal body 窗口内返回 completed turn 的问题、答案、引用与来源，正文清理后只返回明确的 `body_available=false` tombstone 元数据；同一只读快照另返回最多一个 active turn 及其固定阶段。已有有效 session 每次 bootstrap 都同步并重新签发同一 session-bound deterministic CSRF，且不刷新配置化 idle TTL。浏览器不持久化原始问题、答案、幂等 key 或 payload；普通断线只在内存仍在时用同 key／同 payload／最后 event ID 有界重连，整页刷新则通过只读 session polling 等待既有 active turn 完成，绝不以新 key 自动重问。
 
-# Non-goals
-
-- 不启用真实生产流量，不执行真实 Chat／Embedding 探针，不决定供应商、部署平台、域名、TLS、反向代理、进程管理、备份恢复或 2 vCPU／4 GB 容量 Go。
-- 不改变 LangGraph 图拓扑、RAG 召回／切片／Qdrant、Prompt、模型结构化输出 schema、2 元 Chat 准入、Embedding 预算、限流／并发／TTL／清理数值或现有机器码；允许在既有 paid-node／event／terminal／checkpoint 边界增加 tombstone／fencing／attempt 守卫，并修复 runner 异常终结与 cleanup recovery，使已确认语义真正成立。输出层只额外拒绝模型 block 文本中的保留 `[n]` marker，并做 additive session view／公开 SSE 投影。
-- 不摄入 About 模板静态文案，不宣称覆盖全部页面，不增加联网搜索、JD 匹配、能力测评、工具、写操作或跨会话记忆。
-- 不做管理员配置页、费用看板、运营分析、公开账号、通知推送、聊天记录导出、跨设备同步、离线模式或 Service Worker。
-- 不把问题、答案、引用、幂等 key／payload 写入 `localStorage`、`sessionStorage`、IndexedDB、客户端日志、分析服务或新 Cookie，也不引入聊天 UI、Markdown 渲染、SSE 或图标第三方依赖。
-- 不重做全站导航或视觉系统；只允许为移动问答 modal 与现有导航 modal 互斥而做最小共享浮层协调。
-
-# Acceptance criteria
+## Acceptance criteria
 
 - AC-1: Web 增加显式解析的 `NUXT_PUBLIC_ASSISTANT_UI_ENABLED`，缺失、空值或非严格 `true` 均为 false；false 时默认布局不渲染 launcher／panel、不创建助手 session、不请求任何助手 API，现有站点也不要求助手配置。true 时 launcher 只按 `route.path` allowlist 出现在 `/`、`/articles`、`/notes/{year}/{month}/{slug}`、`/projects`、`/projects/{slug}`、`/books`、`/books/{year}/{month}/{slug}`、`/archive`、`/about`、`/search`，query／hash 不参与匹配；其他路径、`/admin`、后台 preview、错误布局与 SSR 数据获取均无入口或助手请求。服务端与浏览器仍只支持同源相对 `/api/v1`；在任何助手 bootstrap、GET、POST 或 DELETE 前，客户端都必须把 browser-visible API base 解析并与 `window.location.origin` 精确比较，失败时不建立 session、不发送问题或会话数据，也绝不降级到跨源绝对 URL。launcher shell 保持轻量，panel、SSE parser 与会话逻辑在首次打开前不加载／不运行；不增加外部字体、图片、脚本或网络依赖。
 - AC-2: 右下 launcher 使用现有 `--ee-*` 语义 token、手写 SVG、至少 44×44 CSS px 触控区和明确可见的“问 Gavin”身份；面板采用 `ASK / GAVIN`、细规则线、mono 阶段／来源标签和低圆角 evidence ledger，不使用头像、渐变、发光、虚构在线状态或 token 打字动画。`<640px` 为覆盖视口的 `100dvh` modal，处理 safe-area、独立 transcript 滚动和固定输入区；`>=640px` 为约 400–440px 宽、受视口高度约束的右下非模态面板，内容通过滚动完整可达。320、390、639、640、1024、1280 与 1440px 以及深浅主题均无横向溢出、遮死控制或答案／来源 line-clamp；约 500 中文字符目标答案不得被 CSS 或字符串硬截断。
@@ -67,24 +50,12 @@ state_history:
 - AC-13: launcher 首次打开并懒加载后，由 browser document／默认布局级 controller 而非 panel DOM 持有 session、SSE、idempotency payload、poll timer 与 stream generation；关闭、最小化、主题变化或 AC-1 allowlist 内的 SPA 路由切换只隐藏视图，不通过 `v-if`／unmount 销毁 controller，也不取消正在进行的 turn。离开 allowlist、默认布局卸载或 `pagehide` 时先 abort 当前 transport／解绑 listener，再清 draft、transcript、key／payload；BFCache `pageshow.persisted` 不恢复旧表单或 stream，只允许下次显式打开走 GET status。用户确认 DELETE 时在发请求前就递增／失效本地 stream generation、abort subscriber 并清 transcript，之后旧 callback、代理缓冲 event 或失败的 DELETE 都不得把旧正文写回；这只取消客户端订阅，不宣称取消 provider。受控 barrier 的 Web/E2E 测试证明 panel 关闭→允许公开路由切换→重开仍只有一次 provider 调用，pagehide／BFCache 只读恢复，以及 pause event→DELETE 204／202→release 后 DOM／Vue 内存都不会复活旧内容。
 - AC-14: 原文 purge 后保留的最小 billing／idempotency tombstone 最多到 `body_purged_at + 48h`，不是永久审计库。到期 cleanup 必须先确认 attempt 已按 AC-12 exactly-once 结算且 checkpoint／writes 已删除，再按外键顺序删除该 turn 的 journal、history、已结算 attempts、leases 与 turn；tombstoned／expired session 在无任何 turn／lease／runner 子项后删除 session row、session HMAC 与 CSRF HMAC，只允许不含正文、标识符或跨日 IP 的日聚合指标长期存在。SQLite FK、Saver 删除、WAL checkpoint/truncate 或任一行删除失败都必须被捕获、记录并打开 cleanup breaker，不能只写 warning 后继续生成。受控时钟越过 48 小时的 API cleanup 测试验证无 raw／per-turn minimal row／孤儿 session 残留、无 FK failure，rate/IP 数据仍按既有更短窗口删除，聚合投影缺失不影响权威结算但不得延长 runtime 原始保留。
 
-# Risks
+## Result
 
-- 手工 fetch SSE parser 很容易在任意 chunk 边界、UTF-8、CRLF、重复事件和 EOF 上犯错；必须以独立纯函数和畸形语料测试，不能用“在本机一次读完整 body”证明正确。
-- 同一 question 若在断线后换 key 会放大费用；严格冻结 payload、key、cursor 和禁止自动新问优先于“看起来总能重试”的可用性。整页刷新改走 active-turn polling 会失去实时阶段精度，但避免把原始 payload 持久化到浏览器。
-- `SessionTurn` 在 terminal 后最多约 15 分钟、且受 256 KiB rolling cap 约束的 body 窗口内暴露问题与来源，会增加同源 XSS 的可读面；被提前清理或窗口结束后只能显示 tombstone。不使用浏览器持久化、保持 HttpOnly session、no-store、文本节点渲染和现有 TTL／清理是必要边界，但不能代替强制 CSP 的后续工作。
-- Phase 2 的 tombstone／runner 基线偏差若只在 UI 隐藏，会造成删除后继续付费、迟到原文回写或永久 active turn；provider-send 与提交 fence、attempt 保守结算、异常终结及 barrier race tests 是本阶段的实现前置，任一未通过都必须阻断 Web enabled-state，而不是降级为“稍后再看”。
-- 当前问题、短会话最近最多 4 轮问答和必要公开证据会发往云端供应商；本站 DELETE 只负责本地 session／body 清理，不能撤回已外发内容或改写供应商留存。首次提问前的持续披露与禁止粘贴 JD／联系方式／凭据只能降低误用，不能把外部处理风险归零。
-- API 与 Web 使用两个显式开关会产生漂移：UI on + API off 必须表现为稳定 unavailable，UI off + API on 仍由后端安全控制；文档和部署验收必须同时检查，不能让客户端 flag 充当访问控制。
-- 移动导航和助手都是 Teleport modal，分散的 inert／scroll lock 可能互相覆盖或在断点变化后残留；必须共享最小 overlay ownership，而不是再复制一套互不知情的布尔状态。
-- Nitro 本地代理支持流式并不证明最终公网反向代理不缓冲；本阶段只能验证应用层逐段转发，真实边缘配置仍是生产阻断项。
-- 默认关闭能保护未配置环境，却会让普通 axe／Lighthouse 漏测启用态；质量套件必须有显式 enabled 场景，同时保留 disabled 零请求基线。
-- 共享 NAT 下的 HR 仍可能遇到既有 IP 限流，2 元只约束应用侧新 Chat 准入；UI 不应展示虚构的剩余问题数、费用余额或完成时间。
+Verified and closed by the harness close command.
 
-# Verification plan
+## Evidence
 
-- api-lint => AC-5, AC-10
-- api-tests => AC-4, AC-5, AC-7, AC-8, AC-9, AC-10, AC-11, AC-12, AC-14
-- web-quality => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6, AC-7, AC-8, AC-9, AC-10, AC-13
-- e2e => AC-1, AC-2, AC-3, AC-4, AC-6, AC-7, AC-8, AC-9, AC-10, AC-13
-- harness-integrity => AC-10
-- release => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6, AC-7, AC-8, AC-9, AC-10, AC-11, AC-12, AC-13, AC-14
+[20260829-public-qa-web-delivery.json](../../verification/evidence/20260829-public-qa-web-delivery.json)
+
+Closed at 2026-08-28T21:14:31.639029+00:00.
