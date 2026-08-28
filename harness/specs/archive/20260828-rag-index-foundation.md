@@ -1,13 +1,12 @@
 ---
-id: spec-20260828-rag-index-foundation
-level: L1
+id: archive-20260828-rag-index-foundation
+level: L2
 summary: 为公开内容问答建立可重建、修订绑定且可降级的 SQLite FTS5 与 Qdrant 混合检索索引基础
 load_when:
   - task:20260828-rag-index-foundation
 author: Gavin
 task_id: 20260828-rag-index-foundation
-status: active
-verification_profile: focused
+status: compressed
 documentation_impact: required
 documentation_targets:
   - apps/api/README.md
@@ -17,35 +16,15 @@ documentation_reason: 本任务新增派生向量存储、助手专用 FTS5、�
 state_history:
 ---
 
-# Context
+# 20260828-rag-index-foundation
 
-本站当前公开搜索使用 SQLite FTS5 的文档级 `search_index`，覆盖已发布且未删除的文章、项目和读书笔记。三类内容都采用工作副本与不可变发布修订：公开读取和搜索只投影 `current_revision_id` 指向的当前发布修订，已发布内容的未发布 PATCH 不得进入公开面。公开 Profile 另由单例 `profiles` 行提供，并按可见性字段生成公开投影。About 页还有一部分只存在于 Nuxt 模板的静态文案，目前不是 API 或 SQLite 拥有的规范内容源。
+Deterministic compressed record. The original active spec remains in Git history.
 
-2026-08-26 退役的知识孵化系统曾包含本地模型、专用 Retrieval Service、Worker、向量数据和管理工作台；它因三进程、本地模型资产、专属依赖和质量矩阵的长期负担退出当前产品。新问答助手只能复用“SQLite 事实库、修订绑定、派生索引、generation、幂等任务和显式降级”等原则，不得恢复旧路由、旧表、旧模型服务或旧产品边界。
-
-用户已经确认后续公开助手采用 LangChain、受控 LangGraph 和 Hybrid RAG，并选择 Qdrant 作为稠密向量库、助手专用 SQLite FTS5 作为关键词索引。生产目标仍是单台 2 vCPU／4 GB 服务器，Qdrant 是同机独立单节点服务；Chat 与 Embedding 都使用部署前指定的云端 API，不在服务器加载本地模型。具体云端供应商、Embedding 模型、维度和价格尚未确定。
-
-为保持 active spec 短生命周期，本任务只建立默认关闭的索引与内部检索基础。公开问答 API、LangGraph 会话、费用和限流、Prompt 注入输出防护、悬浮气泡及管理员控制面由后续规格承担。本任务也不解析 `.vue` 文件或复制 About 静态文案；后续规格必须先为这部分内容确定单一规范来源，才能宣称覆盖完整 About 页面。
-
-# Goal
+## Goal
 
 在不开放任何新公开问答入口、也不改变现有 `/api/v1/search` 行为的前提下，为当前公开文章、项目、读书笔记和 Profile 建立默认关闭、可确定性测试的 RAG 索引基础：以 SQLite 保存规范切片、助手 FTS5、持久索引任务、generation 状态和 manifest，以 Qdrant 保存可从 SQLite 重建的稠密向量，通过单并发轻量 Worker 异步处理发布生命周期，并提供仅供后续问答图使用的内部 Hybrid Retriever。任一外部 Embedding 或 Qdrant 故障不得阻塞内容发布；旧修订和已删除内容不得因索引延迟继续冒充当前公开证据。
 
-# Non-goals
-
-- 不新增公开问答、会话、SSE、LangGraph、Chat Model、回答生成、引用呈现、费用预算、匿名限流或 Prompt 注入回答策略。
-- 不新增悬浮气泡、管理页面或任何 Web 消费类型；不改变现有 OpenAPI 公共契约。
-- 不索引 Nuxt About 模板中的静态文案，不让 API 或 Worker 运行时读取、解析或依赖 `apps/web` 源文件；该正文的规范来源留给后续 spec。
-- 不修改、替换或复用现有公共 `search_index`，不改变 `/api/v1/search` 的 tokenizer、排序、分页、结果 schema 或语料范围。
-- 不在本任务选择或接入具体云端 Embedding 供应商，不提交真实 API Key，不以测试替身冒充可生产调用的模型实现。
-- 不加载本地 Embedding、Reranker 或 Chat 模型，不引入 PyTorch、ONNX Runtime、NumPy 模型扫描或 GPU 假设。
-- 不使用 Qdrant 原生 sparse vector、BM25、hybrid fusion、量化或 reranker；关键词召回只使用助手专用 SQLite FTS5，融合由 API 内部 Retriever 完成。
-- 不创建 `infra/`、`deploy/` 或容器编排，不搭建 Qdrant 高可用集群，不引入 Redis、Celery、RabbitMQ 或其他消息队列。
-- 不恢复知识孵化旧路由、旧表、旧迁移运行面、旧 Worker 或 Retrieval Service，也不删除或重写任何既有 Alembic revision 和历史只读枚举。
-- 不在内容发布事务内调用 Embedding API 或 Qdrant，不为了索引成功而延迟或回滚已经合法提交的公开发布。
-- 不在本阶段宣称 2 vCPU／4 GB 已通过最终生产资源验收；真实模型、真实语料和目标服务器验证属于发布准备 spec。
-
-# Acceptance criteria
+## Acceptance criteria
 
 - AC-1: 在现有 Alembic head 之后新增前向迁移，为助手切片、切片级 FTS5、持久索引任务、索引 generation／manifest 和活动 generation 指针建立明确 schema；fresh database 与已升级到当前 head 的数据库均可完成 upgrade，迁移可执行 downgrade → upgrade 往返，旧迁移保持不变。迁移过程不连接 Qdrant、不调用 Embedding、也不启动 Worker；所有助手索引对象都标记为可重建派生数据，现有内容、发布修订、公开关系、认证和 `search_index` 数据及行为不被迁移或重写。
 - AC-2: 单一规范 source projector 只读取已发布、未删除且带当前发布修订的文章、项目和读书笔记，以及严格复用现有 `default_profile`／`public_payload` 可见性语义的 Profile 公共投影；文章／项目／书摘的工作副本和旧修订、Profile 隐藏的城市或邮箱字段、回收站内容与后台字段不会进入切片。每个 source document 都携带可回查的类型、内容 ID、当前修订 ID 或 Profile version、标题、公开路径、内容哈希和 pipeline version；Nuxt About 静态文案不在本阶段语料中。
@@ -59,19 +38,12 @@ state_history:
 - AC-10: 引入的 LangChain、文本切分、Qdrant 客户端及相关依赖必须精确解析进 API lockfile；实现提供 LangChain `Embeddings` 兼容边界和无网络的确定性测试替身，但不捏造具体生产供应商。助手索引默认关闭，现有 API 在没有 Qdrant、provider 专用包和助手环境变量时保持可启动；显式启用 Worker 时若缺少 provider、model、dimension、endpoint、凭据或 Qdrant production 配置，readiness 必须失败关闭且不得生成伪向量。development/test 可使用 Qdrant 本地模式，production 只接受带认证的私有服务 URL，拒绝多进程共享嵌入式目录。索引测试不访问公网、不要求真实模型、不运行常驻后台服务，也不把数据库、向量或重日志写入仓库。
 - AC-11: 本任务不新增公开或管理路由，不改变 OpenAPI 与 Web 类型，不改变现有全站搜索、文章／项目／书摘发布修订、Profile 公开字段、回收站和公开阅读行为；既有 API 在没有助手配置和 Qdrant 进程时保持启动、迁移与回归测试通过。长期 API 文档说明助手索引的默认关闭状态、Worker 所有权、配置失败语义和无真实 provider 的阶段边界；架构边界明确 SQLite 事实库、Qdrant 派生存储、浏览器不可直连和同机独立服务责任；新增持久决策记录选择 Qdrant + SQLite FTS5、generation／恢复约束、旧知识孵化不恢复、About 静态正文暂不摄入及重新评估触发器。长期文档不链接本 active spec，也不把未开放的问答助手登记成已交付产品。
 
-# Risks
+## Result
 
-- 当前云端 Embedding 供应商和维度未定，本任务只能验证接口、状态机与确定性替身，不能证明真实供应商的召回质量、成本或延迟；助手必须保持默认关闭，后续 provider 接入和发布验收不能省略。
-- Qdrant 新增独立进程、网络认证、持久卷、版本升级和备份排除责任；派生与可重建设计降低数据锁定风险，但不会消除服务维护成本。
-- 发布事务新增 outbox 写入会触及文章、项目、书摘、Profile、taxonomy 与回收站路径；遗漏生命周期事件会造成陈旧索引，错误地把外部调用放入事务则会破坏发布可用性。
-- SQLite 只有单写者。索引任务、切片替换、FTS5 和 generation 切换如果事务过大，可能与管理员发布竞争；Worker 必须限制批次和锁持有时间，不能用全量重建长事务阻塞内容写入。
-- 旧修订、活动切片、Qdrant 点和 generation 分属不同存储；任何只信任向量 payload、未回查 SQLite 当前公开指针的查询都会产生草稿、旧版本或删除内容泄漏风险。
-- Profile 没有不可变发布修订，只能以公开投影与 version 绑定；实现若直接读取模型字段而不是复用公开可见性语义，可能把隐藏城市或邮箱写入派生索引。
-- About 的部分公开正文只存在于 Nuxt 模板。解析 `.vue` 会反转 Web/API 所有权，复制文案会制造双份事实源；本任务明确延后该语料，因此完成后仍不能宣称索引覆盖完整 About 页面。
-- 当前工作区存在与本任务无关的 Web 修改和临时文件。实现与验证必须使用隔离 worktree 或在这些改动被所有者处理后进行，不能覆盖、提交或让它们混入本任务 evidence。
+Verified and closed by the harness close command.
 
-# Verification plan
+## Evidence
 
-- api-lint => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6, AC-7, AC-8, AC-9, AC-10, AC-11
-- api-tests => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6, AC-7, AC-8, AC-9, AC-10, AC-11
-- harness-integrity => AC-11
+[20260828-rag-index-foundation.json](../../verification/evidence/20260828-rag-index-foundation.json)
+
+Closed at 2026-08-28T15:01:28.436504+00:00.
