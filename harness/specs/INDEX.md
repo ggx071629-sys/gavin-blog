@@ -4,14 +4,13 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **1 active**, **0 frozen**.
+Open specifications: **0 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
 | sdd-lifecycle | — | L1 | Active spec 从创建、验证到压缩归档的状态转换 | spec-create, spec-close | Gavin | [_sdd/lifecycle.md](_sdd/lifecycle.md) |
 | sdd-policy | — | L1 | 风险触发、短生命周期的 Spec-Driven Development 规则 | behavior-change, api-change, data-change, security-change, cross-stack-change | Gavin | [_sdd/README.md](_sdd/README.md) |
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
-| spec-20260827-admin-login-penpot-alignment | active | L1 | 按 Penpot Admin Login 桌面与移动目标重排登录页视觉，同时完整保留现有认证、安全与失败合同 | task:20260827-admin-login-penpot-alignment | Gavin | [active/20260827-admin-login-penpot-alignment.md](active/20260827-admin-login-penpot-alignment.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -98,6 +97,7 @@ Open specifications: **1 active**, **0 frozen**.
 | archive-20260816-retrieval-unavailable-health | compressed | L2 | 检索服务不可用时概览与健康检查返回能力态，不再把整台孵化打成 500 | task:20260816-retrieval-unavailable-health | Gavin | [archive/20260816-retrieval-unavailable-health.md](archive/20260816-retrieval-unavailable-health.md) |
 | archive-20260816-trash-incubator-residuals | compressed | L2 | 已发布文章可永久删除，孵化草稿/发布计划失败可恢复，预览与计数不再撒谎 | task:20260816-trash-incubator-residuals | Gavin | [archive/20260816-trash-incubator-residuals.md](archive/20260816-trash-incubator-residuals.md) |
 | archive-20260826-retire-knowledge-incubator | compressed | L2 | 在可恢复归档知识孵化实现与数据后，从博客主项目退役其摄入、检索、审计、生成和发布工作台运行面 | task:20260826-retire-knowledge-incubator | Gavin | [archive/20260826-retire-knowledge-incubator.md](archive/20260826-retire-knowledge-incubator.md) |
+| archive-20260827-admin-login-penpot-alignment | compressed | L2 | 按 Penpot Admin Login 桌面与移动目标重排登录页视觉，同时完整保留现有认证、安全与失败合同 | task:20260827-admin-login-penpot-alignment | Gavin | [archive/20260827-admin-login-penpot-alignment.md](archive/20260827-admin-login-penpot-alignment.md) |
 | archive-20260827-cancel-public-penpot-specs | compressed | L2 | 取消八个未完成的公开页面 Penpot 对齐规格，并从博客主项目开放规格列表移除 | task:20260827-cancel-public-penpot-specs | Gavin | [archive/20260827-cancel-public-penpot-specs.md](archive/20260827-cancel-public-penpot-specs.md) |
 | archive-20260827-document-module-alignment | compressed | L2 | 使当前项目文档与现有博客功能模块一一对应，并把已退役知识孵化资料隔离为冷历史 | task:20260827-document-module-alignment | Codex | [archive/20260827-document-module-alignment.md](archive/20260827-document-module-alignment.md) |
 | archive-20260827-externalize-retired-github-specs | compressed | L2 | 将两份未完成的 GitHub 知识孵化规格从主项目开放列表迁出，并以独立只读归档保留原始基线 | task:20260827-externalize-retired-github-specs | Gavin | [archive/20260827-externalize-retired-github-specs.md](archive/20260827-externalize-retired-github-specs.md) |
