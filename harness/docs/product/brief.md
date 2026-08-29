@@ -41,7 +41,7 @@ author: Gavin
 | 工程控制面 | 同源代理、质量与 E2E 客户端 | SQLite/Alembic、配置与测试隔离 | AGENTS、Harness 索引、发布准备 |
 | 公开问答消费层（默认关闭） | 「问 Gavin」悬浮入口、懒加载面板、同源 SSE | 匿名 session／SSE、tombstone fence、公开 session view | Web/API/Contracts README、本决策 |
 
-默认关闭的匿名公开问答现包含 API 内核与可选 Web 消费层。Web 只有 `NUXT_PUBLIC_ASSISTANT_UI_ENABLED=true` 才渲染「问 Gavin」悬浮入口；API 仍由 `GAVIN_ASSISTANT_ONLINE_ENABLED` 控制。没有管理配置页，About 静态文案仍不是 RAG 语料，OpenAPI 路由存在不等于真实供应商可用。启用前必须显式配置两端开关、provision runtime、签发 readiness receipt，且项目整体仍是生产部署 No-Go。
+默认关闭的匿名公开问答现包含 API 内核与可选 Web 消费层。Web 只有 `NUXT_PUBLIC_ASSISTANT_UI_ENABLED=true` 才渲染「问 Gavin」悬浮入口；API 仍由 `GAVIN_ASSISTANT_ONLINE_ENABLED` 控制。一次问题可把同一短会话最近最多 4 个完整、未清理的成功问答 pair 作为明确分区的不可信历史发送给模型；删除只清除/撤销本站可读与继续写入能力，不能撤回供应商已收到的数据。questions 的无效输入稳定为 400，900 秒后 session view 不再返回正文。没有管理配置页，About 静态文案仍不是 RAG 语料，OpenAPI 路由存在不等于真实供应商可用。启用前必须显式配置两端开关、provision runtime、签发与当前 estimator/policy 匹配的 readiness receipt，且项目整体仍是生产部署 No-Go。
 
 ## 写作与媒体
 
@@ -74,5 +74,7 @@ author: Gavin
 2. 完整内容系统：栏目与标签、项目与读书笔记、FTS5 全站搜索、媒体管线、回收站与 Markdown 导入导出。
 3. 视觉与工程质量完善：公共体验、SEO 与内容发现、可重复质量门禁。
 4. 媒体内联生命周期、文章公开引用、wikilink/反链和不可变文章修订等后续增量。
+
+公开问答第三阶段已按当时 Harness 契约形式关闭，其 archive/evidence 保持历史原样；后续运行时完整性任务只修复审计发现的 execution fence、Saver 清理、保留期、浏览器 DELETE 与多轮合同。管理员启停、健康、索引队列和费用控制面必须作为下一独立阶段设计；真实环境生产资格在其后另行验收。
 
 本地开发不强制 Docker，使用 Node.js、Python 虚拟环境和本地 SQLite。部署暂不决定，只预留配置与存储迁移边界。当前结论仍是本地发布候选可验证，生产部署 No-Go。
