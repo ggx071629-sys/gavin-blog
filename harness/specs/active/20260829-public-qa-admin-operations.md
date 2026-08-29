@@ -8,6 +8,7 @@ author: Gavin
 task_id: 20260829-public-qa-admin-operations
 status: active
 verification_profile: release
+verification_escalation: 本任务同时涉及公开准入安全、跨库状态、三类费用账本、外部索引副作用和管理员 Web／API 合同，关闭前必须运行完整 release 与 E2E 资格门禁。
 documentation_impact: required
 documentation_targets:
   - README.md
