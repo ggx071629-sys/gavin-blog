@@ -53,7 +53,7 @@ CI 在权威 gate 结束后以 `always()` 生成脱敏 Harness telemetry summary
 
 `.env`、开发日志、SQLite 数据库、本地媒体和原始验证产物不得进入 Git。备份必须同时覆盖内容事实库 SQLite 与媒体对象，并包含其中的 index-embedding 账本；只有数据库或只有媒体的备份不构成可恢复备份。`assistant_runtime` 数据库及其 WAL/SHM、checkpoint 和临时副本明确排除于长期备份。恢复演练须先重建空 runtime schema，公开 Chat／query 至少锁到下一个北京时间零点，Qdrant 丢失时须先按 Worker 账本重建 generation 再签发新的 readiness receipt。
 
-北京时间每日 2.00 元人民币只约束按部署价格快照计算的公开 Chat 新调用准入／预留；已经越过 sending 线性化点的失去 fence 调用仍按价格快照保守结算，异常 usage 可以更高，真实供应商账单仍需供应商侧限额。第三阶段的 archive/evidence 只证明当时 Harness 形式关闭；运行时完整性修复及其本地 release evidence 也只证明当前提交的离线语义，不等于已合并、上线、对访客开放或 production Go。必须同时检查 `GAVIN_ASSISTANT_ONLINE_ENABLED` 与 `NUXT_PUBLIC_ASSISTANT_UI_ENABLED`，且不能把本地聊天持久化或 About 静态文案写成 RAG 语料。管理员运营控制面仍待独立设计；真实供应商、反向代理 SSE、备份恢复、目标服务器公网安全与 2 vCPU／4 GB 实机验收仍是生产放行条件。
+北京时间每日 2.00 元人民币只约束按部署价格快照计算的公开 Chat 新调用准入／预留；已经越过 sending 线性化点的失去 fence 调用仍按价格快照保守结算，异常 usage 可以更高，真实供应商账单仍需供应商侧限额。第四阶段的 runtime-integrity archive/evidence 只证明当时 Harness 形式关闭；其后补救及新的本地 release evidence 也只证明当前提交的离线语义，不等于已合并、上线、对访客开放或 production Go。启用前必须同时检查 `GAVIN_ASSISTANT_ONLINE_ENABLED` 与 `NUXT_PUBLIC_ASSISTANT_UI_ENABLED`，显式声明 input/output/context 三项 token 上限、满足内部关系，并在 runtime 的 `checkpoints`/`writes` 零残留后重新签发绑定当前 estimator 的 readiness receipt；operator-declared context 仍须按供应商官方模型资料人工核对，应用不会自动发现真实窗口。不得把本地聊天持久化或 About 静态文案写成 RAG 语料。第五阶段管理员运营控制面尚未开始；真实供应商、反向代理 SSE、备份恢复、目标服务器公网安全与 2 vCPU／4 GB 实机验收仍是生产放行条件。
 
 `.run/`、`my_image/` 和复刻项目快照 `my_blog_fork/` 永久排除于 smart_blog Git 历史与 CI checkout；不得通过强制添加、归档上传或 workflow artifact 绕过该边界。
 
