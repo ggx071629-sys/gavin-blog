@@ -1,14 +1,12 @@
 ---
-id: spec-20260829-public-qa-admin-operations
-level: L1
+id: archive-20260829-public-qa-admin-operations
+level: L2
 summary: 为默认关闭的公开问答交付可审计、费用可信且不越过部署边界的单管理员运营控制面
 load_when:
   - task:20260829-public-qa-admin-operations
 author: Gavin
 task_id: 20260829-public-qa-admin-operations
-status: active
-verification_profile: release
-verification_escalation: 本任务同时涉及公开准入安全、跨库状态、三类费用账本、外部索引副作用和管理员 Web／API 合同，关闭前必须运行完整 release 与 E2E 资格门禁。
+status: compressed
 documentation_impact: required
 documentation_targets:
   - README.md
@@ -23,35 +21,17 @@ documentation_reason: 本任务新增管理员启停、被动健康、索引命�
 state_history:
 ---
 
-# Context
+# 20260829-public-qa-admin-operations
 
-公开问答已经依次完成第一阶段 RAG 索引基础、第二阶段 LangChain／LangGraph 在线内核、第三阶段全站悬浮 Web 体验和第四阶段运行时完整性；其后的 remediation 只补救第四阶段缺口，不单独占用产品阶段编号。系统仍保持默认关闭和 production No-Go。本 Spec 是已确认的第五阶段：为本站唯一管理员提供“问答助手”运营页，使管理员能够控制是否接受公开问答、判断本地已知健康、查看索引和费用摘要、重试失败索引任务并请求全量重建；它不是生产启用或部署管理阶段。
+Deterministic compressed record. The original active spec remains in Git history.
 
-当前实现只有部署时的 API 与 Web 静态开关，没有运行时运营开关或管理页。普通进程 liveness 不能代表 Qdrant、云端模型或索引 Worker 健康，已有 readiness receipt 也只证明一次带签名的配置／generation 绑定，不证明供应商此刻可达。管理页刷新若暗中调用 Chat、Embedding 或 Qdrant，会增加费用、延迟并把“观察”误写成“探活”。
-
-控制面也不能建立在当前不可信的账本和 Worker 语义上：runtime SQLite 的 Chat／query Embedding 预算与 content SQLite 的 index Embedding 预算都只比较未结算预留，结算后可再次消费同一日额度；现有每日指标混入全生命周期 turn，并漏记部分调用；索引 Worker 没有独立 heartbeat、单 owner fencing 或耐长调用的租约续期。直接在这些事实之上做仪表盘会错误宣称人民币 2 元日限额、Worker 健康和安全重试已经成立。
-
-runtime SQLite 继续由单 FastAPI owner 管理 session、预算、attempt、receipt、LangGraph checkpoint 与动态准入；content SQLite 继续承载公开内容、索引任务、generation 和 index Embedding 账本；独立单并发 Worker 不得打开 runtime SQLite。两库之间没有分布式事务，因此聚合视图必须携带各自观察时间并能表达 partial、stale 和 unknown，不能伪造一个原子全局快照。
-
-# Goal
+## Goal
 
 交付 `/admin/assistant` 单管理员运营控制面及其严格 API／数据合同，在不修改部署密钥、模型和价格配置的前提下：以 runtime 内默认关闭、版本化且 generation／readiness 绑定的动态准入 gate 安全启停新问答；用不产生供应商费用的被动事实展示 API 能力、readiness、Qdrant、Worker、索引、breaker 与三类预算；通过持久、幂等且受单 owner fencing 保护的 Worker 命令重试当前公开事实或请求全量重建；以北京时间、整数 micro-CNY 和不含正文的聚合数据可信展示当天用量。
 
 停用必须是可线性化的 kill switch：响应返回后不再创建新 session、新 idempotency turn，也没有新 attempt 能越过 `prepared→sending`；已经先越过 sending 线性点的第三方请求无法撤回，因数据库 CAS 与物理网络调用之间存在 handoff，它仍可能在停用响应后才实际发出或完成，但只能进行不含原文的保守 exactly-once 结算，旧 runner 不能恢复回答、事件、history、checkpoint 或 live publish。启用必须 fail closed，且任何 readiness／配置／active generation 漂移都要求管理员在重新建立有效绑定后显式再启用。
 
-# Non-goals
-
-- 不在本任务真实启用匿名助手，不执行 production Go，不调用真实 Chat／Embedding 供应商做质量测评，也不把本地替身或 release evidence 写成已上线、已验证供应商可达或 production-ready。
-- 不配置反向代理、TLS／SSE、公网安全策略、Qdrant 持久卷、备份恢复、进程守护或告警基础设施；不在目标 2 vCPU／4 GB 服务器测量 RSS、重建峰值、P50／P95、句柄或持续负载。这些仍属于后续生产资格任务。
-- 不改变既有 LangGraph 拓扑、identity-aware Saver、descriptor-only checkpoint、RAG 索引身份、混合检索、引用闭包、多轮范围、正文保留、Prompt 注入防护、限流或公开答案完整性合同，除非为 kill switch 增加统一 operational epoch fence。
-- 不给匿名助手或模型新增互联网搜索、任意 URL、工具执行、JD／候选人测评、写入或管理后台能力，不摄入未发布内容、管理员数据、其他会话或已退役知识孵化系统。
-- 不在管理页查看 API Key、raw endpoint、credential fingerprint、HMAC、运行路径或原始供应商响应，也不在管理页修改任何供应商、模型、版本、维度、pipeline、价格、Token 上限或预算 cap。provider／model／version／dimension／pipeline manifest 与价格／Token／cap 快照可以按 allowlist 脱敏只读展示，所有值仍只能通过部署配置更新。
-- 不展示、搜索、导出或长期记录原始问题、完整回答、检索／prompt／chunk 正文、原始 IP、IP 哈希、checkpoint state 或 LangGraph thread history；不引入 LangSmith 原文追踪或 LLM-as-judge。
-- 不把仪表盘刷新实现为 Chat／Embedding／Qdrant live probe；缺少新鲜本地证据时显示 unknown 或 stale。真实供应商和代理链资格由后续生产阶段显式验证。
-- 不恢复多用户账户或新增运营 RBAC，不迁移到 PostgreSQL，不让 Worker 打开 runtime SQLite，也不为两库伪造跨库事务。
-- 动态 gate 只控制 API 准入和 provider dispatch，不修改部署静态开关、启动或停止外部进程。`NUXT_PUBLIC_ASSISTANT_UI_ENABLED` 仍决定悬浮气泡是否挂载；部署允许气泡但动态 gate 关闭时，气泡可以保持可见并呈现稳定的暂不可用状态，不能宣称 kill switch 同时隐藏了 UI。
-
-# Acceptance criteria
+## Acceptance criteria
 
 - AC-1: 项目提供可升级、可回滚的最小控制面 schema。runtime SQLite 新增单例动态准入事实，至少包含请求状态、单调 version、operational epoch、当前 readiness／active-generation 绑定、安全更新时间，以及可空的 `switch_pending` operation ID／target generation／finalize token；fresh provision、runtime 数据丢失、缺行、损坏或无法验证时一律默认关闭。content SQLite 新增持久索引命令、单 Worker owner／heartbeat／fencing 与本阶段所需的脱敏日聚合事实；已有索引任务、generation、pointer 和三类账本仍由各自数据库负责。迁移测试覆盖 fresh、上一版本 upgrade、downgrade→upgrade 与 schema fingerprint，并证明 runtime 控制迁移不修改 pinned `checkpoints`／`writes` 表，Worker 从不打开 runtime SQLite。API 静态 capability 关闭时，管理员概览仍能以只读、partial／unknown 语义加载部署配置与 content 侧事实，不初始化问答 runtime、不连接 Qdrant／模型，任何启用请求都 fail closed。
 - AC-2: API 静态开关是 capability ceiling，Web 静态开关只控制 launcher 挂载，runtime 动态 gate 才是新 session、新问题和 provider dispatch 的权威准入。启用必须验证静态 capability、单 API owner、当前未撤销 readiness receipt、配置 fingerprint、active generation、cleanup breaker、restore lock 且不存在 `switch_pending`；每个 admission、`prepared→sending` 和正文 mutation boundary 在授权前复核这些绑定，发现 receipt、配置或 generation 漂移时必须在 runtime 原子落为 blocked／disabled、递增 version／epoch 并 fail closed，只有重新满足条件后的显式启用才能恢复。`switch_pending` 期间所有 enable 一律失败；普通 enable 永远不能清除此 marker，只有 API-owner finalize／recovery 在复核 content pointer 与 operation terminal fact 后才能把它收敛为 disabled。FTS5 可用时，Qdrant／Worker stale 可以作为 degraded warning，而不是伪装成 healthy 或无条件阻止启用。启用要求精确 expected version，重复或 stale enable 返回稳定冲突；安全优先的停用即使 expected version 过期也必须可幂等执行并压过并发 stale enable，每次有效状态变化或 generation 切换 fence 都递增 version／epoch。停用与 admission、sending CAS、stage／terminal、Saver 和 publish 服从同一 runtime gate／epoch 顺序：停用响应后零新 session、零新 idempotency turn，也没有新 attempt 能跨入 sending；先于停用提交 sending 的 attempt 属于不可撤回 in-flight，即使物理 provider 调用在响应后才开始或完成也至多一次、不重试，只允许由无正文 recovery path 按既有 price snapshot exactly-once 结算，不能提交答案、引用、event、history、checkpoint 或 hub delivery；尚未 sending 的 attempt 零调用并 exactly-once 释放预留，disable→enable 不能让旧 runner 复活。既有幂等 replay、GET、DELETE、cleanup、recovery 和费用结算仍可用，概览明确显示 effective 关闭、阻塞原因和派生 draining 数量，且不声称能撤回已发送或已线性化交接给供应商的数据。
@@ -68,28 +48,12 @@ runtime SQLite 继续由单 FastAPI owner 管理 session、预算、attempt、re
 - AC-9: 离线确定性验证使用 fake clock、临时隔离 runtime／content SQLite、fake provider、Qdrant-local／fake adapter 和显式 barrier，禁止公网、固定 sleep、恒真断言或只检查最终状态。API 测试覆盖控制迁移、三账本 settled+reserved 边界／并发／overage／BJT、unknown usage、静态关闭、receipt／generation drift、stale enable 与 safety-biased disable、disable-before／after-sending 的 CAS 与物理 handoff、disable→enable stale runner、GET／DELETE／settlement 可用、双 Worker contender、长调用 lease、lost-fence recovery settlement、revision-scoped Qdrant upsert／delete，以及 pause old Qdrant mutation→fence loss→newer revision→release old mutation 时新 revision 始终可检索或旧 revision 始终不可检索。测试还覆盖 duplicate retry／rebuild／finalize、operator-authorized retry lineage、unknown attempt zero-retry、index budget waiting、rebuild waiting→publish／update／delete 时 active outbox 不被 staging 截留、跨 BJT／crash 后不重复成功 source、rebuild failure 保留 pointer、ready 后再发布／删除必须退回 catch-up，以及 `ready_to_switch → switch_pending fence → content switch → runtime reconciliation` 每个 pause／crash point；fence 后并发 enable 必须失败，普通 enable 不能清 marker。成功 switch 后 gate 保持关闭，generation validation 的额外 provider call count 为零；fresh／stale／missing health 与 dashboard GET 的 provider／Qdrant call count 也为零。每个适用场景断言调用次数、预留／结算、正文／event／checkpoint／publish 迟到集合、Qdrant 检索资格和安全状态码。Web unit／component 测试使用受控时钟与延迟响应覆盖权限、CSRF、no-store／strict parse、Nuxt/API 双来源、控制确认、stale response、可见性轮询、partial／unknown 和响应式无障碍；独占 E2E 替身覆盖管理员启用→匿名提问→紧急停用→后续新问题零 sending，以及 retry／rebuild command→Worker ready→管理员 finalize→两阶段 reconciliation→状态刷新，不把本地场景解释成真实供应商或生产资源验收。
 - AC-10: 长期文档和新决策记录第五阶段交付的是默认关闭的单管理员运营控制面，并明确 remediation 仍归第四阶段、生产资格在其后；区分 API capability、Web launcher flag、runtime gate、readiness、被动健康与三类预算的不同权威。记录单 API owner、Worker 不开 runtime、跨库非原子快照、epoch kill switch、先于 disable 的 sending 可能迟到物理发出但只能无正文结算、当前事实 retry、operator-authorized 重计费、active-first outbox、revision-scoped Qdrant mutation、可恢复 fenced rebuild、`switch_pending` 与 API-owner 显式两阶段 generation finalize，以及切换后重新签 receipt／显式启用。文档必须如实说明人民币 2 元只约束按配置价格估算的 Chat 新调用而非供应商总账单，不能再引用旧的错误日指标；同时保留前四阶段 archive／evidence 为历史事实。真实供应商、反向代理／SSE、备份恢复、目标 2 vCPU／4 GB 实机与公网安全继续标记为后续 production No-Go，不得把本任务 release gate、管理页状态或 readiness receipt 描述为已上线、已合并、已完成模型质量评估或 production-ready。
 
-# Risks
+## Result
 
-- 如果只新增 UI 而不先修复三个账本的 `settled + reserved` 判定，人民币 2 元会在每次结算后重新可用；看板会放大而不是发现成本失真。
-- kill switch 无法撤回已经越过 sending 线性点的外部请求。规范选择丢弃其正文结果并保守结算，因此紧急停用可能仍产生一次既有费用，管理文案必须直说。
-- runtime 与 content SQLite 没有原子快照；任何把不同 `observed_at` 的数字拼成单一实时总数或让 content 副本参与 admission 的实现都会产生错误决策。
-- readiness receipt、最近成功和 heartbeat 都是历史事实，不是实时供应商证明；unknown／stale 若被渲染成 healthy，会让管理员在未验证的条件下启用。
-- Worker idle 与 Worker dead 外观相似；若 heartbeat 与 task activity 混用，空闲期会误报警，而长 provider 调用又可能因租约过期被重复领取和收费。
-- 直接重开 failed row 会复活旧修订或已删除内容；重试必须重新投影当前公开事实，并隔离 sending／unknown 的重复费用风险。
-- Qdrant mutation 是 SQLite 事务外副作用；只在数据库提交时检查 fence 不能撤回 stale Worker 的迟到写，必须用 revision eligibility、staging 隔离和 repair 意图保证其不可被检索。
-- 当前 generation validation 会绕过 index ledger 直接调用云端 Embedding；若不替换为零额外 provider 的结构 probe，看似只读的切换会产生未预算费用。
-- 全量重建消耗独立费用、磁盘和内存；没有单 owner、持久 source 进度、预算等待、high-water／catch-up 与原子 pointer switch 时，跨日恢复会重复付费，失败或 stale Worker 也可能污染 active generation。
-- generation switch 会使 readiness 失效，且 runtime／content 无跨库事务；两阶段 finalize 的安全代价是崩溃后可能保持停用并等待恢复，但绝不能为了自动可用而留下“已切换、旧 epoch 仍可回答”。
-- deployment API flag、Web launcher flag 与 runtime gate 是三件事。若管理页把它们压成一个布尔值，会产生“已停用但气泡仍在”或“已启用但部署能力不存在”的误导。
-- 管理 mutation 受单管理员 cookie 权限、CSRF、重复点击和 stale tab 影响；错误的自动重试或迟到 enable 响应可能覆盖更晚的紧急停用。
-- 脱敏聚合若没有稳定事件身份会在 recovery／重试时双计数；若为了精确改存原问题、IP 或 provider raw，又会突破已确认的隐私边界。
-- 本地 fake provider、Qdrant-local、Playwright 与 release gate 不能证明真实供应商、代理链或 4 GB 主机安全，生产资格仍需单独 Spec 和真实环境证据。
+Verified and closed by the harness close command.
 
-# Verification plan
+## Evidence
 
-- api-lint => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6, AC-7, AC-9
-- api-tests => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6, AC-7, AC-9
-- web-quality => AC-3, AC-4, AC-7, AC-8, AC-9
-- e2e => AC-2, AC-3, AC-5, AC-6, AC-7, AC-8, AC-9
-- harness-integrity => AC-10
-- release => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6, AC-7, AC-8, AC-9, AC-10
+[20260829-public-qa-admin-operations.json](../../verification/evidence/20260829-public-qa-admin-operations.json)
+
+Closed at 2026-08-29T18:04:38.101862+00:00.
