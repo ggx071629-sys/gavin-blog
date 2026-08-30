@@ -6,7 +6,6 @@ load_when:
   - task:20260830-public-qa-production-qualification
 author: Gavin
 task_id: 20260830-public-qa-production-qualification
-status: active
 verification_profile: release
 verification_escalation: 本任务跨越真实云端供应商、公网 TLS／SSE、可信代理、Qdrant 持久化、备份恢复和 2 vCPU／4 GB 目标机资源边界，关闭前必须运行完整 release、E2E 与脱敏目标环境资格证据校验。
 documentation_impact: required
@@ -19,7 +18,12 @@ documentation_targets:
   - harness/docs/operations/release-readiness.md
   - harness/docs/decisions/20260830-public-qa-production-qualification.md
 documentation_reason: 本任务首次固定公开问答的实际生产拓扑、供应商合同、代理与存储恢复边界，并形成可审计的 Go／No-Go 结论，必须同步项目、应用、产品、架构、运维和持久决策文档。
+status: frozen
+frozen_at: 2026-08-30T12:49:08.333510+00:00
+freeze_reason: 当前处于功能开发阶段；管理员明确禁止进入真实服务器、真实域名与真实供应商部署，生产资格待部署阶段再恢复。
+frozen_scope_sha256: 662484443c0b71bc3e46d3f4addb8b99ea32e57f65566ddaa125af90480a8bc5
 state_history:
+  - {"action":"freeze","at":"2026-08-30T12:49:08.333510+00:00","reason":"当前处于功能开发阶段；管理员明确禁止进入真实服务器、真实域名与真实供应商部署，生产资格待部署阶段再恢复。","scope_sha256":"662484443c0b71bc3e46d3f4addb8b99ea32e57f65566ddaa125af90480a8bc5"}
 ---
 
 # Context
