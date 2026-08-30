@@ -663,8 +663,9 @@ def _provider_matches_profile(provider: dict[str, Any], profile: Any) -> None:
 
 
 def _generation_matches_profile(generation: dict[str, Any], profile: Any) -> None:
+    generation_id = generation.get("id")
     expected = {
-        "collection": profile.qdrant.collection_name,
+        "collection": f"{profile.qdrant.collection_prefix}_{generation_id}",
         "dimension": profile.qdrant.vector_dimension,
         "distance": profile.qdrant.distance,
         "pipeline_version": profile.qdrant.pipeline_version,

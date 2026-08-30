@@ -139,7 +139,7 @@ def _summary(profile: dict, cases: list[dict]) -> dict:
         },
         "active_generation": {
             "id": 42,
-            "collection": profile["qdrant"]["collection_name"],
+            "collection": f'{profile["qdrant"]["collection_prefix"]}_42',
             "dimension": profile["qdrant"]["vector_dimension"],
             "distance": profile["qdrant"]["distance"],
             "pipeline_version": profile["qdrant"]["pipeline_version"],

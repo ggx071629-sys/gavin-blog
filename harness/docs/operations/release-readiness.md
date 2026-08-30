@@ -13,7 +13,9 @@ author: Gavin
 
 ## Current status
 
-项目当前处于“本地 MVP 与工程收口完成、首发准备等待部署决策”。`npm run quality:release` 通过只表示本地发布候选满足代码、契约、测试、构建、可访问性、性能、SEO 和 Harness 完整性门槛；在部署决策及运维演练完成前不得标记为 production-ready。
+项目当前处于公开问答 `LOCAL_READY` 和整站 production No-Go。`npm run quality:release` 通过只表示本地发布候选满足代码、契约、测试、构建、可访问性、性能、SEO 和 Harness 完整性门槛；它不证明真实供应商、最终 TLS／SSE 链、目标 2 vCPU／4 GB、恢复或监控。当前缺少管理员选定的非秘密 profile、唯一平台部署资产、真实目标 47 项 case 记录和签名 manifest，因此既不是有效 `QUALIFICATION_NO_GO`，也不是 `QUALIFICATION_GO_CANDIDATE`。
+
+资格状态只允许 `LOCAL_READY → QUALIFICATION_GO_CANDIDATE | QUALIFICATION_NO_GO`。前者要求所有必测 case 为 pass；后者要求真实 measured fail 及其无环 `blocked_by` 因果链完整，不能用 missing／unknown／没环境代替。task close 只关闭这次资格判定；只有仍新鲜的 GO candidate 才可由管理员在任务外继续 `FINAL_GO → PUBLIC_ENABLED`。部署、runner、readiness 和 close 均不得自动开启 Web launcher、API capability 或 runtime gate。
 
 ## Local release candidate gate
 
@@ -49,6 +51,10 @@ CI 在权威 gate 结束后以 `always()` 生成脱敏 Harness telemetry summary
 - 从干净检出使用锁文件安装依赖并通过 `npm run quality:release`。
 - 确认 Git 工作树干净，生成带版本号和 commit SHA 的发布说明。
 
+选定 profile 后先从 `apps/api/` 运行 `scripts/assistant_qualification.py validate <profile>`，在零部署、零供应商调用下复核 digest 和三开关关闭。真实 provider probe 只能显式选择 Chat／Embedding、传入该批准 digest 并遵守 profile 的 calls／micro-CNY envelope。目标 runner 必须在 Git 外的批准 qualification root 初始化，逐项记录 47 个 case 的已复核外部 artifact 哈希，再组装未签名 manifest；私钥只从批准 secret source 提供给 `python -m tools.harness qualification-sign`。仓库只保存 pinned public key 与签名后的 `harness/verification/qualifications/20260830-public-qa-production-qualification.json`，重型日志、抓包、数据库副本、原问答、IP、endpoint 和 provider raw payload 留在加密外部存储。
+
+`python -m tools.harness qualification-verify 20260830-public-qa-production-qualification` 校验签名、schema、源码／artifact／profile／case-suite 绑定、TTL、目标与 provider 事实、完整 case 终态和三开关关闭；缺失或过期都非零。历史 manifest 到期不拖垮未来普通本地 release，但永远不能授权 `FINAL_GO`。
+
 ## Data boundaries
 
 `.env`、开发日志、SQLite 数据库、本地媒体和原始验证产物不得进入 Git。备份必须同时覆盖内容事实库 SQLite 与媒体对象，并包含其中的 index-embedding 账本；只有数据库或只有媒体的备份不构成可恢复备份。`assistant_runtime` 数据库及其 WAL/SHM、checkpoint 和临时副本明确排除于长期备份。恢复演练须先重建空 runtime schema，公开 Chat／query 至少锁到下一个北京时间零点，Qdrant 丢失时须先按 Worker 账本重建 generation 再签发新的 readiness receipt。
@@ -59,7 +65,7 @@ CI 在权威 gate 结束后以 `always()` 生成脱敏 Harness telemetry summary
 
 ## Rollback boundary
 
-在部署方案确定前，本项目只定义回滚原则，不虚构平台命令：保留上一可运行应用产物；迁移前创建可验证备份；数据库迁移默认前向修复，只有迁移显式证明可逆时才执行降级；涉及数据库或媒体写入的回滚必须先停止写流量并保护当前副本。
+在部署方案确定前，本项目只定义回滚原则，不虚构平台命令：保留上一可运行应用产物；迁移前创建可验证备份；数据库迁移默认前向修复，只有迁移显式证明可逆时才执行降级；涉及数据库或媒体写入的回滚必须先停止写流量并保护当前副本。仓库已提供共同写 fence、SQLite online backup、版本化媒体 manifest 和隔离恢复校验，但本地 snapshot 明确没有主机外加密回执，不能冒充最终备份演练。
 
 ## Go / no-go
 
