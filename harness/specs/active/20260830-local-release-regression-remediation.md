@@ -13,13 +13,14 @@ documentation_impact: required
 documentation_targets:
   - README.md
   - apps/api/README.md
-documentation_reason: 本任务修正项目状态和内容写 fence 的运行语义，必须同步公开项目状态与 API 持久化边界。
+  - apps/web/README.md
+documentation_reason: 本任务修正项目状态、内容写 fence 与 E2E 隔离运行语义，必须同步公开项目状态及 API／Web 边界。
 state_history:
 ---
 
 # Context
 
-生产资格任务因当前仍处于功能开发阶段而保持 frozen，且不得访问真实服务器、域名或供应商。本地 `npm run quality:release` 在同一 API owner 内并发创建文章、项目和读书笔记时只允许第一个请求取得非阻塞跨进程文件锁，其余正常请求错误返回 `503 content writes are temporarily fenced`；质量矩阵因此失败。失败后的退出诊断显示 Playwright 已进入 Windows WebServer 终止流程，但当前 Codex 受限沙箱拒绝它对自建子进程树执行 `taskkill /T /F`；同一最小测试在允许管理本地测试子进程的上下文中正常终止，因此这是验证执行环境前提，不是应用生命周期缺陷。相同构建还报告 Nitro `es2019` 目标无法安全表达可信代理 CIDR 实现使用的 BigInt。根 README 仍把已经压缩归档的 Admin Login 规格写成当前保留任务。
+生产资格任务因当前仍处于功能开发阶段而保持 frozen，且不得访问真实服务器、域名或供应商。本地 `npm run quality:release` 在同一 API owner 内并发创建文章、项目和读书笔记时只允许第一个请求取得非阻塞跨进程文件锁，其余正常请求错误返回 `503 content writes are temporarily fenced`；质量矩阵因此失败。失败后的退出诊断显示 Playwright 已进入 Windows WebServer 终止流程，但当前 Codex 受限沙箱拒绝它对自建子进程树执行 `taskkill /T /F`；同一最小测试在允许管理本地测试子进程的上下文中正常终止，因此这是验证执行环境前提，不是应用生命周期缺陷。首次完整门禁随后暴露助手 E2E runner 未显式提供已经成为必填项的 session／CSRF secret 和 provider 并发配置，并会让未覆盖的 `GAVIN_*` 主机环境进入测试子进程。相同构建还报告 Nitro `es2019` 目标无法安全表达可信代理 CIDR 实现使用的 BigInt。根 README 仍把已经压缩归档的 Admin Login 规格写成当前保留任务。
 
 # Goal
 
@@ -41,12 +42,14 @@ state_history:
 - AC-3: Nitro 服务端构建明确使用支持 BigInt 的目标并与项目声明的 Node 22 运行基线一致；可信代理 IPv4、IPv4-mapped IPv6、IPv6 和 CIDR 单元测试保持通过，生产构建不再输出 `Big integer literals are not available in ... es2019` 警告。
 - AC-4: 根 README 不再把已压缩的 Admin Login 规格描述为当前 active；API README 准确记录普通单 owner mutation 的进程内序列化与外部备份 fence fail-closed 区别。历史已取消、退役或压缩任务不被重新列为待完成。
 - AC-5: 当前 HEAD 的 API lint／测试、Harness tests、OpenAPI 一致性、Web 类型／单测／构建／质量／失败态、核心 E2E 与 Harness integrity 均由一次完整 `npm run quality:release` 成功覆盖；命令正常退出、工作树保持干净，local-only change coverage skip 只作为明确记录而不被描述成远端 CI 证据。
+- AC-6: E2E 父 runner 从子进程环境中移除主机 `GAVIN_*` 配置，只保留显式允许的测试端口并重新注入本次随机 run root；助手 E2E API 显式声明通过当前校验所需的独立本地测试 secrets、provider 限制和确定性 test providers。助手 Web E2E 运行本地生产 Node preview；Nuxt 助手代理从 H3 的直接 peer 地址解析能力读取客户端 socket 身份，不信任 `X-Forwarded-For`，并在缺少 direct peer 时 fail closed。测试不得读取真实资格、密钥或 provider 身份，也不得发起非 loopback 网络调用。
 
 # Risks
 
 - 仅把文件锁改成阻塞锁可能卡住事件循环或让外部备份造成无限等待；进程内 async 序列化和跨进程非阻塞 fence 必须分层。
 - 在响应流仍未结束时提前释放 fence 会破坏未来 mutation 路由；在取消路径未释放则会永久阻塞单 owner。中间件边界必须由并发和异常测试证明。
 - Windows 进程树回收依赖执行环境允许 Playwright 终止自己启动的子进程；受限沙箱拒绝 `taskkill` 时会制造与产品生命周期缺陷相似的挂起，验证必须在权限合适的本地上下文执行并区分两者。
+- 只补一个当前报错的测试 secret 会让其余必填配置继续依赖主机环境，既不稳定也可能误触真实 provider；runner 必须先清除 `GAVIN_*` 继承，再完整声明本地测试身份和限制。
 - 单纯忽略 esbuild 警告会保留配置漂移；提高服务端目标必须与 Node 22 最低版本一致，不能无意改变浏览器兼容目标。
 - 本地 release 通过不能证明远端 CI、分支保护、生产部署或公开问答资格。
 
@@ -55,6 +58,6 @@ state_history:
 - api-lint => AC-1
 - api-tests => AC-1
 - web-quality => AC-2, AC-3, AC-4
-- e2e => AC-5
+- e2e => AC-5, AC-6
 - harness-integrity => AC-4
-- release => AC-1, AC-2, AC-3, AC-4, AC-5
+- release => AC-1, AC-2, AC-3, AC-4, AC-5, AC-6
