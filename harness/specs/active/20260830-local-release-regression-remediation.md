@@ -8,6 +8,7 @@ author: Gavin
 task_id: 20260830-local-release-regression-remediation
 status: active
 verification_profile: release
+verification_escalation: 本任务直接修复完整本地 release gate 的失败与退出语义，只有执行全部 API、Web、E2E 与 Harness 阶段才能证明门禁恢复且没有以局部绿灯替代发布候选。
 documentation_impact: required
 documentation_targets:
   - README.md
