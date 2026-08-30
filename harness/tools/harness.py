@@ -15,6 +15,7 @@ from . import (
     lifecycle,
     product_verification,
     qualification,
+    qualification_runner,
     summarizer,
     task_reporting,
     telemetry,
@@ -504,6 +505,50 @@ def command_qualification_verify(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_qualification_run_init(args: argparse.Namespace) -> int:
+    summarizer.validate_task_id(args.task_id)
+    try:
+        path = qualification_runner.initialize_run(
+            task_id=args.task_id,
+            artifact_path=args.artifact,
+            workspace=args.workspace,
+        )
+    except (OSError, ValueError) as error:
+        print(f"qualification run initialization failed: {error}", file=sys.stderr)
+        return 1
+    print(f"qualification run {path}")
+    print("provider calls 0; deployment mutations 0; public switches unchanged")
+    return 0
+
+
+def command_qualification_run_record(args: argparse.Namespace) -> int:
+    try:
+        path = qualification_runner.record_case(
+            workspace=args.workspace,
+            observation_path=args.observation,
+        )
+    except (OSError, ValueError) as error:
+        print(f"qualification case recording failed: {error}", file=sys.stderr)
+        return 1
+    print(f"qualification case {path}")
+    return 0
+
+
+def command_qualification_run_assemble(args: argparse.Namespace) -> int:
+    try:
+        path = qualification_runner.assemble_manifest(
+            workspace=args.workspace,
+            summary_path=args.summary,
+            output_path=args.output,
+        )
+    except (OSError, ValueError) as error:
+        print(f"qualification manifest assembly failed: {error}", file=sys.stderr)
+        return 1
+    print(f"unsigned qualification manifest {path}")
+    print("review and sign separately; no public switch was enabled")
+    return 0
+
+
 def parser() -> argparse.ArgumentParser:
     root = argparse.ArgumentParser(description="Gavin project harness")
     commands = root.add_subparsers(dest="command", required=True)
@@ -538,6 +583,32 @@ def parser() -> argparse.ArgumentParser:
     qualification_verify.add_argument("task_id")
     qualification_verify.add_argument("--historical", action="store_true")
     qualification_verify.set_defaults(func=command_qualification_verify)
+
+    qualification_init = commands.add_parser(
+        "qualification-run-init",
+        help="initialize a zero-call evidence run on the approved real target",
+    )
+    qualification_init.add_argument("task_id")
+    qualification_init.add_argument("--artifact", type=Path, required=True)
+    qualification_init.add_argument("--workspace", type=Path, required=True)
+    qualification_init.set_defaults(func=command_qualification_run_init)
+
+    qualification_record = commands.add_parser(
+        "qualification-run-record",
+        help="record one reviewed case and its off-host artifact hashes",
+    )
+    qualification_record.add_argument("--workspace", type=Path, required=True)
+    qualification_record.add_argument("--observation", type=Path, required=True)
+    qualification_record.set_defaults(func=command_qualification_run_record)
+
+    qualification_assemble = commands.add_parser(
+        "qualification-run-assemble",
+        help="assemble a complete unsigned compact target manifest",
+    )
+    qualification_assemble.add_argument("--workspace", type=Path, required=True)
+    qualification_assemble.add_argument("--summary", type=Path, required=True)
+    qualification_assemble.add_argument("--output", type=Path, required=True)
+    qualification_assemble.set_defaults(func=command_qualification_run_assemble)
 
     close = commands.add_parser("close", help="verify and compress an active spec")
     close.add_argument("task_id")

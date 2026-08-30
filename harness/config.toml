@@ -121,6 +121,7 @@ runtime_source_files = [
   "apps/api/pyproject.toml",
   "harness/config.toml",
   "harness/tools/qualification.py",
+  "harness/tools/qualification_runner.py",
   "harness/verification/checks/qualification_manifests.py",
 ]
 
