@@ -53,5 +53,6 @@ state_history:
 - api-lint => AC-1
 - api-tests => AC-1
 - web-quality => AC-2, AC-3, AC-4
+- e2e => AC-5
 - harness-integrity => AC-4
 - release => AC-1, AC-2, AC-3, AC-4, AC-5
