@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "task_id": "20260830-local-release-regression-remediation",
-  "created_at": "2026-08-30T14:39:24.596465+00:00",
+  "created_at": "2026-08-30T15:01:59.820036+00:00",
   "command": "python -m tools.harness verify 20260830-local-release-regression-remediation",
   "status": "passed",
   "acceptance_criteria": [
@@ -66,10 +66,10 @@
   ],
   "verification_profile": "release",
   "fingerprints": {
-    "source_tree": "5b9ec5a9eebe32fa95dca4c953bd926094dc2d81",
+    "source_tree": "3d9786a458ae9fae01b86192ef10c75fa6e84fee",
     "active_spec_sha256": "34f7471261a557ba9308fe697090ab42788e2526f8859d46c39d261258999cc0",
     "verification_contract_sha256": "0645625664ff9ae4ad143222d724ef9b3a5d1f23afb08c7bae10a377e92c24c3",
-    "gate_config_sha256": "c4d83580cd07c5dc97f1d153d7c0b4659ef0504f02151aa8d71e4728b595957a",
+    "gate_config_sha256": "3dca20c3176a6a68d9cf2bbe79dae90b6143994a73fac65de17afa7ca182d2b9",
     "documentation_contract_sha256": "3f032f341e77336f189d5340857f74c5ebda73febe5678721903412ccb2a7455",
     "documentation_targets_sha256": "5e6e476b8579e312b1438848323ec5adea05c03de3728b9addddd4d7f0b5fab9"
   },
@@ -90,7 +90,7 @@
   },
   "execution": {
     "mode": "git-worktree",
-    "source_commit": "9ab7b97ec23a271906b8eff3d51ee49b469a0a79",
+    "source_commit": "20b5b7ddb0cefc4a754ac640b5cf02f834551468",
     "cleanup_status": "passed",
     "reused_paths": 3
   },
@@ -101,7 +101,7 @@
         "1 subsumption contracts bind 6 registered child gates"
       ],
       "status": "passed",
-      "duration_ms": 7.162
+      "duration_ms": 5.039
     },
     {
       "name": "history-integrity",
@@ -109,7 +109,7 @@
         "96 deterministic closes retain archive, evidence, event, and active-spec history"
       ],
       "status": "passed",
-      "duration_ms": 223.195
+      "duration_ms": 157.863
     },
     {
       "name": "indexes",
@@ -117,7 +117,7 @@
         "9 generated indexes are current"
       ],
       "status": "passed",
-      "duration_ms": 94.765
+      "duration_ms": 60.583
     },
     {
       "name": "l0",
@@ -125,7 +125,7 @@
         "AGENTS.md is the unique L0 and stays within 60-80 lines"
       ],
       "status": "passed",
-      "duration_ms": 1.459
+      "duration_ms": 0.551
     },
     {
       "name": "links",
@@ -133,7 +133,7 @@
         "418 local Markdown links resolve without durable active-spec references"
       ],
       "status": "passed",
-      "duration_ms": 2561.923
+      "duration_ms": 1765.087
     },
     {
       "name": "metadata",
@@ -141,7 +141,7 @@
         "194 routed Markdown documents have valid metadata"
       ],
       "status": "passed",
-      "duration_ms": 53.337
+      "duration_ms": 54.017
     },
     {
       "name": "qualification-manifests",
@@ -149,7 +149,7 @@
         "configured qualification manifests have valid historical bindings"
       ],
       "status": "passed",
-      "duration_ms": 3.954
+      "duration_ms": 3.384
     },
     {
       "name": "structure",
@@ -157,7 +157,7 @@
         "28 required paths exist"
       ],
       "status": "passed",
-      "duration_ms": 9.11
+      "duration_ms": 8.844
     },
     {
       "name": "supply-chain",
@@ -165,14 +165,14 @@
         "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
       ],
       "status": "passed",
-      "duration_ms": 81.95
+      "duration_ms": 76.752
     },
     {
       "name": "api-lint",
       "kind": "product",
-      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-m8m5hczy\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m ruff check .",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-arrbzcih\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m ruff check .",
       "status": "passed",
-      "duration_ms": 291.321,
+      "duration_ms": 269.508,
       "covers": [
         "AC-1"
       ],
@@ -184,9 +184,9 @@
     {
       "name": "api-tests",
       "kind": "product",
-      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-m8m5hczy\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m pytest",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-arrbzcih\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m pytest",
       "status": "passed",
-      "duration_ms": 121465.104,
+      "duration_ms": 117083.481,
       "covers": [
         "AC-1"
       ],
@@ -205,7 +205,7 @@
       "kind": "product",
       "command": "D:\\Tool\\nodejs\\npm.CMD run quality:web",
       "status": "passed",
-      "duration_ms": 297962.539,
+      "duration_ms": 294948.302,
       "covers": [
         "AC-2",
         "AC-3",
@@ -226,7 +226,7 @@
       "kind": "product",
       "command": "D:\\Tool\\nodejs\\npm.CMD run test:e2e",
       "status": "passed",
-      "duration_ms": 207273.299,
+      "duration_ms": 211403.508,
       "covers": [
         "AC-5",
         "AC-6"
@@ -244,9 +244,9 @@
     {
       "name": "harness-integrity",
       "kind": "product",
-      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-m8m5hczy\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m tools.harness verify",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-arrbzcih\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m tools.harness verify",
       "status": "passed",
-      "duration_ms": 3941.043,
+      "duration_ms": 4714.64,
       "covers": [
         "AC-4"
       ],
@@ -260,7 +260,7 @@
       "kind": "product",
       "command": "D:\\Tool\\nodejs\\npm.CMD run quality:release",
       "status": "passed",
-      "duration_ms": 651287.467,
+      "duration_ms": 657572.593,
       "covers": [
         "AC-1",
         "AC-2",
@@ -313,7 +313,7 @@
       "kind": "isolation",
       "command": "git worktree add --detach <temporary> HEAD",
       "status": "passed",
-      "duration_ms": 1924.883,
+      "duration_ms": 1813.38,
       "covers": [],
       "details": [
         "temporary worktree and dependency links were removed"
@@ -326,7 +326,7 @@
       "passed": 16,
       "failed": 0
     },
-    "duration_ms": 1287182.511,
+    "duration_ms": 1289937.532,
     "failures": [],
     "test_counts": {
       "passed": 1091,
@@ -334,5 +334,5 @@
       "skipped": 2
     }
   },
-  "source_commit": "9ab7b97ec23a271906b8eff3d51ee49b469a0a79"
+  "source_commit": "20b5b7ddb0cefc4a754ac640b5cf02f834551468"
 }
