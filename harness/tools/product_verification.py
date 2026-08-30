@@ -17,6 +17,7 @@ from .config import load_config, project_root
 from .lifecycle import LifecycleError
 from .lifecycle import documentation_contract as parse_documentation_contract
 from .metadata import parse_front_matter
+from .qualification import validate_task_qualification
 from .result_reporting import (
     failure_details,
     failure_summary,
@@ -573,12 +574,17 @@ def evidence_fingerprints(
         "verification_escalation": verification_escalation(task_id),
     }
     documentation = documentation or documentation_report(task_id)
+    qualification_errors, qualification_binding = validate_task_qualification(task_id)
+    if qualification_errors:
+        raise ProductVerificationError(
+            "qualification manifest is not valid: " + "; ".join(qualification_errors)
+        )
     documentation_input = {
         "impact": documentation["impact"],
         "reason": documentation["reason"],
         "targets": documentation["targets"],
     }
-    return {
+    fingerprints = {
         "source_tree": _git_value("rev-parse", "HEAD^{tree}"),
         "active_spec_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
         "verification_contract_sha256": _canonical_hash(verification_contract),
@@ -588,6 +594,11 @@ def evidence_fingerprints(
             documentation.get("target_blobs", {})
         ),
     }
+    if qualification_binding is not None:
+        fingerprints["qualification_manifest_sha256"] = _canonical_hash(
+            qualification_binding
+        )
+    return fingerprints
 
 
 def source_changes(extra_paths: list[str] | None = None) -> list[str]:

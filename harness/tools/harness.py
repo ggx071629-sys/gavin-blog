@@ -14,6 +14,7 @@ from . import (
     isolated_verification,
     lifecycle,
     product_verification,
+    qualification,
     summarizer,
     task_reporting,
     telemetry,
@@ -477,6 +478,32 @@ def command_resume(args: argparse.Namespace) -> int:
     return _command_transition(args, lifecycle.resume_spec, "resumed")
 
 
+def command_qualification_sign(args: argparse.Namespace) -> int:
+    try:
+        qualification.sign_manifest_file(args.input, args.private_key, args.output)
+    except (OSError, ValueError) as error:
+        print(f"qualification signing failed: {error}", file=sys.stderr)
+        return 1
+    print(f"signed qualification manifest {args.output}")
+    return 0
+
+
+def command_qualification_verify(args: argparse.Namespace) -> int:
+    summarizer.validate_task_id(args.task_id)
+    errors, binding = qualification.validate_task_qualification(
+        args.task_id,
+        active=not args.historical,
+    )
+    if errors:
+        print(f"[FAILED] qualification {args.task_id}")
+        for error in errors:
+            print(f"  - {error}")
+        return 1
+    print(f"[PASSED] qualification {args.task_id}")
+    print(json.dumps(binding, ensure_ascii=False, sort_keys=True))
+    return 0
+
+
 def parser() -> argparse.ArgumentParser:
     root = argparse.ArgumentParser(description="Gavin project harness")
     commands = root.add_subparsers(dest="command", required=True)
@@ -494,6 +521,23 @@ def parser() -> argparse.ArgumentParser:
     )
     spec_lint.add_argument("task_id", nargs="?")
     spec_lint.set_defaults(func=command_spec_lint)
+
+    qualification_sign = commands.add_parser(
+        "qualification-sign",
+        help="sign a canonical target qualification manifest with an approved private key",
+    )
+    qualification_sign.add_argument("--input", type=Path, required=True)
+    qualification_sign.add_argument("--private-key", type=Path, required=True)
+    qualification_sign.add_argument("--output", type=Path, required=True)
+    qualification_sign.set_defaults(func=command_qualification_sign)
+
+    qualification_verify = commands.add_parser(
+        "qualification-verify",
+        help="verify the configured signed target qualification manifest",
+    )
+    qualification_verify.add_argument("task_id")
+    qualification_verify.add_argument("--historical", action="store_true")
+    qualification_verify.set_defaults(func=command_qualification_verify)
 
     close = commands.add_parser("close", help="verify and compress an active spec")
     close.add_argument("task_id")

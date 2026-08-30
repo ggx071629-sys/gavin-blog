@@ -50,6 +50,8 @@ source_paths = [
   "harness/specs/INDEX.md",
   "harness/verification/README.md",
   "harness/verification/checks",
+  "harness/verification/qualification-cases",
+  "harness/verification/qualifications",
   "harness/verification/tests",
   "harness/verification/vdd",
 ]
@@ -100,11 +102,32 @@ id = "harness-control"
 prefixes = [
   "harness/tools/",
   "harness/verification/checks/",
+  "harness/verification/qualification-cases/",
+  "harness/verification/qualifications/",
   "harness/verification/tests/",
   "harness/specs/_sdd/",
 ]
 files = []
 required_gates = ["harness-tests", "harness-integrity"]
+
+[verification.qualifications]
+directory = "verification/qualifications"
+trusted_public_keys = "verification/qualifications/trusted-public-keys.json"
+runtime_source_prefixes = ["apps/", "packages/", "scripts/"]
+runtime_source_files = [
+  "package.json",
+  "package-lock.json",
+  "apps/api/uv.lock",
+  "apps/api/pyproject.toml",
+  "harness/config.toml",
+  "harness/tools/qualification.py",
+  "harness/verification/checks/qualification_manifests.py",
+]
+
+[verification.qualifications.tasks.20260830-public-qa-production-qualification]
+manifest = "verification/qualifications/20260830-public-qa-production-qualification.json"
+profile = "verification/qualifications/20260830-public-qa-production-qualification.profile.json"
+case_suite = "verification/qualification-cases/public-qa-conformance-v1.json"
 
 [[verification.risk_routes]]
 id = "release-control"
