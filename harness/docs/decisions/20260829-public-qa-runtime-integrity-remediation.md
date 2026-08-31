@@ -31,3 +31,5 @@ author: Gavin
 ## Status and production boundary
 
 本决策只闭合第四阶段关闭后发现的三个缺口，不追溯改写原 archive/evidence/decision，也不表示项目已上线或 production-ready。第五阶段管理员运营控制面保持未开始；真实供应商、代理 SSE、备份恢复、目标服务器资源与公网安全仍是 production No-Go。
+
+上句“第五阶段保持未开始”记录本决策作出时的状态，不是当前状态。后续 [公开问答运营控制面决策](20260829-public-qa-admin-operations.md) 已交付默认关闭的 `/admin/assistant`；该后续交付不改变本决策的完整性补救内容，也不解除 production No-Go。

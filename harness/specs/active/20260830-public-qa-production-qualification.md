@@ -19,11 +19,13 @@ documentation_targets:
   - harness/docs/decisions/20260830-public-qa-production-qualification.md
 documentation_reason: 本任务首次固定公开问答的实际生产拓扑、供应商合同、代理与存储恢复边界，并形成可审计的 Go／No-Go 结论，必须同步项目、应用、产品、架构、运维和持久决策文档。
 status: frozen
-frozen_at: 2026-08-30T12:49:08.333510+00:00
-freeze_reason: 当前处于功能开发阶段；管理员明确禁止进入真实服务器、真实域名与真实供应商部署，生产资格待部署阶段再恢复。
-frozen_scope_sha256: 662484443c0b71bc3e46d3f4addb8b99ea32e57f65566ddaa125af90480a8bc5
+frozen_at: 2026-08-31T12:46:40.562819+00:00
+freeze_reason: AC-7 已对齐已交付 checkpoint 合同；管理员仍未选择生产 profile、平台、供应商与目标环境，继续冻结。
+frozen_scope_sha256: 3f463cc33f22989c8602e2fc7d7b44fb207bdd6221b4a1409ecab0c4bc8e9ca9
 state_history:
   - {"action":"freeze","at":"2026-08-30T12:49:08.333510+00:00","reason":"当前处于功能开发阶段；管理员明确禁止进入真实服务器、真实域名与真实供应商部署，生产资格待部署阶段再恢复。","scope_sha256":"662484443c0b71bc3e46d3f4addb8b99ea32e57f65566ddaa125af90480a8bc5"}
+  - {"action":"resume","at":"2026-08-31T12:45:54.170649+00:00","reason":"文档漂移复核确认 AC-7 与已交付 checkpoint 合同冲突；仅恢复以纠正验收措辞，不启动生产资格。"}
+  - {"action":"freeze","at":"2026-08-31T12:46:40.562819+00:00","reason":"AC-7 已对齐已交付 checkpoint 合同；管理员仍未选择生产 profile、平台、供应商与目标环境，继续冻结。","scope_sha256":"3f463cc33f22989c8602e2fc7d7b44fb207bdd6221b4a1409ecab0c4bc8e9ca9"}
 ---
 
 # Context
@@ -70,7 +72,7 @@ state_history:
 
 - AC-6: 实现并演练可执行的备份、恢复和上一版本回滚，不以声明性 helper 或普通文件复制代替。备份必须通过共同写 fence／受控 quiesce、支持 SQLite 与媒体一致性的原子卷快照，或经过验证的版本化 media manifest 协议，消除 content SQLite online backup 与并发媒体上传／删除之间的竞态；恢复点覆盖 index-embedding 账本、迁移版本、媒体清单／哈希，并有并发媒体变更测试证明不会得到数据库与对象不一致的混合时刻。按 profile 加密保存到主机故障域之外并执行频率、保留期、失败告警和过期检查。assistant runtime、WAL／SHM、LangGraph checkpoints／writes、lock 和临时 qualification artifacts 明确排除于长期备份，但普通重启所用 runtime volume 不得无声消失。在全新隔离目标上恢复内容与媒体，执行 Alembic／integrity／FTS 校验，创建空 runtime，使公开 Chat／query 至少锁到下一个北京时间零点，按 AC-5 恢复或重建 Qdrant，重新签发绑定 active generation 的 receipt 后仍保持 disabled；记录实测 RPO／RTO、数据计数、哈希、人工步骤和失败路径。上一 artifact 回滚必须保护当前副本、处理 generation／switch_pending、使用前向修复优先策略，不能默认数据库 downgrade 安全。
 
-- AC-7: 在实际目标文件系统和单 API owner 拓扑上对 pinned AsyncSqliteSaver 生产例外做专项资格测试：拒绝 NFS／SMB／网络共享目录和第二 API owner，验证 owner lock、WAL／busy timeout、最大 3 并发 session lease、进程 crash／restart、部署重启、同 session serialization、30 分钟空闲／24 小时绝对过期、DELETE／cleanup breaker、checkpoint／writes 最终零残留，以及无问题、答案、证据正文、provider payload 或 query vector 落入 State／checkpoint。测试必须覆盖 Saver／WAL／磁盘错误和 lock contention 下的 fail-closed、无部分 publish、无双调用与保守费用结算。任一第二 owner、共享文件系统、持续锁争用、残留或清理不变量失败都使资格结果为 No-Go，并产生独立 saver 迁移任务建议；不得在本 AC 内静默扩成 Postgres 或改变 LangGraph 拓扑。
+- AC-7: 在实际目标文件系统和单 API owner 拓扑上对 pinned AsyncSqliteSaver 生产例外做专项资格测试：拒绝 NFS／SMB／网络共享目录和第二 API owner，验证 owner lock、WAL／busy timeout、最大 3 并发 session lease、进程 crash／restart、部署重启、同 session serialization、30 分钟空闲／24 小时绝对过期、DELETE／cleanup breaker、checkpoint／writes 最终零残留，以及历史问题、历史答案、证据正文、provider raw/parsed payload 或 query vector 均不落入 State／checkpoint／writes；current question、内部 ID、generation/version 与非正文 evidence descriptor 只作为必要恢复状态持久化。测试必须覆盖 Saver／WAL／磁盘错误和 lock contention 下的 fail-closed、无部分 publish、无双调用与保守费用结算。任一第二 owner、共享文件系统、持续锁争用、残留或清理不变量失败都使资格结果为 No-Go，并产生独立 saver 迁移任务建议；不得在本 AC 内静默扩成 Postgres 或改变 LangGraph 拓扑。
 
 - AC-8: 在同一台 2 vCPU／4 GB 目标主机、相同生产 artifact 和代表性真实语料上执行资源、容量与 soak 资格；任何阈值、soak 时长或流量模型都必须在运行前由管理员写入 profile，满足 AC-1 的关系约束并附依据，缺失后不得事后按结果移动门槛。运行前验证 NTP 同步与时钟漂移处于 profile 水位内，因为 BJT 预算、receipt freshness、TLS 和 manifest TTL 均依赖可信时间。场景至少覆盖冷启动、空闲、两位 HR 的低流量访问、最大 3 并发 SSE、Qdrant／FTS degraded、全量 rebuild 与 segment optimize 峰值、API／Worker／Qdrant 重启、备份过程和持续运行；批量负载可用确定性非计费 provider，另以 AC-3／AC-9 的有限真实 canary 校准外部延迟。每个进程记录 steady／peak RSS、CPU、swap、OOM／restart、disk I/O、磁盘增长与剩余空间、threads／file descriptors、Qdrant／FTS latency、完整 LangGraph 问答 P50／P95 和随时间增长；没有 OOM、持续 swap thrash、句柄／内存单调泄漏或突破任何已批准水位才可得到 pass，否则记录 measured fail。Qdrant 重建峰值、OS／代理余量和备份空间必须计入，不能只相加配置上限或复用已退役 Zvec 数字。
 

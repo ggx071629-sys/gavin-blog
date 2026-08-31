@@ -39,8 +39,8 @@ author: Gavin
 | 认证与个人资料 | 管理登录、路由保护、Profile 编辑与公开名片 | Session、CSRF、登录限流、Profile 持久化与字段可见性 | Web/API README、OpenAPI |
 | 内容发现输出 | canonical、Open Graph、结构化数据、RSS、站点地图与 robots | 只读公开投影和稳定内容 URL | Web README、产品基线 |
 | 工程控制面 | 同源代理、质量与 E2E 客户端 | SQLite/Alembic、配置与测试隔离 | AGENTS、Harness 索引、发布准备 |
-| 公开问答消费层（默认关闭） | 「问 Gavin」悬浮入口、懒加载面板、同源 SSE | 匿名 session／SSE、tombstone fence、公开 session view | Web/API/Contracts README、本决策 |
-| 问答运营控制面（默认关闭） | `/admin/assistant` 被动事实、确认与可见性轮询 | runtime gate、三账本、index task/rebuild/finalize | Web/API/Contracts README、第五阶段决策 |
+| 公开问答消费层（默认关闭） | 「问 Gavin」悬浮入口、懒加载面板、同源 SSE | 匿名 session／SSE、tombstone fence、公开 session view | Web/API/Contracts README、[公开问答 Web 交付决策](../decisions/20260829-public-qa-web-delivery.md) |
+| 问答运营控制面（默认关闭） | `/admin/assistant` 被动事实、确认与可见性轮询 | runtime gate、三账本、index task/rebuild/finalize | Web/API/Contracts README、[问答运营控制面决策](../decisions/20260829-public-qa-admin-operations.md) |
 
 默认关闭的匿名公开问答现包含 API 内核、可选 Web 消费层与单管理员运营页。Web launcher flag、API capability、runtime gate 和 readiness 分属不同权威；运营页只聚合本地被动事实，不实时探活。一次问题可把同一短会话最近最多 4 个完整、未清理的成功问答 pair 作为明确分区的不可信历史发送给模型；历史 query/prompt 都只在节点内瞬时构造。停用不能撤回已越过 sending 的调用，但 operational epoch 阻止其正文、事件、history、checkpoint 与 publish，只允许无正文保守结算。About 静态文案仍不是 RAG 语料，OpenAPI 路由或 dashboard healthy 也不等于真实供应商可用。生产资格状态唯一为 `LOCAL_READY → QUALIFICATION_GO_CANDIDATE | QUALIFICATION_NO_GO`；task close 只完成一次有真实目标证据的资格分类，不是最终 Go。只有新鲜 GO candidate 才能由管理员在任务外继续 `FINAL_GO → PUBLIC_ENABLED`。当前仍是 `LOCAL_READY` 与生产部署 No-Go。
 

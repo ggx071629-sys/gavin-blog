@@ -13,7 +13,7 @@ author: Gavin
 
 ## Current status
 
-项目当前处于公开问答 `LOCAL_READY` 和整站 production No-Go。`npm run quality:release` 通过只表示本地发布候选满足代码、契约、测试、构建、可访问性、性能、SEO 和 Harness 完整性门槛；它不证明真实供应商、最终 TLS／SSE 链、目标 2 vCPU／4 GB、恢复或监控。当前缺少管理员选定的非秘密 profile、唯一平台部署资产、真实目标 47 项 case 记录和签名 manifest，因此既不是有效 `QUALIFICATION_NO_GO`，也不是 `QUALIFICATION_GO_CANDIDATE`。
+项目当前处于公开问答 `LOCAL_READY` 和整站 production No-Go。`npm run quality:release` 通过只表示本地发布候选满足代码、契约、测试、构建、可访问性、性能、SEO 和 Harness 完整性门槛；它不证明真实供应商、最终 TLS／SSE 链、目标 2 vCPU／4 GB、恢复或监控。当前资格任务仍冻结，配置声明的批准非秘密 profile、匹配的 pinned public-key set 与签名 manifest 均未落盘；唯一平台部署 artifact、真实目标 47 项 case 记录也不存在。因此当前既不是有效 `QUALIFICATION_NO_GO`，也不是 `QUALIFICATION_GO_CANDIDATE`。
 
 资格状态只允许 `LOCAL_READY → QUALIFICATION_GO_CANDIDATE | QUALIFICATION_NO_GO`。前者要求所有必测 case 为 pass；后者要求真实 measured fail 及其无环 `blocked_by` 因果链完整，不能用 missing／unknown／没环境代替。task close 只关闭这次资格判定；只有仍新鲜的 GO candidate 才可由管理员在任务外继续 `FINAL_GO → PUBLIC_ENABLED`。部署、runner、readiness 和 close 均不得自动开启 Web launcher、API capability 或 runtime gate。
 
@@ -26,7 +26,7 @@ npm ci
 npm run quality:release
 ```
 
-API 虚拟环境必须位于 `apps/api/.venv`，并已安装 `.[dev]`。本地依赖升级后从 `apps/api/` 使用项目固定的 uv 版本重新生成并提交 `uv.lock`，再执行 `uv lock --check --python 3.11`；不得手工编辑锁文件。门禁依次执行 API Ruff、Pytest、Harness check 单测、OpenAPI 快照一致性、Web 类型检查、Vitest、生产构建、axe-core、Lighthouse、核心 Playwright E2E 和 Harness checks。任何一步失败都阻断候选版本。
+API 虚拟环境必须位于 `apps/api/.venv`，并已安装 `.[dev]`。本地依赖升级后从 `apps/api/` 使用项目固定的 uv 版本重新生成并提交 `uv.lock`，再执行 `uv lock --check --python 3.11`；不得手工编辑锁文件。门禁依次执行 API Ruff、Pytest、Harness check 单测、OpenAPI 快照一致性、Web 类型检查、Vitest、生产构建、axe-core、Lighthouse、核心与默认关闭助手的 Playwright E2E，以及 Harness checks。任何一步失败都阻断候选版本。
 
 `quality:release` 在环境变量 `HARNESS_BASE_REF` 存在时，先从 `harness/` 执行 `python -m tools.harness change-check --base <ref> --head <ref>`。该检查只接受同一 Git diff 中的压缩 task archive 与 schema v2 passed evidence，并验证 evidence source commit 位于 base 之后且可从 head 到达。`HARNESS_HEAD_REF` 可选，默认是 `HEAD`。
 
@@ -51,15 +51,115 @@ CI 在权威 gate 结束后以 `always()` 生成脱敏 Harness telemetry summary
 - 从干净检出使用锁文件安装依赖并通过 `npm run quality:release`。
 - 确认 Git 工作树干净，生成带版本号和 commit SHA 的发布说明。
 
-选定 profile 后先从 `apps/api/` 运行 `scripts/assistant_qualification.py validate <profile>`，在零部署、零供应商调用下复核 digest 和三开关关闭。真实 provider probe 只能显式选择 Chat／Embedding、传入该批准 digest 并遵守 profile 的 calls／micro-CNY envelope。目标 runner 必须在 Git 外的批准 qualification root 初始化，逐项记录 47 个 case 的已复核外部 artifact 哈希，再组装未签名 manifest；私钥只从批准 secret source 提供给 `python -m tools.harness qualification-sign`。仓库只保存 pinned public key 与签名后的 `harness/verification/qualifications/20260830-public-qa-production-qualification.json`，重型日志、抓包、数据库副本、原问答、IP、endpoint 和 provider raw payload 留在加密外部存储。
+恢复资格任务前，管理员必须批准并提交配置所指向的非秘密 profile 与匹配的 pinned public-key set；versioned case suite 已在仓库中。完成一次真实目标判定后，仓库再保存签名的 `harness/verification/qualifications/20260830-public-qa-production-qualification.json`。原始 case observation、summary、provider probe ledger、重型日志、抓包、数据库副本、原问答、IP、私有 endpoint、provider raw payload 和 private key 均留在批准的 Git 外加密存储。
 
 `python -m tools.harness qualification-verify 20260830-public-qa-production-qualification` 校验签名、schema、源码／artifact／profile／case-suite 绑定、TTL、目标与 provider 事实、完整 case 终态和三开关关闭；缺失或过期都非零。历史 manifest 到期不拖垮未来普通本地 release，但永远不能授权 `FINAL_GO`。
+
+### Qualification CLI contract
+
+以下命令已经存在，但当前仍被冻结状态及“管理员尚未选择 profile／平台／真实供应商与目标主机”阻断；命令可用不等于资格可执行，更不产生占位 No-Go。恢复任务并提交批准的非秘密输入后，先从 `apps/api/` 用 lock 一致的环境完成 profile 检查；真实 provider probe 必须同时显式选择 Chat 与 Embedding，并把 ledger/output 写在 profile 批准的 qualification root：
+
+```powershell
+uv run --locked python scripts/assistant_qualification.py schema
+uv run --locked python scripts/assistant_qualification.py validate "<approved-profile-path>"
+
+uv run --locked python scripts/run_assistant_provider_qualification.py `
+  --profile "<approved-profile-path>" `
+  --approve-profile-digest "sha256:<approved-64-hex-digest>" `
+  --ledger "<approved-qualification-root>/provider-ledger.json" `
+  --output "<approved-qualification-root>/provider-probe.json" `
+  --chat `
+  --embedding
+
+uv run --locked python -m app.assistant.provisioning
+uv run --locked python -m app.assistant.readiness `
+  --probe-live `
+  --qualification-profile "<absolute-approved-profile-path>" `
+  --provider-probe "<absolute-reviewed-provider-probe>"
+```
+
+前两个 profile 命令不部署也不调用供应商。provider probe 是显式、按批准 calls/micro-CNY envelope 计量的真实调用；最终 readiness 要求同一份 probe 中 Chat 与 Embedding 都存在且通过，并要求环境已选择相同 profile/digest/probe hash。命令中的占位符没有仓库默认值，不能把示例摘要、配置自报身份或本地替身当成真实结果。
+
+目标 evidence runner 本身不执行 47 个 case；操作者按 versioned suite 的 `depends_on` 顺序在目标环境执行检查、复核 Git 外原始产物，再从 `harness/` 逐项追加 observation：
+
+```powershell
+$taskId = "20260830-public-qa-production-qualification"
+$artifactManifest = "<approved-immutable-deployment-artifact-manifest>"
+$workspace = "<profile-approved-off-repo-qualification-root>/run-<id>"
+
+python -m tools.harness qualification-run-init $taskId `
+  --artifact $artifactManifest `
+  --workspace $workspace
+
+# 每次调用只登记一个已经执行并复核的 case；不得覆盖已有记录。
+python -m tools.harness qualification-run-record `
+  --workspace $workspace `
+  --observation "<reviewed-case-observation.json>"
+
+python -m tools.harness qualification-run-assemble `
+  --workspace $workspace `
+  --summary "<reviewed-qualification-summary.json>" `
+  --output "<unsigned-compact-manifest.json>"
+
+python -m tools.harness qualification-sign `
+  --input "<unsigned-compact-manifest.json>" `
+  --private-key "<approved-secret-source-private-key.json>" `
+  --output verification/qualifications/20260830-public-qa-production-qualification.json
+
+python -m tools.harness qualification-verify $taskId
+```
+
+`qualification-run-init` 要求当前 tracked source 干净、最终不可变 artifact manifest 存在、workspace 位于 profile 声明的 `qualification_root` 下且完全在 Git checkout 外，并自动绑定当前 commit、profile、case suite 和真实 2 vCPU／4 GB 目标观测。每份 case observation 的字段必须精确为：
+
+```text
+schema_version: 1
+case_id: <versioned suite 中的 case ID>
+status: <pass | measured_fail | blocked_by:CASE-ID>
+reviewer: <至少 2 个字符的复核者>
+reviewed_at: <不早于 run start、带 offset 的 ISO-8601 时间>
+artifact_records:
+  - artifact_id: <稳定且非空的 ID>
+    kind: <非空产物类型>
+    path: <Git 外已存在且已复核的原始文件绝对路径>
+    location_category: <encrypted-off-host-object-store | encrypted-off-host-filesystem>
+    retention_days: <大于等于 1 的整数>
+    reviewed: true
+```
+
+每个 case 至少一条 artifact record；runner 读取文件并计算 SHA-256，不接受 Git 内路径。记录是 append-only；依赖尚未记录时拒绝，依赖失败后的 case 只能引用 suite 祖先中已经 `measured_fail` 的 blocker，不能把 missing/unknown 伪装为 No-Go。
+
+assemble 前必须完整记录 suite 当前定义的全部 47 个 case。summary 顶层字段精确为 `schema_version`、`completed_at`、`provider`、`active_generation`、`switches`、`qualification_usage`、`results`、`operator`，嵌套合同如下；所有价格、维度、模型、generation 和 envelope 必须来自批准 profile 或已复核观测，不能从本文占位符推导：
+
+- `provider`：精确包含 `real_provider`、`chat`、`embedding`。Chat 字段为 `provider/model/version/model_identity_source/input_price_micro_cny_per_million/output_price_micro_cny_per_million/reports_usage/reports_finish_reason`；Embedding 字段为 `provider/model/version/model_identity_source/dimension/input_price_micro_cny_per_million/reports_usage`。identity source 只接受 `provider-response`、`versioned-provider-contract`、`operator-declaration`；自报 identity 或缺 usage/finish reason 不能让 `provider_contract` 通过。
+- `active_generation`：精确包含 `id/collection/dimension/distance/pipeline_version`，与 profile 的 collection prefix、维度和 pipeline 一致，distance 必须为 `Cosine`。
+- `switches`：精确包含 `before/canary/after/runner_auto_enabled`；before/after 的 `web_launcher/api_capability/runtime_gate` 全为 false，canary 的 `edge_restricted/administrator_enabled` 全为 true，runner auto-enable 为 false。
+- `qualification_usage`：精确包含唯一非空的 `beijing_dates`，三类调用计数、`total_micro_cny`、与 profile 完全一致的 `max_calls/max_micro_cny` 及 `within_envelope: true`；调用或费用越界会拒绝。
+- `results`：必须且只能包含 `profile_validation`、`deployment`、`provider_contract`、`tls_proxy`、`qdrant`、`backup_restore`、`saver`、`resources`、`conformance`、`observability`、`dark_launch`。每项精确包含 `status/case_ids/summary`，case ID 非空且唯一，summary 至少 12 个字符，状态必须能由所连 case 证明。
+- `operator`：精确包含 `reviewer/reviewed_at/decision_reason/residual_risks/remediation_tasks`；review 在 qualification completion 之后。`QUALIFICATION_NO_GO` 必须给出非空 remediation task 引用，缺失输入不能借此分类。
+
+签名私钥不是 PEM，而是只存在于批准 secret source 的 JSON 文件，字段精确为 `schema_version/key_id/algorithm/n/e/d`：schema 为 1，算法为 `rsa-sha256-pkcs1-v1_5`，`e` 为 65537，RSA 至少 3072 位，`n/d` 使用 base64url。仓库中的 public-key set 字段精确为 `schema_version/keys`，每个 key 为 `key_id/algorithm/n/e/not_before/not_after`；签名程序不会替操作者生成或 pin key。任何命令都不得把 key 值、raw endpoint、真实问答、IP 或 provider raw payload 写进参数、Git 或 compact manifest。runner、签名和 verify 都不会自动开启 Web launcher、API capability 或 runtime gate；`qualification-verify --historical` 只供历史审计，不能授权 `FINAL_GO`。
+
+本地备份 helper 的实际接口如下；snapshot 目录必须全新，restore 的内容库、媒体和 runtime 目标也必须全新且不得覆盖 live 路径：
+
+```powershell
+uv run --locked python scripts/run_assistant_backup_restore.py snapshot `
+  --destination "<fresh-snapshot-directory>"
+uv run --locked python scripts/run_assistant_backup_restore.py verify `
+  --snapshot "<snapshot-directory>"
+uv run --locked python scripts/run_assistant_backup_restore.py restore `
+  --snapshot "<snapshot-directory>" `
+  --database "<fresh-content-database>" `
+  --media "<fresh-media-directory>" `
+  --runtime "<fresh-runtime-database>"
+```
+
+该 helper 能验证本地 fenced snapshot 与 fresh-target restore，但不产生主机外加密回执，不能单独证明 profile 要求的最终备份资格。
 
 ## Data boundaries
 
 `.env`、开发日志、SQLite 数据库、本地媒体和原始验证产物不得进入 Git。备份必须同时覆盖内容事实库 SQLite 与媒体对象，并包含其中的 index-embedding 账本；只有数据库或只有媒体的备份不构成可恢复备份。`assistant_runtime` 数据库及其 WAL/SHM、checkpoint 和临时副本明确排除于长期备份。恢复演练须先重建空 runtime schema，公开 Chat／query 至少锁到下一个北京时间零点，Qdrant 丢失时须先按 Worker 账本重建 generation 再签发新的 readiness receipt。
 
-北京时间每日 2.00 元人民币只约束按部署价格快照计算的公开 Chat 新调用；query Embedding 与 index Embedding 使用各自独立 cap，三者都以 `settled + reserved` 计算，也都不是供应商总账单保证。已越过 sending 的失 fence调用仍按价格快照无正文保守结算，异常 usage 可以更高。第四阶段 archive/evidence 只证明当时形式关闭；第五阶段本地运营控制面与 release evidence也不等于已合并、上线、对访客开放或 production Go。启用前必须分别检查 API capability、Web launcher、runtime gate 与当前 generation readiness，在 `checkpoints`/`writes` 零残留后签发 receipt，再由管理员显式 enable；generation finalize 会先 fail closed，切换后必须重签 receipt。真实供应商、反向代理 SSE、备份恢复、目标服务器公网安全与 2 vCPU／4 GB 实机验收仍是生产放行条件。
+北京时间每日 2.00 元人民币只约束按部署价格快照计算的公开 Chat 新调用；query Embedding 与 index Embedding 使用各自独立 cap，三者都以 `settled + reserved` 计算，也都不是供应商总账单保证。已越过 sending 的失 fence 调用仍按价格快照无正文保守结算，异常 usage 可以更高。第四阶段 archive/evidence 只证明当时形式关闭；第五阶段本地运营控制面已经进入当前代码，release evidence 也只证明本地门禁，二者都不等于已上线、对访客开放或 production Go。启用前必须分别检查 API capability、Web launcher、runtime gate 与当前 generation readiness，在 `checkpoints`/`writes` 零残留后签发 receipt，再由管理员显式 enable；generation finalize 会先 fail closed，切换后必须重签 receipt。真实供应商、反向代理 SSE、备份恢复、目标服务器公网安全与 2 vCPU／4 GB 实机验收仍是生产放行条件。
 
 `.run/`、`my_image/` 和复刻项目快照 `my_blog_fork/` 永久排除于 smart_blog Git 历史与 CI checkout；不得通过强制添加、归档上传或 workflow artifact 绕过该边界。
 

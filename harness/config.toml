@@ -11,6 +11,12 @@ routable = ["L1", "L2"]
 
 [metadata]
 required = ["id", "level", "summary", "load_when"]
+project_documents = [
+  "README.md",
+  "apps/web/README.md",
+  "apps/api/README.md",
+  "packages/contracts/README.md",
+]
 optional = [
   "author",
   "task_id",
@@ -38,6 +44,7 @@ checks = "verification/checks"
 evidence = "verification/evidence"
 heavy_artifacts = "verification/evidence/artifacts"
 source_paths = [
+  "AGENTS.md",
   "README.md",
   "apps",
   "packages",
@@ -94,7 +101,7 @@ prefixes = [
   "harness/evolution/",
   "harness/workflows/",
 ]
-files = []
+files = ["README.md"]
 required_gates = ["harness-integrity"]
 
 [[verification.risk_routes]]
@@ -194,6 +201,7 @@ risk_files = [
   ".gitattributes",
   ".gitignore",
   "AGENTS.md",
+  "README.md",
   "package.json",
   "package-lock.json",
 ]

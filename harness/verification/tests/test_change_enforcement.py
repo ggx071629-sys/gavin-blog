@@ -2,11 +2,10 @@ from __future__ import annotations
 
 import json
 import subprocess
+import tomllib
 from pathlib import Path
 
 import pytest
-import tomllib
-
 from harness.tools import change_enforcement
 
 TASK_ID = "20260812-example-change"
@@ -51,7 +50,7 @@ def repository(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
         "indexes": {"specs": {"path": "specs"}},
         "change_enforcement": {
             "risk_prefixes": ["apps/", "harness/"],
-            "risk_files": ["AGENTS.md", "package.json"],
+            "risk_files": ["AGENTS.md", "README.md", "package.json"],
         },
     }
     monkeypatch.setattr(change_enforcement, "project_root", lambda: tmp_path)
@@ -102,10 +101,22 @@ def _closed_task(
     _write(root, f"harness/verification/evidence/{task_id}.json", json.dumps(evidence))
 
 
-def test_documentation_only_change_does_not_require_task(repository: Path) -> None:
+def test_root_readme_change_requires_closed_task(repository: Path) -> None:
     base = _git(repository, "rev-parse", "HEAD")
-    _write(repository, "README.md", "documentation only\n")
+    _write(repository, "README.md", "changed project contract\n")
     _commit(repository, "docs")
+
+    result = change_enforcement.inspect_change(base)
+
+    assert result["passed"] is False
+    assert result["tasks"] == []
+    assert result["risk_paths"] == ["README.md"]
+
+
+def test_non_risk_change_does_not_require_task(repository: Path) -> None:
+    base = _git(repository, "rev-parse", "HEAD")
+    _write(repository, "notes.txt", "non-risk fixture\n")
+    _commit(repository, "notes")
 
     result = change_enforcement.inspect_change(base)
 
@@ -216,6 +227,7 @@ def test_project_risk_scope_covers_implementation_control_plane_and_root_files()
         "harness/telemetry/README.md",
         "harness/verification/README.md",
         "AGENTS.md",
+        "README.md",
         ".gitattributes",
         ".gitignore",
         "package.json",

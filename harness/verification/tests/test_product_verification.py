@@ -6,7 +6,6 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
-
 from harness.tools import harness as harness_cli
 from harness.tools import product_verification
 from harness.tools.result_reporting import summarize_checks
@@ -671,6 +670,12 @@ def test_risk_routes_derive_stable_gate_floor_from_committed_paths(
                 "required_gates": ["api-lint", "api-tests"],
             },
             {
+                "id": "harness-docs",
+                "prefixes": ["harness/docs/"],
+                "files": ["README.md"],
+                "required_gates": ["harness-integrity"],
+            },
+            {
                 "id": "release-control",
                 "prefixes": ["harness/tools/"],
                 "files": ["package-lock.json"],
@@ -691,15 +696,19 @@ def test_risk_routes_derive_stable_gate_floor_from_committed_paths(
 
     derived = product_verification.derived_gate_requirements(TASK_ID)
 
-    assert derived["required_gates"] == ["api-lint", "api-tests", "release"]
+    assert derived["required_gates"] == [
+        "api-lint",
+        "api-tests",
+        "harness-integrity",
+        "release",
+    ]
     assert [route["id"] for route in derived["routes"]] == [
         "api",
+        "harness-docs",
         "release-control",
     ]
     assert derived["routes"][0]["matched_paths"] == ["apps/api/app/main.py"]
-    assert "README.md" not in {
-        path for route in derived["routes"] for path in route["matched_paths"]
-    }
+    assert derived["routes"][1]["matched_paths"] == ["README.md"]
 
 
 def test_risk_derived_gates_cannot_be_removed_by_profile_or_plan(
@@ -929,6 +938,26 @@ def test_live_risk_routes_rightsize_harness_docs_control_and_release(
 ) -> None:
     cases = [
         (
+            ["README.md"],
+            ["harness-docs"],
+            ["harness-integrity"],
+        ),
+        (
+            ["apps/api/README.md"],
+            ["api"],
+            ["api-lint", "api-tests"],
+        ),
+        (
+            ["apps/web/README.md"],
+            ["web"],
+            ["web-quality"],
+        ),
+        (
+            ["packages/contracts/README.md"],
+            ["cross-stack"],
+            ["release"],
+        ),
+        (
             ["harness/tools/telemetry.py"],
             ["harness-control"],
             ["harness-tests", "harness-integrity"],
@@ -943,6 +972,11 @@ def test_live_risk_routes_rightsize_harness_docs_control_and_release(
             ["release-control"],
             ["release"],
         ),
+        (
+            ["AGENTS.md"],
+            ["release-control"],
+            ["release"],
+        ),
     ]
     for paths, route_ids, gates in cases:
         monkeypatch.setattr(
@@ -953,7 +987,10 @@ def test_live_risk_routes_rightsize_harness_docs_control_and_release(
         derived = product_verification.derived_gate_requirements(TASK_ID)
         assert [route["id"] for route in derived["routes"]] == route_ids
         assert derived["required_gates"] == gates
-        assert "release" not in derived["required_gates"] or route_ids == ["release-control"]
+        assert "release" not in derived["required_gates"] or tuple(route_ids) in {
+            ("cross-stack",),
+            ("release-control",),
+        }
 
 
 def test_bundle_gate_cannot_be_the_only_mapping_for_multiple_criteria(
