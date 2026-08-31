@@ -8,10 +8,46 @@ from types import SimpleNamespace
 import pytest
 
 from harness.tools import harness as harness_cli
-from harness.tools import product_verification
+from harness.tools import product_verification, validator
 from harness.tools.result_reporting import summarize_checks
 
 TASK_ID = "20260812-product-evidence"
+
+
+def test_task_evidence_is_written_with_canonical_lf_bytes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    evidence = tmp_path / "task.json"
+    monkeypatch.setattr(validator, "evidence_path", lambda _: evidence)
+    monkeypatch.setattr(validator, "_source_commit", lambda: "a" * 40)
+
+    validator.write_task_evidence(
+        TASK_ID,
+        f"python -m tools.harness verify {TASK_ID}",
+        ["AC-1"],
+        {"harness-tests": ["AC-1"]},
+        "focused",
+        {"source_tree": "tree"},
+        {},
+        {"mode": "git-worktree"},
+        [
+            {
+                "name": "harness-tests",
+                "kind": "product",
+                "command": "python -m pytest",
+                "status": "passed",
+                "passed": True,
+                "duration_ms": 1,
+                "covers": ["AC-1"],
+                "details": [],
+                "result": {"exit_code": 0},
+            }
+        ],
+    )
+
+    assert evidence.read_bytes().endswith(b"\n")
+    assert b"\r\n" not in evidence.read_bytes()
 
 
 def _write_spec(

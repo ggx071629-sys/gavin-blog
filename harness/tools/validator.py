@@ -44,7 +44,7 @@ def run_checks() -> list[dict[str, Any]]:
             result.setdefault("name", path.stem)
             result.setdefault("details", [])
             result["status"] = "passed" if bool(result.get("passed")) else "failed"
-        except Exception as error:
+        except Exception as error:  # noqa: BLE001 - each plugin check must fail closed
             result = {
                 "name": path.stem,
                 "passed": False,
@@ -136,7 +136,11 @@ def write_evidence(task_id: str, command: str, results: list[dict[str, Any]]) ->
     }
     path = evidence_path(task_id)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
     return path
 
 
@@ -178,5 +182,9 @@ def write_task_evidence(
     }
     path = evidence_path(task_id)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
     return path

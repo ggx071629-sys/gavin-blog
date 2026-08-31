@@ -146,6 +146,8 @@ def test_lifecycle_event_can_be_recorded_without_a_proposal(
     )
 
     assert event.is_file()
+    assert event.read_bytes().endswith(b"\n")
+    assert b"\r\n" not in event.read_bytes()
     assert proposal is None
     assert not (root / "evolution" / "proposals" / f"{TASK_ID}--spec-completed.md").exists()
 
