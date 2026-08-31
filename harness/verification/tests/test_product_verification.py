@@ -6,6 +6,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+
 from harness.tools import harness as harness_cli
 from harness.tools import product_verification
 from harness.tools.result_reporting import summarize_checks
@@ -13,7 +14,12 @@ from harness.tools.result_reporting import summarize_checks
 TASK_ID = "20260812-product-evidence"
 
 
-def _write_spec(path: Path, *, plan: str = "- harness-tests => AC-1, AC-2") -> Path:
+def _write_spec(
+    path: Path,
+    *,
+    plan: str = "- harness-tests => AC-1, AC-2",
+    cases: str = "- AC-1 => M08-TRACE-01\n- AC-2 => M08-TRACE-02",
+) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         "---\n"
@@ -31,6 +37,8 @@ def _write_spec(path: Path, *, plan: str = "- harness-tests => AC-1, AC-2") -> P
         "# Acceptance criteria\n\n"
         "- AC-1: First observable outcome.\n"
         "- AC-2: Second observable outcome.\n\n"
+        "# Verification cases\n\n"
+        f"{cases}\n\n"
         "# Verification plan\n\n"
         f"{plan}\n",
         encoding="utf-8",
@@ -57,6 +65,117 @@ def test_verification_contract_requires_complete_deterministic_mapping(
     ):
         product_verification.verification_contract(TASK_ID)
 
+
+def test_verification_case_plan_requires_one_structural_mapping_per_criterion(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    spec = _write_spec(tmp_path / f"{TASK_ID}.md")
+    monkeypatch.setattr(product_verification, "active_spec", lambda _: spec)
+
+    assert product_verification.verification_case_plan(
+        TASK_ID, ["AC-1", "AC-2"]
+    ) == {
+        "AC-1": ["M08-TRACE-01"],
+        "AC-2": ["M08-TRACE-02"],
+    }
+
+    _write_spec(spec, cases="- AC-1 => M08-FUTURE-01")
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="lack a Verification cases mapping: AC-2",
+    ):
+        product_verification.verification_case_plan(TASK_ID, ["AC-1", "AC-2"])
+
+    _write_spec(
+        spec,
+        cases="- AC-1 => M08-FUTURE-01\n- AC-1 => M08-FUTURE-02\n- AC-2 => M08-TRACE-02",
+    )
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="mapped more than once",
+    ):
+        product_verification.verification_case_plan(TASK_ID, ["AC-1", "AC-2"])
+
+
+def test_resolved_verification_cases_require_case_existence_and_gate_coverage(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    spec = _write_spec(tmp_path / f"{TASK_ID}.md")
+    monkeypatch.setattr(product_verification, "active_spec", lambda _: spec)
+    gates = {
+        "harness-tests": {},
+        "e2e": {},
+        "api-tests": {},
+    }
+    monkeypatch.setattr(product_verification, "_configured_gates", lambda: gates)
+    case_index = {
+        "M08-TRACE-01": {
+            "id": "M08-TRACE-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P0",
+            "scenario": "Resolve the first case.",
+            "expectations": [],
+            "required_gates": ["harness-tests"],
+            "test_refs": [{"path": "first.py", "name": "test_first"}],
+        },
+        "M08-TRACE-02": {
+            "id": "M08-TRACE-02",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Resolve the second case.",
+            "expectations": [],
+            "required_gates": ["e2e"],
+            "test_refs": [{"path": "second.ts", "name": "second"}],
+        },
+    }
+    resolved_contract = {
+        "contract": {"contract_id": "fixture-v1"},
+        "digest": "b" * 64,
+        "case_index": case_index,
+    }
+    monkeypatch.setattr(
+        product_verification,
+        "resolve_module_contract",
+        lambda *_args, **_kwargs: resolved_contract,
+    )
+
+    report = product_verification.resolved_verification_cases(
+        TASK_ID,
+        ["AC-1", "AC-2"],
+        {"harness-tests": ["AC-1"], "e2e": ["AC-2"]},
+    )
+
+    assert report["contract_sha256"] == "b" * 64
+    assert report["criteria"][0]["cases"][0]["id"] == "M08-TRACE-01"
+    assert report["criteria"][1]["cases"][0]["gate_satisfaction"] == [
+        {"gate": "e2e", "satisfied_by": "e2e", "mode": "direct"}
+    ]
+
+    case_index["M08-TRACE-02"]["required_gates"] = ["api-tests"]
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="does not cover M08-TRACE-02 required gates: api-tests",
+    ):
+        product_verification.resolved_verification_cases(
+            TASK_ID,
+            ["AC-1", "AC-2"],
+            {"harness-tests": ["AC-1"], "e2e": ["AC-2"]},
+        )
+
+    case_index.pop("M08-TRACE-01")
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="unresolved module case: M08-TRACE-01",
+    ):
+        product_verification.resolved_verification_cases(
+            TASK_ID,
+            ["AC-1", "AC-2"],
+            {"harness-tests": ["AC-1"], "e2e": ["AC-2"]},
+        )
 
 def test_run_gates_uses_registered_argv_without_a_shell(
     tmp_path: Path,
@@ -198,7 +317,7 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
     evidence = tmp_path / "task.json"
     harness_results = [
         {
-            "name": "structure",
+            "name": "module-coverage",
             "passed": True,
             "status": "passed",
             "duration_ms": 1,
@@ -230,6 +349,17 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
     )
     monkeypatch.setattr(product_verification, "verification_profile", lambda _: "focused")
     monkeypatch.setattr(product_verification, "validate_configured_gates", lambda *_: None)
+    verification_cases = {
+        "schema_version": 1,
+        "contract_id": "fixture",
+        "contract_sha256": "a" * 64,
+        "criteria": [],
+    }
+    monkeypatch.setattr(
+        product_verification,
+        "resolved_verification_cases",
+        lambda *_: verification_cases,
+    )
     documentation = {
         "impact": "none",
         "reason": "Fixture only.",
@@ -269,6 +399,7 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
         written_documentation: dict[str, object],
         written_execution: dict[str, object],
         results: list[dict[str, object]],
+        written_verification_cases: dict[str, object],
     ) -> Path:
         assert task_id == TASK_ID
         assert command.endswith(TASK_ID)
@@ -279,6 +410,7 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
         assert written_documentation == documentation
         assert written_execution == execution
         assert results == harness_results + gate_results
+        assert written_verification_cases == verification_cases
         evidence.write_text("{}", encoding="utf-8")
         return evidence
 
@@ -326,6 +458,12 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
             "source_commit": "abc123",
             "cleanup_status": "passed",
         },
+        "verification_cases": {
+            "schema_version": 1,
+            "contract_id": "fixture",
+            "contract_sha256": "a" * 64,
+            "criteria": [],
+        },
         "checks": [
             {
                 "name": "harness-tests",
@@ -341,6 +479,12 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
                 "status": "passed",
                 "covers": [],
             },
+            {
+                "name": "module-coverage",
+                "status": "passed",
+                "duration_ms": 1,
+                "details": [],
+            },
         ],
     }
     payload["summary"] = summarize_checks(payload["checks"])
@@ -353,6 +497,12 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
     )
     monkeypatch.setattr(product_verification, "verification_profile", lambda _: "focused")
     monkeypatch.setattr(product_verification, "validate_configured_gates", lambda *_: None)
+    current_verification_cases = json.loads(json.dumps(payload["verification_cases"]))
+    monkeypatch.setattr(
+        product_verification,
+        "resolved_verification_cases",
+        lambda *_: current_verification_cases,
+    )
     monkeypatch.setattr(
         product_verification,
         "documentation_report",
@@ -367,6 +517,26 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
     monkeypatch.setattr(product_verification, "ensure_source_clean", lambda *_: None)
 
     assert product_verification.validate_evidence(TASK_ID, evidence) == []
+
+    module_check = payload["checks"].pop()
+    payload["summary"] = summarize_checks(payload["checks"])
+    evidence.write_text(json.dumps(payload), encoding="utf-8")
+    assert any(
+        "exactly one global required check: module-coverage" in error
+        for error in product_verification.validate_evidence(TASK_ID, evidence)
+    )
+    payload["checks"].append(module_check)
+    payload["summary"] = summarize_checks(payload["checks"])
+
+    payload["verification_cases"]["contract_sha256"] = "c" * 64
+    evidence.write_text(json.dumps(payload), encoding="utf-8")
+    assert any(
+        "verification cases do not match" in error
+        for error in product_verification.validate_evidence(TASK_ID, evidence)
+    )
+    payload["verification_cases"] = json.loads(
+        json.dumps(current_verification_cases)
+    )
 
     payload["checks"][0]["result"] = {
         "subsumption": {"contract_sha256": "forged", "verified": []}
@@ -922,6 +1092,20 @@ def test_fingerprints_change_with_spec_contract_and_gate_configuration(
         "focused",
         changed_documentation,
     )
+    verification_cases = {
+        "schema_version": 1,
+        "contract_id": "fixture-v1",
+        "contract_sha256": "d" * 64,
+        "criteria": [],
+    }
+    sixth = product_verification.evidence_fingerprints(
+        TASK_ID,
+        criteria,
+        mappings,
+        "focused",
+        changed_documentation,
+        verification_cases,
+    )
 
     assert first["source_tree"] == "tree-one"
     assert first["active_spec_sha256"] != second["active_spec_sha256"]
@@ -931,6 +1115,11 @@ def test_fingerprints_change_with_spec_contract_and_gate_configuration(
         != fourth["documentation_targets_sha256"]
     )
     assert fourth["gate_config_sha256"] != fifth["gate_config_sha256"]
+    assert sixth["module_contract_sha256"] == "d" * 64
+    assert (
+        fifth["verification_contract_sha256"]
+        != sixth["verification_contract_sha256"]
+    )
 
 
 def test_live_risk_routes_rightsize_harness_docs_control_and_release(

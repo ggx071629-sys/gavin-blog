@@ -51,7 +51,9 @@ state_history:
 - 新 Spec 可能计划尚未实现的场景；spec-lint 只验证 AC 到场景 ID 的结构，task verify 才要求 ID 已在当前合同中解析并有可执行测试引用。
 - 现有冻结 Spec 不含新章节；全局校验不得因此破坏合法冻结状态。
 
-# Verification cases
+# Verification plan
+
+## Verification cases
 
 - AC-1 => M08-TRACE-01
 - AC-2 => M08-TRACE-02
@@ -59,7 +61,7 @@ state_history:
 - AC-4 => M08-TRACE-04
 - AC-5 => M08-TRACE-02, M08-TRACE-03
 
-# Verification plan
+## Gates
 
 - harness-tests => AC-1, AC-2, AC-3, AC-4, AC-5
 - harness-integrity => AC-1, AC-2, AC-4, AC-5

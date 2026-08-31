@@ -30,6 +30,14 @@ schema v2 task evidence 为每个 gate 保存退出码、耗时、可识别的 P
 
 非零 gate 的 `details` 第一行是净化、最长 300 字符的 `diagnostic` 锚点，随后最多保留 11 行去重尾部；结构化 failure summary 使用同一锚点。锚点优先识别 Playwright 用例、Assertion/Error/FAILED、TypeScript 和包管理器错误，完整 stdout/stderr、trace、截图和原始报告仍属于本地重型产物。有限输出提高诊断能力但不能把启发式命中当成根因证明。
 
+## Module verification contract
+
+模块验证合同以产品基线中的稳定模块 ID 为入口，为每个验证 case 建立 `module → scenario → observable expectations → exact test refs → leaf gates → task evidence` 链。scenario 描述要触发的用户或系统情境；observable expectations 必须同时容纳应当出现的结果与明确禁止出现的 `forbidden` 结果；exact test refs 指向可被对应 leaf gate 收集的精确 Pytest node ID、Vitest 测试或 Playwright project/spec/test；leaf gate 必须是实际执行测试或检查的注册 gate，不能只用带 `subsumption_contract` 的包门禁替代多条 case 的叶子归属。默认关闭的现行模块仍需覆盖关闭态及显式启用后的合同，不得按退役模块跳过。
+
+Active spec 在 `## Verification cases` 中把每条 AC 映射到一个或多个稳定 case ID。Specify 阶段只检查 AC／模块 ID、case ID 语法、唯一性和完整覆盖，允许引用将由本任务新增的 planned case ID；task verify 才以当前提交中的模块验证合同解析全部 case ID，并核对 exact test refs、leaf gates 与 spec 的 `gate => AC` 覆盖。到 task verify 时仍未进入当前合同、引用不存在测试定义、或没有被已选 leaf gate 收集的 case 一律失败，planned 不能成为关闭时的悬空豁免。
+
+静态引用校验只能证明测试定义存在，且其所属 suite 会被声明的 gate 收集；它不证明 scenario、required／forbidden expectations 与测试断言语义等价，也不证明本次 gate 已逐条执行每个引用。当前 task evidence 证明的是 gate 级退出状态、可识别测试数量和声明的 AC 聚合结果。若任务要求逐 case 执行证明，必须由可重算的收集／执行清单扩展 evidence 合同，不能从静态引用或总测试数推断。
+
 ## Change coverage closure
 
 `change-check` 不只要求比较区间内出现 task archive 与 schema v2 passed evidence，还要求至少一份有效 evidence 的 source commit 已包含最后一次风险修改。evidence source 到 change head 之间不得再出现 `.github/`、`apps/`、`packages/`、`scripts/`、`harness/` 或配置中关键根文件的修改；否则旧 evidence 不能覆盖后续变化，必须在最新树上重新验证。

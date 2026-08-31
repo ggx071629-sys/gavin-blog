@@ -216,7 +216,7 @@ def test_task_verify_stops_before_product_gates_when_documentation_is_incomplete
     monkeypatch.setattr(
         harness_cli.validator,
         "write_task_evidence",
-        lambda _task, _command, _criteria, _mappings, _profile, _fingerprints, _documentation, _execution, checks: written.append(checks)
+        lambda _task, _command, _criteria, _mappings, _profile, _fingerprints, _documentation, _execution, checks, _cases: written.append(checks)
         or tmp_path / "evidence.json",
     )
     monkeypatch.setattr(product_verification, "derived_task_state", lambda *_: "active")

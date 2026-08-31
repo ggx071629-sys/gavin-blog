@@ -58,6 +58,7 @@ def command_verify(args: argparse.Namespace) -> int:
     fingerprints: dict[str, str] = {}
     documentation: dict[str, object] = {}
     execution: dict[str, object] = {}
+    verification_cases: dict[str, object] = {}
     if args.task_id:
         if lifecycle.task_status(args.task_id) == "frozen":
             results.append(
@@ -86,12 +87,18 @@ def command_verify(args: argparse.Namespace) -> int:
                     criteria,
                 )
                 documentation = product_verification.documentation_report(args.task_id)
+                verification_cases = product_verification.resolved_verification_cases(
+                    args.task_id,
+                    criteria,
+                    mappings,
+                )
                 fingerprints = product_verification.evidence_fingerprints(
                     args.task_id,
                     criteria,
                     mappings,
                     profile,
                     documentation,
+                    verification_cases,
                 )
                 source_commit = product_verification.head_commit()
                 if source_commit is None:
@@ -128,6 +135,7 @@ def command_verify(args: argparse.Namespace) -> int:
             documentation,
             execution,
             results,
+            verification_cases,
         )
         print(f"evidence {evidence}")
         if evidence.resolve() == validator.evidence_path(args.task_id).resolve():

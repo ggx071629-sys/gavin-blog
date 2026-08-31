@@ -43,6 +43,7 @@ require_documentation_impact = true
 checks = "verification/checks"
 evidence = "verification/evidence"
 heavy_artifacts = "verification/evidence/artifacts"
+required_task_checks = ["module-coverage"]
 source_paths = [
   "AGENTS.md",
   "README.md",
@@ -50,6 +51,7 @@ source_paths = [
   "packages",
   "scripts",
   "harness/config.toml",
+  "harness/docs/product/brief.md",
   "harness/tools",
   "harness/workflows",
   "harness/specs/_sdd",

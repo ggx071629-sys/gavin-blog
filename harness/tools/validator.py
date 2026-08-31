@@ -5,6 +5,7 @@ import importlib.util
 import json
 import subprocess
 import time
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from types import ModuleType
@@ -51,6 +52,39 @@ def run_checks() -> list[dict[str, Any]]:
             }
         result["duration_ms"] = round((time.perf_counter() - started) * 1000, 3)
         results.append(result)
+    required = config.get("verification", {}).get("required_task_checks", [])
+    registration_errors: list[str] = []
+    if (
+        not isinstance(required, list)
+        or not required
+        or not all(isinstance(name, str) and name for name in required)
+    ):
+        registration_errors.append(
+            "verification.required_task_checks must be a non-empty string array"
+        )
+    elif len(required) != len(set(required)):
+        registration_errors.append(
+            "verification.required_task_checks must not contain duplicates"
+        )
+    else:
+        counts = Counter(str(result.get("name", "")) for result in results)
+        for name in required:
+            if counts[name] == 0:
+                registration_errors.append(f"required check is not registered: {name}")
+            elif counts[name] != 1:
+                registration_errors.append(
+                    f"required check must be registered exactly once: {name}"
+                )
+    if registration_errors:
+        results.append(
+            {
+                "name": "required-check-registration",
+                "passed": False,
+                "status": "failed",
+                "duration_ms": 0,
+                "details": registration_errors,
+            }
+        )
     return results
 
 
@@ -124,6 +158,7 @@ def write_task_evidence(
     documentation: dict[str, Any],
     execution: dict[str, Any],
     results: list[dict[str, Any]],
+    verification_cases: dict[str, Any] | None = None,
 ) -> Path:
     manifest = {
         "schema_version": 2,
@@ -137,6 +172,7 @@ def write_task_evidence(
         "fingerprints": fingerprints,
         "documentation": documentation,
         "execution": execution,
+        "verification_cases": verification_cases or {},
         "checks": [
             {
                 key: value

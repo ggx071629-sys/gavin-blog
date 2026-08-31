@@ -1,0 +1,827 @@
+{
+  "schema_version": 1,
+  "contract_id": "gavin-module-coverage-v1",
+  "authority_ref": "harness/docs/product/brief.md#当前功能模块与责任映射",
+  "modules": [
+    {
+      "id": "M01",
+      "name": "公开阅读与导航",
+      "cases": [
+        {
+          "id": "M01-P0-01",
+          "priority": "P0",
+          "scenario": "草稿经保存和显式发布后才进入公开文章列表与稳定详情路径。",
+          "expectations": [
+            {
+              "id": "M01-P0-01-E01",
+              "surface": "response",
+              "statement": "发布成功后，公开详情返回 200、正文为已保存版本且公开列表包含该文章。"
+            },
+            {
+              "id": "M01-P0-01-E02",
+              "surface": "forbidden",
+              "statement": "显式发布前，草稿不得出现在公开列表，固定年月详情请求不得成功。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_article_loop.py",
+              "kind": "pytest",
+              "name": "test_draft_autosave_publish_and_public_read",
+              "gate": "api-tests",
+              "covers": [
+                "M01-P0-01-E01",
+                "M01-P0-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M01-P1-01",
+          "priority": "P1",
+          "scenario": "移动公共导航作为单一模态对话框管理焦点、背景和断点切换。",
+          "expectations": [
+            {
+              "id": "M01-P1-01-E01",
+              "surface": "user_visible",
+              "statement": "移动菜单打开时可见为 aria-modal 对话框，背景 inert、页面滚动锁定且焦点在菜单内循环。"
+            },
+            {
+              "id": "M01-P1-01-E02",
+              "surface": "forbidden",
+              "statement": "关闭菜单或切换到 1280px 桌面导航后，不得残留 inert、滚动锁或隐藏的活动对话框。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/public-experience.spec.ts",
+              "kind": "playwright",
+              "name": "mobile overlay dialog traps focus, locks background, and clears at 1280",
+              "gate": "e2e",
+              "covers": [
+                "M01-P1-01-E01",
+                "M01-P1-01-E02"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M02",
+      "name": "文章写作、发布与修订",
+      "cases": [
+        {
+          "id": "M02-P0-01",
+          "priority": "P0",
+          "scenario": "文章自动保存只推进工作副本，不提前改变不可变发布快照。",
+          "expectations": [
+            {
+              "id": "M02-P0-01-E01",
+              "surface": "state",
+              "statement": "自动保存成功后工作副本版本递增，并保留既有发布 revision 作为当前公开快照。"
+            },
+            {
+              "id": "M02-P0-01-E02",
+              "surface": "forbidden",
+              "statement": "自动保存不得创建新发布 revision，也不得把工作副本正文泄漏到公开详情。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_article_revisions.py",
+              "kind": "pytest",
+              "name": "test_autosave_never_creates_revision_or_changes_public_content",
+              "gate": "api-tests",
+              "covers": [
+                "M02-P0-01-E01",
+                "M02-P0-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M02-P1-01",
+          "priority": "P1",
+          "scenario": "管理员比较两次发布并以新 revision 回滚到历史内容。",
+          "expectations": [
+            {
+              "id": "M02-P1-01-E01",
+              "surface": "response",
+              "statement": "修订列表按新到旧返回，差异包含两版正文，回滚后公开正文等于目标历史内容。"
+            },
+            {
+              "id": "M02-P1-01-E02",
+              "surface": "forbidden",
+              "statement": "回滚不得覆写既有 revision；必须创建单调递增且带 rollback 来源和目标标识的新 revision。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_article_revisions.py",
+              "kind": "pytest",
+              "name": "test_revision_list_diff_and_rollback_remain_core_article_features",
+              "gate": "api-tests",
+              "covers": [
+                "M02-P1-01-E01",
+                "M02-P1-01-E02"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M03",
+      "name": "栏目、标签与全站搜索",
+      "cases": [
+        {
+          "id": "M03-P0-01",
+          "priority": "P0",
+          "scenario": "FTS5 搜索只投影当前已发布内容，并随重发布和回收同步。",
+          "expectations": [
+            {
+              "id": "M03-P0-01-E01",
+              "surface": "response",
+              "statement": "搜索返回已发布文章、项目和读书笔记，并在重发布后命中新公开正文。"
+            },
+            {
+              "id": "M03-P0-01-E02",
+              "surface": "forbidden",
+              "statement": "草稿、未发布工作副本和已进入回收站的正文不得出现在公开搜索结果。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_search.py",
+              "kind": "pytest",
+              "name": "test_search_covers_published_content_taxonomy_and_syncs_changes",
+              "gate": "api-tests",
+              "covers": [
+                "M03-P0-01-E01",
+                "M03-P0-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M03-P1-01",
+          "priority": "P1",
+          "scenario": "未发布的栏目和标签修改不改变公开筛选与计数。",
+          "expectations": [
+            {
+              "id": "M03-P1-01-E01",
+              "surface": "response",
+              "statement": "公开详情、栏目筛选、标签筛选和 taxonomy 计数继续反映当前发布 revision 的栏目与标签。"
+            },
+            {
+              "id": "M03-P1-01-E02",
+              "surface": "forbidden",
+              "statement": "仅保存到工作副本的新栏目或标签不得移动公开文章，也不得提前改变公开计数。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_taxonomy.py",
+              "kind": "pytest",
+              "name": "test_unpublished_taxonomy_change_does_not_move_public_filters",
+              "gate": "api-tests",
+              "covers": [
+                "M03-P1-01-E01",
+                "M03-P1-01-E02"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M04",
+      "name": "项目与读书笔记",
+      "cases": [
+        {
+          "id": "M04-P0-01",
+          "priority": "P0",
+          "scenario": "项目从草稿和乐观锁工作副本显式发布为稳定公开快照。",
+          "expectations": [
+            {
+              "id": "M04-P0-01-E01",
+              "surface": "response",
+              "statement": "项目发布返回稳定的 /projects/{slug} 路径、首个发布 revision，并只公开已发布的关联文章。"
+            },
+            {
+              "id": "M04-P0-01-E02",
+              "surface": "forbidden",
+              "statement": "项目草稿和关联的文章草稿不得出现在公开项目列表、详情或 related_articles。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_projects_books.py",
+              "kind": "pytest",
+              "name": "test_project_draft_autosave_publish_and_related_article_visibility",
+              "gate": "api-tests",
+              "covers": [
+                "M04-P0-01-E01",
+                "M04-P0-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M04-P1-01",
+          "priority": "P1",
+          "scenario": "读书笔记验证专有字段并以稳定年月路径发布和重发布。",
+          "expectations": [
+            {
+              "id": "M04-P1-01-E01",
+              "surface": "response",
+              "statement": "合法读书笔记发布后公开详情返回作者和稳定年月路径，重发布生成下一 revision 并更新搜索。"
+            },
+            {
+              "id": "M04-P1-01-E02",
+              "surface": "forbidden",
+              "statement": "非法阅读状态、越界评分、陈旧发布版本和已发布 slug 修改不得被接受。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_projects_books.py",
+              "kind": "pytest",
+              "name": "test_book_note_fields_validation_autosave_publish_and_public_read",
+              "gate": "api-tests",
+              "covers": [
+                "M04-P1-01-E01",
+                "M04-P1-01-E02"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M05",
+      "name": "媒体与内容可移植性",
+      "cases": [
+        {
+          "id": "M05-P0-01",
+          "priority": "P0",
+          "scenario": "受认证和 CSRF 保护的媒体上传生成可公开读取的派生格式。",
+          "expectations": [
+            {
+              "id": "M05-P0-01-E01",
+              "surface": "response",
+              "statement": "合法图片上传返回 201、记录尺寸与替代文本、生成 WebP 变体且公开 URL 返回图片内容。"
+            },
+            {
+              "id": "M05-P0-01-E02",
+              "surface": "forbidden",
+              "statement": "未认证的媒体列表访问和缺少 CSRF 的媒体上传不得成功。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_media.py",
+              "kind": "pytest",
+              "name": "test_media_upload_conversion_external_registration_and_public_read",
+              "gate": "api-tests",
+              "covers": [
+                "M05-P0-01-E01",
+                "M05-P0-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M05-P1-01",
+          "priority": "P1",
+          "scenario": "Markdown 多文件导入在写入前完成整批验证。",
+          "expectations": [
+            {
+              "id": "M05-P1-01-E01",
+              "surface": "response",
+              "statement": "包含合法和非法文档的混合导入批次返回 422。"
+            },
+            {
+              "id": "M05-P1-01-E02",
+              "surface": "forbidden",
+              "statement": "整批任一文档无效时，不得从同一批次创建任何部分草稿。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_content_portability.py",
+              "kind": "pytest",
+              "name": "test_import_prevalidates_the_whole_batch_before_writing",
+              "gate": "api-tests",
+              "covers": [
+                "M05-P1-01-E01",
+                "M05-P1-01-E02"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M06",
+      "name": "认证与个人资料",
+      "cases": [
+        {
+          "id": "M06-P0-01",
+          "priority": "P0",
+          "scenario": "重复错误登录触发单管理员登录限流。",
+          "expectations": [
+            {
+              "id": "M06-P0-01-E01",
+              "surface": "response",
+              "statement": "带有效 CSRF 的前三次错误凭据登录返回 401。"
+            },
+            {
+              "id": "M06-P0-01-E02",
+              "surface": "forbidden",
+              "statement": "达到失败阈值后，后续错误登录不得继续按普通凭据失败处理，必须返回 429。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_article_loop.py",
+              "kind": "pytest",
+              "name": "test_login_rate_limit",
+              "gate": "api-tests",
+              "covers": [
+                "M06-P0-01-E01",
+                "M06-P0-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-P1-01",
+          "priority": "P1",
+          "scenario": "个人资料保留管理字段，同时按可见性生成公开投影。",
+          "expectations": [
+            {
+              "id": "M06-P1-01-E01",
+              "surface": "state",
+              "statement": "管理员资料响应保留已保存的城市和邮箱字段供后续编辑。"
+            },
+            {
+              "id": "M06-P1-01-E02",
+              "surface": "forbidden",
+              "statement": "city_visible 和 email_visible 为 false 时，公开资料响应不得序列化城市或邮箱。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_profile.py",
+              "kind": "pytest",
+              "name": "test_public_strips_hidden_city_and_email",
+              "gate": "api-tests",
+              "covers": [
+                "M06-P1-01-E01",
+                "M06-P1-01-E02"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M07",
+      "name": "内容发现输出",
+      "cases": [
+        {
+          "id": "M07-P0-01",
+          "priority": "P0",
+          "scenario": "已发布文章输出一致的 canonical、结构化数据和发现文档。",
+          "expectations": [
+            {
+              "id": "M07-P0-01-E01",
+              "surface": "response",
+              "statement": "文章 head 使用同源稳定 canonical 和 BlogPosting JSON-LD，RSS、sitemap 与 robots 返回可发现文档。"
+            },
+            {
+              "id": "M07-P0-01-E02",
+              "surface": "forbidden",
+              "statement": "纯文本描述、搜索摘要和 RSS 不得泄漏 Markdown 标记，普通文章不得请求未使用的 Mermaid 或 KaTeX 增强器。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/seo-discovery.spec.ts",
+              "kind": "playwright",
+              "name": "published content exposes canonical metadata and discovery documents",
+              "gate": "e2e",
+              "covers": [
+                "M07-P0-01-E01",
+                "M07-P0-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M07-P1-01",
+          "priority": "P1",
+          "scenario": "生产首页满足四项桌面 Lighthouse 发布阈值。",
+          "expectations": [
+            {
+              "id": "M07-P1-01-E01",
+              "surface": "user_visible",
+              "statement": "Performance、Accessibility、Best Practices 与 SEO 四项 Lighthouse 分数均达到 90。"
+            },
+            {
+              "id": "M07-P1-01-E02",
+              "surface": "forbidden",
+              "statement": "任一受控 Lighthouse 类别低于 90 时不得通过 Web 质量门禁。"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/quality/site-quality.spec.ts",
+              "kind": "playwright",
+              "name": "production homepage meets all Lighthouse 90 thresholds",
+              "gate": "web-quality",
+              "covers": [
+                "M07-P1-01-E01",
+                "M07-P1-01-E02"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M08",
+      "name": "工程控制面",
+      "cases": [
+        {
+          "id": "M08-TRACE-01",
+          "priority": "P0",
+          "scenario": "模块覆盖合同完整映射产品 brief 的权威模块和优先级下限。",
+          "expectations": [
+            {
+              "id": "M08-TRACE-01-E01",
+              "surface": "state",
+              "statement": "合同以唯一 ID 和精确名称覆盖权威 M01-M10，且每个模块至少包含一个 P0 和一个 P1 case。"
+            },
+            {
+              "id": "M08-TRACE-01-E02",
+              "surface": "forbidden",
+              "statement": "合同不得缺失、重复或额外声明权威模块，也不得让任一模块缺少 P0 或 P1。"
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_module_coverage.py",
+              "kind": "pytest",
+              "name": "test_m08_trace_01_complete_contract",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-TRACE-01-E01",
+                "M08-TRACE-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-TRACE-02",
+          "priority": "P0",
+          "scenario": "module-coverage 以失败关闭方式拒绝产品权威、合同结构、优先级、测试引用、gate 和 expectation 覆盖漂移。",
+          "expectations": [
+            {
+              "id": "M08-TRACE-02-E01",
+              "surface": "response",
+              "statement": "合同缺陷返回紧凑且可定位到 authority、module、case、expectation 或 test_ref 的确定性诊断。"
+            },
+            {
+              "id": "M08-TRACE-02-E02",
+              "surface": "forbidden",
+              "statement": "缺失、重复或额外字段和 ID、危险路径、未知或错误 gate、不存在或不唯一测试名及 expectation 覆盖缺口均不得静默通过。"
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_module_coverage.py",
+              "kind": "pytest",
+              "name": "test_m08_trace_02_rejects_authority_drift",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-TRACE-02-E01",
+                "M08-TRACE-02-E02"
+              ]
+            },
+            {
+              "path": "harness/verification/tests/test_module_coverage.py",
+              "kind": "pytest",
+              "name": "test_contract_reports_compact_defects",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-TRACE-02-E01"
+              ]
+            },
+            {
+              "path": "harness/verification/tests/test_module_coverage.py",
+              "kind": "pytest",
+              "name": "test_contract_is_fail_closed_and_requires_complete_coverage",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-TRACE-02-E02"
+              ]
+            },
+            {
+              "path": "harness/verification/tests/test_module_coverage.py",
+              "kind": "pytest",
+              "name": "test_contract_rejects_non_baseline_priority_and_unknown_surface",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-TRACE-02-E02"
+              ]
+            },
+            {
+              "path": "harness/verification/tests/test_module_coverage.py",
+              "kind": "pytest",
+              "name": "test_m08_trace_03_resolves_references_and_gate_ownership",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-TRACE-02-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-TRACE-03",
+          "priority": "P1",
+          "scenario": "Spec 的 AC 到 case 映射在 task verify 中解析为真实测试引用、gate 覆盖和可重算 evidence。",
+          "expectations": [
+            {
+              "id": "M08-TRACE-03-E01",
+              "surface": "state",
+              "statement": "每个映射 case 解析到真实静态测试名称，所选 gate 直接或经已证明 subsumption 覆盖 required_gates，解析结果与合同摘要进入 evidence。"
+            },
+            {
+              "id": "M08-TRACE-03-E02",
+              "surface": "forbidden",
+              "statement": "未解析 planned case、缺失或错误测试引用、gate 覆盖缺口以及 case、test_ref 或合同摘要漂移不得通过 task verify 或 evidence 校验。"
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_module_coverage.py",
+              "kind": "pytest",
+              "name": "test_m08_trace_03_resolves_references_and_gate_ownership",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-TRACE-03-E01",
+                "M08-TRACE-03-E02"
+              ]
+            },
+            {
+              "path": "harness/verification/tests/test_product_verification.py",
+              "kind": "pytest",
+              "name": "test_resolved_verification_cases_require_case_existence_and_gate_coverage",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-TRACE-03-E01",
+                "M08-TRACE-03-E02"
+              ]
+            },
+            {
+              "path": "harness/verification/tests/test_product_verification.py",
+              "kind": "pytest",
+              "name": "test_close_evidence_requires_current_head_complete_coverage_and_clean_source",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-TRACE-03-E01",
+                "M08-TRACE-03-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-TRACE-04",
+          "priority": "P1",
+          "scenario": "长期验证政策、SDD 模板与 specify 工作流约束 AC 到模块 case 的映射及静态保证边界。",
+          "expectations": [
+            {
+              "id": "M08-TRACE-04-E01",
+              "surface": "state",
+              "statement": "产品基线固定 M01-M10，模板与工作流规定每个 AC 的 case 映射格式、planned case 在 task verify 解析的时点和 leaf gate 责任。"
+            },
+            {
+              "id": "M08-TRACE-04-E02",
+              "surface": "forbidden",
+              "statement": "长期政策不得把静态 test_ref 误述为测试断言语义等价或本次逐条执行通过的证明。"
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_module_coverage.py",
+              "kind": "pytest",
+              "name": "test_m08_trace_04_documents_verification_case_boundaries",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-TRACE-04-E01",
+                "M08-TRACE-04-E02"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M09",
+      "name": "公开问答消费层（默认关闭）",
+      "cases": [
+        {
+          "id": "M09-P0-01",
+          "priority": "P0",
+          "scenario": "默认关闭的公开问答 UI 对普通页面保持零挂载和零网络副作用。",
+          "expectations": [
+            {
+              "id": "M09-P0-01-E01",
+              "surface": "user_visible",
+              "statement": "关闭 UI flag 时，普通公开页面完成水合且不渲染问答 launcher 或 panel。"
+            },
+            {
+              "id": "M09-P0-01-E02",
+              "surface": "forbidden",
+              "statement": "关闭 UI flag 时，浏览器不得向任何 /api/v1/assistant 路径发起请求。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/assistant-disabled.spec.ts",
+              "kind": "playwright",
+              "name": "disabled assistant flag never mounts a launcher or assistant API traffic",
+              "gate": "e2e",
+              "covers": [
+                "M09-P0-01-E01",
+                "M09-P0-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-P1-01",
+          "priority": "P1",
+          "scenario": "启用的确定性测试消费层恢复 active turn、支持多轮并 fence 删除后的迟到响应。",
+          "expectations": [
+            {
+              "id": "M09-P1-01-E01",
+              "surface": "user_visible",
+              "statement": "进行中的问题在 reload 后恢复为锁定状态，完成后显示答案，多轮问答和来源导航保持可用。"
+            },
+            {
+              "id": "M09-P1-01-E02",
+              "surface": "forbidden",
+              "statement": "同一 active turn 不得重复提交；确认 DELETE 后迟到 GET 不得复活正文，且响应式页面不得同时拥有两个模态对话框。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+              "kind": "playwright",
+              "name": "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay",
+              "gate": "e2e",
+              "covers": [
+                "M09-P1-01-E01",
+                "M09-P1-01-E02"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M10",
+      "name": "问答运营控制面（默认关闭）",
+      "cases": [
+        {
+          "id": "M10-P0-01",
+          "priority": "P0",
+          "scenario": "安全停用压过陈旧版本并立即阻止新的匿名问答准入。",
+          "expectations": [
+            {
+              "id": "M10-P0-01-E01",
+              "surface": "response",
+              "statement": "使用陈旧 expected_version 的 disable 仍返回 200、effective_state 为 disabled 且 gate version 前进。"
+            },
+            {
+              "id": "M10-P0-01-E02",
+              "surface": "forbidden",
+              "statement": "停用完成后不得建立新的匿名问答 session，新的 session 请求必须返回 503。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_admin.py",
+              "kind": "pytest",
+              "name": "test_safety_disable_beats_stale_version_and_blocks_new_sessions",
+              "gate": "api-tests",
+              "covers": [
+                "M10-P0-01-E01",
+                "M10-P0-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-P1-01",
+          "priority": "P1",
+          "scenario": "重建请求持久且幂等，显式 finalize 切换 generation 后仍保持 gate 关闭。",
+          "expectations": [
+            {
+              "id": "M10-P1-01-E01",
+              "surface": "state",
+              "statement": "重建返回 pending，同一 Idempotency-Key 返回同一 operation，ready generation 经 finalize 后状态为 switched。"
+            },
+            {
+              "id": "M10-P1-01-E02",
+              "surface": "forbidden",
+              "statement": "创建重建请求不得立即调用 Embedding 或创建额外 Qdrant collection；finalize 不得自动启用 runtime gate。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_admin.py",
+              "kind": "pytest",
+              "name": "test_rebuild_request_is_durable_and_finalize_leaves_gate_disabled",
+              "gate": "api-tests",
+              "covers": [
+                "M10-P1-01-E01",
+                "M10-P1-01-E02"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

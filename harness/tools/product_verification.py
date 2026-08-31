@@ -17,6 +17,7 @@ from .config import load_config, project_root
 from .lifecycle import LifecycleError
 from .lifecycle import documentation_contract as parse_documentation_contract
 from .metadata import parse_front_matter
+from .module_verification import ModuleVerificationError, resolve_module_contract
 from .qualification import validate_task_qualification
 from .result_reporting import (
     failure_details,
@@ -31,6 +32,12 @@ CRITERION_PATTERN = re.compile(r"^-\s+(AC-[1-9][0-9]*):\s+\S", re.MULTILINE)
 GATE_PATTERN = re.compile(
     r"^-\s+([a-z0-9]+(?:-[a-z0-9]+)*)\s+=>\s+(AC-[1-9][0-9]*(?:\s*,\s*AC-[1-9][0-9]*)*)\s*$",
     re.MULTILINE,
+)
+CASE_ID_PATTERN = re.compile(r"^M(?:0[1-9]|10)-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
+CASE_MAPPING_PATTERN = re.compile(
+    r"^-\s+(AC-[1-9][0-9]*)\s+=>\s+"
+    r"(M(?:0[1-9]|10)-[A-Z0-9]+(?:-[A-Z0-9]+)*"
+    r"(?:\s*,\s*M(?:0[1-9]|10)-[A-Z0-9]+(?:-[A-Z0-9]+)*)*)\s*$"
 )
 TOKEN_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SUBSUMPTION_PROOF_PREFIX = "HARNESS_RELEASE_PROOF "
@@ -99,10 +106,145 @@ def verification_contract(task_id: str) -> tuple[list[str], dict[str, list[str]]
     return criteria, mappings
 
 
+def verification_case_plan(
+    task_id: str,
+    criteria: list[str] | None = None,
+) -> dict[str, list[str]]:
+    """Parse the structural AC-to-module-case mapping without resolving case IDs."""
+    path = active_spec(task_id)
+    if not path.is_file():
+        raise ProductVerificationError(f"active spec not found: {path}")
+    _, body = parse_front_matter(path)
+    case_section = _section(body, "Verification cases")
+    known = set(criteria if criteria is not None else verification_contract(task_id)[0])
+    mappings: dict[str, list[str]] = {}
+    for line in case_section.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        match = CASE_MAPPING_PATTERN.fullmatch(stripped)
+        if match is None:
+            raise ProductVerificationError(
+                "Verification cases must use '- AC-N => M01-CASE-ID, M02-CASE-ID' entries"
+            )
+        criterion = match.group(1)
+        if criterion in mappings:
+            raise ProductVerificationError(
+                f"acceptance criterion mapped more than once in Verification cases: {criterion}"
+            )
+        case_ids = [value.strip() for value in match.group(2).split(",")]
+        if len(case_ids) != len(set(case_ids)):
+            raise ProductVerificationError(
+                f"Verification cases contains duplicate case IDs for {criterion}"
+            )
+        if not all(CASE_ID_PATTERN.fullmatch(case_id) for case_id in case_ids):
+            raise ProductVerificationError(
+                f"Verification cases contains an invalid case ID for {criterion}"
+            )
+        mappings[criterion] = case_ids
+    if not mappings:
+        raise ProductVerificationError(
+            "Verification cases must map every acceptance criterion to a module case"
+        )
+    unknown = sorted(set(mappings) - known)
+    missing = sorted(known - set(mappings))
+    if unknown:
+        raise ProductVerificationError(
+            f"Verification cases references unknown criteria: {', '.join(unknown)}"
+        )
+    if missing:
+        raise ProductVerificationError(
+            f"Acceptance criteria lack a Verification cases mapping: {', '.join(missing)}"
+        )
+    return mappings
+
+
+def resolved_verification_cases(
+    task_id: str,
+    criteria: list[str],
+    gate_mappings: dict[str, list[str]],
+) -> dict[str, Any]:
+    """Resolve AC case IDs against the current module contract and gate plan."""
+    planned = verification_case_plan(task_id, criteria)
+    try:
+        contract = resolve_module_contract(
+            project_root(),
+            registered_gates=set(_configured_gates()),
+        )
+    except ModuleVerificationError as error:
+        raise ProductVerificationError(
+            "module verification contract is invalid: " + "; ".join(error.details)
+        ) from error
+    indexed = contract["case_index"]
+    resolved_criteria: list[dict[str, Any]] = []
+    for criterion in criteria:
+        selected_gates = [
+            gate for gate, covered in gate_mappings.items() if criterion in covered
+        ]
+        resolved_cases: list[dict[str, Any]] = []
+        for case_id in planned[criterion]:
+            case = indexed.get(case_id)
+            if not isinstance(case, dict):
+                raise ProductVerificationError(
+                    f"Verification cases references an unresolved module case: {case_id}"
+                )
+            required_gates = [str(value) for value in case["required_gates"]]
+            satisfaction = _requirement_report(required_gates, selected_gates)
+            if satisfaction["missing"]:
+                raise ProductVerificationError(
+                    f"{criterion} gate plan does not cover {case_id} required gates: "
+                    + ", ".join(satisfaction["missing"])
+                )
+            resolved_cases.append(
+                {
+                    "id": case_id,
+                    "module_id": case["module_id"],
+                    "module_name": case["module_name"],
+                    "priority": case["priority"],
+                    "scenario": case["scenario"],
+                    "expectations": case["expectations"],
+                    "required_gates": required_gates,
+                    "test_refs": case["test_refs"],
+                    "gate_satisfaction": satisfaction["satisfied"],
+                }
+            )
+        resolved_criteria.append(
+            {
+                "criterion": criterion,
+                "selected_gates": selected_gates,
+                "cases": resolved_cases,
+            }
+        )
+    return {
+        "schema_version": 1,
+        "contract_id": contract["contract"]["contract_id"],
+        "contract_sha256": contract["digest"],
+        "criteria": resolved_criteria,
+    }
+
+
 def _configured_gates() -> dict[str, Any]:
     verification = load_config().get("verification", {})
     gates = verification.get("gates", {})
     return dict(gates) if isinstance(gates, dict) else {}
+
+
+def required_task_checks() -> list[str]:
+    raw = load_config().get("verification", {}).get("required_task_checks", [])
+    if (
+        not isinstance(raw, list)
+        or not raw
+        or not all(isinstance(value, str) and TOKEN_PATTERN.fullmatch(value) for value in raw)
+    ):
+        raise ProductVerificationError(
+            "verification.required_task_checks must be a non-empty array of check names"
+        )
+    values = [str(value) for value in raw]
+    if len(values) != len(set(values)):
+        raise ProductVerificationError(
+            "verification.required_task_checks must not contain duplicates"
+        )
+    return values
 
 
 def _load_subsumption_contract(
@@ -444,6 +586,7 @@ def lint_task_contract(task_id: str) -> tuple[list[str], dict[str, list[str]], s
     path = active_spec(task_id)
     summarizer.ensure_spec_in_git_history(path)
     criteria, mappings = verification_contract(task_id)
+    verification_case_plan(task_id, criteria)
     profile = verification_profile(task_id)
     validate_configured_gates(mappings, profile, task_id, criteria)
     return criteria, mappings, profile
@@ -548,6 +691,7 @@ def evidence_fingerprints(
     mappings: dict[str, list[str]],
     profile: str,
     documentation: dict[str, Any] | None = None,
+    verification_cases: dict[str, Any] | None = None,
 ) -> dict[str, str]:
     path = active_spec(task_id)
     gates = _configured_gates()
@@ -566,6 +710,7 @@ def evidence_fingerprints(
             "risk": _requirement_report(derived["required_gates"], mappings),
         },
         "subsumption_contracts": _selected_subsumption_contracts(mappings),
+        "required_task_checks": required_task_checks(),
     }
     verification_contract = {
         "profile": profile,
@@ -573,6 +718,8 @@ def evidence_fingerprints(
         "mappings": mappings,
         "verification_escalation": verification_escalation(task_id),
     }
+    if verification_cases is not None:
+        verification_contract["verification_cases"] = verification_cases
     documentation = documentation or documentation_report(task_id)
     qualification_errors, qualification_binding = validate_task_qualification(task_id)
     if qualification_errors:
@@ -594,6 +741,15 @@ def evidence_fingerprints(
             documentation.get("target_blobs", {})
         ),
     }
+    if verification_cases is not None:
+        contract_sha256 = verification_cases.get("contract_sha256")
+        if not isinstance(contract_sha256, str) or not re.fullmatch(
+            r"[0-9a-f]{64}", contract_sha256
+        ):
+            raise ProductVerificationError(
+                "resolved verification cases have an invalid contract digest"
+            )
+        fingerprints["module_contract_sha256"] = contract_sha256
     if qualification_binding is not None:
         fingerprints["qualification_manifest_sha256"] = _canonical_hash(
             qualification_binding
@@ -1054,8 +1210,14 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
         profile = verification_profile(task_id)
         validate_configured_gates(mappings, profile, task_id, criteria)
         documentation = documentation_report(task_id)
+        verification_cases = resolved_verification_cases(task_id, criteria, mappings)
         fingerprints = evidence_fingerprints(
-            task_id, criteria, mappings, profile, documentation
+            task_id,
+            criteria,
+            mappings,
+            profile,
+            documentation,
+            verification_cases,
         )
     except (ProductVerificationError, OSError, ValueError) as error:
         errors.append(str(error))
@@ -1076,6 +1238,10 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
         errors.append("task evidence verification_profile does not match the active spec")
     if payload.get("documentation") != documentation:
         errors.append("task evidence documentation does not match current documentation inputs")
+    if payload.get("verification_cases") != verification_cases:
+        errors.append(
+            "task evidence verification cases do not match the current module contract"
+        )
     if payload.get("fingerprints") != fingerprints:
         errors.append("task evidence fingerprints do not match current verification inputs")
     execution = payload.get("execution")
@@ -1119,6 +1285,23 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
         ]
         if len(isolation) != 1 or isolation[0].get("name") != "isolated-worktree":
             errors.append("task evidence must contain one passed isolated-worktree check")
+        for required_name in required_task_checks():
+            required_matches = [
+                check
+                for check in checks
+                if isinstance(check, dict)
+                and check.get("name") == required_name
+                and check.get("kind") not in {"product", "isolation"}
+            ]
+            if len(required_matches) != 1:
+                errors.append(
+                    "task evidence must contain exactly one global required check: "
+                    f"{required_name}"
+                )
+            elif required_matches[0].get("status") != "passed":
+                errors.append(
+                    f"task evidence required check must be passed: {required_name}"
+                )
         product = {
             str(check.get("name")): check
             for check in checks
