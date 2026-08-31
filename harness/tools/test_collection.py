@@ -306,9 +306,11 @@ def _collect_playwright(
 
 
 def _collect_vitest(project_root: Path) -> list[dict[str, Any]]:
+    web_root = project_root / "apps/web"
+    _run([_npm(), "exec", "nuxt", "--", "prepare"], web_root)
     stdout = _run(
         [_npm(), "exec", "vitest", "--", "list", "--config", "vitest.config.ts", "--json"],
-        project_root / "apps/web",
+        web_root,
     )
     try:
         payload = json.loads(stdout)
@@ -354,7 +356,10 @@ def collect_test_index(
     validate_gate_bindings(root, config)
     watched = [
         root / "package.json",
+        root / "package-lock.json",
         root / "apps/web/package.json",
+        root / "apps/web/nuxt.config.ts",
+        root / "apps/web/tsconfig.json",
         root / "apps/web/vitest.config.ts",
         root / "apps/web/playwright.config.ts",
         root / "apps/web/playwright.assistant.config.ts",

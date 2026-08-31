@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from harness.tools import test_collection
 from harness.tools.config import load_config
 from harness.tools.module_verification import (
     AUTHORITY_REF,
@@ -456,6 +457,55 @@ def test_m08_collector_01_rejects_uncollected_disabled_and_gate_drift(
         path.write_text(json.dumps({"scripts": scripts}), encoding="utf-8")
     with pytest.raises(CollectionError, match="owner gate command drifted"):
         validate_gate_bindings(tmp_path, _config())
+
+
+def test_vitest_collector_prepares_nuxt_before_listing(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = tmp_path / "apps/web/tests/unit/collector.test.ts"
+    source.parent.mkdir(parents=True)
+    source.write_text("test('collector anchor', () => {})\n", encoding="utf-8")
+    calls: list[tuple[list[str], Path]] = []
+
+    def run(command: list[str], cwd: Path) -> str:
+        calls.append((command, cwd))
+        if "vitest" not in command:
+            return ""
+        return json.dumps(
+            [{"name": "suite > collector anchor", "file": str(source.resolve())}]
+        )
+
+    monkeypatch.setattr(test_collection, "_run", run)
+
+    rows = test_collection._collect_vitest(tmp_path)
+
+    assert calls == [
+        ([test_collection._npm(), "exec", "nuxt", "--", "prepare"], tmp_path / "apps/web"),
+        (
+            [
+                test_collection._npm(),
+                "exec",
+                "vitest",
+                "--",
+                "list",
+                "--config",
+                "vitest.config.ts",
+                "--json",
+            ],
+            tmp_path / "apps/web",
+        ),
+    ]
+    assert rows == [
+        {
+            "kind": "vitest",
+            "gate": "web-quality",
+            "path": "apps/web/tests/unit/collector.test.ts",
+            "name": "collector anchor",
+            "node": "suite > collector anchor",
+            "disabled": [],
+        }
+    ]
 
 
 def test_m08_semantics_01_resolves_the_real_repository_contract() -> None:
