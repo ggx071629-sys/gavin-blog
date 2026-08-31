@@ -8,6 +8,7 @@ author: Codex
 task_id: 20260831-document-drift-remediation
 status: active
 verification_profile: release
+verification_escalation: 本任务将修改唯一 L0、Harness 风险路由与 metadata check；即使初始 spec 提交尚未触发路径下限，也必须用完整 release 证明控制面与产品门禁仍可组合执行。
 documentation_impact: required
 documentation_targets:
   - README.md
