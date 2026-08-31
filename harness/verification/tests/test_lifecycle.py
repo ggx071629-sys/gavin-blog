@@ -19,6 +19,12 @@ summarizer = importlib.import_module("harness.tools.summarizer")
 TASK_ID = "20260811-example-close"
 
 
+@pytest.fixture(autouse=True)
+def _isolate_close_attestation(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(harness_cli, "_refresh_task_evidence", lambda _task: True)
+    monkeypatch.setattr(harness_cli, "_evidence_sha256", lambda _task: "a" * 64)
+
+
 def _spec_config() -> dict[str, object]:
     return {
         "specs": {
@@ -257,7 +263,7 @@ def test_close_requests_an_event_without_a_proposal(
     monkeypatch.setattr(harness_cli.summarizer, "active_spec", lambda _: source)
     monkeypatch.setattr(harness_cli.summarizer, "archive_spec", lambda _: archive)
 
-    def close_spec(_: str) -> tuple[Path, str]:
+    def close_spec(_: str, **_kwargs: object) -> tuple[Path, str]:
         archive.write_text("archive", encoding="utf-8")
         return archive, "source"
 
@@ -273,8 +279,13 @@ def test_close_requests_an_event_without_a_proposal(
     )
     monkeypatch.setattr(harness_cli.indexer, "write_indexes", list)
 
-    def record_event(*_: object, create_proposal: bool) -> tuple[Path, None]:
+    def record_event(
+        *_: object,
+        create_proposal: bool,
+        evidence_sha256: str,
+    ) -> tuple[Path, None]:
         requested.append(create_proposal)
+        assert evidence_sha256 == "a" * 64
         event.write_text("{}", encoding="utf-8")
         return event, None
 
@@ -310,6 +321,25 @@ def test_close_rejects_invalid_task_evidence_before_running_checks(
 
     assert harness_cli.command_close(argparse.Namespace(task_id=TASK_ID)) == 1
     assert checks_called is False
+
+
+def test_m08_evidence_01_close_requires_fresh_verification(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    evidence_validated = False
+    monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
+    monkeypatch.setattr(harness_cli.lifecycle, "task_status", lambda _: "active")
+    monkeypatch.setattr(harness_cli, "_refresh_task_evidence", lambda _task: False)
+
+    def validate(*_args: object) -> list[str]:
+        nonlocal evidence_validated
+        evidence_validated = True
+        return []
+
+    monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", validate)
+
+    assert harness_cli.command_close(argparse.Namespace(task_id=TASK_ID)) == 1
+    assert evidence_validated is False
 
 
 def test_close_all_skips_frozen_and_preflights_every_active_spec(
@@ -390,7 +420,7 @@ def test_close_all_rolls_back_every_task_when_post_check_fails(
 
     monkeypatch.setattr(harness_cli.validator, "run_checks", run_checks)
 
-    def close_spec(task: str) -> tuple[Path, str]:
+    def close_spec(task: str, **_kwargs: object) -> tuple[Path, str]:
         archive = tmp_path / f"{task}.archive.md"
         archive.write_text("archive", encoding="utf-8")
         return archive, f"source:{task}"
@@ -458,7 +488,7 @@ def test_close_all_success_writes_every_task_and_indexes_once(
     monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", lambda *_: [])
     monkeypatch.setattr(harness_cli.validator, "run_checks", lambda: passed)
 
-    def close_spec(task: str) -> tuple[Path, str]:
+    def close_spec(task: str, **_kwargs: object) -> tuple[Path, str]:
         archive = tmp_path / f"{task}.archive.md"
         archive.write_text("archive", encoding="utf-8")
         return archive, f"source:{task}"
@@ -509,7 +539,7 @@ def test_close_cleans_partial_event_when_emission_raises(
     monkeypatch.setattr(harness_cli.validator, "run_checks", lambda: passed)
     monkeypatch.setattr(harness_cli.indexer, "write_indexes", list)
 
-    def close_spec(_: str) -> tuple[Path, str]:
+    def close_spec(_: str, **_kwargs: object) -> tuple[Path, str]:
         archive.write_text("partial archive", encoding="utf-8")
         source.unlink()
         return archive, "source"

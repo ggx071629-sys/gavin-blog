@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 import subprocess
@@ -126,6 +127,78 @@ def test_history_integrity_rejects_missing_mismatched_and_active_close_assets(
     assert any("original active spec is absent" in detail for detail in result["details"])
     assert any("main evidence is missing" in detail for detail in result["details"])
     assert any("event contract is inconsistent" in detail for detail in result["details"])
+
+
+def test_m08_history_01_binds_exact_evidence_digest(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    check = _load_check()
+    task_id = "20260901-bound"
+    evidence_payload = {
+        "schema_version": 2,
+        "task_id": task_id,
+        "created_at": "2026-09-01T00:00:00+00:00",
+        "command": f"python -m tools.harness verify {task_id}",
+        "status": "passed",
+        "acceptance_criteria": ["AC-1"],
+        "criteria_results": [],
+        "verification_profile": "focused",
+        "fingerprints": {},
+        "documentation": {},
+        "execution": {},
+        "verification_cases": {},
+        "checks": [],
+        "summary": {},
+        "source_commit": "a" * 40,
+    }
+    evidence_text = json.dumps(evidence_payload, sort_keys=True)
+    digest = hashlib.sha256(evidence_text.encode()).hexdigest()
+    evidence = tmp_path / "verification/evidence" / f"{task_id}.json"
+    _write(evidence, evidence_text)
+    _write(
+        tmp_path / "specs/archive" / f"{task_id}.md",
+        "---\n"
+        f"id: archive-{task_id}\n"
+        f"task_id: {task_id}\n"
+        "status: compressed\n"
+        f"evidence_sha256: {digest}\n"
+        "---\n\n"
+        f"[evidence](../../verification/evidence/{task_id}.json)\n",
+    )
+    event = tmp_path / "evolution/events" / f"{task_id}--spec-completed.json"
+    _write(
+        event,
+        json.dumps(
+            {
+                "schema_version": 2,
+                "event_type": "spec.completed",
+                "task_id": task_id,
+                "source": "lifecycle",
+                "may_modify_agents_md": False,
+                "evidence_sha256": digest,
+            }
+        ),
+    )
+    monkeypatch.setattr(
+        check,
+        "_historical_active_paths",
+        lambda _: {f"harness/specs/active/{task_id}.md"},
+    )
+
+    assert check.run(_context(tmp_path))["passed"] is True
+
+    _write(evidence, evidence_text + "\n")
+    result = check.run(_context(tmp_path))
+    assert result["passed"] is False
+    assert any("digest binding is inconsistent" in detail for detail in result["details"])
+
+    event_payload = json.loads(event.read_text(encoding="utf-8"))
+    event_payload["schema_version"] = 1
+    event_payload.pop("evidence_sha256")
+    _write(event, json.dumps(event_payload))
+    result = check.run(_context(tmp_path))
+    assert any("digest-bound close contract is required" in detail for detail in result["details"])
 
 
 def test_historical_active_paths_include_side_parent_history_after_merge(

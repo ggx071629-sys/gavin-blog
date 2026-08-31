@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 from pathlib import Path
@@ -7,6 +8,24 @@ from typing import Any
 
 MAX_FAILURES = 20
 COMPLETION_SUFFIX = "--spec-completed.json"
+DIGEST_REQUIRED_FROM = "20260901-"
+REQUIRED_EVIDENCE_FIELDS = {
+    "schema_version",
+    "task_id",
+    "created_at",
+    "command",
+    "status",
+    "acceptance_criteria",
+    "criteria_results",
+    "verification_profile",
+    "fingerprints",
+    "documentation",
+    "execution",
+    "verification_cases",
+    "checks",
+    "summary",
+    "source_commit",
+}
 
 
 def _json_object(path: Path) -> dict[str, Any] | None:
@@ -94,6 +113,7 @@ def _failures(context: dict[str, Any]) -> tuple[list[str], int]:
             failures.append(f"{task_id}: original active spec is absent from Git history")
 
         metadata = _front_matter_scalars(archive)
+        archive_digest: str | None = None
         if metadata is None:
             failures.append(f"{task_id}: compressed archive metadata is unreadable")
         else:
@@ -103,6 +123,8 @@ def _failures(context: dict[str, Any]) -> tuple[list[str], int]:
                 or metadata.get("status") != "compressed"
             ):
                 failures.append(f"{task_id}: compressed archive metadata is inconsistent")
+            raw_digest = metadata.get("evidence_sha256")
+            archive_digest = raw_digest if raw_digest else None
         expected_link = f"../../verification/evidence/{task_id}.json"
         try:
             if expected_link not in archive.read_text(encoding="utf-8"):
@@ -117,9 +139,15 @@ def _failures(context: dict[str, Any]) -> tuple[list[str], int]:
         elif (
             evidence_payload.get("task_id") != task_id
             or evidence_payload.get("status") != "passed"
+            or type(evidence_payload.get("schema_version")) is not int
             or evidence_payload.get("schema_version") not in {1, 2}
         ):
             failures.append(f"{task_id}: main evidence identity or status is inconsistent")
+        evidence_digest = (
+            hashlib.sha256(evidence.read_bytes()).hexdigest()
+            if evidence_payload is not None
+            else None
+        )
 
         event = events.get(task_id)
         if event is None:
@@ -128,13 +156,31 @@ def _failures(context: dict[str, Any]) -> tuple[list[str], int]:
         if event_payload is None:
             failures.append(f"{task_id}: spec.completed event is unreadable")
         elif (
-            event_payload.get("schema_version") != 1
+            type(event_payload.get("schema_version")) is not int
+            or event_payload.get("schema_version") not in {1, 2}
             or event_payload.get("event_type") != "spec.completed"
             or event_payload.get("task_id") != task_id
             or event_payload.get("source") != "lifecycle"
             or event_payload.get("may_modify_agents_md") is not False
         ):
             failures.append(f"{task_id}: spec.completed event contract is inconsistent")
+        elif event_payload.get("schema_version") == 2:
+            event_digest = event_payload.get("evidence_sha256")
+            if (
+                not isinstance(event_digest, str)
+                or len(event_digest) != 64
+                or any(character not in "0123456789abcdef" for character in event_digest)
+                or archive_digest != event_digest
+                or evidence_digest != event_digest
+            ):
+                failures.append(f"{task_id}: evidence digest binding is inconsistent")
+            if evidence_payload is not None and (
+                evidence_payload.get("schema_version") != 2
+                or set(evidence_payload) != REQUIRED_EVIDENCE_FIELDS
+            ):
+                failures.append(f"{task_id}: bound task evidence contract is incomplete")
+        elif task_id >= DIGEST_REQUIRED_FROM or archive_digest is not None:
+            failures.append(f"{task_id}: digest-bound close contract is required")
 
     return failures[:MAX_FAILURES], len(archives)
 

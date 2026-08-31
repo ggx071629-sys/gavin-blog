@@ -462,12 +462,12 @@
         {
           "id": "M07-P1-01",
           "priority": "P1",
-          "scenario": "生产首页满足四项桌面 Lighthouse 发布阈值。",
+          "scenario": "本地 production-build preview 首页满足四项桌面 Lighthouse 发布阈值。",
           "expectations": [
             {
               "id": "M07-P1-01-E01",
               "surface": "user_visible",
-              "statement": "Performance、Accessibility、Best Practices 与 SEO 四项 Lighthouse 分数均达到 90。"
+              "statement": "本地 production-build preview 的 Performance、Accessibility、Best Practices 与 SEO 四项 Lighthouse 分数均达到 90。"
             },
             {
               "id": "M07-P1-01-E02",
@@ -482,7 +482,7 @@
             {
               "path": "apps/web/tests/quality/site-quality.spec.ts",
               "kind": "playwright",
-              "name": "production homepage meets all Lighthouse 90 thresholds",
+              "name": "local production-build preview homepage meets all Lighthouse 90 thresholds",
               "gate": "web-quality",
               "covers": [
                 "M07-P1-01-E01",
@@ -680,6 +680,175 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M08-COLLECTOR-01",
+          "priority": "P0",
+          "scenario": "测试引用由真实框架 collector 和绑定的 owner Gate 共同裁决。",
+          "expectations": [
+            {
+              "id": "M08-COLLECTOR-01-E01",
+              "surface": "state",
+              "statement": "Pytest、Vitest 与 Playwright 引用只在对应 Gate collector 精确收集一次且可执行时成立。"
+            },
+            {
+              "id": "M08-COLLECTOR-01-E02",
+              "surface": "forbidden",
+              "statement": "死代码、嵌套未收集测试、skip/todo/fixme 以及 Gate command 或脚本漂移不得形成有效引用。"
+            }
+          ],
+          "required_gates": ["harness-tests"],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_module_coverage.py",
+              "kind": "pytest",
+              "name": "test_m08_collector_01_rejects_uncollected_disabled_and_gate_drift",
+              "gate": "harness-tests",
+              "covers": ["M08-COLLECTOR-01-E01", "M08-COLLECTOR-01-E02"]
+            }
+          ]
+        },
+        {
+          "id": "M08-EVIDENCE-01",
+          "priority": "P0",
+          "scenario": "任务关闭重新执行验证并拒绝伪造的产品 Gate 结果。",
+          "expectations": [
+            {
+              "id": "M08-EVIDENCE-01-E01",
+              "surface": "state",
+              "statement": "每个产品 Gate evidence 绑定规范命令、结构化零退出结果和 fresh close verification。"
+            },
+            {
+              "id": "M08-EVIDENCE-01-E02",
+              "surface": "forbidden",
+              "statement": "手改 status、summary、coverage 或删除 result 后不得通过 evidence 校验或 close。"
+            }
+          ],
+          "required_gates": ["harness-tests"],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_product_verification.py",
+              "kind": "pytest",
+              "name": "test_m08_evidence_01_rejects_forged_gate_result",
+              "gate": "harness-tests",
+              "covers": ["M08-EVIDENCE-01-E01", "M08-EVIDENCE-01-E02"]
+            },
+            {
+              "path": "harness/verification/tests/test_lifecycle.py",
+              "kind": "pytest",
+              "name": "test_m08_evidence_01_close_requires_fresh_verification",
+              "gate": "harness-tests",
+              "covers": ["M08-EVIDENCE-01-E01", "M08-EVIDENCE-01-E02"]
+            }
+          ]
+        },
+        {
+          "id": "M08-HISTORY-01",
+          "priority": "P0",
+          "scenario": "压缩归档和完成事件绑定关闭时 exact evidence 摘要。",
+          "expectations": [
+            {
+              "id": "M08-HISTORY-01-E01",
+              "surface": "state",
+              "statement": "新关闭的 archive、spec.completed event 与 evidence 文件共享相同 SHA-256。"
+            },
+            {
+              "id": "M08-HISTORY-01-E02",
+              "surface": "forbidden",
+              "statement": "新 evidence 篡改、字段删除、digest 缺失或降级为 legacy schema 不得通过 history-integrity。"
+            }
+          ],
+          "required_gates": ["harness-tests"],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_history_integrity.py",
+              "kind": "pytest",
+              "name": "test_m08_history_01_binds_exact_evidence_digest",
+              "gate": "harness-tests",
+              "covers": ["M08-HISTORY-01-E01", "M08-HISTORY-01-E02"]
+            }
+          ]
+        },
+        {
+          "id": "M08-SEMANTICS-01",
+          "priority": "P1",
+          "scenario": "真实仓库合同解析和人工语义责任共同约束自然语言预期。",
+          "expectations": [
+            {
+              "id": "M08-SEMANTICS-01-E01",
+              "surface": "state",
+              "statement": "实际仓库合同通过真实 collector 解析，长期政策要求 reviewer 逐条核对 expectation 与断言语义。"
+            },
+            {
+              "id": "M08-SEMANTICS-01-E02",
+              "surface": "forbidden",
+              "statement": "测试名存在或 covers 自述不得被当作断言语义等价的自动证明。"
+            }
+          ],
+          "required_gates": ["harness-tests"],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_module_coverage.py",
+              "kind": "pytest",
+              "name": "test_m08_semantics_01_resolves_the_real_repository_contract",
+              "gate": "harness-tests",
+              "covers": ["M08-SEMANTICS-01-E01", "M08-SEMANTICS-01-E02"]
+            }
+          ]
+        },
+        {
+          "id": "M08-VALIDATOR-01",
+          "priority": "P1",
+          "scenario": "恶意或畸形合同输入产生严格、确定且有界的诊断。",
+          "expectations": [
+            {
+              "id": "M08-VALIDATOR-01-E01",
+              "surface": "response",
+              "statement": "schema、枚举、required-check 与诊断净化规则由单一严格 schema 确定裁决。"
+            },
+            {
+              "id": "M08-VALIDATOR-01-E02",
+              "surface": "forbidden",
+              "statement": "浮点 schema、非字符串枚举、控制字符、无限详情和非确定 set 顺序不得通过或泄漏。"
+            }
+          ],
+          "required_gates": ["harness-tests"],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_module_coverage.py",
+              "kind": "pytest",
+              "name": "test_m08_validator_01_rejects_float_schema_and_sanitizes_details",
+              "gate": "harness-tests",
+              "covers": ["M08-VALIDATOR-01-E01", "M08-VALIDATOR-01-E02"]
+            }
+          ]
+        },
+        {
+          "id": "M08-SPEC-01",
+          "priority": "P1",
+          "scenario": "spec-lint 强制模板嵌套结构并允许显式 planned 模块延迟解析。",
+          "expectations": [
+            {
+              "id": "M08-SPEC-01-E01",
+              "surface": "state",
+              "statement": "Verification plan 只接受有序的 Verification cases 与 Gates 子节，planned_modules 可声明未来稳定模块 ID。"
+            },
+            {
+              "id": "M08-SPEC-01-E02",
+              "surface": "forbidden",
+              "statement": "模板外结构、未声明新模块和 task verify 时仍未进入当前合同的 case 不得通过。"
+            }
+          ],
+          "required_gates": ["harness-tests"],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_product_verification.py",
+              "kind": "pytest",
+              "name": "test_m08_spec_01_enforces_nested_plan_and_planned_modules",
+              "gate": "harness-tests",
+              "covers": ["M08-SPEC-01-E01", "M08-SPEC-01-E02"]
+            }
+          ]
         }
       ]
     },
@@ -750,6 +919,33 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-P0-02",
+          "priority": "P0",
+          "scenario": "API runtime 未配置时公开问答 capability 默认不可用。",
+          "expectations": [
+            {
+              "id": "M09-P0-02-E01",
+              "surface": "response",
+              "statement": "默认运行时对公开问答 session、turn 与 source 路由返回不可用响应。"
+            },
+            {
+              "id": "M09-P0-02-E02",
+              "surface": "forbidden",
+              "statement": "仅存在路由或前端 flag 不得使未配置的问答 runtime 接受公开请求。"
+            }
+          ],
+          "required_gates": ["api-tests"],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_online.py",
+              "kind": "pytest",
+              "name": "test_disabled_assistant_routes_are_unavailable_without_runtime",
+              "gate": "api-tests",
+              "covers": ["M09-P0-02-E01", "M09-P0-02-E02"]
+            }
+          ]
         }
       ]
     },
@@ -818,6 +1014,33 @@
                 "M10-P1-01-E01",
                 "M10-P1-01-E02"
               ]
+            }
+          ]
+        },
+        {
+          "id": "M10-P0-02",
+          "priority": "P0",
+          "scenario": "全新默认配置的运营快照保持认证保护、部分响应和 no-store。",
+          "expectations": [
+            {
+              "id": "M10-P0-02-E01",
+              "surface": "response",
+              "statement": "认证管理员读取 fresh snapshot 时看到 effective_state disabled 且响应禁止缓存。"
+            },
+            {
+              "id": "M10-P0-02-E02",
+              "surface": "forbidden",
+              "statement": "未认证访问不得读取运营快照，默认状态不得隐式启用问答。"
+            }
+          ],
+          "required_gates": ["api-tests"],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_admin.py",
+              "kind": "pytest",
+              "name": "test_static_off_snapshot_is_authenticated_partial_and_no_store",
+              "gate": "api-tests",
+              "covers": ["M10-P0-02-E01", "M10-P0-02-E02"]
             }
           ]
         }

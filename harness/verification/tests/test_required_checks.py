@@ -87,7 +87,7 @@ def test_required_check_configuration_rejects_empty_or_duplicate_names(
 ) -> None:
     _configure(tmp_path, monkeypatch, required=[])
     empty = validator.run_checks()
-    assert "must be a non-empty string array" in empty[-1]["details"][0]
+    assert "must be a non-empty array of check names" in empty[-1]["details"][0]
 
     monkeypatch.setattr(
         validator,

@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from harness.tools.config import load_config
 from harness.tools.module_verification import (
     AUTHORITY_REF,
     CONTRACT_ID,
@@ -14,6 +15,12 @@ from harness.tools.module_verification import (
     resolve_module_contract,
     resolve_test_reference,
     validate_module_contract,
+)
+from harness.tools.test_collection import (
+    TestCollectionError as CollectionError,
+)
+from harness.tools.test_collection import (
+    validate_gate_bindings,
 )
 from harness.verification.checks import module_coverage as module_coverage_check
 
@@ -135,17 +142,36 @@ def _write_project(project_root: Path, payload: dict[str, object] | None = None)
     return selected
 
 
+def _collected(payload: dict[str, object]) -> dict[tuple[str, str, str, str], list[dict[str, object]]]:
+    index: dict[tuple[str, str, str, str], list[dict[str, object]]] = {}
+    for module in payload["modules"]:  # type: ignore[index]
+        for case in module["cases"]:  # type: ignore[index]
+            for reference in case["test_refs"]:  # type: ignore[index]
+                key = (
+                    reference["kind"],
+                    reference["path"],
+                    reference["name"],
+                    reference["gate"],
+                )
+                index.setdefault(key, []).append(
+                    {**reference, "node": "fixture", "disabled": []}
+                )
+    return index
+
+
 def test_m08_trace_01_complete_contract(tmp_path: Path) -> None:
     payload = _write_project(tmp_path)
 
     resolved = resolve_module_contract(
         tmp_path,
         registered_gates=set(_config()["verification"]["gates"]),  # type: ignore[index]
+        collected_tests=_collected(payload),
     )
     validated, errors = validate_module_contract(
         tmp_path,
         tmp_path / "harness",
         _config(),
+        collected_tests=_collected(payload),
     )
 
     assert errors == []
@@ -174,6 +200,7 @@ def test_m08_trace_02_rejects_authority_drift(tmp_path: Path) -> None:
         tmp_path,
         tmp_path / "harness",
         _config(),
+        collected_tests=_collected(payload),
     )
 
     assert validated == payload
@@ -182,6 +209,7 @@ def test_m08_trace_02_rejects_authority_drift(tmp_path: Path) -> None:
         resolve_module_contract(
             tmp_path,
             registered_gates={"harness-tests"},
+            collected_tests=_collected(payload),
         )
 
 
@@ -204,6 +232,11 @@ def test_m08_trace_03_resolves_references_and_gate_ownership(tmp_path: Path) -> 
         tmp_path,
         reference,
         registered_gates={"api-tests", "harness-tests"},
+        collected_tests={
+            ("pytest", reference["path"], reference["name"], "api-tests"): [
+                {**reference, "disabled": []}
+            ]
+        },
     )
     assert resolved["node"] == (
         "apps/api/tests/test_contract_anchor.py::test_exact_anchor"
@@ -215,6 +248,7 @@ def test_m08_trace_03_resolves_references_and_gate_ownership(tmp_path: Path) -> 
             tmp_path,
             wrong_owner,
             registered_gates={"api-tests", "harness-tests"},
+            collected_tests={},
         )
     assert any("belongs to api-tests" in detail for detail in error.value.details)
 
@@ -228,6 +262,12 @@ def test_m08_trace_03_resolves_references_and_gate_ownership(tmp_path: Path) -> 
             tmp_path,
             reference,
             registered_gates={"api-tests"},
+            collected_tests={
+                ("pytest", reference["path"], reference["name"], "api-tests"): [
+                    {**reference, "disabled": []},
+                    {**reference, "disabled": []},
+                ]
+            },
         )
     assert any("found 2" in detail for detail in error.value.details)
 
@@ -283,9 +323,10 @@ def test_m08_trace_04_documents_verification_case_boundaries() -> None:
     assert "## Verification cases" in policy
     assert "Specify 阶段只检查" in policy
     assert "task verify 才" in policy
-    assert "静态引用校验只能证明测试定义存在" in policy
+    assert "模块引用校验直接调用 Pytest、Vitest 与 Playwright" in policy
+    assert "Reviewer 在每次新增或修改 case 时必须人工逐条检查" in policy
     assert "不证明 scenario" in policy
-    assert "不能从静态引用或总测试数推断" in policy
+    assert "不能把测试名、引用存在或总测试数当作语义证明" in policy
 
 
 def test_contract_is_fail_closed_and_requires_complete_coverage(tmp_path: Path) -> None:
@@ -301,6 +342,7 @@ def test_contract_is_fail_closed_and_requires_complete_coverage(tmp_path: Path) 
         tmp_path,
         tmp_path / "harness",
         _config(),
+        collected_tests=_collected(payload),
     )
 
     assert any("unexpected fields unexpected" in error for error in errors)
@@ -320,6 +362,7 @@ def test_contract_rejects_non_baseline_priority_and_unknown_surface(
         tmp_path,
         tmp_path / "harness",
         _config(),
+        collected_tests=_collected(payload),
     )
 
     assert any("priority must be P0 or P1" in error for error in errors)
@@ -348,6 +391,11 @@ def test_static_typescript_titles_are_exact_and_comments_do_not_count(
         tmp_path,
         {**base, "name": "literal anchor"},
         registered_gates={"web-quality"},
+        collected_tests={
+            ("vitest", base["path"], "literal anchor", "web-quality"): [
+                {**base, "name": "literal anchor", "disabled": []}
+            ]
+        },
     )["name"] == "literal anchor"
     for absent in ("commented anchor", "template value"):
         with pytest.raises(ModuleVerificationError, match="found 0"):
@@ -355,4 +403,98 @@ def test_static_typescript_titles_are_exact_and_comments_do_not_count(
                 tmp_path,
                 {**base, "name": absent},
                 registered_gates={"web-quality"},
+                collected_tests={},
             )
+
+
+def test_m08_collector_01_rejects_uncollected_disabled_and_gate_drift(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "apps/api/tests/test_anchor.py"
+    source.parent.mkdir(parents=True)
+    source.write_text(
+        "def wrapper():\n    def test_ghost():\n        pass\n",
+        encoding="utf-8",
+    )
+    reference = {
+        "path": "apps/api/tests/test_anchor.py",
+        "kind": "pytest",
+        "name": "test_ghost",
+        "gate": "api-tests",
+        "covers": ["M08-COLLECTOR-01-E01"],
+    }
+    with pytest.raises(ModuleVerificationError, match="collected exactly once"):
+        resolve_test_reference(
+            tmp_path,
+            reference,
+            registered_gates={"api-tests"},
+            collected_tests={},
+        )
+    with pytest.raises(ModuleVerificationError, match="disabled by skip"):
+        resolve_test_reference(
+            tmp_path,
+            reference,
+            registered_gates={"api-tests"},
+            collected_tests={
+                ("pytest", reference["path"], reference["name"], "api-tests"): [
+                    {**reference, "disabled": ["skip"]}
+                ]
+            },
+        )
+
+    for relative, scripts in {
+        "package.json": {"quality:web": "drifted", "test:e2e": "drifted"},
+        "apps/web/package.json": {
+            "test": "drifted",
+            "test:e2e": "drifted",
+            "test:quality": "drifted",
+            "test:failure-states": "drifted",
+        },
+    }.items():
+        path = tmp_path / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps({"scripts": scripts}), encoding="utf-8")
+    with pytest.raises(CollectionError, match="owner gate command drifted"):
+        validate_gate_bindings(tmp_path, _config())
+
+
+def test_m08_semantics_01_resolves_the_real_repository_contract() -> None:
+    project_root = Path(__file__).resolve().parents[3]
+    config = load_config()
+    resolved = resolve_module_contract(
+        project_root,
+        registered_gates=set(config["verification"]["gates"]),
+        config=config,
+    )
+
+    assert resolved["counts"] == {
+        "modules": 10,
+        "cases": 30,
+        "expectations": 60,
+        "test_refs": 37,
+    }
+
+
+def test_m08_validator_01_rejects_float_schema_and_sanitizes_details(
+    tmp_path: Path,
+) -> None:
+    payload = _write_project(tmp_path)
+    payload["schema_version"] = 1.0
+    payload["modules"][0]["cases"][0]["priority"] = ["P0"]  # type: ignore[index]
+    _write_project(tmp_path, payload)
+
+    _, errors = validate_module_contract(
+        tmp_path,
+        tmp_path / "harness",
+        _config(),
+        collected_tests=_collected(payload),
+    )
+    assert any("schema_version must equal 1" in error for error in errors)
+    assert any("priority must be P0 or P1" in error for error in errors)
+
+    compact = module_coverage_check._compact(
+        [f"line-{index}\n\x00secret" for index in range(20)]
+    )
+    assert len(compact) == module_coverage_check.MAX_FAILURE_DETAILS + 1
+    assert all("\n" not in detail and "\x00" not in detail for detail in compact)
+    assert all(len(detail) <= 280 for detail in compact)

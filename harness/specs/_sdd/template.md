@@ -22,6 +22,8 @@ author: Gavin # optional
 task_id: YYYYMMDD-short-slug
 status: active
 verification_profile: focused # focused | stack | release
+planned_modules: # 仅在本任务先定义、后落地新模块时填写；例如 M11
+  - M11
 documentation_impact: required # required | none
 documentation_targets: # required 时至少一个；none 时留空
   - README.md
@@ -34,9 +36,9 @@ state_history:
 
 每项验收标准使用唯一标识，格式为 `- AC-1: 可观察结果`。验证计划只引用 `config.toml` 注册的白名单 gate，格式为 `- gate-name => AC-1, AC-2`；每项验收标准至少由一个 gate 覆盖，不能从 Markdown 填写或执行任意 shell 命令。`verification_profile` 选择 `focused`、`stack` 或 `release`，并强制包含该层级在 `config.toml` 注册的最低 gate。带 `subsumption_contract` 的 gate（当前为 `release`）是包门禁：超过一条 AC 时，每条 AC 必须至少映射一个叶子 gate，不能把全部 AC 只挂在同一个包门禁上。若计划额外选择不在风险下限内的包门禁，必须填写非空单行 `verification_escalation`。实现前可用 `python -m tools.harness spec-lint <task_id>` 做同一套合同检查，不启动产品 gate。
 
-`## Verification cases` 每行映射一个 AC，格式为 `- AC-1 => M01-SCENARIO-01`；同一 AC 需要多个 case 时在该行使用逗号分隔。每个 AC 必须且只能出现一次并至少映射一个 case，AC 引用与模块前缀必须已知，同一 AC 内不得重复 case ID；同一 case 可以为多条相关 AC 提供共同验证责任。Spec 可以先引用将由本任务新增的 planned case ID，因此 specify 不要求它已存在于变更前合同；task verify 时该 ID 必须已进入当前提交的模块验证合同，并具有 exact test refs、observable required／forbidden expectations 和与 `gate => AC` 一致的 leaf gate，否则验证失败。`## Gates` 中保存 `- gate-name => AC-1, AC-2` 映射。
+`## Verification cases` 每行映射一个 AC，格式为 `- AC-1 => M01-SCENARIO-01`；同一 AC 需要多个 case 时在该行使用逗号分隔。每个 AC 必须且只能出现一次并至少映射一个 case，同一 AC 内不得重复 case ID；同一 case 可以为多条相关 AC 提供共同验证责任。当前模块前缀必须来自产品 authority；本任务要先定义新模块时，必须在 front matter 的 `planned_modules` 显式声明稳定 ID（如 `M11`），不能靠任意未知前缀绕过。Specify 允许该 planned case 尚未进入变更前合同；task verify 时它必须已进入当前产品 authority 与模块验证合同，并具有 exact test refs、observable required／forbidden expectations 和与 `gate => AC` 一致的 leaf gate，否则验证失败。`## Gates` 中保存 `- gate-name => AC-1, AC-2` 映射。
 
-确定性 close 为兼容既有 spec 也接受对应 H2 章节，但新 spec 统一使用上述 H1 结构。Goal 与 Acceptance criteria 缺失或为空时必须先修复 spec，close 不会删除 active 文件或生成不完整归档。
+spec-lint 只接受唯一的 `# Verification plan`，其内恰好按顺序出现 `## Verification cases` 与 `## Gates`。Goal 与 Acceptance criteria 缺失或为空时必须先修复 spec，close 不会删除 active 文件或生成不完整归档。
 
 `state_history` 由 Harness 的 freeze/resume 命令维护，新 spec 初始为空。不要手工改写 `status`、冻结元数据或历史记录。
 

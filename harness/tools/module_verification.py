@@ -8,6 +8,9 @@ from collections.abc import Collection, Mapping, Sequence
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from .config import load_config
+from .test_collection import TestCollectionError, collect_test_index
+
 SCHEMA_VERSION = 1
 CONTRACT_ID = "gavin-module-coverage-v1"
 CONTRACT_RELATIVE_PATH = Path(
@@ -452,8 +455,11 @@ def resolve_test_reference(
     reference: Mapping[str, Any],
     *,
     registered_gates: Collection[str],
+    collected_tests: Mapping[
+        tuple[str, str, str, str], list[dict[str, Any]]
+    ] | None = None,
 ) -> dict[str, Any]:
-    """Resolve one already-shaped test reference or raise closed-contract errors."""
+    """Resolve one reference against tests collected by its owning framework."""
 
     errors: list[str] = []
     _field_errors(reference, REFERENCE_FIELDS, "test reference", errors)
@@ -477,18 +483,31 @@ def resolve_test_reference(
         errors.append(
             f"test reference: {raw_path} belongs to {mapped_gate}, not {gate}"
         )
-    if path is not None and kind in {"pytest", "vitest", "playwright"} and _non_empty_string(name):
-        try:
-            names = _pytest_test_names(path) if kind == "pytest" else _typescript_test_names(path)
-        except ModuleVerificationError as error:
-            errors.extend(error.details)
-        else:
-            occurrences = names.count(name)
-            if occurrences != 1:
-                errors.append(
-                    f"test reference: {raw_path}::{name} must resolve exactly once "
-                    f"(found {occurrences})"
-                )
+    if (
+        path is not None
+        and kind in {"pytest", "vitest", "playwright"}
+        and _non_empty_string(name)
+        and _non_empty_string(gate)
+    ):
+        if collected_tests is None:
+            try:
+                collected_tests = collect_test_index(project_root, load_config())
+            except TestCollectionError as error:
+                errors.append(f"test reference: framework collection failed: {error}")
+                collected_tests = {}
+        matches = collected_tests.get(
+            (str(kind), str(raw_path), str(name), str(gate)), []
+        )
+        if len(matches) != 1:
+            errors.append(
+                f"test reference: {raw_path}::{name} must be collected exactly once "
+                f"by {gate} (found {len(matches)})"
+            )
+        elif matches[0].get("disabled"):
+            disabled = ", ".join(str(value) for value in matches[0]["disabled"])
+            errors.append(
+                f"test reference: {raw_path}::{name} is disabled by {disabled}"
+            )
     if errors:
         raise ModuleVerificationError(errors)
     return {
@@ -519,12 +538,15 @@ def _validate_payload(
     payload: dict[str, Any],
     project_root: Path,
     registered_gates: set[str],
+    collected_tests: Mapping[
+        tuple[str, str, str, str], list[dict[str, Any]]
+    ],
 ) -> list[str]:
     errors: list[str] = []
     exact_top = _field_errors(payload, TOP_LEVEL_FIELDS, "contract", errors)
-    if payload.get("schema_version") != SCHEMA_VERSION or isinstance(
-        payload.get("schema_version"), bool
-    ):
+    if type(payload.get("schema_version")) is not int or payload.get(
+        "schema_version"
+    ) != SCHEMA_VERSION:
         errors.append(f"contract: schema_version must equal {SCHEMA_VERSION}")
     if payload.get("contract_id") != CONTRACT_ID:
         errors.append(f"contract: contract_id must equal {CONTRACT_ID}")
@@ -671,7 +693,7 @@ def _validate_payload(
                 errors.append(f"{scoped_case_id}: required_gates entries must be strings")
             if len(valid_required_gates) != len(set(valid_required_gates)):
                 errors.append(f"{scoped_case_id}: required_gates must not contain duplicates")
-            for gate in set(valid_required_gates):
+            for gate in sorted(set(valid_required_gates)):
                 if gate not in registered_gates:
                     errors.append(f"{scoped_case_id}: unregistered required gate {gate}")
 
@@ -712,6 +734,7 @@ def _validate_payload(
                         project_root,
                         reference,
                         registered_gates=registered_gates,
+                        collected_tests=collected_tests,
                     )
                 except ModuleVerificationError as error:
                     errors.extend(f"{reference_label}: {detail}" for detail in error.details)
@@ -769,6 +792,9 @@ def validate_module_contract(
     config: Mapping[str, Any],
     *,
     contract_path: str | Path | None = None,
+    collected_tests: Mapping[
+        tuple[str, str, str, str], list[dict[str, Any]]
+    ] | None = None,
 ) -> tuple[dict[str, Any], list[str]]:
     """Load and validate the complete contract without hiding any defects.
 
@@ -779,12 +805,25 @@ def validate_module_contract(
     del harness_root
     errors: list[str] = []
     registered_gates = _registered_gates(config, errors)
+    if collected_tests is None:
+        try:
+            collected_tests = collect_test_index(project_root, config)
+        except TestCollectionError as error:
+            errors.append(f"test collection: {error}")
+            collected_tests = {}
     try:
         payload = load_module_contract(project_root, contract_path)
     except ModuleVerificationError as error:
         errors.extend(error.details)
         return {}, errors
-    errors.extend(_validate_payload(payload, project_root.resolve(), registered_gates))
+    errors.extend(
+        _validate_payload(
+            payload,
+            project_root.resolve(),
+            registered_gates,
+            collected_tests,
+        )
+    )
     return payload, errors
 
 
@@ -793,11 +832,28 @@ def resolve_module_contract(
     *,
     registered_gates: Collection[str],
     contract_path: str | Path | None = None,
+    config: Mapping[str, Any] | None = None,
+    collected_tests: Mapping[
+        tuple[str, str, str, str], list[dict[str, Any]]
+    ] | None = None,
 ) -> dict[str, Any]:
     """Validate and return a compact, reusable resolved representation."""
 
     payload = load_module_contract(project_root, contract_path)
-    errors = _validate_payload(payload, project_root.resolve(), set(registered_gates))
+    if collected_tests is None:
+        try:
+            collected_tests = collect_test_index(
+                project_root,
+                config if config is not None else load_config(),
+            )
+        except TestCollectionError as error:
+            raise ModuleVerificationError(f"test collection: {error}") from error
+    errors = _validate_payload(
+        payload,
+        project_root.resolve(),
+        set(registered_gates),
+        collected_tests,
+    )
     if errors:
         raise ModuleVerificationError(errors)
     indexed_cases = case_index(payload)

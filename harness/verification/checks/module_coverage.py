@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Any
 
@@ -21,10 +22,17 @@ MAX_FAILURE_DETAILS = 12
 
 
 def _compact(errors: list[str]) -> list[str]:
-    if len(errors) <= MAX_FAILURE_DETAILS:
-        return errors
-    omitted = len(errors) - MAX_FAILURE_DETAILS
-    return [*errors[:MAX_FAILURE_DETAILS], f"... {omitted} additional defects omitted"]
+    sanitized = [
+        re.sub(r"\s+", " ", re.sub(r"[\x00-\x1f\x7f]", " ", str(error))).strip()[:280]
+        for error in errors
+    ]
+    if len(sanitized) <= MAX_FAILURE_DETAILS:
+        return sanitized
+    omitted = len(sanitized) - MAX_FAILURE_DETAILS
+    return [
+        *sanitized[:MAX_FAILURE_DETAILS],
+        f"... {omitted} additional defects omitted",
+    ]
 
 
 def run(context: dict[str, Any]) -> dict[str, Any]:

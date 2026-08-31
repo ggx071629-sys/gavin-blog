@@ -57,7 +57,9 @@ def _write_spec(path: Path, metadata: dict[str, object]) -> None:
         "# Goal\n\nFixture.\n\n"
         "# Non-goals\n\nFixture.\n\n"
         "# Acceptance criteria\n\n- AC-1: Fixture.\n\n"
-        "# Verification plan\n\n- harness-tests => AC-1\n",
+        "# Verification plan\n\n"
+        "## Verification cases\n\n- AC-1 => M08-TRACE-01\n\n"
+        "## Gates\n\n- harness-tests => AC-1\n",
         encoding="utf-8",
     )
 

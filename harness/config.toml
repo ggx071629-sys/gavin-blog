@@ -26,6 +26,7 @@ optional = [
   "frozen_scope_sha256",
   "verification_profile",
   "verification_escalation",
+  "planned_modules",
   "documentation_impact",
   "documentation_targets",
   "documentation_reason",

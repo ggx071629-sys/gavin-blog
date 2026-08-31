@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from collections.abc import Callable
@@ -48,9 +49,11 @@ def command_index(_: argparse.Namespace) -> int:
     return 0
 
 
-def command_verify(args: argparse.Namespace) -> int:
-    if args.task_id:
-        summarizer.validate_task_id(args.task_id)
+def _execute_verification(
+    task_id: str | None,
+    *,
+    observe_telemetry: bool = True,
+) -> tuple[list[dict[str, object]], Path | None]:
     results = validator.run_checks()
     criteria: list[str] = []
     mappings: dict[str, list[str]] = {}
@@ -59,8 +62,8 @@ def command_verify(args: argparse.Namespace) -> int:
     documentation: dict[str, object] = {}
     execution: dict[str, object] = {}
     verification_cases: dict[str, object] = {}
-    if args.task_id:
-        if lifecycle.task_status(args.task_id) == "frozen":
+    if task_id:
+        if lifecycle.task_status(task_id) == "frozen":
             results.append(
                 {
                     "name": "task-lifecycle",
@@ -71,29 +74,29 @@ def command_verify(args: argparse.Namespace) -> int:
                     "duration_ms": 0,
                     "covers": [],
                     "details": [
-                        f"{args.task_id} is frozen; resume it before task verification"
+                        f"{task_id} is frozen; resume it before task verification"
                     ],
                 }
             )
         else:
             try:
-                summarizer.ensure_spec_in_git_history(summarizer.active_spec(args.task_id))
-                criteria, mappings = product_verification.verification_contract(args.task_id)
-                profile = product_verification.verification_profile(args.task_id)
+                summarizer.ensure_spec_in_git_history(summarizer.active_spec(task_id))
+                criteria, mappings = product_verification.verification_contract(task_id)
+                profile = product_verification.verification_profile(task_id)
                 product_verification.validate_configured_gates(
                     mappings,
                     profile,
-                    args.task_id,
+                    task_id,
                     criteria,
                 )
-                documentation = product_verification.documentation_report(args.task_id)
+                documentation = product_verification.documentation_report(task_id)
                 verification_cases = product_verification.resolved_verification_cases(
-                    args.task_id,
+                    task_id,
                     criteria,
                     mappings,
                 )
                 fingerprints = product_verification.evidence_fingerprints(
-                    args.task_id,
+                    task_id,
                     criteria,
                     mappings,
                     profile,
@@ -124,10 +127,11 @@ def command_verify(args: argparse.Namespace) -> int:
                     }
                 )
     _print_results(results)
-    if args.task_id:
+    evidence: Path | None = None
+    if task_id:
         evidence = validator.write_task_evidence(
-            args.task_id,
-            f"python -m tools.harness verify {args.task_id}",
+            task_id,
+            f"python -m tools.harness verify {task_id}",
             criteria,
             mappings,
             profile,
@@ -138,9 +142,12 @@ def command_verify(args: argparse.Namespace) -> int:
             verification_cases,
         )
         print(f"evidence {evidence}")
-        if evidence.resolve() == validator.evidence_path(args.task_id).resolve():
+        if (
+            observe_telemetry
+            and evidence.resolve() == validator.evidence_path(task_id).resolve()
+        ):
             telemetry_error = telemetry.observe_task_verification_safely(
-                args.task_id,
+                task_id,
                 profile,
                 execution,
                 results,
@@ -151,15 +158,22 @@ def command_verify(args: argparse.Namespace) -> int:
                     f"warning: telemetry observation failed: {telemetry_error}",
                     file=sys.stderr,
                 )
-        if lifecycle.task_status(args.task_id) == "frozen":
+        if lifecycle.task_status(task_id) == "frozen":
             print("task state frozen")
         else:
-            state = product_verification.derived_task_state(args.task_id, evidence)
+            state = product_verification.derived_task_state(task_id, evidence)
             print(f"task state {state}")
         if not validator.passed(results):
-            hint = _repeated_failure_hint(args.task_id)
+            hint = _repeated_failure_hint(task_id)
             if hint:
                 print(hint, file=sys.stderr)
+    return results, evidence
+
+
+def command_verify(args: argparse.Namespace) -> int:
+    if args.task_id:
+        summarizer.validate_task_id(args.task_id)
+    results, _ = _execute_verification(args.task_id)
     return 0 if validator.passed(results) else 1
 
 
@@ -203,9 +217,28 @@ def command_spec_lint(args: argparse.Namespace) -> int:
     return 1 if failed else 0
 
 
-def _preflight_close(task_ids: list[str]) -> bool:
+def _refresh_task_evidence(task_id: str) -> bool:
+    results, evidence = _execute_verification(
+        task_id,
+        observe_telemetry=False,
+    )
+    return validator.passed(results) and evidence is not None
+
+
+def _evidence_sha256(task_id: str) -> str:
+    return hashlib.sha256(validator.evidence_path(task_id).read_bytes()).hexdigest()
+
+
+def _preflight_close(task_ids: list[str], *, refresh_evidence: bool = True) -> bool:
     valid = True
     for task_id in task_ids:
+        if refresh_evidence and not _refresh_task_evidence(task_id):
+            valid = False
+            print(
+                f"close aborted: fresh verification failed for {task_id}",
+                file=sys.stderr,
+            )
+            continue
         evidence_errors = product_verification.validate_evidence(
             task_id,
             validator.evidence_path(task_id),
@@ -218,10 +251,14 @@ def _preflight_close(task_ids: list[str]) -> bool:
     return valid
 
 
-def _close_preflight(task_ids: list[str]) -> list[tuple[str, Path, str, Path]] | None:
-    if not _preflight_close(task_ids):
+def _close_preflight(
+    task_ids: list[str],
+    *,
+    refresh_evidence: bool = True,
+) -> list[tuple[str, Path, str, Path, str]] | None:
+    if not _preflight_close(task_ids, refresh_evidence=refresh_evidence):
         return None
-    snapshots: list[tuple[str, Path, str, Path]] = []
+    snapshots: list[tuple[str, Path, str, Path, str]] = []
     try:
         for task_id in task_ids:
             source = summarizer.active_spec(task_id)
@@ -231,8 +268,15 @@ def _close_preflight(task_ids: list[str]) -> list[tuple[str, Path, str, Path]] |
                 raise FileExistsError(f"archive already exists: {archive}")
             if event_path.exists():
                 raise FileExistsError(f"event already exists: {event_path}")
+            evidence_sha256 = _evidence_sha256(task_id)
             snapshots.append(
-                (task_id, archive, source.read_text(encoding="utf-8"), event_path)
+                (
+                    task_id,
+                    archive,
+                    source.read_text(encoding="utf-8"),
+                    event_path,
+                    evidence_sha256,
+                )
             )
     except (OSError, ValueError) as error:
         print(f"close aborted: {error}", file=sys.stderr)
@@ -250,17 +294,25 @@ def _close_tasks(task_ids: list[str]) -> int:
     if snapshots is None:
         return 1
 
-    attempted: list[tuple[str, Path, str, Path]] = []
+    attempted: list[tuple[str, Path, str, Path, str]] = []
     try:
-        for task_id, expected_archive, source_text, expected_event in snapshots:
-            attempted.append((task_id, expected_archive, source_text, expected_event))
-            archive, source_text = summarizer.close_spec(task_id)
+        for task_id, expected_archive, source_text, expected_event, evidence_sha256 in snapshots:
+            attempted.append(
+                (task_id, expected_archive, source_text, expected_event, evidence_sha256)
+            )
+            if _evidence_sha256(task_id) != evidence_sha256:
+                raise RuntimeError(f"task evidence changed during close: {task_id}")
+            archive, source_text = summarizer.close_spec(
+                task_id,
+                evidence_sha256=evidence_sha256,
+            )
             event_path, proposal_path = events.emit_event(
                 "spec.completed",
                 task_id,
                 "The active spec passed verification and was deterministically compressed.",
                 "lifecycle",
                 create_proposal=False,
+                evidence_sha256=evidence_sha256,
             )
             if proposal_path is not None:
                 raise RuntimeError("spec.completed must not create a proposal")
@@ -271,14 +323,14 @@ def _close_tasks(task_ids: list[str]) -> int:
         if not validator.passed(after):
             raise RuntimeError("post-close verification failed")
         _print_results(after)
-        for task_id, archive, _, event_path in snapshots:
+        for task_id, archive, _, event_path, _ in snapshots:
             print(f"archive {archive}")
             print(f"evidence {validator.evidence_path(task_id)}")
             print(f"event {event_path}")
         return 0
     except Exception as error:
         rollback_errors: list[str] = []
-        for task_id, archive, source_text, event_path in reversed(attempted):
+        for task_id, archive, source_text, event_path, _ in reversed(attempted):
             try:
                 summarizer.restore_spec(task_id, source_text, archive)
             except OSError as rollback_error:
@@ -325,7 +377,7 @@ def command_close_all(args: argparse.Namespace) -> int:
         return 0
     print(f"preflight {len(active)} active spec(s)")
     if bool(getattr(args, "dry_run", False)):
-        snapshots = _close_preflight(active)
+        snapshots = _close_preflight(active, refresh_evidence=False)
         if snapshots is None:
             return 1
         print(f"dry-run ready: {len(snapshots)} active spec(s) can close atomically")

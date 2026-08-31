@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -99,6 +100,7 @@ def emit_event(
     *,
     create_proposal: bool = True,
     evidence_runs: list[dict[str, Any]] | None = None,
+    evidence_sha256: str | None = None,
 ) -> tuple[Path, Path | None]:
     config = load_config()
     validate_task_id(task_id)
@@ -108,6 +110,11 @@ def emit_event(
     if source == "telemetry":
         raise ValueError("telemetry cannot directly trigger evolution")
     evidence_runs = _validated_evidence_runs(event_type, source, evidence_runs or [])
+    if evidence_sha256 is not None:
+        if event_type != "spec.completed":
+            raise ValueError("evidence_sha256 is only valid for spec.completed")
+        if re.fullmatch(r"[0-9a-f]{64}", evidence_sha256) is None:
+            raise ValueError("evidence_sha256 must be a lowercase SHA-256")
 
     token = event_type.replace(".", "-")
     events_dir = harness_root() / str(config["evolution"]["events"])
@@ -121,7 +128,7 @@ def emit_event(
 
     now = datetime.now(timezone.utc).isoformat()
     payload = {
-        "schema_version": 1,
+        "schema_version": 2 if evidence_sha256 is not None else 1,
         "event_type": event_type,
         "task_id": task_id,
         "created_at": now,
@@ -131,6 +138,8 @@ def emit_event(
     }
     if evidence_runs:
         payload["evidence_runs"] = evidence_runs
+    if evidence_sha256 is not None:
+        payload["evidence_sha256"] = evidence_sha256
     target_event.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",

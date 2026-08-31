@@ -67,7 +67,7 @@ def _required_section(body: str, heading: str) -> str:
     return section
 
 
-def close_spec(task_id: str) -> tuple[Path, str]:
+def close_spec(task_id: str, *, evidence_sha256: str | None = None) -> tuple[Path, str]:
     config = load_config()
     source = active_spec(task_id)
     if not source.is_file():
@@ -109,6 +109,9 @@ def close_spec(task_id: str) -> tuple[Path, str]:
                 f"  - {value}" for value in documentation_targets
             ) + "\n"
         documentation_lines += f"documentation_reason: {documentation_reason}\n"
+    evidence_digest_line = (
+        f"evidence_sha256: {evidence_sha256}\n" if evidence_sha256 is not None else ""
+    )
     content = (
         "---\n"
         f"id: archive-{task_id}\n"
@@ -120,6 +123,7 @@ def close_spec(task_id: str) -> tuple[Path, str]:
         f"task_id: {task_id}\n"
         "status: compressed\n"
         f"{documentation_lines}"
+        f"{evidence_digest_line}"
         f"{history_lines}"
         "---\n\n"
         f"# {task_id}\n\n"
@@ -132,7 +136,12 @@ def close_spec(task_id: str) -> tuple[Path, str]:
         "Verified and closed by the harness close command.\n\n"
         "## Evidence\n\n"
         f"[{task_id}.json](../../verification/evidence/{task_id}.json)\n\n"
-        f"Closed at {datetime.now(timezone.utc).isoformat()}.\n"
+        + (
+            f"SHA-256: `{evidence_sha256}`\n\n"
+            if evidence_sha256 is not None
+            else ""
+        )
+        + f"Closed at {datetime.now(timezone.utc).isoformat()}.\n"
     )
     archive.write_text(content, encoding="utf-8", newline="\n")
     source.unlink()

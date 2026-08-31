@@ -205,6 +205,7 @@ def run_in_worktree(
                 "duration_ms": isolation_duration_ms,
                 "covers": [],
                 "details": ["temporary worktree and dependency links were removed"],
+                "result": {"exit_code": 0},
             }
         )
     return results, context

@@ -16,8 +16,12 @@ from typing import Any
 from .config import load_config, project_root
 from .lifecycle import LifecycleError
 from .lifecycle import documentation_contract as parse_documentation_contract
-from .metadata import parse_front_matter
-from .module_verification import ModuleVerificationError, resolve_module_contract
+from .metadata import parse_front_matter, values_as_list
+from .module_verification import (
+    EXPECTED_MODULE_IDS,
+    ModuleVerificationError,
+    resolve_module_contract,
+)
 from .qualification import validate_task_qualification
 from .result_reporting import (
     failure_details,
@@ -27,20 +31,40 @@ from .result_reporting import (
     summarize_criteria,
 )
 from .summarizer import active_spec
+from .verification_config import TOKEN_PATTERN, required_check_names
 
 CRITERION_PATTERN = re.compile(r"^-\s+(AC-[1-9][0-9]*):\s+\S", re.MULTILINE)
 GATE_PATTERN = re.compile(
     r"^-\s+([a-z0-9]+(?:-[a-z0-9]+)*)\s+=>\s+(AC-[1-9][0-9]*(?:\s*,\s*AC-[1-9][0-9]*)*)\s*$",
     re.MULTILINE,
 )
-CASE_ID_PATTERN = re.compile(r"^M(?:0[1-9]|10)-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
+MODULE_ID_PATTERN = re.compile(r"^M(?:0[1-9]|[1-9][0-9]+)$")
+CASE_ID_PATTERN = re.compile(r"^M(?:0[1-9]|[1-9][0-9]+)-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
 CASE_MAPPING_PATTERN = re.compile(
     r"^-\s+(AC-[1-9][0-9]*)\s+=>\s+"
-    r"(M(?:0[1-9]|10)-[A-Z0-9]+(?:-[A-Z0-9]+)*"
-    r"(?:\s*,\s*M(?:0[1-9]|10)-[A-Z0-9]+(?:-[A-Z0-9]+)*)*)\s*$"
+    r"(M(?:0[1-9]|[1-9][0-9]+)-[A-Z0-9]+(?:-[A-Z0-9]+)*"
+    r"(?:\s*,\s*M(?:0[1-9]|[1-9][0-9]+)-[A-Z0-9]+(?:-[A-Z0-9]+)*)*)\s*$"
 )
-TOKEN_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SUBSUMPTION_PROOF_PREFIX = "HARNESS_RELEASE_PROOF "
+TASK_EVIDENCE_FIELDS = frozenset(
+    {
+        "schema_version",
+        "task_id",
+        "created_at",
+        "command",
+        "status",
+        "acceptance_criteria",
+        "criteria_results",
+        "verification_profile",
+        "fingerprints",
+        "documentation",
+        "execution",
+        "verification_cases",
+        "checks",
+        "summary",
+        "source_commit",
+    }
+)
 
 
 class ProductVerificationError(ValueError):
@@ -64,13 +88,42 @@ def _section(body: str, heading: str) -> str:
     return content
 
 
+def _verification_plan_sections(body: str) -> tuple[str, str]:
+    plan_matches = list(
+        re.finditer(r"^# Verification plan[ \t]*$", body, re.MULTILINE)
+    )
+    if len(plan_matches) != 1:
+        raise ProductVerificationError(
+            "Verification plan must occur exactly once as a level-1 section"
+        )
+    plan_match = plan_matches[0]
+    next_h1 = re.search(r"^# [^#]", body[plan_match.end() :], re.MULTILINE)
+    plan_end = (
+        plan_match.end() + next_h1.start() if next_h1 is not None else len(body)
+    )
+    plan = body[plan_match.end() : plan_end]
+    headings = list(re.finditer(r"^## ([^#\r\n]+?)[ \t]*$", plan, re.MULTILINE))
+    names = [match.group(1).strip() for match in headings]
+    if names != ["Verification cases", "Gates"]:
+        raise ProductVerificationError(
+            "Verification plan must contain exactly '## Verification cases' then '## Gates'"
+        )
+    cases = plan[headings[0].end() : headings[1].start()].strip()
+    gates = plan[headings[1].end() :].strip()
+    if not cases or not gates:
+        raise ProductVerificationError(
+            "Verification cases and Gates must both be non-empty"
+        )
+    return cases, gates
+
+
 def verification_contract(task_id: str) -> tuple[list[str], dict[str, list[str]]]:
     path = active_spec(task_id)
     if not path.is_file():
         raise ProductVerificationError(f"active spec not found: {path}")
     _, body = parse_front_matter(path)
     acceptance = _section(body, "Acceptance criteria")
-    verification = _section(body, "Verification plan")
+    _, verification = _verification_plan_sections(body)
 
     criteria = CRITERION_PATTERN.findall(acceptance)
     if not criteria:
@@ -114,8 +167,14 @@ def verification_case_plan(
     path = active_spec(task_id)
     if not path.is_file():
         raise ProductVerificationError(f"active spec not found: {path}")
-    _, body = parse_front_matter(path)
-    case_section = _section(body, "Verification cases")
+    metadata, body = parse_front_matter(path)
+    case_section, _ = _verification_plan_sections(body)
+    planned_modules = values_as_list(metadata.get("planned_modules"))
+    if any(not MODULE_ID_PATTERN.fullmatch(value) for value in planned_modules):
+        raise ProductVerificationError("planned_modules must contain stable module IDs")
+    if len(planned_modules) != len(set(planned_modules)):
+        raise ProductVerificationError("planned_modules must not contain duplicates")
+    allowed_modules = set(EXPECTED_MODULE_IDS) | set(planned_modules)
     known = set(criteria if criteria is not None else verification_contract(task_id)[0])
     mappings: dict[str, list[str]] = {}
     for line in case_section.splitlines():
@@ -140,6 +199,13 @@ def verification_case_plan(
         if not all(CASE_ID_PATTERN.fullmatch(case_id) for case_id in case_ids):
             raise ProductVerificationError(
                 f"Verification cases contains an invalid case ID for {criterion}"
+            )
+        case_modules = {case_id.split("-", 1)[0] for case_id in case_ids}
+        unknown_modules = sorted(case_modules - allowed_modules)
+        if unknown_modules:
+            raise ProductVerificationError(
+                "Verification cases references modules that are neither current nor planned: "
+                + ", ".join(unknown_modules)
             )
         mappings[criterion] = case_ids
     if not mappings:
@@ -230,21 +296,10 @@ def _configured_gates() -> dict[str, Any]:
 
 
 def required_task_checks() -> list[str]:
-    raw = load_config().get("verification", {}).get("required_task_checks", [])
-    if (
-        not isinstance(raw, list)
-        or not raw
-        or not all(isinstance(value, str) and TOKEN_PATTERN.fullmatch(value) for value in raw)
-    ):
-        raise ProductVerificationError(
-            "verification.required_task_checks must be a non-empty array of check names"
-        )
-    values = [str(value) for value in raw]
-    if len(values) != len(set(values)):
-        raise ProductVerificationError(
-            "verification.required_task_checks must not contain duplicates"
-        )
-    return values
+    try:
+        return required_check_names(load_config())
+    except ValueError as error:
+        raise ProductVerificationError(str(error)) from error
 
 
 def _load_subsumption_contract(
@@ -989,7 +1044,16 @@ def _run_supervised_command(
         try:
             for line in iter(stream.readline, ""):
                 chunks.append(line)
-                sys.stdout.write(line)
+                try:
+                    sys.stdout.write(line)
+                except UnicodeEncodeError:
+                    encoding = sys.stdout.encoding or "utf-8"
+                    safe = line.encode(encoding, errors="backslashreplace")
+                    output_buffer = getattr(sys.stdout, "buffer", None)
+                    if output_buffer is not None:
+                        output_buffer.write(safe)
+                    else:  # pragma: no cover - StringIO-style fallback
+                        sys.stdout.write(safe.decode(encoding))
                 sys.stdout.flush()
         finally:
             stream.close()
@@ -1027,6 +1091,15 @@ def _verified_subsumption(contract: dict[str, Any]) -> dict[str, Any]:
             for item in contract["stages"]
         ],
     }
+
+
+def _configured_command_text(definition: dict[str, Any]) -> str:
+    raw = definition.get("command")
+    if not isinstance(raw, list) or not raw or not all(
+        isinstance(value, str) and value for value in raw
+    ):
+        raise ProductVerificationError("gate command must be a non-empty argv array")
+    return subprocess.list2cmdline(raw)
 
 
 def _parse_subsumption_proof(
@@ -1142,7 +1215,7 @@ def run_gates(
             result = {
                 "name": gate,
                 "kind": "product",
-                "command": subprocess.list2cmdline(command),
+                "command": _configured_command_text(dict(configured[gate])),
                 "status": "passed" if passed else "failed",
                 "passed": passed,
                 "duration_ms": duration_ms,
@@ -1204,6 +1277,15 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
         return [f"task evidence is unreadable: {error}"]
     if not isinstance(payload, dict):
         return ["task evidence must be a JSON object"]
+    missing_fields = sorted(TASK_EVIDENCE_FIELDS - set(payload))
+    unexpected_fields = sorted(set(payload) - TASK_EVIDENCE_FIELDS)
+    if missing_fields:
+        errors.append("task evidence missing fields: " + ", ".join(missing_fields))
+    if unexpected_fields:
+        errors.append(
+            "task evidence contains unexpected fields: "
+            + ", ".join(unexpected_fields)
+        )
 
     try:
         criteria, mappings = verification_contract(task_id)
@@ -1223,7 +1305,7 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
         errors.append(str(error))
         return errors
 
-    if payload.get("schema_version") != 2:
+    if type(payload.get("schema_version")) is not int or payload.get("schema_version") != 2:
         errors.append("task evidence schema_version must be 2")
     if payload.get("task_id") != task_id:
         errors.append("task evidence task_id does not match")
@@ -1285,6 +1367,8 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
         ]
         if len(isolation) != 1 or isolation[0].get("name") != "isolated-worktree":
             errors.append("task evidence must contain one passed isolated-worktree check")
+        elif isolation[0].get("result") != {"exit_code": 0}:
+            errors.append("task evidence isolated-worktree result must have exit_code 0")
         for required_name in required_task_checks():
             required_matches = [
                 check
@@ -1320,10 +1404,22 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
                 check = product[gate]
                 if check.get("covers") != covered:
                     errors.append(f"task evidence coverage does not match for gate {gate}")
-                if not check.get("command"):
-                    errors.append(f"task evidence command missing for gate {gate}")
-                contract = _load_subsumption_contract(gate, _configured_gates())
+                configured = _configured_gates()
+                expected_command = _configured_command_text(dict(configured[gate]))
+                if check.get("command") != expected_command:
+                    errors.append(f"task evidence command does not match for gate {gate}")
+                contract = _load_subsumption_contract(gate, configured)
                 result = check.get("result")
+                if not isinstance(result, dict):
+                    errors.append(f"task evidence result missing for gate {gate}")
+                elif (
+                    type(result.get("exit_code")) is not int
+                    or result.get("exit_code") != 0
+                    or "failure" in result
+                ):
+                    errors.append(
+                        f"task evidence result must record zero exit for gate {gate}"
+                    )
                 actual_subsumption = (
                     result.get("subsumption") if isinstance(result, dict) else None
                 )

@@ -37,9 +37,10 @@ def _write_spec(
         "# Acceptance criteria\n\n"
         "- AC-1: First observable outcome.\n"
         "- AC-2: Second observable outcome.\n\n"
-        "# Verification cases\n\n"
-        f"{cases}\n\n"
         "# Verification plan\n\n"
+        "## Verification cases\n\n"
+        f"{cases}\n\n"
+        "## Gates\n\n"
         f"{plan}\n",
         encoding="utf-8",
     )
@@ -429,6 +430,8 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
     payload = {
         "schema_version": 2,
         "task_id": TASK_ID,
+        "created_at": "2026-08-12T00:00:00+00:00",
+        "command": f"python -m tools.harness verify {TASK_ID}",
         "status": "passed",
         "source_commit": "abc123",
         "acceptance_criteria": ["AC-1", "AC-2"],
@@ -471,6 +474,7 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
                 "command": "python -m pytest",
                 "status": "passed",
                 "covers": ["AC-1", "AC-2"],
+                "result": {"exit_code": 0},
             },
             {
                 "name": "isolated-worktree",
@@ -478,6 +482,7 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
                 "command": "git worktree add --detach <temporary> HEAD",
                 "status": "passed",
                 "covers": [],
+                "result": {"exit_code": 0},
             },
             {
                 "name": "module-coverage",
@@ -515,6 +520,21 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
     )
     monkeypatch.setattr(product_verification, "head_commit", lambda: "abc123")
     monkeypatch.setattr(product_verification, "ensure_source_clean", lambda *_: None)
+    monkeypatch.setattr(
+        product_verification,
+        "_configured_gates",
+        lambda: {
+            "harness-tests": {
+                "cwd": ".",
+                "command": ["python", "-m", "pytest"],
+            }
+        },
+    )
+    monkeypatch.setattr(
+        product_verification,
+        "_command",
+        lambda *_args, **_kwargs: (["python", "-m", "pytest"], tmp_path, 900),
+    )
 
     assert product_verification.validate_evidence(TASK_ID, evidence) == []
 
@@ -579,6 +599,52 @@ def test_close_evidence_requires_current_head_complete_coverage_and_clean_source
         TASK_ID,
         evidence,
     )
+
+
+def test_m08_evidence_01_rejects_forged_gate_result(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    test_close_evidence_requires_current_head_complete_coverage_and_clean_source(
+        tmp_path,
+        monkeypatch,
+    )
+
+
+def test_m08_spec_01_enforces_nested_plan_and_planned_modules(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    spec = _write_spec(
+        tmp_path / f"{TASK_ID}.md",
+        cases="- AC-1 => M11-FUTURE-01\n- AC-2 => M08-TRACE-02",
+    )
+    monkeypatch.setattr(product_verification, "active_spec", lambda _: spec)
+
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="neither current nor planned: M11",
+    ):
+        product_verification.verification_case_plan(TASK_ID, ["AC-1", "AC-2"])
+
+    text = spec.read_text(encoding="utf-8").replace(
+        "verification_profile: focused\n",
+        "verification_profile: focused\nplanned_modules:\n  - M11\n",
+    )
+    spec.write_text(text, encoding="utf-8")
+    assert product_verification.verification_case_plan(
+        TASK_ID, ["AC-1", "AC-2"]
+    )["AC-1"] == ["M11-FUTURE-01"]
+
+    spec.write_text(
+        text.replace("## Verification cases", "# Verification cases"),
+        encoding="utf-8",
+    )
+    with pytest.raises(
+        product_verification.ProductVerificationError,
+        match="must contain exactly",
+    ):
+        product_verification.verification_contract(TASK_ID)
 
 
 def test_profile_requires_its_minimum_registered_gates(

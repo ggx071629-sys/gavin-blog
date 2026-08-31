@@ -13,6 +13,7 @@ from typing import Any
 
 from .config import harness_root, load_config, project_root
 from .result_reporting import summarize_checks, summarize_criteria
+from .verification_config import required_check_names
 
 
 def _load_check(path: Path) -> ModuleType:
@@ -52,20 +53,11 @@ def run_checks() -> list[dict[str, Any]]:
             }
         result["duration_ms"] = round((time.perf_counter() - started) * 1000, 3)
         results.append(result)
-    required = config.get("verification", {}).get("required_task_checks", [])
     registration_errors: list[str] = []
-    if (
-        not isinstance(required, list)
-        or not required
-        or not all(isinstance(name, str) and name for name in required)
-    ):
-        registration_errors.append(
-            "verification.required_task_checks must be a non-empty string array"
-        )
-    elif len(required) != len(set(required)):
-        registration_errors.append(
-            "verification.required_task_checks must not contain duplicates"
-        )
+    try:
+        required = required_check_names(config)
+    except ValueError as error:
+        registration_errors.append(str(error))
     else:
         counts = Counter(str(result.get("name", "")) for result in results)
         for name in required:
