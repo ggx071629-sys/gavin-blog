@@ -8,6 +8,7 @@ author: Codex
 task_id: 20260831-module-verification-contract
 status: active
 verification_profile: release
+verification_escalation: 模块合同进入 task evidence 与 Gate 覆盖计算，必须用完整 release 证明现有 API、Web、E2E 和 Harness 子门禁仍被同一包门禁实际执行。
 documentation_impact: required
 documentation_targets:
   - harness/verification/README.md
