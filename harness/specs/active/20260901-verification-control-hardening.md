@@ -8,6 +8,7 @@ author: Codex
 task_id: 20260901-verification-control-hardening
 status: active
 verification_profile: release
+verification_escalation: 完整修复会改动 Gate 命令绑定、历史 evidence 与跨栈模块测试合同，最终必须执行 release 证明不存在控制面或产品回归。
 documentation_impact: required
 documentation_targets:
   - harness/verification/README.md
