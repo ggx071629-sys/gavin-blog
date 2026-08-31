@@ -132,14 +132,19 @@ def run_in_worktree(
 
     try:
         config = isolation_config()
-        temporary_root = Path(tempfile.mkdtemp(prefix="gavin-task-verify-"))
+        root = project_root().resolve()
+        temporary_root = Path(
+            tempfile.mkdtemp(
+                prefix=f".{root.name}-task-verify-",
+                dir=root.parent,
+            )
+        )
         worktree = temporary_root / "worktree"
         added = _run_git("worktree", "add", "--detach", str(worktree), source_commit)
         if added.returncode != 0:
             raise ProductVerificationError("temporary Git worktree creation failed")
         registered = True
 
-        root = project_root().resolve()
         for raw_path in config["reuse_paths"]:
             relative = _relative_path(raw_path)
             source = (root / relative).resolve()

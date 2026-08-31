@@ -21,6 +21,7 @@ def test_isolated_gate_run_uses_detached_worktree_and_cleans_it(
     temporary = tmp_path / "gavin-task-verify-fixture"
     calls: list[tuple[str, ...]] = []
     gate_roots: list[Path] = []
+    mkdtemp_options: list[dict[str, object]] = []
     monkeypatch.setattr(isolated_verification, "project_root", lambda: project)
     monkeypatch.setattr(
         isolated_verification,
@@ -30,7 +31,9 @@ def test_isolated_gate_run_uses_detached_worktree_and_cleans_it(
     monkeypatch.setattr(
         isolated_verification.tempfile,
         "mkdtemp",
-        lambda **_: str(temporary.mkdir() or temporary),
+        lambda **options: str(
+            mkdtemp_options.append(options) or temporary.mkdir() or temporary
+        ),
     )
 
     def run_git(*args: str) -> subprocess.CompletedProcess[str]:
@@ -66,6 +69,9 @@ def test_isolated_gate_run_uses_detached_worktree_and_cleans_it(
     )
 
     assert gate_roots == [temporary / "worktree"]
+    assert mkdtemp_options == [
+        {"prefix": ".project-task-verify-", "dir": project.parent}
+    ]
     assert calls[0][:3] == ("worktree", "add", "--detach")
     assert ("worktree", "remove", "--force", str(temporary / "worktree")) in calls
     assert results[-1]["name"] == "isolated-worktree"
