@@ -9,7 +9,6 @@ task_id: 20260831-article-slug-validation
 status: active
 verification_profile: focused
 documentation_impact: none
-documentation_targets: []
 documentation_reason: 本任务修复既有 ASCII slug 合同下的表单校验与错误反馈，不改变长期产品、架构、API 或运维边界。
 state_history:
 ---
