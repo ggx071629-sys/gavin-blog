@@ -74,7 +74,7 @@ reuse_paths = ["node_modules", "apps/web/node_modules", "apps/api/.venv"]
 required_gates = []
 
 [verification.profiles.stack]
-required_gates = ["api-lint", "api-tests", "web-quality"]
+required_gates = ["api-lint", "api-typecheck", "api-tests", "web-quality"]
 
 [verification.profiles.release]
 required_gates = ["release"]
@@ -83,7 +83,7 @@ required_gates = ["release"]
 id = "api"
 prefixes = ["apps/api/"]
 files = []
-required_gates = ["api-lint", "api-tests"]
+required_gates = ["api-lint", "api-typecheck", "api-tests"]
 
 [[verification.risk_routes]]
 id = "web"
@@ -160,6 +160,11 @@ required_gates = ["release"]
 cwd = "apps/api"
 command = ["{api_python}", "-m", "ruff", "check", "."]
 timeout_seconds = 120
+
+[verification.gates.api-typecheck]
+cwd = "apps/api"
+command = ["{api_python}", "-m", "mypy", "app"]
+timeout_seconds = 300
 
 [verification.gates.api-tests]
 cwd = "apps/api"

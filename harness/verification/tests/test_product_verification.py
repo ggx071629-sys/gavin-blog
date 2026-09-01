@@ -1236,7 +1236,7 @@ def test_live_risk_routes_rightsize_harness_docs_control_and_release(
         (
             ["apps/api/README.md"],
             ["api"],
-            ["api-lint", "api-tests"],
+            ["api-lint", "api-typecheck", "api-tests"],
         ),
         (
             ["apps/web/README.md"],

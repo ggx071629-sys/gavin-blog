@@ -28,6 +28,7 @@ PACKAGE_SCRIPT_BINDINGS: dict[str, dict[str, str]] = {
     "package.json": {
         "quality:web": (
             "npm --workspace @gavin/web run typecheck && "
+            "npm --workspace @gavin/web run lint && "
             "npm --workspace @gavin/web run test && "
             "npm --workspace @gavin/web run build && "
             "npm --workspace @gavin/web run test:quality && "
@@ -46,7 +47,7 @@ PACKAGE_SCRIPT_BINDINGS: dict[str, dict[str, str]] = {
 }
 FILE_SHA256_BINDINGS = {
     "apps/web/scripts/run-playwright-e2e.mjs": (
-        "1d845f26c720c97688fa2621d41a6718ee1fafd57a01eba53bc82985e9195036"
+        "a1ade1a47a512853596f76e0f3685c11ef7af80c0b15e941097dd1e5c059bf2d"
     ),
 }
 
