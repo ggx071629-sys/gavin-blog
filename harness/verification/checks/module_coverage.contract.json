@@ -1031,7 +1031,7 @@
             },
             {
               "id": "M09-P1-02-E02",
-              "surface": "response",
+              "surface": "forbidden",
               "statement": "专用命令只绑定回环 Web/API，使用临时 runtime、离线 provider 和独立开发构建目录，并保留普通启动的默认关闭语义。"
             }
           ],
