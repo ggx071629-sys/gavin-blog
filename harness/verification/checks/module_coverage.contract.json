@@ -70,6 +70,78 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M01-P1-02",
+          "priority": "P1",
+          "scenario": "公开站点壳层在桌面与移动端使用同一栏目编号顺序，并在受支持窄屏保持无页面级横向溢出。",
+          "expectations": [
+            {
+              "id": "M01-P1-02-E01",
+              "surface": "user_visible",
+              "statement": "桌面与移动导航按文章、项目、读书、归档、关于的同一编号顺序呈现；移动端额外保留搜索且写作台保持独立低优先级入口。"
+            },
+            {
+              "id": "M01-P1-02-E02",
+              "surface": "forbidden",
+              "statement": "首页在 320、360、375、390、768、1024、1280 与 1440px 不得出现页面级横向溢出，移动菜单不得交换项目与读书编号。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/public-experience.spec.ts",
+              "kind": "playwright",
+              "name": "mobile menu switches from a full-screen route index to the tablet drawer at 640",
+              "gate": "e2e",
+              "covers": [
+                "M01-P1-02-E01"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/public-experience.spec.ts",
+              "kind": "playwright",
+              "name": "public chrome keeps one navigation sequence and prevents narrow overflow",
+              "gate": "e2e",
+              "covers": [
+                "M01-P1-02-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M01-P1-03",
+          "priority": "P1",
+          "scenario": "长文章首屏在保留阅读元信息和长短文差异的同时，让章节轨和正文入口尽早进入桌面视口。",
+          "expectations": [
+            {
+              "id": "M01-P1-03-E01",
+              "surface": "user_visible",
+              "statement": "1440×900 的无首图长文章保留日期、元数据、标题、摘要或操作，并把 Hero 高度控制在 400px 内。"
+            },
+            {
+              "id": "M01-P1-03-E02",
+              "surface": "forbidden",
+              "statement": "压缩 Hero 不得消除长短文差异，也不得把文章正文起点继续推到 900px 视口以下。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/article-reading.spec.ts",
+              "kind": "playwright",
+              "name": "article reading variant follows the exact Short truth table and boundaries",
+              "gate": "e2e",
+              "covers": [
+                "M01-P1-03-E01",
+                "M01-P1-03-E02"
+              ]
+            }
+          ]
         }
       ]
     },

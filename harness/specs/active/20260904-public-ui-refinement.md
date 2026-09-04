@@ -8,8 +8,10 @@ author: Codex
 task_id: 20260904-public-ui-refinement
 status: active
 verification_profile: focused
-documentation_impact: none
-documentation_reason: 本任务只修复既有公开 UI 的响应式和视觉一致性，不改变产品模块、路由、数据、API 或长期产品边界
+documentation_impact: required
+documentation_targets:
+  - apps/web/README.md
+documentation_reason: 统一移动导航顺序会更新 Web 边界文档中已明确记录的公开导航次序，其他产品边界保持不变
 state_history:
 ---
 
@@ -52,3 +54,5 @@ state_history:
 
 - web-quality => AC-1, AC-2, AC-3
 - e2e => AC-1, AC-2, AC-3
+- harness-tests => AC-1, AC-2, AC-3
+- harness-integrity => AC-1, AC-2, AC-3
