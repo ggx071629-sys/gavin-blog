@@ -519,9 +519,9 @@ def test_m08_semantics_01_resolves_the_real_repository_contract() -> None:
 
     assert resolved["counts"] == {
         "modules": 10,
-        "cases": 32,
-        "expectations": 64,
-        "test_refs": 40,
+        "cases": 34,
+        "expectations": 68,
+        "test_refs": 44,
     }
 
 
