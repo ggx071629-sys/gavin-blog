@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260905-assistant-dev-integration",
+  "created_at": "2026-09-04T21:48:25.434538+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "478a2810353dfd28ae9843684579e3d99b859dbad47315c302a4cc362a921b19"
+}

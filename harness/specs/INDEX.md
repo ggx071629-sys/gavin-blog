@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **1 active**, **1 frozen**.
+Open specifications: **0 active**, **1 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -12,7 +12,6 @@ Open specifications: **1 active**, **1 frozen**.
 | sdd-policy | — | L1 | 风险触发、短生命周期的 Spec-Driven Development 规则 | behavior-change, api-change, data-change, security-change, cross-stack-change | Gavin | [_sdd/README.md](_sdd/README.md) |
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
 | spec-20260830-public-qa-production-qualification | frozen | L1 | 用真实供应商、目标主机和可恢复基础设施证据判定公开问答是否具备生产放行资格 | task:20260830-public-qa-production-qualification | Gavin | [active/20260830-public-qa-production-qualification.md](active/20260830-public-qa-production-qualification.md) |
-| spec-20260905-assistant-dev-integration | active | L1 | 将公开问答纳入可重复、仅本机且默认安全的项目开发启动流程 | task:20260905-assistant-dev-integration | Codex | [active/20260905-assistant-dev-integration.md](active/20260905-assistant-dev-integration.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -115,3 +114,4 @@ Open specifications: **1 active**, **1 frozen**.
 | archive-20260831-module-verification-contract | compressed | L2 | 建立现行产品模块、可观察预期、具体测试引用与验证 Gate 之间的机器可校验闭环 | task:20260831-module-verification-contract | Codex | [archive/20260831-module-verification-contract.md](archive/20260831-module-verification-contract.md) |
 | archive-20260901-verification-control-hardening | compressed | L2 | 封闭模块验证、产品 Gate evidence 与历史证据中的假绿和语义错配 | task:20260901-verification-control-hardening | Codex | [archive/20260901-verification-control-hardening.md](archive/20260901-verification-control-hardening.md) |
 | archive-20260904-public-ui-refinement | compressed | L2 | 修复公开导航一致性、窄屏横溢与长文首屏比例，同时保留现有视觉身份和测试数据 | task:20260904-public-ui-refinement | Codex | [archive/20260904-public-ui-refinement.md](archive/20260904-public-ui-refinement.md) |
+| archive-20260905-assistant-dev-integration | compressed | L2 | 将公开问答纳入可重复、仅本机且默认安全的项目开发启动流程 | task:20260905-assistant-dev-integration | Codex | [archive/20260905-assistant-dev-integration.md](archive/20260905-assistant-dev-integration.md) |
