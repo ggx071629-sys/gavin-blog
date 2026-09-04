@@ -1,0 +1,54 @@
+---
+id: spec-20260904-public-ui-refinement
+level: L1
+summary: 修复公开导航一致性、窄屏横溢与长文首屏比例，同时保留现有视觉身份和测试数据
+load_when:
+  - task:20260904-public-ui-refinement
+author: Codex
+task_id: 20260904-public-ui-refinement
+status: active
+verification_profile: focused
+documentation_impact: none
+documentation_reason: 本任务只修复既有公开 UI 的响应式和视觉一致性，不改变产品模块、路由、数据、API 或长期产品边界
+state_history:
+---
+
+# Context
+
+真实运行与桌面、移动截图审查确认：公开站点的 Electric Editorial 视觉系统整体成立，但桌面与移动导航对项目和读书使用不同编号顺序；首页在 320–375px 发生横向溢出；长文章的桌面 Hero 过高，把正文入口推到首屏以下。用户明确要求只修复 UI，测试文章、Profile 链接、单技能和项目空数据均为故意保留的测试数据，不属于本任务。
+
+# Goal
+
+在不改变公开内容、认证、路由和 Electric Editorial 视觉身份的前提下，修复导航、窄屏和长文首屏的已确认 UI 缺陷，并用真实响应式浏览器检查验证结果。
+
+# Non-goals
+
+- 不修改文章、项目或 Profile 测试数据。
+- 不隐藏、移动或删除产品要求保留的桌面与移动“写作台”入口。
+- 不改变 API、数据库、认证、内容发布或助手功能。
+- 不重做主题、首页信息架构或整体视觉风格。
+
+# Acceptance criteria
+
+- AC-1: 桌面与移动公开导航从同一规范顺序呈现文章、项目、读书、归档、关于；移动端额外保留搜索，写作台入口和既有模态交互保持不变。
+- AC-2: 首页在 320、360、375、390px 视口的 `scrollWidth` 不超过 `clientWidth`，标题标记仍完整可读且保留信号色强调。
+- AC-3: 1440×900 的长文章 Hero 明显短于修复前的 32.5rem 首屏区，仍保留日期、元数据、标题、摘要/操作和长短文视觉差异，正文或章节轨在首屏可见。
+
+# Risks
+
+- 标题换行修复可能损害 390px 以上既有构图或使荧光标记断裂。
+- 压缩长文 Hero 可能让日期铭牌、标题、工具栏和可选摘要在较长内容下碰撞。
+- 合并导航数据时可能误删移动端独有搜索，或回归写作台入口、焦点循环与断点切换。
+
+# Verification plan
+
+## Verification cases
+
+- AC-1 => M01-P1-02
+- AC-2 => M01-P1-02
+- AC-3 => M01-P1-03
+
+## Gates
+
+- web-quality => AC-1, AC-2, AC-3
+- e2e => AC-1, AC-2, AC-3
