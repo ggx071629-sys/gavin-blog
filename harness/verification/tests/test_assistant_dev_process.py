@@ -22,7 +22,7 @@ def test_assistant_shutdown_stops_parent_and_descendant(tmp_path: Path) -> None:
         "  setInterval(() => {}, 1000);\n"
         "`;\n"
         "const parent = spawn(process.execPath, ['-e', parentCode], {\n"
-        "  detached: process.platform !== 'win32', windowsHide: true,\n"
+        "  detached: true, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'],\n"
         "});\n"
         "const [data] = await once(parent.stdout, 'data');\n"
         "const descendant = Number(data.toString().trim());\n"
