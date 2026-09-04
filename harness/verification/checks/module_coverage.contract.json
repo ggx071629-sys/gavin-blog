@@ -1018,6 +1018,74 @@
               "covers": ["M09-P0-02-E01", "M09-P0-02-E02"]
             }
           ]
+        },
+        {
+          "id": "M09-P1-02",
+          "priority": "P1",
+          "scenario": "官方本地开发命令复用现有内容库，并在真实页面提供离线带引用问答。",
+          "expectations": [
+            {
+              "id": "M09-P1-02-E01",
+              "surface": "user_visible",
+              "statement": "启动后公开页面显示问 Gavin 悬浮入口，针对现有已发布文章的问题返回相关中文摘录、引用与来源路径。"
+            },
+            {
+              "id": "M09-P1-02-E02",
+              "surface": "response",
+              "statement": "专用命令只绑定回环 Web/API，使用临时 runtime、离线 provider 和独立开发构建目录，并保留普通启动的默认关闭语义。"
+            }
+          ],
+          "required_gates": ["api-tests", "web-quality"],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_development.py",
+              "kind": "pytest",
+              "name": "test_local_development_uses_existing_content_and_returns_citations",
+              "gate": "api-tests",
+              "covers": ["M09-P1-02-E01"]
+            },
+            {
+              "path": "apps/web/tests/unit/assistant-development.test.ts",
+              "kind": "vitest",
+              "name": "tracked assistant development entry is loopback-only and preserves normal defaults",
+              "gate": "web-quality",
+              "covers": ["M09-P1-02-E02"]
+            }
+          ]
+        },
+        {
+          "id": "M09-P0-03",
+          "priority": "P0",
+          "scenario": "本地问答开发旁路在非开发环境、非回环来源或普通启动中保持关闭。",
+          "expectations": [
+            {
+              "id": "M09-P0-03-E01",
+              "surface": "response",
+              "statement": "API 开发配置拒绝非 development 环境和非回环 Web origin。"
+            },
+            {
+              "id": "M09-P0-03-E02",
+              "surface": "forbidden",
+              "statement": "普通 Nuxt dev/build/preview 未携带专用构建标记时不得获得直接回环代理身份或自动显示 launcher。"
+            }
+          ],
+          "required_gates": ["api-tests", "web-quality"],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_development.py",
+              "kind": "pytest",
+              "name": "test_local_development_settings_fail_closed_outside_development",
+              "gate": "api-tests",
+              "covers": ["M09-P0-03-E01"]
+            },
+            {
+              "path": "apps/web/tests/unit/assistant-development.test.ts",
+              "kind": "vitest",
+              "name": "tracked assistant development entry is loopback-only and preserves normal defaults",
+              "gate": "web-quality",
+              "covers": ["M09-P0-03-E02"]
+            }
+          ]
         }
       ]
     },
