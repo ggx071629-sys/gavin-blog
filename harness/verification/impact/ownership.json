@@ -2140,7 +2140,8 @@
         "M02-UNIT-ARTICLE-LOOP-01",
         "M02-UNIT-AUTOSAVE-01",
         "M02-UNIT-EDITOR-SAVE-CONTRACT-01",
-        "M05-OPS-MEDIA-01"
+        "M05-OPS-MEDIA-01",
+        "M07-UNIT-SITE-QUALITY-01"
       ],
       "dependents": [
         "M04.books_web",
@@ -3097,7 +3098,8 @@
         "ui-fix/PHASE-3.md",
         "ui-fix/PHASE-4.md",
         "ui-fix/PHASE-5.md",
-        "ui-fix/PHASE-6.md"
+        "ui-fix/PHASE-6.md",
+        "ui-fix/PHASE-7.md"
       ],
       "cases": [
         "M08-DOCS-01"

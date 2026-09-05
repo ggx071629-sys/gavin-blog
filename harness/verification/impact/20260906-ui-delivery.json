@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "task_id": "20260906-ui-delivery",
+  "changes": [
+    {
+      "path": "apps/web/components/WritingWorkspace.vue",
+      "owner": "M02.editing",
+      "reason": "修复预览 aria-controls 悬空目标并保持内部按需渲染；记录并回归完整发布候选。",
+      "cases": [
+        "M02-DESK-LAYOUT-01",
+        "M07-UNIT-SITE-QUALITY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "三类新建和编辑复用受控预览容器，覆盖初始与切换状态，未改变保存或发布协议。",
+          "cases": [
+            "M02-DESK-LAYOUT-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "三类新建和编辑复用受控预览容器，覆盖初始与切换状态，未改变保存或发布协议。",
+          "cases": [
+            "M02-DESK-LAYOUT-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+      "owner": "M02.editing",
+      "reason": "修复预览 aria-controls 悬空目标并保持内部按需渲染；记录并回归完整发布候选。",
+      "cases": [
+        "M02-DESK-LAYOUT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "登记第七阶段文档及已有生产矩阵覆盖，不修改执行政策。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "ui-fix/PHASE-7.md",
+      "owner": "M08.documentation",
+      "reason": "登记第七阶段文档及已有生产矩阵覆盖，不修改执行政策。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    }
+  ]
+}
