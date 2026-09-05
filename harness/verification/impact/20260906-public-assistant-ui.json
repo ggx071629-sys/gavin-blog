@@ -309,6 +309,15 @@
           "cases": []
         }
       ]
+    },
+    {
+      "path": "ui-fix/PHASE-5.md",
+      "owner": "M08.documentation",
+      "reason": "修正既有阶段五记录把忽略的本地截图当作持久 Markdown 链接导致隔离快照链接检查失败；保留本地路径与原验收事实，不纳入重型产物。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
     }
   ]
 }
