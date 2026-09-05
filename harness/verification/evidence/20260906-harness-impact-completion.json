@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
   "task_id": "20260906-harness-impact-completion",
-  "created_at": "2026-09-05T16:45:04.536965+00:00",
+  "created_at": "2026-09-05T16:48:15.999835+00:00",
   "command": "python -m tools.harness verify 20260906-harness-impact-completion --fresh",
-  "status": "failed",
+  "status": "passed",
   "acceptance_criteria": [
     "AC-1",
     "AC-2",
@@ -18,7 +18,7 @@
   "criteria_results": [
     {
       "id": "AC-1",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "harness-tests",
         "harness-integrity"
@@ -26,7 +26,7 @@
     },
     {
       "id": "AC-2",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "harness-tests",
         "harness-integrity"
@@ -34,7 +34,7 @@
     },
     {
       "id": "AC-3",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "harness-tests",
         "harness-integrity"
@@ -42,7 +42,7 @@
     },
     {
       "id": "AC-4",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "harness-tests",
         "harness-integrity"
@@ -50,7 +50,7 @@
     },
     {
       "id": "AC-5",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "harness-tests",
         "harness-integrity"
@@ -58,7 +58,7 @@
     },
     {
       "id": "AC-6",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "harness-tests",
         "harness-integrity"
@@ -66,7 +66,7 @@
     },
     {
       "id": "AC-7",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "harness-tests",
         "harness-integrity"
@@ -74,7 +74,7 @@
     },
     {
       "id": "AC-8",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "harness-tests",
         "harness-integrity"
@@ -82,7 +82,7 @@
     },
     {
       "id": "AC-9",
-      "status": "not-run",
+      "status": "passed",
       "gates": [
         "harness-integrity"
       ]
@@ -90,10 +90,10 @@
   ],
   "verification_profile": "focused",
   "fingerprints": {
-    "source_tree": "9ee336c3134904d9e06afdeadfbfe183d816b817",
+    "source_tree": "80162f8db8d1b71992437301c3e3c5b89a1d2edf",
     "active_spec_sha256": "42be9ee2348dbe335b6eb836c248cbc6aba1c7bd414bb5c4a1382faacccb6c5a",
     "verification_contract_sha256": "401cc148c152d2705364fc658dc957d2b389475a911e9b1f34a73115e8d79c87",
-    "gate_config_sha256": "cb0e183da321c39e38f718cf378757f1f0a9a8fae2f519f51ce090d4603c505d",
+    "gate_config_sha256": "b6020946ce2655e801298d4728f39cb7ddafe4acf7e7daad3d905e10d44a7a2b",
     "documentation_contract_sha256": "7feb53f27814c748abe597d896eedd1060212e28a80043ae9f50d2fdeda0ecf1",
     "documentation_targets_sha256": "aaa6d5cbd56f1715d0deaf8a49c4602331753b76c90dbcf3c189eedba118cb56",
     "module_contract_sha256": "7b486107d41b7bdb2e93d9d647a3fe2ab8a0d1edf9e537bef414b5d8bcb7041c"
@@ -115,12 +115,12 @@
   },
   "execution": {
     "mode": "git-worktree",
-    "source_commit": "44b39ba123cb20b53c0cbd954f8adf4cb6e0563a",
+    "source_commit": "d7ee41a3da998c7d6b1bc17ad4c45b8e40019c5f",
     "cleanup_status": "passed",
     "reused_paths": 1,
     "impact": {
       "plan": "harness/verification/impact/20260906-harness-impact-completion.json",
-      "sha256": "db305d143fe08acf9c015fd96b719310346fc9ddc46134d1f56e817908734fbf",
+      "sha256": "2fc6ce51cf66f797bf4a1533035daa9a6d8806f63bf354713f1db7d9e658aa05",
       "selected_cases": [
         "M08-COLLECTOR-01",
         "M08-DOCS-01",
@@ -140,8 +140,8 @@
       "excluded_cases": 130
     },
     "receipt": {
-      "run_id": "85fbabd82605c416c0f511c572649f9c",
-      "identity": "4093b78f24697bfab13c819fc142f46e3003e3262f7a5ccbb10994f594036b64",
+      "run_id": "c670caaee8f5fb309ff9b7ecc6bf96ab",
+      "identity": "1b925893618f8e8a97982721f585ceb4cb19d5f1bea1c8484f616f51d7d105e9",
       "plan": [
         {
           "gate": "harness-tests",
@@ -160,9 +160,9 @@
       ]
     },
     "phase_durations_ms": {
-      "preflight_checks": 1081.856,
-      "plan_inputs": 1121.214,
-      "execute_cleanup_and_input_recheck": 62161.12
+      "preflight_checks": 993.911,
+      "plan_inputs": 1034.142,
+      "execute_cleanup_and_input_recheck": 60093.671
     }
   },
   "verification_cases": {
@@ -1993,7 +1993,7 @@
         "1 subsumption contracts bind 7 registered child gates"
       ],
       "status": "passed",
-      "duration_ms": 5.313
+      "duration_ms": 5.111
     },
     {
       "name": "history-integrity",
@@ -2001,7 +2001,7 @@
         "105 deterministic closes retain archive, evidence, event, and active-spec history"
       ],
       "status": "passed",
-      "duration_ms": 159.167
+      "duration_ms": 146.144
     },
     {
       "name": "indexes",
@@ -2009,7 +2009,7 @@
         "9 generated indexes are current"
       ],
       "status": "passed",
-      "duration_ms": 63.229
+      "duration_ms": 60.079
     },
     {
       "name": "l0",
@@ -2017,7 +2017,7 @@
         "AGENTS.md is the unique L0 and stays within 60-80 lines"
       ],
       "status": "passed",
-      "duration_ms": 0.51
+      "duration_ms": 0.599
     },
     {
       "name": "links",
@@ -2025,7 +2025,7 @@
         "680 local Markdown links resolve without durable active-spec references"
       ],
       "status": "passed",
-      "duration_ms": 373.118
+      "duration_ms": 339.787
     },
     {
       "name": "metadata",
@@ -2033,7 +2033,7 @@
         "211 routed Markdown documents have valid metadata"
       ],
       "status": "passed",
-      "duration_ms": 59.741
+      "duration_ms": 53.899
     },
     {
       "name": "module-coverage",
@@ -2041,7 +2041,7 @@
         "10 modules, 143 cases, 286 expectations, 607 exact test references; contract sha256 7b486107d41b"
       ],
       "status": "passed",
-      "duration_ms": 324.479
+      "duration_ms": 293.448
     },
     {
       "name": "qualification-manifests",
@@ -2049,7 +2049,7 @@
         "configured qualification manifests have valid historical bindings"
       ],
       "status": "passed",
-      "duration_ms": 3.599
+      "duration_ms": 3.31
     },
     {
       "name": "structure",
@@ -2057,7 +2057,7 @@
         "28 required paths exist"
       ],
       "status": "passed",
-      "duration_ms": 8.708
+      "duration_ms": 8.479
     },
     {
       "name": "supply-chain",
@@ -2065,14 +2065,14 @@
         "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
       ],
       "status": "passed",
-      "duration_ms": 81.094
+      "duration_ms": 80.265
     },
     {
       "name": "harness-tests",
       "kind": "product",
       "command": "{api_python} -m harness.tools.selected_tests --task 20260906-harness-impact-completion --gate harness-tests",
-      "status": "failed",
-      "duration_ms": 60566.99,
+      "status": "passed",
+      "duration_ms": 57409.675,
       "covers": [
         "AC-1",
         "AC-2",
@@ -2083,42 +2083,54 @@
         "AC-7",
         "AC-8"
       ],
-      "details": [
-        "diagnostic: E       AssertionError: assert [(['npm.cmd',...0/apps/web'))] == [(['npm.cmd',...0/apps/web'))]",
-        "-             '--',",
-        "'list',",
-        "'--config',",
-        "'vitest.config.ts',",
-        "'--json',",
-        "],",
-        "WindowsPath('C:/Users/Administrator/AppData/Local/Temp/pytest-of-unknown/pytest-14/test_vitest_collector_prepares0/apps/web'),",
-        "),",
-        "]",
-        "1 failed, 112 passed in 58.81s",
-        "HARNESS_SELECTION {\"collected\": 113, \"executed\": 113}"
-      ],
+      "details": [],
       "result": {
-        "exit_code": 1,
-        "output_bytes": 5046,
+        "exit_code": 0,
+        "output_bytes": 235,
         "test_counts": {
-          "passed": 112,
-          "failed": 1,
+          "passed": 113,
+          "failed": 0,
           "skipped": 0
         },
         "selection_counts": {
           "collected": 113,
           "executed": 113
         },
-        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\85fbabd82605c416c0f511c572649f9c\\harness-tests\\output.log",
-        "failure": {
-          "kind": "assertion",
-          "summary": "E       AssertionError: assert [(['npm.cmd',...0/apps/web'))] == [(['npm.cmd',...0/apps/web'))]"
-        }
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\c670caaee8f5fb309ff9b7ecc6bf96ab\\harness-tests\\output.log"
       },
       "provenance": {
         "mode": "executed",
-        "run_id": "85fbabd82605c416c0f511c572649f9c",
-        "attempt_id": "b6514136fc497a8eb1db187b7a10e4ea"
+        "run_id": "c670caaee8f5fb309ff9b7ecc6bf96ab",
+        "attempt_id": "625c0ba040315f1d861d113d4e053e7a"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "duration_ms": 1224.926,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6",
+        "AC-7",
+        "AC-8",
+        "AC-9"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 30,
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\c670caaee8f5fb309ff9b7ecc6bf96ab\\harness-integrity\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "c670caaee8f5fb309ff9b7ecc6bf96ab",
+        "attempt_id": "6b15792e79e88d65917640ca42733c4e"
       }
     },
     {
@@ -2126,7 +2138,7 @@
       "kind": "isolation",
       "command": "git worktree add --detach <temporary> HEAD",
       "status": "passed",
-      "duration_ms": 1420.936,
+      "duration_ms": 1273.627,
       "covers": [],
       "details": [
         "temporary worktree and dependency links were removed"
@@ -2138,23 +2150,17 @@
   ],
   "summary": {
     "checks": {
-      "total": 12,
-      "passed": 11,
-      "failed": 1
+      "total": 13,
+      "passed": 13,
+      "failed": 0
     },
-    "duration_ms": 63066.884,
-    "failures": [
-      {
-        "name": "harness-tests",
-        "kind": "assertion",
-        "summary": "E       AssertionError: assert [(['npm.cmd',...0/apps/web'))] == [(['npm.cmd',...0/apps/web'))]"
-      }
-    ],
+    "duration_ms": 60899.349,
+    "failures": [],
     "test_counts": {
-      "passed": 112,
-      "failed": 1,
+      "passed": 113,
+      "failed": 0,
       "skipped": 0
     }
   },
-  "source_commit": "44b39ba123cb20b53c0cbd954f8adf4cb6e0563a"
+  "source_commit": "d7ee41a3da998c7d6b1bc17ad4c45b8e40019c5f"
 }
