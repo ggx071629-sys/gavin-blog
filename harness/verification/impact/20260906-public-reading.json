@@ -1134,15 +1134,6 @@
       "dependencies": []
     },
     {
-      "path": "ui-fix/PROPOSAL.md",
-      "owner": "M08.documentation",
-      "reason": "Register/document the public reading scope and exact observable verification; no validator or runner implementation changes.",
-      "cases": [
-        "M08-DOCS-01"
-      ],
-      "dependencies": []
-    },
-    {
       "path": "harness/verification/checks/module_coverage.contract.json",
       "owner": "M08.module_verification",
       "reason": "Register/document the public reading scope and exact observable verification; no validator or runner implementation changes.",

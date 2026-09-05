@@ -3027,8 +3027,7 @@
         "harness/evolution/proposals/INDEX.md",
         "packages/contracts/README.md",
         "ui-fix/PHASE-2.md",
-        "ui-fix/PHASE-3.md",
-        "ui-fix/PROPOSAL.md"
+        "ui-fix/PHASE-3.md"
       ],
       "cases": [
         "M08-DOCS-01"
