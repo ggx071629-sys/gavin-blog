@@ -45,7 +45,8 @@
       "cases": [
         "M08-IMPACT-GRAPH-01",
         "M08-IMPACT-MAPPING-01",
-        "M08-IMPACT-SELECTION-01"
+        "M08-IMPACT-SELECTION-01",
+        "M08-DOCS-01"
       ],
       "dependents": [
         "M08.isolated_verification",
@@ -1914,7 +1915,9 @@
         "M01-UNIT-PUBLIC-UI-POLISH-01",
         "M01-UNIT-SITE-01",
         "M01-UNIT-UI-FOUNDATION-01",
-        "M02-P1-02"
+        "M02-P1-02",
+        "M01-PUBLIC-SURFACES-01",
+        "M01-PUBLIC-STATES-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -1961,7 +1964,9 @@
         "apps/web/utils/article.ts",
         "apps/web/utils/markdown.ts",
         "apps/web/utils/readingTime.ts",
-        "apps/web/utils/wikilinks.ts"
+        "apps/web/utils/wikilinks.ts",
+        "apps/web/components/ReadingLayout.vue",
+        "apps/web/tests/e2e/public-reading.spec.ts"
       ],
       "cases": [
         "M01-P1-03",
@@ -1971,7 +1976,11 @@
         "M01-UNIT-KNOWLEDGE-LINKS-01",
         "M01-UNIT-MARKDOWN-01",
         "M01-UNIT-MARKDOWN-MERMAID-01",
-        "M01-UNIT-WIKILINKS-01"
+        "M01-UNIT-WIKILINKS-01",
+        "M01-PUBLIC-READING-01",
+        "M04-PUBLIC-DETAILS-01",
+        "M01-PUBLIC-SURFACES-01",
+        "M01-PUBLIC-STATES-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2163,7 +2172,8 @@
       ],
       "cases": [
         "M04-P0-01",
-        "M04-UNIT-PROJECTS-INDEX-01"
+        "M04-UNIT-PROJECTS-INDEX-01",
+        "M04-PUBLIC-DETAILS-01"
       ],
       "dependents": []
     },
@@ -2180,7 +2190,8 @@
       ],
       "cases": [
         "M04-P1-01",
-        "M04-UNIT-BOOKS-INDEX-01"
+        "M04-UNIT-BOOKS-INDEX-01",
+        "M04-PUBLIC-DETAILS-01"
       ],
       "dependents": []
     },
@@ -2307,7 +2318,8 @@
         "apps/web/tests/quality/site-quality.spec.ts",
         "apps/web/tests/unit/theme-structure.test.ts",
         "apps/web/tests/unit/typography.test.ts",
-        "apps/web/types/markdown.d.ts"
+        "apps/web/types/markdown.d.ts",
+        "apps/web/assets/css/public-reading.css"
       ],
       "cases": [
         "M01-P1-04",
@@ -2316,7 +2328,11 @@
         "M07-UNIT-SITE-QUALITY-01",
         "M07-UNIT-THEME-STRUCTURE-01",
         "M07-UNIT-TYPOGRAPHY-01",
-        "M01-HOME-VISUAL-01"
+        "M01-HOME-VISUAL-01",
+        "M01-PUBLIC-SURFACES-01",
+        "M01-PUBLIC-READING-01",
+        "M04-PUBLIC-DETAILS-01",
+        "M07-P0-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2763,7 +2779,9 @@
         "apps/web/vitest.config.ts"
       ],
       "cases": [
-        "M08-IMPACT-RUNNERS-01"
+        "M08-IMPACT-RUNNERS-01",
+        "M01-PUBLIC-SURFACES-01",
+        "M07-P1-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3008,7 +3026,9 @@
         "harness/evolution/proposals/20260905-ui-foundation--workflow-friction_confirmed.md",
         "harness/evolution/proposals/INDEX.md",
         "packages/contracts/README.md",
-        "ui-fix/PHASE-2.md"
+        "ui-fix/PHASE-2.md",
+        "ui-fix/PHASE-3.md",
+        "ui-fix/PROPOSAL.md"
       ],
       "cases": [
         "M08-DOCS-01"
