@@ -486,8 +486,8 @@ def test_vitest_collector_prepares_nuxt_before_listing(
             [
                 test_collection._npm(),
                 "exec",
-                "vitest",
                 "--",
+                "vitest",
                 "list",
                 "--config",
                 "vitest.config.ts",
