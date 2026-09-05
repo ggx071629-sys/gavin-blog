@@ -143,7 +143,8 @@ def close_spec(task_id: str, *, evidence_sha256: str | None = None) -> tuple[Pat
         )
         + f"Closed at {datetime.now(timezone.utc).isoformat()}.\n"
     )
-    archive.write_text(content, encoding="utf-8", newline="\n")
+    from .run_store import atomic_write
+    atomic_write(archive, content.encode("utf-8"))
     source.unlink()
     return archive, source_text
 
@@ -151,6 +152,7 @@ def close_spec(task_id: str, *, evidence_sha256: str | None = None) -> tuple[Pat
 def restore_spec(task_id: str, source_text: str, archive: Path | None) -> None:
     source = active_spec(task_id)
     source.parent.mkdir(parents=True, exist_ok=True)
-    source.write_text(source_text, encoding="utf-8", newline="\n")
+    from .run_store import atomic_write
+    atomic_write(source, source_text.encode("utf-8"))
     if archive is not None and archive.exists():
         archive.unlink()

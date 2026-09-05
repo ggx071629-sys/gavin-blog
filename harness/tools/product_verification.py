@@ -972,6 +972,7 @@ def _pid_is_running(pid: int) -> bool:
     if os.name == "nt":
         completed = subprocess.run(
             ["tasklist", "/FI", f"PID eq {pid}"],
+            creationflags=subprocess.CREATE_NO_WINDOW,
             capture_output=True,
             text=True,
             encoding="utf-8",
@@ -993,6 +994,7 @@ def kill_process_tree(pid: int) -> None:
     if os.name == "nt":
         subprocess.run(
             ["taskkill", "/F", "/T", "/PID", str(pid)],
+            creationflags=subprocess.CREATE_NO_WINDOW,
             capture_output=True,
             text=True,
             encoding="utf-8",
@@ -1032,7 +1034,7 @@ def _run_supervised_command(
         "env": merged_env,
     }
     if os.name == "nt":
-        popen_kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
+        popen_kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.CREATE_NO_WINDOW
     else:
         popen_kwargs["start_new_session"] = True
 

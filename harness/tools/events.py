@@ -140,11 +140,8 @@ def emit_event(
         payload["evidence_runs"] = evidence_runs
     if evidence_sha256 is not None:
         payload["evidence_sha256"] = evidence_sha256
-    target_event.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-        newline="\n",
-    )
+    from .run_store import atomic_write
+    atomic_write(target_event, (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
     if create_proposal:
         evidence_section = ""
         if evidence_runs:

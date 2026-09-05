@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -17,7 +18,7 @@ def test_assistant_shutdown_stops_parent_and_descendant(tmp_path: Path) -> None:
         f"import {{ stopTree }} from {json.dumps(helper.as_uri())};\n"
         "const parentCode = `\n"
         "  const { spawn } = require('node:child_process');\n"
-        "  const child = spawn(process.execPath, ['-e', 'setInterval(() => {}, 1000)']);\n"
+        "  const child = spawn(process.execPath, ['-e', 'setInterval(() => {}, 1000)'], { windowsHide: true, stdio: 'ignore' });\n"
         "  child.once('spawn', () => console.log(child.pid));\n"
         "  setInterval(() => {}, 1000);\n"
         "`;\n"
@@ -43,5 +44,8 @@ def test_assistant_shutdown_stops_parent_and_descendant(tmp_path: Path) -> None:
         "}\n",
         encoding="utf-8",
     )
-    result = subprocess.run([node, str(script)], capture_output=True, text=True, timeout=30)
+    result = subprocess.run(
+        [node, str(script)], capture_output=True, text=True, timeout=30,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0, check=False,
+    )
     assert result.returncode == 0, result.stdout + result.stderr

@@ -33,9 +33,9 @@ def test_supervised_command_streams_output_and_forces_unbuffered_python(
 def test_supervised_command_kills_descendant_on_timeout(tmp_path: Path) -> None:
     marker = tmp_path / "child-pid.txt"
     script = (
-        "import subprocess, sys, time\n"
+        "import os, subprocess, sys, time\n"
         f"marker = {str(marker)!r}\n"
-        "child = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(90)'])\n"
+        "child = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(90)'], creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0)\n"
         "with open(marker, 'w', encoding='utf-8') as handle:\n"
         "    handle.write(str(child.pid))\n"
         "time.sleep(90)\n"

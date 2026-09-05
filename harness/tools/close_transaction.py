@@ -7,12 +7,12 @@ import hmac
 import json
 from pathlib import Path
 
-from . import events, indexer, summarizer
-from .run_store import RunStore, StoreError, atomic_write, canonical, store_root
+from . import events, indexer, run_store, summarizer
+from .run_store import RunStore, StoreError, atomic_write, canonical
 
 
 def journal_path() -> Path:
-    return store_root() / "close-transaction.json"
+    return run_store.store_root() / "close-transaction.json"
 
 
 def begin(snapshots: list[tuple[str, Path, str, Path, str]], head: str | None) -> None:

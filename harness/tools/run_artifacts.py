@@ -7,7 +7,7 @@ import shutil
 import time
 from pathlib import Path
 
-from .run_store import store_root
+from . import run_store
 
 LOG_LIMIT = 2 * 1024 * 1024
 RUN_LIMIT = 64 * 1024 * 1024
@@ -52,7 +52,7 @@ def retain(root: Path, destination: Path) -> None:
 
 
 def prune() -> None:
-    root = store_root() / "artifacts"
+    root = run_store.store_root() / "artifacts"
     if not root.is_dir():
         return
     entries = []
