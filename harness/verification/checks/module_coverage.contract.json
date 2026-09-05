@@ -2526,6 +2526,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M03-OPS-TAXONOMY-01",
+          "priority": "P1",
+          "scenario": "栏目创建编辑、关联文章发布、禁止删除使用中栏目。",
+          "expectations": [
+            {
+              "id": "M03-OPS-TAXONOMY-01-E01",
+              "surface": "user_visible",
+              "statement": "手机键盘编辑聚焦名称，改名显示到公开栏目。"
+            },
+            {
+              "id": "M03-OPS-TAXONOMY-01-E02",
+              "surface": "forbidden",
+              "statement": "仍被使用的栏目不能删除，失败保留条目。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "name": "ops taxonomy",
+              "gate": "e2e",
+              "covers": [
+                "M03-OPS-TAXONOMY-01-E01",
+                "M03-OPS-TAXONOMY-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -3231,6 +3263,102 @@
               "covers": [
                 "M05-UNIT-CONTENT-01-E01",
                 "M05-UNIT-CONTENT-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M05-OPS-LAYOUT-01",
+          "priority": "P1",
+          "scenario": "五个运营页在双主题及320至1440宽度和短视口使用真实隔离资源。",
+          "expectations": [
+            {
+              "id": "M05-OPS-LAYOUT-01-E01",
+              "surface": "user_visible",
+              "statement": "布局和实际缩略图完整，自动无障碍检查通过并保留截图。"
+            },
+            {
+              "id": "M05-OPS-LAYOUT-01-E02",
+              "surface": "forbidden",
+              "statement": "长内容不得产生页面横滚，未知状态不得伪装健康。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "name": "ops layout",
+              "gate": "e2e",
+              "covers": [
+                "M05-OPS-LAYOUT-01-E01",
+                "M05-OPS-LAYOUT-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M05-OPS-MEDIA-01",
+          "priority": "P1",
+          "scenario": "真实媒体上传、复制失败、移除恢复失败重试、外链与编辑器复用。",
+          "expectations": [
+            {
+              "id": "M05-OPS-MEDIA-01-E01",
+              "surface": "user_visible",
+              "statement": "媒体预览存在，剪贴板失败提供手动复制；三类编辑器可复用引用。"
+            },
+            {
+              "id": "M05-OPS-MEDIA-01-E02",
+              "surface": "forbidden",
+              "statement": "失败不得报告成功或消失资源；移除可恢复，引用不丢失。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "name": "ops media",
+              "gate": "e2e",
+              "covers": [
+                "M05-OPS-MEDIA-01-E01",
+                "M05-OPS-MEDIA-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M05-OPS-CONTENT-01",
+          "priority": "P1",
+          "scenario": "真实导出、导入草稿编辑和回收站恢复永久删除，并注入失败。",
+          "expectations": [
+            {
+              "id": "M05-OPS-CONTENT-01-E01",
+              "surface": "user_visible",
+              "statement": "导出下载ZIP，导入有编辑链接，恢复与删除成功更新列表。"
+            },
+            {
+              "id": "M05-OPS-CONTENT-01-E02",
+              "surface": "forbidden",
+              "statement": "导入不公开，失败不清除回收站条目，不报告成功。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "name": "ops content",
+              "gate": "e2e",
+              "covers": [
+                "M05-OPS-CONTENT-01-E01",
+                "M05-OPS-CONTENT-01-E02"
               ]
             }
           ]
@@ -4251,6 +4379,38 @@
               "covers": [
                 "M06-PROFILE-HOME-01-E01",
                 "M06-PROFILE-HOME-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-OPS-PROFILE-01",
+          "priority": "P1",
+          "scenario": "名片保存失败重试并公开读取。",
+          "expectations": [
+            {
+              "id": "M06-OPS-PROFILE-01-E01",
+              "surface": "user_visible",
+              "statement": "保存失败保留输入，重试后首页与关于显示新名称。"
+            },
+            {
+              "id": "M06-OPS-PROFILE-01-E02",
+              "surface": "forbidden",
+              "statement": "失败不能报告保存成功或丢失输入。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "name": "ops profile",
+              "gate": "e2e",
+              "covers": [
+                "M06-OPS-PROFILE-01-E01",
+                "M06-OPS-PROFILE-01-E02"
               ]
             }
           ]
@@ -10141,6 +10301,38 @@
               "covers": [
                 "M10-UNIT-ASSISTANT-ADMIN-01-E01",
                 "M10-UNIT-ASSISTANT-ADMIN-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-OPS-UI-01",
+          "priority": "P1",
+          "scenario": "默认关闭环境中的运营事实、刷新失败恢复、被拒启用及重建命令。",
+          "expectations": [
+            {
+              "id": "M10-OPS-UI-01-E01",
+              "surface": "user_visible",
+              "statement": "四个独立状态和手机费用标签可读，失败保留过期快照与原因。"
+            },
+            {
+              "id": "M10-OPS-UI-01-E02",
+              "surface": "forbidden",
+              "statement": "未知不得显示为零，资格不足不能接受新问答。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "name": "ops assistant",
+              "gate": "e2e",
+              "covers": [
+                "M10-OPS-UI-01-E01",
+                "M10-OPS-UI-01-E02"
               ]
             }
           ]

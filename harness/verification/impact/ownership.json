@@ -1882,7 +1882,10 @@
         "M06-PROFILE-CARD-01",
         "M06-PROFILE-SKILLS-01",
         "M06-UNIT-PROFILE-01",
-        "M06-PROFILE-HOME-01"
+        "M06-PROFILE-HOME-01",
+        "M06-OPS-PROFILE-01",
+        "M05-OPS-LAYOUT-01",
+        "M05-OPS-MEDIA-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2135,7 +2138,8 @@
         "M02-P1-01",
         "M02-UNIT-ARTICLE-LOOP-01",
         "M02-UNIT-AUTOSAVE-01",
-        "M02-UNIT-EDITOR-SAVE-CONTRACT-01"
+        "M02-UNIT-EDITOR-SAVE-CONTRACT-01",
+        "M05-OPS-MEDIA-01"
       ],
       "dependents": [
         "M04.books_web",
@@ -2192,7 +2196,9 @@
         "apps/web/pages/admin/taxonomy.vue"
       ],
       "cases": [
-        "M03-P1-01"
+        "M03-P1-01",
+        "M03-OPS-TAXONOMY-01",
+        "M05-OPS-LAYOUT-01"
       ],
       "dependents": []
     },
@@ -2214,7 +2220,8 @@
         "M02-UNIT-ARTICLE-LOOP-01",
         "M04-P0-01",
         "M04-PUBLIC-DETAILS-01",
-        "M04-UNIT-PROJECTS-INDEX-01"
+        "M04-UNIT-PROJECTS-INDEX-01",
+        "M05-OPS-MEDIA-01"
       ],
       "dependents": []
     },
@@ -2236,7 +2243,8 @@
         "M02-UNIT-ARTICLE-LOOP-01",
         "M04-P1-01",
         "M04-PUBLIC-DETAILS-01",
-        "M04-UNIT-BOOKS-INDEX-01"
+        "M04-UNIT-BOOKS-INDEX-01",
+        "M05-OPS-MEDIA-01"
       ],
       "dependents": []
     },
@@ -2253,7 +2261,9 @@
       "cases": [
         "M05-P0-01",
         "M05-UNIT-MARKDOWN-MEDIA-01",
-        "M05-UNIT-MEDIA-UPLOAD-01"
+        "M05-UNIT-MEDIA-UPLOAD-01",
+        "M05-OPS-MEDIA-01",
+        "M05-OPS-LAYOUT-01"
       ],
       "dependents": [
         "M02.editing",
@@ -2288,7 +2298,9 @@
       ],
       "cases": [
         "M05-P1-01",
-        "M05-UNIT-CONTENT-01"
+        "M05-UNIT-CONTENT-01",
+        "M05-OPS-CONTENT-01",
+        "M05-OPS-LAYOUT-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2501,7 +2513,9 @@
       ],
       "cases": [
         "M10-P0-02",
-        "M10-UNIT-ASSISTANT-ADMIN-01"
+        "M10-UNIT-ASSISTANT-ADMIN-01",
+        "M10-OPS-UI-01",
+        "M05-OPS-LAYOUT-01"
       ],
       "dependents": []
     },
@@ -3073,7 +3087,8 @@
         "packages/contracts/README.md",
         "ui-fix/PHASE-2.md",
         "ui-fix/PHASE-3.md",
-        "ui-fix/PHASE-4.md"
+        "ui-fix/PHASE-4.md",
+        "ui-fix/PHASE-5.md"
       ],
       "cases": [
         "M08-DOCS-01"
@@ -3159,6 +3174,45 @@
         ],
         "M08.verification_resume": [
           "Execution protocol imports: explicit prerequisites, exact identities, snapshot preflight or diagnostic CLI."
+        ]
+      }
+    },
+    "M05.operations_layout": {
+      "paths": [
+        "apps/web/assets/css/resource-operations.css",
+        "apps/web/tests/e2e/resource-ops.spec.ts"
+      ],
+      "cases": [
+        "M05-OPS-LAYOUT-01",
+        "M06-OPS-PROFILE-01",
+        "M03-OPS-TAXONOMY-01",
+        "M05-OPS-MEDIA-01",
+        "M05-OPS-CONTENT-01",
+        "M10-OPS-UI-01",
+        "M07-P1-01"
+      ],
+      "dependents": [
+        "M06.profile_web",
+        "M03.taxonomy_web",
+        "M05.media_web",
+        "M05.content_web",
+        "M10.operations_web"
+      ],
+      "dependency_reasons": {
+        "M06.profile_web": [
+          "The five admin pages import resource-operations.css; this test exercises their real UI and service boundaries."
+        ],
+        "M03.taxonomy_web": [
+          "The five admin pages import resource-operations.css; this test exercises their real UI and service boundaries."
+        ],
+        "M05.media_web": [
+          "The five admin pages import resource-operations.css; this test exercises their real UI and service boundaries."
+        ],
+        "M05.content_web": [
+          "The five admin pages import resource-operations.css; this test exercises their real UI and service boundaries."
+        ],
+        "M10.operations_web": [
+          "The five admin pages import resource-operations.css; this test exercises their real UI and service boundaries."
         ]
       }
     }
