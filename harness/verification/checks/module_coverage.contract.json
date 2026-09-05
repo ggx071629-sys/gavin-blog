@@ -2030,7 +2030,7 @@
             {
               "kind": "playwright",
               "path": "apps/web/tests/e2e/writing-desk.spec.ts",
-              "name": "writing desk twelve surfaces preserve themes mobile panels and accessible actions",
+              "name": "desk layout",
               "gate": "e2e",
               "covers": [
                 "M02-DESK-LAYOUT-01-E01",
