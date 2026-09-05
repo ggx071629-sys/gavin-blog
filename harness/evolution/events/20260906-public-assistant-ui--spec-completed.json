@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260906-public-assistant-ui",
+  "created_at": "2026-09-05T21:19:24.703714+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "cdc4e10ece5e0f80e5a6cdc49d67b563dd296db8d02e77ac1305a1ff6195f001"
+}
