@@ -1016,7 +1016,9 @@ def _run_supervised_command(
     timeout_seconds: int,
     env: dict[str, str] | None = None,
 ) -> subprocess.CompletedProcess[str]:
-    merged_env = {**os.environ, "CI": "1", "PYTHONUNBUFFERED": "1"}
+    from .verification_inputs import controlled_environment
+    from .run_artifacts import log_path, LOG_LIMIT
+    merged_env = controlled_environment()
     if env:
         merged_env.update(env)
     popen_kwargs: dict[str, Any] = {
@@ -1036,14 +1038,25 @@ def _run_supervised_command(
 
     proc = subprocess.Popen(**popen_kwargs)
     chunks: list[str] = []
+    diagnostic_path = log_path.get()
+    if diagnostic_path is not None:
+        diagnostic_path.parent.mkdir(parents=True, exist_ok=True)
+    diagnostic = diagnostic_path.open("wb") if diagnostic_path is not None else None
+    logged = 0
 
     def read_stdout() -> None:
+        nonlocal logged
         stream = proc.stdout
         if stream is None:
             return
         try:
             for line in iter(stream.readline, ""):
                 chunks.append(line)
+                if diagnostic is not None and logged < LOG_LIMIT:
+                    data = line.encode("utf-8")[:LOG_LIMIT - logged]
+                    diagnostic.write(data)
+                    diagnostic.flush()
+                    logged += len(data)
                 try:
                     sys.stdout.write(line)
                 except UnicodeEncodeError:
@@ -1071,7 +1084,16 @@ def _run_supervised_command(
         except subprocess.TimeoutExpired:
             proc.kill()
             proc.wait(timeout=5)
+    except BaseException:
+        kill_process_tree(proc.pid)
+        proc.wait(timeout=15)
+        reader.join(timeout=5)
+        if diagnostic is not None:
+            diagnostic.close()
+        raise
     reader.join(timeout=5)
+    if diagnostic is not None:
+        diagnostic.close()
     output = "".join(chunks)
     if timed_out:
         raise subprocess.TimeoutExpired(command, timeout_seconds, output=output)
@@ -1147,14 +1169,48 @@ def _parse_subsumption_proof(
     return _verified_subsumption(contract)
 
 
+def classify_failure(output: str) -> str:
+    lowered = output.lower()
+    if "eaddrinuse" in lowered or "already used" in lowered:
+        return "port-conflict"
+    if "error collecting" in lowered or "no tests collected" in lowered:
+        return "collection"
+    if "assertionerror" in lowered or "assert " in lowered:
+        return "assertion"
+    if "failed to start" in lowered or "cannot find module" in lowered:
+        return "startup"
+    return "nonzero-exit"
+
+
 def run_gates(
     mappings: dict[str, list[str]],
     *,
     execution_root: Path | None = None,
+    gate_callback: Any = None,
+    artifact_root: Path | None = None,
 ) -> list[dict[str, Any]]:
+    from .run_artifacts import log_path
     configured = _configured_gates()
     results: list[dict[str, Any]] = []
-    for gate, covered in mappings.items():
+    # Execute bundle owners before explicit children; skip only after a real proof.
+    ordered = sorted(mappings, key=lambda gate: 0 if configured[gate].get("subsumption_contract") else 1)
+    proven_children: dict[str, str] = {}
+    for gate in ordered:
+        covered = mappings[gate]
+        if gate in proven_children:
+            if gate_callback is not None:
+                gate_callback(gate, None)
+            result = {"name": gate, "kind": "product", "command": _configured_command_text(configured[gate]),
+                      "status": "passed", "passed": True, "duration_ms": 0, "covers": covered,
+                      "details": [], "result": {"exit_code": 0},
+                      "provenance": {"mode": "subsumed", "parent_gate": proven_children[gate]}}
+            if gate_callback is not None:
+                gate_callback(gate, result)
+            results.append(result)
+            continue
+        if gate_callback is not None:
+            gate_callback(gate, None)
+        log_token = log_path.set(artifact_root / gate / "output.log" if artifact_root else None)
         started = time.perf_counter()
         try:
             contract = _load_subsumption_contract(
@@ -1203,7 +1259,7 @@ def run_gates(
                     redactions=redactions,
                 )
                 structured_result["failure"] = {
-                    "kind": "nonzero-exit",
+                    "kind": classify_failure(completed.stdout + completed.stderr),
                     "summary": failure_summary(
                         completed.stdout,
                         completed.stderr,
@@ -1256,18 +1312,24 @@ def run_gates(
                 "result": {
                     "exit_code": None,
                     "failure": {
-                        "kind": "execution-error",
+                        "kind": "startup",
                         "summary": str(error)[:300],
                     },
                 },
             }
+        log_path.reset(log_token)
+        if result["passed"] and result.get("result", {}).get("subsumption"):
+            for child in result["result"]["subsumption"]["verified"]:
+                proven_children[child["gate"]] = gate
+        if gate_callback is not None:
+            gate_callback(gate, result)
         results.append(result)
         if not result["passed"]:
             break
     return results
 
 
-def validate_evidence(task_id: str, path: Path) -> list[str]:
+def validate_evidence(task_id: str, path: Path, *, prepared: dict[str, Any] | None = None) -> list[str]:
     errors: list[str] = []
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
@@ -1288,19 +1350,27 @@ def validate_evidence(task_id: str, path: Path) -> list[str]:
         )
 
     try:
-        criteria, mappings = verification_contract(task_id)
-        profile = verification_profile(task_id)
-        validate_configured_gates(mappings, profile, task_id, criteria)
-        documentation = documentation_report(task_id)
-        verification_cases = resolved_verification_cases(task_id, criteria, mappings)
-        fingerprints = evidence_fingerprints(
-            task_id,
-            criteria,
-            mappings,
-            profile,
-            documentation,
-            verification_cases,
-        )
+        if prepared is None and isinstance(payload.get("execution"), dict) and "receipt" in payload["execution"]:
+            from .verification_resume import authenticate
+            prepared = authenticate(task_id, path)
+        if prepared is not None:
+            criteria, mappings = prepared["criteria"], prepared["mappings"]
+            profile, documentation = prepared["profile"], prepared["documentation"]
+            verification_cases, fingerprints = prepared["cases"], prepared["fingerprints"]
+        else:
+            criteria, mappings = verification_contract(task_id)
+            profile = verification_profile(task_id)
+            validate_configured_gates(mappings, profile, task_id, criteria)
+            documentation = documentation_report(task_id)
+            verification_cases = resolved_verification_cases(task_id, criteria, mappings)
+            fingerprints = evidence_fingerprints(
+                task_id,
+                criteria,
+                mappings,
+                profile,
+                documentation,
+                verification_cases,
+            )
     except (ProductVerificationError, OSError, ValueError) as error:
         errors.append(str(error))
         return errors

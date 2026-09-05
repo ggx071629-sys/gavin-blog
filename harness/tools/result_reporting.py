@@ -139,7 +139,7 @@ def summarize_checks(checks: list[dict[str, Any]]) -> dict[str, Any]:
         result = check.get("result")
         if isinstance(result, dict):
             counts = result.get("test_counts")
-            if isinstance(counts, dict):
+            if isinstance(counts, dict) and check.get("provenance", {}).get("mode") not in {"reused", "subsumed"}:
                 counts_detected = True
                 for state in total_counts:
                     total_counts[state] += int(counts.get(state, 0) or 0)

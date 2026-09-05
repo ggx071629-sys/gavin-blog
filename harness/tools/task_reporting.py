@@ -21,11 +21,23 @@ def task_record(task_id: str) -> dict[str, Any]:
                 "evidence": "not-evaluated",
                 "blockers": [],
             }
-        errors = product_verification.validate_evidence(
-            task_id,
-            validator.evidence_path(task_id),
-        )
+        try:
+            from .verification_resume import authenticate
+            prepared = authenticate(task_id, validator.evidence_path(task_id))
+            errors = product_verification.validate_evidence(task_id, validator.evidence_path(task_id), prepared=prepared)
+        except (OSError, RuntimeError, ValueError) as error:
+            errors = [str(error)]
+        try:
+            from .verification_resume import preview, gate_plan
+            from .run_store import RunStore
+            plan = ({"gates": gate_plan(prepared, RunStore(task_id).read()), "next": "", "blocker": None}
+                    if not errors else preview(task_id))
+        except (OSError, RuntimeError, ValueError) as error:
+            plan = {"gates": [], "blocker": str(error), "next": f"python -m tools.harness verify {task_id}"}
+        if not errors:
+            plan["next"] = f"python -m tools.harness close {task_id}"
         return {
+            "plan": plan,
             "task_id": task_id,
             "state": "verified" if not errors else "active",
             "verification_profile": profile,

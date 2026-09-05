@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
-from harness.tools import task_reporting
+from harness.tools import task_reporting, verification_resume
 
 TASK_ID = "20260812-status-fixture"
 
@@ -56,7 +56,10 @@ def test_status_reports_verified_compressed_and_missing(
     monkeypatch.setattr(task_reporting.summarizer, "active_spec", lambda _: active)
     monkeypatch.setattr(task_reporting.summarizer, "archive_spec", lambda _: archive)
     monkeypatch.setattr(task_reporting.validator, "evidence_path", lambda _: tmp_path / "evidence.json")
-    monkeypatch.setattr(task_reporting.product_verification, "validate_evidence", lambda *_: [])
+    monkeypatch.setattr(task_reporting.product_verification, "validate_evidence", lambda *_a, **_k: [])
+    monkeypatch.setattr(verification_resume, "authenticate", lambda *_: {})
+    monkeypatch.setattr(verification_resume, "gate_plan", lambda *_: [])
+    monkeypatch.setattr(verification_resume, "preview", lambda *_: {"gates": [], "next": "verify"})
 
     assert task_reporting.task_record(TASK_ID)["state"] == "verified"
 

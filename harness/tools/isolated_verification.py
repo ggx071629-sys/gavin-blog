@@ -115,6 +115,9 @@ def _failure(
 def run_in_worktree(
     mappings: dict[str, list[str]],
     source_commit: str,
+    *,
+    gate_callback: Any = None,
+    artifact_root: Path | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     started = time.perf_counter()
     context: dict[str, Any] = {
@@ -160,10 +163,19 @@ def run_in_worktree(
             _create_directory_link(source, destination)
             links.append(destination)
 
-        results.extend(run_gates(mappings, execution_root=worktree))
+        if gate_callback is None and artifact_root is None:
+            results.extend(run_gates(mappings, execution_root=worktree))
+        else:
+            results.extend(run_gates(mappings, execution_root=worktree, gate_callback=gate_callback, artifact_root=artifact_root))
     except Exception as error:  # noqa: BLE001 - cleanup must cover every gate failure
         setup_error = str(error)
     finally:
+        if artifact_root is not None and worktree is not None:
+            try:
+                from .run_artifacts import retain
+                retain(worktree, artifact_root)
+            except OSError:
+                cleanup_errors.append("diagnostic export failed; worktree retained")
         for link in reversed(links):
             try:
                 _remove_directory_link(link)

@@ -26,7 +26,7 @@ def _load_check(path: Path) -> ModuleType:
     return module
 
 
-def run_checks() -> list[dict[str, Any]]:
+def run_checks(*, close_assets: bool = False) -> list[dict[str, Any]]:
     config = load_config()
     root = harness_root()
     context = {
@@ -37,6 +37,8 @@ def run_checks() -> list[dict[str, Any]]:
     results: list[dict[str, Any]] = []
     checks_dir = root / str(config["verification"]["checks"])
     for path in sorted(checks_dir.glob("*.py")):
+        if close_assets and path.stem == "module_coverage":
+            continue  # Collector proof is authenticated against unchanged inputs at close.
         started = time.perf_counter()
         try:
             module = _load_check(path)
@@ -61,6 +63,8 @@ def run_checks() -> list[dict[str, Any]]:
     else:
         counts = Counter(str(result.get("name", "")) for result in results)
         for name in required:
+            if close_assets and name == "module-coverage":
+                continue
             if counts[name] == 0:
                 registration_errors.append(f"required check is not registered: {name}")
             elif counts[name] != 1:
@@ -78,6 +82,10 @@ def run_checks() -> list[dict[str, Any]]:
             }
         )
     return results
+
+
+def run_close_checks() -> list[dict[str, Any]]:
+    return run_checks(close_assets=True)
 
 
 def passed(results: list[dict[str, Any]]) -> bool:

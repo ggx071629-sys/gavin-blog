@@ -344,7 +344,7 @@ def test_gate_failure_result_distinguishes_nonzero_timeout_and_execution_error(
     )
     monkeypatch.setattr(product_verification.shutil, "which", lambda _: None)
     execution_error = product_verification.run_gates({"fixture": ["AC-1"]})[0]
-    assert execution_error["result"]["failure"]["kind"] == "execution-error"
+    assert execution_error["result"]["failure"]["kind"] == "startup"
 
 
 def test_task_verify_runs_product_gates_and_writes_current_evidence(
@@ -451,6 +451,10 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
         evidence.write_text("{}", encoding="utf-8")
         return evidence
 
+    monkeypatch.setattr(harness_cli.run_store, "store_root", lambda: tmp_path / "local-runs")
+    monkeypatch.setattr(harness_cli.verification_resume.inputs, "input_snapshot", lambda *_: {"head": "abc123"})
+    monkeypatch.setattr(harness_cli.verification_resume, "execute", lambda *_a, **_k: (gate_results, execution))
+    monkeypatch.setattr(harness_cli.verification_resume, "attest", lambda *_: None)
     monkeypatch.setattr(harness_cli.validator, "write_task_evidence", write)
     monkeypatch.setattr(product_verification, "derived_task_state", lambda *_: "verified")
 

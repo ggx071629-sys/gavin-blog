@@ -1,7 +1,7 @@
 ---
 id: decision-verification-attestation
 level: L1
-summary: 任务关闭以 fresh verification 和跨资产 evidence digest 建立本地可信边界
+summary: 原始 attestation 决策；fresh close 条款由认证续跑决策替代
 load_when:
   - verification
   - task-close
@@ -10,6 +10,8 @@ author: Codex
 ---
 
 # Verification attestation
+
+更新：以下 fresh close 条款和“必要成本”论断已由 [认证续跑决策](20260905-verification-resume.md) 替代；本文件保留原决策依据，exact digest 与本地信任边界仍有效。
 
 ## Decision
 

@@ -14,13 +14,13 @@ author: Gavin
 
 应用层 Pytest、Vitest、Playwright、类型检查和 Lighthouse 命令注册在 `config.toml` 的白名单 gate 中，不复制进 Harness checks，也不从 spec 执行任意 shell 文本。active spec 用 `gate => AC` 映射声明适用门禁。
 
-无 task ID 的 `verify` 只检查 Harness 完整性；带 task ID 的 `verify` 先检查文档影响契约，再运行 spec 声明的产品 gate，并写入 schema v2 evidence。`required` 文档目标必须存在于 HEAD、在 spec 首次提交后有已提交变更且没有工作区漂移；检查失败时不启动产品 gate。evidence 只保存命令、退出状态、耗时、AC 覆盖、profile、文档契约与目标 blob、source tree/spec/合同/gate 配置指纹和有限失败摘要，不提交重型原始日志。close 不信任磁盘上既有的 passed JSON：实际关闭会在同一进程重新执行完整 task verify、覆盖 evidence、再次校验后才压缩 spec；dry-run 只验证现有 evidence，不改写关闭资产。
+无 task ID 的 `verify` 只检查 Harness 完整性；带 task ID 的 `verify` 先检查文档影响契约，再运行 spec 声明的产品 gate，并写入 schema v2 evidence。`required` 文档目标必须存在于 HEAD、在 spec 首次提交后有已提交变更且没有工作区漂移；检查失败时不启动产品 gate。evidence 只保存命令、退出状态、耗时、AC 覆盖、profile、文档契约与目标 blob、source tree/spec/合同/gate 配置指纹和有限失败摘要，不提交重型原始日志。close 不信任磁盘上自报 passed 的 JSON：它校验本机 HMAC ledger、exact evidence digest、同 HEAD/输入和最新 attempt 后事务归档，不执行产品 gate 或全套 collector；dry-run 只验证现有凭据，不改写关闭资产。详见 [认证续跑决策](../docs/decisions/20260905-verification-resume.md)。
 
 全局 `metadata` check 除各生成索引作用域外，还验证 `config.toml` 中显式列出的四个项目入口／边界 README；这些文件继续由根 `AGENTS.md` 或公开入口直接路由，不为了纳入校验而复制进 Harness 生成索引。项目文档清单中的路径必须是存在的项目相对 Markdown 文件，且与索引文档共同执行必填 front matter、L1/L2、`load_when` 和全局 ID 唯一性检查。
 
 验证 profile 提供最低风险门槛：`focused` 允许任务选择局部 gate，`stack` 强制 API lint、API tests 与 Web quality，`release` 强制完整 release gate。profile 不替代 AC 映射。
 
-task 产品 gate 默认在固定到当前 HEAD 的 detached 临时 Git worktree 中运行。隔离层只链接 `config.toml` 明确允许的项目内依赖目录，gate 不得把这些依赖目录当作输出位置；测试产生的缓存、日志、截图和构建产物应留在临时 worktree 并随清理删除。隔离建立或清理失败都写为 failed check，禁止生成可关闭的 passed evidence；无 task ID 的全局 verify 不创建 worktree。
+task 产品 gate 默认在固定到当前 HEAD 的 detached 临时 Git worktree 中运行。隔离层只链接 `config.toml` 明确允许的项目内依赖目录，gate 不得把这些依赖目录当作输出位置；测试缓存与构建产物留在临时 worktree 并随清理删除；有界诊断日志、trace、截图在清理前导出到工作树外的本机目录。隔离建立或清理失败都写为 failed check，禁止生成可关闭的 passed evidence；无 task ID 的全局 verify 不创建 worktree。
 
 产品 gate 由监督启动：子进程进入新的进程组或会话，标准输出与错误合并后边产生边写到 verify 终端，同时保留给失败摘要和测试计数。超时使用 `taskkill /T`（Windows）或进程组信号（POSIX）拆除整棵子孙进程，再返回既有 `failure.kind = timeout`，不得因残留管道阻塞 `communicate()`。evidence 仍只保存有限摘要，不提交原始日志。
 
@@ -77,3 +77,5 @@ task gate 只有退出 0 且 proof 唯一、可解析、hash 当前、阶段完�
 `.benchmark.json` 和 `.application.json` 作为辅助资产列入 inventory，但不计作独立 task。任何 assurance 标签都只描述文件中可证事实，不能替代重新验证，也不能自动触发 Evolution。
 
 全局 `history-integrity` check 以 compressed archive 为确定性关闭集合，验证同 task 的 passed 主 evidence、lifecycle `spec.completed` event、archive 标识与 evidence 链接，并用一次 Git 查询确认原 active spec 路径仍在当前 HEAD 历史。自 `20260901-*` task 起，archive front matter 与 schema v2 completion event 必须同时保存关闭时 exact evidence SHA-256；文件字段删除、字节篡改、digest 漂移或降级成 legacy event 都会失败。更早的 schema v1 completion event 作为明确 legacy 边界只保留身份／状态检查，不追溯补造 digest。该 check 只读且不重写、补造、迁移或删除历史资产。
+
+`plan <task>` 只读输出 gate 执行/复用与失效原因。`verify <task>` 先执行全局前检，成功后按最后有效 attempt 续跑；`--fresh` 禁止复用，release 保持 fresh。`status <task>` 报告未执行、失败、失效与可复用状态。只有同 task、同 HEAD、同规范计划及受控依赖/环境允许复用；跨提交复用与构建拆分尚未启用。

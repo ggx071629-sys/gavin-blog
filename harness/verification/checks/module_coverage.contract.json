@@ -852,7 +852,7 @@
             {
               "id": "M08-EVIDENCE-01-E01",
               "surface": "state",
-              "statement": "每个产品 Gate evidence 绑定规范命令、结构化零退出结果和 fresh close verification。"
+              "statement": "每个产品 Gate evidence 绑定规范命令、结构化零退出结果和 本机认证的完整 gate verification。"
             },
             {
               "id": "M08-EVIDENCE-01-E02",
@@ -872,7 +872,7 @@
             {
               "path": "harness/verification/tests/test_lifecycle.py",
               "kind": "pytest",
-              "name": "test_m08_evidence_01_close_requires_fresh_verification",
+              "name": "test_m08_evidence_01_close_requires_authenticated_verification",
               "gate": "harness-tests",
               "covers": ["M08-EVIDENCE-01-E01", "M08-EVIDENCE-01-E02"]
             }
@@ -1014,6 +1014,134 @@
               "covers": [
                 "M08-LINKS-01-E01",
                 "M08-LINKS-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-RESUME-01",
+          "priority": "P0",
+          "scenario": "前检失败保留停止原因并禁止启动产品 gate。",
+          "expectations": [
+            {
+              "id": "M08-RESUME-01-E01",
+              "surface": "response",
+              "statement": "全局前检失败时产品 gate 调用数为 0，返回明确停止原因。"
+            },
+            {
+              "id": "M08-RESUME-01-E02",
+              "surface": "forbidden",
+              "statement": "已知前检失败不得继续产品执行或报告通过。"
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_verification_resume.py",
+              "kind": "pytest",
+              "name": "test_preflight_failure_starts_zero_product_gates",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-RESUME-01-E01",
+                "M08-RESUME-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-RESUME-02",
+          "priority": "P0",
+          "scenario": "按最新 gate attempt 续跑并保留失败历史。",
+          "expectations": [
+            {
+              "id": "M08-RESUME-02-E01",
+              "surface": "response",
+              "statement": "A、B 通过而 C 失败后重试只执行 C、D，并引用 A、B 来源。"
+            },
+            {
+              "id": "M08-RESUME-02-E02",
+              "surface": "forbidden",
+              "statement": "重试成功不得抹除 C 的失败记录或重复统计复用测试。"
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_verification_resume.py",
+              "kind": "pytest",
+              "name": "test_resume_only_failed_and_unrun_gates_and_preserves_failure",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-RESUME-02-E01",
+                "M08-RESUME-02-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-RESUME-03",
+          "priority": "P0",
+          "scenario": "认证当前输入与 evidence 来源并拒绝篡改。",
+          "expectations": [
+            {
+              "id": "M08-RESUME-03-E01",
+              "surface": "response",
+              "statement": "未修改的本机 runner 凭据可认证当前输入。"
+            },
+            {
+              "id": "M08-RESUME-03-E02",
+              "surface": "forbidden",
+              "statement": "篡改 evidence/ledger、删除密钥或输入漂移不得通过认证。"
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_verification_resume.py",
+              "kind": "pytest",
+              "name": "test_authenticated_evidence_rejects_tampering_missing_key_and_input_drift",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-RESUME-03-E01",
+                "M08-RESUME-03-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-RESUME-04",
+          "priority": "P0",
+          "scenario": "关闭消费凭据且失败原子回滚。",
+          "expectations": [
+            {
+              "id": "M08-RESUME-04-E01",
+              "surface": "response",
+              "statement": "有效聚合凭据满足 close 前检且不执行产品 gate 或 collector。"
+            },
+            {
+              "id": "M08-RESUME-04-E02",
+              "surface": "forbidden",
+              "statement": "普通 JSON 编辑不得通过 close；缺失凭据不能触发暗中重跑。"
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_verification_resume.py",
+              "kind": "pytest",
+              "name": "test_close_consumes_attestation_without_gates_or_collectors",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-RESUME-04-E01",
+                "M08-RESUME-04-E02"
               ]
             }
           ]

@@ -150,6 +150,7 @@ def _api_python(project_root: Path) -> Path:
 
 
 def _run(command: list[str], cwd: Path) -> str:
+    from .verification_inputs import controlled_environment
     try:
         result = subprocess.run(
             command,
@@ -160,6 +161,7 @@ def _run(command: list[str], cwd: Path) -> str:
             errors="replace",
             check=False,
             timeout=120,
+            env=controlled_environment(),
         )
     except (OSError, subprocess.TimeoutExpired) as error:
         raise TestCollectionError(f"test collector failed to start: {error}") from error

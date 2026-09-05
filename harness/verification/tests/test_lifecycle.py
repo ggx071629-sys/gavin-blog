@@ -20,8 +20,10 @@ TASK_ID = "20260811-example-close"
 
 
 @pytest.fixture(autouse=True)
-def _isolate_close_attestation(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(harness_cli, "_refresh_task_evidence", lambda _task: True)
+def _isolate_close_attestation(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    monkeypatch.setattr(harness_cli.verification_resume, "authenticate", lambda *_: {})
+    monkeypatch.setattr(harness_cli.verification_resume, "authenticated_digest", lambda *_: "a" * 64)
+    monkeypatch.setattr(harness_cli.run_store, "store_root", lambda: tmp_path / "local-runs")
     monkeypatch.setattr(harness_cli, "_evidence_sha256", lambda _task: "a" * 64)
 
 
@@ -271,13 +273,13 @@ def test_close_requests_an_event_without_a_proposal(
 
     monkeypatch.setattr(harness_cli.summarizer, "close_spec", close_spec)
     monkeypatch.setattr(harness_cli.summarizer, "restore_spec", lambda *_: None)
-    monkeypatch.setattr(harness_cli.validator, "run_checks", lambda: results)
+    monkeypatch.setattr(harness_cli.validator, "run_close_checks", lambda: results)
     monkeypatch.setattr(harness_cli.validator, "passed", lambda _: True)
     monkeypatch.setattr(harness_cli.validator, "evidence_path", lambda _: evidence)
     monkeypatch.setattr(
         harness_cli.product_verification,
         "validate_evidence",
-        lambda *_: [],
+        lambda *_a, **_k: [],
     )
     monkeypatch.setattr(harness_cli.indexer, "write_indexes", list)
 
@@ -311,7 +313,7 @@ def test_close_rejects_invalid_task_evidence_before_running_checks(
     monkeypatch.setattr(
         harness_cli.product_verification,
         "validate_evidence",
-        lambda *_: ["task evidence missing"],
+        lambda *_a, **_k: ["task evidence missing"],
     )
 
     def run_checks() -> list[dict[str, object]]:
@@ -319,19 +321,21 @@ def test_close_rejects_invalid_task_evidence_before_running_checks(
         checks_called = True
         return []
 
-    monkeypatch.setattr(harness_cli.validator, "run_checks", run_checks)
+    monkeypatch.setattr(harness_cli.validator, "run_close_checks", run_checks)
 
     assert harness_cli.command_close(argparse.Namespace(task_id=TASK_ID)) == 1
     assert checks_called is False
 
 
-def test_m08_evidence_01_close_requires_fresh_verification(
+def test_m08_evidence_01_close_requires_authenticated_verification(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     evidence_validated = False
     monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
     monkeypatch.setattr(harness_cli.lifecycle, "task_status", lambda _: "active")
-    monkeypatch.setattr(harness_cli, "_refresh_task_evidence", lambda _task: False)
+    def reject(*_):
+        raise ValueError("missing authenticated receipt")
+    monkeypatch.setattr(harness_cli.verification_resume, "authenticate", reject)
 
     def validate(*_args: object) -> list[str]:
         nonlocal evidence_validated
@@ -365,7 +369,7 @@ def test_close_all_skips_frozen_and_preflights_every_active_spec(
     monkeypatch.setattr(
         harness_cli.product_verification,
         "validate_evidence",
-        lambda task, _: ["stale evidence"] if task == invalid.stem else [],
+        lambda task, _, **_k: ["stale evidence"] if task == invalid.stem else [],
     )
     monkeypatch.setattr(
         harness_cli.summarizer,
@@ -378,7 +382,7 @@ def test_close_all_skips_frozen_and_preflights_every_active_spec(
         checks_called = True
         return []
 
-    monkeypatch.setattr(harness_cli.validator, "run_checks", run_checks)
+    monkeypatch.setattr(harness_cli.validator, "run_close_checks", run_checks)
 
     assert harness_cli.command_close_all(argparse.Namespace()) == 1
     assert close_calls == []
@@ -413,14 +417,14 @@ def test_close_all_rolls_back_every_task_when_post_check_fails(
     monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
     monkeypatch.setattr(harness_cli.lifecycle, "task_status", lambda _: "active")
     monkeypatch.setattr(harness_cli.validator, "evidence_path", lambda task: tmp_path / f"{task}.json")
-    monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", lambda *_: [])
+    monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", lambda *_a, **_k: [])
 
     def run_checks() -> list[dict[str, object]]:
         nonlocal check_runs
         check_runs += 1
         return passed if check_runs == 1 else failed
 
-    monkeypatch.setattr(harness_cli.validator, "run_checks", run_checks)
+    monkeypatch.setattr(harness_cli.validator, "run_close_checks", run_checks)
 
     def close_spec(task: str, **_kwargs: object) -> tuple[Path, str]:
         archive = tmp_path / f"{task}.archive.md"
@@ -487,8 +491,8 @@ def test_close_all_success_writes_every_task_and_indexes_once(
     monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
     monkeypatch.setattr(harness_cli.lifecycle, "task_status", lambda _: "active")
     monkeypatch.setattr(harness_cli.validator, "evidence_path", lambda task: tmp_path / f"{task}.json")
-    monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", lambda *_: [])
-    monkeypatch.setattr(harness_cli.validator, "run_checks", lambda: passed)
+    monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", lambda *_a, **_k: [])
+    monkeypatch.setattr(harness_cli.validator, "run_close_checks", lambda: passed)
 
     def close_spec(task: str, **_kwargs: object) -> tuple[Path, str]:
         archive = tmp_path / f"{task}.archive.md"
@@ -534,11 +538,11 @@ def test_close_cleans_partial_event_when_emission_raises(
     monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
     monkeypatch.setattr(harness_cli.lifecycle, "task_status", lambda _: "active")
     monkeypatch.setattr(harness_cli.validator, "evidence_path", lambda _: tmp_path / "evidence.json")
-    monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", lambda *_: [])
+    monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", lambda *_a, **_k: [])
     monkeypatch.setattr(harness_cli.summarizer, "active_spec", lambda _: source)
     monkeypatch.setattr(harness_cli.summarizer, "archive_spec", lambda _: archive)
     monkeypatch.setattr(harness_cli.events, "event_path", lambda *_: event)
-    monkeypatch.setattr(harness_cli.validator, "run_checks", lambda: passed)
+    monkeypatch.setattr(harness_cli.validator, "run_close_checks", lambda: passed)
     monkeypatch.setattr(harness_cli.indexer, "write_indexes", list)
 
     def close_spec(_: str, **_kwargs: object) -> tuple[Path, str]:
@@ -576,9 +580,9 @@ def test_close_all_dry_run_performs_full_preflight_without_writes(
     monkeypatch.setattr(harness_cli.summarizer, "archive_spec", lambda _: archive)
     monkeypatch.setattr(harness_cli.lifecycle, "task_status", lambda _: "active")
     monkeypatch.setattr(harness_cli.validator, "evidence_path", lambda _: tmp_path / "evidence.json")
-    monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", lambda *_: [])
+    monkeypatch.setattr(harness_cli.product_verification, "validate_evidence", lambda *_a, **_k: [])
     monkeypatch.setattr(harness_cli.events, "event_path", lambda *_: event)
-    monkeypatch.setattr(harness_cli.validator, "run_checks", lambda: passed)
+    monkeypatch.setattr(harness_cli.validator, "run_close_checks", lambda: passed)
 
     def forbidden(*_: object, **__: object) -> None:
         raise AssertionError("dry-run must not write close artifacts")
