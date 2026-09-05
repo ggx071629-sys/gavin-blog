@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import platform
 import shutil
@@ -56,33 +57,68 @@ def controlled_environment() -> dict[str, str]:
     }
 
 
+def _is_link(path: Path) -> bool:
+    # pathlib.is_symlink() alone misses Windows npm workspace junctions.
+    return path.is_symlink() or bool(
+        getattr(path.lstat(), "st_file_attributes", 0) & 0x400
+    )
+
+
 def tree_digest(root: Path) -> str:
-    """Hash installed code; discard only bytecode and documented generated caches."""
+    """Hash installed code, binding workspace links to their HEAD-controlled source."""
     if not root.is_dir():
         raise pv.ProductVerificationError(
             f"dependency directory is missing: {root.name}"
         )
+    repository = project_root().resolve()
+    package = repository / "package.json"
+    workspace_paths = []
+    if package.is_file():
+        workspaces = json.loads(package.read_bytes()).get("workspaces", [])
+        if isinstance(workspaces, list):
+            workspace_paths = [
+                (repository / value).resolve()
+                for value in workspaces
+                if isinstance(value, str) and "*" not in value
+            ]
     result = hashlib.sha256()
     for directory, dirs, files in os.walk(root, followlinks=False):
-        dirs[:] = sorted(d for d in dirs if d not in {"__pycache__", ".cache", ".vite"})
-        for name in sorted(
-            [*files, *(d for d in dirs if (Path(directory) / d).is_symlink())]
-        ):
+        candidates = sorted(
+            d for d in dirs if d not in {"__pycache__", ".cache", ".vite"}
+        )
+        linked_dirs = [d for d in candidates if _is_link(Path(directory) / d)]
+        dirs[:] = [d for d in candidates if d not in linked_dirs]
+        for name in sorted([*files, *linked_dirs]):
             path = Path(directory) / name
             if path.suffix == ".pyc":
                 continue
             relative = path.relative_to(root).as_posix().encode()
             result.update(len(relative).to_bytes(8, "big"))
             result.update(relative)
-            if path.is_symlink():
+            if _is_link(path):
                 target = path.resolve()
-                if not target.is_relative_to(root.resolve()):
-                    raise pv.ProductVerificationError(
-                        "dependency symlink escapes its input root"
+                if target.is_relative_to(root.resolve()):
+                    binding = (
+                        "dependency:" + target.relative_to(root.resolve()).as_posix()
                     )
-                result.update(
-                    b"link" + hashlib.sha256(os.readlink(path).encode()).digest()
-                )
+                elif target in workspace_paths and target.is_relative_to(repository):
+                    binding = (
+                        "workspace-head:" + target.relative_to(repository).as_posix()
+                    )
+                elif (
+                    root.name == ".venv"
+                    and path.parent.name == "bin"
+                    and path.name.startswith("python")
+                    and target.is_file()
+                ):
+                    binding = (
+                        "interpreter:" + hashlib.sha256(target.read_bytes()).hexdigest()
+                    )
+                else:
+                    raise pv.ProductVerificationError(
+                        "dependency link escapes its controlled input roots"
+                    )
+                result.update(b"link" + hashlib.sha256(binding.encode()).digest())
             elif path.is_file():
                 content = hashlib.sha256()
                 with path.open("rb") as handle:
@@ -90,6 +126,19 @@ def tree_digest(root: Path) -> str:
                         content.update(chunk)
                 result.update(b"file" + content.digest())
     return result.hexdigest()
+
+
+def _python_identity(executable: str) -> str:
+    completed = subprocess.run(
+        [executable, "-c", "import sys; print(sys.version)"],
+        capture_output=True,
+        text=True,
+        check=True,
+        timeout=10,
+        env=controlled_environment(),
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+    )
+    return completed.stdout.strip()
 
 
 def input_snapshot(
@@ -109,6 +158,11 @@ def input_snapshot(
     toolchain = {
         str(Path(path).resolve()): hashlib.sha256(Path(path).read_bytes()).hexdigest()
         for path in sorted(executables)
+    }
+    toolchain["python_runtime_versions"] = {
+        path: _python_identity(path)
+        for path in sorted(executables)
+        if Path(path).name.lower().startswith("python")
     }
     dependencies = {
         value: tree_digest(root / value) for value in isolation_config()["reuse_paths"]

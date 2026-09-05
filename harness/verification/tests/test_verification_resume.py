@@ -478,3 +478,43 @@ def test_close_asset_checks_never_load_collector(monkeypatch, tmp_path):
     )
     assert validator.passed(validator.run_close_checks())
     assert not validator.passed(validator.run_checks())
+
+
+def test_workspace_link_outputs_do_not_change_installed_dependency_identity(
+    tmp_path, monkeypatch
+):
+    from harness.tools import isolated_verification
+
+    root = tmp_path / "project"
+    dependencies = root / "node_modules"
+    workspace = root / "apps/web"
+    workspace.mkdir(parents=True)
+    dependencies.mkdir()
+    (root / "package.json").write_text('{"workspaces":["apps/web"]}')
+    monkeypatch.setattr(inputs, "project_root", lambda: root)
+    link = dependencies / "workspace"
+    isolated_verification._create_directory_link(workspace, link)
+    try:
+        baseline = inputs.tree_digest(dependencies)
+        (workspace / "generated-output.js").write_text("random build output")
+        assert inputs.tree_digest(dependencies) == baseline
+        (dependencies / "installed.js").write_text("actual installed code")
+        assert inputs.tree_digest(dependencies) != baseline
+    finally:
+        isolated_verification._remove_directory_link(link)
+
+
+def test_invalidation_reasons_compare_canonical_mapping_values(runtime):
+    prepared, _, _ = runtime
+    prepared["snapshot"] = {"head": "new", "mappings": [("A", ["AC-1"])]}
+    ledger = {
+        "runs": [
+            {
+                "identity": "old",
+                "inputs": {"head": "old", "mappings": [["A", ["AC-1"]]]},
+                "attempts": [{"gate": "A"}],
+            }
+        ]
+    }
+    plan = resume.gate_plan(prepared, ledger)
+    assert plan[0]["reason"] == "input identity changed: head"

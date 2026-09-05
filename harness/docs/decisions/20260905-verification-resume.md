@@ -17,7 +17,7 @@ author: Gavin
 
 ## Inputs and execution
 
-初版只支持同 task、同 HEAD 完整 tree、同 gate 顺序及合同的续跑。身份包括 spec、文档目标 blob、风险下限、规范脚本、测试/初始化配置、runner/collector、执行平台、解释器和 Node 可执行文件、本地安装依赖内容与受控环境摘要。依赖扫描排除生成的 Python bytecode、`__pycache__`、`.cache`、`.vite`；这些目录不能承载 gate 的可执行输入。未知可执行依赖、缺失目录和越界链接拒绝验证，不推测可以复用。
+初版只支持同 task、同 HEAD 完整 tree、同 gate 顺序及合同的续跑。身份包括 spec、文档目标 blob、风险下限、规范脚本、测试/初始化配置、runner/collector、执行平台、解释器可执行文件与实际运行时版本、Node 可执行文件、本地安装依赖内容与受控环境摘要。依赖扫描排除生成的 Python bytecode、`__pycache__`、`.cache`、`.vite`；这些目录不能承载 gate 的可执行输入。已在 package.json 声明且由同一 HEAD 约束的 workspace 链接（含 Windows junction）只绑定目标，不扫描目标内生成产物；安装包内容仍逐文件计算摘要。未知可执行依赖、缺失目录和其他越界链接拒绝验证，不推测可以复用。
 
 gate 与 collector 仅继承 `verification_inputs.ENVIRONMENT_KEYS` 中的 OS/工具定位字段并设置 CI 与 Python 确定性开关；任意外部应用密钥、测试标记、端口或构建开关不透传。应用环境由已提交的规范测试入口建立。manifest 不保存密钥值。修改受控字段或依赖内容使凭据失效。验证前后分别检查输入，处理中漂移的运行不可复用。
 

@@ -109,7 +109,7 @@ def gate_plan(
             changed = [
                 key
                 for key, value in prepared["snapshot"].items()
-                if previous_run.get("inputs", {}).get(key) != value
+                if digest(previous_run.get("inputs", {}).get(key)) != digest(value)
             ]
             reason = "input identity changed: " + ", ".join(changed)
         rows.append(
