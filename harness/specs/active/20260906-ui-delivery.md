@@ -8,6 +8,7 @@ author: Gavin
 task_id: 20260906-ui-delivery
 status: active
 verification_profile: release
+verification_escalation: 用户指定第七阶段全站交付明确要求发布候选门禁，除局部无障碍修复外执行完整 release 检查。
 documentation_impact: required
 documentation_targets:
   - ui-fix/PHASE-7.md
