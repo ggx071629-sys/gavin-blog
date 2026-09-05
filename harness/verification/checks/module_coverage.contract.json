@@ -10336,6 +10336,58 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M10-OPS-RUNTIME-01",
+          "priority": "P1",
+          "scenario": "隔离运行时实际停用、重建切换和费用结算边界。",
+          "expectations": [
+            {
+              "id": "M10-OPS-RUNTIME-01-E01",
+              "surface": "response",
+              "statement": "停用优先，重建命令持久化，finalize 后仍须显式启用，账本精确计入结算与预留。"
+            },
+            {
+              "id": "M10-OPS-RUNTIME-01-E02",
+              "surface": "forbidden",
+              "statement": "过期版本不能妨碍紧急停用，切换不能自动开放问答，预留费用不能漏计。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_admin.py",
+              "name": "test_safety_disable_beats_stale_version_and_blocks_new_sessions",
+              "gate": "api-tests",
+              "covers": [
+                "M10-OPS-RUNTIME-01-E01",
+                "M10-OPS-RUNTIME-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_admin.py",
+              "name": "test_rebuild_request_is_durable_and_finalize_leaves_gate_disabled",
+              "gate": "api-tests",
+              "covers": [
+                "M10-OPS-RUNTIME-01-E01",
+                "M10-OPS-RUNTIME-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_admin.py",
+              "name": "test_runtime_ledgers_count_settled_plus_reserved_exactly_and_serialize",
+              "gate": "api-tests",
+              "covers": [
+                "M10-OPS-RUNTIME-01-E01",
+                "M10-OPS-RUNTIME-01-E02"
+              ]
+            }
+          ]
         }
       ]
     }
