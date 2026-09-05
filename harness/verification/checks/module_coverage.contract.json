@@ -9730,6 +9730,304 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-UI-LAYOUT-01",
+          "priority": "P1",
+          "scenario": "双主题八个断点、短视口、长内容及可视视口缩小后布局成立且操作可达。",
+          "expectations": [
+            {
+              "id": "M09-UI-LAYOUT-01-ALLOW",
+              "surface": "user_visible",
+              "statement": "双主题八个断点、短视口、长内容及可视视口缩小后布局成立且操作可达。"
+            },
+            {
+              "id": "M09-UI-LAYOUT-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得出现横向溢出、重复发送、错误来源焦点、抢滚动或清除后旧正文复活等本测试禁止结果。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "assistant phase six layout covers themes breakpoints and visual viewport",
+              "gate": "e2e",
+              "covers": [
+                "M09-UI-LAYOUT-01-ALLOW",
+                "M09-UI-LAYOUT-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-UI-INTERACTION-01",
+          "priority": "P1",
+          "scenario": "示例只填草稿、IME 不发送、手机回车换行、引用返回本次触发点且未读到达不抢上翻位置。",
+          "expectations": [
+            {
+              "id": "M09-UI-INTERACTION-01-ALLOW",
+              "surface": "user_visible",
+              "statement": "示例只填草稿、IME 不发送、手机回车换行、引用返回本次触发点且未读到达不抢上翻位置。"
+            },
+            {
+              "id": "M09-UI-INTERACTION-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得出现横向溢出、重复发送、错误来源焦点、抢滚动或清除后旧正文复活等本测试禁止结果。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "assistant phase six interactions preserve draft citation focus and unread position",
+              "gate": "e2e",
+              "covers": [
+                "M09-UI-INTERACTION-01-ALLOW",
+                "M09-UI-INTERACTION-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-UI-STATES-01",
+          "priority": "P1",
+          "scenario": "拒答保留问题，恢复、限流、断线、会话失效及清除状态分别反馈；检查结果不重问。",
+          "expectations": [
+            {
+              "id": "M09-UI-STATES-01-ALLOW",
+              "surface": "user_visible",
+              "statement": "拒答保留问题，恢复、限流、断线、会话失效及清除状态分别反馈；检查结果不重问。"
+            },
+            {
+              "id": "M09-UI-STATES-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得出现横向溢出、重复发送、错误来源焦点、抢滚动或清除后旧正文复活等本测试禁止结果。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "assistant phase six states distinguish refusal recovery limits expiry and clearing",
+              "gate": "e2e",
+              "covers": [
+                "M09-UI-STATES-01-ALLOW",
+                "M09-UI-STATES-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-UI-BOUNDARY-01",
+          "priority": "P0",
+          "scenario": "保留公开助手输入、SSE、引用、路径、恢复和删除代际校验。",
+          "expectations": [
+            {
+              "id": "M09-UI-BOUNDARY-01-ALLOW",
+              "surface": "response",
+              "statement": "合法 SSE 与已校验引用、期限和字数按原合同消费。"
+            },
+            {
+              "id": "M09-UI-BOUNDARY-01-DENY",
+              "surface": "forbidden",
+              "statement": "不接受跨源路径、错误引用、内部字段、乱序事件或旧代际完成。"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "is strict true only",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "accepts only same-origin relative /api/v1",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "requires the exact final endpoint without redirects, suffixes, queries, or hashes",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "matches launcher paths without query or hash",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "accepts only navigable source paths",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "parses events across arbitrary chunk and CRLF boundaries",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "rejects fatal UTF-8, unknown fields, and internal idempotent",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "enforces the 16-event logical-turn cap across reconnects",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "rejects rewind ids, missing terminal EOF, and data after terminal",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "keeps the Host reconnect path on one parser instance",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "splits each [n] marker once without duplicating the preceding text",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "closes markers only to matching citations and allowlisted sources",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "aborts every old request and rejects a delayed completion after DELETE generation advances",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "uses a controlled 3-second poll clock, bounded Retry-After, and one 180-second horizon",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "closes hydrated answers before allowing source paths into Vue state",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "keeps raw fields out of restorable form controls and wires lifecycle invalidation",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "maps machine codes and Retry-After bounds",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "counts unicode code points and wipes on BFCache",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UI-BOUNDARY-01-ALLOW",
+                "M09-UI-BOUNDARY-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

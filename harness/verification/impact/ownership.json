@@ -1948,7 +1948,8 @@
         "M01-UNIT-UI-FOUNDATION-01",
         "M02-P1-02",
         "M01-PUBLIC-SURFACES-01",
-        "M01-PUBLIC-STATES-01"
+        "M01-PUBLIC-STATES-01",
+        "M09-P1-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2475,7 +2476,9 @@
         "apps/web/utils/assistant/origin.ts",
         "apps/web/utils/assistant/persistence.ts",
         "apps/web/utils/assistant/polling.ts",
-        "apps/web/utils/assistant/sse.ts"
+        "apps/web/utils/assistant/sse.ts",
+        "apps/web/assets/css/assistant.css",
+        "apps/web/tests/e2e-assistant/panel.spec.ts"
       ],
       "cases": [
         "M09-P0-01",
@@ -2485,7 +2488,11 @@
         "M09-UNIT-ASSISTANT-01",
         "M09-UNIT-ASSISTANT-DEVELOPMENT-01",
         "M09-UNIT-ASSISTANT-DISABLED-01",
-        "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01"
+        "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01",
+        "M09-UI-LAYOUT-01",
+        "M09-UI-INTERACTION-01",
+        "M09-UI-STATES-01",
+        "M09-UI-BOUNDARY-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3089,7 +3096,8 @@
         "ui-fix/PHASE-2.md",
         "ui-fix/PHASE-3.md",
         "ui-fix/PHASE-4.md",
-        "ui-fix/PHASE-5.md"
+        "ui-fix/PHASE-5.md",
+        "ui-fix/PHASE-6.md"
       ],
       "cases": [
         "M08-DOCS-01"
