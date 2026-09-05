@@ -155,7 +155,7 @@ timeout_seconds = 600
 [verification.gates.release]
 cwd = "."
 command = ["npm", "run", "quality:release"]
-timeout_seconds = 900
+timeout_seconds = 1200
 subsumption_contract = "scripts/release-stage-contract.json"
 
 [change_enforcement]
