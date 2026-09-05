@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260905-harness-resume",
+  "created_at": "2026-09-05T15:40:51.499188+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "848967abe4e6170a05baa376ecd665658b1456a16297b52068d0d37bab6134a1"
+}

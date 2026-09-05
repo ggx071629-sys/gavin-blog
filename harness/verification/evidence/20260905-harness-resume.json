@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
   "task_id": "20260905-harness-resume",
-  "created_at": "2026-09-05T15:31:08.060721+00:00",
+  "created_at": "2026-09-05T15:40:45.650834+00:00",
   "command": "python -m tools.harness verify 20260905-harness-resume --fresh",
-  "status": "failed",
+  "status": "passed",
   "acceptance_criteria": [
     "AC-1",
     "AC-2",
@@ -14,7 +14,7 @@
   "criteria_results": [
     {
       "id": "AC-1",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "harness-tests",
         "harness-integrity"
@@ -22,7 +22,7 @@
     },
     {
       "id": "AC-2",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "harness-tests",
         "harness-integrity"
@@ -30,7 +30,7 @@
     },
     {
       "id": "AC-3",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "harness-tests",
         "harness-integrity"
@@ -38,7 +38,7 @@
     },
     {
       "id": "AC-4",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "harness-tests",
         "harness-integrity"
@@ -46,7 +46,7 @@
     },
     {
       "id": "AC-5",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "harness-tests",
         "harness-integrity"
@@ -55,10 +55,10 @@
   ],
   "verification_profile": "focused",
   "fingerprints": {
-    "source_tree": "e419dc060a2c998e187d816a1eb247722b75e365",
+    "source_tree": "a2e5a4fa2cb60a3e26a60379d8e53e881ed681a9",
     "active_spec_sha256": "7050a7660e2ecb69850f75828f118fcd1c78438473c2f4e8ced1739f325e2032",
     "verification_contract_sha256": "8db0802f7acc12c7353b638fadccb7c2e2690f30370ac64b5983171bd68d7de7",
-    "gate_config_sha256": "24ed47a0e65d50112dedcf0ab6d99184f0089b4316851f24641318541d05e09d",
+    "gate_config_sha256": "b9aef33a8560a0017179f4029dcc6a344e203598fc66a48b6278a83ae0a50059",
     "documentation_contract_sha256": "37c11436a77188ced220748400bb5e23d798a710dbcb244cbd2953a8a8b1f46d",
     "documentation_targets_sha256": "b202739b66a09abe3dc5b82861f5dcb6fb42246474903dd5df9721967075bd19",
     "module_contract_sha256": "f77c2300e4907b57fa9081929b1c1179b49ca3c4e8b0fe873daf7e2465cf51e2"
@@ -78,12 +78,12 @@
   },
   "execution": {
     "mode": "git-worktree",
-    "source_commit": "49ec35ebf8a4e0272ee0ff1f8a2fbb4d8302ec66",
+    "source_commit": "fcfe7514d64c0027fb35c002fa252f59de5aec8b",
     "cleanup_status": "passed",
     "reused_paths": 1,
     "impact": {
       "plan": "harness/verification/impact/20260905-harness-resume.json",
-      "sha256": "34fb4f72ee29dd6c974a6533598e3b49ad5e11a11e9a81ccbb2faabf7ec88b28",
+      "sha256": "ad141d50e0cdf0a54b95a48b0a37da2c8ee423849e393f53e8b5e5cc6603c35c",
       "selected_cases": [
         "M08-IMPACT-CLOSURE-01",
         "M08-IMPACT-CLOSURE-02",
@@ -102,8 +102,8 @@
       "excluded_cases": 42
     },
     "receipt": {
-      "run_id": "7359962d2d59167533adc737c9bd0113",
-      "identity": "26b64e25bd7adfa55536df2725252f573a7f99e439a998518abae73e5793cdf7",
+      "run_id": "8b6776ba6950ff98eb3a5f92ab8fef42",
+      "identity": "cb8024686a2a09acef3f8aef963ed20711ca4f95022576c55029176fc0d59d90",
       "plan": [
         {
           "gate": "harness-tests",
@@ -122,9 +122,9 @@
       ]
     },
     "phase_durations_ms": {
-      "preflight_checks": 4062.389,
-      "plan_inputs": 1132.96,
-      "execute_cleanup_and_input_recheck": 60357.886
+      "preflight_checks": 4060.965,
+      "plan_inputs": 1126.926,
+      "execute_cleanup_and_input_recheck": 58579.077
     }
   },
   "verification_cases": {
@@ -1768,7 +1768,7 @@
         "1 subsumption contracts bind 7 registered child gates"
       ],
       "status": "passed",
-      "duration_ms": 4.58
+      "duration_ms": 4.735
     },
     {
       "name": "history-integrity",
@@ -1776,7 +1776,7 @@
         "104 deterministic closes retain archive, evidence, event, and active-spec history"
       ],
       "status": "passed",
-      "duration_ms": 131.994
+      "duration_ms": 133.1
     },
     {
       "name": "indexes",
@@ -1784,7 +1784,7 @@
         "9 generated indexes are current"
       ],
       "status": "passed",
-      "duration_ms": 58.728
+      "duration_ms": 58.439
     },
     {
       "name": "l0",
@@ -1792,7 +1792,7 @@
         "AGENTS.md is the unique L0 and stays within 60-80 lines"
       ],
       "status": "passed",
-      "duration_ms": 0.529
+      "duration_ms": 0.538
     },
     {
       "name": "links",
@@ -1800,7 +1800,7 @@
         "745 local Markdown links resolve without durable active-spec references"
       ],
       "status": "passed",
-      "duration_ms": 3623.656
+      "duration_ms": 3622.002
     },
     {
       "name": "metadata",
@@ -1808,7 +1808,7 @@
         "210 routed Markdown documents have valid metadata"
       ],
       "status": "passed",
-      "duration_ms": 54.172
+      "duration_ms": 52.79
     },
     {
       "name": "module-coverage",
@@ -1816,7 +1816,7 @@
         "10 modules, 54 cases, 108 expectations, 173 exact test references; contract sha256 f77c2300e490"
       ],
       "status": "passed",
-      "duration_ms": 101.809
+      "duration_ms": 99.338
     },
     {
       "name": "qualification-manifests",
@@ -1824,7 +1824,7 @@
         "configured qualification manifests have valid historical bindings"
       ],
       "status": "passed",
-      "duration_ms": 2.747
+      "duration_ms": 2.856
     },
     {
       "name": "structure",
@@ -1832,7 +1832,7 @@
         "28 required paths exist"
       ],
       "status": "passed",
-      "duration_ms": 8.223
+      "duration_ms": 8.134
     },
     {
       "name": "supply-chain",
@@ -1840,14 +1840,14 @@
         "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
       ],
       "status": "passed",
-      "duration_ms": 73.369
+      "duration_ms": 76.167
     },
     {
       "name": "harness-tests",
       "kind": "product",
       "command": "{api_python} -m harness.tools.selected_tests --task 20260905-harness-resume --gate harness-tests",
       "status": "passed",
-      "duration_ms": 57160.906,
+      "duration_ms": 55464.423,
       "covers": [
         "AC-1",
         "AC-2",
@@ -1868,20 +1868,20 @@
           "collected": 121,
           "executed": 121
         },
-        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\7359962d2d59167533adc737c9bd0113\\harness-tests\\output.log"
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\8b6776ba6950ff98eb3a5f92ab8fef42\\harness-tests\\output.log"
       },
       "provenance": {
         "mode": "executed",
-        "run_id": "7359962d2d59167533adc737c9bd0113",
-        "attempt_id": "4a7faceacca847f46c9630084ea3d3b4"
+        "run_id": "8b6776ba6950ff98eb3a5f92ab8fef42",
+        "attempt_id": "b895ce94ec8cccdd8f881970fdb75694"
       }
     },
     {
       "name": "harness-integrity",
       "kind": "product",
       "command": "{python} -m tools.harness verify",
-      "status": "failed",
-      "duration_ms": 1540.817,
+      "status": "passed",
+      "duration_ms": 1491.697,
       "covers": [
         "AC-1",
         "AC-2",
@@ -1889,33 +1889,16 @@
         "AC-4",
         "AC-5"
       ],
-      "details": [
-        "diagnostic: [FAILED] links",
-        "- harness/evolution/proposals/20260905-harness-resume--workflow-friction_confirmed.md: missing link target ../../verification/evidence/20260905-harness-resume.json",
-        "[PASSED] metadata",
-        "- 210 routed Markdown documents have valid metadata",
-        "[PASSED] module-coverage",
-        "- 10 modules, 54 cases, 108 expectations, 173 exact test references; contract sha256 f77c2300e490",
-        "[PASSED] qualification-manifests",
-        "- configured qualification manifests have valid historical bindings",
-        "[PASSED] structure",
-        "- 28 required paths exist",
-        "[PASSED] supply-chain",
-        "- 1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
-      ],
+      "details": [],
       "result": {
-        "exit_code": 1,
-        "output_bytes": 984,
-        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\7359962d2d59167533adc737c9bd0113\\harness-integrity\\output.log",
-        "failure": {
-          "kind": "nonzero-exit",
-          "summary": "[FAILED] links"
-        }
+        "exit_code": 0,
+        "output_bytes": 31,
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\8b6776ba6950ff98eb3a5f92ab8fef42\\harness-integrity\\output.log"
       },
       "provenance": {
         "mode": "executed",
-        "run_id": "7359962d2d59167533adc737c9bd0113",
-        "attempt_id": "7165d0905c633c1e4e2e493753eabf08"
+        "run_id": "8b6776ba6950ff98eb3a5f92ab8fef42",
+        "attempt_id": "506826c288828b08b40e5f3f404c91c9"
       }
     },
     {
@@ -1923,7 +1906,7 @@
       "kind": "isolation",
       "command": "git worktree add --detach <temporary> HEAD",
       "status": "passed",
-      "duration_ms": 1223.801,
+      "duration_ms": 1206.673,
       "covers": [],
       "details": [
         "temporary worktree and dependency links were removed"
@@ -1936,22 +1919,16 @@
   "summary": {
     "checks": {
       "total": 13,
-      "passed": 12,
-      "failed": 1
+      "passed": 13,
+      "failed": 0
     },
-    "duration_ms": 63985.331,
-    "failures": [
-      {
-        "name": "harness-integrity",
-        "kind": "nonzero-exit",
-        "summary": "[FAILED] links"
-      }
-    ],
+    "duration_ms": 62220.892,
+    "failures": [],
     "test_counts": {
       "passed": 121,
       "failed": 0,
       "skipped": 0
     }
   },
-  "source_commit": "49ec35ebf8a4e0272ee0ff1f8a2fbb4d8302ec66"
+  "source_commit": "fcfe7514d64c0027fb35c002fa252f59de5aec8b"
 }
