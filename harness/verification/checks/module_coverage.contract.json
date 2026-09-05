@@ -9754,7 +9754,7 @@
             {
               "kind": "playwright",
               "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
-              "name": "assistant phase six layout covers themes breakpoints and visual viewport",
+              "name": "panel layout",
               "gate": "e2e",
               "covers": [
                 "M09-UI-LAYOUT-01-ALLOW",
@@ -9786,7 +9786,7 @@
             {
               "kind": "playwright",
               "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
-              "name": "assistant phase six interactions preserve draft citation focus and unread position",
+              "name": "panel interaction",
               "gate": "e2e",
               "covers": [
                 "M09-UI-INTERACTION-01-ALLOW",
@@ -9818,7 +9818,7 @@
             {
               "kind": "playwright",
               "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
-              "name": "assistant phase six states distinguish refusal recovery limits expiry and clearing",
+              "name": "panel state recovery",
               "gate": "e2e",
               "covers": [
                 "M09-UI-STATES-01-ALLOW",
