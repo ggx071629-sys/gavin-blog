@@ -1251,6 +1251,48 @@
           "cases": []
         }
       ]
+    },
+    {
+      "path": "apps/web/tests/e2e/archive-index.spec.ts",
+      "owner": "M01.indexes",
+      "reason": "Make the existing empty-archive assertion independent of earlier published fixtures in the isolated task database; explicitly assert HTTP 200. No product API or archive behavior changes.",
+      "cases": [
+        "M01-UNIT-ARTICLES-INDEX-01",
+        "M01-UNIT-ARCHIVE-INDEX-01",
+        "M01-UNIT-ABOUT-INDEX-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
     }
   ]
 }
