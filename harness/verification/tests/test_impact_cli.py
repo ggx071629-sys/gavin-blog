@@ -64,6 +64,18 @@ def run_in_worktree(*args, **kwargs):
             "        (context['harness_root'] / 'tools/fixture.py').write_text('changed during close')\n"
             "    return {'name': 'injected', 'passed': True, 'details': []}\n"
         )
+    if fault == 'readonly':
+        marker = tmp_path / 'readonly'
+        for filename, function in [('product_verification.py', 'run_gates'), ('test_collection.py', '_run')]:
+            path = root/'harness/tools'/filename
+            path.write_text(path.read_text()+f'''
+_readonly_original_{function} = {function}
+def {function}(*args, **kwargs):
+    from pathlib import Path
+    if Path({str(marker)!r}).exists():
+        raise RuntimeError('readonly command attempted tests, build or collection')
+    return _readonly_original_{function}(*args, **kwargs)
+''')
     config = root / "harness/config.toml"
     config.write_text(
         config.read_text().replace("reuse = false", f"reuse = {str(reuse).lower()}")
@@ -313,6 +325,23 @@ def test_real_docs_close_has_no_test_collection_or_dependencies(tmp_path):
     assert [c["name"] for c in evidence["checks"] if c.get("kind") == "product"] == [
         "harness-integrity"
     ]
+
+
+def test_real_plan_status_and_close_cannot_start_gates_or_collectors(tmp_path):
+    root=fixture_repository(tmp_path, fault='readonly')
+    marker=tmp_path/'readonly'
+    marker.touch()
+    for command in ['plan','status']:
+        result=cli(root,command,TASK)
+        assert result.returncode==0,result.stdout+result.stderr
+    marker.unlink()
+    verify=cli(root,'verify',TASK)
+    assert verify.returncode==0,verify.stdout+verify.stderr
+    marker.touch()
+    for command in ['plan','status','close']:
+        result=cli(root,command,TASK)
+        assert result.returncode==0,result.stdout+result.stderr
+    assert (root/f'harness/specs/archive/{TASK}.md').is_file()
 
 
 def test_real_close_source_race_rolls_back_and_concurrent_cli_is_rejected(tmp_path):

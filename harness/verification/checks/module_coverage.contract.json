@@ -362,80 +362,6 @@
           ]
         },
         {
-          "id": "M01-UNIT-UI-FOUNDATION-01",
-          "priority": "P1",
-          "scenario": "M01.navigation: ui-foundation scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M01-UNIT-UI-FOUNDATION-01-E01",
-              "surface": "response",
-              "statement": "shared public foundations preserve themes, routes and keyboard navigation; shared admin foundations keep all destinations reachable in short viewports"
-            },
-            {
-              "id": "M01-UNIT-UI-FOUNDATION-01-E02",
-              "surface": "forbidden",
-              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
-            }
-          ],
-          "required_gates": [
-            "e2e"
-          ],
-          "test_refs": [
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
-              "name": "shared public foundations preserve themes, routes and keyboard navigation",
-              "gate": "e2e",
-              "covers": [
-                "M01-UNIT-UI-FOUNDATION-01-E01",
-                "M01-UNIT-UI-FOUNDATION-01-E02"
-              ]
-            },
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
-              "name": "shared admin foundations keep all destinations reachable in short viewports",
-              "gate": "e2e",
-              "covers": [
-                "M01-UNIT-UI-FOUNDATION-01-E01",
-                "M01-UNIT-UI-FOUNDATION-01-E02"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "M01-UNIT-SITE-01",
-          "priority": "P1",
-          "scenario": "M01.navigation: site scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M01-UNIT-SITE-01-E01",
-              "surface": "response",
-              "statement": "uses the same variable in the target placeholder and query-input declaration"
-            },
-            {
-              "id": "M01-UNIT-SITE-01-E02",
-              "surface": "forbidden",
-              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
-            }
-          ],
-          "required_gates": [
-            "web-quality"
-          ],
-          "test_refs": [
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/site.test.ts",
-              "name": "uses the same variable in the target placeholder and query-input declaration",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-SITE-01-E01",
-                "M01-UNIT-SITE-01-E02"
-              ]
-            }
-          ]
-        },
-        {
           "id": "M01-UNIT-PUBLIC-EXPERIENCE-01",
           "priority": "P1",
           "scenario": "M01.navigation: public-experience scenarios at the existing module boundary.",
@@ -538,6 +464,80 @@
           ]
         },
         {
+          "id": "M01-UNIT-SITE-01",
+          "priority": "P1",
+          "scenario": "M01.navigation: site scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M01-UNIT-SITE-01-E01",
+              "surface": "response",
+              "statement": "uses the same variable in the target placeholder and query-input declaration"
+            },
+            {
+              "id": "M01-UNIT-SITE-01-E02",
+              "surface": "forbidden",
+              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/site.test.ts",
+              "name": "uses the same variable in the target placeholder and query-input declaration",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-SITE-01-E01",
+                "M01-UNIT-SITE-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M01-UNIT-UI-FOUNDATION-01",
+          "priority": "P1",
+          "scenario": "M01.navigation: ui-foundation scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M01-UNIT-UI-FOUNDATION-01-E01",
+              "surface": "response",
+              "statement": "shared public foundations preserve themes, routes and keyboard navigation; shared admin foundations keep all destinations reachable in short viewports"
+            },
+            {
+              "id": "M01-UNIT-UI-FOUNDATION-01-E02",
+              "surface": "forbidden",
+              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+              "name": "shared public foundations preserve themes, routes and keyboard navigation",
+              "gate": "e2e",
+              "covers": [
+                "M01-UNIT-UI-FOUNDATION-01-E01",
+                "M01-UNIT-UI-FOUNDATION-01-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+              "name": "shared admin foundations keep all destinations reachable in short viewports",
+              "gate": "e2e",
+              "covers": [
+                "M01-UNIT-UI-FOUNDATION-01-E01",
+                "M01-UNIT-UI-FOUNDATION-01-E02"
+              ]
+            }
+          ]
+        },
+        {
           "id": "M01-UNIT-ARTICLE-READING-01",
           "priority": "P1",
           "scenario": "M01.reading: article-reading scenarios at the existing module boundary.",
@@ -575,6 +575,110 @@
               "covers": [
                 "M01-UNIT-ARTICLE-READING-01-E01",
                 "M01-UNIT-ARTICLE-READING-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M01-UNIT-MARKDOWN-MERMAID-01",
+          "priority": "P1",
+          "scenario": "M01.reading: markdown-mermaid scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M01-UNIT-MARKDOWN-MERMAID-01-E01",
+              "surface": "response",
+              "statement": "Mermaid redraws for the resolved theme and invalid diagrams degrade locally"
+            },
+            {
+              "id": "M01-UNIT-MARKDOWN-MERMAID-01-E02",
+              "surface": "forbidden",
+              "statement": "Mermaid redraws for the resolved theme and invalid diagrams degrade locally"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/markdown-mermaid.spec.ts",
+              "name": "Mermaid redraws for the resolved theme and invalid diagrams degrade locally",
+              "gate": "e2e",
+              "covers": [
+                "M01-UNIT-MARKDOWN-MERMAID-01-E01",
+                "M01-UNIT-MARKDOWN-MERMAID-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M01-UNIT-ARTICLE-01",
+          "priority": "P1",
+          "scenario": "M01.reading: article scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M01-UNIT-ARTICLE-01-E01",
+              "surface": "response",
+              "statement": "builds a stable UTC publication path; creates URL-safe ASCII slugs; builds public taxonomy filters from supported query values"
+            },
+            {
+              "id": "M01-UNIT-ARTICLE-01-E02",
+              "surface": "forbidden",
+              "statement": "requires an explicit English or pinyin slug when the title cannot generate one; rejects empty titles and slugs outside the API slug contract"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/article.test.ts",
+              "name": "builds a stable UTC publication path",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-ARTICLE-01-E01",
+                "M01-UNIT-ARTICLE-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/article.test.ts",
+              "name": "creates URL-safe ASCII slugs",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-ARTICLE-01-E01",
+                "M01-UNIT-ARTICLE-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/article.test.ts",
+              "name": "requires an explicit English or pinyin slug when the title cannot generate one",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-ARTICLE-01-E01",
+                "M01-UNIT-ARTICLE-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/article.test.ts",
+              "name": "rejects empty titles and slugs outside the API slug contract",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-ARTICLE-01-E01",
+                "M01-UNIT-ARTICLE-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/article.test.ts",
+              "name": "builds public taxonomy filters from supported query values",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-ARTICLE-01-E01",
+                "M01-UNIT-ARTICLE-01-E02"
               ]
             }
           ]
@@ -702,38 +806,6 @@
           ]
         },
         {
-          "id": "M01-UNIT-MARKDOWN-MERMAID-01",
-          "priority": "P1",
-          "scenario": "M01.reading: markdown-mermaid scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M01-UNIT-MARKDOWN-MERMAID-01-E01",
-              "surface": "response",
-              "statement": "Mermaid redraws for the resolved theme and invalid diagrams degrade locally"
-            },
-            {
-              "id": "M01-UNIT-MARKDOWN-MERMAID-01-E02",
-              "surface": "forbidden",
-              "statement": "Mermaid redraws for the resolved theme and invalid diagrams degrade locally"
-            }
-          ],
-          "required_gates": [
-            "e2e"
-          ],
-          "test_refs": [
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/markdown-mermaid.spec.ts",
-              "name": "Mermaid redraws for the resolved theme and invalid diagrams degrade locally",
-              "gate": "e2e",
-              "covers": [
-                "M01-UNIT-MARKDOWN-MERMAID-01-E01",
-                "M01-UNIT-MARKDOWN-MERMAID-01-E02"
-              ]
-            }
-          ]
-        },
-        {
           "id": "M01-UNIT-WIKILINKS-01",
           "priority": "P1",
           "scenario": "M01.reading: wikilinks scenarios at the existing module boundary.",
@@ -776,6 +848,98 @@
           ]
         },
         {
+          "id": "M01-UNIT-CODEBLOCK-THEME-01",
+          "priority": "P1",
+          "scenario": "M01.reading: codeblock-theme scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M01-UNIT-CODEBLOCK-THEME-01-E01",
+              "surface": "response",
+              "statement": "keeps heavy article enhancers behind content-driven dynamic imports; defines hljs token color variables for the light theme; defines hljs token color variables for the dark theme; maps hljs token classes to the theme variables; gives prose pre a theme-aware text color"
+            },
+            {
+              "id": "M01-UNIT-CODEBLOCK-THEME-01-E02",
+              "surface": "forbidden",
+              "statement": "does not hardcode a dark background on editorial-prose pre; does not load a single hard-coded hljs dark theme globally"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
+              "name": "does not hardcode a dark background on editorial-prose pre",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-CODEBLOCK-THEME-01-E01",
+                "M01-UNIT-CODEBLOCK-THEME-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
+              "name": "does not load a single hard-coded hljs dark theme globally",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-CODEBLOCK-THEME-01-E01",
+                "M01-UNIT-CODEBLOCK-THEME-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
+              "name": "keeps heavy article enhancers behind content-driven dynamic imports",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-CODEBLOCK-THEME-01-E01",
+                "M01-UNIT-CODEBLOCK-THEME-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
+              "name": "defines hljs token color variables for the light theme",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-CODEBLOCK-THEME-01-E01",
+                "M01-UNIT-CODEBLOCK-THEME-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
+              "name": "defines hljs token color variables for the dark theme",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-CODEBLOCK-THEME-01-E01",
+                "M01-UNIT-CODEBLOCK-THEME-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
+              "name": "maps hljs token classes to the theme variables",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-CODEBLOCK-THEME-01-E01",
+                "M01-UNIT-CODEBLOCK-THEME-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
+              "name": "gives prose pre a theme-aware text color",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-CODEBLOCK-THEME-01-E01",
+                "M01-UNIT-CODEBLOCK-THEME-01-E02"
+              ]
+            }
+          ]
+        },
+        {
           "id": "M01-UNIT-KNOWLEDGE-LINKS-01",
           "priority": "P1",
           "scenario": "M01.reading: knowledge-links scenarios at the existing module boundary.",
@@ -803,110 +967,6 @@
               "covers": [
                 "M01-UNIT-KNOWLEDGE-LINKS-01-E01",
                 "M01-UNIT-KNOWLEDGE-LINKS-01-E02"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "M01-UNIT-CODEBLOCK-THEME-01",
-          "priority": "P1",
-          "scenario": "M01.reading: codeblock-theme scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M01-UNIT-CODEBLOCK-THEME-01-E01",
-              "surface": "response",
-              "statement": "codeblocks stay readable and switch hljs theme in both color modes"
-            },
-            {
-              "id": "M01-UNIT-CODEBLOCK-THEME-01-E02",
-              "surface": "forbidden",
-              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
-            }
-          ],
-          "required_gates": [
-            "e2e"
-          ],
-          "test_refs": [
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/codeblock-theme.spec.ts",
-              "name": "codeblocks stay readable and switch hljs theme in both color modes",
-              "gate": "e2e",
-              "covers": [
-                "M01-UNIT-CODEBLOCK-THEME-01-E01",
-                "M01-UNIT-CODEBLOCK-THEME-01-E02"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "M01-UNIT-ARTICLE-01",
-          "priority": "P1",
-          "scenario": "M01.reading: article scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M01-UNIT-ARTICLE-01-E01",
-              "surface": "response",
-              "statement": "builds a stable UTC publication path; creates URL-safe ASCII slugs; builds public taxonomy filters from supported query values"
-            },
-            {
-              "id": "M01-UNIT-ARTICLE-01-E02",
-              "surface": "forbidden",
-              "statement": "requires an explicit English or pinyin slug when the title cannot generate one; rejects empty titles and slugs outside the API slug contract"
-            }
-          ],
-          "required_gates": [
-            "web-quality"
-          ],
-          "test_refs": [
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/article.test.ts",
-              "name": "builds a stable UTC publication path",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
-                "M01-UNIT-ARTICLE-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/article.test.ts",
-              "name": "creates URL-safe ASCII slugs",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
-                "M01-UNIT-ARTICLE-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/article.test.ts",
-              "name": "requires an explicit English or pinyin slug when the title cannot generate one",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
-                "M01-UNIT-ARTICLE-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/article.test.ts",
-              "name": "rejects empty titles and slugs outside the API slug contract",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
-                "M01-UNIT-ARTICLE-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/article.test.ts",
-              "name": "builds public taxonomy filters from supported query values",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
-                "M01-UNIT-ARTICLE-01-E02"
               ]
             }
           ]
@@ -1058,48 +1118,6 @@
           ]
         },
         {
-          "id": "M01-UNIT-PHASE4-INDEXES-01",
-          "priority": "P1",
-          "scenario": "M01.indexes: phase4-indexes scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M01-UNIT-PHASE4-INDEXES-01-E01",
-              "surface": "response",
-              "statement": "home chrome and cards survive phase 4 index restyles"
-            },
-            {
-              "id": "M01-UNIT-PHASE4-INDEXES-01-E02",
-              "surface": "forbidden",
-              "statement": "phase 4 indexes and home do not overflow at 390 or 1440"
-            }
-          ],
-          "required_gates": [
-            "e2e"
-          ],
-          "test_refs": [
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/phase4-indexes.spec.ts",
-              "name": "phase 4 indexes and home do not overflow at 390 or 1440",
-              "gate": "e2e",
-              "covers": [
-                "M01-UNIT-PHASE4-INDEXES-01-E01",
-                "M01-UNIT-PHASE4-INDEXES-01-E02"
-              ]
-            },
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/phase4-indexes.spec.ts",
-              "name": "home chrome and cards survive phase 4 index restyles",
-              "gate": "e2e",
-              "covers": [
-                "M01-UNIT-PHASE4-INDEXES-01-E01",
-                "M01-UNIT-PHASE4-INDEXES-01-E02"
-              ]
-            }
-          ]
-        },
-        {
           "id": "M01-UNIT-ARCHIVE-INDEX-01",
           "priority": "P1",
           "scenario": "M01.indexes: archive-index scenarios at the existing module boundary.",
@@ -1137,6 +1155,48 @@
               "covers": [
                 "M01-UNIT-ARCHIVE-INDEX-01-E01",
                 "M01-UNIT-ARCHIVE-INDEX-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M01-UNIT-PHASE4-INDEXES-01",
+          "priority": "P1",
+          "scenario": "M01.indexes: phase4-indexes scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M01-UNIT-PHASE4-INDEXES-01-E01",
+              "surface": "response",
+              "statement": "home chrome and cards survive phase 4 index restyles"
+            },
+            {
+              "id": "M01-UNIT-PHASE4-INDEXES-01-E02",
+              "surface": "forbidden",
+              "statement": "phase 4 indexes and home do not overflow at 390 or 1440"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/phase4-indexes.spec.ts",
+              "name": "phase 4 indexes and home do not overflow at 390 or 1440",
+              "gate": "e2e",
+              "covers": [
+                "M01-UNIT-PHASE4-INDEXES-01-E01",
+                "M01-UNIT-PHASE4-INDEXES-01-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/phase4-indexes.spec.ts",
+              "name": "home chrome and cards survive phase 4 index restyles",
+              "gate": "e2e",
+              "covers": [
+                "M01-UNIT-PHASE4-INDEXES-01-E01",
+                "M01-UNIT-PHASE4-INDEXES-01-E02"
               ]
             }
           ]
@@ -1460,48 +1520,6 @@
           ]
         },
         {
-          "id": "M02-UNIT-EDITOR-SAVE-CONTRACT-01",
-          "priority": "P1",
-          "scenario": "M02.editing: editor-save-contract scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E01",
-              "surface": "response",
-              "statement": "disables published slugs and sends article publish versions; surfaces trash errors and published preview honestly"
-            },
-            {
-              "id": "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E02",
-              "surface": "forbidden",
-              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
-            }
-          ],
-          "required_gates": [
-            "web-quality"
-          ],
-          "test_refs": [
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/editor-save-contract.test.ts",
-              "name": "disables published slugs and sends article publish versions",
-              "gate": "web-quality",
-              "covers": [
-                "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E01",
-                "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/editor-save-contract.test.ts",
-              "name": "surfaces trash errors and published preview honestly",
-              "gate": "web-quality",
-              "covers": [
-                "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E01",
-                "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E02"
-              ]
-            }
-          ]
-        },
-        {
           "id": "M02-UNIT-ARTICLE-LOOP-01",
           "priority": "P1",
           "scenario": "M02.editing: article-loop scenarios at the existing module boundary.",
@@ -1621,6 +1639,48 @@
               "covers": [
                 "M02-UNIT-AUTOSAVE-01-E01",
                 "M02-UNIT-AUTOSAVE-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M02-UNIT-EDITOR-SAVE-CONTRACT-01",
+          "priority": "P1",
+          "scenario": "M02.editing: editor-save-contract scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E01",
+              "surface": "response",
+              "statement": "disables published slugs and sends article publish versions; surfaces trash errors and published preview honestly"
+            },
+            {
+              "id": "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E02",
+              "surface": "forbidden",
+              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/editor-save-contract.test.ts",
+              "name": "disables published slugs and sends article publish versions",
+              "gate": "web-quality",
+              "covers": [
+                "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E01",
+                "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/editor-save-contract.test.ts",
+              "name": "surfaces trash errors and published preview honestly",
+              "gate": "web-quality",
+              "covers": [
+                "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E01",
+                "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E02"
               ]
             }
           ]
@@ -2486,38 +2546,6 @@
           ]
         },
         {
-          "id": "M05-UNIT-MEDIA-UPLOAD-01",
-          "priority": "P1",
-          "scenario": "M05.media_web: media-upload scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M05-UNIT-MEDIA-UPLOAD-01-E01",
-              "surface": "response",
-              "statement": "reports success, failure, success independently and retries only failures"
-            },
-            {
-              "id": "M05-UNIT-MEDIA-UPLOAD-01-E02",
-              "surface": "forbidden",
-              "statement": "reports success, failure, success independently and retries only failures"
-            }
-          ],
-          "required_gates": [
-            "web-quality"
-          ],
-          "test_refs": [
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/media-upload.test.ts",
-              "name": "reports success, failure, success independently and retries only failures",
-              "gate": "web-quality",
-              "covers": [
-                "M05-UNIT-MEDIA-UPLOAD-01-E01",
-                "M05-UNIT-MEDIA-UPLOAD-01-E02"
-              ]
-            }
-          ]
-        },
-        {
           "id": "M05-UNIT-MARKDOWN-MEDIA-01",
           "priority": "P1",
           "scenario": "M05.media_web: markdown-media scenarios at the existing module boundary.",
@@ -2555,6 +2583,38 @@
               "covers": [
                 "M05-UNIT-MARKDOWN-MEDIA-01-E01",
                 "M05-UNIT-MARKDOWN-MEDIA-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M05-UNIT-MEDIA-UPLOAD-01",
+          "priority": "P1",
+          "scenario": "M05.media_web: media-upload scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M05-UNIT-MEDIA-UPLOAD-01-E01",
+              "surface": "response",
+              "statement": "reports success, failure, success independently and retries only failures"
+            },
+            {
+              "id": "M05-UNIT-MEDIA-UPLOAD-01-E02",
+              "surface": "forbidden",
+              "statement": "reports success, failure, success independently and retries only failures"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/media-upload.test.ts",
+              "name": "reports success, failure, success independently and retries only failures",
+              "gate": "web-quality",
+              "covers": [
+                "M05-UNIT-MEDIA-UPLOAD-01-E01",
+                "M05-UNIT-MEDIA-UPLOAD-01-E02"
               ]
             }
           ]
@@ -3374,88 +3434,6 @@
           ]
         },
         {
-          "id": "M06-UNIT-API-ERRORS-01",
-          "priority": "P1",
-          "scenario": "M06.transport: api-errors scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M06-UNIT-API-ERRORS-01-E01",
-              "surface": "response",
-              "statement": "distinguishes optimistic-lock 409 from slug-lock 409; reads statuses from Nuxt and fetch error shapes; gives truthful login messages; accepts only local admin return targets"
-            },
-            {
-              "id": "M06-UNIT-API-ERRORS-01-E02",
-              "surface": "forbidden",
-              "statement": "only maps an explicit 404 to not found; never claims logout succeeded after a failed request"
-            }
-          ],
-          "required_gates": [
-            "web-quality"
-          ],
-          "test_refs": [
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/api-errors.test.ts",
-              "name": "distinguishes optimistic-lock 409 from slug-lock 409",
-              "gate": "web-quality",
-              "covers": [
-                "M06-UNIT-API-ERRORS-01-E01",
-                "M06-UNIT-API-ERRORS-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/api-errors.test.ts",
-              "name": "reads statuses from Nuxt and fetch error shapes",
-              "gate": "web-quality",
-              "covers": [
-                "M06-UNIT-API-ERRORS-01-E01",
-                "M06-UNIT-API-ERRORS-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/api-errors.test.ts",
-              "name": "only maps an explicit 404 to not found",
-              "gate": "web-quality",
-              "covers": [
-                "M06-UNIT-API-ERRORS-01-E01",
-                "M06-UNIT-API-ERRORS-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/api-errors.test.ts",
-              "name": "gives truthful login messages",
-              "gate": "web-quality",
-              "covers": [
-                "M06-UNIT-API-ERRORS-01-E01",
-                "M06-UNIT-API-ERRORS-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/api-errors.test.ts",
-              "name": "never claims logout succeeded after a failed request",
-              "gate": "web-quality",
-              "covers": [
-                "M06-UNIT-API-ERRORS-01-E01",
-                "M06-UNIT-API-ERRORS-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/api-errors.test.ts",
-              "name": "accepts only local admin return targets",
-              "gate": "web-quality",
-              "covers": [
-                "M06-UNIT-API-ERRORS-01-E01",
-                "M06-UNIT-API-ERRORS-01-E02"
-              ]
-            }
-          ]
-        },
-        {
           "id": "M06-UNIT-FAILURE-STATE-01",
           "priority": "P1",
           "scenario": "M06.transport: failure-state scenarios at the existing module boundary.",
@@ -3553,6 +3531,88 @@
               "covers": [
                 "M06-UNIT-FAILURE-STATE-01-E01",
                 "M06-UNIT-FAILURE-STATE-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-UNIT-API-ERRORS-01",
+          "priority": "P1",
+          "scenario": "M06.transport: api-errors scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M06-UNIT-API-ERRORS-01-E01",
+              "surface": "response",
+              "statement": "distinguishes optimistic-lock 409 from slug-lock 409; reads statuses from Nuxt and fetch error shapes; gives truthful login messages; accepts only local admin return targets"
+            },
+            {
+              "id": "M06-UNIT-API-ERRORS-01-E02",
+              "surface": "forbidden",
+              "statement": "only maps an explicit 404 to not found; never claims logout succeeded after a failed request"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/api-errors.test.ts",
+              "name": "distinguishes optimistic-lock 409 from slug-lock 409",
+              "gate": "web-quality",
+              "covers": [
+                "M06-UNIT-API-ERRORS-01-E01",
+                "M06-UNIT-API-ERRORS-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/api-errors.test.ts",
+              "name": "reads statuses from Nuxt and fetch error shapes",
+              "gate": "web-quality",
+              "covers": [
+                "M06-UNIT-API-ERRORS-01-E01",
+                "M06-UNIT-API-ERRORS-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/api-errors.test.ts",
+              "name": "only maps an explicit 404 to not found",
+              "gate": "web-quality",
+              "covers": [
+                "M06-UNIT-API-ERRORS-01-E01",
+                "M06-UNIT-API-ERRORS-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/api-errors.test.ts",
+              "name": "gives truthful login messages",
+              "gate": "web-quality",
+              "covers": [
+                "M06-UNIT-API-ERRORS-01-E01",
+                "M06-UNIT-API-ERRORS-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/api-errors.test.ts",
+              "name": "never claims logout succeeded after a failed request",
+              "gate": "web-quality",
+              "covers": [
+                "M06-UNIT-API-ERRORS-01-E01",
+                "M06-UNIT-API-ERRORS-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/api-errors.test.ts",
+              "name": "accepts only local admin return targets",
+              "gate": "web-quality",
+              "covers": [
+                "M06-UNIT-API-ERRORS-01-E01",
+                "M06-UNIT-API-ERRORS-01-E02"
               ]
             }
           ]
@@ -3680,6 +3740,38 @@
           ]
         },
         {
+          "id": "M07-UNIT-SEO-DISCOVERY-01",
+          "priority": "P1",
+          "scenario": "M07.discovery: seo-discovery scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M07-UNIT-SEO-DISCOVERY-01-E01",
+              "surface": "response",
+              "statement": "published content exposes canonical metadata and discovery documents"
+            },
+            {
+              "id": "M07-UNIT-SEO-DISCOVERY-01-E02",
+              "surface": "forbidden",
+              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/seo-discovery.spec.ts",
+              "name": "published content exposes canonical metadata and discovery documents",
+              "gate": "e2e",
+              "covers": [
+                "M07-UNIT-SEO-DISCOVERY-01-E01",
+                "M07-UNIT-SEO-DISCOVERY-01-E02"
+              ]
+            }
+          ]
+        },
+        {
           "id": "M07-UNIT-DISCOVERY-01",
           "priority": "P1",
           "scenario": "M07.discovery: discovery scenarios at the existing module boundary.",
@@ -3727,38 +3819,6 @@
               "covers": [
                 "M07-UNIT-DISCOVERY-01-E01",
                 "M07-UNIT-DISCOVERY-01-E02"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "M07-UNIT-SEO-DISCOVERY-01",
-          "priority": "P1",
-          "scenario": "M07.discovery: seo-discovery scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M07-UNIT-SEO-DISCOVERY-01-E01",
-              "surface": "response",
-              "statement": "published content exposes canonical metadata and discovery documents"
-            },
-            {
-              "id": "M07-UNIT-SEO-DISCOVERY-01-E02",
-              "surface": "forbidden",
-              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
-            }
-          ],
-          "required_gates": [
-            "e2e"
-          ],
-          "test_refs": [
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/seo-discovery.spec.ts",
-              "name": "published content exposes canonical metadata and discovery documents",
-              "gate": "e2e",
-              "covers": [
-                "M07-UNIT-SEO-DISCOVERY-01-E01",
-                "M07-UNIT-SEO-DISCOVERY-01-E02"
               ]
             }
           ]
@@ -3876,48 +3936,6 @@
           ]
         },
         {
-          "id": "M07-UNIT-TYPOGRAPHY-01",
-          "priority": "P1",
-          "scenario": "M07.theme: typography scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M07-UNIT-TYPOGRAPHY-01-E01",
-              "surface": "response",
-              "statement": "keeps homepage empty-state copy in the shipped template"
-            },
-            {
-              "id": "M07-UNIT-TYPOGRAPHY-01-E02",
-              "surface": "forbidden",
-              "statement": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts"
-            }
-          ],
-          "required_gates": [
-            "web-quality"
-          ],
-          "test_refs": [
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/typography.test.ts",
-              "name": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts",
-              "gate": "web-quality",
-              "covers": [
-                "M07-UNIT-TYPOGRAPHY-01-E01",
-                "M07-UNIT-TYPOGRAPHY-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/typography.test.ts",
-              "name": "keeps homepage empty-state copy in the shipped template",
-              "gate": "web-quality",
-              "covers": [
-                "M07-UNIT-TYPOGRAPHY-01-E01",
-                "M07-UNIT-TYPOGRAPHY-01-E02"
-              ]
-            }
-          ]
-        },
-        {
           "id": "M07-UNIT-PENPOT-ALIGNMENT-CAPTURE-01",
           "priority": "P1",
           "scenario": "M07.theme: penpot-alignment-capture scenarios at the existing module boundary.",
@@ -3957,56 +3975,98 @@
             {
               "id": "M07-UNIT-THEME-STRUCTURE-01-E01",
               "surface": "response",
-              "statement": "admin login keeps the same two-column and open mobile structure across themes; desktop homepage and article list share the dark canonical structure; mobile article list stacks Date then Title then Meta; representative public and admin pages remain overflow-free on mobile in both themes"
+              "statement": "shares the dark shape scale and elevation geometry across themes; pairs every theme-specific Vue structural utility with the same base utility; keeps theme icon DOM and public profile handlers stable during SSR hydration"
             },
             {
               "id": "M07-UNIT-THEME-STRUCTURE-01-E02",
               "surface": "forbidden",
-              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
+              "statement": "does not keep public layout rules behind light or dark selectors"
             }
           ],
           "required_gates": [
-            "e2e"
+            "web-quality"
           ],
           "test_refs": [
             {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/theme-structure.spec.ts",
-              "name": "admin login keeps the same two-column and open mobile structure across themes",
-              "gate": "e2e",
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/theme-structure.test.ts",
+              "name": "shares the dark shape scale and elevation geometry across themes",
+              "gate": "web-quality",
               "covers": [
                 "M07-UNIT-THEME-STRUCTURE-01-E01",
                 "M07-UNIT-THEME-STRUCTURE-01-E02"
               ]
             },
             {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/theme-structure.spec.ts",
-              "name": "desktop homepage and article list share the dark canonical structure",
-              "gate": "e2e",
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/theme-structure.test.ts",
+              "name": "does not keep public layout rules behind light or dark selectors",
+              "gate": "web-quality",
               "covers": [
                 "M07-UNIT-THEME-STRUCTURE-01-E01",
                 "M07-UNIT-THEME-STRUCTURE-01-E02"
               ]
             },
             {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/theme-structure.spec.ts",
-              "name": "mobile article list stacks Date then Title then Meta",
-              "gate": "e2e",
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/theme-structure.test.ts",
+              "name": "pairs every theme-specific Vue structural utility with the same base utility",
+              "gate": "web-quality",
               "covers": [
                 "M07-UNIT-THEME-STRUCTURE-01-E01",
                 "M07-UNIT-THEME-STRUCTURE-01-E02"
               ]
             },
             {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/theme-structure.spec.ts",
-              "name": "representative public and admin pages remain overflow-free on mobile in both themes",
-              "gate": "e2e",
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/theme-structure.test.ts",
+              "name": "keeps theme icon DOM and public profile handlers stable during SSR hydration",
+              "gate": "web-quality",
               "covers": [
                 "M07-UNIT-THEME-STRUCTURE-01-E01",
                 "M07-UNIT-THEME-STRUCTURE-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M07-UNIT-TYPOGRAPHY-01",
+          "priority": "P1",
+          "scenario": "M07.theme: typography scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M07-UNIT-TYPOGRAPHY-01-E01",
+              "surface": "response",
+              "statement": "keeps homepage empty-state copy in the shipped template"
+            },
+            {
+              "id": "M07-UNIT-TYPOGRAPHY-01-E02",
+              "surface": "forbidden",
+              "statement": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/typography.test.ts",
+              "name": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts",
+              "gate": "web-quality",
+              "covers": [
+                "M07-UNIT-TYPOGRAPHY-01-E01",
+                "M07-UNIT-TYPOGRAPHY-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/typography.test.ts",
+              "name": "keeps homepage empty-state copy in the shipped template",
+              "gate": "web-quality",
+              "covers": [
+                "M07-UNIT-TYPOGRAPHY-01-E01",
+                "M07-UNIT-TYPOGRAPHY-01-E02"
               ]
             }
           ]
@@ -4717,6 +4777,16 @@
               "kind": "pytest",
               "path": "harness/verification/tests/test_impact_cli.py",
               "name": "test_real_close_source_race_rolls_back_and_concurrent_cli_is_rejected",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-IMPACT-SELECTION-01-ALLOW",
+                "M08-IMPACT-SELECTION-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_impact_cli.py",
+              "name": "test_real_plan_status_and_close_cannot_start_gates_or_collectors",
               "gate": "harness-tests",
               "covers": [
                 "M08-IMPACT-SELECTION-01-ALLOW",
@@ -6103,6 +6173,16 @@
               "kind": "pytest",
               "path": "harness/verification/tests/test_impact_registry.py",
               "name": "test_new_unknown_source_fails_without_expanding_test_scope",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-IMPACT-MAPPING-01-E01",
+                "M08-IMPACT-MAPPING-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_impact_registry.py",
+              "name": "test_structure_resolves_repeated_paths_once_but_rechecks_next_invocation",
               "gate": "harness-tests",
               "covers": [
                 "M08-IMPACT-MAPPING-01-E01",
@@ -8240,110 +8320,6 @@
           ]
         },
         {
-          "id": "M09-UNIT-ASSISTANT-DEVELOPMENT-01",
-          "priority": "P1",
-          "scenario": "M09.assistant_web: assistant-development scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E01",
-              "surface": "response",
-              "statement": "tracked assistant development entry is loopback-only and preserves normal defaults"
-            },
-            {
-              "id": "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E02",
-              "surface": "forbidden",
-              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
-            }
-          ],
-          "required_gates": [
-            "web-quality"
-          ],
-          "test_refs": [
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant-development.test.ts",
-              "name": "tracked assistant development entry is loopback-only and preserves normal defaults",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E01",
-                "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E02"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01",
-          "priority": "P1",
-          "scenario": "M09.assistant_web: assistant-proxy-identity scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E01",
-              "surface": "response",
-              "statement": "matches IPv4, mapped IPv4, and IPv6 CIDRs exactly; accepts one edge-produced address only from a trusted socket peer; allows a missing edge header only for the explicit trusted loopback development seam; binds the signature to method, path, address, and timestamp"
-            },
-            {
-              "id": "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E02",
-              "surface": "forbidden",
-              "statement": "rejects missing and chained browser identities"
-            }
-          ],
-          "required_gates": [
-            "web-quality"
-          ],
-          "test_refs": [
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant-proxy-identity.test.ts",
-              "name": "matches IPv4, mapped IPv4, and IPv6 CIDRs exactly",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E01",
-                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant-proxy-identity.test.ts",
-              "name": "accepts one edge-produced address only from a trusted socket peer",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E01",
-                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant-proxy-identity.test.ts",
-              "name": "rejects missing and chained browser identities",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E01",
-                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant-proxy-identity.test.ts",
-              "name": "allows a missing edge header only for the explicit trusted loopback development seam",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E01",
-                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant-proxy-identity.test.ts",
-              "name": "binds the signature to method, path, address, and timestamp",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E01",
-                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E02"
-              ]
-            }
-          ]
-        },
-        {
           "id": "M09-UNIT-ASSISTANT-DISABLED-01",
           "priority": "P1",
           "scenario": "M09.assistant_web: assistant-disabled scenarios at the existing module boundary.",
@@ -8573,6 +8549,110 @@
               "covers": [
                 "M09-UNIT-ASSISTANT-01-E01",
                 "M09-UNIT-ASSISTANT-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01",
+          "priority": "P1",
+          "scenario": "M09.assistant_web: assistant-proxy-identity scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E01",
+              "surface": "response",
+              "statement": "matches IPv4, mapped IPv4, and IPv6 CIDRs exactly; accepts one edge-produced address only from a trusted socket peer; allows a missing edge header only for the explicit trusted loopback development seam; binds the signature to method, path, address, and timestamp"
+            },
+            {
+              "id": "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E02",
+              "surface": "forbidden",
+              "statement": "rejects missing and chained browser identities"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-proxy-identity.test.ts",
+              "name": "matches IPv4, mapped IPv4, and IPv6 CIDRs exactly",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E01",
+                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-proxy-identity.test.ts",
+              "name": "accepts one edge-produced address only from a trusted socket peer",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E01",
+                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-proxy-identity.test.ts",
+              "name": "rejects missing and chained browser identities",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E01",
+                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-proxy-identity.test.ts",
+              "name": "allows a missing edge header only for the explicit trusted loopback development seam",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E01",
+                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-proxy-identity.test.ts",
+              "name": "binds the signature to method, path, address, and timestamp",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E01",
+                "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-UNIT-ASSISTANT-DEVELOPMENT-01",
+          "priority": "P1",
+          "scenario": "M09.assistant_web: assistant-development scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E01",
+              "surface": "response",
+              "statement": "tracked assistant development entry is loopback-only and preserves normal defaults"
+            },
+            {
+              "id": "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E02",
+              "surface": "forbidden",
+              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-development.test.ts",
+              "name": "tracked assistant development entry is loopback-only and preserves normal defaults",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E01",
+                "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E02"
               ]
             }
           ]

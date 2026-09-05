@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import contextvars
 import hashlib
 import json
 import re
@@ -12,6 +13,7 @@ from .config import load_config
 from .test_collection import TestCollectionError, collect_test_index
 
 STRUCTURE_ONLY = object()
+_REFERENCE_PATHS = contextvars.ContextVar('reference_paths', default=None)
 
 SCHEMA_VERSION = 1
 CONTRACT_ID = "gavin-module-coverage-v1"
@@ -314,6 +316,10 @@ def _safe_reference_path(
     if not isinstance(raw_path, str):
         errors.append(f"{label}: path must be a string")
         return None
+    cache = _REFERENCE_PATHS.get()
+    key = (str(project_root), raw_path)
+    if cache is not None and key in cache:
+        return cache[key]
     if (
         not raw_path
         or "\\" in raw_path
@@ -332,6 +338,8 @@ def _safe_reference_path(
     if not resolved.is_file():
         errors.append(f"{label}: referenced file does not exist: {raw_path}")
         return None
+    if cache is not None:
+        cache[key] = resolved
     return resolved
 
 
@@ -550,6 +558,22 @@ def _registered_gates(config: Mapping[str, Any] | None, errors: list[str]) -> se
 
 
 def _validate_payload(
+    payload: dict[str, Any],
+    project_root: Path,
+    registered_gates: set[str],
+    collected_tests: Mapping[tuple[str, str, str, str], list[dict[str, Any]]],
+) -> list[str]:
+    # One structure pass may reference the same file hundreds of times. Cache
+    # successful path resolution only within this call; never across mutations,
+    # plan/verify/close calls, processes, or execution phases.
+    token = _REFERENCE_PATHS.set({})
+    try:
+        return _validate_payload_with_paths(payload, project_root, registered_gates, collected_tests)
+    finally:
+        _REFERENCE_PATHS.reset(token)
+
+
+def _validate_payload_with_paths(
     payload: dict[str, Any],
     project_root: Path,
     registered_gates: set[str],

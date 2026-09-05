@@ -121,7 +121,7 @@
       ],
       "dependency_reasons": {
         "M08.module_verification": [
-          "harness/tools/module_verification.py:12 imports harness.tools.test_collection"
+          "harness/tools/module_verification.py:13 imports harness.tools.test_collection"
         ],
         "M08.selected_tests": [
           "harness/tools/selected_tests.py:15 imports harness.tools.test_collection"
@@ -451,7 +451,7 @@
           "harness/tools/summarizer.py:8 imports harness.tools.config"
         ],
         "M08.module_verification": [
-          "harness/tools/module_verification.py:11 imports harness.tools.config"
+          "harness/tools/module_verification.py:12 imports harness.tools.config"
         ],
         "M08.product_verification": [
           "harness/tools/product_verification.py:16 imports harness.tools.config",
