@@ -1254,6 +1254,239 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M01-HOME-DATA-01",
+          "priority": "P1",
+          "scenario": "Load bounded home data from existing public APIs.",
+          "expectations": [
+            {
+              "id": "M01-HOME-DATA-01-E01",
+              "surface": "user_visible",
+              "statement": "At most three category queries follow stable id ordering; preserve site-wide total and public paths; reuse the recent request without categories."
+            },
+            {
+              "id": "M01-HOME-DATA-01-E02",
+              "surface": "forbidden",
+              "statement": "Do not serialize full bodies, request an uncategorized filter, or convert primary/aborted failures into an empty success."
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/home.test.ts",
+              "name": "bounds category requests by stable id and strips full bodies from the page payload",
+              "gate": "web-quality",
+              "covers": [
+                "M01-HOME-DATA-01-E01",
+                "M01-HOME-DATA-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/home.test.ts",
+              "name": "reuses recent articles when there are no current categories and keeps the site total",
+              "gate": "web-quality",
+              "covers": [
+                "M01-HOME-DATA-01-E01",
+                "M01-HOME-DATA-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/home.test.ts",
+              "name": "distinguishes empty content, taxonomy failure and individual topic failure",
+              "gate": "web-quality",
+              "covers": [
+                "M01-HOME-DATA-01-E01",
+                "M01-HOME-DATA-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/home.test.ts",
+              "name": "propagates primary article and aborted request failures instead of inventing an empty success",
+              "gate": "web-quality",
+              "covers": [
+                "M01-HOME-DATA-01-E01",
+                "M01-HOME-DATA-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M01-HOME-INTERACTION-01",
+          "priority": "P1",
+          "scenario": "Explore a stable bounded topic atlas by pointer and keyboard.",
+          "expectations": [
+            {
+              "id": "M01-HOME-INTERACTION-01-E01",
+              "surface": "user_visible",
+              "statement": "Focus and hover highlight direct branches; Enter/Space persist selection, reset clears it; real category and article destinations remain present."
+            },
+            {
+              "id": "M01-HOME-INTERACTION-01-E02",
+              "surface": "forbidden",
+              "statement": "No fourth branch, incorrect summed total, duplicate request or lingering selection after reset."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/home-atlas.spec.ts",
+              "name": "homepage atlas supports stable selection, hover, keyboard reset and real destinations",
+              "gate": "e2e",
+              "covers": [
+                "M01-HOME-INTERACTION-01-E01",
+                "M01-HOME-INTERACTION-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M01-HOME-STATES-01",
+          "priority": "P1",
+          "scenario": "Navigate through loading, empty, missing taxonomy and per-topic failures.",
+          "expectations": [
+            {
+              "id": "M01-HOME-STATES-01-E01",
+              "surface": "user_visible",
+              "statement": "Loading is visible; empty and uncategorized content have honest fallbacks; per-topic error and empty results differ and retry recovers. Main upstream failures retain HTTP errors."
+            },
+            {
+              "id": "M01-HOME-STATES-01-E02",
+              "surface": "forbidden",
+              "statement": "Do not show empty success while loading or on upstream failure; missing taxonomy cannot claim zero articles."
+            }
+          ],
+          "required_gates": [
+            "e2e",
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/home-atlas.spec.ts",
+              "name": "homepage distinguishes loading, empty, uncategorized and partial failures with retry",
+              "gate": "e2e",
+              "covers": [
+                "M01-HOME-STATES-01-E01",
+                "M01-HOME-STATES-01-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/failure/failure-state.spec.ts",
+              "name": "public SSR preserves upstream failures instead of rendering empty 200 pages",
+              "gate": "web-quality",
+              "covers": [
+                "M01-HOME-STATES-01-E01",
+                "M01-HOME-STATES-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M01-HOME-VISUAL-01",
+          "priority": "P1",
+          "scenario": "Read long content on both themes at desktop, mobile and short viewports.",
+          "expectations": [
+            {
+              "id": "M01-HOME-VISUAL-01-E01",
+              "surface": "user_visible",
+              "statement": "320-1440px remains within the viewport with three topics and compact rows, visible controls, reduced motion and accessible production screenshots."
+            },
+            {
+              "id": "M01-HOME-VISUAL-01-E02",
+              "surface": "forbidden",
+              "statement": "No horizontal overflow, automated WCAG violation, fake live state or missing-summary placeholder; no runtime diagnostics or hydration API replay."
+            }
+          ],
+          "required_gates": [
+            "e2e",
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/home-atlas.spec.ts",
+              "name": "homepage atlas adapts long content to both themes and narrow short viewports",
+              "gate": "e2e",
+              "covers": [
+                "M01-HOME-VISUAL-01-E01",
+                "M01-HOME-VISUAL-01-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/quality/home-atlas.spec.ts",
+              "name": "production homepage records real payloads, first paint and dual theme composition",
+              "gate": "web-quality",
+              "covers": [
+                "M01-HOME-VISUAL-01-E01",
+                "M01-HOME-VISUAL-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/typography.test.ts",
+              "name": "keeps homepage empty-state copy in the shipped template",
+              "gate": "web-quality",
+              "covers": [
+                "M01-HOME-VISUAL-01-E01",
+                "M01-HOME-VISUAL-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M01-HOME-LIVE-01",
+          "priority": "P1",
+          "scenario": "Publish isolated articles and inspect the real homepage and reading navigation.",
+          "expectations": [
+            {
+              "id": "M01-HOME-LIVE-01-E01",
+              "surface": "user_visible",
+              "statement": "Stable selected categories match taxonomy and latest article API; real paths open their article; measure bounded requests and response sizes."
+            },
+            {
+              "id": "M01-HOME-LIVE-01-E02",
+              "surface": "forbidden",
+              "statement": "Unpublished working-copy titles and full-body sentinels never enter homepage HTML; hydration must not refetch API data."
+            }
+          ],
+          "required_gates": [
+            "e2e",
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/home-atlas.spec.ts",
+              "name": "homepage reads published categories and latest snapshots with bounded requests",
+              "gate": "e2e",
+              "covers": [
+                "M01-HOME-LIVE-01-E01",
+                "M01-HOME-LIVE-01-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/quality/home-atlas.spec.ts",
+              "name": "production homepage records real payloads, first paint and dual theme composition",
+              "gate": "web-quality",
+              "covers": [
+                "M01-HOME-LIVE-01-E01",
+                "M01-HOME-LIVE-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -3605,6 +3838,48 @@
               "covers": [
                 "M06-UNIT-API-ERRORS-01-E01",
                 "M06-UNIT-API-ERRORS-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-PROFILE-HOME-01",
+          "priority": "P1",
+          "scenario": "Edit contact details through the existing admin profile and view the homepage intro variant.",
+          "expectations": [
+            {
+              "id": "M06-PROFILE-HOME-01-E01",
+              "surface": "user_visible",
+              "statement": "Saved skills, profile links, safe new-window attributes and email clipboard announcement are retained."
+            },
+            {
+              "id": "M06-PROFILE-HOME-01-E02",
+              "surface": "forbidden",
+              "statement": "Hidden city/email never render; the homepage variant must not break the admin form or contact actions."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/profile.spec.ts",
+              "name": "admin edits the profile and visitors see the updated card",
+              "gate": "e2e",
+              "covers": [
+                "M06-PROFILE-HOME-01-E01",
+                "M06-PROFILE-HOME-01-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/profile.spec.ts",
+              "name": "hidden city and email never appear on the public card",
+              "gate": "e2e",
+              "covers": [
+                "M06-PROFILE-HOME-01-E01",
+                "M06-PROFILE-HOME-01-E02"
               ]
             }
           ]

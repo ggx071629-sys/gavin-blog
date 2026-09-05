@@ -1852,16 +1852,19 @@
       "cases": [
         "M06-PROFILE-CARD-01",
         "M06-PROFILE-SKILLS-01",
-        "M06-UNIT-PROFILE-01"
+        "M06-UNIT-PROFILE-01",
+        "M06-PROFILE-HOME-01"
       ],
       "dependents": [
-        "M01.navigation"
+        "M01.navigation",
+        "M01.home"
       ],
       "dependency_reasons": {
         "M01.navigation": [
-          "apps/web/layouts/default.vue calls auto-imported usePublicProfile",
-          "apps/web/pages/index.vue calls auto-imported usePublicProfile",
-          "apps/web/pages/index.vue renders auto-imported ProfileCard"
+          "apps/web/layouts/default.vue calls usePublicProfile for footer links."
+        ],
+        "M01.home": [
+          "Homepage consumes this unit through its public utility, profile, theme, API or browser verification boundary."
         ]
       }
     },
@@ -1898,7 +1901,6 @@
         "apps/web/composables/usePublicOverlay.ts",
         "apps/web/error.vue",
         "apps/web/layouts/default.vue",
-        "apps/web/pages/index.vue",
         "apps/web/tests/e2e/public-experience.spec.ts",
         "apps/web/tests/e2e/ui-foundation.spec.ts",
         "apps/web/tests/unit/public-ui-polish.test.ts",
@@ -2043,7 +2045,8 @@
         "M01.navigation",
         "M01.reading",
         "M04.projects_web",
-        "M07.discovery"
+        "M07.discovery",
+        "M01.home"
       ],
       "dependency_reasons": {
         "M01.navigation": [
@@ -2059,6 +2062,9 @@
           "apps/web/composables/useSiteSeo.ts imports ~/utils/site",
           "apps/web/server/routes/robots.txt.get.ts imports ~/utils/site",
           "apps/web/server/utils/discovery.ts imports ../../utils/site"
+        ],
+        "M01.home": [
+          "Homepage consumes this unit through its public utility, profile, theme, API or browser verification boundary."
         ]
       }
     },
@@ -2309,7 +2315,8 @@
         "M07-UNIT-PENPOT-ALIGNMENT-CAPTURE-01",
         "M07-UNIT-SITE-QUALITY-01",
         "M07-UNIT-THEME-STRUCTURE-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-UNIT-TYPOGRAPHY-01",
+        "M01-HOME-VISUAL-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2325,7 +2332,8 @@
         "M06.auth_web",
         "M06.profile_web",
         "M09.assistant_web",
-        "M10.operations_web"
+        "M10.operations_web",
+        "M01.home"
       ],
       "dependency_reasons": {
         "M01.navigation": [
@@ -2369,6 +2377,9 @@
         ],
         "M10.operations_web": [
           "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M01.home": [
+          "Homepage consumes this unit through its public utility, profile, theme, API or browser verification boundary."
         ]
       }
     },
@@ -2466,7 +2477,8 @@
         "M05.media_web",
         "M06.profile_web",
         "M07.discovery",
-        "M10.operations_web"
+        "M10.operations_web",
+        "M01.home"
       ],
       "dependency_reasons": {
         "M01.indexes": [
@@ -2531,6 +2543,9 @@
         ],
         "M10.operations_web": [
           "apps/web/pages/admin/assistant.vue imports ~/utils/api-errors"
+        ],
+        "M01.home": [
+          "Homepage consumes this unit through its public utility, profile, theme, API or browser verification boundary."
         ]
       }
     },
@@ -2631,7 +2646,8 @@
         "M06.transport",
         "M07.discovery",
         "M09.assistant_web",
-        "M10.operations_web"
+        "M10.operations_web",
+        "M01.home"
       ],
       "dependency_reasons": {
         "M01.indexes": [
@@ -2731,6 +2747,9 @@
           "Web models consumed by typed requests/components; review changed field before propagation",
           "apps/web/pages/admin/assistant.vue imports ~/types/api",
           "apps/web/utils/assistant-admin.ts imports ~/types/api"
+        ],
+        "M01.home": [
+          "Homepage consumes this unit through its public utility, profile, theme, API or browser verification boundary."
         ]
       }
     },
@@ -2830,7 +2849,8 @@
       "dependents": [
         "M01.navigation",
         "M06.profile_web",
-        "M09.assistant_web"
+        "M09.assistant_web",
+        "M01.home"
       ],
       "dependency_reasons": {
         "M01.navigation": [
@@ -2841,6 +2861,9 @@
         ],
         "M09.assistant_web": [
           "Browser config binds exact projects, services and environment; other cases add consumers when touched"
+        ],
+        "M01.home": [
+          "Homepage consumes this unit through its public utility, profile, theme, API or browser verification boundary."
         ]
       }
     },
@@ -2984,7 +3007,8 @@
         "harness/evolution/proposals/20260905-harness-resume--workflow-friction_confirmed.md",
         "harness/evolution/proposals/20260905-ui-foundation--workflow-friction_confirmed.md",
         "harness/evolution/proposals/INDEX.md",
-        "packages/contracts/README.md"
+        "packages/contracts/README.md",
+        "ui-fix/PHASE-2.md"
       ],
       "cases": [
         "M08-DOCS-01"
@@ -3009,6 +3033,25 @@
         "M08.lifecycle",
         "M08.module_verification"
       ]
+    },
+    "M01.home": {
+      "paths": [
+        "apps/web/pages/index.vue",
+        "apps/web/components/HomeAtlas.vue",
+        "apps/web/utils/home.ts",
+        "apps/web/tests/unit/home.test.ts",
+        "apps/web/tests/e2e/home-atlas.spec.ts",
+        "apps/web/tests/quality/home-atlas.spec.ts"
+      ],
+      "cases": [
+        "M01-HOME-DATA-01",
+        "M01-HOME-INTERACTION-01",
+        "M01-HOME-STATES-01",
+        "M01-HOME-VISUAL-01",
+        "M01-HOME-LIVE-01",
+        "M07-P1-01"
+      ],
+      "dependents": []
     }
   }
 }
