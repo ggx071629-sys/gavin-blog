@@ -315,7 +315,9 @@ def _collect_vitest(project_root: Path, *, selectors: list[str] | None = None, p
     if prepare:
         _run([_npm(), "exec", "nuxt", "--", "prepare"], web_root)
     stdout = _run(
-        [_npm(), "exec", "vitest", "--", "list", "--config", "vitest.config.ts", "--json", *(selectors or [])],
+        # --json accepts an optional output path. Keep it last so a positional
+        # test selector can never be interpreted as a file to overwrite.
+        [_npm(), "exec", "--", "vitest", "list", "--config", "vitest.config.ts", *(selectors or []), "--json"],
         web_root,
     )
     try:

@@ -1,28 +1,28 @@
 ---
 id: evolution-20260905-harness-resume-workflow-friction_confirmed
 level: L1
-summary: 只运行改动后受到影响的模块的测试，以影响分析决定范围
+summary: 受影响模块验证已完成核心改造，映射、产品闭环与成本验收仍待补齐
 load_when:
   - process-evolution
   - task:20260905-harness-resume
 task_id: 20260905-harness-resume
-status: applied
+status: accepted
 author: Gavin
 ---
 
 # Harness 受影响模块验证修订提案
 
-Gavin 在本次实施中重新明确：问题不只在小改动，也不只在重复执行。最终明确的规则是：只运行改动后受到影响的模块的测试；Harness 必须节省上下文、token 和推进时间，不能让普通模块任务承担全项目验证成本。此处记录已明确的目标，下面的具体实现与门禁迁移尚未应用。
+Gavin 在本次实施中重新明确：问题不只在小改动，也不只在重复执行。最终明确的规则是：只运行改动后受到影响的模块的测试；Harness 必须节省上下文、token 和推进时间，不能让普通模块任务承担全项目验证成本。核心机制与门禁迁移已实施，但完整方案尚未执行、验收完毕，具体进度见文末。
 
-来源：[人工确认的摩擦事件](../events/20260905-harness-resume--workflow-friction_confirmed.json)、[原提案](20260905-ui-foundation--workflow-friction_confirmed.md)。本次实施任务保持 active，不宣称已经完成新的成本目标。
+来源：[人工确认的摩擦事件](../events/20260905-harness-resume--workflow-friction_confirmed.json)、[原提案](20260905-ui-foundation--workflow-friction_confirmed.md)。`20260905-harness-resume` 已按执行者收窄后的 spec 验证并压缩归档；该归档不能证明本文全部验收通过，也不能证明新的成本目标已经完成。
 
-Gavin 于 2026-09-05 要求将旧提案吸收到本提案并关闭旧提案。本文已合并仍适用的验证闭环要求，成为后续方案的统一入口；旧提案仅保留历史。此次确认的是合并与终结旧路线，具体实现方案仍为 proposed。
+Gavin 于 2026-09-05 要求将旧提案吸收到本提案并关闭旧提案，随后明确要求按本文改造 Harness。本文是统一实施入口；旧提案仅保留历史。当前 `accepted` 表示方案已获授权、仍有实施与验收工作，不表示需要重新确认，也不表示已经全部应用。
 
-## 已核实的问题
+## 迁移前已核实的问题（历史背景）
 
-- `harness/config.toml` 将 Web、API、Harness 目录变化分别映射到整个应用或整个 Harness 的 gate，没有模块级测试选择能力；某些脚本和配置还要求完整 release。
-- 全局 `module-coverage` 经 `module_verification` 调用跨 API、Vitest、Playwright 的 collector。收集不等于执行全部测试，但它仍消耗时间、进程和输出。
-- [本次 evidence](../../verification/evidence/20260905-harness-resume.json) 中真实同 HEAD 重验复用了两个 gate；前检约 24.1 秒、计划输入约 44.4 秒、输入复核约 47.2 秒，合计约 115.8 秒。产品测试调用减少，并不意味着端到端成本已经降低。
+- 迁移前，`harness/config.toml` 将 Web、API、Harness 目录变化分别映射到整个应用或整个 Harness 的 gate，没有模块级测试选择能力；某些脚本和配置还要求完整 release。
+- 迁移前，全局 `module-coverage` 经 `module_verification` 调用跨 API、Vitest、Playwright 的 collector。收集不等于执行全部测试，但它仍消耗时间、进程和输出。
+- 早期同 HEAD 重验复用了两个 gate；当时记录的前检约 24.1 秒、计划输入约 44.4 秒、输入复核约 47.2 秒，合计约 115.8 秒。该历史现场的本地备份为 `.run/impact/prior-resume-evidence.json`，不是当前主 evidence 的结果。产品测试调用减少，并不意味着端到端成本已经降低。
 - 该轮 evidence 自报 passed，但实际 close 因缺少全复用场景的 isolation check 被拒绝；没有生成 archive/completion event。它不能作为“验证闭环已完成”的证明。
 - 执行者在完整验证后继续补实现，产生多个新 HEAD 并反复全量验证，加重了原有问题。这是执行安排的责任，不能全部归因于工具。
 
@@ -89,7 +89,7 @@ close 消费足够且可信的证据，核对验收覆盖、隔离清理和归�
 
 不再继承旧提案“先完成 A/B 同 HEAD 缓存，再考虑范围拆分”的实施顺序。先落实受影响模块选择，再按真实收益决定是否保留跨进程缓存。HMAC、密钥位置、独立本地账本不是本提案指定的必选架构；同进程可信收尾与可选持久化证明应按成本比较。全依赖指纹扫描、未知路径全项目兜底、scripts/config 变更自动触发完整 release 均不能作为普通任务默认路径。
 
-已有 A/B 提交逐项按范围正确性、闭环可用性和端到端成本重新评估，不因已经实现就全部沿用。终结旧提案不表示 A/B 已验收，也不关闭仍 active 的 `20260905-harness-resume` spec；既有事件和运行记录继续保留。
+已有 A/B 提交逐项按范围正确性、闭环可用性和端到端成本重新评估，不因已经实现就全部沿用。终结旧提案本身不表示 A/B 已验收，也不触发当时 active 的 `20260905-harness-resume` spec 关闭；该 spec 后续的实际归档及其验收边界见下文。既有事件和运行记录继续保留。
 
 ## 必须通过的验收
 
@@ -105,15 +105,51 @@ close 消费足够且可信的证据，核对验收覆盖、隔离清理和归�
 
 ## 当前处理状态
 
-暂停沿用旧方案继续全量验证或追逐关闭。保留已有提交、attempts 和失败现场；不自动改 AGENTS.md，不以当前未完成闭环的 evidence 声称已交付。下一阶段以实际影响分析及受影响模块选择为核心，重新确定最小实施 spec 和门禁迁移，而不是继续以缓存命中率为主要成果。
+当前为部分实施：核心执行机制与有限范围试点已完成，本文的完整实施计划尚未执行一遍，必须通过的验收仍有缺口。执行者此前自行收窄了 spec，并将“收窄后的 spec 已通过并归档”表述成整体完成；这不是用户事先确认的分阶段交付。本次将误标的 `applied` 修正为 `accepted`，按下列事实继续追踪。
 
-旧提案已按本次人工决定终结并移出主 Evolution 索引；本提案保留在当前决策面，包含后续设计需要的有效要求，无需重新加载旧方案作为实施依据。
+旧提案保持终结；本提案恢复到主 Evolution 索引的当前决策面。保留已有提交、attempts、失败现场、主 evidence、archive 和 completion event；进度同步不重写这些历史资产，不自动改 AGENTS.md，也不降低上文验收要求。
 
+### 已实施与证据边界
 
-## 本次实施记录
+- 提交 `49ec35e` 实施影响计划、精确 runner 与门禁迁移；`fcfe751` 补充隔离链接检查所需的任务 evidence；`9a6122c` 保存确定性归档结果。
+- [影响计划实现](../../tools/impact.py) 与 [独立任务计划](../../verification/impact/20260905-harness-resume.json) 已用于选择所需 cases/test refs；固定 `risk_routes` 已移除，全局 `module-coverage` 改为结构检查。
+- [规范 runner](../../tools/selected_tests.py) 已实现 Pytest、Vitest、Playwright 精确选择路径。真实执行证据覆盖 Harness Pytest 与一个个人资料 API case；新的 Vitest、Playwright 选择路径尚无真实运行验收，不能从实现存在推断它们已经验收通过。
+- [源码归属清单](../../verification/impact/ownership.json) 当前登记部分 Harness 选择、执行、关闭、报告及文档单元，以及 `M06.profile` 的四个 API 文件和一个 case。其余 Harness 工具与其他产品模块尚未完整接入，Web 功能源码未登记；不能称为全项目模块映射完成。
+- 默认关闭复用，已登记 Harness 输入使用有界核对；产品安装依赖闭包尚未登记完整，因此限制跨进程复用与关闭，提供 `verify <task> --close` 同进程收尾。跨进程缓存仍是可选优化，不能为了补功能重新引入整套依赖扫描。
+- [主 evidence](../../verification/evidence/20260905-harness-resume.json) 对应输入提交 `fcfe751`：选中 12 个 cases、121 个 test refs，实际收集并执行 121 项测试，全部通过；聚合检查 13/13 通过，隔离清理通过。[归档](../../specs/archive/20260905-harness-resume.md) 保存与主 evidence 一致的摘要，但只证明该次 spec 的验收范围。
+- 真实临时仓库 CLI fixture 覆盖全复用、部分复用、清理失败、中断、篡改、并发、源码竞态回滚及文档零测试关闭。fixture 也调用过 `plan`/`status`；它们不能替代本仓库真实产品任务的完整闭环验收。
 
-用户明确要求按本文改造，已授权并应用影响计划、精确 runner、门禁迁移与可信收尾。原问题及历史 evidence 保留用于审计；本段不把旧 passed JSON 当作新验收证明。
+### 按原验收条目核对
 
-实现入口为 `harness/tools/impact.py`、`harness/tools/selected_tests.py` 和 `harness/verification/impact/`。固定 risk_routes 已从主配置移除；全局 module-coverage 改为结构检查。默认不复用，已登记 Harness 输入按必要分发文件核对，未登记产品依赖闭包使用同进程 verify --close。
+| 原验收条目 | 当前状态 | 现有依据与未完成项 |
+| --- | --- | --- |
+| 范围等于实际受影响集合，未受影响模块不收集、不构建、不执行 | 部分完成 | 已有显式选择机制与 Harness 执行证据；归属、依赖及 case 映射仍不完整，真实 Web 选择路径待验收。 |
+| 公共契约只扩展到有依据的依赖，每项新增检查说明理由 | 部分完成 | 已要求计划填写已登记消费者的影响判断；现有登记范围不能证明产品跨模块及传递依赖影响已完整覆盖。 |
+| 未知归属报告缺口，不回退全项目 | 已实现并有 fixture 验证 | 已登记机制对未知源码归属阻断；后续模块接入须补归属，不能用扩大测试范围绕过缺口。 |
+| 文档检查的产品测试、跨项目 collector、整套依赖扫描均为零 | 已有 fixture 验证 | 已拆分全局结构检查，并有文档关闭的真实 CLI fixture；仍需区分普通文档与改变可执行合同的文档影响。 |
+| 不形成机械重验循环，来源和范围可追踪 | 部分完成 | 同进程收尾已实现；本次因隔离链接检查缺少任务 evidence 而补提交，随后仍重跑了 121 项测试，不能称为该目标已完全达成。 |
+| passed 可被 close 消费，复用、清理失败和中断有真实 CLI 闭环 | Harness 与 fixture 已验证，产品待补 | 本次 Harness 主 evidence 已被真实 close 消费；产品只运行过一个 API case，尚无真实产品任务完整 verify/close 验收。 |
+| plan/status/close 零产品调用，fresh 限定范围，前置失败阻止昂贵检查 | 部分验证 | fixture 与所选 Harness 验证提供部分依据；本任务独立 `plan` 命令执行记录未找到，真实产品对应场景仍需补充。 |
+| 失败历史、篡改、输入失效、父子去重、产物缺失、隔离及回滚 | 部分验证 | 已有既有单元测试与新增 CLI fixture；尚未逐项完成这些条目在新选择路径下的证据对应，不能据测试总数认定全部覆盖。 |
+| 同环境比较真实模块任务的端到端时间、范围和输出量 | 尚未完成 | 现有测量只覆盖真实输入核对阶段、合成 CLI fixture 和单个 API case；缺少真实模块任务修改前后的完整对照。 |
 
-真实 CLI fixture 已覆盖全复用、部分复用、清理失败、中断、篡改、并发、源码竞态回滚及文档零测试关闭。个人资料 API 精确 case 已实跑。成本测量保存在 `harness/verification/evidence/20260905-harness-resume.benchmark.json`：受控 fixture 的端到端比较固定其余收尾机制，只比较整套选择与精确选择；真实输入指纹比较只报告该阶段，不能外推整产品发布速度。最终交付判定以本任务新的主 evidence 与确定性 archive/completion event 为准。
+### 成本测量与 plan 执行记录
+
+[成本记录](../../verification/evidence/20260905-harness-resume.benchmark.json) 是辅助测量，不是全部成本目标通过的证明：
+
+- 真实输入核对阶段：旧路径约 66.45 秒，新路径约 0.32 秒；只比较该阶段，不能外推完整任务耗时。
+- 合成 CLI fixture：同一收尾机制下，20 项测试的整套选择约 6.20 秒，精确选择 1 项约 4.57 秒；输出从 1126 字节变为 1133 字节，没有减少。该对比不是旧实现与新实现的真实模块任务端到端对比。
+- 真实 API：`M06-P1-01` 的 `test_public_strips_hidden_city_and_email` 单项执行通过，驱动总耗时约 6.08 秒；没有覆盖真实产品任务的影响计划、隔离 verify 与 close 全流程。
+- 以上均为本地单次样本，没有统计性能结论，也未测量模型 token。
+
+对于“plan 是否执行了一遍”，须区分完整实施方案与 CLI 预览：本文的完整实施方案未执行完毕；本任务 `verify` 内部确实生成并使用了影响计划，主 evidence 保存了计划摘要和执行范围。目前未找到针对本任务独立执行 `python -m tools.harness plan 20260905-harness-resume` 的记录，不能声称单独执行过；临时仓库 fixture 中执行过 `plan` 不等于本任务执行过。此次同步进度没有补跑该命令，也不补造历史记录。
+
+### 后续未完成工作
+
+1. 补齐上述预期行为所需的源码归属、消费者依赖和 case 映射，核对公共契约与传递影响；按实际接入范围记录完成情况。
+2. 完成真实产品模块任务的影响计划、所选验证及关闭闭环；对新的 Vitest、Playwright 精确选择路径补充必要的真实验收，避免按每个分支运行整站 E2E。
+3. 逐项对应原验收要求与测试证据，补足新选择路径下的失败重试、前置条件、产物依赖及父子去重等缺口；复核输入合同，不用旧测试数量替代覆盖结论。
+4. 整理最终验证输入与证据链接的准备顺序，验证提交、记录证据与关闭不会机械增加相同测试；是否启用缓存仍按所选检查成本决定。
+5. 在同一受控环境下完成真实模块任务修改前后的端到端时间、执行范围与输出量对照，再据结果判定成本目标。
+
+上述工作完成前，保持本提案 `accepted`。本次只同步进度和生成索引，不重新打开已压缩 spec、不修改历史 evidence，也不将未完成项宣告通过。

@@ -1,115 +1,3008 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "coverage": [
+    "apps/api/app/*.py",
+    "apps/api/tests/*.py",
+    "apps/api/scripts/*.py",
+    "apps/api/alembic/*.py",
+    "apps/api/pyproject.toml",
+    "apps/api/uv.lock",
+    "apps/api/alembic.ini",
+    "apps/api/.env.example",
+    "apps/web/*.vue",
+    "apps/web/*.ts",
+    "apps/web/*.mjs",
+    "apps/web/*.css",
+    "apps/web/package.json",
+    "apps/web/.env.example",
+    "packages/contracts/*.json",
+    "packages/contracts/*.ts",
+    "packages/contracts/*.mjs",
+    "scripts/*",
+    "harness/tools/*",
+    "harness/verification/tests/*.py",
+    "harness/verification/checks/*",
+    "harness/verification/impact/ownership.json",
+    "harness/config.toml",
+    ".github/workflows/*",
+    "package.json",
+    "package-lock.json",
+    ".gitignore",
+    ".gitattributes",
+    "AGENTS.md"
+  ],
   "units": {
-    "M08.selection": {
+    "M08.impact": {
       "paths": [
         "harness/tools/impact.py",
-        "harness/tools/selected_tests.py",
-        "harness/tools/test_collection.py",
-        "harness/tools/module_verification.py",
-        "harness/tools/verification_config.py",
-        "harness/tools/config.py",
+        "harness/tools/impact_registry.py",
+        "harness/verification/impact/ownership.json",
         "harness/verification/tests/test_impact.py",
-        "harness/verification/tests/test_module_coverage.py",
-        "harness/verification/tests/test_required_checks.py",
-        "harness/config.toml",
-        "harness/verification/checks/module_coverage.py",
-        "harness/verification/checks/module_coverage.contract.json",
-        "harness/verification/tests/test_impact_cli.py"
+        "harness/verification/tests/test_impact_cli.py",
+        "harness/verification/tests/test_impact_graph.py",
+        "harness/verification/tests/test_impact_registry.py"
       ],
       "cases": [
-        "M08-IMPACT-SELECTION-01",
-        "M08-IMPACT-SELECTION-02",
-        "M08-IMPACT-SELECTION-03"
+        "M08-IMPACT-GRAPH-01",
+        "M08-IMPACT-MAPPING-01",
+        "M08-IMPACT-SELECTION-01"
       ],
       "dependents": [
-        "M08.execution",
-        "M08.closure"
-      ]
+        "M08.isolated_verification",
+        "M08.lifecycle",
+        "M08.module_verification",
+        "M08.product_verification",
+        "M08.selected_tests",
+        "M08.verification_resume"
+      ],
+      "dependency_reasons": {
+        "M08.isolated_verification": [
+          "harness/tools/isolated_verification.py:151 imports harness.tools.impact"
+        ],
+        "M08.lifecycle": [
+          "harness/tools/harness.py:314 imports harness.tools.impact"
+        ],
+        "M08.module_verification": [
+          "harness/verification/checks/module_coverage.py:52 imports tools.impact_registry",
+          "harness/verification/checks/module_coverage.py:54 imports harness.tools.impact_registry"
+        ],
+        "M08.product_verification": [
+          "harness/tools/product_verification.py:1503 imports harness.tools.impact",
+          "harness/tools/product_verification.py:1531 imports harness.tools.impact",
+          "harness/tools/product_verification.py:235 imports harness.tools.impact",
+          "harness/tools/product_verification.py:298 imports harness.tools.impact",
+          "harness/tools/product_verification.py:652 imports harness.tools.impact",
+          "harness/tools/product_verification.py:827 imports harness.tools.impact",
+          "harness/tools/product_verification.py:875 imports harness.tools.impact"
+        ],
+        "M08.selected_tests": [
+          "harness/tools/selected_tests.py:14 imports harness.tools.impact"
+        ],
+        "M08.verification_resume": [
+          "harness/tools/verification_inputs.py:147 imports harness.tools.impact",
+          "harness/tools/verification_inputs.py:226 imports harness.tools.impact",
+          "harness/tools/verification_resume.py:182 imports harness.tools.impact",
+          "harness/tools/verification_resume.py:22 imports harness.tools.impact",
+          "harness/tools/verification_resume.py:59 imports harness.tools.impact"
+        ]
+      }
     },
-    "M08.execution": {
+    "M08.selected_tests": {
       "paths": [
-        "harness/tools/verification_resume.py",
-        "harness/tools/verification_inputs.py",
-        "harness/tools/product_verification.py",
-        "harness/tools/isolated_verification.py",
-        "harness/tools/run_store.py",
+        "harness/tools/selected_tests.py",
+        "harness/verification/tests/test_selected_prerequisites.py",
+        "harness/verification/tests/test_selected_runners.py"
+      ],
+      "cases": [
+        "M08-IMPACT-PREREQUISITES-01",
+        "M08-IMPACT-RUNNERS-01"
+      ],
+      "dependents": [
+        "M08.verification_resume"
+      ],
+      "dependency_reasons": {
+        "M08.verification_resume": [
+          "harness/tools/verification_inputs.py:239 imports harness.tools.selected_tests"
+        ]
+      }
+    },
+    "M08.test_collection": {
+      "paths": [
+        "harness/tools/test_collection.py"
+      ],
+      "cases": [
+        "M08-COLLECTOR-01",
+        "M08-IMPACT-RUNNERS-01"
+      ],
+      "dependents": [
+        "M08.module_verification",
+        "M08.selected_tests"
+      ],
+      "dependency_reasons": {
+        "M08.module_verification": [
+          "harness/tools/module_verification.py:12 imports harness.tools.test_collection"
+        ],
+        "M08.selected_tests": [
+          "harness/tools/selected_tests.py:15 imports harness.tools.test_collection"
+        ]
+      }
+    },
+    "M08.module_verification": {
+      "paths": [
+        "harness/tools/module_verification.py",
+        "harness/verification/checks/module_coverage.contract.json",
+        "harness/verification/checks/module_coverage.py",
+        "harness/verification/tests/test_module_coverage.py"
+      ],
+      "cases": [
+        "M08-COLLECTOR-01",
+        "M08-DOCS-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-SEMANTICS-01",
+        "M08-TRACE-01",
+        "M08-TRACE-02",
+        "M08-TRACE-03",
+        "M08-TRACE-04",
+        "M08-VALIDATOR-01"
+      ],
+      "dependents": [
+        "M08.impact",
+        "M08.product_verification"
+      ],
+      "dependency_reasons": {
+        "M08.impact": [
+          "harness/tools/impact.py:16 imports harness.tools.module_verification",
+          "harness/tools/impact_registry.py:9 imports harness.tools.module_verification"
+        ],
+        "M08.product_verification": [
+          "harness/tools/product_verification.py:20 imports harness.tools.module_verification",
+          "harness/tools/product_verification.py:236 imports harness.tools.module_verification"
+        ]
+      }
+    },
+    "M08.verification_resume": {
+      "paths": [
         "harness/tools/run_artifacts.py",
-        "harness/verification/tests/test_verification_resume.py",
-        "harness/verification/tests/test_product_verification.py",
-        "harness/verification/tests/test_isolated_verification.py",
-        "harness/verification/tests/test_gate_supervision.py",
-        "harness/tools/empty-user.npmrc",
-        "harness/tools/empty-global.npmrc",
-        "harness/verification/tests/test_assistant_dev_process.py"
+        "harness/tools/run_store.py",
+        "harness/tools/verification_inputs.py",
+        "harness/tools/verification_resume.py",
+        "harness/verification/tests/test_verification_resume.py"
       ],
       "cases": [
         "M08-IMPACT-EXECUTION-01",
-        "M08-IMPACT-EXECUTION-02",
-        "M08-IMPACT-EXECUTION-03",
-        "M08-IMPACT-EXECUTION-04"
+        "M08-IMPACT-PREREQUISITES-01",
+        "M08-RESUME-01",
+        "M08-RESUME-02",
+        "M08-RESUME-03",
+        "M08-RESUME-04"
       ],
       "dependents": [
-        "M08.closure",
-        "M08.reporting"
-      ]
+        "M08.isolated_verification",
+        "M08.lifecycle",
+        "M08.product_verification",
+        "M08.task_reporting",
+        "M08.test_collection"
+      ],
+      "dependency_reasons": {
+        "M08.isolated_verification": [
+          "harness/tools/isolated_verification.py:177 imports harness.tools.run_artifacts"
+        ],
+        "M08.lifecycle": [
+          "harness/tools/close_transaction.py:10 imports harness.tools.run_store",
+          "harness/tools/close_transaction.py:11 imports harness.tools.run_store",
+          "harness/tools/events.py:143 imports harness.tools.run_store",
+          "harness/tools/harness.py:11 imports harness.tools.run_store",
+          "harness/tools/harness.py:11 imports harness.tools.verification_resume",
+          "harness/tools/summarizer.py:146 imports harness.tools.run_store",
+          "harness/tools/summarizer.py:155 imports harness.tools.run_store"
+        ],
+        "M08.product_verification": [
+          "harness/tools/product_verification.py:1036 imports harness.tools.run_artifacts",
+          "harness/tools/product_verification.py:1037 imports harness.tools.verification_inputs",
+          "harness/tools/product_verification.py:1211 imports harness.tools.run_artifacts",
+          "harness/tools/product_verification.py:1380 imports harness.tools.verification_resume"
+        ],
+        "M08.task_reporting": [
+          "harness/tools/task_reporting.py:25 imports harness.tools.verification_resume",
+          "harness/tools/task_reporting.py:31 imports harness.tools.verification_resume",
+          "harness/tools/task_reporting.py:32 imports harness.tools.run_store"
+        ],
+        "M08.test_collection": [
+          "harness/tools/test_collection.py:153 imports harness.tools.verification_inputs"
+        ]
+      }
     },
-    "M08.closure": {
+    "M08.product_verification": {
       "paths": [
-        "harness/tools/harness.py",
-        "harness/tools/close_transaction.py",
-        "harness/tools/events.py",
-        "harness/tools/summarizer.py",
-        "harness/tools/validator.py",
-        "harness/verification/tests/test_lifecycle.py",
-        "harness/verification/tests/test_history_integrity.py",
-        "harness/verification/tests/test_documentation_impact.py"
+        "harness/tools/empty-global.npmrc",
+        "harness/tools/empty-user.npmrc",
+        "harness/tools/product_verification.py",
+        "harness/verification/checks/gate_subsumption.py",
+        "harness/verification/tests/test_gate_supervision.py",
+        "harness/verification/tests/test_product_verification.py"
       ],
       "cases": [
-        "M08-IMPACT-CLOSURE-01",
-        "M08-IMPACT-CLOSURE-02",
-        "M08-IMPACT-CLOSURE-03"
+        "M08-EVIDENCE-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-04",
+        "M08-IMPACT-GRAPH-01",
+        "M08-SPEC-01",
+        "M08-TRACE-03"
       ],
       "dependents": [
-        "M08.reporting"
-      ]
+        "M08.change_enforcement",
+        "M08.configuration",
+        "M08.impact",
+        "M08.isolated_verification",
+        "M08.lifecycle",
+        "M08.selected_tests",
+        "M08.task_reporting",
+        "M08.verification_resume"
+      ],
+      "dependency_reasons": {
+        "M08.change_enforcement": [
+          "harness/tools/change_enforcement.py:11 imports harness.tools.product_verification"
+        ],
+        "M08.configuration": [
+          "harness/tools/validator.py:196 imports harness.tools.product_verification"
+        ],
+        "M08.impact": [
+          "harness/tools/impact.py:106 imports harness.tools.product_verification"
+        ],
+        "M08.isolated_verification": [
+          "harness/tools/isolated_verification.py:12 imports harness.tools.product_verification"
+        ],
+        "M08.lifecycle": [
+          "harness/tools/harness.py:11 imports harness.tools.product_verification"
+        ],
+        "M08.selected_tests": [
+          "harness/tools/selected_tests.py:17 imports harness.tools.product_verification"
+        ],
+        "M08.task_reporting": [
+          "harness/tools/task_reporting.py:5 imports harness.tools.product_verification"
+        ],
+        "M08.verification_resume": [
+          "harness/tools/verification_inputs.py:16 imports harness.tools.product_verification",
+          "harness/tools/verification_resume.py:14 imports harness.tools.product_verification"
+        ]
+      }
     },
-    "M08.reporting": {
+    "M08.isolated_verification": {
+      "paths": [
+        "harness/tools/isolated_verification.py",
+        "harness/verification/tests/test_isolated_verification.py"
+      ],
+      "cases": [
+        "M08-IMPACT-EXECUTION-03"
+      ],
+      "dependents": [
+        "M08.acceptance",
+        "M08.lifecycle",
+        "M08.verification_resume"
+      ],
+      "dependency_reasons": {
+        "M08.acceptance": [
+          "harness/tools/impact_acceptance.py:81 imports harness.tools.isolated_verification"
+        ],
+        "M08.lifecycle": [
+          "harness/tools/harness.py:11 imports harness.tools.isolated_verification"
+        ],
+        "M08.verification_resume": [
+          "harness/tools/verification_inputs.py:150 imports harness.tools.isolated_verification",
+          "harness/tools/verification_inputs.py:223 imports harness.tools.isolated_verification",
+          "harness/tools/verification_resume.py:13 imports harness.tools.isolated_verification"
+        ]
+      }
+    },
+    "M08.lifecycle": {
+      "paths": [
+        "harness/tools/close_transaction.py",
+        "harness/tools/events.py",
+        "harness/tools/harness.py",
+        "harness/tools/lifecycle.py",
+        "harness/tools/summarizer.py",
+        "harness/verification/tests/test_documentation_impact.py",
+        "harness/verification/tests/test_freeze_lifecycle.py",
+        "harness/verification/tests/test_lifecycle.py"
+      ],
+      "cases": [
+        "M08-EVIDENCE-01",
+        "M08-IMPACT-CLOSURE-01",
+        "M08-IMPACT-CLOSURE-03",
+        "M08-IMPACT-SELECTION-01"
+      ],
+      "dependents": [
+        "M08.impact",
+        "M08.metadata",
+        "M08.product_verification",
+        "M08.task_reporting",
+        "M08.verification_resume"
+      ],
+      "dependency_reasons": {
+        "M08.impact": [
+          "harness/tools/impact.py:51 imports harness.tools.summarizer"
+        ],
+        "M08.metadata": [
+          "harness/verification/checks/metadata.py:15 imports harness.tools.lifecycle",
+          "harness/verification/checks/metadata.py:7 imports tools.lifecycle"
+        ],
+        "M08.product_verification": [
+          "harness/tools/product_verification.py:17 imports harness.tools.lifecycle",
+          "harness/tools/product_verification.py:18 imports harness.tools.lifecycle",
+          "harness/tools/product_verification.py:33 imports harness.tools.summarizer",
+          "harness/tools/product_verification.py:643 imports harness.tools.summarizer"
+        ],
+        "M08.task_reporting": [
+          "harness/tools/task_reporting.py:5 imports harness.tools.summarizer"
+        ],
+        "M08.verification_resume": [
+          "harness/tools/run_store.py:85 imports harness.tools.summarizer",
+          "harness/tools/verification_resume.py:39 imports harness.tools.lifecycle",
+          "harness/tools/verification_resume.py:39 imports harness.tools.summarizer"
+        ]
+      }
+    },
+    "M08.task_reporting": {
       "paths": [
         "harness/tools/task_reporting.py",
+        "harness/verification/tests/test_task_reporting.py"
+      ],
+      "cases": [
+        "M08-IMPACT-REPORTING-01"
+      ],
+      "dependents": [
+        "M08.lifecycle"
+      ],
+      "dependency_reasons": {
+        "M08.lifecycle": [
+          "harness/tools/harness.py:11 imports harness.tools.task_reporting"
+        ]
+      }
+    },
+    "M08.result_reporting": {
+      "paths": [
         "harness/tools/result_reporting.py",
-        "harness/verification/tests/test_task_reporting.py",
         "harness/verification/tests/test_result_reporting.py"
       ],
       "cases": [
-        "M08-IMPACT-REPORTING-01",
         "M08-IMPACT-REPORTING-02"
       ],
-      "dependents": []
+      "dependents": [
+        "M08.configuration",
+        "M08.product_verification",
+        "M08.selected_tests",
+        "M08.telemetry"
+      ],
+      "dependency_reasons": {
+        "M08.configuration": [
+          "harness/tools/validator.py:15 imports harness.tools.result_reporting"
+        ],
+        "M08.product_verification": [
+          "harness/tools/product_verification.py:26 imports harness.tools.result_reporting"
+        ],
+        "M08.selected_tests": [
+          "harness/tools/selected_tests.py:18 imports harness.tools.result_reporting"
+        ],
+        "M08.telemetry": [
+          "harness/tools/telemetry.py:13 imports harness.tools.result_reporting"
+        ]
+      }
     },
-    "M06.profile": {
+    "M08.configuration": {
       "paths": [
-        "apps/api/app/routes/profile.py",
-        "apps/api/app/models/profile.py",
-        "apps/api/app/schemas/profile.py",
-        "apps/api/tests/test_profile.py"
+        "harness/config.toml",
+        "harness/tools/__init__.py",
+        "harness/tools/config.py",
+        "harness/tools/validator.py",
+        "harness/tools/verification_config.py",
+        "harness/verification/checks/structure.py",
+        "harness/verification/tests/test_required_checks.py"
       ],
       "cases": [
-        "M06-P1-01"
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependents": [
+        "M08.acceptance",
+        "M08.assurance",
+        "M08.change_enforcement",
+        "M08.impact",
+        "M08.isolated_verification",
+        "M08.lifecycle",
+        "M08.module_verification",
+        "M08.product_verification",
+        "M08.qualification",
+        "M08.qualification_runner",
+        "M08.selected_tests",
+        "M08.task_reporting",
+        "M08.telemetry",
+        "M08.verification_resume"
+      ],
+      "dependency_reasons": {
+        "M08.acceptance": [
+          "harness/tools/impact_acceptance.py:18 imports harness.tools.config"
+        ],
+        "M08.assurance": [
+          "harness/tools/assurance.py:7 imports harness.tools.config",
+          "harness/tools/indexer.py:6 imports harness.tools.config"
+        ],
+        "M08.change_enforcement": [
+          "harness/tools/change_enforcement.py:9 imports harness.tools.config"
+        ],
+        "M08.impact": [
+          "harness/tools/impact.py:106 imports harness.tools",
+          "harness/tools/impact.py:15 imports harness.tools.config"
+        ],
+        "M08.isolated_verification": [
+          "harness/tools/isolated_verification.py:11 imports harness.tools.config"
+        ],
+        "M08.lifecycle": [
+          "harness/tools/close_transaction.py:10 imports harness.tools",
+          "harness/tools/events.py:9 imports harness.tools.config",
+          "harness/tools/harness.py:11 imports harness.tools",
+          "harness/tools/harness.py:11 imports harness.tools.validator",
+          "harness/tools/harness.py:314 imports harness.tools",
+          "harness/tools/lifecycle.py:12 imports harness.tools.config",
+          "harness/tools/summarizer.py:8 imports harness.tools.config"
+        ],
+        "M08.module_verification": [
+          "harness/tools/module_verification.py:11 imports harness.tools.config"
+        ],
+        "M08.product_verification": [
+          "harness/tools/product_verification.py:16 imports harness.tools.config",
+          "harness/tools/product_verification.py:235 imports harness.tools",
+          "harness/tools/product_verification.py:34 imports harness.tools.verification_config",
+          "harness/tools/product_verification.py:643 imports harness.tools",
+          "harness/tools/product_verification.py:652 imports harness.tools",
+          "harness/tools/product_verification.py:875 imports harness.tools"
+        ],
+        "M08.qualification": [
+          "harness/tools/qualification.py:14 imports harness.tools.config"
+        ],
+        "M08.qualification_runner": [
+          "harness/tools/qualification_runner.py:13 imports harness.tools",
+          "harness/tools/qualification_runner.py:14 imports harness.tools.config"
+        ],
+        "M08.selected_tests": [
+          "harness/tools/selected_tests.py:14 imports harness.tools",
+          "harness/tools/selected_tests.py:15 imports harness.tools",
+          "harness/tools/selected_tests.py:16 imports harness.tools.config"
+        ],
+        "M08.task_reporting": [
+          "harness/tools/task_reporting.py:5 imports harness.tools",
+          "harness/tools/task_reporting.py:5 imports harness.tools.validator"
+        ],
+        "M08.telemetry": [
+          "harness/tools/telemetry.py:12 imports harness.tools.config"
+        ],
+        "M08.verification_resume": [
+          "harness/tools/run_artifacts.py:10 imports harness.tools",
+          "harness/tools/run_store.py:16 imports harness.tools.config",
+          "harness/tools/verification_inputs.py:16 imports harness.tools",
+          "harness/tools/verification_inputs.py:17 imports harness.tools.config",
+          "harness/tools/verification_inputs.py:345 imports harness.tools.config",
+          "harness/tools/verification_resume.py:13 imports harness.tools",
+          "harness/tools/verification_resume.py:13 imports harness.tools.validator",
+          "harness/tools/verification_resume.py:14 imports harness.tools",
+          "harness/tools/verification_resume.py:15 imports harness.tools",
+          "harness/tools/verification_resume.py:22 imports harness.tools",
+          "harness/tools/verification_resume.py:39 imports harness.tools",
+          "harness/tools/verification_resume.py:59 imports harness.tools"
+        ]
+      }
+    },
+    "M08.acceptance": {
+      "paths": [
+        "harness/tools/impact_acceptance.py",
+        "harness/verification/tests/test_impact_acceptance.py"
+      ],
+      "cases": [
+        "M08-IMPACT-BENCHMARK-01"
       ],
       "dependents": []
     },
-    "M08.documentation": {
+    "M08.assurance": {
       "paths": [
-        "README.md",
-        "harness/docs/*.md",
-        "harness/workflows/*.md",
-        "harness/evolution/*.md"
+        "harness/tools/assurance.py",
+        "harness/tools/indexer.py",
+        "harness/verification/checks/indexes.py",
+        "harness/verification/tests/test_history_assurance.py"
+      ],
+      "cases": [
+        "M08-UNIT-ASSURANCE-01"
+      ],
+      "dependents": [
+        "M08.lifecycle"
+      ],
+      "dependency_reasons": {
+        "M08.lifecycle": [
+          "harness/tools/close_transaction.py:10 imports harness.tools.indexer",
+          "harness/tools/harness.py:11 imports harness.tools.assurance",
+          "harness/tools/harness.py:11 imports harness.tools.indexer"
+        ]
+      }
+    },
+    "M08.change_enforcement": {
+      "paths": [
+        "harness/tools/change_enforcement.py",
+        "harness/verification/tests/test_change_enforcement.py"
+      ],
+      "cases": [
+        "M08-UNIT-CHANGE-ENFORCEMENT-01"
+      ],
+      "dependents": [
+        "M08.lifecycle"
+      ],
+      "dependency_reasons": {
+        "M08.lifecycle": [
+          "harness/tools/harness.py:11 imports harness.tools.change_enforcement"
+        ]
+      }
+    },
+    "M08.telemetry": {
+      "paths": [
+        "harness/tools/telemetry.py",
+        "harness/verification/tests/test_telemetry.py"
+      ],
+      "cases": [
+        "M08-UNIT-TELEMETRY-01"
+      ],
+      "dependents": [
+        "M08.lifecycle"
+      ],
+      "dependency_reasons": {
+        "M08.lifecycle": [
+          "harness/tools/harness.py:11 imports harness.tools.telemetry"
+        ]
+      }
+    },
+    "M08.metadata": {
+      "paths": [
+        "harness/tools/metadata.py",
+        "harness/verification/checks/metadata.py",
+        "harness/verification/tests/test_metadata_check.py"
+      ],
+      "cases": [
+        "M08-UNIT-METADATA-01"
+      ],
+      "dependents": [
+        "M08.assurance",
+        "M08.change_enforcement",
+        "M08.lifecycle",
+        "M08.product_verification",
+        "M08.task_reporting"
+      ],
+      "dependency_reasons": {
+        "M08.assurance": [
+          "harness/tools/indexer.py:7 imports harness.tools.metadata"
+        ],
+        "M08.change_enforcement": [
+          "harness/tools/change_enforcement.py:10 imports harness.tools.metadata"
+        ],
+        "M08.lifecycle": [
+          "harness/tools/lifecycle.py:13 imports harness.tools.metadata",
+          "harness/tools/summarizer.py:9 imports harness.tools.metadata"
+        ],
+        "M08.product_verification": [
+          "harness/tools/product_verification.py:19 imports harness.tools.metadata"
+        ],
+        "M08.task_reporting": [
+          "harness/tools/task_reporting.py:6 imports harness.tools.metadata"
+        ]
+      }
+    },
+    "M08.qualification": {
+      "paths": [
+        "harness/tools/qualification.py",
+        "harness/verification/checks/qualification_manifests.py",
+        "harness/verification/tests/test_qualification_manifest.py"
+      ],
+      "cases": [
+        "M08-UNIT-QUALIFICATION-01"
+      ],
+      "dependents": [
+        "M08.lifecycle",
+        "M08.product_verification",
+        "M08.qualification_runner"
+      ],
+      "dependency_reasons": {
+        "M08.lifecycle": [
+          "harness/tools/harness.py:11 imports harness.tools.qualification"
+        ],
+        "M08.product_verification": [
+          "harness/tools/product_verification.py:25 imports harness.tools.qualification"
+        ],
+        "M08.qualification_runner": [
+          "harness/tools/qualification_runner.py:13 imports harness.tools.qualification"
+        ]
+      }
+    },
+    "M08.qualification_runner": {
+      "paths": [
+        "harness/tools/qualification_runner.py",
+        "harness/verification/tests/test_qualification_runner.py"
+      ],
+      "cases": [
+        "M08-UNIT-QUALIFICATION-RUNNER-01"
+      ],
+      "dependents": [
+        "M08.lifecycle"
+      ],
+      "dependency_reasons": {
+        "M08.lifecycle": [
+          "harness/tools/harness.py:11 imports harness.tools.qualification_runner"
+        ]
+      }
+    },
+    "M08.history": {
+      "paths": [
+        "harness/verification/checks/history_integrity.py",
+        "harness/verification/tests/test_history_integrity.py"
+      ],
+      "cases": [
+        "M08-HISTORY-01",
+        "M08-IMPACT-CLOSURE-02"
+      ],
+      "dependents": []
+    },
+    "M08.links": {
+      "paths": [
+        "harness/verification/checks/links.py",
+        "harness/verification/tests/test_links.py"
+      ],
+      "cases": [
+        "M08-LINKS-01"
+      ],
+      "dependents": []
+    },
+    "M08.l0": {
+      "paths": [
+        "AGENTS.md",
+        "harness/verification/checks/l0.py",
+        "harness/verification/tests/test_l0_check.py"
       ],
       "cases": [
         "M08-DOCS-01"
       ],
       "dependents": []
+    },
+    "M08.supply_chain": {
+      "paths": [
+        "harness/verification/checks/supply_chain.py",
+        "harness/verification/tests/test_supply_chain.py"
+      ],
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependents": []
+    },
+    "M08.ci": {
+      "paths": [
+        ".github/workflows/release.yml",
+        "harness/verification/tests/test_github_ci.py"
+      ],
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependents": []
+    },
+    "M08.dev_process": {
+      "paths": [
+        "harness/verification/tests/test_assistant_dev_process.py",
+        "scripts/assistant-dev-process.mjs"
+      ],
+      "cases": [
+        "M09-P1-02"
+      ],
+      "dependents": [
+        "M09.development"
+      ],
+      "dependency_reasons": {
+        "M09.development": [
+          "scripts/run-assistant-dev.mjs imports ./assistant-dev-process.mjs"
+        ]
+      }
+    },
+    "M08.release": {
+      "paths": [
+        "scripts/release-stage-contract.json",
+        "scripts/run-release-check.mjs"
+      ],
+      "cases": [
+        "M08-IMPACT-EXECUTION-01"
+      ],
+      "dependents": []
+    },
+    "M01.articles": {
+      "paths": [
+        "apps/api/app/article_revision_history.py",
+        "apps/api/app/routes/public_articles.py",
+        "apps/api/tests/test_article_context.py",
+        "apps/api/tests/test_article_loop.py"
+      ],
+      "cases": [
+        "M01-P0-01",
+        "M01-UNIT-ARTICLE-CONTEXT-01",
+        "M01-UNIT-ARTICLE-LOOP-01",
+        "M06-P0-01"
+      ],
+      "dependents": [
+        "M01.indexes",
+        "M01.navigation",
+        "M01.reading",
+        "M02.publishing",
+        "M06.runtime_config",
+        "M07.discovery"
+      ],
+      "dependency_reasons": {
+        "M01.indexes": [
+          "Public article HTTP response consumed by reading, index and discovery surfaces"
+        ],
+        "M01.navigation": [
+          "Public article HTTP response consumed by reading, index and discovery surfaces"
+        ],
+        "M01.reading": [
+          "Public article HTTP response consumed by reading, index and discovery surfaces"
+        ],
+        "M02.publishing": [
+          "apps/api/app/routes/admin_publishing.py:8 imports app.article_revision_history"
+        ],
+        "M06.runtime_config": [
+          "apps/api/app/main.py:18 imports app.routes.public_articles"
+        ],
+        "M07.discovery": [
+          "Public article HTTP response consumed by reading, index and discovery surfaces"
+        ]
+      }
+    },
+    "M02.publishing": {
+      "paths": [
+        "apps/api/app/article_revisions.py",
+        "apps/api/app/routes/admin_articles.py",
+        "apps/api/app/routes/admin_publishing.py",
+        "apps/api/tests/test_article_revisions.py"
+      ],
+      "cases": [
+        "M02-P0-01",
+        "M02-P1-01",
+        "M02-UNIT-ARTICLE-REVISIONS-01"
+      ],
+      "dependents": [
+        "M01.articles",
+        "M02.editing",
+        "M06.runtime_config",
+        "M09.runtime"
+      ],
+      "dependency_reasons": {
+        "M01.articles": [
+          "apps/api/app/article_revision_history.py:8 imports app.article_revisions"
+        ],
+        "M02.editing": [
+          "Admin article/version HTTP contract consumed by editor and revision pages"
+        ],
+        "M06.runtime_config": [
+          "apps/api/app/main.py:18 imports app.routes.admin_articles",
+          "apps/api/app/main.py:18 imports app.routes.admin_publishing"
+        ],
+        "M09.runtime": [
+          "apps/api/app/assistant/test_bootstrap.py:10 imports app.article_revisions"
+        ]
+      }
+    },
+    "M03.search": {
+      "paths": [
+        "apps/api/app/routes/public_search.py",
+        "apps/api/app/search.py",
+        "apps/api/tests/test_search.py"
+      ],
+      "cases": [
+        "M03-P0-01",
+        "M03-UNIT-SEARCH-01"
+      ],
+      "dependents": [
+        "M01.articles",
+        "M02.publishing",
+        "M03.search_web",
+        "M03.taxonomy",
+        "M04.projects",
+        "M05.portability",
+        "M06.runtime_config",
+        "M09.providers",
+        "M09.runtime",
+        "M10.index"
+      ],
+      "dependency_reasons": {
+        "M01.articles": [
+          "apps/api/app/article_revision_history.py:22 imports app.search"
+        ],
+        "M02.publishing": [
+          "apps/api/app/routes/admin_articles.py:29 imports app.search"
+        ],
+        "M03.search_web": [
+          "Search response and errors consumed by search page"
+        ],
+        "M03.taxonomy": [
+          "apps/api/app/routes/admin_taxonomy.py:22 imports app.search"
+        ],
+        "M04.projects": [
+          "apps/api/app/routes/admin_books.py:20 imports app.search",
+          "apps/api/app/routes/admin_projects.py:20 imports app.search"
+        ],
+        "M05.portability": [
+          "apps/api/app/routes/admin_content.py:52 imports app.search"
+        ],
+        "M06.runtime_config": [
+          "apps/api/app/main.py:18 imports app.routes.public_search"
+        ],
+        "M09.providers": [
+          "apps/api/app/assistant/providers.py:22 imports app.search"
+        ],
+        "M09.runtime": [
+          "apps/api/app/assistant/test_bootstrap.py:17 imports app.search"
+        ],
+        "M10.index": [
+          "apps/api/app/assistant_index/retriever.py:10 imports app.search"
+        ]
+      }
+    },
+    "M03.taxonomy": {
+      "paths": [
+        "apps/api/app/routes/admin_taxonomy.py",
+        "apps/api/app/routes/public_taxonomy.py",
+        "apps/api/tests/test_taxonomy.py"
+      ],
+      "cases": [
+        "M03-P1-01",
+        "M03-UNIT-TAXONOMY-01"
+      ],
+      "dependents": [
+        "M01.indexes",
+        "M03.taxonomy_web",
+        "M06.runtime_config"
+      ],
+      "dependency_reasons": {
+        "M01.indexes": [
+          "Taxonomy HTTP contract consumed by management and filters"
+        ],
+        "M03.taxonomy_web": [
+          "Taxonomy HTTP contract consumed by management and filters"
+        ],
+        "M06.runtime_config": [
+          "apps/api/app/main.py:18 imports app.routes.admin_taxonomy",
+          "apps/api/app/main.py:18 imports app.routes.public_taxonomy"
+        ]
+      }
+    },
+    "M04.projects": {
+      "paths": [
+        "apps/api/app/content_revisions.py",
+        "apps/api/app/routes/admin_books.py",
+        "apps/api/app/routes/admin_projects.py",
+        "apps/api/app/routes/public_books.py",
+        "apps/api/app/routes/public_projects.py",
+        "apps/api/tests/test_projects_books.py"
+      ],
+      "cases": [
+        "M04-P0-01",
+        "M04-P1-01",
+        "M04-UNIT-PROJECTS-BOOKS-01"
+      ],
+      "dependents": [
+        "M04.books_web",
+        "M04.projects_web",
+        "M06.runtime_config"
+      ],
+      "dependency_reasons": {
+        "M04.books_web": [
+          "Project/book HTTP contracts consumed by their editors and public pages"
+        ],
+        "M04.projects_web": [
+          "Project/book HTTP contracts consumed by their editors and public pages"
+        ],
+        "M06.runtime_config": [
+          "apps/api/app/main.py:18 imports app.routes.admin_books",
+          "apps/api/app/main.py:18 imports app.routes.admin_projects",
+          "apps/api/app/main.py:18 imports app.routes.public_books",
+          "apps/api/app/main.py:18 imports app.routes.public_projects"
+        ]
+      }
+    },
+    "M05.media": {
+      "paths": [
+        "apps/api/app/markdown_media.py",
+        "apps/api/app/media.py",
+        "apps/api/app/routes/media.py",
+        "apps/api/tests/test_markdown_media.py",
+        "apps/api/tests/test_media.py"
+      ],
+      "cases": [
+        "M05-P0-01",
+        "M05-UNIT-MARKDOWN-MEDIA-01",
+        "M05-UNIT-MEDIA-01"
+      ],
+      "dependents": [
+        "M02.publishing",
+        "M04.projects",
+        "M05.media_web",
+        "M06.runtime_config"
+      ],
+      "dependency_reasons": {
+        "M02.publishing": [
+          "apps/api/app/routes/admin_articles.py:25 imports app.markdown_media"
+        ],
+        "M04.projects": [
+          "apps/api/app/routes/admin_books.py:16 imports app.markdown_media",
+          "apps/api/app/routes/admin_projects.py:16 imports app.markdown_media"
+        ],
+        "M05.media_web": [
+          "Media HTTP response consumed by upload/editor controls"
+        ],
+        "M06.runtime_config": [
+          "apps/api/app/main.py:17 imports app.media",
+          "apps/api/app/main.py:18 imports app.routes.media"
+        ]
+      }
+    },
+    "M05.portability": {
+      "paths": [
+        "apps/api/app/routes/admin_content.py",
+        "apps/api/tests/test_content_portability.py"
+      ],
+      "cases": [
+        "M05-P1-01",
+        "M05-UNIT-CONTENT-PORTABILITY-01"
+      ],
+      "dependents": [
+        "M05.content_web",
+        "M06.runtime_config"
+      ],
+      "dependency_reasons": {
+        "M05.content_web": [
+          "Trash/import/export HTTP contract consumed by content management"
+        ],
+        "M06.runtime_config": [
+          "apps/api/app/main.py:18 imports app.routes.admin_content"
+        ]
+      }
+    },
+    "M06.auth": {
+      "paths": [
+        "apps/api/app/dependencies.py",
+        "apps/api/app/routes/auth.py",
+        "apps/api/app/security.py"
+      ],
+      "cases": [
+        "M06-P0-01"
+      ],
+      "dependents": [
+        "M01.articles",
+        "M02.publishing",
+        "M03.search",
+        "M03.taxonomy",
+        "M04.projects",
+        "M05.media",
+        "M05.portability",
+        "M06.auth_web",
+        "M06.profile",
+        "M06.runtime_config",
+        "M06.transport",
+        "M10.operations"
+      ],
+      "dependency_reasons": {
+        "M01.articles": [
+          "apps/api/app/routes/public_articles.py:7 imports app.dependencies"
+        ],
+        "M02.publishing": [
+          "apps/api/app/routes/admin_articles.py:16 imports app.dependencies",
+          "apps/api/app/routes/admin_publishing.py:15 imports app.dependencies"
+        ],
+        "M03.search": [
+          "apps/api/app/routes/public_search.py:5 imports app.dependencies"
+        ],
+        "M03.taxonomy": [
+          "apps/api/app/routes/admin_taxonomy.py:11 imports app.dependencies",
+          "apps/api/app/routes/public_taxonomy.py:6 imports app.dependencies"
+        ],
+        "M04.projects": [
+          "apps/api/app/routes/admin_books.py:15 imports app.dependencies",
+          "apps/api/app/routes/admin_projects.py:15 imports app.dependencies",
+          "apps/api/app/routes/public_books.py:9 imports app.dependencies",
+          "apps/api/app/routes/public_projects.py:7 imports app.dependencies"
+        ],
+        "M05.media": [
+          "apps/api/app/routes/media.py:17 imports app.dependencies"
+        ],
+        "M05.portability": [
+          "apps/api/app/routes/admin_content.py:29 imports app.dependencies"
+        ],
+        "M06.auth_web": [
+          "Session and CSRF HTTP contracts consumed by authenticated Web requests"
+        ],
+        "M06.profile": [
+          "apps/api/app/routes/admin_profile.py:9 imports app.dependencies",
+          "apps/api/app/routes/public_profile.py:5 imports app.dependencies"
+        ],
+        "M06.runtime_config": [
+          "apps/api/app/main.py:18 imports app.routes.auth",
+          "apps/api/app/main.py:36 imports app.security"
+        ],
+        "M06.transport": [
+          "Session and CSRF HTTP contracts consumed by authenticated Web requests"
+        ],
+        "M10.operations": [
+          "apps/api/app/routes/admin_assistant.py:28 imports app.dependencies"
+        ]
+      }
+    },
+    "M06.profile": {
+      "paths": [
+        "apps/api/app/profile_service.py",
+        "apps/api/app/routes/admin_profile.py",
+        "apps/api/app/routes/public_profile.py",
+        "apps/api/tests/test_profile.py"
+      ],
+      "cases": [
+        "M06-P1-01",
+        "M06-PROFILE-DEFAULT-01",
+        "M06-UNIT-PROFILE-01"
+      ],
+      "dependents": [
+        "M06.profile_web",
+        "M06.runtime_config",
+        "M10.index"
+      ],
+      "dependency_reasons": {
+        "M06.profile_web": [
+          "Profile route response consumed by usePublicProfile/ProfileCard and admin form"
+        ],
+        "M06.runtime_config": [
+          "apps/api/app/main.py:18 imports app.routes.admin_profile",
+          "apps/api/app/main.py:18 imports app.routes.public_profile"
+        ],
+        "M10.index": [
+          "apps/api/app/assistant_index/outbox.py:7 imports app.profile_service",
+          "apps/api/app/assistant_index/projector.py:21 imports app.profile_service"
+        ]
+      }
+    },
+    "M09.runtime": {
+      "paths": [
+        "apps/api/app/assistant/__init__.py",
+        "apps/api/app/assistant/cleanup.py",
+        "apps/api/app/assistant/constants.py",
+        "apps/api/app/assistant/crypto.py",
+        "apps/api/app/assistant/errors.py",
+        "apps/api/app/assistant/graph.py",
+        "apps/api/app/assistant/hub.py",
+        "apps/api/app/assistant/hydrate.py",
+        "apps/api/app/assistant/identity.py",
+        "apps/api/app/assistant/ip.py",
+        "apps/api/app/assistant/money.py",
+        "apps/api/app/assistant/operational.py",
+        "apps/api/app/assistant/origin.py",
+        "apps/api/app/assistant/output.py",
+        "apps/api/app/assistant/owner_lock.py",
+        "apps/api/app/assistant/pragmas.py",
+        "apps/api/app/assistant/preflight.py",
+        "apps/api/app/assistant/prompt.py",
+        "apps/api/app/assistant/provisioning.py",
+        "apps/api/app/assistant/readiness.py",
+        "apps/api/app/assistant/recovery.py",
+        "apps/api/app/assistant/routes.py",
+        "apps/api/app/assistant/runner.py",
+        "apps/api/app/assistant/runtime.py",
+        "apps/api/app/assistant/runtime_db.py",
+        "apps/api/app/assistant/runtime_models.py",
+        "apps/api/app/assistant/runtime_schema.py",
+        "apps/api/app/assistant/saver.py",
+        "apps/api/app/assistant/serialization.py",
+        "apps/api/app/assistant/service.py",
+        "apps/api/app/assistant/sse.py",
+        "apps/api/app/assistant/store.py",
+        "apps/api/app/assistant/test_bootstrap.py",
+        "apps/api/app/assistant/time_beijing.py",
+        "apps/api/app/assistant/validation.py",
+        "apps/api/tests/test_assistant_expiry_serialization.py",
+        "apps/api/tests/test_assistant_online.py",
+        "apps/api/tests/test_assistant_online_matrix.py",
+        "apps/api/tests/test_assistant_runtime_integrity.py",
+        "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+        "apps/api/tests/test_assistant_web_delivery.py"
+      ],
+      "cases": [
+        "M09-P0-02",
+        "M09-UNIT-ASSISTANT-EXPIRY-SERIALIZATION-01",
+        "M09-UNIT-ASSISTANT-ONLINE-01",
+        "M09-UNIT-ASSISTANT-ONLINE-MATRIX-01",
+        "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-01",
+        "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-REMEDIATION-01",
+        "M09-UNIT-ASSISTANT-WEB-DELIVERY-01"
+      ],
+      "dependents": [
+        "M06.api_tooling",
+        "M06.persistence",
+        "M06.runtime_config",
+        "M09.assistant_web",
+        "M09.development",
+        "M09.providers",
+        "M10.index",
+        "M10.operations",
+        "M10.qualification"
+      ],
+      "dependency_reasons": {
+        "M06.api_tooling": [
+          "apps/api/scripts/assistant_readiness.py:1 imports app.assistant.readiness",
+          "apps/api/scripts/provision_assistant_runtime.py:1 imports app.assistant.provisioning",
+          "apps/api/scripts/run_assistant_dev.py:16 imports app.assistant.provisioning",
+          "apps/api/scripts/run_assistant_e2e.py:14 imports app.assistant.constants",
+          "apps/api/scripts/run_assistant_e2e.py:20 imports app.assistant.provisioning"
+        ],
+        "M06.persistence": [
+          "apps/api/app/content_write_fence.py:7 imports app.assistant.owner_lock"
+        ],
+        "M06.runtime_config": [
+          "apps/api/app/config.py:136 imports app.assistant.validation",
+          "apps/api/app/main.py:183 imports app.assistant.routes",
+          "apps/api/app/main.py:49 imports app.assistant.runtime",
+          "apps/api/app/main.py:53 imports app.assistant.test_bootstrap",
+          "apps/api/app/main.py:63 imports app.assistant.runtime",
+          "apps/api/app/main.py:88 imports app.assistant.errors"
+        ],
+        "M09.assistant_web": [
+          "Session/SSE HTTP contracts consumed by assistant client"
+        ],
+        "M09.development": [
+          "apps/api/app/assistant/development.py:23 imports app.assistant.constants",
+          "apps/api/app/assistant/development.py:24 imports app.assistant.readiness"
+        ],
+        "M09.providers": [
+          "apps/api/app/assistant/providers.py:23 imports app.assistant.constants"
+        ],
+        "M10.index": [
+          "apps/api/app/assistant_index/index_ledger.py:12 imports app.assistant.constants",
+          "apps/api/app/assistant_index/index_ledger.py:19 imports app.assistant.crypto",
+          "apps/api/app/assistant_index/index_ledger.py:20 imports app.assistant.money",
+          "apps/api/app/assistant_index/index_ledger.py:22 imports app.assistant.time_beijing",
+          "apps/api/app/assistant_index/runtime.py:11 imports app.assistant.crypto",
+          "apps/api/app/assistant_index/worker.py:13 imports app.assistant.crypto",
+          "apps/api/app/assistant_index/worker.py:14 imports app.assistant.errors",
+          "apps/api/app/assistant_index/worker.py:547 imports app.assistant.time_beijing",
+          "apps/api/app/assistant_index/worker.py:913 imports app.assistant.time_beijing",
+          "apps/api/app/assistant_index/worker_control.py:9 imports app.assistant.crypto"
+        ],
+        "M10.operations": [
+          "apps/api/app/assistant/admin_operations.py:51 imports app.assistant.crypto",
+          "apps/api/app/assistant/admin_operations.py:52 imports app.assistant.money",
+          "apps/api/app/assistant/admin_operations.py:53 imports app.assistant.operational",
+          "apps/api/app/assistant/admin_operations.py:61 imports app.assistant.readiness",
+          "apps/api/app/assistant/admin_operations.py:62 imports app.assistant.recovery",
+          "apps/api/app/assistant/admin_operations.py:63 imports app.assistant.store",
+          "apps/api/app/assistant/admin_operations.py:64 imports app.assistant.time_beijing"
+        ],
+        "M10.qualification": [
+          "apps/api/app/assistant_qualification/backup_restore.py:17 imports app.assistant.provisioning",
+          "apps/api/app/assistant_qualification/backup_restore.py:18 imports app.assistant.recovery",
+          "apps/api/app/assistant_qualification/provider_probe.py:16 imports app.assistant.constants",
+          "apps/api/app/assistant_qualification/provider_probe.py:17 imports app.assistant.crypto",
+          "apps/api/app/assistant_qualification/provider_probe.py:18 imports app.assistant.graph",
+          "apps/api/app/assistant_qualification/provider_probe.py:19 imports app.assistant.money",
+          "apps/api/app/assistant_qualification/provider_probe.py:20 imports app.assistant.owner_lock"
+        ]
+      }
+    },
+    "M09.development": {
+      "paths": [
+        "apps/api/app/assistant/development.py",
+        "apps/api/tests/test_assistant_development.py",
+        "scripts/run-assistant-dev.mjs"
+      ],
+      "cases": [
+        "M09-P0-03",
+        "M09-P1-02",
+        "M09-UNIT-ASSISTANT-DEVELOPMENT-01"
+      ],
+      "dependents": [
+        "M06.api_tooling",
+        "M06.runtime_config"
+      ],
+      "dependency_reasons": {
+        "M06.api_tooling": [
+          "apps/api/scripts/run_assistant_dev.py:15 imports app.assistant.development"
+        ],
+        "M06.runtime_config": [
+          "apps/api/app/main.py:57 imports app.assistant.development"
+        ]
+      }
+    },
+    "M10.operations": {
+      "paths": [
+        "apps/api/app/assistant/admin_operations.py",
+        "apps/api/app/assistant/admin_schemas.py",
+        "apps/api/app/routes/admin_assistant.py",
+        "apps/api/tests/test_assistant_admin.py"
+      ],
+      "cases": [
+        "M10-P0-01",
+        "M10-P0-02",
+        "M10-P1-01",
+        "M10-UNIT-ASSISTANT-ADMIN-01"
+      ],
+      "dependents": [
+        "M06.runtime_config",
+        "M09.development",
+        "M09.runtime",
+        "M10.operations_web"
+      ],
+      "dependency_reasons": {
+        "M06.runtime_config": [
+          "apps/api/app/main.py:18 imports app.routes.admin_assistant"
+        ],
+        "M09.development": [
+          "apps/api/app/assistant/development.py:22 imports app.assistant.admin_operations"
+        ],
+        "M09.runtime": [
+          "apps/api/app/assistant/runtime.py:142 imports app.assistant.admin_operations",
+          "apps/api/app/assistant/test_bootstrap.py:19 imports app.assistant.admin_operations"
+        ],
+        "M10.operations_web": [
+          "Admin snapshot/operation HTTP contracts consumed by administration page"
+        ]
+      }
+    },
+    "M10.index": {
+      "paths": [
+        "apps/api/app/assistant_index/__init__.py",
+        "apps/api/app/assistant_index/chunker.py",
+        "apps/api/app/assistant_index/constants.py",
+        "apps/api/app/assistant_index/embeddings.py",
+        "apps/api/app/assistant_index/fts.py",
+        "apps/api/app/assistant_index/index_ledger.py",
+        "apps/api/app/assistant_index/outbox.py",
+        "apps/api/app/assistant_index/projector.py",
+        "apps/api/app/assistant_index/qdrant_store.py",
+        "apps/api/app/assistant_index/retriever.py",
+        "apps/api/app/assistant_index/runtime.py",
+        "apps/api/app/assistant_index/worker.py",
+        "apps/api/app/assistant_index/worker_control.py",
+        "apps/api/tests/test_assistant_index.py"
+      ],
+      "cases": [
+        "M10-P1-01",
+        "M10-UNIT-ASSISTANT-INDEX-01"
+      ],
+      "dependents": [
+        "M01.articles",
+        "M02.publishing",
+        "M03.taxonomy",
+        "M04.projects",
+        "M05.portability",
+        "M06.api_tooling",
+        "M06.profile",
+        "M09.development",
+        "M09.providers",
+        "M09.runtime",
+        "M10.operations"
+      ],
+      "dependency_reasons": {
+        "M01.articles": [
+          "apps/api/app/article_revision_history.py:13 imports app.assistant_index.outbox"
+        ],
+        "M02.publishing": [
+          "apps/api/app/routes/admin_articles.py:15 imports app.assistant_index.outbox"
+        ],
+        "M03.taxonomy": [
+          "apps/api/app/routes/admin_taxonomy.py:10 imports app.assistant_index.outbox"
+        ],
+        "M04.projects": [
+          "apps/api/app/routes/admin_books.py:10 imports app.assistant_index.outbox",
+          "apps/api/app/routes/admin_projects.py:10 imports app.assistant_index.outbox"
+        ],
+        "M05.portability": [
+          "apps/api/app/routes/admin_content.py:28 imports app.assistant_index.outbox"
+        ],
+        "M06.api_tooling": [
+          "apps/api/scripts/run_assistant_e2e.py:21 imports app.assistant_index.constants",
+          "apps/api/scripts/run_assistant_index_worker.py:3 imports app.assistant_index.worker"
+        ],
+        "M06.profile": [
+          "apps/api/app/routes/admin_profile.py:8 imports app.assistant_index.outbox"
+        ],
+        "M09.development": [
+          "apps/api/app/assistant/development.py:13 imports app.assistant_index.constants",
+          "apps/api/app/assistant/development.py:18 imports app.assistant_index.worker"
+        ],
+        "M09.providers": [
+          "apps/api/app/assistant/providers.py:19 imports app.assistant_index.constants",
+          "apps/api/app/assistant/providers.py:20 imports app.assistant_index.embeddings"
+        ],
+        "M09.runtime": [
+          "apps/api/app/assistant/hydrate.py:10 imports app.assistant_index.runtime",
+          "apps/api/app/assistant/hydrate.py:168 imports app.assistant_index.worker",
+          "apps/api/app/assistant/hydrate.py:75 imports app.assistant_index.worker",
+          "apps/api/app/assistant/hydrate.py:8 imports app.assistant_index.projector",
+          "apps/api/app/assistant/hydrate.py:9 imports app.assistant_index.retriever",
+          "apps/api/app/assistant/readiness.py:8 imports app.assistant_index.worker",
+          "apps/api/app/assistant/runtime.py:15 imports app.assistant_index.runtime",
+          "apps/api/app/assistant/runtime.py:62 imports app.assistant_index.worker",
+          "apps/api/app/assistant/test_bootstrap.py:11 imports app.assistant_index.outbox",
+          "apps/api/app/assistant/test_bootstrap.py:12 imports app.assistant_index.worker",
+          "apps/api/app/assistant/validation.py:202 imports app.assistant_index.embeddings",
+          "apps/api/app/assistant/validation.py:6 imports app.assistant_index.constants"
+        ],
+        "M10.operations": [
+          "apps/api/app/assistant/admin_operations.py:12 imports app.assistant_index.projector"
+        ]
+      }
+    },
+    "M10.qualification": {
+      "paths": [
+        "apps/api/app/assistant/backup.py",
+        "apps/api/app/assistant_qualification/__init__.py",
+        "apps/api/app/assistant_qualification/backup_restore.py",
+        "apps/api/app/assistant_qualification/cli.py",
+        "apps/api/app/assistant_qualification/profile.py",
+        "apps/api/app/assistant_qualification/provider_probe.py",
+        "apps/api/app/assistant_qualification/runtime_binding.py",
+        "apps/api/tests/test_assistant_backup_restore.py",
+        "apps/api/tests/test_assistant_provider_qualification.py",
+        "apps/api/tests/test_assistant_qualification_profile.py",
+        "apps/api/tests/test_assistant_runtime_profile_binding.py"
+      ],
+      "cases": [
+        "M10-P1-01",
+        "M10-UNIT-ASSISTANT-BACKUP-RESTORE-01",
+        "M10-UNIT-ASSISTANT-PROVIDER-QUALIFICATION-01",
+        "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01",
+        "M10-UNIT-ASSISTANT-RUNTIME-PROFILE-BINDING-01"
+      ],
+      "dependents": [
+        "M06.api_tooling",
+        "M08.qualification",
+        "M08.qualification_runner",
+        "M09.runtime",
+        "M10.index"
+      ],
+      "dependency_reasons": {
+        "M06.api_tooling": [
+          "apps/api/scripts/assistant_qualification.py:3 imports app.assistant_qualification.cli",
+          "apps/api/scripts/run_assistant_backup_restore.py:7 imports app.assistant_qualification.backup_restore",
+          "apps/api/scripts/run_assistant_provider_qualification.py:7 imports app.assistant_qualification.provider_probe"
+        ],
+        "M08.qualification": [
+          "harness/tools/qualification.py:791 imports app.assistant_qualification.profile"
+        ],
+        "M08.qualification_runner": [
+          "harness/tools/qualification_runner.py:125 imports app.assistant_qualification.profile"
+        ],
+        "M09.runtime": [
+          "apps/api/app/assistant/readiness.py:120 imports app.assistant_qualification.profile",
+          "apps/api/app/assistant/readiness.py:121 imports app.assistant_qualification.provider_probe",
+          "apps/api/app/assistant/readiness.py:125 imports app.assistant_qualification.runtime_binding",
+          "apps/api/app/assistant/validation.py:206 imports app.assistant_qualification.runtime_binding"
+        ],
+        "M10.index": [
+          "apps/api/app/assistant_index/embeddings.py:82 imports app.assistant_qualification.runtime_binding"
+        ]
+      }
+    },
+    "M09.providers": {
+      "paths": [
+        "apps/api/app/assistant/providers.py",
+        "apps/api/tests/test_assistant_provider_facts.py"
+      ],
+      "cases": [
+        "M09-P0-02",
+        "M09-UNIT-ASSISTANT-PROVIDER-FACTS-01"
+      ],
+      "dependents": [
+        "M09.runtime",
+        "M10.index",
+        "M10.qualification"
+      ],
+      "dependency_reasons": {
+        "M09.runtime": [
+          "apps/api/app/assistant/graph.py:36 imports app.assistant.providers",
+          "apps/api/app/assistant/output.py:8 imports app.assistant.providers",
+          "apps/api/app/assistant/prompt.py:10 imports app.assistant.providers",
+          "apps/api/app/assistant/readiness.py:15 imports app.assistant.providers",
+          "apps/api/app/assistant/runtime.py:24 imports app.assistant.providers"
+        ],
+        "M10.index": [
+          "apps/api/app/assistant_index/embeddings.py:118 imports app.assistant.providers",
+          "apps/api/app/assistant_index/index_ledger.py:21 imports app.assistant.providers",
+          "apps/api/app/assistant_index/runtime.py:53 imports app.assistant.providers"
+        ],
+        "M10.qualification": [
+          "apps/api/app/assistant_qualification/provider_probe.py:21 imports app.assistant.providers"
+        ]
+      }
+    },
+    "M01.links": {
+      "paths": [
+        "apps/api/app/knowledge_links.py",
+        "apps/api/tests/test_knowledge_links.py"
+      ],
+      "cases": [
+        "M01-P0-01",
+        "M01-UNIT-KNOWLEDGE-LINKS-01"
+      ],
+      "dependents": [
+        "M01.articles",
+        "M02.publishing",
+        "M04.projects",
+        "M05.portability",
+        "M09.runtime"
+      ],
+      "dependency_reasons": {
+        "M01.articles": [
+          "apps/api/app/article_revision_history.py:14 imports app.knowledge_links",
+          "apps/api/app/routes/public_articles.py:8 imports app.knowledge_links"
+        ],
+        "M02.publishing": [
+          "apps/api/app/article_revisions.py:10 imports app.knowledge_links",
+          "apps/api/app/routes/admin_articles.py:17 imports app.knowledge_links"
+        ],
+        "M04.projects": [
+          "apps/api/app/routes/admin_books.py:168 imports app.knowledge_links",
+          "apps/api/app/routes/admin_books.py:193 imports app.knowledge_links",
+          "apps/api/app/routes/admin_projects.py:201 imports app.knowledge_links",
+          "apps/api/app/routes/admin_projects.py:226 imports app.knowledge_links",
+          "apps/api/app/routes/public_books.py:10 imports app.knowledge_links",
+          "apps/api/app/routes/public_projects.py:8 imports app.knowledge_links"
+        ],
+        "M05.portability": [
+          "apps/api/app/routes/admin_content.py:226 imports app.knowledge_links",
+          "apps/api/app/routes/admin_content.py:257 imports app.knowledge_links"
+        ],
+        "M09.runtime": [
+          "apps/api/app/assistant/test_bootstrap.py:15 imports app.knowledge_links"
+        ]
+      }
+    },
+    "M01.pagination": {
+      "paths": [
+        "apps/api/app/pagination.py",
+        "apps/api/tests/test_pagination.py"
+      ],
+      "cases": [
+        "M01-P0-01",
+        "M01-UNIT-PAGINATION-01"
+      ],
+      "dependents": [
+        "M01.articles",
+        "M02.publishing",
+        "M03.search",
+        "M04.projects",
+        "M05.media",
+        "M05.portability"
+      ],
+      "dependency_reasons": {
+        "M01.articles": [
+          "apps/api/app/routes/public_articles.py:10 imports app.pagination"
+        ],
+        "M02.publishing": [
+          "apps/api/app/routes/admin_articles.py:27 imports app.pagination",
+          "apps/api/app/routes/admin_publishing.py:18 imports app.pagination"
+        ],
+        "M03.search": [
+          "apps/api/app/routes/public_search.py:6 imports app.pagination"
+        ],
+        "M04.projects": [
+          "apps/api/app/routes/admin_books.py:18 imports app.pagination",
+          "apps/api/app/routes/admin_projects.py:18 imports app.pagination",
+          "apps/api/app/routes/public_books.py:12 imports app.pagination",
+          "apps/api/app/routes/public_projects.py:10 imports app.pagination"
+        ],
+        "M05.media": [
+          "apps/api/app/routes/media.py:20 imports app.pagination"
+        ],
+        "M05.portability": [
+          "apps/api/app/routes/admin_content.py:42 imports app.pagination"
+        ]
+      }
+    },
+    "M06.runtime_config": {
+      "paths": [
+        "apps/api/app/config.py",
+        "apps/api/app/http_errors.py",
+        "apps/api/app/main.py",
+        "apps/api/tests/__init__.py",
+        "apps/api/tests/conftest.py",
+        "apps/api/tests/test_environment_isolation.py",
+        "apps/api/tests/test_runtime_safety.py"
+      ],
+      "cases": [
+        "M06-P0-01",
+        "M06-UNIT-ENVIRONMENT-ISOLATION-01",
+        "M06-UNIT-RUNTIME-SAFETY-01"
+      ],
+      "dependents": [
+        "M02.publishing",
+        "M06.api_tooling",
+        "M06.auth",
+        "M06.persistence",
+        "M09.development",
+        "M09.providers",
+        "M09.runtime",
+        "M10.index",
+        "M10.operations",
+        "M10.qualification"
+      ],
+      "dependency_reasons": {
+        "M02.publishing": [
+          "apps/api/app/routes/admin_publishing.py:16 imports app.http_errors"
+        ],
+        "M06.api_tooling": [
+          "apps/api/scripts/export_openapi.py:6 imports app.config",
+          "apps/api/scripts/export_openapi.py:7 imports app.main",
+          "apps/api/scripts/run_assistant_backup_restore.py:12 imports app.config",
+          "apps/api/scripts/run_assistant_dev.py:17 imports app.config",
+          "apps/api/scripts/run_assistant_dev.py:18 imports app.main",
+          "apps/api/scripts/run_assistant_e2e.py:26 imports app.config",
+          "apps/api/scripts/run_assistant_e2e.py:28 imports app.main",
+          "apps/api/scripts/run_assistant_provider_qualification.py:8 imports app.config",
+          "apps/api/scripts/run_e2e.py:14 imports app.config",
+          "apps/api/scripts/run_e2e.py:16 imports app.main"
+        ],
+        "M06.auth": [
+          "apps/api/app/routes/auth.py:7 imports app.config",
+          "apps/api/app/security.py:14 imports app.config"
+        ],
+        "M06.persistence": [
+          "apps/api/app/content_write_fence.py:8 imports app.config"
+        ],
+        "M09.development": [
+          "apps/api/app/assistant/development.py:19 imports app.config"
+        ],
+        "M09.providers": [
+          "apps/api/app/assistant/providers.py:21 imports app.config"
+        ],
+        "M09.runtime": [
+          "apps/api/app/assistant/errors.py:3 imports app.http_errors",
+          "apps/api/app/assistant/ip.py:8 imports app.config",
+          "apps/api/app/assistant/operational.py:9 imports app.http_errors",
+          "apps/api/app/assistant/origin.py:7 imports app.config",
+          "apps/api/app/assistant/provisioning.py:12 imports app.config",
+          "apps/api/app/assistant/readiness.py:9 imports app.config",
+          "apps/api/app/assistant/runtime.py:16 imports app.config",
+          "apps/api/app/assistant/test_bootstrap.py:13 imports app.config",
+          "apps/api/app/assistant/validation.py:7 imports app.config"
+        ],
+        "M10.index": [
+          "apps/api/app/assistant_index/embeddings.py:8 imports app.config",
+          "apps/api/app/assistant_index/qdrant_store.py:19 imports app.config",
+          "apps/api/app/assistant_index/runtime.py:12 imports app.config",
+          "apps/api/app/assistant_index/worker.py:15 imports app.config"
+        ],
+        "M10.operations": [
+          "apps/api/app/assistant/admin_operations.py:18 imports app.http_errors"
+        ],
+        "M10.qualification": [
+          "apps/api/app/assistant_qualification/backup_restore.py:19 imports app.config",
+          "apps/api/app/assistant_qualification/provider_probe.py:28 imports app.config",
+          "apps/api/app/assistant_qualification/runtime_binding.py:13 imports app.config"
+        ]
+      }
+    },
+    "M06.persistence": {
+      "paths": [
+        "apps/api/app/__init__.py",
+        "apps/api/app/content_write_fence.py",
+        "apps/api/app/db.py",
+        "apps/api/app/models.py",
+        "apps/api/app/routes/__init__.py",
+        "apps/api/app/schemas.py",
+        "apps/api/tests/test_migrations.py"
+      ],
+      "cases": [
+        "M06-P0-01",
+        "M06-UNIT-MIGRATIONS-01"
+      ],
+      "dependents": [
+        "M01.articles",
+        "M01.links",
+        "M02.publishing",
+        "M03.search",
+        "M03.taxonomy",
+        "M04.projects",
+        "M05.media",
+        "M05.portability",
+        "M06.api_tooling",
+        "M06.auth",
+        "M06.profile",
+        "M06.runtime_config",
+        "M09.development",
+        "M09.runtime",
+        "M10.index",
+        "M10.operations",
+        "M10.qualification"
+      ],
+      "dependency_reasons": {
+        "M01.articles": [
+          "apps/api/app/article_revision_history.py:15 imports app.models",
+          "apps/api/app/routes/public_articles.py:11 imports app.schemas",
+          "apps/api/app/routes/public_articles.py:9 imports app.models"
+        ],
+        "M01.links": [
+          "apps/api/app/knowledge_links.py:13 imports app.models",
+          "apps/api/app/knowledge_links.py:21 imports app.schemas",
+          "apps/api/app/knowledge_links.py:22 imports app.schemas"
+        ],
+        "M02.publishing": [
+          "apps/api/app/article_revisions.py:11 imports app.models",
+          "apps/api/app/routes/admin_articles.py:26 imports app.models",
+          "apps/api/app/routes/admin_articles.py:28 imports app.schemas",
+          "apps/api/app/routes/admin_publishing.py:17 imports app.models",
+          "apps/api/app/routes/admin_publishing.py:19 imports app.schemas"
+        ],
+        "M03.search": [
+          "apps/api/app/routes/public_search.py:7 imports app.schemas",
+          "apps/api/app/search.py:11 imports app.models",
+          "apps/api/app/search.py:21 imports app.schemas"
+        ],
+        "M03.taxonomy": [
+          "apps/api/app/routes/admin_taxonomy.py:12 imports app.models",
+          "apps/api/app/routes/admin_taxonomy.py:21 imports app.schemas",
+          "apps/api/app/routes/public_taxonomy.py:7 imports app.models",
+          "apps/api/app/routes/public_taxonomy.py:8 imports app.schemas"
+        ],
+        "M04.projects": [
+          "apps/api/app/content_revisions.py:10 imports app.models",
+          "apps/api/app/routes/admin_books.py:17 imports app.models",
+          "apps/api/app/routes/admin_books.py:19 imports app.schemas",
+          "apps/api/app/routes/admin_projects.py:17 imports app.models",
+          "apps/api/app/routes/admin_projects.py:19 imports app.schemas",
+          "apps/api/app/routes/public_books.py:11 imports app.models",
+          "apps/api/app/routes/public_books.py:13 imports app.schemas",
+          "apps/api/app/routes/public_projects.py:11 imports app.schemas",
+          "apps/api/app/routes/public_projects.py:9 imports app.models"
+        ],
+        "M05.media": [
+          "apps/api/app/routes/media.py:19 imports app.models",
+          "apps/api/app/routes/media.py:21 imports app.schemas"
+        ],
+        "M05.portability": [
+          "apps/api/app/routes/admin_content.py:30 imports app.models",
+          "apps/api/app/routes/admin_content.py:43 imports app.schemas"
+        ],
+        "M06.api_tooling": [
+          "apps/api/scripts/run_assistant_e2e.py:27 imports app.db",
+          "apps/api/scripts/run_e2e.py:15 imports app.db"
+        ],
+        "M06.auth": [
+          "apps/api/app/dependencies.py:10 imports app.models",
+          "apps/api/app/dependencies.py:9 imports app.db",
+          "apps/api/app/routes/auth.py:10 imports app.schemas",
+          "apps/api/app/routes/auth.py:9 imports app.models"
+        ],
+        "M06.profile": [
+          "apps/api/app/profile_service.py:8 imports app.models",
+          "apps/api/app/profile_service.py:9 imports app.schemas",
+          "apps/api/app/routes/admin_profile.py:10 imports app.models",
+          "apps/api/app/routes/admin_profile.py:12 imports app.schemas",
+          "apps/api/app/routes/public_profile.py:7 imports app.schemas"
+        ],
+        "M06.runtime_config": [
+          "apps/api/app/main.py:14 imports app.content_write_fence",
+          "apps/api/app/main.py:15 imports app.db",
+          "apps/api/app/main.py:18 imports app.routes"
+        ],
+        "M09.development": [
+          "apps/api/app/assistant/development.py:20 imports app.db",
+          "apps/api/app/assistant/development.py:21 imports app.models"
+        ],
+        "M09.runtime": [
+          "apps/api/app/assistant/cleanup.py:421 imports app.models",
+          "apps/api/app/assistant/hydrate.py:11 imports app.models",
+          "apps/api/app/assistant/readiness.py:10 imports app.db",
+          "apps/api/app/assistant/readiness.py:162 imports app.models",
+          "apps/api/app/assistant/runtime.py:17 imports app.db",
+          "apps/api/app/assistant/runtime.py:63 imports app.models",
+          "apps/api/app/assistant/test_bootstrap.py:14 imports app.db",
+          "apps/api/app/assistant/test_bootstrap.py:16 imports app.models"
+        ],
+        "M10.index": [
+          "apps/api/app/assistant_index/fts.py:6 imports app.models",
+          "apps/api/app/assistant_index/index_ledger.py:23 imports app.models",
+          "apps/api/app/assistant_index/outbox.py:6 imports app.models",
+          "apps/api/app/assistant_index/projector.py:10 imports app.models",
+          "apps/api/app/assistant_index/retriever.py:9 imports app.models",
+          "apps/api/app/assistant_index/runtime.py:13 imports app.db",
+          "apps/api/app/assistant_index/worker.py:16 imports app.content_write_fence",
+          "apps/api/app/assistant_index/worker.py:17 imports app.db",
+          "apps/api/app/assistant_index/worker.py:18 imports app.models",
+          "apps/api/app/assistant_index/worker_control.py:10 imports app.models"
+        ],
+        "M10.operations": [
+          "apps/api/app/assistant/admin_operations.py:19 imports app.models",
+          "apps/api/app/routes/admin_assistant.py:29 imports app.models"
+        ],
+        "M10.qualification": [
+          "apps/api/app/assistant_qualification/backup_restore.py:20 imports app.content_write_fence",
+          "apps/api/app/assistant_qualification/runtime_binding.py:9 imports app.content_write_fence"
+        ]
+      }
+    },
+    "M06.time": {
+      "paths": [
+        "apps/api/app/time_utils.py",
+        "apps/api/tests/test_time_semantics.py"
+      ],
+      "cases": [
+        "M06-P0-01",
+        "M06-UNIT-TIME-SEMANTICS-01"
+      ],
+      "dependents": [
+        "M01.articles",
+        "M02.publishing",
+        "M03.search",
+        "M04.projects",
+        "M05.media",
+        "M05.portability",
+        "M06.auth",
+        "M06.persistence",
+        "M06.profile",
+        "M09.runtime",
+        "M10.index",
+        "M10.operations"
+      ],
+      "dependency_reasons": {
+        "M01.articles": [
+          "apps/api/app/article_revision_history.py:23 imports app.time_utils"
+        ],
+        "M02.publishing": [
+          "apps/api/app/article_revisions.py:12 imports app.time_utils",
+          "apps/api/app/routes/admin_articles.py:30 imports app.time_utils"
+        ],
+        "M03.search": [
+          "apps/api/app/search.py:22 imports app.time_utils"
+        ],
+        "M04.projects": [
+          "apps/api/app/content_revisions.py:17 imports app.time_utils",
+          "apps/api/app/routes/admin_books.py:21 imports app.time_utils",
+          "apps/api/app/routes/admin_projects.py:21 imports app.time_utils"
+        ],
+        "M05.media": [
+          "apps/api/app/routes/media.py:30 imports app.time_utils"
+        ],
+        "M05.portability": [
+          "apps/api/app/routes/admin_content.py:53 imports app.time_utils"
+        ],
+        "M06.auth": [
+          "apps/api/app/dependencies.py:12 imports app.time_utils",
+          "apps/api/app/security.py:15 imports app.time_utils"
+        ],
+        "M06.persistence": [
+          "apps/api/app/models.py:19 imports app.time_utils"
+        ],
+        "M06.profile": [
+          "apps/api/app/routes/admin_profile.py:13 imports app.time_utils"
+        ],
+        "M09.runtime": [
+          "apps/api/app/assistant/readiness.py:11 imports app.time_utils",
+          "apps/api/app/assistant/runtime.py:18 imports app.time_utils",
+          "apps/api/app/assistant/test_bootstrap.py:18 imports app.time_utils",
+          "apps/api/app/assistant/time_beijing.py:5 imports app.time_utils"
+        ],
+        "M10.index": [
+          "apps/api/app/assistant_index/outbox.py:8 imports app.time_utils",
+          "apps/api/app/assistant_index/runtime.py:14 imports app.time_utils",
+          "apps/api/app/assistant_index/worker.py:26 imports app.time_utils"
+        ],
+        "M10.operations": [
+          "apps/api/app/assistant/admin_operations.py:29 imports app.time_utils"
+        ]
+      }
+    },
+    "M06.api_tooling": {
+      "paths": [
+        "apps/api/.env.example",
+        "apps/api/alembic.ini",
+        "apps/api/pyproject.toml",
+        "apps/api/scripts/assistant_qualification.py",
+        "apps/api/scripts/assistant_readiness.py",
+        "apps/api/scripts/export_openapi.py",
+        "apps/api/scripts/provision_assistant_runtime.py",
+        "apps/api/scripts/run_assistant_backup_restore.py",
+        "apps/api/scripts/run_assistant_dev.py",
+        "apps/api/scripts/run_assistant_e2e.py",
+        "apps/api/scripts/run_assistant_index_worker.py",
+        "apps/api/scripts/run_assistant_provider_qualification.py",
+        "apps/api/scripts/run_e2e.py",
+        "apps/api/uv.lock"
+      ],
+      "cases": [
+        "M06-P0-01"
+      ],
+      "dependents": [
+        "M06.persistence",
+        "M06.runtime_config",
+        "M09.runtime",
+        "M10.index"
+      ],
+      "dependency_reasons": {
+        "M06.persistence": [
+          "API dependency/migration/entrypoint consumers require per-change review"
+        ],
+        "M06.runtime_config": [
+          "API dependency/migration/entrypoint consumers require per-change review"
+        ],
+        "M09.runtime": [
+          "API dependency/migration/entrypoint consumers require per-change review"
+        ],
+        "M10.index": [
+          "API dependency/migration/entrypoint consumers require per-change review"
+        ]
+      }
+    },
+    "M06.profile_web": {
+      "paths": [
+        "apps/web/components/ProfileCard.vue",
+        "apps/web/composables/usePublicProfile.ts",
+        "apps/web/pages/admin/profile.vue",
+        "apps/web/tests/e2e/profile.spec.ts",
+        "apps/web/tests/unit/profile.test.ts",
+        "apps/web/utils/profile.ts"
+      ],
+      "cases": [
+        "M06-PROFILE-CARD-01",
+        "M06-PROFILE-SKILLS-01",
+        "M06-UNIT-PROFILE-01"
+      ],
+      "dependents": [
+        "M01.navigation"
+      ],
+      "dependency_reasons": {
+        "M01.navigation": [
+          "apps/web/layouts/default.vue calls auto-imported usePublicProfile",
+          "apps/web/pages/index.vue calls auto-imported usePublicProfile",
+          "apps/web/pages/index.vue renders auto-imported ProfileCard"
+        ]
+      }
+    },
+    "M06.auth_web": {
+      "paths": [
+        "apps/web/middleware/admin.ts",
+        "apps/web/pages/admin/login.vue",
+        "apps/web/tests/e2e/auth-proxy.spec.ts",
+        "apps/web/tests/unit/admin.test.ts",
+        "apps/web/utils/admin.ts"
+      ],
+      "cases": [
+        "M02-P1-02",
+        "M06-P0-01",
+        "M06-UNIT-ADMIN-01",
+        "M06-UNIT-AUTH-PROXY-01"
+      ],
+      "dependents": [
+        "M02.admin_shell"
+      ],
+      "dependency_reasons": {
+        "M02.admin_shell": [
+          "apps/web/components/AdminCoreNavigation.vue imports ~/utils/admin"
+        ]
+      }
+    },
+    "M01.navigation": {
+      "paths": [
+        "apps/web/app.vue",
+        "apps/web/components/PublicPageHero.vue",
+        "apps/web/components/SiteFooter.vue",
+        "apps/web/components/SiteHeader.vue",
+        "apps/web/components/ThemeToggle.vue",
+        "apps/web/composables/usePublicOverlay.ts",
+        "apps/web/error.vue",
+        "apps/web/layouts/default.vue",
+        "apps/web/pages/index.vue",
+        "apps/web/tests/e2e/public-experience.spec.ts",
+        "apps/web/tests/e2e/ui-foundation.spec.ts",
+        "apps/web/tests/unit/public-ui-polish.test.ts",
+        "apps/web/tests/unit/site.test.ts"
+      ],
+      "cases": [
+        "M01-P1-01",
+        "M01-P1-02",
+        "M01-P1-04",
+        "M01-UNIT-PUBLIC-EXPERIENCE-01",
+        "M01-UNIT-PUBLIC-UI-POLISH-01",
+        "M01-UNIT-SITE-01",
+        "M01-UNIT-UI-FOUNDATION-01",
+        "M02-P1-02"
+      ],
+      "dependents": [
+        "M01.indexes",
+        "M02.admin_shell",
+        "M04.books_web",
+        "M04.projects_web",
+        "M09.assistant_web"
+      ],
+      "dependency_reasons": {
+        "M01.indexes": [
+          "apps/web/pages/articles/index.vue renders auto-imported PublicPageHero"
+        ],
+        "M02.admin_shell": [
+          "apps/web/components/AdminThemeToggle.vue renders auto-imported ThemeToggle"
+        ],
+        "M04.books_web": [
+          "apps/web/pages/books/index.vue renders auto-imported PublicPageHero"
+        ],
+        "M04.projects_web": [
+          "apps/web/pages/projects/index.vue renders auto-imported PublicPageHero"
+        ],
+        "M09.assistant_web": [
+          "Public overlay ownership coordinates navigation and assistant modal",
+          "apps/web/components/AssistantHost.vue calls auto-imported usePublicOverlay",
+          "apps/web/components/AssistantPanel.vue calls auto-imported usePublicOverlay"
+        ]
+      }
+    },
+    "M01.reading": {
+      "paths": [
+        "apps/web/components/ArticleCard.vue",
+        "apps/web/components/BacklinkList.vue",
+        "apps/web/components/ContentToc.vue",
+        "apps/web/components/MarkdownArticle.vue",
+        "apps/web/pages/notes/[year]/[month]/[slug].vue",
+        "apps/web/tests/e2e/article-reading.spec.ts",
+        "apps/web/tests/e2e/codeblock-theme.spec.ts",
+        "apps/web/tests/e2e/knowledge-links.spec.ts",
+        "apps/web/tests/e2e/markdown-mermaid.spec.ts",
+        "apps/web/tests/unit/article.test.ts",
+        "apps/web/tests/unit/codeblock-theme.test.ts",
+        "apps/web/tests/unit/markdown.test.ts",
+        "apps/web/tests/unit/wikilinks.test.ts",
+        "apps/web/utils/article.ts",
+        "apps/web/utils/markdown.ts",
+        "apps/web/utils/readingTime.ts",
+        "apps/web/utils/wikilinks.ts"
+      ],
+      "cases": [
+        "M01-P1-03",
+        "M01-UNIT-ARTICLE-01",
+        "M01-UNIT-ARTICLE-READING-01",
+        "M01-UNIT-CODEBLOCK-THEME-01",
+        "M01-UNIT-KNOWLEDGE-LINKS-01",
+        "M01-UNIT-MARKDOWN-01",
+        "M01-UNIT-MARKDOWN-MERMAID-01",
+        "M01-UNIT-WIKILINKS-01"
+      ],
+      "dependents": [
+        "M01.indexes",
+        "M01.navigation",
+        "M02.editing",
+        "M03.taxonomy_web",
+        "M04.books_web",
+        "M04.projects_web",
+        "M07.discovery"
+      ],
+      "dependency_reasons": {
+        "M01.indexes": [
+          "apps/web/pages/archive.vue imports ~/utils/readingTime",
+          "apps/web/pages/articles/index.vue renders auto-imported ArticleCard"
+        ],
+        "M01.navigation": [
+          "apps/web/pages/index.vue renders auto-imported ArticleCard"
+        ],
+        "M02.editing": [
+          "apps/web/components/ArticleEditor.vue renders auto-imported MarkdownArticle",
+          "apps/web/pages/admin/articles/[id]/preview.vue renders auto-imported MarkdownArticle",
+          "apps/web/pages/admin/articles/[id]/revisions.vue renders auto-imported MarkdownArticle",
+          "apps/web/pages/admin/articles/new.vue imports ~/utils/article"
+        ],
+        "M03.taxonomy_web": [
+          "apps/web/components/TaxonomyManager.vue imports ~/utils/article"
+        ],
+        "M04.books_web": [
+          "apps/web/components/BookNoteEditor.vue renders auto-imported MarkdownArticle",
+          "apps/web/pages/admin/books/new.vue imports ~/utils/article",
+          "apps/web/pages/books/[year]/[month]/[slug].vue imports ~/utils/markdown",
+          "apps/web/pages/books/[year]/[month]/[slug].vue renders auto-imported BacklinkList",
+          "apps/web/pages/books/[year]/[month]/[slug].vue renders auto-imported ContentToc",
+          "apps/web/pages/books/[year]/[month]/[slug].vue renders auto-imported MarkdownArticle"
+        ],
+        "M04.projects_web": [
+          "apps/web/components/ProjectEditor.vue renders auto-imported MarkdownArticle",
+          "apps/web/pages/admin/projects/new.vue imports ~/utils/article",
+          "apps/web/pages/projects/[slug].vue imports ~/utils/markdown",
+          "apps/web/pages/projects/[slug].vue renders auto-imported BacklinkList",
+          "apps/web/pages/projects/[slug].vue renders auto-imported ContentToc",
+          "apps/web/pages/projects/[slug].vue renders auto-imported MarkdownArticle"
+        ],
+        "M07.discovery": [
+          "apps/web/server/routes/rss.xml.get.ts imports ~/utils/markdown"
+        ]
+      }
+    },
+    "M01.indexes": {
+      "paths": [
+        "apps/web/pages/about.vue",
+        "apps/web/pages/archive.vue",
+        "apps/web/pages/articles/index.vue",
+        "apps/web/tests/e2e/about-index.spec.ts",
+        "apps/web/tests/e2e/archive-index.spec.ts",
+        "apps/web/tests/e2e/articles-index.spec.ts",
+        "apps/web/tests/e2e/phase4-indexes.spec.ts",
+        "apps/web/tests/unit/archive.test.ts",
+        "apps/web/utils/archive.ts",
+        "apps/web/utils/site.ts"
+      ],
+      "cases": [
+        "M01-P1-02",
+        "M01-UNIT-ABOUT-INDEX-01",
+        "M01-UNIT-ARCHIVE-01",
+        "M01-UNIT-ARCHIVE-INDEX-01",
+        "M01-UNIT-ARTICLES-INDEX-01",
+        "M01-UNIT-PHASE4-INDEXES-01"
+      ],
+      "dependents": [
+        "M01.navigation",
+        "M01.reading",
+        "M04.projects_web",
+        "M07.discovery"
+      ],
+      "dependency_reasons": {
+        "M01.navigation": [
+          "apps/web/pages/index.vue imports ~/utils/site"
+        ],
+        "M01.reading": [
+          "apps/web/pages/notes/[year]/[month]/[slug].vue imports ~/utils/site"
+        ],
+        "M04.projects_web": [
+          "apps/web/pages/projects/[slug].vue imports ~/utils/site"
+        ],
+        "M07.discovery": [
+          "apps/web/composables/useSiteSeo.ts imports ~/utils/site",
+          "apps/web/server/routes/robots.txt.get.ts imports ~/utils/site",
+          "apps/web/server/utils/discovery.ts imports ../../utils/site"
+        ]
+      }
+    },
+    "M02.editing": {
+      "paths": [
+        "apps/web/components/AdminDialog.vue",
+        "apps/web/components/ArticleEditor.vue",
+        "apps/web/composables/useAutosaveSafety.ts",
+        "apps/web/pages/admin/articles/[id]/edit.vue",
+        "apps/web/pages/admin/articles/[id]/preview.vue",
+        "apps/web/pages/admin/articles/[id]/revisions.vue",
+        "apps/web/pages/admin/articles/index.vue",
+        "apps/web/pages/admin/articles/new.vue",
+        "apps/web/tests/e2e/article-loop.spec.ts",
+        "apps/web/tests/unit/autosave.test.ts",
+        "apps/web/tests/unit/editor-save-contract.test.ts",
+        "apps/web/utils/articleRevisions.ts",
+        "apps/web/utils/autosave.ts"
+      ],
+      "cases": [
+        "M02-P0-01",
+        "M02-P1-01",
+        "M02-UNIT-ARTICLE-LOOP-01",
+        "M02-UNIT-AUTOSAVE-01",
+        "M02-UNIT-EDITOR-SAVE-CONTRACT-01"
+      ],
+      "dependents": [
+        "M04.books_web",
+        "M04.projects_web"
+      ],
+      "dependency_reasons": {
+        "M04.books_web": [
+          "apps/web/components/BookNoteEditor.vue calls auto-imported useAutosaveSafety",
+          "apps/web/components/BookNoteEditor.vue imports ~/utils/autosave"
+        ],
+        "M04.projects_web": [
+          "apps/web/components/ProjectEditor.vue calls auto-imported useAutosaveSafety",
+          "apps/web/components/ProjectEditor.vue imports ~/utils/autosave"
+        ]
+      }
+    },
+    "M02.admin_shell": {
+      "paths": [
+        "apps/web/components/AdminCoreNavigation.vue",
+        "apps/web/components/AdminThemeToggle.vue",
+        "apps/web/layouts/admin-core.vue"
+      ],
+      "cases": [
+        "M02-P1-02"
+      ],
+      "dependents": [
+        "M06.auth_web"
+      ],
+      "dependency_reasons": {
+        "M06.auth_web": [
+          "apps/web/pages/admin/login.vue renders auto-imported AdminThemeToggle"
+        ]
+      }
+    },
+    "M03.search_web": {
+      "paths": [
+        "apps/web/pages/search.vue",
+        "apps/web/tests/e2e/search-states.spec.ts",
+        "apps/web/tests/e2e/search-theme.spec.ts",
+        "apps/web/tests/unit/search-ui.test.ts",
+        "apps/web/utils/search-ui.ts"
+      ],
+      "cases": [
+        "M03-P0-01",
+        "M03-UNIT-SEARCH-STATES-01",
+        "M03-UNIT-SEARCH-THEME-01",
+        "M03-UNIT-SEARCH-UI-01"
+      ],
+      "dependents": []
+    },
+    "M03.taxonomy_web": {
+      "paths": [
+        "apps/web/components/TaxonomyManager.vue",
+        "apps/web/pages/admin/taxonomy.vue"
+      ],
+      "cases": [
+        "M03-P1-01"
+      ],
+      "dependents": []
+    },
+    "M04.projects_web": {
+      "paths": [
+        "apps/web/components/ProjectCard.vue",
+        "apps/web/components/ProjectEditor.vue",
+        "apps/web/pages/admin/projects/[id]/edit.vue",
+        "apps/web/pages/admin/projects/index.vue",
+        "apps/web/pages/admin/projects/new.vue",
+        "apps/web/pages/projects/[slug].vue",
+        "apps/web/pages/projects/index.vue",
+        "apps/web/tests/e2e/projects-index.spec.ts"
+      ],
+      "cases": [
+        "M04-P0-01",
+        "M04-UNIT-PROJECTS-INDEX-01"
+      ],
+      "dependents": []
+    },
+    "M04.books_web": {
+      "paths": [
+        "apps/web/components/BookCard.vue",
+        "apps/web/components/BookNoteEditor.vue",
+        "apps/web/pages/admin/books/[id]/edit.vue",
+        "apps/web/pages/admin/books/index.vue",
+        "apps/web/pages/admin/books/new.vue",
+        "apps/web/pages/books/[year]/[month]/[slug].vue",
+        "apps/web/pages/books/index.vue",
+        "apps/web/tests/e2e/books-index.spec.ts"
+      ],
+      "cases": [
+        "M04-P1-01",
+        "M04-UNIT-BOOKS-INDEX-01"
+      ],
+      "dependents": []
+    },
+    "M05.media_web": {
+      "paths": [
+        "apps/web/components/MarkdownMediaField.vue",
+        "apps/web/components/MediaUploader.vue",
+        "apps/web/pages/admin/media.vue",
+        "apps/web/tests/unit/markdown-media.test.ts",
+        "apps/web/tests/unit/media-upload.test.ts",
+        "apps/web/utils/markdown-media.ts",
+        "apps/web/utils/media-upload.ts"
+      ],
+      "cases": [
+        "M05-P0-01",
+        "M05-UNIT-MARKDOWN-MEDIA-01",
+        "M05-UNIT-MEDIA-UPLOAD-01"
+      ],
+      "dependents": [
+        "M02.editing",
+        "M04.books_web",
+        "M04.projects_web",
+        "M06.profile_web"
+      ],
+      "dependency_reasons": {
+        "M02.editing": [
+          "apps/web/components/ArticleEditor.vue imports ~/utils/markdown-media",
+          "apps/web/components/ArticleEditor.vue renders auto-imported MarkdownMediaField"
+        ],
+        "M04.books_web": [
+          "apps/web/components/BookNoteEditor.vue imports ~/utils/markdown-media",
+          "apps/web/components/BookNoteEditor.vue renders auto-imported MarkdownMediaField",
+          "apps/web/components/BookNoteEditor.vue renders auto-imported MediaUploader"
+        ],
+        "M04.projects_web": [
+          "apps/web/components/ProjectEditor.vue imports ~/utils/markdown-media",
+          "apps/web/components/ProjectEditor.vue renders auto-imported MarkdownMediaField"
+        ],
+        "M06.profile_web": [
+          "apps/web/pages/admin/profile.vue renders auto-imported MediaUploader"
+        ]
+      }
+    },
+    "M05.content_web": {
+      "paths": [
+        "apps/web/pages/admin/content.vue",
+        "apps/web/tests/unit/content.test.ts",
+        "apps/web/utils/content.ts"
+      ],
+      "cases": [
+        "M05-P1-01",
+        "M05-UNIT-CONTENT-01"
+      ],
+      "dependents": [
+        "M01.indexes",
+        "M04.books_web"
+      ],
+      "dependency_reasons": {
+        "M01.indexes": [
+          "apps/web/pages/archive.vue imports ~/utils/content"
+        ],
+        "M04.books_web": [
+          "apps/web/components/BookCard.vue imports ~/utils/content",
+          "apps/web/pages/admin/books/index.vue imports ~/utils/content",
+          "apps/web/pages/books/[year]/[month]/[slug].vue imports ~/utils/content"
+        ]
+      }
+    },
+    "M07.discovery": {
+      "paths": [
+        "apps/web/composables/useSiteSeo.ts",
+        "apps/web/server/routes/robots.txt.get.ts",
+        "apps/web/server/routes/rss.xml.get.ts",
+        "apps/web/server/routes/sitemap.xml.get.ts",
+        "apps/web/server/utils/discovery.ts",
+        "apps/web/tests/e2e/seo-discovery.spec.ts",
+        "apps/web/tests/unit/discovery.test.ts"
+      ],
+      "cases": [
+        "M07-P0-01",
+        "M07-UNIT-DISCOVERY-01",
+        "M07-UNIT-SEO-DISCOVERY-01"
+      ],
+      "dependents": [
+        "M01.indexes",
+        "M01.navigation",
+        "M01.reading",
+        "M03.search_web",
+        "M04.books_web",
+        "M04.projects_web"
+      ],
+      "dependency_reasons": {
+        "M01.indexes": [
+          "apps/web/pages/about.vue calls auto-imported useSiteSeo",
+          "apps/web/pages/archive.vue calls auto-imported useSiteSeo",
+          "apps/web/pages/articles/index.vue calls auto-imported useSiteSeo"
+        ],
+        "M01.navigation": [
+          "apps/web/pages/index.vue calls auto-imported useSiteSeo"
+        ],
+        "M01.reading": [
+          "apps/web/pages/notes/[year]/[month]/[slug].vue calls auto-imported useSiteSeo"
+        ],
+        "M03.search_web": [
+          "apps/web/pages/search.vue calls auto-imported useSiteSeo"
+        ],
+        "M04.books_web": [
+          "apps/web/pages/books/[year]/[month]/[slug].vue calls auto-imported useSiteSeo",
+          "apps/web/pages/books/index.vue calls auto-imported useSiteSeo"
+        ],
+        "M04.projects_web": [
+          "apps/web/pages/projects/[slug].vue calls auto-imported useSiteSeo",
+          "apps/web/pages/projects/index.vue calls auto-imported useSiteSeo"
+        ]
+      }
+    },
+    "M07.theme": {
+      "paths": [
+        "apps/web/assets/css/main.css",
+        "apps/web/public/katex/katex.min.css",
+        "apps/web/tests/e2e/penpot-alignment-capture.spec.ts",
+        "apps/web/tests/e2e/theme-structure.spec.ts",
+        "apps/web/tests/e2e/theme-typography.spec.ts",
+        "apps/web/tests/quality/site-quality.spec.ts",
+        "apps/web/tests/unit/theme-structure.test.ts",
+        "apps/web/tests/unit/typography.test.ts",
+        "apps/web/types/markdown.d.ts"
+      ],
+      "cases": [
+        "M01-P1-04",
+        "M07-P1-01",
+        "M07-UNIT-PENPOT-ALIGNMENT-CAPTURE-01",
+        "M07-UNIT-SITE-QUALITY-01",
+        "M07-UNIT-THEME-STRUCTURE-01",
+        "M07-UNIT-TYPOGRAPHY-01"
+      ],
+      "dependents": [
+        "M01.navigation",
+        "M01.pagination_web",
+        "M01.reading",
+        "M02.editing",
+        "M03.search_web",
+        "M03.taxonomy_web",
+        "M04.books_web",
+        "M04.projects_web",
+        "M05.content_web",
+        "M05.media_web",
+        "M06.auth_web",
+        "M06.profile_web",
+        "M09.assistant_web",
+        "M10.operations_web"
+      ],
+      "dependency_reasons": {
+        "M01.navigation": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M01.pagination_web": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M01.reading": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M02.editing": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M03.search_web": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M03.taxonomy_web": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M04.books_web": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M04.projects_web": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M05.content_web": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M05.media_web": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M06.auth_web": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M06.profile_web": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M09.assistant_web": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ],
+        "M10.operations_web": [
+          "Shared stylesheet imported by Nuxt UI; review changed selector/token"
+        ]
+      }
+    },
+    "M09.assistant_web": {
+      "paths": [
+        "apps/web/components/AssistantHost.vue",
+        "apps/web/components/AssistantPanel.vue",
+        "apps/web/server/utils/assistant-proxy-identity.ts",
+        "apps/web/tests/e2e-assistant/assistant.spec.ts",
+        "apps/web/tests/e2e/assistant-disabled.spec.ts",
+        "apps/web/tests/unit/assistant-development.test.ts",
+        "apps/web/tests/unit/assistant-proxy-identity.test.ts",
+        "apps/web/tests/unit/assistant.test.ts",
+        "apps/web/utils/assistant/allowlist.ts",
+        "apps/web/utils/assistant/citations.ts",
+        "apps/web/utils/assistant/client.ts",
+        "apps/web/utils/assistant/errors.ts",
+        "apps/web/utils/assistant/flag.ts",
+        "apps/web/utils/assistant/generation.ts",
+        "apps/web/utils/assistant/origin.ts",
+        "apps/web/utils/assistant/persistence.ts",
+        "apps/web/utils/assistant/polling.ts",
+        "apps/web/utils/assistant/sse.ts"
+      ],
+      "cases": [
+        "M09-P0-01",
+        "M09-P0-03",
+        "M09-P1-01",
+        "M09-P1-02",
+        "M09-UNIT-ASSISTANT-01",
+        "M09-UNIT-ASSISTANT-DEVELOPMENT-01",
+        "M09-UNIT-ASSISTANT-DISABLED-01",
+        "M09-UNIT-ASSISTANT-PROXY-IDENTITY-01"
+      ],
+      "dependents": [
+        "M01.navigation",
+        "M06.transport",
+        "M10.operations_web"
+      ],
+      "dependency_reasons": {
+        "M01.navigation": [
+          "apps/web/layouts/default.vue imports ~/utils/assistant/flag",
+          "apps/web/layouts/default.vue renders auto-imported AssistantHost"
+        ],
+        "M06.transport": [
+          "apps/web/server/routes/api/v1/[...path].ts imports ~/server/utils/assistant-proxy-identity"
+        ],
+        "M10.operations_web": [
+          "apps/web/pages/admin/assistant.vue imports ~/utils/assistant/flag"
+        ]
+      }
+    },
+    "M10.operations_web": {
+      "paths": [
+        "apps/web/pages/admin/assistant.vue",
+        "apps/web/tests/unit/assistant-admin.test.ts",
+        "apps/web/utils/assistant-admin.ts"
+      ],
+      "cases": [
+        "M10-P0-02",
+        "M10-UNIT-ASSISTANT-ADMIN-01"
+      ],
+      "dependents": []
+    },
+    "M06.transport": {
+      "paths": [
+        "apps/web/composables/useApi.ts",
+        "apps/web/composables/useApiFailure.ts",
+        "apps/web/server/middleware/security-headers.ts",
+        "apps/web/server/routes/api/v1/[...path].ts",
+        "apps/web/tests/failure/failure-state.spec.ts",
+        "apps/web/tests/unit/api-errors.test.ts",
+        "apps/web/tests/unit/api-url.test.ts",
+        "apps/web/tests/unit/failure-state-contract.test.ts",
+        "apps/web/utils/api-errors.ts",
+        "apps/web/utils/api-url.ts"
+      ],
+      "cases": [
+        "M06-P0-01",
+        "M06-UNIT-API-ERRORS-01",
+        "M06-UNIT-API-URL-01",
+        "M06-UNIT-FAILURE-STATE-01",
+        "M06-UNIT-FAILURE-STATE-CONTRACT-01"
+      ],
+      "dependents": [
+        "M01.indexes",
+        "M01.navigation",
+        "M01.reading",
+        "M02.editing",
+        "M03.search_web",
+        "M03.taxonomy_web",
+        "M04.books_web",
+        "M04.projects_web",
+        "M05.content_web",
+        "M05.media_web",
+        "M06.profile_web",
+        "M07.discovery",
+        "M10.operations_web"
+      ],
+      "dependency_reasons": {
+        "M01.indexes": [
+          "apps/web/pages/about.vue calls auto-imported useApiFailure",
+          "apps/web/pages/archive.vue calls auto-imported useApiFailure",
+          "apps/web/pages/articles/index.vue calls auto-imported useApiFailure"
+        ],
+        "M01.navigation": [
+          "apps/web/pages/index.vue calls auto-imported useApiFailure"
+        ],
+        "M01.reading": [
+          "apps/web/pages/notes/[year]/[month]/[slug].vue calls auto-imported useApiFailure"
+        ],
+        "M02.editing": [
+          "apps/web/components/ArticleEditor.vue calls auto-imported useApiFailure",
+          "apps/web/components/ArticleEditor.vue imports ~/utils/api-errors",
+          "apps/web/pages/admin/articles/[id]/edit.vue calls auto-imported useApiFailure",
+          "apps/web/pages/admin/articles/[id]/preview.vue calls auto-imported useApiFailure",
+          "apps/web/pages/admin/articles/index.vue calls auto-imported useApiFailure",
+          "apps/web/pages/admin/articles/new.vue calls auto-imported useApiFailure",
+          "apps/web/pages/admin/articles/new.vue imports ~/utils/api-errors",
+          "apps/web/utils/autosave.ts imports ./api-errors"
+        ],
+        "M03.search_web": [
+          "apps/web/pages/search.vue calls auto-imported useApiFailure"
+        ],
+        "M03.taxonomy_web": [
+          "apps/web/pages/admin/taxonomy.vue calls auto-imported useApiFailure"
+        ],
+        "M04.books_web": [
+          "apps/web/components/BookNoteEditor.vue imports ~/utils/api-errors",
+          "apps/web/pages/admin/books/[id]/edit.vue calls auto-imported useApiFailure",
+          "apps/web/pages/admin/books/index.vue calls auto-imported useApiFailure",
+          "apps/web/pages/books/[year]/[month]/[slug].vue calls auto-imported useApiFailure",
+          "apps/web/pages/books/index.vue calls auto-imported useApiFailure"
+        ],
+        "M04.projects_web": [
+          "apps/web/components/ProjectEditor.vue imports ~/utils/api-errors",
+          "apps/web/pages/admin/projects/[id]/edit.vue calls auto-imported useApiFailure",
+          "apps/web/pages/admin/projects/index.vue calls auto-imported useApiFailure",
+          "apps/web/pages/admin/projects/new.vue calls auto-imported useApiFailure",
+          "apps/web/pages/projects/[slug].vue calls auto-imported useApiFailure",
+          "apps/web/pages/projects/index.vue calls auto-imported useApiFailure"
+        ],
+        "M05.content_web": [
+          "apps/web/pages/admin/content.vue calls auto-imported useApiFailure",
+          "apps/web/pages/admin/content.vue imports ~/utils/api-errors"
+        ],
+        "M05.media_web": [
+          "apps/web/components/MarkdownMediaField.vue imports ~/utils/api-url",
+          "apps/web/components/MediaUploader.vue calls auto-imported useApiFailure",
+          "apps/web/components/MediaUploader.vue imports ~/utils/api-url"
+        ],
+        "M06.profile_web": [
+          "apps/web/components/ProfileCard.vue imports ~/utils/api-url",
+          "apps/web/pages/admin/profile.vue calls auto-imported useApiFailure",
+          "apps/web/pages/admin/profile.vue imports ~/utils/api-url"
+        ],
+        "M07.discovery": [
+          "apps/web/server/routes/rss.xml.get.ts imports ~/utils/api-url",
+          "apps/web/server/routes/sitemap.xml.get.ts imports ~/utils/api-url"
+        ],
+        "M10.operations_web": [
+          "apps/web/pages/admin/assistant.vue imports ~/utils/api-errors"
+        ]
+      }
+    },
+    "M01.pagination_web": {
+      "paths": [
+        "apps/web/components/PaginationNav.vue",
+        "apps/web/composables/useBoundedPage.ts",
+        "apps/web/tests/e2e/pagination-boundary.spec.ts",
+        "apps/web/tests/unit/pagination.test.ts",
+        "apps/web/utils/pagination.ts"
+      ],
+      "cases": [
+        "M01-P1-02",
+        "M01-UNIT-PAGINATION-01",
+        "M01-UNIT-PAGINATION-BOUNDARY-01"
+      ],
+      "dependents": [
+        "M01.indexes",
+        "M02.editing",
+        "M03.search_web",
+        "M04.books_web",
+        "M04.projects_web",
+        "M05.content_web",
+        "M05.media_web",
+        "M07.discovery"
+      ],
+      "dependency_reasons": {
+        "M01.indexes": [
+          "apps/web/pages/archive.vue calls auto-imported useBoundedPage",
+          "apps/web/pages/archive.vue imports ~/utils/pagination",
+          "apps/web/pages/archive.vue renders auto-imported PaginationNav",
+          "apps/web/pages/articles/index.vue calls auto-imported useBoundedPage",
+          "apps/web/pages/articles/index.vue imports ~/utils/pagination",
+          "apps/web/pages/articles/index.vue renders auto-imported PaginationNav"
+        ],
+        "M02.editing": [
+          "apps/web/pages/admin/articles/index.vue calls auto-imported useBoundedPage",
+          "apps/web/pages/admin/articles/index.vue imports ~/utils/pagination",
+          "apps/web/pages/admin/articles/index.vue renders auto-imported PaginationNav"
+        ],
+        "M03.search_web": [
+          "apps/web/pages/search.vue calls auto-imported useBoundedPage",
+          "apps/web/pages/search.vue imports ~/utils/pagination",
+          "apps/web/pages/search.vue renders auto-imported PaginationNav"
+        ],
+        "M04.books_web": [
+          "apps/web/pages/admin/books/index.vue calls auto-imported useBoundedPage",
+          "apps/web/pages/admin/books/index.vue imports ~/utils/pagination",
+          "apps/web/pages/admin/books/index.vue renders auto-imported PaginationNav",
+          "apps/web/pages/books/index.vue calls auto-imported useBoundedPage",
+          "apps/web/pages/books/index.vue imports ~/utils/pagination",
+          "apps/web/pages/books/index.vue renders auto-imported PaginationNav"
+        ],
+        "M04.projects_web": [
+          "apps/web/pages/admin/projects/[id]/edit.vue imports ~/utils/pagination",
+          "apps/web/pages/admin/projects/index.vue calls auto-imported useBoundedPage",
+          "apps/web/pages/admin/projects/index.vue imports ~/utils/pagination",
+          "apps/web/pages/admin/projects/index.vue renders auto-imported PaginationNav",
+          "apps/web/pages/admin/projects/new.vue imports ~/utils/pagination",
+          "apps/web/pages/projects/index.vue calls auto-imported useBoundedPage",
+          "apps/web/pages/projects/index.vue imports ~/utils/pagination",
+          "apps/web/pages/projects/index.vue renders auto-imported PaginationNav"
+        ],
+        "M05.content_web": [
+          "apps/web/pages/admin/content.vue calls auto-imported useBoundedPage",
+          "apps/web/pages/admin/content.vue imports ~/utils/pagination",
+          "apps/web/pages/admin/content.vue renders auto-imported PaginationNav"
+        ],
+        "M05.media_web": [
+          "apps/web/components/MediaUploader.vue imports ~/utils/pagination"
+        ],
+        "M07.discovery": [
+          "apps/web/server/routes/sitemap.xml.get.ts imports ~/utils/pagination"
+        ]
+      }
+    },
+    "M06.web_types": {
+      "paths": [
+        "apps/web/types/api.ts"
+      ],
+      "cases": [
+        "M06-PROFILE-SKILLS-01"
+      ],
+      "dependents": [
+        "M01.indexes",
+        "M01.navigation",
+        "M01.pagination_web",
+        "M01.reading",
+        "M02.editing",
+        "M03.search_web",
+        "M03.taxonomy_web",
+        "M04.books_web",
+        "M04.projects_web",
+        "M05.content_web",
+        "M05.media_web",
+        "M06.auth_web",
+        "M06.profile_web",
+        "M06.transport",
+        "M07.discovery",
+        "M09.assistant_web",
+        "M10.operations_web"
+      ],
+      "dependency_reasons": {
+        "M01.indexes": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/pages/about.vue imports ~/types/api",
+          "apps/web/pages/archive.vue imports ~/types/api",
+          "apps/web/pages/articles/index.vue imports ~/types/api",
+          "apps/web/utils/archive.ts imports ~/types/api"
+        ],
+        "M01.navigation": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/pages/index.vue imports ~/types/api"
+        ],
+        "M01.pagination_web": [
+          "Web models consumed by typed requests/components; review changed field before propagation"
+        ],
+        "M01.reading": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/components/ArticleCard.vue imports ~/types/api",
+          "apps/web/components/BacklinkList.vue imports ~/types/api",
+          "apps/web/components/MarkdownArticle.vue imports ~/types/api",
+          "apps/web/pages/notes/[year]/[month]/[slug].vue imports ~/types/api",
+          "apps/web/utils/wikilinks.ts imports ~/types/api"
+        ],
+        "M02.editing": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/components/ArticleEditor.vue imports ~/types/api",
+          "apps/web/pages/admin/articles/[id]/edit.vue imports ~/types/api",
+          "apps/web/pages/admin/articles/[id]/preview.vue imports ~/types/api",
+          "apps/web/pages/admin/articles/[id]/revisions.vue imports ~/types/api",
+          "apps/web/pages/admin/articles/index.vue imports ~/types/api",
+          "apps/web/pages/admin/articles/new.vue imports ~/types/api"
+        ],
+        "M03.search_web": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/pages/search.vue imports ~/types/api"
+        ],
+        "M03.taxonomy_web": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/components/TaxonomyManager.vue imports ~/types/api",
+          "apps/web/pages/admin/taxonomy.vue imports ~/types/api"
+        ],
+        "M04.books_web": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/components/BookCard.vue imports ~/types/api",
+          "apps/web/components/BookNoteEditor.vue imports ~/types/api",
+          "apps/web/pages/admin/books/[id]/edit.vue imports ~/types/api",
+          "apps/web/pages/admin/books/index.vue imports ~/types/api",
+          "apps/web/pages/admin/books/new.vue imports ~/types/api",
+          "apps/web/pages/books/[year]/[month]/[slug].vue imports ~/types/api",
+          "apps/web/pages/books/index.vue imports ~/types/api"
+        ],
+        "M04.projects_web": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/components/ProjectCard.vue imports ~/types/api",
+          "apps/web/components/ProjectEditor.vue imports ~/types/api",
+          "apps/web/pages/admin/projects/[id]/edit.vue imports ~/types/api",
+          "apps/web/pages/admin/projects/index.vue imports ~/types/api",
+          "apps/web/pages/admin/projects/new.vue imports ~/types/api",
+          "apps/web/pages/projects/[slug].vue imports ~/types/api",
+          "apps/web/pages/projects/index.vue imports ~/types/api"
+        ],
+        "M05.content_web": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/pages/admin/content.vue imports ~/types/api"
+        ],
+        "M05.media_web": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/components/MarkdownMediaField.vue imports ~/types/api",
+          "apps/web/components/MediaUploader.vue imports ~/types/api",
+          "apps/web/utils/media-upload.ts imports ~/types/api"
+        ],
+        "M06.auth_web": [
+          "Web models consumed by typed requests/components; review changed field before propagation"
+        ],
+        "M06.profile_web": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/components/ProfileCard.vue imports ~/types/api",
+          "apps/web/composables/usePublicProfile.ts imports ~/types/api",
+          "apps/web/pages/admin/profile.vue imports ~/types/api"
+        ],
+        "M06.transport": [
+          "Web models consumed by typed requests/components; review changed field before propagation"
+        ],
+        "M07.discovery": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/server/routes/rss.xml.get.ts imports ~/types/api",
+          "apps/web/server/routes/sitemap.xml.get.ts imports ~/types/api"
+        ],
+        "M09.assistant_web": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/components/AssistantHost.vue imports ~/types/api",
+          "apps/web/components/AssistantPanel.vue imports ~/types/api",
+          "apps/web/utils/assistant/client.ts imports ~/types/api"
+        ],
+        "M10.operations_web": [
+          "Web models consumed by typed requests/components; review changed field before propagation",
+          "apps/web/pages/admin/assistant.vue imports ~/types/api",
+          "apps/web/utils/assistant-admin.ts imports ~/types/api"
+        ]
+      }
+    },
+    "M08.web_tooling": {
+      "paths": [
+        "apps/web/.env.example",
+        "apps/web/eslint.config.mjs",
+        "apps/web/nuxt.config.ts",
+        "apps/web/package.json",
+        "apps/web/scripts/fix-nuxt-tsconfig-paths.mjs",
+        "apps/web/vitest.config.ts"
+      ],
+      "cases": [
+        "M08-IMPACT-RUNNERS-01"
+      ],
+      "dependents": [
+        "M01.navigation",
+        "M01.pagination_web",
+        "M01.reading",
+        "M02.editing",
+        "M03.search_web",
+        "M03.taxonomy_web",
+        "M04.books_web",
+        "M04.projects_web",
+        "M05.content_web",
+        "M05.media_web",
+        "M06.auth_web",
+        "M06.profile_web",
+        "M07.discovery",
+        "M09.assistant_web",
+        "M10.operations_web"
+      ],
+      "dependency_reasons": {
+        "M01.navigation": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M01.pagination_web": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M01.reading": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M02.editing": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M03.search_web": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M03.taxonomy_web": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M04.books_web": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M04.projects_web": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M05.content_web": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M05.media_web": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M06.auth_web": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M06.profile_web": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M07.discovery": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M09.assistant_web": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ],
+        "M10.operations_web": [
+          "Nuxt/Vitest shared configuration; inspect changed option before selecting cases"
+        ]
+      }
+    },
+    "M08.browser_tooling": {
+      "paths": [
+        "apps/web/playwright.assistant.config.ts",
+        "apps/web/playwright.config.ts",
+        "apps/web/playwright.failure.config.ts",
+        "apps/web/playwright.quality.config.ts",
+        "apps/web/scripts/run-playwright-e2e.mjs",
+        "apps/web/tests/fixtures/failure-api.mjs",
+        "apps/web/tests/support/e2e-env.ts",
+        "apps/web/tests/support/hydration.ts",
+        "apps/web/tests/unit/playwright-config.test.ts"
+      ],
+      "cases": [
+        "M08-IMPACT-PREREQUISITES-01",
+        "M08-IMPACT-RUNNERS-01"
+      ],
+      "dependents": [
+        "M01.navigation",
+        "M06.profile_web",
+        "M09.assistant_web"
+      ],
+      "dependency_reasons": {
+        "M01.navigation": [
+          "Browser config binds exact projects, services and environment; other cases add consumers when touched"
+        ],
+        "M06.profile_web": [
+          "Browser config binds exact projects, services and environment; other cases add consumers when touched"
+        ],
+        "M09.assistant_web": [
+          "Browser config binds exact projects, services and environment; other cases add consumers when touched"
+        ]
+      }
+    },
+    "M06.shared_contracts": {
+      "paths": [
+        "packages/contracts/api-types.d.ts",
+        "packages/contracts/generate.mjs",
+        "packages/contracts/openapi.json",
+        "packages/contracts/package.json"
+      ],
+      "cases": [
+        "M06-P0-01",
+        "M06-PROFILE-DEFAULT-01"
+      ],
+      "dependents": [
+        "M06.web_types"
+      ],
+      "dependency_reasons": {
+        "M06.web_types": [
+          "OpenAPI schema is the normative model for the Web consumption types"
+        ]
+      }
+    },
+    "M08.installation": {
+      "paths": [
+        ".gitattributes",
+        ".gitignore",
+        "package-lock.json",
+        "package.json"
+      ],
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependents": [
+        "M08.browser_tooling",
+        "M08.release",
+        "M08.web_tooling",
+        "M09.development"
+      ],
+      "dependency_reasons": {
+        "M08.browser_tooling": [
+          "Root workspace commands and lockfile bind these tools"
+        ],
+        "M08.release": [
+          "Root workspace commands and lockfile bind these tools"
+        ],
+        "M08.web_tooling": [
+          "Root workspace commands and lockfile bind these tools"
+        ],
+        "M09.development": [
+          "Root workspace commands and lockfile bind these tools"
+        ]
+      }
+    },
+    "M08.documentation": {
+      "paths": [
+        "README.md",
+        "UI_AUDIT_REPORT.md",
+        "apps/api/README.md",
+        "apps/web/README.md",
+        "apps/web/UI-FOUNDATION.md",
+        "harness/docs/INDEX.md",
+        "harness/docs/architecture/boundaries.md",
+        "harness/docs/decisions/0001-harness-control-plane.md",
+        "harness/docs/decisions/0002-utc-time-semantics.md",
+        "harness/docs/decisions/0003-media-write-consistency.md",
+        "harness/docs/decisions/0004-markdown-import-boundary.md",
+        "harness/docs/decisions/0005-bounded-list-pagination.md",
+        "harness/docs/decisions/0006-freeze-github-source-crawler-spec.md",
+        "harness/docs/decisions/0007-freeze-github-discovery-ingestion-spec.md",
+        "harness/docs/decisions/0008-harness-freeze-lifecycle.md",
+        "harness/docs/decisions/20260814-evidence-integrity-and-gate-subsumption.md",
+        "harness/docs/decisions/20260814-python-lock-and-control-plane.md",
+        "harness/docs/decisions/20260814-verification-cost-rightsize.md",
+        "harness/docs/decisions/20260814-zvec-derived-vector-index.md",
+        "harness/docs/decisions/20260826-retire-knowledge-incubator.md",
+        "harness/docs/decisions/20260827-cancel-public-penpot-specs.md",
+        "harness/docs/decisions/20260827-externalize-retired-github-specs.md",
+        "harness/docs/decisions/20260828-public-qa-online-core.md",
+        "harness/docs/decisions/20260828-qdrant-rag-index.md",
+        "harness/docs/decisions/20260829-public-qa-admin-operations.md",
+        "harness/docs/decisions/20260829-public-qa-runtime-integrity-remediation.md",
+        "harness/docs/decisions/20260829-public-qa-runtime-integrity.md",
+        "harness/docs/decisions/20260829-public-qa-web-delivery.md",
+        "harness/docs/decisions/20260830-public-qa-production-qualification.md",
+        "harness/docs/decisions/20260901-verification-attestation.md",
+        "harness/docs/operations/release-readiness.md",
+        "harness/docs/product/brief.md",
+        "harness/docs/product/knowledge-incubator.md",
+        "harness/docs/reviews/2026-08-09-project-audit-remediation-plan.md",
+        "harness/docs/reviews/2026-08-09-project-audit.md",
+        "harness/docs/reviews/2026-08-15-project-audit-remediation-plan.md",
+        "harness/docs/reviews/2026-08-15-project-audit.md",
+        "harness/docs/reviews/2026-08-16-project-audit-remediation-plan.md",
+        "harness/docs/reviews/2026-08-16-project-audit.md",
+        "harness/evolution/proposals/20260731-core-article-loop--spec-completed.md",
+        "harness/evolution/proposals/20260731-harness-bootstrap--spec-completed.md",
+        "harness/evolution/proposals/20260801-bounded-pagination--spec-completed.md",
+        "harness/evolution/proposals/20260801-content-portability--spec-completed.md",
+        "harness/evolution/proposals/20260801-content-taxonomy--spec-completed.md",
+        "harness/evolution/proposals/20260801-core-integrity-hardening--spec-completed.md",
+        "harness/evolution/proposals/20260801-e2e-isolation--spec-completed.md",
+        "harness/evolution/proposals/20260801-markdown-import-hardening--spec-completed.md",
+        "harness/evolution/proposals/20260801-media-pipeline--spec-completed.md",
+        "harness/evolution/proposals/20260801-media-transaction-consistency--spec-completed.md",
+        "harness/evolution/proposals/20260801-profile-card--spec-completed.md",
+        "harness/evolution/proposals/20260801-projects-books--spec-completed.md",
+        "harness/evolution/proposals/20260801-public-experience--spec-completed.md",
+        "harness/evolution/proposals/20260801-quality-gates--spec-completed.md",
+        "harness/evolution/proposals/20260801-seo-discovery--spec-completed.md",
+        "harness/evolution/proposals/20260801-site-search--spec-completed.md",
+        "harness/evolution/proposals/20260801-utc-time-semantics--spec-completed.md",
+        "harness/evolution/proposals/20260802-engineering-closeout--spec-completed.md",
+        "harness/evolution/proposals/20260802-engineering-closeout--workflow-friction_confirmed.md",
+        "harness/evolution/proposals/20260803-incubator-ingestion--spec-completed.md",
+        "harness/evolution/proposals/20260803-incubator-retrieval-index--spec-completed.md",
+        "harness/evolution/proposals/20260803-same-origin-auth-proxy--spec-completed.md",
+        "harness/evolution/proposals/20260804-incubator-drafts--spec-completed.md",
+        "harness/evolution/proposals/20260804-incubator-llm-audit--spec-completed.md",
+        "harness/evolution/proposals/20260804-incubator-publishing--spec-completed.md",
+        "harness/evolution/proposals/20260804-incubator-workbench--spec-completed.md",
+        "harness/evolution/proposals/20260808-electric-editorial-admin-core--spec-completed.md",
+        "harness/evolution/proposals/20260808-electric-editorial-public-pages--spec-completed.md",
+        "harness/evolution/proposals/20260808-electric-editorial-ui--spec-completed.md",
+        "harness/evolution/proposals/20260809-boundary-seo-cleanup--spec-completed.md",
+        "harness/evolution/proposals/20260809-editor-save-safety--spec-completed.md",
+        "harness/evolution/proposals/20260809-electric-editorial-incubator-workbench--spec-completed.md",
+        "harness/evolution/proposals/20260809-electric-editorial-ui-hardening--spec-completed.md",
+        "harness/evolution/proposals/20260809-failure-state-contracts--spec-completed.md",
+        "harness/evolution/proposals/20260809-frontend-runtime-reliability--spec-completed.md",
+        "harness/evolution/proposals/20260809-mobile-accessibility-assets--spec-completed.md",
+        "harness/evolution/proposals/20260809-profile-contact-icons--spec-completed.md",
+        "harness/evolution/proposals/20260809-publishing-snapshots--spec-completed.md",
+        "harness/evolution/proposals/20260809-restore-writing-desk-entry--spec-completed.md",
+        "harness/evolution/proposals/20260809-runtime-security-boundaries--spec-completed.md",
+        "harness/evolution/proposals/20260809-soften-light-signal-color--spec-completed.md",
+        "harness/evolution/proposals/20260809-sync-light-heading-font--spec-completed.md",
+        "harness/evolution/proposals/20260809-sync-light-search-layout--spec-completed.md",
+        "harness/evolution/proposals/20260809-sync-light-site-structure--spec-completed.md",
+        "harness/evolution/proposals/20260811-harness-close-signal-integrity--workflow-friction_confirmed.md",
+        "harness/evolution/proposals/20260905-harness-resume--workflow-friction_confirmed.md",
+        "harness/evolution/proposals/20260905-ui-foundation--workflow-friction_confirmed.md",
+        "harness/evolution/proposals/INDEX.md",
+        "packages/contracts/README.md"
+      ],
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependents": []
+    },
+    "M08.workflow_contracts": {
+      "paths": [
+        "harness/workflows/*.md",
+        "harness/specs/_sdd/*.md",
+        "harness/verification/README.md",
+        "harness/verification/vdd/*.md",
+        "harness/docs/decisions/20260905-verification-resume.md"
+      ],
+      "cases": [
+        "M08-DOCS-01",
+        "M08-TRACE-04",
+        "M08-IMPACT-GRAPH-01"
+      ],
+      "dependents": [
+        "M08.impact",
+        "M08.lifecycle",
+        "M08.module_verification"
+      ]
     }
   }
 }

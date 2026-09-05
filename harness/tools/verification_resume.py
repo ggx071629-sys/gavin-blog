@@ -106,6 +106,8 @@ def gate_plan(
         reason = (
             "authenticated successful attempt with matching inputs and cleanup"
             if reusable
+            else "reuse disabled; execute selected scope"
+            if prepared.get("reuse_enabled") is False and fresh
             else "fresh execution required by request or release policy"
             if fresh
             else "latest attempt failed, interrupted, or cleanup did not pass"
@@ -345,7 +347,7 @@ def _execute(
             else "precondition",
             "summary": str(error)[:300],
         }
-        run["state"] = "interrupted"
+        run["state"] = "interrupted" if isinstance(error, (KeyboardInterrupt, SystemExit)) else "failed"
         run["cleanup_status"] = "unknown"
         store.write(ledger)
         raise

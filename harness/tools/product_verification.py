@@ -647,7 +647,12 @@ def lint_task_contract(task_id: str) -> tuple[list[str], dict[str, list[str]], s
     criteria, mappings = verification_contract(task_id)
     verification_case_plan(task_id, criteria)
     profile = verification_profile(task_id)
-    validate_configured_gates(mappings, profile, task_id, criteria)
+    # Specify precedes implementation: planned cases and an impact plan may not
+    # exist yet. Execution still resolves and enforces the complete impact plan.
+    from . import impact
+    validate_configured_gates(mappings, profile, None if impact.enabled() else task_id, criteria)
+    if impact.enabled() and profile != "release" and _bundle_gates() & set(mappings):
+        raise ProductVerificationError("bundle gates require an explicit release task")
     return criteria, mappings, profile
 
 
@@ -1028,8 +1033,8 @@ def _run_supervised_command(
     timeout_seconds: int,
     env: dict[str, str] | None = None,
 ) -> subprocess.CompletedProcess[str]:
+    from .run_artifacts import LOG_LIMIT, log_path
     from .verification_inputs import controlled_environment
-    from .run_artifacts import log_path, LOG_LIMIT
     merged_env = controlled_environment()
     if env:
         merged_env.update(env)

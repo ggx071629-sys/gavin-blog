@@ -306,7 +306,8 @@ def scoped_snapshot(mappings, fingerprints, plan):
             executables.add(executable)
     toolchain = {str(Path(p).resolve()): hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in sorted(executables)}
     dependencies = {}
-    if refs and harness_only:
+    reuse_enabled = harness_only and bool(load_reuse_policy())
+    if refs and reuse_enabled:
         python = str(root / "apps/api/.venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python"))
         script = r'''
 import hashlib, importlib.metadata as m, json
@@ -335,8 +336,8 @@ print(json.dumps(result, sort_keys=True))
             "platform": [platform.system(), platform.machine(), sys.version],
             "toolchain": digest(toolchain), "dependencies": dependencies,
             "environment": digest(controlled_environment()),
-            "reusable": harness_only and bool(load_reuse_policy()),
-            "persistent_close": harness_only,
+            "reusable": reuse_enabled,
+            "persistent_close": not refs or reuse_enabled,
             "build_artifacts": "never reused; selected prerequisites rebuilt in isolated worktree"}
 
 

@@ -6,5 +6,6 @@ Read this index first. Load only entries whose `load_when` matches the task.
 
 | ID | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- |
+| evolution-20260905-harness-resume-workflow-friction_confirmed | L1 | 受影响模块验证已完成核心改造，映射、产品闭环与成本验收仍待补齐 | process-evolution, task:20260905-harness-resume | Gavin | [proposals/20260905-harness-resume--workflow-friction_confirmed.md](proposals/20260905-harness-resume--workflow-friction_confirmed.md) |
 | evolution-history | L1 | 已终结 Evolution proposal 的按需审计入口 | process-evolution-history, evolution-audit | Codex | [history.md](history.md) |
 | evolution-policy | L1 | 仅由显式事件驱动、经人工确认后应用的控制面演进规则 | process-evolution, repeated-failure, architecture-decision | Gavin | [policy.md](policy.md) |

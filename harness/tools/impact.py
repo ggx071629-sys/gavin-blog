@@ -54,6 +54,54 @@ def plan_path(task_id):
     return project_root() / "harness/verification/impact" / f"{task_id}.json"
 
 
+def structural_path(path, task_id):
+    """Only deterministic lifecycle assets are exempt from human impact review."""
+    return (
+        path.startswith("harness/") and path.endswith("/INDEX.md")
+        or path == "harness/INDEX.md"
+        or path == f"harness/specs/active/{task_id}.md"
+        or path == f"harness/verification/impact/{task_id}.json"
+        or path in {
+            f"harness/verification/evidence/{task_id}.json",
+            f"harness/verification/evidence/{task_id}.benchmark.json",
+            f"harness/evolution/events/{task_id}--spec-completed.json",
+        }
+    )
+
+
+def reviewed_dependencies(owner, decision, units):
+    """Walk only affected edges; one flat decision per reachable consumer, including cycles."""
+    dependencies = decision.get("dependencies", [])
+    if not isinstance(dependencies, list):
+        raise ValueError(f"impact gap: invalid dependent decisions for {owner}")  # noqa: TRY004 - CLI input contract
+    by_unit = {}
+    for dep in dependencies:
+        if not isinstance(dep, dict) or dep.get("unit") in by_unit:
+            raise ValueError(f"impact gap: duplicate/invalid dependent decision for {owner}")
+        by_unit[dep.get("unit")] = dep
+    pending, seen, entries = [owner], {owner}, []
+    while pending:
+        parent = pending.pop(0)
+        for unit in units[parent].get("dependents", []):
+            if unit in seen:
+                continue
+            seen.add(unit)
+            dep = by_unit.get(unit)
+            if dep is None:
+                raise ValueError(f"impact gap: review every dependent of {parent}: {unit}")
+            if type(dep.get("affected")) is not bool or not str(dep.get("reason", "")).strip():
+                raise ValueError(f"impact gap: dependent decision requires affected and reason: {unit}")
+            if not dep["affected"] and dep.get("cases"):
+                raise ValueError("unaffected dependency cannot select cases")
+            if dep["affected"]:
+                entries.append((unit, dep))
+                pending.append(unit)
+    extra = set(by_unit) - (seen - {owner})
+    if extra:
+        raise ValueError(f"impact gap: unreachable dependent decisions: {sorted(extra)}")
+    return entries
+
+
 def build_plan(task_id, *, paths=None, root=None):
     from . import product_verification as pv
 
@@ -97,17 +145,7 @@ def build_plan(task_id, *, paths=None, root=None):
     selected, reasons, reviewed = set(), {}, []
     for path in actual:
         safe_path(path)
-        # Generated/lifecycle assets are structurally checked and never infer product scope.
-        structural = path.endswith(".md") and not path.startswith(
-            ("apps/", "packages/")
-        )
-        structural = structural or path.startswith(
-            (
-                "harness/evolution/events/",
-                "harness/verification/evidence/",
-                "harness/verification/impact/",
-            )
-        )
+        structural = structural_path(path, task_id)
         decision = decisions.get(path)
         if decision is None:
             if structural:
@@ -116,42 +154,22 @@ def build_plan(task_id, *, paths=None, root=None):
                         "path": path,
                         "owner": "documentation",
                         "cases": [],
-                        "reason": "metadata, links and indexes; no executable contract change declared",
+                        "reason": "deterministic lifecycle asset; metadata, links and indexes checked",
                     }
                 )
                 continue
             raise ValueError(f"impact gap: missing analysis for {path}")
         owner = decision.get("owner")
-        if owner not in units or not any(
-            fnmatch.fnmatchcase(path, pattern) for pattern in units[owner]["paths"]
-        ):
+        owners = [u for u, value in units.items() if any(path == p or fnmatch.fnmatchcase(path, p) for p in value["paths"])]
+        if len(owners) > 1:
+            raise ValueError(f"impact gap: ambiguous ownership for {path}: {owners}")
+        if owners != [owner]:
             raise ValueError(
                 f"impact gap: unknown/mismatched ownership {owner!r} for {path}"
             )
         if not str(decision.get("reason", "")).strip():
             raise ValueError(f"impact gap: missing change rationale for {path}")
-        dependencies = decision.get("dependencies", [])
-        expected = set(units[owner].get("dependents", []))
-        if (
-            len(dependencies) != len(expected)
-            or {d.get("unit") for d in dependencies} != expected
-        ):
-            raise ValueError(
-                f"impact gap: review every dependent of {owner}: {sorted(expected)}"
-            )
-        entries = [(owner, decision)]
-        for dep in dependencies:
-            if (
-                type(dep.get("affected")) is not bool
-                or not str(dep.get("reason", "")).strip()
-            ):
-                raise ValueError(
-                    f"impact gap: dependent decision requires affected and reason: {path}"
-                )
-            if not dep["affected"] and dep.get("cases"):
-                raise ValueError("unaffected dependency cannot select cases")
-            if dep["affected"]:
-                entries.append((dep["unit"], dep))
+        entries = [(owner, decision), *reviewed_dependencies(owner, decision, units)]
         for unit, entry in entries:
             cases = entry.get("cases")
             if not isinstance(cases, list) or len(cases) != len(set(cases)):

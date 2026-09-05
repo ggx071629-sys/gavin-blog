@@ -44,6 +44,15 @@ def run(context: dict[str, Any]) -> dict[str, Any]:
         context["config"],
         structure_only=bool(context["config"].get("verification", {}).get("impact")),
     )
+    ownership = harness_root / 'verification/impact/ownership.json'
+    if ownership.is_file():
+        import json
+        if json.loads(ownership.read_bytes()).get('coverage'):
+            try:
+                from tools.impact_registry import audit
+            except ModuleNotFoundError:
+                from harness.tools.impact_registry import audit
+            errors.extend(audit(project_root)['errors'])
     if errors:
         return {
             "name": "module-coverage",

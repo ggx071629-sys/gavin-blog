@@ -7,7 +7,9 @@ import json
 import re
 import shutil
 import sys
+import tempfile
 from collections import defaultdict
+from contextlib import ExitStack
 
 from . import impact
 from . import test_collection as tc
@@ -115,6 +117,18 @@ def command_for(refs, root):
 
 def run_selected(refs, root=None):
     root = root or project_root()
+    with ExitStack() as cleanup:
+        env = {}
+        if any(r['kind'] == 'playwright' for r in refs):
+            runtime = root / '.run'
+            runtime.mkdir(exist_ok=True)
+            env['GAVIN_E2E_RUN_ROOT'] = cleanup.enter_context(
+                tempfile.TemporaryDirectory(prefix='selected-e2e-', dir=runtime))
+        return _run_selected(refs, root, env)
+
+
+def _run_selected(refs, root, env):
+    root = root or project_root()
     if not refs:
         raise ValueError("empty test selection is forbidden")
     prepared_web = False
@@ -182,7 +196,7 @@ def run_selected(refs, root=None):
             timeout_seconds=600,
             env={"PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"}
             if group[0]["kind"] == "pytest"
-            else None,
+            else env,
         )
         if result.returncode:
             return result.returncode
