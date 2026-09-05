@@ -1505,9 +1505,20 @@
             }
           ],
           "required_gates": [
+            "web-quality",
             "e2e"
           ],
           "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/markdown.test.ts",
+              "name": "keeps Chinese headings linkable",
+              "gate": "web-quality",
+              "covers": [
+                "M01-PUBLIC-READING-01-E01",
+                "M01-PUBLIC-READING-01-E02"
+              ]
+            },
             {
               "kind": "playwright",
               "path": "apps/web/tests/e2e/public-reading.spec.ts",

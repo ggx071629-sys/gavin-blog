@@ -52,6 +52,6 @@ state_history:
 
 ## Gates
 
+- web-quality => AC-1, AC-2, AC-4, AC-5
 - e2e => AC-1, AC-2, AC-3, AC-4, AC-5
-- web-quality => AC-1, AC-4, AC-5
 - harness-integrity => AC-5
