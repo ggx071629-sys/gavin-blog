@@ -9,6 +9,12 @@ import pytest
 from harness.tools import isolated_verification
 
 
+@pytest.fixture(autouse=True)
+def snapshot_stub(monkeypatch):
+    monkeypatch.setattr(isolated_verification, "snapshot_preflight", lambda *_: {
+        "name": "snapshot-preflight", "status": "passed", "passed": True, "duration_ms": 0})
+
+
 def _completed(*args: str) -> subprocess.CompletedProcess[str]:
     return subprocess.CompletedProcess(args, 0, "", "")
 

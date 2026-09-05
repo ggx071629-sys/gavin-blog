@@ -332,6 +332,7 @@ def test_gate_failure_result_distinguishes_nonzero_timeout_and_execution_error(
     assert nonzero["result"]["failure"] == {
         "kind": "nonzero-exit",
         "summary": "Error: failed at <isolated-worktree>\\fixture.py",
+        "source": "gate-runner", "hint": "nonzero-exit",
     }
     assert nonzero["details"][0] == (
         "diagnostic: Error: failed at <isolated-worktree>\\fixture.py"

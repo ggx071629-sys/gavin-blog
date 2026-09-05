@@ -162,12 +162,22 @@ def preview(task_id: str, *, fresh: bool = False) -> dict[str, Any]:
         task_id, collect=False, cases=cases, identify=bool(ledger["runs"])
     )
     rows = gate_plan(prepared, ledger, fresh=fresh)
+    from .execution_contracts import prerequisites
+    from .selected_tests import execution_batches
+    refs = prepared.get("impact", {}).get("test_refs", [])
     return {
         "task_id": task_id,
         "source_commit": prepared["snapshot"]["head"],
         "identity": prepared["identity"],
         "gates": rows,
         "impact": prepared.get("impact"),
+        "prerequisites": prerequisites(refs),
+        "batches": [{"consumers": group, "data_policy": "per-identity unless explicitly shared",
+                     "resolution": "planned; collector has not run"} for group in execution_batches(refs)],
+        "last_run": ({"state": ledger["runs"][-1]["state"],
+                      "failures": [a.get("check", {}).get("result", {}).get("failure") for a in ledger["runs"][-1]["attempts"]
+                                   if a.get("check", {}).get("status") == "failed"],
+                      "duration_ms": sum(a.get("check", {}).get("duration_ms", 0) for a in ledger["runs"][-1]["attempts"])} if ledger["runs"] else None),
         "blocker": error,
         "next": f"python -m tools.harness verify {task_id}"
         + (" --fresh" if error else ""),
@@ -207,6 +217,7 @@ def _execute(
         "cleanup_status": "pending",
         "attempts": [],
         "plan": plan,
+        "selected_refs": prepared.get("impact", {}).get("test_refs", []),
     }
     ledger["runs"].append(run)
     ledger["aggregate"] = None
@@ -332,6 +343,7 @@ def _execute(
             if validator.passed(results) and context["cleanup_status"] == "passed"
             else "failed"
         )
+        run["checks"] = results
         context["receipt"] = {
             "run_id": run_id,
             "identity": prepared["identity"],

@@ -46,6 +46,7 @@ def test_selected_javascript_collection_rejects_missing_duplicate_and_disabled(
         runner, "command_for", lambda *_: (["npm", "test", "chosen"], tmp_path)
     )
     commands = []
+    monkeypatch.setattr(runner, "ensure_prerequisites", lambda *a: 0)
 
     def invoke(command, **kwargs):
         commands.append(command)
@@ -61,7 +62,7 @@ def test_selected_javascript_collection_rejects_missing_duplicate_and_disabled(
         monkeypatch.setattr(tc, "_collect_vitest", lambda *_, rows=rows, **__: rows)
         with pytest.raises(ValueError, match="missing, duplicate or disabled"):
             runner.run_selected([ref], tmp_path)
-        assert len(commands) == 1  # only prepare; no test execution
+        assert not commands  # prerequisites are stubbed; no test execution
 
 
 def test_javascript_file_and_name_selectors_do_not_form_cross_products(tmp_path):

@@ -6862,6 +6862,16 @@
                 "M08-IMPACT-BENCHMARK-01-E01",
                 "M08-IMPACT-BENCHMARK-01-E02"
               ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_impact_acceptance.py",
+              "name": "test_paired_cost_summary_retains_failures_and_uses_median_and_range",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-IMPACT-BENCHMARK-01-E01",
+                "M08-IMPACT-BENCHMARK-01-E02"
+              ]
             }
           ]
         },
@@ -7761,6 +7771,226 @@
               "covers": [
                 "M08-UNIT-DEV-PROCESS-01-E01",
                 "M08-UNIT-DEV-PROCESS-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-SNAPSHOT-01",
+          "priority": "P1",
+          "scenario": "Committed snapshot checks precede dependency linkage and all product execution.",
+          "expectations": [
+            {
+              "id": "M08-SNAPSHOT-01-ALLOW",
+              "surface": "response",
+              "statement": "Committed snapshot checks precede dependency linkage and all product execution."
+            },
+            {
+              "id": "M08-SNAPSHOT-01-DENY",
+              "surface": "forbidden",
+              "statement": "No false passing result, broadened selection, overwritten evidence or lost preceding artifact is accepted."
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_execution_protocol.py",
+              "name": "test_snapshot_failure_stops_before_dependency_links_and_product_calls",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-SNAPSHOT-01-ALLOW",
+                "M08-SNAPSHOT-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_execution_protocol.py",
+              "name": "test_snapshot_checks_missing_link_without_collecting",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-SNAPSHOT-01-ALLOW",
+                "M08-SNAPSHOT-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_execution_protocol.py",
+              "name": "test_real_git_snapshot_cannot_borrow_workspace_only_link_target",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-SNAPSHOT-01-ALLOW",
+                "M08-SNAPSHOT-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-PREREQUISITE-01",
+          "priority": "P1",
+          "scenario": "Explicit prerequisite contracts initialize selected consumers once and block failures.",
+          "expectations": [
+            {
+              "id": "M08-PREREQUISITE-01-ALLOW",
+              "surface": "response",
+              "statement": "Explicit prerequisite contracts initialize selected consumers once and block failures."
+            },
+            {
+              "id": "M08-PREREQUISITE-01-DENY",
+              "surface": "forbidden",
+              "statement": "No false passing result, broadened selection, overwritten evidence or lost preceding artifact is accepted."
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_execution_protocol.py",
+              "name": "test_prerequisites_are_once_per_worktree_and_failure_blocks_consumers",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-PREREQUISITE-01-ALLOW",
+                "M08-PREREQUISITE-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-DIAGNOSE-01",
+          "priority": "P1",
+          "scenario": "Trusted failures resolve to exact current subsets without certification.",
+          "expectations": [
+            {
+              "id": "M08-DIAGNOSE-01-ALLOW",
+              "surface": "response",
+              "statement": "Trusted failures resolve to exact current subsets without certification."
+            },
+            {
+              "id": "M08-DIAGNOSE-01-DENY",
+              "surface": "forbidden",
+              "statement": "No false passing result, broadened selection, overwritten evidence or lost preceding artifact is accepted."
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_execution_protocol.py",
+              "name": "test_diagnose_failed_requires_trusted_consumers_and_matches_current_plan",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-DIAGNOSE-01-ALLOW",
+                "M08-DIAGNOSE-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_execution_protocol.py",
+              "name": "test_diagnosis_does_not_write_formal_evidence_or_aggregate",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-DIAGNOSE-01-ALLOW",
+                "M08-DIAGNOSE-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-EXACT-IDENTITY-01",
+          "priority": "P1",
+          "scenario": "Full identities prevent duplicate, ambiguous, expanded or same-count substitutions.",
+          "expectations": [
+            {
+              "id": "M08-EXACT-IDENTITY-01-ALLOW",
+              "surface": "response",
+              "statement": "Full identities prevent duplicate, ambiguous, expanded or same-count substitutions."
+            },
+            {
+              "id": "M08-EXACT-IDENTITY-01-DENY",
+              "surface": "forbidden",
+              "statement": "No false passing result, broadened selection, overwritten evidence or lost preceding artifact is accepted."
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_execution_protocol.py",
+              "name": "test_exact_identity_rejects_same_count_different_titles_projects_and_duplicates",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-EXACT-IDENTITY-01-ALLOW",
+                "M08-EXACT-IDENTITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_execution_protocol.py",
+              "name": "test_batches_isolate_undeclared_and_only_merge_compatible_shared_identities",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-EXACT-IDENTITY-01-ALLOW",
+                "M08-EXACT-IDENTITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_execution_protocol.py",
+              "name": "test_reporter_proofs_reject_skipped_retried_and_same_count_substitutions",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-EXACT-IDENTITY-01-ALLOW",
+                "M08-EXACT-IDENTITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_execution_protocol.py",
+              "name": "test_vitest_filtered_skips_never_hide_selected_skip_retry_or_extra_execution",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-EXACT-IDENTITY-01-ALLOW",
+                "M08-EXACT-IDENTITY-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-BATCH-ARTIFACTS-01",
+          "priority": "P1",
+          "scenario": "Batch outputs remain independent and survive bounded export.",
+          "expectations": [
+            {
+              "id": "M08-BATCH-ARTIFACTS-01-ALLOW",
+              "surface": "response",
+              "statement": "Batch outputs remain independent and survive bounded export."
+            },
+            {
+              "id": "M08-BATCH-ARTIFACTS-01-DENY",
+              "surface": "forbidden",
+              "statement": "No false passing result, broadened selection, overwritten evidence or lost preceding artifact is accepted."
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_execution_protocol.py",
+              "name": "test_batch_artifacts_survive_later_calls_and_bounded_export",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-BATCH-ARTIFACTS-01-ALLOW",
+                "M08-BATCH-ARTIFACTS-01-DENY"
               ]
             }
           ]

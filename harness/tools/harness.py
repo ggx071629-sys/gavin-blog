@@ -11,6 +11,7 @@ from pathlib import Path
 from . import (
     assurance,
     change_enforcement,
+    close_transaction,
     events,
     indexer,
     isolated_verification,
@@ -18,13 +19,12 @@ from . import (
     product_verification,
     qualification,
     qualification_runner,
+    run_store,
     summarizer,
     task_reporting,
     telemetry,
     validator,
     verification_resume,
-    run_store,
-    close_transaction,
 )
 
 
@@ -65,6 +65,9 @@ def _execute_verification(
 ) -> tuple[list[dict[str, object]], Path | None]:
     checks_started = time.perf_counter()
     results = validator.run_checks()
+    if task_id:
+        for result in results:
+            result["provenance"] = {"scope": "workspace"}
     checks_ms = round((time.perf_counter() - checks_started) * 1000, 3)
     criteria: list[str] = []
     mappings: dict[str, list[str]] = {}
@@ -197,6 +200,8 @@ def command_plan(args: argparse.Namespace) -> int:
             if plan.get("impact"):
                 scope = plan["impact"]
                 print(f"[SCOPE] {len(scope['selected_cases'])} cases, {len(scope['test_refs'])} exact refs, {len(scope['excluded_cases'])} excluded cases")
+                print(f"[PREPARE] {', '.join(p['id'] for p in plan.get('prerequisites', [])) or 'none'}")
+                print(f"[BATCHES] {len(plan.get('batches', []))} conservative batches; identities resolved at execution")
             verification_resume.print_plan(plan["gates"])
             if plan["blocker"]:
                 print(f"blocked: {plan['blocker']}")
@@ -688,6 +693,14 @@ def parser() -> argparse.ArgumentParser:
     plan.add_argument("--fresh", action="store_true")
     plan.add_argument("--json", action="store_true")
     plan.set_defaults(func=command_plan)
+
+    from .diagnostics import command as command_diagnose
+    diagnose = commands.add_parser("diagnose", help="run a fixed-HEAD exact subset without certification")
+    diagnose.add_argument("task_id")
+    selection = diagnose.add_mutually_exclusive_group(required=True)
+    selection.add_argument("--case")
+    selection.add_argument("--failed", action="store_true")
+    diagnose.set_defaults(func=command_diagnose)
 
     spec_lint = commands.add_parser(
         "spec-lint",

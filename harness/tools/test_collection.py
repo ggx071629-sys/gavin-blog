@@ -165,6 +165,13 @@ def _run(command: list[str], cwd: Path) -> str:
         )
     except (OSError, subprocess.TimeoutExpired) as error:
         raise TestCollectionError(f"test collector failed to start: {error}") from error
+    from .run_artifacts import LOG_LIMIT, log_path
+    diagnostic = log_path.get()
+    if diagnostic is not None:
+        diagnostic.parent.mkdir(parents=True, exist_ok=True)
+        existing = diagnostic.stat().st_size if diagnostic.exists() else 0
+        with diagnostic.open("ab") as handle:
+            handle.write((result.stdout + result.stderr).encode("utf-8")[:max(0, LOG_LIMIT - existing)])
     if result.returncode != 0:
         from .result_reporting import failure_summary
         summary = failure_summary(result.stdout, result.stderr)
@@ -219,59 +226,29 @@ def _collect_pytest(project_root: Path, target: str | list[str], gate: str) -> l
     return rows
 
 
-def _walk_playwright_suites(
-    suites: list[Any],
-    root_dir: Path,
-    project_root: Path,
-    gate: str,
-) -> list[dict[str, Any]]:
-    rows: list[dict[str, Any]] = []
+def _walk_playwright_suites(suites, root_dir, project_root, gate, *, config="", titles=(), depth=0):
+    rows = []
     for suite in suites:
-        if not isinstance(suite, dict):
-            continue
+        # JSON's outer file suite is not part of the user describe hierarchy.
+        parents = (*titles, suite["title"]) if depth else titles
         for spec in suite.get("specs", []):
-            if not isinstance(spec, dict):
-                continue
-            tests = spec.get("tests", [])
-            disabled: list[str] = []
-            if not isinstance(tests, list) or not tests:
-                disabled.append("uninstantiated")
-            else:
-                for test in tests:
-                    if not isinstance(test, dict):
-                        disabled.append("invalid")
-                        continue
-                    if test.get("expectedStatus") != "passed":
-                        disabled.append(str(test.get("expectedStatus")))
-                    annotations = test.get("annotations", [])
-                    if isinstance(annotations, list):
-                        disabled.extend(
-                            str(value.get("type"))
-                            for value in annotations
-                            if isinstance(value, dict) and value.get("type")
-                        )
-            raw_file = str(spec.get("file", ""))
-            source = Path(raw_file)
+            source = Path(spec["file"])
             if not source.is_absolute():
                 source = root_dir / source
-            rows.append(
-                {
-                    "kind": "playwright",
-                    "gate": gate,
-                    "path": _project_path(project_root, str(source)),
-                    "name": str(spec.get("title", "")),
-                    "node": str(spec.get("id", "")),
-                    "disabled": sorted(set(disabled)),
-                }
-            )
-        rows.extend(
-            _walk_playwright_suites(
-                suite.get("suites", []) if isinstance(suite.get("suites"), list) else [],
-                root_dir,
-                project_root,
-                gate,
-            )
-        )
+            for test in spec.get("tests", []):
+                disabled = [a["type"] for a in test.get("annotations", [])
+                            if a.get("type") in {"skip", "fixme", "todo", "fail"}]
+                if test.get("expectedStatus") != "passed":
+                    disabled.append(test.get("expectedStatus", "unknown"))
+                rows.append({"kind": "playwright", "gate": gate,
+                             "path": _project_path(project_root, str(source)),
+                             "name": spec["title"], "title_path": [*parents, spec["title"]],
+                             "config": config, "project": test.get("projectName", ""),
+                             "selection_path": source.relative_to(root_dir).as_posix(),
+                             "node": spec.get("id", ""), "disabled": disabled,
+                             "results": test.get("results", []), "status": test.get("status")})
+        rows.extend(_walk_playwright_suites(suite.get("suites", []), root_dir, project_root, gate,
+                                          config=config, titles=parents, depth=depth + 1))
     return rows
 
 
@@ -307,7 +284,7 @@ def _collect_playwright(
         ) from error
     if not isinstance(suites, list):
         raise TestCollectionError(f"Playwright suites must be an array for {config_name}")
-    return _walk_playwright_suites(suites, root_dir, project_root, gate)
+    return _walk_playwright_suites(suites, root_dir, project_root, gate, config=config_name)
 
 
 def _collect_vitest(project_root: Path, *, selectors: list[str] | None = None, prepare: bool = True) -> list[dict[str, Any]]:
@@ -350,6 +327,8 @@ def _collect_vitest(project_root: Path, *, selectors: list[str] | None = None, p
                 "path": relative_path,
                 "name": name,
                 "node": str(item.get("name", "")),
+                "config": "vitest.config.ts", "project": item.get("projectName", ""),
+                "title_path": str(item.get("name", "")).split(" > "),
                 "disabled": disabled,
             }
         )

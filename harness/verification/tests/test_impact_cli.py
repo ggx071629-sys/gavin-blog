@@ -295,7 +295,8 @@ def test_real_cli_partial_reuse_preserves_failed_attempt(tmp_path):
         for c in evidence["checks"]
         if c.get("kind") == "product"
     }
-    assert modes == {"harness-tests": "reused", "harness-integrity": "executed"}
+    # The former late integrity fault is now detected before any tests run.
+    assert modes == {"harness-tests": "executed", "harness-integrity": "executed"}
 
 
 def test_real_cli_cleanup_and_interrupt_cannot_close(tmp_path):

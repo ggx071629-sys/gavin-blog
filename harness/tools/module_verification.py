@@ -196,6 +196,18 @@ def _field_errors(
         errors.append(f"{label}: must be an object")
         return False
     actual = set(value)
+    if expected == REFERENCE_FIELDS:
+        optional = {"config", "project", "title_path"}
+        supplied = actual & optional
+        if supplied and supplied != optional:
+            errors.append(f"{label}: config, project and title_path must be supplied together")
+        if supplied == optional:
+            try:
+                from .exact_identity import identity
+                identity(value)
+            except (ValueError, TypeError) as error:
+                errors.append(f"{label}: {error}")
+        actual -= optional
     missing = sorted(set(expected) - actual)
     unexpected = sorted(actual - set(expected))
     if missing:
@@ -521,6 +533,9 @@ def resolve_test_reference(
         matches = collected_tests.get(
             (str(kind), str(raw_path), str(name), str(gate)), []
         )
+        if "title_path" in reference:
+            from .exact_identity import identity
+            matches = [m for m in matches if identity(m) == identity(reference)]
         if len(matches) != 1:
             errors.append(
                 f"test reference: {raw_path}::{name} must be collected exactly once "

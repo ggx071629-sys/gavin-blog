@@ -1207,6 +1207,7 @@ def run_gates(
     execution_root: Path | None = None,
     gate_callback: Any = None,
     artifact_root: Path | None = None,
+    selected_refs_file: Path | None = None,
 ) -> list[dict[str, Any]]:
     from .run_artifacts import log_path
     configured = _configured_gates()
@@ -1242,6 +1243,10 @@ def run_gates(
                 dict(configured[gate]),
                 execution_root,
             )
+            if selected_refs_file is not None:
+                if "harness.tools.selected_tests" not in command:
+                    raise ProductVerificationError("diagnosis requires an exact selected runner")
+                command.extend(["--selection", str(selected_refs_file)])
             completed = _run_supervised_command(
                 command,
                 cwd=cwd,
@@ -1259,6 +1264,10 @@ def run_gates(
             if selection_rows:
                 structured_result["selection_counts"] = {
                     key: sum(row[key] for row in selection_rows) for key in ("collected", "executed")}
+            stages = [json.loads(line.removeprefix("HARNESS_STAGE ")) for line in completed.stdout.splitlines()
+                      if line.startswith("HARNESS_STAGE ")]
+            if stages:
+                structured_result["stages"] = stages
             if artifact_root is not None:
                 structured_result["log"] = str(artifact_root / gate / "output.log")
             proof_error: ProductVerificationError | None = None
@@ -1285,7 +1294,9 @@ def run_gates(
                     redactions=redactions,
                 )
                 structured_result["failure"] = {
-                    "kind": classify_failure(completed.stdout + completed.stderr),
+                    "kind": next((row["phase"] for row in reversed(stages) if row["status"] == "failed"), "nonzero-exit"),
+                    "source": "selected-runner" if stages else "gate-runner",
+                    "hint": classify_failure(completed.stdout + completed.stderr),
                     "summary": failure_summary(
                         completed.stdout,
                         completed.stderr,

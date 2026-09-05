@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import json
 import os
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 from pathlib import Path
@@ -10,6 +12,41 @@ from typing import Any
 
 from .config import load_config, project_root
 from .product_verification import ProductVerificationError, run_gates
+
+
+def snapshot_preflight(worktree, mappings):
+    from . import impact, validator
+    from . import product_verification as pv
+    from .run_store import digest
+    from .verification_inputs import controlled_environment
+
+    plan = impact.current_plan.get()
+    command = [sys.executable, "-m", "tools.snapshot_check"]
+    if plan is not None:
+        command.append(plan["task_id"])
+    started = time.perf_counter()
+    completed = subprocess.run(command, cwd=worktree / "harness", capture_output=True,
+                               text=True, encoding="utf-8", errors="replace", timeout=120,
+                               env=controlled_environment(), check=False)
+    try:
+        report = json.loads(completed.stdout)
+        passed = completed.returncode == 0 and report["version"] == 1 and validator.passed(report["checks"])
+        if plan is not None and report["plan_digest"] != digest(plan):
+            passed = False
+        details = [str(d) for c in report["checks"] if c["status"] != "passed" for d in c.get("details", [])]
+    except (ValueError, KeyError, TypeError):
+        passed, details = False, ["invalid snapshot preflight report: " + completed.stderr[-600:]]
+    gate = "harness-integrity" if "harness-integrity" in mappings else "snapshot-preflight"
+    result = {"name": gate, "kind": "product" if gate in mappings else "preflight",
+              "command": pv._configured_command_text(pv._configured_gates()[gate]) if gate in mappings else "snapshot-check",
+              "status": "passed" if passed else "failed", "passed": passed,
+              "covers": mappings.get(gate, []), "duration_ms": round((time.perf_counter() - started) * 1000, 3),
+              "details": details, "provenance": {"phase": "snapshot", "scope": "committed-snapshot"},
+              "result": {"exit_code": 0 if passed else 1}}
+    if not passed:
+        result["result"]["failure"] = {"kind": "snapshot-input", "source": "snapshot-runner",
+                                        "summary": ("; ".join(details) or "snapshot plan differs from workspace")[:300]}
+    return result
 
 
 def isolation_config() -> dict[str, Any]:
@@ -118,6 +155,7 @@ def run_in_worktree(
     *,
     gate_callback: Any = None,
     artifact_root: Path | None = None,
+    diagnostic_refs: list[dict[str, Any]] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     started = time.perf_counter()
     context: dict[str, Any] = {
@@ -148,6 +186,16 @@ def run_in_worktree(
             raise ProductVerificationError("temporary Git worktree creation failed")
         registered = True
 
+        snapshot = snapshot_preflight(worktree, mappings)
+        results.append(snapshot)
+        if snapshot["name"] in mappings and gate_callback is not None:
+            gate_callback(snapshot["name"], None)
+            gate_callback(snapshot["name"], snapshot)
+        if not snapshot["passed"]:
+            context["not_run"] = [gate for gate in mappings if gate != snapshot["name"]]
+            raise ProductVerificationError("committed snapshot preflight failed; consumers not-run")
+        remaining = {gate: covers for gate, covers in mappings.items() if gate != snapshot["name"]}
+
         from .impact import current_plan, dependency_paths
         reuse_paths = dependency_paths(mappings) if current_plan.get() is not None else config["reuse_paths"]
         for raw_path in reuse_paths:
@@ -165,10 +213,16 @@ def run_in_worktree(
             _create_directory_link(source, destination)
             links.append(destination)
 
-        if gate_callback is None and artifact_root is None:
-            results.extend(run_gates(mappings, execution_root=worktree))
+        selection_options = {}
+        if diagnostic_refs is not None:
+            selection_file = worktree / ".run" / "harness-diagnostic-selection.json"
+            selection_file.parent.mkdir(parents=True, exist_ok=True)
+            selection_file.write_text(json.dumps(diagnostic_refs), encoding="utf-8")
+            selection_options["selected_refs_file"] = selection_file
+        if gate_callback is None and artifact_root is None and not selection_options:
+            results.extend(run_gates(remaining, execution_root=worktree))
         else:
-            results.extend(run_gates(mappings, execution_root=worktree, gate_callback=gate_callback, artifact_root=artifact_root))
+            results.extend(run_gates(remaining, execution_root=worktree, gate_callback=gate_callback, artifact_root=artifact_root, **selection_options))
     except Exception as error:  # noqa: BLE001 - cleanup must cover every gate failure
         setup_error = str(error)
     finally:

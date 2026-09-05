@@ -503,6 +503,8 @@ def test_vitest_collector_prepares_nuxt_before_listing(
             "path": "apps/web/tests/unit/collector.test.ts",
             "name": "collector anchor",
             "node": "suite > collector anchor",
+            "config": "vitest.config.ts", "project": "",
+            "title_path": ["suite", "collector anchor"],
             "disabled": [],
         }
     ]

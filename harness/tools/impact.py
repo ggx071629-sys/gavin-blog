@@ -201,8 +201,8 @@ def build_plan(task_id, *, paths=None, root=None):
     refs = {}
     for case in sorted(selected):
         for ref in indexed[case]["test_refs"]:
-            key = (ref["kind"], ref["path"], ref["name"], ref["gate"])
-            refs[key] = {k: ref[k] for k in ("kind", "path", "name", "gate")}
+            key = (ref["kind"], ref["path"], ref["name"], ref["gate"], ref.get("config"), ref.get("project"), tuple(ref.get("title_path", [])))
+            refs[key] = {k: ref[k] for k in ("kind", "path", "name", "gate", "config", "project", "title_path") if k in ref}
     gates = sorted({r["gate"] for r in refs.values()} | {"harness-integrity"})
     profile = pv.verification_profile(task_id)
     if profile != "release" and set(mappings) != set(gates):

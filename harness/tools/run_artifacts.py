@@ -52,23 +52,19 @@ def retain(root: Path, destination: Path) -> None:
 
 
 def prune() -> None:
-    root = run_store.store_root() / "artifacts"
-    if not root.is_dir():
-        return
+    roots = [run_store.store_root() / "artifacts", run_store.store_root() / "diagnostics" / "artifacts"]
     entries = []
-    for directory in root.iterdir():
-        if directory.is_symlink() or not directory.is_dir():
+    for root in roots:
+        if not root.is_dir():
             continue
-        size = sum(
-            p.stat().st_size
-            for p in directory.rglob("*")
-            if p.is_file() and not p.is_symlink()
-        )
-        entries.append((directory.stat().st_mtime, size, directory))
-    total = sum(size for _, size, _ in entries)
-    for modified, size, directory in sorted(entries):
+        for directory in root.iterdir():
+            if directory.is_symlink() or not directory.is_dir():
+                continue
+            size = sum(p.stat().st_size for p in directory.rglob("*") if p.is_file() and not p.is_symlink())
+            entries.append((directory.stat().st_mtime, size, directory, root))
+    total = sum(size for _, size, _, _ in entries)
+    for modified, size, directory, root in sorted(entries):
         if time.time() - modified > RETENTION_SECONDS or total > TOTAL_LIMIT:
-            # Paths are direct, resolved descendants of the runner-owned artifact root.
             if directory.resolve().parent != root.resolve():
                 raise ValueError("artifact cleanup escaped its root")
             shutil.rmtree(directory)

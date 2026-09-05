@@ -72,6 +72,12 @@ ownership = "verification/impact/ownership.json"
 plans = "verification/impact"
 reuse = false
 
+[verification.execution]
+identity_version = 3
+# Enable only after symmetric fixture/order checks and paired cost acceptance.
+merge_playwright = false
+shared_test_paths = []
+
 [verification.isolation]
 mode = "git-worktree"
 reuse_paths = ["node_modules", "apps/web/node_modules", "apps/api/.venv"]

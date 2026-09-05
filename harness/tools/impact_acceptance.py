@@ -12,6 +12,7 @@ import json
 import os
 import shutil
 import stat
+import statistics
 import subprocess
 import sys
 import tempfile
@@ -58,6 +59,25 @@ def validate_comparison(payload):
             "profile-web: missing complete real Pytest/Vitest/Playwright closure"
         )
     return errors
+
+
+def paired_summary(samples, *, minimum_pairs=3):
+    """Keep every sample; never promote failed or asymmetric data to a speedup."""
+    report = {}
+    workloads = sorted({r["workload"] for r in samples})
+    for workload in workloads:
+        rows = [r for r in samples if r["workload"] == workload]
+        before = [r for r in rows if r["version"] == "before"]
+        after = [r for r in rows if r["version"] == "after"]
+        valid = (len(before) == len(after) and len(before) >= minimum_pairs
+                 and all(r.get("status") == "passed" and r.get("closed") for r in rows)
+                 and all(b.get("executed") == a.get("executed") for b, a in zip(before, after)))
+        stats = {version: {"median_ms": statistics.median([r["wall_ms"] for r in group]),
+                           "range_ms": [min(r["wall_ms"] for r in group), max(r["wall_ms"] for r in group)]}
+                 for version, group in (("before", before), ("after", after)) if group}
+        report[workload] = {"samples": len(rows), "eligible": valid, **stats,
+                            "improved": valid and stats["after"]["median_ms"] < stats["before"]["median_ms"]}
+    return report
 
 
 def run(command, cwd, *, log=None):
@@ -163,7 +183,10 @@ def prepare_repository(root, source, baseline, version, workload):
     if version == "before":
         # Only the engine changes. Product code, docs, checks, toolchain and
         # workload are identical; preserve all original implementation in Git.
-        git(root, "restore", "--source=" + baseline, "--", "harness/tools")
+        # Keep newly added helpers present for the common current ownership manifest.
+        # The baseline entrypoints do not import them; overwrite its existing engine files only.
+        paths = git(root, "ls-tree", "-r", "--name-only", baseline, "--", "harness/tools").splitlines()
+        git(root, "restore", "--source=" + baseline, "--", *paths)
     bind_dependencies(root, source, web=workload == "profile-web")
     task = "20260906-acceptance-" + workload
     changed, cid, gate, test_path, test_name = workload_contract(workload)
@@ -442,12 +465,15 @@ def retain_and_cleanup_sample(row):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--baseline", required=True)
+    parser.add_argument("--pairs", type=int, default=3, help="alternating before/after pairs per workload (minimum 3)")
     parser.add_argument(
         "--resume",
         action="store_true",
         help="Retry failed local samples, preserving their histories and logs",
     )
     args = parser.parse_args()
+    if args.pairs < 3:
+        parser.error("--pairs must be at least 3")
     source = project_root()
     baseline = git(source, "rev-parse", args.baseline + "^{commit}")
     output = source / ".run/impact-acceptance"
@@ -488,27 +514,26 @@ def main():
             samples.append(result)
             print(json.dumps(result), flush=True)
         payload["samples"] = samples
+        payload["paired_summary"] = paired_summary(samples)
         payload["errors"] = validate_comparison(payload)
+        for workload in ("harness", "profile-api"):
+            if not payload["paired_summary"].get(workload, {}).get("improved"):
+                payload["errors"].append(workload + ": paired cost threshold not met")
         (output / "comparison.json").write_text(
             json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )
         return bool(payload["errors"])
     samples = []
     for workload in ["harness", "profile-api"]:
-        for version in ["before", "after"]:
-            root = Path(tempfile.mkdtemp(prefix="harness-acceptance-")) / "repository"
-            print(f"[ACCEPTANCE] {workload} {version}", flush=True)
-            samples.append(
-                sample(
-                    root,
-                    source,
-                    baseline,
-                    version,
-                    workload,
-                    output / f"{workload}-{version}",
-                )
-            )
-            print(json.dumps(samples[-1]), flush=True)
+        for pair in range(args.pairs):
+            for version in (["before", "after"] if pair % 2 == 0 else ["after", "before"]):
+                root = Path(tempfile.mkdtemp(prefix="harness-acceptance-")) / "repository"
+                print(f"[ACCEPTANCE] {workload} pair {pair + 1} {version}", flush=True)
+                row = sample(root, source, baseline, version, workload,
+                             output / f"{workload}-{pair + 1}-{version}")
+                row["pair"] = pair + 1
+                samples.append(row)
+                print(json.dumps(row), flush=True)
     root = Path(tempfile.mkdtemp(prefix="harness-acceptance-")) / "repository"
     print(
         "[ACCEPTANCE] profile-web after (real Pytest/Vitest/Playwright closure)",
@@ -524,10 +549,14 @@ def main():
         "schema_version": 1,
         "baseline": baseline,
         "candidate": git(source, "rev-parse", "HEAD"),
-        "method": "Same product tree, checks, workload, installed dependencies; only harness/tools engine differs. Sequential single samples; setup excluded.",
+        "method": "Same product tree, checks, workload, installed dependencies; only harness/tools engine differs. Alternating paired samples; setup excluded; profile-web is a separate integration sample.",
         "samples": samples,
     }
+    payload["paired_summary"] = paired_summary(samples)
     payload["errors"] = validate_comparison(payload)
+    for workload in ("harness", "profile-api"):
+        if not payload["paired_summary"][workload]["improved"]:
+            payload["errors"].append(workload + ": paired cost threshold not met")
     if not payload["errors"]:
         for row in samples:
             retain_and_cleanup_sample(row)

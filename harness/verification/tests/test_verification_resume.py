@@ -388,7 +388,8 @@ def test_failure_logs_and_bounded_artifacts_are_retained(tmp_path, monkeypatch):
     results = pv.run_gates(
         {"fixture": ["AC-1"]}, execution_root=tmp_path, artifact_root=log_root
     )
-    assert results[0]["result"]["failure"]["kind"] == "assertion"
+    assert results[0]["result"]["failure"]["kind"] == "nonzero-exit"
+    assert results[0]["result"]["failure"]["hint"] == "assertion"
     assert "AssertionError: fixture" in (log_root / "fixture/output.log").read_text()
     artifact = tmp_path / "apps/web/test-results/trace.zip"
     artifact.parent.mkdir(parents=True)

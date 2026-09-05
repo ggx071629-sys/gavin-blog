@@ -54,7 +54,8 @@
         "M08.module_verification",
         "M08.product_verification",
         "M08.selected_tests",
-        "M08.verification_resume"
+        "M08.verification_resume",
+        "M08.execution_protocol"
       ],
       "dependency_reasons": {
         "M08.isolated_verification": [
@@ -86,6 +87,9 @@
           "harness/tools/verification_resume.py:23 imports harness.tools.impact",
           "harness/tools/verification_resume.py:387 imports harness.tools.impact",
           "harness/tools/verification_resume.py:60 imports harness.tools.impact"
+        ],
+        "M08.execution_protocol": [
+          "harness/tools/diagnostics.py, execution_contracts.py or snapshot_check.py consumes this control-plane contract."
         ]
       }
     },
@@ -100,11 +104,15 @@
         "M08-IMPACT-RUNNERS-01"
       ],
       "dependents": [
-        "M08.verification_resume"
+        "M08.verification_resume",
+        "M08.execution_protocol"
       ],
       "dependency_reasons": {
         "M08.verification_resume": [
           "harness/tools/verification_inputs.py:239 imports harness.tools.selected_tests"
+        ],
+        "M08.execution_protocol": [
+          "harness/tools/diagnostics.py, execution_contracts.py or snapshot_check.py consumes this control-plane contract."
         ]
       }
     },
@@ -149,7 +157,8 @@
       ],
       "dependents": [
         "M08.impact",
-        "M08.product_verification"
+        "M08.product_verification",
+        "M08.execution_protocol"
       ],
       "dependency_reasons": {
         "M08.impact": [
@@ -159,6 +168,9 @@
         "M08.product_verification": [
           "harness/tools/product_verification.py:20 imports harness.tools.module_verification",
           "harness/tools/product_verification.py:236 imports harness.tools.module_verification"
+        ],
+        "M08.execution_protocol": [
+          "harness/tools/diagnostics.py, execution_contracts.py or snapshot_check.py consumes this control-plane contract."
         ]
       }
     },
@@ -183,7 +195,8 @@
         "M08.lifecycle",
         "M08.product_verification",
         "M08.task_reporting",
-        "M08.test_collection"
+        "M08.test_collection",
+        "M08.execution_protocol"
       ],
       "dependency_reasons": {
         "M08.isolated_verification": [
@@ -211,6 +224,9 @@
         ],
         "M08.test_collection": [
           "harness/tools/test_collection.py:153 imports harness.tools.verification_inputs"
+        ],
+        "M08.execution_protocol": [
+          "harness/tools/diagnostics.py, execution_contracts.py or snapshot_check.py consumes this control-plane contract."
         ]
       }
     },
@@ -239,7 +255,8 @@
         "M08.lifecycle",
         "M08.selected_tests",
         "M08.task_reporting",
-        "M08.verification_resume"
+        "M08.verification_resume",
+        "M08.execution_protocol"
       ],
       "dependency_reasons": {
         "M08.change_enforcement": [
@@ -266,6 +283,9 @@
         "M08.verification_resume": [
           "harness/tools/verification_inputs.py:16 imports harness.tools.product_verification",
           "harness/tools/verification_resume.py:14 imports harness.tools.product_verification"
+        ],
+        "M08.execution_protocol": [
+          "harness/tools/diagnostics.py, execution_contracts.py or snapshot_check.py consumes this control-plane contract."
         ]
       }
     },
@@ -280,7 +300,8 @@
       "dependents": [
         "M08.acceptance",
         "M08.lifecycle",
-        "M08.verification_resume"
+        "M08.verification_resume",
+        "M08.execution_protocol"
       ],
       "dependency_reasons": {
         "M08.acceptance": [
@@ -294,6 +315,9 @@
           "harness/tools/verification_inputs.py:150 imports harness.tools.isolated_verification",
           "harness/tools/verification_inputs.py:223 imports harness.tools.isolated_verification",
           "harness/tools/verification_resume.py:13 imports harness.tools.isolated_verification"
+        ],
+        "M08.execution_protocol": [
+          "harness/tools/diagnostics.py, execution_contracts.py or snapshot_check.py consumes this control-plane contract."
         ]
       }
     },
@@ -422,7 +446,8 @@
         "M08.selected_tests",
         "M08.task_reporting",
         "M08.telemetry",
-        "M08.verification_resume"
+        "M08.verification_resume",
+        "M08.execution_protocol"
       ],
       "dependency_reasons": {
         "M08.acceptance": [
@@ -494,6 +519,9 @@
           "harness/tools/verification_resume.py:23 imports harness.tools",
           "harness/tools/verification_resume.py:40 imports harness.tools",
           "harness/tools/verification_resume.py:60 imports harness.tools"
+        ],
+        "M08.execution_protocol": [
+          "harness/tools/diagnostics.py, execution_contracts.py or snapshot_check.py consumes this control-plane contract."
         ]
       }
     },
@@ -3040,7 +3068,10 @@
         "harness/specs/_sdd/*.md",
         "harness/verification/README.md",
         "harness/verification/vdd/*.md",
-        "harness/docs/decisions/20260905-verification-resume.md"
+        "harness/docs/decisions/20260905-verification-resume.md",
+        "harness/docs/decisions/20260906-harness-execution.md",
+        "harness/evolution/proposals/20260906-public-reading--workflow-friction_confirmed.md",
+        "harness/evolution/events/20260906-public-reading--workflow-friction_confirmed.json"
       ],
       "cases": [
         "M08-DOCS-01",
@@ -3071,6 +3102,47 @@
         "M07-P1-01"
       ],
       "dependents": []
+    },
+    "M08.execution_protocol": {
+      "paths": [
+        "harness/tools/execution_contracts.py",
+        "harness/tools/exact_identity.py",
+        "harness/tools/snapshot_check.py",
+        "harness/tools/diagnostics.py",
+        "harness/verification/tests/test_execution_protocol.py",
+        "harness/tools/vitest-identity-reporter.mjs"
+      ],
+      "cases": [
+        "M08-SNAPSHOT-01",
+        "M08-PREREQUISITE-01",
+        "M08-DIAGNOSE-01",
+        "M08-EXACT-IDENTITY-01",
+        "M08-BATCH-ARTIFACTS-01"
+      ],
+      "dependents": [
+        "M08.selected_tests",
+        "M08.module_verification",
+        "M08.isolated_verification",
+        "M08.lifecycle",
+        "M08.verification_resume"
+      ],
+      "dependency_reasons": {
+        "M08.selected_tests": [
+          "Execution protocol imports: explicit prerequisites, exact identities, snapshot preflight or diagnostic CLI."
+        ],
+        "M08.module_verification": [
+          "Execution protocol imports: explicit prerequisites, exact identities, snapshot preflight or diagnostic CLI."
+        ],
+        "M08.isolated_verification": [
+          "Execution protocol imports: explicit prerequisites, exact identities, snapshot preflight or diagnostic CLI."
+        ],
+        "M08.lifecycle": [
+          "Execution protocol imports: explicit prerequisites, exact identities, snapshot preflight or diagnostic CLI."
+        ],
+        "M08.verification_resume": [
+          "Execution protocol imports: explicit prerequisites, exact identities, snapshot preflight or diagnostic CLI."
+        ]
+      }
     }
   }
 }

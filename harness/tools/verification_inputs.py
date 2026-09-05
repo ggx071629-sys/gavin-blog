@@ -52,6 +52,7 @@ def controlled_environment() -> dict[str, str]:
         "CI": "1",
         "PYTHONUNBUFFERED": "1",
         "PYTHONDONTWRITEBYTECODE": "1",
+        "NPM_CONFIG_YES": "false",
         "NPM_CONFIG_USERCONFIG": str(Path(__file__).with_name("empty-user.npmrc")),
         "NPM_CONFIG_GLOBALCONFIG": str(Path(__file__).with_name("empty-global.npmrc")),
     }
@@ -219,7 +220,7 @@ def input_snapshot(
     }
 
 
-def preflight(mappings: dict[str, list[str]]) -> None:
+def preflight(mappings: dict[str, list[str]], *, selected_refs=None) -> None:
     from .isolated_verification import isolation_config
 
     root = project_root().resolve()
@@ -237,7 +238,7 @@ def preflight(mappings: dict[str, list[str]]) -> None:
     plan = current_plan.get()
     if plan is not None and not plan.get("release"):
         from .selected_tests import playwright_config
-        for ref in plan["test_refs"]:
+        for ref in selected_refs if selected_refs is not None else plan["test_refs"]:
             if ref["gate"] in mappings and ref["kind"] == "playwright":
                 config_name, _ = playwright_config(ref["path"])
                 ports.update({"playwright.config.ts": (3100, 8100),
@@ -335,7 +336,7 @@ print(json.dumps(result, sort_keys=True))
             diagnostic = str(getattr(error, 'stderr', '') or 'dependency probe could not complete').strip().splitlines()[-1]
             raise pv.ProductVerificationError('dependency input check failed: ' + diagnostic[:240]) from error
         dependencies = json.loads(completed.stdout)
-    return {"version": 2, "head": pv.head_commit(), "fingerprints": fingerprints,
+    return {"version": 3, "selection_protocol": 3, "head": pv.head_commit(), "fingerprints": fingerprints,
             "plan": digest(plan), "mappings": list(mappings.items()), "commands": commands,
             "platform": [platform.system(), platform.machine(), sys.version],
             "toolchain": digest(toolchain), "dependencies": dependencies,

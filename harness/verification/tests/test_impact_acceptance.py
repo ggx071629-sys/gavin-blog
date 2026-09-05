@@ -1,6 +1,18 @@
 from harness.tools.impact_acceptance import validate_comparison, workload_contract
 
 
+def test_paired_cost_summary_retains_failures_and_uses_median_and_range():
+    from harness.tools.impact_acceptance import paired_summary
+    rows = [{"workload": "web", "version": v, "status": "passed", "closed": True,
+             "executed": 2, "wall_ms": ms}
+            for v, values in (("before", [9, 10, 11]), ("after", [7, 8, 9])) for ms in values]
+    summary = paired_summary(rows)["web"]
+    assert summary["improved"] and summary["after"] == {"median_ms": 8, "range_ms": [7, 9]}
+    rows[0]["status"] = "failed"
+    assert not paired_summary(rows)["web"]["eligible"]
+    assert paired_summary(rows)["web"]["samples"] == 6
+
+
 def test_cost_comparison_rejects_missing_failed_or_fixture_only_samples():
     assert validate_comparison({"samples": []})
     rows = [
