@@ -43,10 +43,10 @@
         "harness/verification/tests/test_impact_registry.py"
       ],
       "cases": [
+        "M08-DOCS-01",
         "M08-IMPACT-GRAPH-01",
         "M08-IMPACT-MAPPING-01",
-        "M08-IMPACT-SELECTION-01",
-        "M08-DOCS-01"
+        "M08-IMPACT-SELECTION-01"
       ],
       "dependents": [
         "M08.isolated_verification",
@@ -2119,9 +2119,18 @@
         "apps/web/tests/unit/autosave.test.ts",
         "apps/web/tests/unit/editor-save-contract.test.ts",
         "apps/web/utils/articleRevisions.ts",
-        "apps/web/utils/autosave.ts"
+        "apps/web/utils/autosave.ts",
+        "apps/web/components/WritingWorkspace.vue",
+        "apps/web/composables/useNewDraftSafety.ts",
+        "apps/web/assets/css/writing-desk.css",
+        "apps/web/tests/e2e/writing-desk.spec.ts"
       ],
       "cases": [
+        "M02-DESK-LAYOUT-01",
+        "M02-DESK-RESOURCES-01",
+        "M02-DESK-REVISIONS-01",
+        "M02-DESK-SAFETY-01",
+        "M02-DESK-STATES-01",
         "M02-P0-01",
         "M02-P1-01",
         "M02-UNIT-ARTICLE-LOOP-01",
@@ -2199,9 +2208,13 @@
         "apps/web/tests/e2e/projects-index.spec.ts"
       ],
       "cases": [
+        "M02-DESK-LAYOUT-01",
+        "M02-DESK-SAFETY-01",
+        "M02-DESK-STATES-01",
+        "M02-UNIT-ARTICLE-LOOP-01",
         "M04-P0-01",
-        "M04-UNIT-PROJECTS-INDEX-01",
-        "M04-PUBLIC-DETAILS-01"
+        "M04-PUBLIC-DETAILS-01",
+        "M04-UNIT-PROJECTS-INDEX-01"
       ],
       "dependents": []
     },
@@ -2217,9 +2230,13 @@
         "apps/web/tests/e2e/books-index.spec.ts"
       ],
       "cases": [
+        "M02-DESK-LAYOUT-01",
+        "M02-DESK-SAFETY-01",
+        "M02-DESK-STATES-01",
+        "M02-UNIT-ARTICLE-LOOP-01",
         "M04-P1-01",
-        "M04-UNIT-BOOKS-INDEX-01",
-        "M04-PUBLIC-DETAILS-01"
+        "M04-PUBLIC-DETAILS-01",
+        "M04-UNIT-BOOKS-INDEX-01"
       ],
       "dependents": []
     },
@@ -2807,9 +2824,9 @@
         "apps/web/vitest.config.ts"
       ],
       "cases": [
-        "M08-IMPACT-RUNNERS-01",
         "M01-PUBLIC-SURFACES-01",
-        "M07-P1-01"
+        "M07-P1-01",
+        "M08-IMPACT-RUNNERS-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3055,7 +3072,8 @@
         "harness/evolution/proposals/INDEX.md",
         "packages/contracts/README.md",
         "ui-fix/PHASE-2.md",
-        "ui-fix/PHASE-3.md"
+        "ui-fix/PHASE-3.md",
+        "ui-fix/PHASE-4.md"
       ],
       "cases": [
         "M08-DOCS-01"

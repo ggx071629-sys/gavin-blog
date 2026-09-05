@@ -2006,6 +2006,196 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M02-DESK-LAYOUT-01",
+          "priority": "P1",
+          "scenario": "writing desk twelve surfaces preserve themes mobile panels and accessible actions",
+          "expectations": [
+            {
+              "id": "M02-DESK-LAYOUT-01-E01",
+              "surface": "user_visible",
+              "statement": "Twelve isolated login, list, creation, editor, preview and history surfaces preserve theme tokens, fit 320–1440px and 480px short viewports, switch mobile sections and Markdown/preview by keyboard, with zero axe violations."
+            },
+            {
+              "id": "M02-DESK-LAYOUT-01-E02",
+              "surface": "forbidden",
+              "statement": "No horizontal overflow, inaccessible hidden settings, duplicate visible editor/preview, browser page errors or warnings."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+              "name": "writing desk twelve surfaces preserve themes mobile panels and accessible actions",
+              "gate": "e2e",
+              "covers": [
+                "M02-DESK-LAYOUT-01-E01",
+                "M02-DESK-LAYOUT-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M02-DESK-SAFETY-01",
+          "priority": "P1",
+          "scenario": "writing desk saves retries blocks conflicts and reveals hidden invalid fields",
+          "expectations": [
+            {
+              "id": "M02-DESK-SAFETY-01-E01",
+              "surface": "user_visible",
+              "statement": "Real three-type mobile creation reveals missing Slug, saves and publishes; working updates remain private; failed saves retain input, retry and publish exact latest text; real concurrent updates produce conflicts; new drafts and dirty edits warn before loss."
+            },
+            {
+              "id": "M02-DESK-SAFETY-01-E02",
+              "surface": "forbidden",
+              "statement": "Failed or conflicting saves cannot navigate away or issue publish; unpublished working content never appears publicly; publish failure must not navigate or discard text."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+              "name": "writing desk saves retries blocks conflicts and reveals hidden invalid fields",
+              "gate": "e2e",
+              "covers": [
+                "M02-DESK-SAFETY-01-E01",
+                "M02-DESK-SAFETY-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M02-DESK-REVISIONS-01",
+          "priority": "P1",
+          "scenario": "writing desk previews real revisions compares and rolls back with visible failures",
+          "expectations": [
+            {
+              "id": "M02-DESK-REVISIONS-01-E01",
+              "surface": "user_visible",
+              "statement": "Preview declares its working-copy boundary and renders one H1; history reads real content and diff; accessible confirmation restores focus; rollback creates a new monotonic revision whose content is public."
+            },
+            {
+              "id": "M02-DESK-REVISIONS-01-E02",
+              "surface": "forbidden",
+              "statement": "Rollback must not rewrite a past revision; failed snapshot retrieval must not retain another snapshot as its successful result."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+              "name": "writing desk previews real revisions compares and rolls back with visible failures",
+              "gate": "e2e",
+              "covers": [
+                "M02-DESK-REVISIONS-01-E01",
+                "M02-DESK-REVISIONS-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M02-DESK-RESOURCES-01",
+          "priority": "P1",
+          "scenario": "writing desk media and incomplete references remain explicit through publication",
+          "expectations": [
+            {
+              "id": "M02-DESK-RESOURCES-01-E01",
+              "surface": "user_visible",
+              "statement": "New article uploads a real isolated image; Alt validation returns to Markdown; incomplete references declare their unsaved status and focus settings; completing a project reference persists and publishes its real link and image."
+            },
+            {
+              "id": "M02-DESK-RESOURCES-01-E02",
+              "surface": "forbidden",
+              "statement": "Missing Alt cannot publish; incomplete references cannot be silently lost on navigation or described as saved."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+              "name": "writing desk media and incomplete references remain explicit through publication",
+              "gate": "e2e",
+              "covers": [
+                "M02-DESK-RESOURCES-01-E01",
+                "M02-DESK-RESOURCES-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M02-DESK-STATES-01",
+          "priority": "P1",
+          "scenario": "Writing-desk dependencies and authentication preserve explicit load and credential failures.",
+          "expectations": [
+            {
+              "id": "M02-DESK-STATES-01-E01",
+              "surface": "response",
+              "statement": "Isolated upstream failures remain non-success for editors and new-page dependencies; login exposes pending and recoverable errors; safe return path survives 401."
+            },
+            {
+              "id": "M02-DESK-STATES-01-E02",
+              "surface": "forbidden",
+              "statement": "Upstream failures cannot become blank successful editors; unsafe return targets cannot redirect out of the admin boundary."
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/failure/failure-state.spec.ts",
+              "name": "admin editors do not render load failures as empty success",
+              "gate": "web-quality",
+              "covers": [
+                "M02-DESK-STATES-01-E01",
+                "M02-DESK-STATES-01-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/failure/failure-state.spec.ts",
+              "name": "session 500 remains an error and 401 preserves the requested admin route",
+              "gate": "web-quality",
+              "covers": [
+                "M02-DESK-STATES-01-E01",
+                "M02-DESK-STATES-01-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/failure/failure-state.spec.ts",
+              "name": "login exposes its pending state before restoring an actionable error state",
+              "gate": "web-quality",
+              "covers": [
+                "M02-DESK-STATES-01-E01",
+                "M02-DESK-STATES-01-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/failure/failure-state.spec.ts",
+              "name": "login classifies failures and accepts only safe return targets",
+              "gate": "web-quality",
+              "covers": [
+                "M02-DESK-STATES-01-E01",
+                "M02-DESK-STATES-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
