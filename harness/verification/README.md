@@ -50,7 +50,7 @@ Active spec 在 `## Verification cases` 中把每条 AC 映射到一个或多个
 
 全仓 module-coverage 只验证廉价结构，不运行 collector。普通任务的真实收集只发生在所选 runner 中。Pytest 使用精确 node ID；Vitest 和 Playwright 分文件及精确名称/config/project 选择，防止文件与名称交叉组合扩大范围。没有选择 Web 场景的 Harness 任务不调用 Node、Web build 或跨项目 collector。
 
-复用默认关闭，`--fresh` 仍只运行受影响范围。已登记的 Harness pytest 安装输入按分发文件核对，不扫描整套安装目录。未登记产品安装依赖闭包时，跨进程复用/close 被拒绝，使用 `verify <task> --close` 同进程收尾。可选复用保留 HMAC、本机账本、失败历史、输入漂移与清理检查。
+复用默认关闭，`--fresh` 仍只运行受影响范围。默认不探测安装分发，普通有测试任务使用 `verify <task> --close` 同进程收尾。只有显式启用且 Harness pytest 安装输入合同完整时才按有界分发文件核对；未登记安装依赖闭包时禁止跨进程复用/close。可选复用保留 HMAC、本机账本、失败历史、输入漂移与清理检查。同进程关闭复用本次 runner 的不可变解析结果，并重新核对 HEAD、源码/计划和运行输入；单次结构校验共享同文件路径解析，下一次调用重新校验。
 
 ## Gate subsumption
 

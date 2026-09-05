@@ -280,83 +280,43 @@
           ]
         },
         {
-          "id": "M01-UNIT-PUBLIC-UI-POLISH-01",
+          "id": "M01-UNIT-UI-FOUNDATION-01",
           "priority": "P1",
-          "scenario": "M01.navigation: public-ui-polish scenarios at the existing module boundary.",
+          "scenario": "M01.navigation: ui-foundation scenarios at the existing module boundary.",
           "expectations": [
             {
-              "id": "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
+              "id": "M01-UNIT-UI-FOUNDATION-01-E01",
               "surface": "response",
-              "statement": "labels desktop search and keeps the writing desk visually secondary; hides empty article summaries instead of rendering a placeholder; keeps about portraits in color and widens the article table of contents; keeps public article chrome in reader language; uses one medium outlined index treatment for every homepage article card"
+              "statement": "shared public foundations preserve themes, routes and keyboard navigation; shared admin foundations keep all destinations reachable in short viewports"
             },
             {
-              "id": "M01-UNIT-PUBLIC-UI-POLISH-01-E02",
+              "id": "M01-UNIT-UI-FOUNDATION-01-E02",
               "surface": "forbidden",
-              "statement": "keeps the homepage hero focused without the redundant content-track strip"
+              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
             }
           ],
           "required_gates": [
-            "web-quality"
+            "e2e"
           ],
           "test_refs": [
             {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/public-ui-polish.test.ts",
-              "name": "labels desktop search and keeps the writing desk visually secondary",
-              "gate": "web-quality",
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+              "name": "shared public foundations preserve themes, routes and keyboard navigation",
+              "gate": "e2e",
               "covers": [
-                "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
-                "M01-UNIT-PUBLIC-UI-POLISH-01-E02"
+                "M01-UNIT-UI-FOUNDATION-01-E01",
+                "M01-UNIT-UI-FOUNDATION-01-E02"
               ]
             },
             {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/public-ui-polish.test.ts",
-              "name": "hides empty article summaries instead of rendering a placeholder",
-              "gate": "web-quality",
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+              "name": "shared admin foundations keep all destinations reachable in short viewports",
+              "gate": "e2e",
               "covers": [
-                "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
-                "M01-UNIT-PUBLIC-UI-POLISH-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/public-ui-polish.test.ts",
-              "name": "keeps about portraits in color and widens the article table of contents",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
-                "M01-UNIT-PUBLIC-UI-POLISH-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/public-ui-polish.test.ts",
-              "name": "keeps public article chrome in reader language",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
-                "M01-UNIT-PUBLIC-UI-POLISH-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/public-ui-polish.test.ts",
-              "name": "keeps the homepage hero focused without the redundant content-track strip",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
-                "M01-UNIT-PUBLIC-UI-POLISH-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/public-ui-polish.test.ts",
-              "name": "uses one medium outlined index treatment for every homepage article card",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
-                "M01-UNIT-PUBLIC-UI-POLISH-01-E02"
+                "M01-UNIT-UI-FOUNDATION-01-E01",
+                "M01-UNIT-UI-FOUNDATION-01-E02"
               ]
             }
           ]
@@ -496,43 +456,83 @@
           ]
         },
         {
-          "id": "M01-UNIT-UI-FOUNDATION-01",
+          "id": "M01-UNIT-PUBLIC-UI-POLISH-01",
           "priority": "P1",
-          "scenario": "M01.navigation: ui-foundation scenarios at the existing module boundary.",
+          "scenario": "M01.navigation: public-ui-polish scenarios at the existing module boundary.",
           "expectations": [
             {
-              "id": "M01-UNIT-UI-FOUNDATION-01-E01",
+              "id": "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
               "surface": "response",
-              "statement": "shared public foundations preserve themes, routes and keyboard navigation; shared admin foundations keep all destinations reachable in short viewports"
+              "statement": "labels desktop search and keeps the writing desk visually secondary; hides empty article summaries instead of rendering a placeholder; keeps about portraits in color and widens the article table of contents; keeps public article chrome in reader language; uses one medium outlined index treatment for every homepage article card"
             },
             {
-              "id": "M01-UNIT-UI-FOUNDATION-01-E02",
+              "id": "M01-UNIT-PUBLIC-UI-POLISH-01-E02",
               "surface": "forbidden",
-              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
+              "statement": "keeps the homepage hero focused without the redundant content-track strip"
             }
           ],
           "required_gates": [
-            "e2e"
+            "web-quality"
           ],
           "test_refs": [
             {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
-              "name": "shared public foundations preserve themes, routes and keyboard navigation",
-              "gate": "e2e",
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/public-ui-polish.test.ts",
+              "name": "labels desktop search and keeps the writing desk visually secondary",
+              "gate": "web-quality",
               "covers": [
-                "M01-UNIT-UI-FOUNDATION-01-E01",
-                "M01-UNIT-UI-FOUNDATION-01-E02"
+                "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
+                "M01-UNIT-PUBLIC-UI-POLISH-01-E02"
               ]
             },
             {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
-              "name": "shared admin foundations keep all destinations reachable in short viewports",
-              "gate": "e2e",
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/public-ui-polish.test.ts",
+              "name": "hides empty article summaries instead of rendering a placeholder",
+              "gate": "web-quality",
               "covers": [
-                "M01-UNIT-UI-FOUNDATION-01-E01",
-                "M01-UNIT-UI-FOUNDATION-01-E02"
+                "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
+                "M01-UNIT-PUBLIC-UI-POLISH-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/public-ui-polish.test.ts",
+              "name": "keeps about portraits in color and widens the article table of contents",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
+                "M01-UNIT-PUBLIC-UI-POLISH-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/public-ui-polish.test.ts",
+              "name": "keeps public article chrome in reader language",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
+                "M01-UNIT-PUBLIC-UI-POLISH-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/public-ui-polish.test.ts",
+              "name": "keeps the homepage hero focused without the redundant content-track strip",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
+                "M01-UNIT-PUBLIC-UI-POLISH-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/public-ui-polish.test.ts",
+              "name": "uses one medium outlined index treatment for every homepage article card",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-PUBLIC-UI-POLISH-01-E01",
+                "M01-UNIT-PUBLIC-UI-POLISH-01-E02"
               ]
             }
           ]
@@ -575,110 +575,6 @@
               "covers": [
                 "M01-UNIT-ARTICLE-READING-01-E01",
                 "M01-UNIT-ARTICLE-READING-01-E02"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "M01-UNIT-MARKDOWN-MERMAID-01",
-          "priority": "P1",
-          "scenario": "M01.reading: markdown-mermaid scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M01-UNIT-MARKDOWN-MERMAID-01-E01",
-              "surface": "response",
-              "statement": "Mermaid redraws for the resolved theme and invalid diagrams degrade locally"
-            },
-            {
-              "id": "M01-UNIT-MARKDOWN-MERMAID-01-E02",
-              "surface": "forbidden",
-              "statement": "Mermaid redraws for the resolved theme and invalid diagrams degrade locally"
-            }
-          ],
-          "required_gates": [
-            "e2e"
-          ],
-          "test_refs": [
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/markdown-mermaid.spec.ts",
-              "name": "Mermaid redraws for the resolved theme and invalid diagrams degrade locally",
-              "gate": "e2e",
-              "covers": [
-                "M01-UNIT-MARKDOWN-MERMAID-01-E01",
-                "M01-UNIT-MARKDOWN-MERMAID-01-E02"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "M01-UNIT-ARTICLE-01",
-          "priority": "P1",
-          "scenario": "M01.reading: article scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M01-UNIT-ARTICLE-01-E01",
-              "surface": "response",
-              "statement": "builds a stable UTC publication path; creates URL-safe ASCII slugs; builds public taxonomy filters from supported query values"
-            },
-            {
-              "id": "M01-UNIT-ARTICLE-01-E02",
-              "surface": "forbidden",
-              "statement": "requires an explicit English or pinyin slug when the title cannot generate one; rejects empty titles and slugs outside the API slug contract"
-            }
-          ],
-          "required_gates": [
-            "web-quality"
-          ],
-          "test_refs": [
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/article.test.ts",
-              "name": "builds a stable UTC publication path",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
-                "M01-UNIT-ARTICLE-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/article.test.ts",
-              "name": "creates URL-safe ASCII slugs",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
-                "M01-UNIT-ARTICLE-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/article.test.ts",
-              "name": "requires an explicit English or pinyin slug when the title cannot generate one",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
-                "M01-UNIT-ARTICLE-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/article.test.ts",
-              "name": "rejects empty titles and slugs outside the API slug contract",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
-                "M01-UNIT-ARTICLE-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/article.test.ts",
-              "name": "builds public taxonomy filters from supported query values",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
-                "M01-UNIT-ARTICLE-01-E02"
               ]
             }
           ]
@@ -806,6 +702,110 @@
           ]
         },
         {
+          "id": "M01-UNIT-MARKDOWN-MERMAID-01",
+          "priority": "P1",
+          "scenario": "M01.reading: markdown-mermaid scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M01-UNIT-MARKDOWN-MERMAID-01-E01",
+              "surface": "response",
+              "statement": "Mermaid redraws for the resolved theme and invalid diagrams degrade locally"
+            },
+            {
+              "id": "M01-UNIT-MARKDOWN-MERMAID-01-E02",
+              "surface": "forbidden",
+              "statement": "Mermaid redraws for the resolved theme and invalid diagrams degrade locally"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/markdown-mermaid.spec.ts",
+              "name": "Mermaid redraws for the resolved theme and invalid diagrams degrade locally",
+              "gate": "e2e",
+              "covers": [
+                "M01-UNIT-MARKDOWN-MERMAID-01-E01",
+                "M01-UNIT-MARKDOWN-MERMAID-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M01-UNIT-ARTICLE-01",
+          "priority": "P1",
+          "scenario": "M01.reading: article scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M01-UNIT-ARTICLE-01-E01",
+              "surface": "response",
+              "statement": "builds a stable UTC publication path; creates URL-safe ASCII slugs; builds public taxonomy filters from supported query values"
+            },
+            {
+              "id": "M01-UNIT-ARTICLE-01-E02",
+              "surface": "forbidden",
+              "statement": "requires an explicit English or pinyin slug when the title cannot generate one; rejects empty titles and slugs outside the API slug contract"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/article.test.ts",
+              "name": "builds a stable UTC publication path",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-ARTICLE-01-E01",
+                "M01-UNIT-ARTICLE-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/article.test.ts",
+              "name": "creates URL-safe ASCII slugs",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-ARTICLE-01-E01",
+                "M01-UNIT-ARTICLE-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/article.test.ts",
+              "name": "requires an explicit English or pinyin slug when the title cannot generate one",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-ARTICLE-01-E01",
+                "M01-UNIT-ARTICLE-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/article.test.ts",
+              "name": "rejects empty titles and slugs outside the API slug contract",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-ARTICLE-01-E01",
+                "M01-UNIT-ARTICLE-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/article.test.ts",
+              "name": "builds public taxonomy filters from supported query values",
+              "gate": "web-quality",
+              "covers": [
+                "M01-UNIT-ARTICLE-01-E01",
+                "M01-UNIT-ARTICLE-01-E02"
+              ]
+            }
+          ]
+        },
+        {
           "id": "M01-UNIT-WIKILINKS-01",
           "priority": "P1",
           "scenario": "M01.reading: wikilinks scenarios at the existing module boundary.",
@@ -855,83 +855,23 @@
             {
               "id": "M01-UNIT-CODEBLOCK-THEME-01-E01",
               "surface": "response",
-              "statement": "keeps heavy article enhancers behind content-driven dynamic imports; defines hljs token color variables for the light theme; defines hljs token color variables for the dark theme; maps hljs token classes to the theme variables; gives prose pre a theme-aware text color"
+              "statement": "codeblocks stay readable and switch hljs theme in both color modes"
             },
             {
               "id": "M01-UNIT-CODEBLOCK-THEME-01-E02",
               "surface": "forbidden",
-              "statement": "does not hardcode a dark background on editorial-prose pre; does not load a single hard-coded hljs dark theme globally"
+              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
             }
           ],
           "required_gates": [
-            "web-quality"
+            "e2e"
           ],
           "test_refs": [
             {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
-              "name": "does not hardcode a dark background on editorial-prose pre",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-CODEBLOCK-THEME-01-E01",
-                "M01-UNIT-CODEBLOCK-THEME-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
-              "name": "does not load a single hard-coded hljs dark theme globally",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-CODEBLOCK-THEME-01-E01",
-                "M01-UNIT-CODEBLOCK-THEME-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
-              "name": "keeps heavy article enhancers behind content-driven dynamic imports",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-CODEBLOCK-THEME-01-E01",
-                "M01-UNIT-CODEBLOCK-THEME-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
-              "name": "defines hljs token color variables for the light theme",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-CODEBLOCK-THEME-01-E01",
-                "M01-UNIT-CODEBLOCK-THEME-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
-              "name": "defines hljs token color variables for the dark theme",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-CODEBLOCK-THEME-01-E01",
-                "M01-UNIT-CODEBLOCK-THEME-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
-              "name": "maps hljs token classes to the theme variables",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-CODEBLOCK-THEME-01-E01",
-                "M01-UNIT-CODEBLOCK-THEME-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/codeblock-theme.test.ts",
-              "name": "gives prose pre a theme-aware text color",
-              "gate": "web-quality",
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/codeblock-theme.spec.ts",
+              "name": "codeblocks stay readable and switch hljs theme in both color modes",
+              "gate": "e2e",
               "covers": [
                 "M01-UNIT-CODEBLOCK-THEME-01-E01",
                 "M01-UNIT-CODEBLOCK-THEME-01-E02"
@@ -1056,6 +996,48 @@
           ]
         },
         {
+          "id": "M01-UNIT-PHASE4-INDEXES-01",
+          "priority": "P1",
+          "scenario": "M01.indexes: phase4-indexes scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M01-UNIT-PHASE4-INDEXES-01-E01",
+              "surface": "response",
+              "statement": "home chrome and cards survive phase 4 index restyles"
+            },
+            {
+              "id": "M01-UNIT-PHASE4-INDEXES-01-E02",
+              "surface": "forbidden",
+              "statement": "phase 4 indexes and home do not overflow at 390 or 1440"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/phase4-indexes.spec.ts",
+              "name": "phase 4 indexes and home do not overflow at 390 or 1440",
+              "gate": "e2e",
+              "covers": [
+                "M01-UNIT-PHASE4-INDEXES-01-E01",
+                "M01-UNIT-PHASE4-INDEXES-01-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/phase4-indexes.spec.ts",
+              "name": "home chrome and cards survive phase 4 index restyles",
+              "gate": "e2e",
+              "covers": [
+                "M01-UNIT-PHASE4-INDEXES-01-E01",
+                "M01-UNIT-PHASE4-INDEXES-01-E02"
+              ]
+            }
+          ]
+        },
+        {
           "id": "M01-UNIT-ARTICLES-INDEX-01",
           "priority": "P1",
           "scenario": "M01.indexes: articles-index scenarios at the existing module boundary.",
@@ -1155,48 +1137,6 @@
               "covers": [
                 "M01-UNIT-ARCHIVE-INDEX-01-E01",
                 "M01-UNIT-ARCHIVE-INDEX-01-E02"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "M01-UNIT-PHASE4-INDEXES-01",
-          "priority": "P1",
-          "scenario": "M01.indexes: phase4-indexes scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M01-UNIT-PHASE4-INDEXES-01-E01",
-              "surface": "response",
-              "statement": "home chrome and cards survive phase 4 index restyles"
-            },
-            {
-              "id": "M01-UNIT-PHASE4-INDEXES-01-E02",
-              "surface": "forbidden",
-              "statement": "phase 4 indexes and home do not overflow at 390 or 1440"
-            }
-          ],
-          "required_gates": [
-            "e2e"
-          ],
-          "test_refs": [
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/phase4-indexes.spec.ts",
-              "name": "phase 4 indexes and home do not overflow at 390 or 1440",
-              "gate": "e2e",
-              "covers": [
-                "M01-UNIT-PHASE4-INDEXES-01-E01",
-                "M01-UNIT-PHASE4-INDEXES-01-E02"
-              ]
-            },
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/phase4-indexes.spec.ts",
-              "name": "home chrome and cards survive phase 4 index restyles",
-              "gate": "e2e",
-              "covers": [
-                "M01-UNIT-PHASE4-INDEXES-01-E01",
-                "M01-UNIT-PHASE4-INDEXES-01-E02"
               ]
             }
           ]
@@ -1520,38 +1460,6 @@
           ]
         },
         {
-          "id": "M02-UNIT-ARTICLE-LOOP-01",
-          "priority": "P1",
-          "scenario": "M02.editing: article-loop scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M02-UNIT-ARTICLE-LOOP-01-E01",
-              "surface": "response",
-              "statement": "admin can publish and read articles, projects, and book notes"
-            },
-            {
-              "id": "M02-UNIT-ARTICLE-LOOP-01-E02",
-              "surface": "forbidden",
-              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
-            }
-          ],
-          "required_gates": [
-            "e2e"
-          ],
-          "test_refs": [
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/article-loop.spec.ts",
-              "name": "admin can publish and read articles, projects, and book notes",
-              "gate": "e2e",
-              "covers": [
-                "M02-UNIT-ARTICLE-LOOP-01-E01",
-                "M02-UNIT-ARTICLE-LOOP-01-E02"
-              ]
-            }
-          ]
-        },
-        {
           "id": "M02-UNIT-AUTOSAVE-01",
           "priority": "P1",
           "scenario": "M02.editing: autosave scenarios at the existing module boundary.",
@@ -1639,6 +1547,38 @@
               "covers": [
                 "M02-UNIT-AUTOSAVE-01-E01",
                 "M02-UNIT-AUTOSAVE-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M02-UNIT-ARTICLE-LOOP-01",
+          "priority": "P1",
+          "scenario": "M02.editing: article-loop scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M02-UNIT-ARTICLE-LOOP-01-E01",
+              "surface": "response",
+              "statement": "admin can publish and read articles, projects, and book notes"
+            },
+            {
+              "id": "M02-UNIT-ARTICLE-LOOP-01-E02",
+              "surface": "forbidden",
+              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/article-loop.spec.ts",
+              "name": "admin can publish and read articles, projects, and book notes",
+              "gate": "e2e",
+              "covers": [
+                "M02-UNIT-ARTICLE-LOOP-01-E01",
+                "M02-UNIT-ARTICLE-LOOP-01-E02"
               ]
             }
           ]
@@ -1870,6 +1810,48 @@
           ]
         },
         {
+          "id": "M03-UNIT-SEARCH-STATES-01",
+          "priority": "P1",
+          "scenario": "M03.search_web: search-states scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M03-UNIT-SEARCH-STATES-01-E01",
+              "surface": "response",
+              "statement": "loading hides prior hits and only the latest generation is shown"
+            },
+            {
+              "id": "M03-UNIT-SEARCH-STATES-01-E02",
+              "surface": "forbidden",
+              "statement": "idle does not call search, empty copy differs, hits and pagination keep q"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/search-states.spec.ts",
+              "name": "idle does not call search, empty copy differs, hits and pagination keep q",
+              "gate": "e2e",
+              "covers": [
+                "M03-UNIT-SEARCH-STATES-01-E01",
+                "M03-UNIT-SEARCH-STATES-01-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/search-states.spec.ts",
+              "name": "loading hides prior hits and only the latest generation is shown",
+              "gate": "e2e",
+              "covers": [
+                "M03-UNIT-SEARCH-STATES-01-E01",
+                "M03-UNIT-SEARCH-STATES-01-E02"
+              ]
+            }
+          ]
+        },
+        {
           "id": "M03-UNIT-SEARCH-THEME-01",
           "priority": "P1",
           "scenario": "M03.search_web: search-theme scenarios at the existing module boundary.",
@@ -1969,48 +1951,6 @@
               "covers": [
                 "M03-UNIT-SEARCH-UI-01-E01",
                 "M03-UNIT-SEARCH-UI-01-E02"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "M03-UNIT-SEARCH-STATES-01",
-          "priority": "P1",
-          "scenario": "M03.search_web: search-states scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M03-UNIT-SEARCH-STATES-01-E01",
-              "surface": "response",
-              "statement": "loading hides prior hits and only the latest generation is shown"
-            },
-            {
-              "id": "M03-UNIT-SEARCH-STATES-01-E02",
-              "surface": "forbidden",
-              "statement": "idle does not call search, empty copy differs, hits and pagination keep q"
-            }
-          ],
-          "required_gates": [
-            "e2e"
-          ],
-          "test_refs": [
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/search-states.spec.ts",
-              "name": "idle does not call search, empty copy differs, hits and pagination keep q",
-              "gate": "e2e",
-              "covers": [
-                "M03-UNIT-SEARCH-STATES-01-E01",
-                "M03-UNIT-SEARCH-STATES-01-E02"
-              ]
-            },
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/search-states.spec.ts",
-              "name": "loading hides prior hits and only the latest generation is shown",
-              "gate": "e2e",
-              "covers": [
-                "M03-UNIT-SEARCH-STATES-01-E01",
-                "M03-UNIT-SEARCH-STATES-01-E02"
               ]
             }
           ]
@@ -3402,38 +3342,6 @@
           ]
         },
         {
-          "id": "M06-UNIT-FAILURE-STATE-CONTRACT-01",
-          "priority": "P1",
-          "scenario": "M06.transport: failure-state-contract scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M06-UNIT-FAILURE-STATE-CONTRACT-01-E01",
-              "surface": "response",
-              "statement": "keeps session, login, and logout failure semantics distinct"
-            },
-            {
-              "id": "M06-UNIT-FAILURE-STATE-CONTRACT-01-E02",
-              "surface": "forbidden",
-              "statement": "keeps session, login, and logout failure semantics distinct"
-            }
-          ],
-          "required_gates": [
-            "web-quality"
-          ],
-          "test_refs": [
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/failure-state-contract.test.ts",
-              "name": "keeps session, login, and logout failure semantics distinct",
-              "gate": "web-quality",
-              "covers": [
-                "M06-UNIT-FAILURE-STATE-CONTRACT-01-E01",
-                "M06-UNIT-FAILURE-STATE-CONTRACT-01-E02"
-              ]
-            }
-          ]
-        },
-        {
           "id": "M06-UNIT-FAILURE-STATE-01",
           "priority": "P1",
           "scenario": "M06.transport: failure-state scenarios at the existing module boundary.",
@@ -3536,6 +3444,90 @@
           ]
         },
         {
+          "id": "M06-UNIT-FAILURE-STATE-CONTRACT-01",
+          "priority": "P1",
+          "scenario": "M06.transport: failure-state-contract scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M06-UNIT-FAILURE-STATE-CONTRACT-01-E01",
+              "surface": "response",
+              "statement": "keeps session, login, and logout failure semantics distinct"
+            },
+            {
+              "id": "M06-UNIT-FAILURE-STATE-CONTRACT-01-E02",
+              "surface": "forbidden",
+              "statement": "keeps session, login, and logout failure semantics distinct"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/failure-state-contract.test.ts",
+              "name": "keeps session, login, and logout failure semantics distinct",
+              "gate": "web-quality",
+              "covers": [
+                "M06-UNIT-FAILURE-STATE-CONTRACT-01-E01",
+                "M06-UNIT-FAILURE-STATE-CONTRACT-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-UNIT-API-URL-01",
+          "priority": "P1",
+          "scenario": "M06.transport: api-url scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M06-UNIT-API-URL-01-E01",
+              "surface": "response",
+              "statement": "normalizes an HTTP(S) upstream to an origin; keeps external media absolute and local media same-origin"
+            },
+            {
+              "id": "M06-UNIT-API-URL-01-E02",
+              "surface": "forbidden",
+              "statement": "rejects unsafe or credential-bearing upstreams"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/api-url.test.ts",
+              "name": "normalizes an HTTP(S) upstream to an origin",
+              "gate": "web-quality",
+              "covers": [
+                "M06-UNIT-API-URL-01-E01",
+                "M06-UNIT-API-URL-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/api-url.test.ts",
+              "name": "rejects unsafe or credential-bearing upstreams",
+              "gate": "web-quality",
+              "covers": [
+                "M06-UNIT-API-URL-01-E01",
+                "M06-UNIT-API-URL-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/api-url.test.ts",
+              "name": "keeps external media absolute and local media same-origin",
+              "gate": "web-quality",
+              "covers": [
+                "M06-UNIT-API-URL-01-E01",
+                "M06-UNIT-API-URL-01-E02"
+              ]
+            }
+          ]
+        },
+        {
           "id": "M06-UNIT-API-ERRORS-01",
           "priority": "P1",
           "scenario": "M06.transport: api-errors scenarios at the existing module boundary.",
@@ -3613,58 +3605,6 @@
               "covers": [
                 "M06-UNIT-API-ERRORS-01-E01",
                 "M06-UNIT-API-ERRORS-01-E02"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "M06-UNIT-API-URL-01",
-          "priority": "P1",
-          "scenario": "M06.transport: api-url scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M06-UNIT-API-URL-01-E01",
-              "surface": "response",
-              "statement": "normalizes an HTTP(S) upstream to an origin; keeps external media absolute and local media same-origin"
-            },
-            {
-              "id": "M06-UNIT-API-URL-01-E02",
-              "surface": "forbidden",
-              "statement": "rejects unsafe or credential-bearing upstreams"
-            }
-          ],
-          "required_gates": [
-            "web-quality"
-          ],
-          "test_refs": [
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/api-url.test.ts",
-              "name": "normalizes an HTTP(S) upstream to an origin",
-              "gate": "web-quality",
-              "covers": [
-                "M06-UNIT-API-URL-01-E01",
-                "M06-UNIT-API-URL-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/api-url.test.ts",
-              "name": "rejects unsafe or credential-bearing upstreams",
-              "gate": "web-quality",
-              "covers": [
-                "M06-UNIT-API-URL-01-E01",
-                "M06-UNIT-API-URL-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/api-url.test.ts",
-              "name": "keeps external media absolute and local media same-origin",
-              "gate": "web-quality",
-              "covers": [
-                "M06-UNIT-API-URL-01-E01",
-                "M06-UNIT-API-URL-01-E02"
               ]
             }
           ]
@@ -3968,6 +3908,48 @@
           ]
         },
         {
+          "id": "M07-UNIT-TYPOGRAPHY-01",
+          "priority": "P1",
+          "scenario": "M07.theme: typography scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M07-UNIT-TYPOGRAPHY-01-E01",
+              "surface": "response",
+              "statement": "keeps homepage empty-state copy in the shipped template"
+            },
+            {
+              "id": "M07-UNIT-TYPOGRAPHY-01-E02",
+              "surface": "forbidden",
+              "statement": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/typography.test.ts",
+              "name": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts",
+              "gate": "web-quality",
+              "covers": [
+                "M07-UNIT-TYPOGRAPHY-01-E01",
+                "M07-UNIT-TYPOGRAPHY-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/typography.test.ts",
+              "name": "keeps homepage empty-state copy in the shipped template",
+              "gate": "web-quality",
+              "covers": [
+                "M07-UNIT-TYPOGRAPHY-01-E01",
+                "M07-UNIT-TYPOGRAPHY-01-E02"
+              ]
+            }
+          ]
+        },
+        {
           "id": "M07-UNIT-THEME-STRUCTURE-01",
           "priority": "P1",
           "scenario": "M07.theme: theme-structure scenarios at the existing module boundary.",
@@ -4025,48 +4007,6 @@
               "covers": [
                 "M07-UNIT-THEME-STRUCTURE-01-E01",
                 "M07-UNIT-THEME-STRUCTURE-01-E02"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "M07-UNIT-TYPOGRAPHY-01",
-          "priority": "P1",
-          "scenario": "M07.theme: typography scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M07-UNIT-TYPOGRAPHY-01-E01",
-              "surface": "response",
-              "statement": "keeps homepage empty-state copy in the shipped template"
-            },
-            {
-              "id": "M07-UNIT-TYPOGRAPHY-01-E02",
-              "surface": "forbidden",
-              "statement": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts"
-            }
-          ],
-          "required_gates": [
-            "web-quality"
-          ],
-          "test_refs": [
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/typography.test.ts",
-              "name": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts",
-              "gate": "web-quality",
-              "covers": [
-                "M07-UNIT-TYPOGRAPHY-01-E01",
-                "M07-UNIT-TYPOGRAPHY-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/typography.test.ts",
-              "name": "keeps homepage empty-state copy in the shipped template",
-              "gate": "web-quality",
-              "covers": [
-                "M07-UNIT-TYPOGRAPHY-01-E01",
-                "M07-UNIT-TYPOGRAPHY-01-E02"
               ]
             }
           ]
@@ -7110,6 +7050,254 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M08-UNIT-L0-01",
+          "priority": "P1",
+          "scenario": "L0 routing preserves explicit boundaries and command working directories.",
+          "expectations": [
+            {
+              "id": "M08-UNIT-L0-01-E01",
+              "surface": "response",
+              "statement": "Required routes and working directories are present."
+            },
+            {
+              "id": "M08-UNIT-L0-01-E02",
+              "surface": "forbidden",
+              "statement": "Missing routes or incorrect working directories are rejected."
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_l0_check.py",
+              "name": "test_l0_accepts_explicit_routes_and_command_working_directories",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-L0-01-E01",
+                "M08-UNIT-L0-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_l0_check.py",
+              "name": "test_l0_rejects_a_missing_command_working_directory",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-L0-01-E01",
+                "M08-UNIT-L0-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-UNIT-SUPPLY-CHAIN-01",
+          "priority": "P1",
+          "scenario": "CI and lockfile supply-chain inputs are checked structurally.",
+          "expectations": [
+            {
+              "id": "M08-UNIT-SUPPLY-CHAIN-01-E01",
+              "surface": "response",
+              "statement": "Immutable actions, least privilege and locked installers are accepted."
+            },
+            {
+              "id": "M08-UNIT-SUPPLY-CHAIN-01-E02",
+              "surface": "forbidden",
+              "statement": "Mutable actions, write permissions and unlocked installers are rejected."
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_supply_chain.py",
+              "name": "test_safe_supply_chain_baseline_passes",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-SUPPLY-CHAIN-01-E01",
+                "M08-UNIT-SUPPLY-CHAIN-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_supply_chain.py",
+              "name": "test_mutable_action_write_permission_and_dangerous_trigger_fail",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-SUPPLY-CHAIN-01-E01",
+                "M08-UNIT-SUPPLY-CHAIN-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_supply_chain.py",
+              "name": "test_unlocked_installers_fail",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-SUPPLY-CHAIN-01-E01",
+                "M08-UNIT-SUPPLY-CHAIN-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_supply_chain.py",
+              "name": "test_missing_or_untrusted_lockfiles_fail",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-SUPPLY-CHAIN-01-E01",
+                "M08-UNIT-SUPPLY-CHAIN-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_supply_chain.py",
+              "name": "test_httpx_is_a_runtime_dependency_not_a_dev_only_dependency",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-SUPPLY-CHAIN-01-E01",
+                "M08-UNIT-SUPPLY-CHAIN-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-UNIT-CI-01",
+          "priority": "P1",
+          "scenario": "The release workflow binds triggers, history and reproducible dependencies.",
+          "expectations": [
+            {
+              "id": "M08-UNIT-CI-01-E01",
+              "surface": "response",
+              "statement": "Bounded triggers, pinned actions and sanitized telemetry persist."
+            },
+            {
+              "id": "M08-UNIT-CI-01-E02",
+              "surface": "forbidden",
+              "statement": "Unbounded CI execution or raw telemetry persistence is forbidden."
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_github_ci.py",
+              "name": "test_release_workflow_has_bounded_triggers_permissions_and_history",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-CI-01-E01",
+                "M08-UNIT-CI-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_github_ci.py",
+              "name": "test_release_workflow_pins_actions_and_reconstructs_dependencies",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-CI-01-E01",
+                "M08-UNIT-CI-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_github_ci.py",
+              "name": "test_release_workflow_persists_only_sanitized_telemetry",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-CI-01-E01",
+                "M08-UNIT-CI-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_github_ci.py",
+              "name": "test_release_workflow_enforces_trusted_change_coverage_refs",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-CI-01-E01",
+                "M08-UNIT-CI-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_github_ci.py",
+              "name": "test_ci_and_local_workspace_paths_are_governed",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-CI-01-E01",
+                "M08-UNIT-CI-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_github_ci.py",
+              "name": "test_openapi_export_forces_lf_for_cross_platform_byte_comparison",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-CI-01-E01",
+                "M08-UNIT-CI-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_github_ci.py",
+              "name": "test_native_optional_dependencies_are_locked_for_ci_and_windows",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-CI-01-E01",
+                "M08-UNIT-CI-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_github_ci.py",
+              "name": "test_playwright_hydration_readiness_is_shared_bounded_and_not_retried",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-CI-01-E01",
+                "M08-UNIT-CI-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-UNIT-DEV-PROCESS-01",
+          "priority": "P1",
+          "scenario": "The development process supervisor shuts down its owned process tree.",
+          "expectations": [
+            {
+              "id": "M08-UNIT-DEV-PROCESS-01-E01",
+              "surface": "response",
+              "statement": "The parent and its descendant stop on shutdown."
+            },
+            {
+              "id": "M08-UNIT-DEV-PROCESS-01-E02",
+              "surface": "forbidden",
+              "statement": "Owned descendants must not remain running after shutdown."
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_assistant_dev_process.py",
+              "name": "test_assistant_shutdown_stops_parent_and_descendant",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-UNIT-DEV-PROCESS-01-E01",
+                "M08-UNIT-DEV-PROCESS-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -8320,51 +8508,19 @@
           ]
         },
         {
-          "id": "M09-UNIT-ASSISTANT-DISABLED-01",
+          "id": "M09-UNIT-ASSISTANT-DEVELOPMENT-01",
           "priority": "P1",
-          "scenario": "M09.assistant_web: assistant-disabled scenarios at the existing module boundary.",
+          "scenario": "M09.assistant_web: assistant-development scenarios at the existing module boundary.",
           "expectations": [
             {
-              "id": "M09-UNIT-ASSISTANT-DISABLED-01-E01",
+              "id": "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E01",
               "surface": "response",
-              "statement": "disabled assistant flag never mounts a launcher or assistant API traffic"
+              "statement": "tracked assistant development entry is loopback-only and preserves normal defaults"
             },
             {
-              "id": "M09-UNIT-ASSISTANT-DISABLED-01-E02",
+              "id": "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E02",
               "surface": "forbidden",
-              "statement": "disabled assistant flag never mounts a launcher or assistant API traffic"
-            }
-          ],
-          "required_gates": [
-            "e2e"
-          ],
-          "test_refs": [
-            {
-              "kind": "playwright",
-              "path": "apps/web/tests/e2e/assistant-disabled.spec.ts",
-              "name": "disabled assistant flag never mounts a launcher or assistant API traffic",
-              "gate": "e2e",
-              "covers": [
-                "M09-UNIT-ASSISTANT-DISABLED-01-E01",
-                "M09-UNIT-ASSISTANT-DISABLED-01-E02"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "M09-UNIT-ASSISTANT-01",
-          "priority": "P1",
-          "scenario": "M09.assistant_web: assistant scenarios at the existing module boundary.",
-          "expectations": [
-            {
-              "id": "M09-UNIT-ASSISTANT-01-E01",
-              "surface": "response",
-              "statement": "is strict true only; accepts only same-origin relative /api/v1; accepts only navigable source paths; parses events across arbitrary chunk and CRLF boundaries; enforces the 16-event logical-turn cap across reconnects; keeps the Host reconnect path on one parser instance; closes markers only to matching citations and allowlisted sources; uses a controlled 3-second poll clock, bounded Retry-After, and one 180-second horizon; closes hydrated answers before allowing source paths into Vue state; maps machine codes and Retry-After bounds; counts unicode code points and wipes on BFCache"
-            },
-            {
-              "id": "M09-UNIT-ASSISTANT-01-E02",
-              "surface": "forbidden",
-              "statement": "requires the exact final endpoint without redirects, suffixes, queries, or hashes; matches launcher paths without query or hash; rejects fatal UTF-8, unknown fields, and internal idempotent; rejects rewind ids, missing terminal EOF, and data after terminal; splits each [n] marker once without duplicating the preceding text; aborts every old request and rejects a delayed completion after DELETE generation advances; keeps raw fields out of restorable form controls and wires lifecycle invalidation"
+              "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
             }
           ],
           "required_gates": [
@@ -8373,182 +8529,12 @@
           "test_refs": [
             {
               "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "is strict true only",
+              "path": "apps/web/tests/unit/assistant-development.test.ts",
+              "name": "tracked assistant development entry is loopback-only and preserves normal defaults",
               "gate": "web-quality",
               "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "accepts only same-origin relative /api/v1",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "requires the exact final endpoint without redirects, suffixes, queries, or hashes",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "matches launcher paths without query or hash",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "accepts only navigable source paths",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "parses events across arbitrary chunk and CRLF boundaries",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "rejects fatal UTF-8, unknown fields, and internal idempotent",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "enforces the 16-event logical-turn cap across reconnects",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "rejects rewind ids, missing terminal EOF, and data after terminal",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "keeps the Host reconnect path on one parser instance",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "splits each [n] marker once without duplicating the preceding text",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "closes markers only to matching citations and allowlisted sources",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "aborts every old request and rejects a delayed completion after DELETE generation advances",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "uses a controlled 3-second poll clock, bounded Retry-After, and one 180-second horizon",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "closes hydrated answers before allowing source paths into Vue state",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "keeps raw fields out of restorable form controls and wires lifecycle invalidation",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "maps machine codes and Retry-After bounds",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "counts unicode code points and wipes on BFCache",
-              "gate": "web-quality",
-              "covers": [
-                "M09-UNIT-ASSISTANT-01-E01",
-                "M09-UNIT-ASSISTANT-01-E02"
+                "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E01",
+                "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E02"
               ]
             }
           ]
@@ -8626,33 +8612,75 @@
           ]
         },
         {
-          "id": "M09-UNIT-ASSISTANT-DEVELOPMENT-01",
+          "id": "M09-UNIT-ASSISTANT-DISABLED-01",
           "priority": "P1",
-          "scenario": "M09.assistant_web: assistant-development scenarios at the existing module boundary.",
+          "scenario": "M09.assistant_web: assistant-disabled scenarios at the existing module boundary.",
           "expectations": [
             {
-              "id": "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E01",
+              "id": "M09-UNIT-ASSISTANT-DISABLED-01-E01",
               "surface": "response",
-              "statement": "tracked assistant development entry is loopback-only and preserves normal defaults"
+              "statement": "disabled assistant flag never mounts a launcher or assistant API traffic"
             },
             {
-              "id": "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E02",
+              "id": "M09-UNIT-ASSISTANT-DISABLED-01-E02",
+              "surface": "forbidden",
+              "statement": "disabled assistant flag never mounts a launcher or assistant API traffic"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/assistant-disabled.spec.ts",
+              "name": "disabled assistant flag never mounts a launcher or assistant API traffic",
+              "gate": "e2e",
+              "covers": [
+                "M09-UNIT-ASSISTANT-DISABLED-01-E01",
+                "M09-UNIT-ASSISTANT-DISABLED-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-UNIT-ASSISTANT-01",
+          "priority": "P1",
+          "scenario": "M09.assistant_web: assistant scenarios at the existing module boundary.",
+          "expectations": [
+            {
+              "id": "M09-UNIT-ASSISTANT-01-E01",
+              "surface": "response",
+              "statement": "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay; admin kill switch is explicit and prevents a later anonymous admission"
+            },
+            {
+              "id": "M09-UNIT-ASSISTANT-01-E02",
               "surface": "forbidden",
               "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
             }
           ],
           "required_gates": [
-            "web-quality"
+            "e2e"
           ],
           "test_refs": [
             {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/assistant-development.test.ts",
-              "name": "tracked assistant development entry is loopback-only and preserves normal defaults",
-              "gate": "web-quality",
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+              "name": "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay",
+              "gate": "e2e",
               "covers": [
-                "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E01",
-                "M09-UNIT-ASSISTANT-DEVELOPMENT-01-E02"
+                "M09-UNIT-ASSISTANT-01-E01",
+                "M09-UNIT-ASSISTANT-01-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+              "name": "admin kill switch is explicit and prevents a later anonymous admission",
+              "gate": "e2e",
+              "covers": [
+                "M09-UNIT-ASSISTANT-01-E01",
+                "M09-UNIT-ASSISTANT-01-E02"
               ]
             }
           ]

@@ -12,6 +12,7 @@ documentation_impact: required
 documentation_targets:
   - harness/docs/decisions/20260905-verification-resume.md
   - harness/workflows/verify.md
+  - harness/verification/README.md
 documentation_reason: 补全影响计划、输入准备、精确执行和成本验收的持久合同。
 state_history:
 ---

@@ -667,7 +667,7 @@
         "harness/verification/tests/test_l0_check.py"
       ],
       "cases": [
-        "M08-DOCS-01"
+        "M08-UNIT-L0-01"
       ],
       "dependents": []
     },
@@ -677,7 +677,7 @@
         "harness/verification/tests/test_supply_chain.py"
       ],
       "cases": [
-        "M08-DOCS-01"
+        "M08-UNIT-SUPPLY-CHAIN-01"
       ],
       "dependents": []
     },
@@ -687,7 +687,7 @@
         "harness/verification/tests/test_github_ci.py"
       ],
       "cases": [
-        "M08-DOCS-01"
+        "M08-UNIT-CI-01"
       ],
       "dependents": []
     },
@@ -697,7 +697,7 @@
         "scripts/assistant-dev-process.mjs"
       ],
       "cases": [
-        "M09-P1-02"
+        "M08-UNIT-DEV-PROCESS-01"
       ],
       "dependents": [
         "M09.development"

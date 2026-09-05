@@ -9,7 +9,9 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
@@ -425,7 +427,15 @@ def retain_and_cleanup_sample(row):
         for path in entries:
             if path.is_dir() and path.resolve() != path.absolute():
                 _remove_directory_link(path)
-    shutil.rmtree(root.parent)
+
+    def remove_readonly(function, path, _error):
+        target = Path(path).resolve()
+        if not target.is_relative_to(root.parent.resolve()):
+            raise ValueError("acceptance cleanup escaped its temporary root")
+        os.chmod(target, stat.S_IREAD | stat.S_IWRITE)
+        function(path)
+
+    shutil.rmtree(root.parent, onerror=remove_readonly)
     row["repository_removed"] = True
 
 

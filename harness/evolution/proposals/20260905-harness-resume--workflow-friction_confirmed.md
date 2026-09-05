@@ -1,22 +1,22 @@
 ---
 id: evolution-20260905-harness-resume-workflow-friction_confirmed
 level: L1
-summary: 受影响模块验证已完成核心改造，映射、产品闭环与成本验收仍待补齐
+summary: 补齐细粒度归属、传递影响、真实产品关闭和受控成本验收
 load_when:
   - process-evolution
   - task:20260905-harness-resume
 task_id: 20260905-harness-resume
-status: accepted
+status: applied
 author: Gavin
 ---
 
 # Harness 受影响模块验证修订提案
 
-Gavin 在本次实施中重新明确：问题不只在小改动，也不只在重复执行。最终明确的规则是：只运行改动后受到影响的模块的测试；Harness 必须节省上下文、token 和推进时间，不能让普通模块任务承担全项目验证成本。核心机制与门禁迁移已实施，但完整方案尚未执行、验收完毕，具体进度见文末。
+Gavin 在本次实施中重新明确：问题不只在小改动，也不只在重复执行。最终明确的规则是：只运行改动后受到影响的模块的测试；Harness 必须节省上下文、token 和推进时间，不能让普通模块任务承担全项目验证成本。2026-09-06 已补齐本次接入范围的归属、传递分析、真实产品关闭及受控成本验收，详见文末当前记录；上一轮不足和失败记录保留为历史。
 
 来源：[人工确认的摩擦事件](../events/20260905-harness-resume--workflow-friction_confirmed.json)、[原提案](20260905-ui-foundation--workflow-friction_confirmed.md)。`20260905-harness-resume` 已按执行者收窄后的 spec 验证并压缩归档；该归档不能证明本文全部验收通过，也不能证明新的成本目标已经完成。
 
-Gavin 于 2026-09-05 要求将旧提案吸收到本提案并关闭旧提案，随后明确要求按本文改造 Harness。本文是统一实施入口；旧提案仅保留历史。当前 `accepted` 表示方案已获授权、仍有实施与验收工作，不表示需要重新确认，也不表示已经全部应用。
+Gavin 于 2026-09-05 要求将旧提案吸收到本提案并关闭旧提案，随后明确要求按本文改造 Harness。本文是统一实施入口；旧提案仅保留历史。此前 `accepted` 表示方案已获授权、仍有实施与验收工作，不需要重新确认。本次 `applied` 对应文末列出的实现、证据及其边界，不把既有试点归档追认成完整验收。
 
 ## 迁移前已核实的问题（历史背景）
 
@@ -103,9 +103,9 @@ close 消费足够且可信的证据，核对验收覆盖、隔离清理和归�
 - 用轻量 fixture 覆盖失败后未执行、旧成功后新失败、凭据篡改、输入失效、父子 gate 去重及产物缺失；补充必要的所选模块 CLI 场景验证隔离清理、并发和归档回滚，不为每个分支运行整站 E2E。
 - 在同一受控环境下，对模块任务比较修改前后的端到端时间、执行范围和输出量。调用次数减少但总成本增加，不能判定为优化成功。
 
-## 当前处理状态
+## 上一轮处理状态（2026-09-05，历史记录）
 
-当前为部分实施：核心执行机制与有限范围试点已完成，本文的完整实施计划尚未执行一遍，必须通过的验收仍有缺口。执行者此前自行收窄了 spec，并将“收窄后的 spec 已通过并归档”表述成整体完成；这不是用户事先确认的分阶段交付。本次将误标的 `applied` 修正为 `accepted`，按下列事实继续追踪。
+截至上一轮为部分实施：核心执行机制与有限范围试点已完成，本文的完整实施计划尚未执行一遍，必须通过的验收仍有缺口。执行者此前自行收窄了 spec，并将“收窄后的 spec 已通过并归档”表述成整体完成；这不是用户事先确认的分阶段交付。上一轮将误标的 `applied` 修正为 `accepted`，按下列事实继续追踪。
 
 旧提案保持终结；本提案恢复到主 Evolution 索引的当前决策面。保留已有提交、attempts、失败现场、主 evidence、archive 和 completion event；进度同步不重写这些历史资产，不自动改 AGENTS.md，也不降低上文验收要求。
 
@@ -153,3 +153,41 @@ close 消费足够且可信的证据，核对验收覆盖、隔离清理和归�
 5. 在同一受控环境下完成真实模块任务修改前后的端到端时间、执行范围与输出量对照，再据结果判定成本目标。
 
 上述工作完成前，保持本提案 `accepted`。本次只同步进度和生成索引，不重新打开已压缩 spec、不修改历史 evidence，也不将未完成项宣告通过。
+
+## 2026-09-06 实施与验收（当前）
+
+本轮任务为 `20260906-harness-impact-completion`，沿用上述全部验收目标。主结果由[当前任务 evidence](../../verification/evidence/20260906-harness-impact-completion.json)记录，成本及真实产品闭环见[紧凑基准记录](../../verification/evidence/20260906-harness-impact-completion.benchmark.json)。历史 spec、evidence、event 和未相关的用户工作区修改均保留。
+
+实现变化：
+
+- 当前治理范围的 399 个源码、测试与配置路径登记为 72 个细分单元，覆盖 Harness 工具、API 功能、Web 组件/工具和共享配置。新增源码无归属、旧路径失效、歧义和悬空 case 会失败；动态业务依赖仍需逐次审查，不能把登记完整等同于所有潜在影响已自动证明。
+- 依赖清单记录实际导入位置、Nuxt 自动组件/组合函数使用和 HTTP 消费关系。计划沿 `affected: true` 继续逐项审查传递影响，在不受影响的边停止；循环不重复，遗漏、重复及不可达判断均拒绝。普通文档不再自动声明无可执行影响，工作流合同单独登记消费者。
+- 修复真实 Vitest 发现的参数缺陷：可选 `--json` 参数曾把紧随其后的源码 selector 当成输出路径；现在放在 selector 之后，并由只读收集回归测试约束。本次调用覆盖的测试文件已恢复，产品文件无残留改动。
+- 所选 Playwright 的数据根在隔离目录内建立并清理；质量预览只准备所选场景需要的 build，构建失败不启动测试。默认验证不探测安装分发，同进程关闭复用已解析的 runner 计划，但仍重新核对 HEAD、源码/计划、工具链和环境。
+- `spec-lint` 不再要求未来实现计划已经存在。最终输入先准备 case、归属、计划、文档、索引和明确标为 pending 的必要 evidence 链接占位；占位不能认证或关闭。最终 runner 替换占位并同进程关闭，随后只提交确定性收尾资产。
+- 结构检查在单次调用内只解析同一文件路径一次；后续调用重新检查，删除或路径漂移不能复用旧结果。该优化不缓存测试成功或放宽真实性校验。
+
+逐项证据对应：
+
+| 原验收要求 | 本轮依据 |
+| --- | --- |
+| 选择等于有依据的受影响集合 | `M08-IMPACT-MAPPING-01`、`M08-IMPACT-GRAPH-01` 和真实个人资料闭环；所选 Pytest/Vitest/Playwright 各 1 项，共收集并执行 3 项，无其它测试 gate。 |
+| 公共契约及传递消费者有逐项理由 | `test_affected_consumer_requires_transitive_review`、`test_cycles_terminate_but_unreachable_decisions_are_rejected`；独立计划保留所有选择与排除理由。 |
+| 未知归属阻断而不全量兜底 | `test_new_unknown_source_fails_without_expanding_test_scope`、`test_ambiguous_ownership_blocks_even_when_one_owner_is_declared`。 |
+| 文档零产品测试、零全仓 collector、零安装扫描 | `test_real_docs_close_has_no_test_collection_or_dependencies`、`test_global_structure_never_calls_collectors`、`test_docs_snapshot_has_zero_dependency_scans_or_product_tools`。 |
+| 不机械重验、来源可追溯 | 真实 Harness、个人资料 API 和三框架任务均以 `verify --fresh --close` 收尾；基准保存 exact evidence digest。已通过的浏览器闭环在执行链源码逐字节一致后保留，后续结构缓存改动用针对性测试验证。 |
+| passed 可关闭、复用/清理/中断闭环 | `test_real_cli_all_reuse_and_close_have_complete_isolation`、`test_real_cli_partial_reuse_preserves_failed_attempt`、`test_real_cli_cleanup_and_interrupt_cannot_close`，以及真实产品归档。 |
+| plan/status/close 零产品调用，fresh 有界，前置失败阻断 | 新增 `test_real_plan_status_and_close_cannot_start_gates_or_collectors` 在真实 CLI 的 gate/collector 入口设失败守卫；`test_failed_preview_build_prevents_selected_browser_execution` 和已有 preflight/port-conflict 测试。 |
+| 失败历史、篡改、失效、去重、产物及事务 | `M08-IMPACT-EXECUTION-01`、`M08-IMPACT-PREREQUISITES-01`、`M08-IMPACT-CLOSURE-01`；包括旧成功后新失败、认证字节篡改、父 gate 阶段证明、缺失 build 重建、并发锁和源码竞态回滚。 |
+| 同环境真实模块端到端成本 | 以下配对测量，所有配对任务均实际关闭；不是仅比较 collector 数或输入核对阶段。 |
+
+受控测量使用旧引擎 `9a6122c` 与候选 `2c05100`，固定产品源码、检查、安装依赖和模块工作负载，测量独立 plan、status、fresh verify 及 close 的总墙钟时间；临时仓库装配不计入任务耗时。
+
+| 工作负载 | 改造前 → 后 | 输出字节前 → 后 | 实际测试前 → 后 |
+| --- | --- | --- | --- |
+| Harness 报告模块 | 16.918 → 12.595 秒 | 1837 → 1744 | 1 → 1 |
+| 个人资料 API | 21.940 → 18.761 秒 | 1852 → 1761 | 1 → 1 |
+
+个人资料三框架真实闭环在候选 `df673e7` 完成，收集/执行均为 3，清理及关闭通过，总流程约 69.654 秒。之后只改结构路径缓存及补充测试/映射；基准保存未改变的选择、收集、输入、认证及隔离执行源码摘要，不把此记录改写成在后续 HEAD 重跑过浏览器。
+
+边界与失败：这些都是本机单次样本，不是统计结论，也没有测量模型 token。早期 API 样本曾总成本增加，因此未判优化成功；相关测量仍在基准的 prior_measurements 中。依赖装配错误、沙箱父目录读取限制及只读 Git 对象清理失败的本地记录保留；修复后仅重试必要步骤，主测试 worktree 的清理成功与基准临时仓库的额外清理分别记录。Git 只保存紧凑 manifest，原始日志和导出的关闭资产位于本机 `.run/impact-acceptance/`。
