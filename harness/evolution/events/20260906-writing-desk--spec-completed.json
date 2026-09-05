@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260906-writing-desk",
+  "created_at": "2026-09-05T20:20:59.232451+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "4cbbc41ba1bc4bf82476a244fd6330d5bb7bdd2223cf1ef30340c7b653f9b5af"
+}
