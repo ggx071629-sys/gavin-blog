@@ -139,7 +139,7 @@ def run_in_worktree(
         temporary_root = Path(
             tempfile.mkdtemp(
                 prefix=f".{root.name}-task-verify-",
-                dir=root.parent,
+                dir=tempfile.gettempdir(),
             )
         )
         worktree = temporary_root / "worktree"
@@ -148,7 +148,9 @@ def run_in_worktree(
             raise ProductVerificationError("temporary Git worktree creation failed")
         registered = True
 
-        for raw_path in config["reuse_paths"]:
+        from .impact import current_plan, dependency_paths
+        reuse_paths = dependency_paths(mappings) if current_plan.get() is not None else config["reuse_paths"]
+        for raw_path in reuse_paths:
             relative = _relative_path(raw_path)
             source = (root / relative).resolve()
             if not source.is_dir() or not source.is_relative_to(root):

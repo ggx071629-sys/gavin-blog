@@ -11,6 +11,8 @@ from typing import Any
 from .config import load_config
 from .test_collection import TestCollectionError, collect_test_index
 
+STRUCTURE_ONLY = object()
+
 SCHEMA_VERSION = 1
 CONTRACT_ID = "gavin-module-coverage-v1"
 CONTRACT_RELATIVE_PATH = Path(
@@ -335,6 +337,7 @@ def _safe_reference_path(
 
 def _expected_gate(path: str, kind: str) -> str | None:
     mappings = (
+        ("harness-check", "harness/verification/checks/", "harness-integrity"),
         ("pytest", "apps/api/tests/", "api-tests"),
         ("pytest", "harness/verification/tests/", "harness-tests"),
         ("vitest", "apps/web/tests/unit/", "web-quality"),
@@ -468,7 +471,7 @@ def resolve_test_reference(
     name = reference.get("name")
     gate = reference.get("gate")
     path = _safe_reference_path(project_root, raw_path, "test reference", errors)
-    if kind not in {"pytest", "vitest", "playwright"}:
+    if kind not in {"pytest", "vitest", "playwright", "harness-check"}:
         errors.append("test reference: kind must be pytest, vitest, or playwright")
     if not _non_empty_string(name):
         errors.append("test reference: name must be a non-empty string")
@@ -483,6 +486,18 @@ def resolve_test_reference(
         errors.append(
             f"test reference: {raw_path} belongs to {mapped_gate}, not {gate}"
         )
+    if kind == "harness-check":
+        if not (isinstance(raw_path, str) and raw_path.startswith("harness/verification/checks/")
+                and raw_path.endswith(".py") and name == Path(raw_path).stem.replace("_", "-")
+                and gate == "harness-integrity"):
+            errors.append("invalid structural check reference")
+        if errors:
+            raise ModuleVerificationError(errors)
+        return dict(reference)
+    if collected_tests is STRUCTURE_ONLY:
+        if errors:
+            raise ModuleVerificationError(errors)
+        return dict(reference)
     if (
         path is not None
         and kind in {"pytest", "vitest", "playwright"}
@@ -795,6 +810,7 @@ def validate_module_contract(
     collected_tests: Mapping[
         tuple[str, str, str, str], list[dict[str, Any]]
     ] | None = None,
+    structure_only: bool = False,
 ) -> tuple[dict[str, Any], list[str]]:
     """Load and validate the complete contract without hiding any defects.
 
@@ -805,6 +821,8 @@ def validate_module_contract(
     del harness_root
     errors: list[str] = []
     registered_gates = _registered_gates(config, errors)
+    if structure_only:
+        collected_tests = STRUCTURE_ONLY
     if collected_tests is None:
         try:
             collected_tests = collect_test_index(project_root, config)

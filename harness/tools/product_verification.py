@@ -232,10 +232,13 @@ def resolved_verification_cases(
 ) -> dict[str, Any]:
     """Resolve AC case IDs against the current module contract and gate plan."""
     planned = verification_case_plan(task_id, criteria)
+    from . import impact
+    from .module_verification import STRUCTURE_ONLY
     try:
         contract = resolve_module_contract(
             project_root(),
             registered_gates=set(_configured_gates()),
+            **({"collected_tests": STRUCTURE_ONLY} if impact.enabled() else {}),
         )
     except ModuleVerificationError as error:
         raise ProductVerificationError(
@@ -292,7 +295,8 @@ def resolved_verification_cases(
 def _configured_gates() -> dict[str, Any]:
     verification = load_config().get("verification", {})
     gates = verification.get("gates", {})
-    return dict(gates) if isinstance(gates, dict) else {}
+    from .impact import definitions
+    return definitions(dict(gates)) if isinstance(gates, dict) else {}
 
 
 def required_task_checks() -> list[str]:
@@ -815,7 +819,9 @@ def evidence_fingerprints(
 def source_changes(extra_paths: list[str] | None = None) -> list[str]:
     config = load_config()
     raw_paths = config.get("verification", {}).get("source_paths", [])
-    paths = [str(value) for value in raw_paths]
+    from .impact import current_plan, source_inputs
+    plan = current_plan.get()
+    paths = source_inputs(plan) if plan is not None and not plan.get("release") else [str(value) for value in raw_paths]
     paths.extend(extra_paths or [])
     paths = list(dict.fromkeys(paths))
     if not paths:
@@ -861,6 +867,10 @@ def implementation_paths(task_id: str) -> list[str]:
 
 
 def derived_gate_requirements(task_id: str) -> dict[str, Any]:
+    from . import impact
+    if impact.enabled():
+        plan = impact.current_plan.get() or impact.build_plan(task_id)
+        return {"paths": plan["paths"], "routes": [], "required_gates": plan["required_gates"], "impact_sha256": _canonical_hash(plan)}
     paths = implementation_paths(task_id)
     matched_routes: list[dict[str, Any]] = []
     required_gates: list[str] = []
@@ -1059,6 +1069,8 @@ def _run_supervised_command(
                     diagnostic.write(data)
                     diagnostic.flush()
                     logged += len(data)
+                if diagnostic_path is not None:
+                    continue
                 try:
                     sys.stdout.write(line)
                 except UnicodeEncodeError:
@@ -1234,9 +1246,16 @@ def run_gates(
             passed = completed.returncode == 0
             redactions = [str(execution_root)] if execution_root is not None else []
             test_counts = parse_test_counts(completed.stdout, completed.stderr)
-            structured_result: dict[str, Any] = {"exit_code": completed.returncode}
+            structured_result: dict[str, Any] = {"exit_code": completed.returncode, "output_bytes": len((completed.stdout + completed.stderr).encode("utf-8"))}
             if test_counts is not None:
                 structured_result["test_counts"] = test_counts
+            selection_rows = [json.loads(line.removeprefix("HARNESS_SELECTION "))
+                              for line in completed.stdout.splitlines() if line.startswith("HARNESS_SELECTION ")]
+            if selection_rows:
+                structured_result["selection_counts"] = {
+                    key: sum(row[key] for row in selection_rows) for key in ("collected", "executed")}
+            if artifact_root is not None:
+                structured_result["log"] = str(artifact_root / gate / "output.log")
             proof_error: ProductVerificationError | None = None
             if passed and contract is not None:
                 try:
@@ -1476,7 +1495,8 @@ def validate_evidence(task_id: str, path: Path, *, prepared: dict[str, Any] | No
                 check = product[gate]
                 if check.get("covers") != covered:
                     errors.append(f"task evidence coverage does not match for gate {gate}")
-                configured = _configured_gates()
+                from .impact import definitions
+                configured = definitions(_configured_gates(), prepared.get("impact") if prepared else None)
                 expected_command = _configured_command_text(dict(configured[gate]))
                 if check.get("command") != expected_command:
                     errors.append(f"task evidence command does not match for gate {gate}")
@@ -1503,7 +1523,9 @@ def validate_evidence(task_id: str, path: Path, *, prepared: dict[str, Any] | No
                         f"task evidence subsumption proof does not match for gate {gate}"
                     )
     try:
-        ensure_source_clean(list(documentation["targets"]))
+        from .impact import activate
+        with activate(prepared.get("impact") if prepared else None):
+            ensure_source_clean(list(documentation["targets"]))
     except ProductVerificationError as error:
         errors.append(str(error))
     return errors

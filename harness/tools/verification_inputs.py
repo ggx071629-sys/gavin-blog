@@ -144,6 +144,9 @@ def _python_identity(executable: str) -> str:
 def input_snapshot(
     mappings: dict[str, list[str]], fingerprints: dict[str, str]
 ) -> dict[str, Any]:
+    from .impact import current_plan
+    if current_plan.get() is not None:
+        return scoped_snapshot(mappings, fingerprints, current_plan.get())
     from .isolated_verification import isolation_config
 
     root = project_root()
@@ -220,7 +223,9 @@ def preflight(mappings: dict[str, list[str]]) -> None:
     from .isolated_verification import isolation_config
 
     root = project_root().resolve()
-    for value in isolation_config()["reuse_paths"]:
+    from .impact import current_plan, dependency_paths
+    reuse_paths = dependency_paths(mappings) if current_plan.get() is not None else isolation_config()["reuse_paths"]
+    for value in reuse_paths:
         path = (root / value).resolve()
         if not path.is_relative_to(root) or not path.is_dir():
             raise pv.ProductVerificationError(
@@ -228,9 +233,21 @@ def preflight(mappings: dict[str, list[str]]) -> None:
             )
     for gate in mappings:
         pv._command(gate, pv._configured_gates()[gate])
-    if set(mappings) & {"e2e", "release"}:
-        # v1 uses canonical E2E defaults; external port overrides are not forwarded.
-        for port in (3100, 8100, 3101, 8101):
+    ports = set()
+    plan = current_plan.get()
+    if plan is not None and not plan.get("release"):
+        from .selected_tests import playwright_config
+        for ref in plan["test_refs"]:
+            if ref["gate"] in mappings and ref["kind"] == "playwright":
+                config_name, _ = playwright_config(ref["path"])
+                ports.update({"playwright.config.ts": (3100, 8100),
+                              "playwright.assistant.config.ts": (3101, 8101),
+                              "playwright.quality.config.ts": (3300, 8300),
+                              "playwright.failure.config.ts": (3200, 8200)}[config_name])
+    elif set(mappings) & {"e2e", "release"}:
+        ports.update((3100, 8100, 3101, 8101))
+    if ports:
+        for port in sorted(ports):
             for host in ("127.0.0.1", "::1"):
                 family = socket.AF_INET6 if ":" in host else socket.AF_INET
                 with socket.socket(family, socket.SOCK_STREAM) as probe:
@@ -267,3 +284,62 @@ def port_owner(port: int) -> str:
     except (OSError, subprocess.TimeoutExpired):
         pass
     return "owner unavailable; no process was terminated"
+
+
+def scoped_snapshot(mappings, fingerprints, plan):
+    """No installed-tree walk. Reuse requires explicit, bounded input ownership.
+
+    Harness tests run with plugin auto-discovery disabled. Only the selected
+    distributions and their declared files are hashed, including RECORD itself.
+    Product executions use same-process close until their dependency contract is
+    registered; an incomplete contract never grants cross-process reuse.
+    """
+    root = project_root()
+    refs = plan["test_refs"]
+    harness_only = all(r["kind"] == "pytest" and r["path"].startswith("harness/") for r in refs)
+    configured = pv._configured_gates()
+    commands = {g: pv._command(g, configured[g])[0] for g in mappings}
+    executables = {sys.executable, *(c[0] for c in commands.values())}
+    for name in (["git"] if harness_only else ["git", "node", "npm"]):
+        executable = shutil.which(name)
+        if executable:
+            executables.add(executable)
+    toolchain = {str(Path(p).resolve()): hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in sorted(executables)}
+    dependencies = {}
+    if refs and harness_only:
+        python = str(root / "apps/api/.venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python"))
+        script = r'''
+import hashlib, importlib.metadata as m, json
+names = ['pytest', 'pluggy', 'packaging', 'iniconfig', 'pygments', 'colorama']
+result = {}
+for name in names:
+    try: dist = m.distribution(name)
+    except m.PackageNotFoundError:
+        if name == 'colorama': continue
+        raise
+    h = hashlib.sha256()
+    for file in sorted(dist.files or [], key=str):
+        if str(file).endswith('.pyc') or '__pycache__' in str(file): continue
+        path = dist.locate_file(file)
+        if not path.is_file(): raise RuntimeError('missing dependency input: ' + str(file))
+        h.update(str(file).encode()); h.update(hashlib.sha256(path.read_bytes()).digest())
+    result[name] = h.hexdigest()
+print(json.dumps(result, sort_keys=True))
+'''
+        completed = subprocess.run([python, "-c", script], capture_output=True, text=True, check=True,
+                                   timeout=30, env=controlled_environment(),
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
+        dependencies = json.loads(completed.stdout)
+    return {"version": 2, "head": pv.head_commit(), "fingerprints": fingerprints,
+            "plan": digest(plan), "mappings": list(mappings.items()), "commands": commands,
+            "platform": [platform.system(), platform.machine(), sys.version],
+            "toolchain": digest(toolchain), "dependencies": dependencies,
+            "environment": digest(controlled_environment()),
+            "reusable": harness_only and bool(load_reuse_policy()),
+            "persistent_close": harness_only,
+            "build_artifacts": "never reused; selected prerequisites rebuilt in isolated worktree"}
+
+
+def load_reuse_policy():
+    from .config import load_config
+    return load_config()["verification"].get("impact", {}).get("reuse", False)

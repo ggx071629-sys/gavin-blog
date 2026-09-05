@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "units": {
+    "M08.selection": {
+      "paths": [
+        "harness/tools/impact.py",
+        "harness/tools/selected_tests.py",
+        "harness/tools/test_collection.py",
+        "harness/tools/module_verification.py",
+        "harness/tools/verification_config.py",
+        "harness/tools/config.py",
+        "harness/verification/tests/test_impact.py",
+        "harness/verification/tests/test_module_coverage.py",
+        "harness/verification/tests/test_required_checks.py",
+        "harness/config.toml",
+        "harness/verification/checks/module_coverage.py",
+        "harness/verification/checks/module_coverage.contract.json",
+        "harness/verification/tests/test_impact_cli.py"
+      ],
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependents": [
+        "M08.execution",
+        "M08.closure"
+      ]
+    },
+    "M08.execution": {
+      "paths": [
+        "harness/tools/verification_resume.py",
+        "harness/tools/verification_inputs.py",
+        "harness/tools/product_verification.py",
+        "harness/tools/isolated_verification.py",
+        "harness/tools/run_store.py",
+        "harness/tools/run_artifacts.py",
+        "harness/verification/tests/test_verification_resume.py",
+        "harness/verification/tests/test_product_verification.py",
+        "harness/verification/tests/test_isolated_verification.py",
+        "harness/verification/tests/test_gate_supervision.py",
+        "harness/tools/empty-user.npmrc",
+        "harness/tools/empty-global.npmrc",
+        "harness/verification/tests/test_assistant_dev_process.py"
+      ],
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependents": [
+        "M08.closure",
+        "M08.reporting"
+      ]
+    },
+    "M08.closure": {
+      "paths": [
+        "harness/tools/harness.py",
+        "harness/tools/close_transaction.py",
+        "harness/tools/events.py",
+        "harness/tools/summarizer.py",
+        "harness/tools/validator.py",
+        "harness/verification/tests/test_lifecycle.py",
+        "harness/verification/tests/test_history_integrity.py",
+        "harness/verification/tests/test_documentation_impact.py"
+      ],
+      "cases": [
+        "M08-IMPACT-CLOSURE-01",
+        "M08-IMPACT-CLOSURE-02",
+        "M08-IMPACT-CLOSURE-03"
+      ],
+      "dependents": [
+        "M08.reporting"
+      ]
+    },
+    "M08.reporting": {
+      "paths": [
+        "harness/tools/task_reporting.py",
+        "harness/tools/result_reporting.py",
+        "harness/verification/tests/test_task_reporting.py",
+        "harness/verification/tests/test_result_reporting.py"
+      ],
+      "cases": [
+        "M08-IMPACT-REPORTING-01",
+        "M08-IMPACT-REPORTING-02"
+      ],
+      "dependents": []
+    },
+    "M06.profile": {
+      "paths": [
+        "apps/api/app/routes/profile.py",
+        "apps/api/app/models/profile.py",
+        "apps/api/app/schemas/profile.py",
+        "apps/api/tests/test_profile.py"
+      ],
+      "cases": [
+        "M06-P1-01"
+      ],
+      "dependents": []
+    },
+    "M08.documentation": {
+      "paths": [
+        "README.md",
+        "harness/docs/*.md",
+        "harness/workflows/*.md",
+        "harness/evolution/*.md"
+      ],
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependents": []
+    }
+  }
+}

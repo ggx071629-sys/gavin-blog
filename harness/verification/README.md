@@ -18,11 +18,11 @@ author: Gavin
 
 全局 `metadata` check 除各生成索引作用域外，还验证 `config.toml` 中显式列出的四个项目入口／边界 README；这些文件继续由根 `AGENTS.md` 或公开入口直接路由，不为了纳入校验而复制进 Harness 生成索引。项目文档清单中的路径必须是存在的项目相对 Markdown 文件，且与索引文档共同执行必填 front matter、L1/L2、`load_when` 和全局 ID 唯一性检查。
 
-验证 profile 提供最低风险门槛：`focused` 允许任务选择局部 gate，`stack` 强制 API lint、API tests 与 Web quality，`release` 强制完整 release gate。profile 不替代 AC 映射。
+验证 profile 的 focused/stack 依据影响计划选择测试，release 专用于明确发布；profile 不替代 AC 映射。
 
 task 产品 gate 默认在固定到当前 HEAD 的 detached 临时 Git worktree 中运行。隔离层只链接 `config.toml` 明确允许的项目内依赖目录，gate 不得把这些依赖目录当作输出位置；测试缓存与构建产物留在临时 worktree 并随清理删除；有界诊断日志、trace、截图在清理前导出到工作树外的本机目录。隔离建立或清理失败都写为 failed check，禁止生成可关闭的 passed evidence；无 task ID 的全局 verify 不创建 worktree。
 
-产品 gate 由监督启动：子进程进入新的进程组或会话，标准输出与错误合并后边产生边写到 verify 终端，同时保留给失败摘要和测试计数。超时使用 `taskkill /T`（Windows）或进程组信号（POSIX）拆除整棵子孙进程，再返回既有 `failure.kind = timeout`，不得因残留管道阻塞 `communicate()`。evidence 仍只保存有限摘要，不提交原始日志。
+产品 gate 由监督启动：子进程进入新的进程组或会话，标准输出与错误合并后写入有界本地日志，同时保留失败摘要、测试计数与输出字节数；成功终端只显示紧凑结果。超时使用 `taskkill /T`（Windows）或进程组信号（POSIX）拆除整棵子孙进程，再返回既有 `failure.kind = timeout`，不得因残留管道阻塞 `communicate()`。evidence 仍只保存有限摘要，不提交原始日志。
 
 注册为 `{api_python}` 的 gate 必须从当前执行根的 `apps/api/.venv` 解析解释器：Windows 使用 `Scripts/python.exe`，POSIX 使用 `bin/python`。隔离 worktree 通过受控依赖链接获得同一环境；缺失时失败关闭，不得退回启动 Harness 的全局 Python。`{python}` 只保留既有通用命令的调用者解释器语义。
 
@@ -36,7 +36,7 @@ schema v2 task evidence 为每个 gate 保存退出码、耗时、可识别的 P
 
 Active spec 在 `## Verification cases` 中把每条 AC 映射到一个或多个稳定 case ID。Specify 阶段只检查 AC／模块 ID、case ID 语法、唯一性和完整覆盖，允许引用将由本任务新增的 planned case ID；task verify 才以当前提交中的模块验证合同解析全部 case ID，并核对 exact test refs、leaf gates 与 spec 的 `gate => AC` 覆盖。到 task verify 时仍未进入当前合同、引用不存在测试定义、或没有被已选 leaf gate 收集的 case 一律失败，planned 不能成为关闭时的悬空豁免。
 
-模块引用校验直接调用 Pytest、Vitest 与 Playwright 的真实 list/collect 协议，并把 suite 路径绑定到 `config.toml` Gate command 及 npm script 入口；未被收集、重复、永久 skip/todo/fixme、错误 owner 或入口漂移均失败。收集清单证明测试在对应执行入口中可见，但仍不证明 scenario、required／forbidden expectations 与测试断言语义等价，也不证明本次 gate 已逐条执行每个引用。Reviewer 在每次新增或修改 case 时必须人工逐条检查 `covers` 对应的断言与正／负预期，不能把测试名、引用存在或总测试数当作语义证明。
+模块引用校验直接调用 Pytest、Vitest 与 Playwright 的真实 list/collect 协议（仅限所选引用；全局结构检查不收集），并把 suite 路径绑定到 `config.toml` Gate command 及 npm script 入口；未被收集、重复、永久 skip/todo/fixme、错误 owner 或入口漂移均失败。收集清单证明测试在对应执行入口中可见，但仍不证明 scenario、required／forbidden expectations 与测试断言语义等价，也不证明本次 gate 已逐条执行每个引用。Reviewer 在每次新增或修改 case 时必须人工逐条检查 `covers` 对应的断言与正／负预期，不能把测试名、引用存在或总测试数当作语义证明。
 
 ## Change coverage closure
 
@@ -44,13 +44,13 @@ Active spec 在 `## Verification cases` 中把每条 AC 映射到一个或多个
 
 验证后只允许该 task 的确定性生命周期产物：active spec 删除、compressed archive、task evidence、`spec.completed` event，以及由配置声明的生成索引。例外精确到 task 文件，不能用整个 archive、evidence 或 event 目录规避风险闭包。`quality:release` 只有设置可信 `HARNESS_BASE_REF` 时执行该检查；未设置时仍明确属于 local-only coverage skip，不能作为远端变更覆盖证明。
 
-## Risk-derived gate floor
+## Impact-derived selection
 
-task verify 以 active spec 首次提交为基线，读取其后到当前 HEAD 的已提交路径，并按 `config.toml` 中有序的 `verification.risk_routes` 聚合最低 gate。API、Web 与跨栈契约保持原路由；根 README 与 Harness 文档走 `harness-docs`（`harness-integrity`），Harness 工具/检查/测试/SDD 走 `harness-control`（`harness-tests` 与 `harness-integrity`），CI、脚本、`config.toml`、锁文件与 `AGENTS.md` 走 `release-control`（`release`）。重叠 route 的 gate 稳定去重。spec 的 verification plan 必须直接映射推导 gate，或映射一个具有有效直接 subsumption proof 的上层 gate；未证明或传递式包含不能满足下限，也不能通过选择较低 profile 绕过。
+普通任务不再按顶层目录推导固定全量 gate。先在 `impact/ownership.json` 登记细粒度单元的源码、case 和消费者，再在 `impact/<task_id>.json` 记录每项变更以及依赖是否受到影响的理由。选中 case 必须与 spec 一致；不允许无理由追加包门禁，缺失归属、case 或消费者判断时报告具体缺口。只有明确发布 profile 执行 release。
 
-超过一条 AC 时，每条 AC 必须至少映射一个叶子 gate。带 `subsumption_contract` 的包门禁不能成为全部 AC 的唯一映射。额外选择不在风险下限内的包门禁时，spec 必须声明非空单行 `verification_escalation`。`python -m tools.harness spec-lint [task_id]` 复用该合同检查但不启动产品 gate。task verify 失败且本地 JSONL 已有同一 task 至少两个 failed run 时，打印可复制的 `emit-event verification.repeated_failure` 命令；提示不写 Evolution 文件，也不改变退出码。
+全仓 module-coverage 只验证廉价结构，不运行 collector。普通任务的真实收集只发生在所选 runner 中。Pytest 使用精确 node ID；Vitest 和 Playwright 分文件及精确名称/config/project 选择，防止文件与名称交叉组合扩大范围。没有选择 Web 场景的 Harness 任务不调用 Node、Web build 或跨项目 collector。
 
-推导范围、匹配 route、触发路径和最低 gate 进入 evidence 的 gate 配置指纹。风险路由配置、实现提交或 verification plan 发生漂移时，旧 evidence 失效。当前权威 Markdown 按其所在的 API、Web、跨栈或 `harness-docs` route 触发相应最低 gate；只有未命中任何配置 route 的非风险文件、生成索引与精确生命周期 close 产物不新增 gate。未提交的验证源码仍由 clean-source 前置条件拒绝。
+复用默认关闭，`--fresh` 仍只运行受影响范围。已登记的 Harness pytest 安装输入按分发文件核对，不扫描整套安装目录。未登记产品安装依赖闭包时，跨进程复用/close 被拒绝，使用 `verify <task> --close` 同进程收尾。可选复用保留 HMAC、本机账本、失败历史、输入漂移与清理检查。
 
 ## Gate subsumption
 
@@ -78,4 +78,4 @@ task gate 只有退出 0 且 proof 唯一、可解析、hash 当前、阶段完�
 
 全局 `history-integrity` check 以 compressed archive 为确定性关闭集合，验证同 task 的 passed 主 evidence、lifecycle `spec.completed` event、archive 标识与 evidence 链接，并用一次 Git 查询确认原 active spec 路径仍在当前 HEAD 历史。自 `20260901-*` task 起，archive front matter 与 schema v2 completion event 必须同时保存关闭时 exact evidence SHA-256；文件字段删除、字节篡改、digest 漂移或降级成 legacy event 都会失败。更早的 schema v1 completion event 作为明确 legacy 边界只保留身份／状态检查，不追溯补造 digest。该 check 只读且不重写、补造、迁移或删除历史资产。
 
-`plan <task>` 只读输出 gate 执行/复用与失效原因。`verify <task>` 先执行全局前检，成功后按最后有效 attempt 续跑；`--fresh` 禁止复用，release 保持 fresh。`status <task>` 报告未执行、失败、失效与可复用状态。只有同 task、同 HEAD、同规范计划及受控依赖/环境允许复用；跨提交复用与构建拆分尚未启用。
+`plan <task>` 只读输出 gate 执行/复用与失效原因。`verify <task>` 先执行全局前检，成功后按最后有效 attempt 续跑；`--fresh` 禁止复用，release 保持 fresh。`status <task>` 报告未执行、失败、失效与可复用状态。默认不复用；启用时要求同 task、同 HEAD、同规范计划及已登记的受控依赖/环境。最终测试后可同进程关闭。

@@ -186,6 +186,8 @@ def test_task_verify_stops_before_product_gates_when_documentation_is_incomplete
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    from harness.tools import impact
+    monkeypatch.setattr(impact, "enabled", lambda: False)
     written: list[list[dict[str, object]]] = []
     monkeypatch.setattr(harness_cli.summarizer, "validate_task_id", lambda _: None)
     monkeypatch.setattr(harness_cli.summarizer, "active_spec", lambda _: tmp_path / "spec.md")

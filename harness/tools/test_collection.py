@@ -75,7 +75,7 @@ class Collector:
             })
             rows.append({
                 "path": source.as_posix(),
-                "name": str(getattr(item, "originalname", None) or item.name).split("[", 1)[0],
+                "name": item.nodeid.split("::", 1)[1],
                 "nodeid": item.nodeid,
                 "disabled": markers,
             })
@@ -184,9 +184,9 @@ def _project_path(project_root: Path, value: str) -> str:
         raise TestCollectionError(f"collector returned path outside project: {value}") from error
 
 
-def _collect_pytest(project_root: Path, target: str, gate: str) -> list[dict[str, Any]]:
+def _collect_pytest(project_root: Path, target: str | list[str], gate: str) -> list[dict[str, Any]]:
     stdout = _run(
-        [str(_api_python(project_root)), "-c", _PYTEST_COLLECTOR, target],
+        [str(_api_python(project_root)), "-c", _PYTEST_COLLECTOR, *([target] if isinstance(target, str) else target)],
         project_root,
     )
     lines = [
@@ -279,6 +279,7 @@ def _collect_playwright(
     project_root: Path,
     config_name: str,
     gate: str,
+    *, selectors: list[str] | None = None,
 ) -> list[dict[str, Any]]:
     web_root = project_root / "apps/web"
     stdout = _run(
@@ -292,6 +293,7 @@ def _collect_playwright(
             config_name,
             "--list",
             "--reporter=json",
+            *(selectors or []),
         ],
         web_root,
     )
@@ -308,11 +310,12 @@ def _collect_playwright(
     return _walk_playwright_suites(suites, root_dir, project_root, gate)
 
 
-def _collect_vitest(project_root: Path) -> list[dict[str, Any]]:
+def _collect_vitest(project_root: Path, *, selectors: list[str] | None = None, prepare: bool = True) -> list[dict[str, Any]]:
     web_root = project_root / "apps/web"
-    _run([_npm(), "exec", "nuxt", "--", "prepare"], web_root)
+    if prepare:
+        _run([_npm(), "exec", "nuxt", "--", "prepare"], web_root)
     stdout = _run(
-        [_npm(), "exec", "vitest", "--", "list", "--config", "vitest.config.ts", "--json"],
+        [_npm(), "exec", "vitest", "--", "list", "--config", "vitest.config.ts", "--json", *(selectors or [])],
         web_root,
     )
     try:

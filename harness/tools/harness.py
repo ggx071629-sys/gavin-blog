@@ -36,6 +36,10 @@ def _configure_console_streams() -> None:
 
 
 def _print_results(results: list[dict[str, object]]) -> None:
+    if validator.passed(results):
+        duration = round(sum(float(r.get("duration_ms", 0)) for r in results), 1)
+        print(f"[PASSED] {len(results)} checks ({duration} ms)")
+        return
     for result in results:
         details = result.get("details") or []
         print(f"[{result['status'].upper()}] {result['name']}")
@@ -129,6 +133,7 @@ def _execute_verification(
             execution,
             results,
             verification_cases,
+            **({"prepared": prepared} if prepared is not None else {}),
         )
         if prepared is not None and validator.passed(results):
             verification_resume.attest(task_id, evidence, prepared)
@@ -175,6 +180,8 @@ def command_verify(args: argparse.Namespace) -> int:
                 ledger["aggregate"] = None
                 store.write(ledger)
                 results, _ = _execute_verification(args.task_id, fresh=bool(getattr(args, "fresh", False)))
+                if validator.passed(results) and getattr(args, "close", False):
+                    return _close_tasks_locked([args.task_id])
         return 0 if validator.passed(results) else 1
     except (OSError, RuntimeError, ValueError) as error:
         print(f"verify stopped: {error}", file=sys.stderr)
@@ -187,6 +194,9 @@ def command_plan(args: argparse.Namespace) -> int:
         if args.json:
             print(json.dumps(plan, ensure_ascii=False, indent=2))
         else:
+            if plan.get("impact"):
+                scope = plan["impact"]
+                print(f"[SCOPE] {len(scope['selected_cases'])} cases, {len(scope['test_refs'])} exact refs, {len(scope['excluded_cases'])} excluded cases")
             verification_resume.print_plan(plan["gates"])
             if plan["blocker"]:
                 print(f"blocked: {plan['blocker']}")
@@ -301,6 +311,16 @@ def _close_tasks_locked(task_ids: list[str]) -> int:
     if snapshots is None:
         return 1
 
+    from . import impact
+    guarded = any(impact.plan_path(task).is_file() for task in task_ids)
+    allowed_close_paths = set()
+    guard_plans = [impact.build_plan(task) for task in task_ids] if guarded else []
+    if guarded:
+        project = product_verification.project_root()
+        allowed_close_paths.update(path.relative_to(project).as_posix() for path in indexer.expected_indexes())
+        for task in task_ids:
+            allowed_close_paths.add(summarizer.active_spec(task).relative_to(project).as_posix())
+
     close_transaction.begin(snapshots, source_head)
     attempted: list[tuple[str, Path, str, Path, str]] = []
     try:
@@ -340,6 +360,14 @@ def _close_tasks_locked(task_ids: list[str]) -> int:
         for task_id, _, _, _, expected_digest in snapshots:
             if _evidence_sha256(task_id) != expected_digest:
                 raise RuntimeError(f"task evidence changed during close: {task_id}")
+        if guarded:
+            drift = []
+            for guard_plan in guard_plans:
+                with impact.activate(guard_plan):
+                    drift.extend(row for row in product_verification.source_changes()
+                                 if row[3:].strip('"').replace("\\", "/") not in allowed_close_paths)
+            if drift:
+                raise RuntimeError("source or impact plan changed during close: " + drift[0][3:])
         close_transaction.finish()
         for task_id, archive, _, event_path, _ in snapshots:
             print(f"archive {archive}")
@@ -652,6 +680,7 @@ def parser() -> argparse.ArgumentParser:
     verify = commands.add_parser("verify", help="run all deterministic checks")
     verify.add_argument("task_id", nargs="?")
     verify.add_argument("--fresh", action="store_true", help="execute all task gates without reuse")
+    verify.add_argument("--close", action="store_true", help="consume this run and close in the same process")
     verify.set_defaults(func=command_verify)
 
     plan = commands.add_parser("plan", help="explain gate execution/reuse without product tests")

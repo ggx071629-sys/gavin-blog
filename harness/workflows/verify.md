@@ -10,18 +10,17 @@ author: Gavin
 
 # Verify
 
-- Input：实现、验收标准与相关 VDD 指南。
-- Preconditions：active spec 与实现已提交；验证范围和已声明文档目标没有未提交修改；检查命令可重复执行。
-- Output：checks 结果与 schema v2 紧凑 task evidence。
-- Checks：TDD、Contract、Integration、E2E、Quality 中与风险相关的部分。
-- Frozen：全局门禁校验冻结不变量但不因合法冻结失败；任务级 verify 必须先恢复该 spec。
-- Documentation：非冻结 active spec 必须声明 `documentation_impact` 与理由。`required` 的每个安全 Markdown 目标必须存在于 HEAD，并在 spec 首次提交之后有已提交变更；`none` 不得列目标。检查失败时不启动产品 gate，也不能产生可关闭的 passed evidence。
-- Task verify：`python -m tools.harness verify <task_id>` 先运行全局 checks；任一失败立即停止，不启动产品 gate。全部通过后验证文档影响契约与映射政策，再解析 spec 的 `gate => AC` 映射并根据本机认证记录只执行缺失、失败或失效的 `config.toml` 白名单 gate；系统同时从 spec 首次提交后的已提交路径推导最低 gate，spec 可以增加但不能降低该下限。多条 AC 不能只映射到 `release` 一类包门禁；高于下限的包门禁需要 `verification_escalation`。未知 gate、缺少 profile 或风险路由最低 gate、失败 gate 或未覆盖 AC 均失败。失败且本地已有两个 failed run 时打印 `emit-event` 命令，不自动写 Evolution。
-- Profiles：`focused` 由 spec 选择相关 gate；`stack` 至少覆盖 API lint、API tests 与 Web quality；`release` 必须运行完整 release gate。
-- Isolation：task verify 默认把当前 HEAD 检出到 detached 临时 Git worktree，受控链接本地 `node_modules` 与 API `.venv` 后运行 gate；不安装依赖，也不在隔离失败时退回共享工作目录。成功、失败或超时后都先移除链接再注销 worktree，清理失败会让 evidence 失败。
-- Reporting：gate evidence 结构化记录退出码、耗时、可识别测试数量与失败类型；顶层 summary 可由 checks 重算。Git evidence 只保留有限摘要与 provenance；失败日志、trace 和截图清理前导出到工作树外有界本机目录。
-- Complete when：passed evidence 对应当前 HEAD，且 source tree、active spec、规范化验证合同、文档契约与目标 blob、profile/gate 配置指纹仍匹配；此时任务派生为 verified，否则仍是 active 并明确报告失败。
+- Input：实现、active spec 和 `harness/verification/impact/<task_id>.json` 独立影响计划。
+- Scope：在 ownership.json 登记细粒度单元、源码归属、case 和已知消费者；逐文件说明影响，逐个消费者写 affected 与理由。仅存在依赖不扩大范围。缺少归属、case 或依赖判断直接阻断，不默认全项目。
+- Preconditions：先完成实现和审查，再一次性提交验证输入；spec 必须存在于 Git 历史。检查相关文档目标、源码及计划无工作区漂移。required 文档目标必须在 spec 首次提交后有已提交变化；失败不启动测试。
+- Plan/status：只读解释所选 case、排除理由、门禁、复用与失效原因；不启动产品测试、构建或 collector。`plan <task> --json` 输出完整影响分析。
+- Task verify：`python -m tools.harness verify <task>` 先执行廉价结构检查，再执行计划的 exact refs。全局 module-coverage 只检查合同结构、归属和文件；实际收集属于所选 runner。Pytest 使用 node ID，Vitest 使用文件与名称，Playwright 使用 spec、config、project 与名称；不调用整套 npm quality 脚本。
+- Profiles：普通 focused/stack 不再有按目录固定的全应用门禁下限。全量 release 只属于明确发布任务；选择 release profile 表示独立发布政策，不能通过脚本/配置的文件位置自动推导。
+- Fresh：`--fresh` 只重新执行所选范围。复用默认关闭；只有明确有界输入合同且检查成本有收益时才启用。未登记产品安装依赖闭包时，不允许跨进程复用或关闭，使用 `verify <task> --close`。
+- Isolation：所选检查在固定 HEAD 的 detached 临时 worktree 执行，只链接所需依赖，不自动安装。所选生产预览测试才构建其需要的 Web 产物。清理失败、中断、来源不完整不得发布可关闭的 passed evidence。
+- Attempts：保留失败与未执行状态；同输入最新失败不能被旧成功覆盖。受控环境屏蔽任意应用密钥和测试参数；端口冲突只报告占用者，不终止其他任务。失败日志在清理前导出到本机有界目录。
+- Reporting：成功输出范围、结果和耗时；失败输出诊断和日志位置。收集、执行、复用及输出字节分别计数，不用字节数冒充 token。
+- Close：消费认证 evidence，不启动产品测试、构建或 collector。可在最终 runner 完成后用 `verify <task> --close` 同进程消费。原始 spec 保留于 Git 历史；archive、completion event 和 exact evidence digest 由事务创建，失败回滚。
+- Complete when：最终输入适用、真实 runner 来源、全部 AC 的所选检查及隔离清理均通过。commit/verify/close 只是步骤，不机械增加一轮相同测试。
 
-- Plan/status：`plan <task>` 与 `status <task>` 只读解释 gate 的执行、复用、失效和下一步，不启动产品测试或 collector。
-- Fresh/release：`verify <task> --fresh` 实际执行完整任务门禁；release 计划始终 fresh。
-- Close：消费本机 HMAC 认证的完整 evidence，校验同 HEAD/输入、最新 attempt、AC 覆盖与清理；无凭据时报缺口，不暗中执行长测试或全套 collector。事务 journal 与仓库级 OS 锁支持失败回滚和中断恢复。详见 [认证续跑决策](../docs/decisions/20260905-verification-resume.md)。
+细节与信任边界见 [受影响范围决策](../docs/decisions/20260905-verification-resume.md)。

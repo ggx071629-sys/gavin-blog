@@ -14,6 +14,14 @@ from harness.tools.result_reporting import summarize_checks
 TASK_ID = "20260812-product-evidence"
 
 
+@pytest.fixture(autouse=True)
+def legacy_contract_fixture(monkeypatch):
+    # These fixtures exercise the retained legacy schema with synthetic gate routes.
+    from harness.tools import impact
+    monkeypatch.setattr(impact, "enabled", lambda: False)
+
+
+
 def test_task_evidence_is_written_with_canonical_lf_bytes(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -437,6 +445,7 @@ def test_task_verify_runs_product_gates_and_writes_current_evidence(
         written_execution: dict[str, object],
         results: list[dict[str, object]],
         written_verification_cases: dict[str, object],
+        **_kwargs,
     ) -> Path:
         assert task_id == TASK_ID
         assert command.endswith(TASK_ID)
@@ -1228,64 +1237,12 @@ def test_fingerprints_change_with_spec_contract_and_gate_configuration(
     )
 
 
-def test_live_risk_routes_rightsize_harness_docs_control_and_release(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    cases = [
-        (
-            ["README.md"],
-            ["harness-docs"],
-            ["harness-integrity"],
-        ),
-        (
-            ["apps/api/README.md"],
-            ["api"],
-            ["api-lint", "api-typecheck", "api-tests"],
-        ),
-        (
-            ["apps/web/README.md"],
-            ["web"],
-            ["web-quality"],
-        ),
-        (
-            ["packages/contracts/README.md"],
-            ["cross-stack"],
-            ["release"],
-        ),
-        (
-            ["harness/tools/telemetry.py"],
-            ["harness-control"],
-            ["harness-tests", "harness-integrity"],
-        ),
-        (
-            ["harness/docs/product/brief.md", "harness/workflows/verify.md"],
-            ["harness-docs"],
-            ["harness-integrity"],
-        ),
-        (
-            [".github/workflows/release.yml", "harness/config.toml"],
-            ["release-control"],
-            ["release"],
-        ),
-        (
-            ["AGENTS.md"],
-            ["release-control"],
-            ["release"],
-        ),
-    ]
-    for paths, route_ids, gates in cases:
-        monkeypatch.setattr(
-            product_verification,
-            "implementation_paths",
-            lambda _task, current=paths: list(current),
-        )
-        derived = product_verification.derived_gate_requirements(TASK_ID)
-        assert [route["id"] for route in derived["routes"]] == route_ids
-        assert derived["required_gates"] == gates
-        assert "release" not in derived["required_gates"] or tuple(route_ids) in {
-            ("cross-stack",),
-            ("release-control",),
-        }
+def test_live_risk_routes_rightsize_harness_docs_control_and_release() -> None:
+    config = product_verification.load_config()["verification"]
+    assert "risk_routes" not in config
+    assert config["impact"]["reuse"] is False
+    assert config["profiles"]["focused"]["required_gates"] == []
+    assert config["profiles"]["release"]["required_gates"] == ["release"]
 
 
 def test_bundle_gate_cannot_be_the_only_mapping_for_multiple_criteria(

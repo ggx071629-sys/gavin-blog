@@ -60,11 +60,17 @@ source_paths = [
   "harness/specs/INDEX.md",
   "harness/verification/README.md",
   "harness/verification/checks",
+  "harness/verification/impact",
   "harness/verification/qualification-cases",
   "harness/verification/qualifications",
   "harness/verification/tests",
   "harness/verification/vdd",
 ]
+
+[verification.impact]
+ownership = "verification/impact/ownership.json"
+plans = "verification/impact"
+reuse = false
 
 [verification.isolation]
 mode = "git-worktree"
@@ -74,51 +80,15 @@ reuse_paths = ["node_modules", "apps/web/node_modules", "apps/api/.venv"]
 required_gates = []
 
 [verification.profiles.stack]
-required_gates = ["api-lint", "api-typecheck", "api-tests", "web-quality"]
+required_gates = []
 
 [verification.profiles.release]
 required_gates = ["release"]
 
-[[verification.risk_routes]]
-id = "api"
-prefixes = ["apps/api/"]
-files = []
-required_gates = ["api-lint", "api-typecheck", "api-tests"]
 
-[[verification.risk_routes]]
-id = "web"
-prefixes = ["apps/web/"]
-files = []
-required_gates = ["web-quality"]
 
-[[verification.risk_routes]]
-id = "cross-stack"
-prefixes = ["packages/"]
-files = []
-required_gates = ["release"]
 
-[[verification.risk_routes]]
-id = "harness-docs"
-prefixes = [
-  "harness/docs/",
-  "harness/evolution/",
-  "harness/workflows/",
-]
-files = ["README.md"]
-required_gates = ["harness-integrity"]
 
-[[verification.risk_routes]]
-id = "harness-control"
-prefixes = [
-  "harness/tools/",
-  "harness/verification/checks/",
-  "harness/verification/qualification-cases/",
-  "harness/verification/qualifications/",
-  "harness/verification/tests/",
-  "harness/specs/_sdd/",
-]
-files = []
-required_gates = ["harness-tests", "harness-integrity"]
 
 [verification.qualifications]
 directory = "verification/qualifications"
@@ -140,21 +110,6 @@ manifest = "verification/qualifications/20260830-public-qa-production-qualificat
 profile = "verification/qualifications/20260830-public-qa-production-qualification.profile.json"
 case_suite = "verification/qualification-cases/public-qa-conformance-v1.json"
 
-[[verification.risk_routes]]
-id = "release-control"
-prefixes = [
-  ".github/",
-  "scripts/",
-]
-files = [
-  ".gitattributes",
-  ".gitignore",
-  "AGENTS.md",
-  "harness/config.toml",
-  "package.json",
-  "package-lock.json",
-]
-required_gates = ["release"]
 
 [verification.gates.api-lint]
 cwd = "apps/api"

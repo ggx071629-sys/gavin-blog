@@ -15,8 +15,21 @@ from . import product_verification as pv
 from . import verification_inputs as inputs
 from .run_store import RunStore, StoreError, digest, latest_attempts
 
+_PROCESS_RECEIPTS = {}
 
-def prepare(
+
+def prepare(task_id, *, collect=True, cases=None, identify=True):
+    from . import impact
+    plan = impact.build_plan(task_id) if impact.enabled() else None
+    with impact.activate(plan):
+        prepared = _prepare(task_id, collect=collect, cases=cases, identify=identify)
+    if plan is not None:
+        prepared["impact"] = plan
+        prepared["reuse_enabled"] = bool(prepared["snapshot"].get("reusable", False))
+    return prepared
+
+
+def _prepare(
     task_id: str,
     *,
     collect: bool = True,
@@ -43,7 +56,8 @@ def prepare(
             ".gitignore",
         ]
     )
-    if collect:
+    from . import impact
+    if collect or impact.enabled():
         cases = pv.resolved_verification_cases(task_id, criteria, mappings)
     fingerprints = pv.evidence_fingerprints(
         task_id, criteria, mappings, profile, documentation, cases
@@ -70,7 +84,7 @@ def gate_plan(
     prepared: dict[str, Any], ledger: dict[str, Any], *, fresh: bool = False
 ) -> list[dict[str, Any]]:
     fresh = (
-        fresh or "release" in prepared["mappings"] or prepared["profile"] == "release"
+        fresh or prepared.get("reuse_enabled") is False or "release" in prepared["mappings"] or prepared["profile"] == "release"
     )
     latest = latest_attempts(ledger, prepared["identity"])
     rows = []
@@ -150,6 +164,7 @@ def preview(task_id: str, *, fresh: bool = False) -> dict[str, Any]:
         "source_commit": prepared["snapshot"]["head"],
         "identity": prepared["identity"],
         "gates": rows,
+        "impact": prepared.get("impact"),
         "blocker": error,
         "next": f"python -m tools.harness verify {task_id}"
         + (" --fresh" if error else ""),
@@ -161,12 +176,21 @@ def print_plan(rows: list[dict[str, Any]]) -> None:
         print(f"[PLAN] {row['gate']}: {row['action']} ({row['reason']})", flush=True)
 
 
-def execute(
+def execute(prepared, *, fresh=False):
+    from .impact import activate
+    with activate(prepared.get("impact")):
+        return _execute(prepared, fresh=fresh)
+
+
+def _execute(
     prepared: dict[str, Any], *, fresh: bool = False
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     store = RunStore(prepared["task_id"])
     ledger = store.recover(fresh=fresh)
     plan = gate_plan(prepared, ledger, fresh=fresh)
+    if prepared.get("impact"):
+        scope = prepared["impact"]
+        print(f"[SCOPE] {len(scope['selected_cases'])} cases, {len(scope['test_refs'])} exact refs; {len(scope['excluded_cases'])} excluded cases")
     print_plan(plan)
     latest = latest_attempts(ledger, prepared["identity"])
     run_id = secrets.token_hex(16)
@@ -227,6 +251,8 @@ def execute(
                 f"[GATE] {gate}: {check['status']} ({check['duration_ms']} ms)",
                 flush=True,
             )
+            if check["status"] != "passed":
+                print(f"[LOG] {artifact_root / gate / 'output.log'}", flush=True)
         store.write(ledger)
 
     try:
@@ -240,7 +266,10 @@ def execute(
             )
         else:
             results, context = (
-                [],
+                [{"name": "isolated-worktree", "kind": "isolation", "command": "authenticated prior isolation",
+                  "status": "passed", "passed": True, "duration_ms": 0, "covers": [],
+                  "details": ["all selected attempts have authenticated cleanup; no new worktree"],
+                  "result": {"exit_code": 0}}],
                 {
                     "mode": "git-worktree",
                     "source_commit": prepared["snapshot"]["head"],
@@ -266,6 +295,12 @@ def execute(
         ):
             raise StoreError("verification inputs changed during execution")
         results = [*reused, *results]
+        if prepared.get("impact") is not None:
+            context["impact"] = {"plan": "harness/verification/impact/" + prepared["task_id"] + ".json",
+                                 "sha256": digest(prepared["impact"]),
+                                 "selected_cases": prepared["impact"]["selected_cases"],
+                                 "selected_refs": len(prepared["impact"]["test_refs"]),
+                                 "excluded_cases": len(prepared["impact"]["excluded_cases"])}
         actual = [check["name"] for check in results if check.get("kind") == "product"]
         if set(actual) != set(prepared["mappings"]) and validator.passed(results):
             results.append(
@@ -333,6 +368,7 @@ def attest(task_id: str, path: Path, prepared: dict[str, Any]) -> None:
         "run_id": ledger["runs"][-1]["id"],
     }
     store.write(ledger)
+    _PROCESS_RECEIPTS[task_id] = ledger["aggregate"]["sha256"]
 
 
 def authenticate(task_id: str, path: Path) -> dict[str, Any]:
@@ -345,6 +381,8 @@ def authenticate(task_id: str, path: Path) -> dict[str, Any]:
     if hashlib.sha256(raw).hexdigest() != aggregate["sha256"]:
         raise StoreError("evidence bytes do not match the authenticated runner receipt")
     prepared = prepare(task_id, collect=False, cases=aggregate["cases"])
+    if prepared["snapshot"].get("persistent_close") is False and _PROCESS_RECEIPTS.get(task_id) != aggregate["sha256"]:
+        raise StoreError("selected dependency closure is not registered for persistent close; use verify --close")
     if prepared["identity"] != aggregate["identity"]:
         raise StoreError(
             "authenticated inputs are stale: HEAD, plan, toolchain, dependencies or environment changed"

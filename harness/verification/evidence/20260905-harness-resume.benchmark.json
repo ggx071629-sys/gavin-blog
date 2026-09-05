@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "task_id": "20260905-harness-resume",
+  "kind": "bounded-scope-benchmark",
+  "input_phase": {
+    "legacy": {
+      "duration_ms": 66447.173,
+      "dependency_roots": [
+        "node_modules",
+        "apps/web/node_modules",
+        "apps/api/.venv",
+        "npm-toolchain"
+      ],
+      "snapshot_bytes": 1001
+    },
+    "selected": {
+      "duration_ms": 323.32,
+      "distributions": [
+        "colorama",
+        "iniconfig",
+        "packaging",
+        "pluggy",
+        "pygments",
+        "pytest"
+      ],
+      "snapshot_bytes": 1314
+    },
+    "scope": "Same environment, real Harness input-identification phase only; not a full-task timing claim."
+  },
+  "controlled_cli": {
+    "legacy_suite": {
+      "duration_ms": 6199.35,
+      "exit_code": 0,
+      "output_bytes": 1126,
+      "test_counts": {
+        "passed": 20,
+        "failed": 0,
+        "skipped": 0
+      },
+      "closed": true
+    },
+    "selected_case": {
+      "duration_ms": 4565.503,
+      "exit_code": 0,
+      "output_bytes": 1133,
+      "test_counts": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      },
+      "closed": true
+    },
+    "scope": "Controlled real CLI A/B; same fixture and current receipt/close engine, only suite versus exact selection changes. 20 synthetic tests each wait 100ms. Does not measure full old product release."
+  },
+  "product_acceptance": {
+    "scenario": "real selected profile API acceptance",
+    "case": "M06-P1-01",
+    "test_refs": [
+      {
+        "path": "apps/api/tests/test_profile.py",
+        "kind": "pytest",
+        "name": "test_public_strips_hidden_city_and_email",
+        "gate": "api-tests",
+        "covers": [
+          "M06-P1-01-E01",
+          "M06-P1-01-E02"
+        ]
+      }
+    ],
+    "exit_code": 0,
+    "duration_ms": 6075.775,
+    "output_bytes": 148
+  },
+  "limitations": [
+    "Single local samples, not statistical performance estimates.",
+    "Controlled CLI fixture uses synthetic tests; this is not a full old-versus-new release comparison.",
+    "Output bytes are a proxy; no model token counts were measured."
+  ]
+}

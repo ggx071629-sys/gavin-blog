@@ -163,6 +163,7 @@ def write_task_evidence(
     execution: dict[str, Any],
     results: list[dict[str, Any]],
     verification_cases: dict[str, Any] | None = None,
+    *, prepared: dict[str, Any] | None = None,
 ) -> Path:
     manifest = {
         "schema_version": 2,
@@ -190,6 +191,19 @@ def write_task_evidence(
     }
     path = evidence_path(task_id)
     path.parent.mkdir(parents=True, exist_ok=True)
+    if prepared is not None and manifest["status"] == "passed":
+        import tempfile
+        from .product_verification import validate_evidence
+        with tempfile.TemporaryDirectory(prefix="harness-evidence-candidate-") as temporary:
+            candidate = Path(temporary) / "candidate.json"
+            candidate.write_text(json.dumps(manifest, ensure_ascii=False), encoding="utf-8")
+            errors = validate_evidence(task_id, candidate, prepared=prepared)
+        if errors:
+            results.append({"name": "close-readiness", "status": "failed", "passed": False,
+                            "duration_ms": 0, "details": errors[:12]})
+            return write_task_evidence(task_id, command, acceptance_criteria, mappings,
+                                       verification_profile, fingerprints, documentation,
+                                       execution, results, verification_cases)
     path.write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",

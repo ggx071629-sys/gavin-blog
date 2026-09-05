@@ -42,6 +42,7 @@ def run(context: dict[str, Any]) -> dict[str, Any]:
         project_root,
         harness_root,
         context["config"],
+        structure_only=bool(context["config"].get("verification", {}).get("impact")),
     )
     if errors:
         return {

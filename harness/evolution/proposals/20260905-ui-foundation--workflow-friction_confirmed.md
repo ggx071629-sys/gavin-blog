@@ -1,18 +1,20 @@
 ---
 id: evolution-20260905-ui-foundation-workflow-friction_confirmed
 level: L1
-summary: 已确认的 Harness 验证闭环重设计：失败续跑、证据复用与低成本关闭
+summary: 已终结：有效要求已并入受影响模块验证提案，旧实施路线被替代
 load_when:
-  - process-evolution
+  - process-evolution-history
   - task:20260905-ui-foundation
 task_id: 20260905-ui-foundation
-status: applied
+status: rejected
 author: Gavin
 ---
 
 # Harness 验证闭环重设计提案
 
-状态：Gavin 已于 2026-09-05 确认本提案。A、B 阶段已在 `20260905-harness-resume` 实施；凭据协议、失败恢复和操作方式见 [认证续跑决策](../../docs/decisions/20260905-verification-resume.md)。C 阶段继续按原决定等待真实运行数据评估，不随本次改造启用。
+状态：已终结，被 [受影响模块验证修订提案](20260905-harness-resume--workflow-friction_confirmed.md) 替代。Gavin 于 2026-09-05 明确要求“吸收到新的提案中然后关闭掉旧提案”；仍适用的要求已合并至新提案。本文件采用现有终态 `rejected` 表示旧实施路线不再继续，不表示此前工作全部无效，也不表示已验收完成。
+
+以下正文保留历史方案及当时决定，不再作为当前实施依据。A、B 阶段已有实现，但全复用后的 close 验收未通过；本提案终结不关闭 `20260905-harness-resume` 实施任务。
 
 来源：[显式摩擦事件](../events/20260905-ui-foundation--workflow-friction_confirmed.json)、[第一阶段归档](../../specs/archive/20260905-ui-foundation.md)。审查基线为 `367a17b06fa6c6c11090ce643631736b655fdee6`。
 
@@ -128,4 +130,10 @@ author: Gavin
 
 Gavin 于 2026-09-05 明确确认本提案，并要求作者字段使用 `Gavin`。本提案由 `proposed` 转为 `accepted`。
 
-按上述顺序优先实施 A、B，再依据真实运行数据评估 C；凭据格式、认证算法与密钥位置、失败记录防回退、并发和崩溃恢复在新的 SDD spec 中细化。确认当时仅记录提案接受，未修改执行器或验证政策；后续 `20260905-harness-resume` 已实施优先交付的 A、B 阶段，因此本提案转为 `applied`。发布门槛未降低，C 阶段保留为后续评估范围。
+按上述顺序优先实施 A、B，再依据真实运行数据评估 C；凭据格式、认证算法与密钥位置、失败记录防回退、并发和崩溃恢复在新的 SDD spec 中细化。确认当时仅记录提案接受，未修改执行器或验证政策。后续 A、B 实现尚未完成全部闭环验收，且成本目标需要按模块范围重新校正，因此撤回实施期间过早设置的 applied 状态，保留 accepted。现行发布门槛未降低。
+
+### 后续人工决定：合并并终结（2026-09-05）
+
+Gavin 随后明确要求只运行改动后受到影响的模块，并要求将本提案吸收到新提案后关闭。本次据此将状态由 `accepted` 转为 `rejected`（旧路线被替代），有效要求并入 [新提案](20260905-harness-resume--workflow-friction_confirmed.md) 的验证闭环、证据与关闭事务及验收条款。旧 A/B 优先顺序和默认高成本缓存路线不再继承。
+
+本次决定替代上文“保留 accepted”的当时状态；原文件与事件保留用于历史审计，主 Evolution 索引不再列出本提案。不标记 applied，不宣称实施验收完成，也不更改现有执行器或发布门槛。

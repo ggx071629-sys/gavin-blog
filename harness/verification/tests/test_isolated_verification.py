@@ -71,7 +71,7 @@ def test_isolated_gate_run_uses_detached_worktree_and_cleans_it(
 
     assert gate_roots == [temporary / "worktree"]
     assert mkdtemp_options == [
-        {"prefix": ".project-task-verify-", "dir": project.parent}
+        {"prefix": ".project-task-verify-", "dir": isolated_verification.tempfile.gettempdir()}
     ]
     assert calls[0][:3] == ("worktree", "add", "--detach")
     assert ("worktree", "remove", "--force", str(temporary / "worktree")) in calls
