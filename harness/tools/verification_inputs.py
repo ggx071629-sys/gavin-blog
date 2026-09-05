@@ -327,9 +327,13 @@ for name in names:
     result[name] = h.hexdigest()
 print(json.dumps(result, sort_keys=True))
 '''
-        completed = subprocess.run([python, "-c", script], capture_output=True, text=True, check=True,
-                                   timeout=30, env=controlled_environment(),
-                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
+        try:
+            completed = subprocess.run([python, "-c", script], capture_output=True, text=True, check=True,
+                                       timeout=30, env=controlled_environment(),
+                                       creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
+        except (OSError, subprocess.SubprocessError) as error:
+            diagnostic = str(getattr(error, 'stderr', '') or 'dependency probe could not complete').strip().splitlines()[-1]
+            raise pv.ProductVerificationError('dependency input check failed: ' + diagnostic[:240]) from error
         dependencies = json.loads(completed.stdout)
     return {"version": 2, "head": pv.head_commit(), "fingerprints": fingerprints,
             "plan": digest(plan), "mappings": list(mappings.items()), "commands": commands,

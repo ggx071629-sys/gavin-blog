@@ -103,3 +103,63 @@ def test_default_same_process_input_identity_never_reads_installed_distributions
     )
     assert result["dependencies"] == {} and result["reusable"] is False
     assert result["persistent_close"] is False
+
+
+def test_reuse_dependency_probe_failure_has_bounded_diagnostic(monkeypatch):
+    import subprocess
+
+    monkeypatch.setattr(inputs, "load_reuse_policy", lambda: True)
+    monkeypatch.setattr(pv, "_configured_gates", dict)
+    monkeypatch.setattr(pv, "head_commit", lambda: "head")
+
+    def failed(*args, **kwargs):
+        raise subprocess.CalledProcessError(
+            1,
+            ["python", "-c", "internal script"],
+            stderr="PackageNotFoundError: pytest",
+        )
+
+    monkeypatch.setattr(inputs.subprocess, "run", failed)
+    with pytest.raises(
+        pv.ProductVerificationError,
+        match="dependency input check failed: PackageNotFoundError: pytest",
+    ) as failure:
+        inputs.scoped_snapshot(
+            {},
+            {},
+            {
+                "test_refs": [
+                    {"kind": "pytest", "path": "harness/verification/tests/a.py"}
+                ]
+            },
+        )
+    assert "internal script" not in str(failure.value)
+
+
+def test_same_process_resolution_rechecks_head_source_and_runtime_without_replanning(
+    monkeypatch,
+):
+    from harness.tools import verification_resume as resume
+
+    prepared = {
+        "impact": {},
+        "snapshot": {"head": "current"},
+        "documentation": {"targets": []},
+        "mappings": {},
+        "fingerprints": {},
+    }
+    checks = []
+    monkeypatch.setattr(pv, "head_commit", lambda: "current")
+    monkeypatch.setattr(pv, "ensure_source_clean", lambda paths: checks.append(paths))
+    monkeypatch.setattr(inputs, "input_snapshot", lambda *_: {"head": "current"})
+    monkeypatch.setattr(
+        resume, "prepare", lambda *_a, **_k: pytest.fail("redundant plan resolution")
+    )
+    assert resume.prepared_in_process(prepared) is prepared
+    assert len(checks) == 1
+    monkeypatch.setattr(inputs, "input_snapshot", lambda *_: {"head": "changed"})
+    with pytest.raises(ValueError, match="runtime inputs changed"):
+        resume.prepared_in_process(prepared)
+    monkeypatch.setattr(pv, "head_commit", lambda: "new-head")
+    with pytest.raises(ValueError, match="HEAD changed"):
+        resume.prepared_in_process(prepared)

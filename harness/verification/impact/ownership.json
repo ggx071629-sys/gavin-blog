@@ -81,9 +81,10 @@
         "M08.verification_resume": [
           "harness/tools/verification_inputs.py:147 imports harness.tools.impact",
           "harness/tools/verification_inputs.py:226 imports harness.tools.impact",
-          "harness/tools/verification_resume.py:182 imports harness.tools.impact",
-          "harness/tools/verification_resume.py:22 imports harness.tools.impact",
-          "harness/tools/verification_resume.py:59 imports harness.tools.impact"
+          "harness/tools/verification_resume.py:183 imports harness.tools.impact",
+          "harness/tools/verification_resume.py:23 imports harness.tools.impact",
+          "harness/tools/verification_resume.py:387 imports harness.tools.impact",
+          "harness/tools/verification_resume.py:60 imports harness.tools.impact"
         ]
       }
     },
@@ -282,7 +283,8 @@
       ],
       "dependency_reasons": {
         "M08.acceptance": [
-          "harness/tools/impact_acceptance.py:81 imports harness.tools.isolated_verification"
+          "harness/tools/impact_acceptance.py:105 imports harness.tools.isolated_verification",
+          "harness/tools/impact_acceptance.py:388 imports harness.tools.isolated_verification"
         ],
         "M08.lifecycle": [
           "harness/tools/harness.py:11 imports harness.tools.isolated_verification"
@@ -337,8 +339,8 @@
         ],
         "M08.verification_resume": [
           "harness/tools/run_store.py:85 imports harness.tools.summarizer",
-          "harness/tools/verification_resume.py:39 imports harness.tools.lifecycle",
-          "harness/tools/verification_resume.py:39 imports harness.tools.summarizer"
+          "harness/tools/verification_resume.py:40 imports harness.tools.lifecycle",
+          "harness/tools/verification_resume.py:40 imports harness.tools.summarizer"
         ]
       }
     },
@@ -371,7 +373,8 @@
         "M08.configuration",
         "M08.product_verification",
         "M08.selected_tests",
-        "M08.telemetry"
+        "M08.telemetry",
+        "M08.test_collection"
       ],
       "dependency_reasons": {
         "M08.configuration": [
@@ -385,6 +388,9 @@
         ],
         "M08.telemetry": [
           "harness/tools/telemetry.py:13 imports harness.tools.result_reporting"
+        ],
+        "M08.test_collection": [
+          "harness/tools/test_collection.py:169 imports harness.tools.result_reporting"
         ]
       }
     },
@@ -419,7 +425,7 @@
       ],
       "dependency_reasons": {
         "M08.acceptance": [
-          "harness/tools/impact_acceptance.py:18 imports harness.tools.config"
+          "harness/tools/impact_acceptance.py:19 imports harness.tools.config"
         ],
         "M08.assurance": [
           "harness/tools/assurance.py:7 imports harness.tools.config",
@@ -479,14 +485,14 @@
           "harness/tools/run_store.py:16 imports harness.tools.config",
           "harness/tools/verification_inputs.py:16 imports harness.tools",
           "harness/tools/verification_inputs.py:17 imports harness.tools.config",
-          "harness/tools/verification_inputs.py:345 imports harness.tools.config",
+          "harness/tools/verification_inputs.py:349 imports harness.tools.config",
           "harness/tools/verification_resume.py:13 imports harness.tools",
           "harness/tools/verification_resume.py:13 imports harness.tools.validator",
           "harness/tools/verification_resume.py:14 imports harness.tools",
           "harness/tools/verification_resume.py:15 imports harness.tools",
-          "harness/tools/verification_resume.py:22 imports harness.tools",
-          "harness/tools/verification_resume.py:39 imports harness.tools",
-          "harness/tools/verification_resume.py:59 imports harness.tools"
+          "harness/tools/verification_resume.py:23 imports harness.tools",
+          "harness/tools/verification_resume.py:40 imports harness.tools",
+          "harness/tools/verification_resume.py:60 imports harness.tools"
         ]
       }
     },

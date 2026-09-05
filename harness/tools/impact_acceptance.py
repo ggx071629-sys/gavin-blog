@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -37,6 +38,23 @@ def validate_comparison(payload):
                 errors.append(f"{workload}: missing wall measurement")
             if not isinstance(row.get("output_bytes"), int):
                 errors.append(f"{workload}: missing output byte measurement")
+        if len(rows) == 2 and all(r.get("status") == "passed" for r in rows):
+            versions = {r["version"]: r for r in rows}
+            if versions["after"]["wall_ms"] >= versions["before"]["wall_ms"]:
+                errors.append(f"{workload}: total measured cost did not improve")
+            if versions["after"]["output_bytes"] > versions["before"]["output_bytes"]:
+                errors.append(f"{workload}: output volume increased")
+    web = [r for r in payload.get("samples", []) if r.get("workload") == "profile-web"]
+    if (
+        len(web) != 1
+        or web[0].get("status") != "passed"
+        or not web[0].get("closed")
+        or web[0].get("executed") != 3
+        or set(web[0].get("kinds", [])) != {"pytest", "vitest", "playwright"}
+    ):
+        errors.append(
+            "profile-web: missing complete real Pytest/Vitest/Playwright closure"
+        )
     return errors
 
 
@@ -77,8 +95,61 @@ def workload_contract(workload):
     raise ValueError("unknown acceptance workload")
 
 
+def bind_dependencies(root, source, *, web=False):
+    """Own dependency roots in the disposable repo; link package content only.
+
+    Isolation still rejects a dependency root outside its repository. No package
+    tree is walked or copied: Python uses one site-packages link; Node needs only
+    its immediate package entries. This setup is identical for both engines.
+    """
+    from .isolated_verification import _create_directory_link, _remove_directory_link
+
+    relatives = ["apps/api/.venv", "node_modules", "apps/web/node_modules"]
+    for relative in relatives:
+        target = root / relative
+        if target.is_symlink() or (
+            target.exists() and target.resolve() != target.absolute()
+        ):
+            _remove_directory_link(target)
+    environment = root / "apps/api/.venv"
+    source_environment = source / "apps/api/.venv"
+    environment.mkdir(exist_ok=True)
+    shutil.copy2(source_environment / "pyvenv.cfg", environment / "pyvenv.cfg")
+    if sys.platform == "win32":
+        (environment / "Scripts").mkdir(exist_ok=True)
+        # pytest's bounded RECORD also includes its installed console launchers.
+        for executable in (source_environment / "Scripts").iterdir():
+            if executable.is_file():
+                shutil.copy2(executable, environment / "Scripts" / executable.name)
+        destination = environment / "Lib/site-packages"
+        if not destination.exists():
+            _create_directory_link(
+                source_environment / "Lib/site-packages", destination
+            )
+    else:
+        (environment / "bin").mkdir(exist_ok=True)
+        shutil.copy2(
+            (source_environment / "bin/python").resolve(), environment / "bin/python"
+        )
+        for directory in (source_environment / "lib").iterdir():
+            destination = environment / "lib" / directory.name / "site-packages"
+            if not destination.exists():
+                _create_directory_link(directory / "site-packages", destination)
+    if web:
+        for relative in relatives[1:]:
+            target = root / relative
+            target.mkdir(parents=True, exist_ok=True)
+            for entry in (source / relative).iterdir():
+                destination = target / entry.name
+                if destination.exists():
+                    continue
+                if entry.is_dir():
+                    _create_directory_link(entry, destination)
+                elif entry.is_file():
+                    shutil.copy2(entry, destination)
+
+
 def prepare_repository(root, source, baseline, version, workload):
-    from .isolated_verification import _create_directory_link
 
     result, _, _ = run(
         ["git", "clone", "--quiet", "--no-hardlinks", str(source), str(root)], source
@@ -91,11 +162,7 @@ def prepare_repository(root, source, baseline, version, workload):
         # Only the engine changes. Product code, docs, checks, toolchain and
         # workload are identical; preserve all original implementation in Git.
         git(root, "restore", "--source=" + baseline, "--", "harness/tools")
-    for relative in ["apps/api/.venv", "node_modules", "apps/web/node_modules"]:
-        target = root / relative
-        if target.exists():
-            raise ValueError("acceptance dependency destination already exists")
-        _create_directory_link(source / relative, target)
+    bind_dependencies(root, source, web=workload == "profile-web")
     task = "20260906-acceptance-" + workload
     changed, cid, gate, test_path, test_name = workload_contract(workload)
     file = root / "harness/verification/checks/module_coverage.contract.json"
@@ -251,6 +318,10 @@ Local timing is a sample, not a statistical or token claim.
 
 def sample(root, source, baseline, version, workload, logs):
     task = prepare_repository(root, source, baseline, version, workload)
+    return execute_sample(root, version, workload, logs, task)
+
+
+def execute_sample(root, version, workload, logs, task):
     wall, output = 0, 0
     commands = []
     for args in [
@@ -293,6 +364,16 @@ def sample(root, source, baseline, version, workload, logs):
         "commands": commands,
         "executed": sum(c.get("executed", 0) for c in counts),
         "collected": sum(c.get("collected", 0) for c in counts),
+        "kinds": sorted(
+            {
+                ref["kind"]
+                for criterion in payload.get("verification_cases", {}).get(
+                    "criteria", []
+                )
+                for case in criterion["cases"]
+                for ref in case["test_refs"]
+            }
+        ),
         "evidence_sha256": hashlib.sha256(evidence.read_bytes()).hexdigest()
         if evidence.is_file()
         else None,
@@ -302,14 +383,106 @@ def sample(root, source, baseline, version, workload, logs):
     }
 
 
+def retain_and_cleanup_sample(row):
+    """Export compact close assets before removing a disposable benchmark repo."""
+    from .isolated_verification import _remove_directory_link
+
+    root = Path(row["repository"])
+    temporary = Path(tempfile.gettempdir()).resolve()
+    if (
+        root.name != "repository"
+        or root.parent.resolve().parent != temporary
+        or not root.parent.name.startswith("harness-acceptance-")
+    ):
+        raise ValueError(
+            "acceptance cleanup target is not an owned temporary repository"
+        )
+    if not root.exists():
+        return
+    task = "20260906-acceptance-" + row["workload"]
+    destination = Path(row["logs"]) / "close-assets"
+    destination.mkdir(parents=True, exist_ok=True)
+    for path in [
+        root / f"harness/verification/evidence/{task}.json",
+        root / f"harness/specs/archive/{task}.md",
+        root / f"harness/evolution/events/{task}--spec-completed.json",
+    ]:
+        if path.is_file():
+            shutil.copy2(path, destination / path.name)
+    for relative in ["node_modules", "apps/web/node_modules", "apps/api/.venv"]:
+        folder = root / relative
+        if not folder.exists():
+            continue
+        if folder.resolve() != folder.absolute():
+            _remove_directory_link(folder)
+            continue
+        entries = (
+            list(folder.iterdir())
+            if relative.endswith("node_modules")
+            else list(folder.glob("Lib/site-packages"))
+            + list(folder.glob("lib/*/site-packages"))
+        )
+        for path in entries:
+            if path.is_dir() and path.resolve() != path.absolute():
+                _remove_directory_link(path)
+    shutil.rmtree(root.parent)
+    row["repository_removed"] = True
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--baseline", required=True)
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Retry failed local samples, preserving their histories and logs",
+    )
     args = parser.parse_args()
     source = project_root()
     baseline = git(source, "rev-parse", args.baseline + "^{commit}")
     output = source / ".run/impact-acceptance"
     output.mkdir(parents=True, exist_ok=True)
+    if not args.resume:
+        output = output / ("run-" + str(time.time_ns()))
+        output.mkdir()
+        (output.parent / "latest.txt").write_text(output.name, encoding="utf-8")
+    elif (output / "latest.txt").is_file():
+        output = output / (output / "latest.txt").read_text(encoding="utf-8").strip()
+    if args.resume:
+        payload = json.loads((output / "comparison.json").read_bytes())
+        samples = []
+        for previous in payload["samples"]:
+            if previous["status"] == "passed" and previous["closed"]:
+                samples.append(previous)
+                continue
+            root = Path(previous["repository"])
+            bind_dependencies(root, source, web=previous["workload"] == "profile-web")
+            logs = output / (
+                previous["workload"] + "-" + previous["version"] + "-retry"
+            )
+            print(
+                "[ACCEPTANCE] retry "
+                + previous["workload"]
+                + " "
+                + previous["version"],
+                flush=True,
+            )
+            result = execute_sample(
+                root,
+                previous["version"],
+                previous["workload"],
+                logs,
+                "20260906-acceptance-" + previous["workload"],
+            )
+            result["previous_attempt"] = previous
+            samples.append(result)
+            print(json.dumps(result), flush=True)
+        payload["samples"] = samples
+        payload["errors"] = validate_comparison(payload)
+        (output / "comparison.json").write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+        return bool(payload["errors"])
     samples = []
     for workload in ["harness", "profile-api"]:
         for version in ["before", "after"]:
@@ -345,6 +518,9 @@ def main():
         "samples": samples,
     }
     payload["errors"] = validate_comparison(payload)
+    if not payload["errors"]:
+        for row in samples:
+            retain_and_cleanup_sample(row)
     (output / "comparison.json").write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )

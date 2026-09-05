@@ -286,6 +286,7 @@ def source_inputs(plan):
         "AGENTS.md", "README.md", "harness/config.toml", "harness/tools",
         "harness/docs", "harness/workflows", "harness/specs/_sdd", "harness/specs/active",
         "harness/verification/checks", "harness/verification/impact",
+        "harness/verification/qualifications", "harness/verification/qualification-cases",
         "harness/verification/README.md", "harness/verification/vdd",
         "apps/api/README.md", "apps/web/README.md", "packages/contracts/README.md",
         ".github", "package-lock.json", "apps/api/uv.lock",

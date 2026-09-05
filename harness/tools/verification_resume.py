@@ -16,6 +16,7 @@ from . import verification_inputs as inputs
 from .run_store import RunStore, StoreError, digest, latest_attempts
 
 _PROCESS_RECEIPTS = {}
+_PROCESS_PREPARED = {}
 
 
 def prepare(task_id, *, collect=True, cases=None, identify=True):
@@ -371,6 +372,29 @@ def attest(task_id: str, path: Path, prepared: dict[str, Any]) -> None:
     }
     store.write(ledger)
     _PROCESS_RECEIPTS[task_id] = ledger["aggregate"]["sha256"]
+    if prepared.get('impact') is not None:
+        _PROCESS_PREPARED[task_id] = copy.deepcopy(prepared)
+
+
+def prepared_in_process(prepared):
+    """Reuse immutable runner resolution, while rechecking every mutable input.
+
+    The runner already checked source cleanliness and input identity after test
+    execution. At close, the same HEAD plus clean tracked source/plan/contract
+    paths pins that resolution; toolchain/dependency/environment inputs are still
+    freshly checked. This is not a persistent cache or a user-supplied receipt.
+    """
+    from .impact import activate
+    with activate(prepared['impact']):
+        if pv.head_commit() != prepared['snapshot']['head']:
+            raise StoreError('authenticated inputs are stale: HEAD changed before close')
+        pv.ensure_source_clean([
+            *prepared['documentation']['targets'], 'package.json', 'package-lock.json',
+            '.npmrc', '.github', '.gitattributes', '.gitignore',
+        ])
+        if inputs.input_snapshot(prepared['mappings'], prepared['fingerprints']) != prepared['snapshot']:
+            raise StoreError('authenticated inputs are stale: runtime inputs changed before close')
+    return prepared
 
 
 def authenticate(task_id: str, path: Path) -> dict[str, Any]:
@@ -382,7 +406,10 @@ def authenticate(task_id: str, path: Path) -> dict[str, Any]:
     raw = path.read_bytes()
     if hashlib.sha256(raw).hexdigest() != aggregate["sha256"]:
         raise StoreError("evidence bytes do not match the authenticated runner receipt")
-    prepared = prepare(task_id, collect=False, cases=aggregate["cases"])
+    if _PROCESS_RECEIPTS.get(task_id) == aggregate['sha256'] and task_id in _PROCESS_PREPARED:
+        prepared = prepared_in_process(_PROCESS_PREPARED[task_id])
+    else:
+        prepared = prepare(task_id, collect=False, cases=aggregate["cases"])
     if prepared["snapshot"].get("persistent_close") is False and _PROCESS_RECEIPTS.get(task_id) != aggregate["sha256"]:
         raise StoreError("selected dependency closure is not registered for persistent close; use verify --close")
     if prepared["identity"] != aggregate["identity"]:

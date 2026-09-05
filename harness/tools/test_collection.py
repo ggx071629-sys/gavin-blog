@@ -166,8 +166,8 @@ def _run(command: list[str], cwd: Path) -> str:
     except (OSError, subprocess.TimeoutExpired) as error:
         raise TestCollectionError(f"test collector failed to start: {error}") from error
     if result.returncode != 0:
-        detail = (result.stderr or result.stdout).strip().splitlines()
-        summary = detail[-1][:300] if detail else f"exit {result.returncode}"
+        from .result_reporting import failure_summary
+        summary = failure_summary(result.stdout, result.stderr)
         raise TestCollectionError(f"test collector failed: {summary}")
     return result.stdout
 
