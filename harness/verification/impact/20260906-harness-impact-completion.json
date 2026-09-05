@@ -989,6 +989,15 @@
       ]
     },
     {
+      "path": "harness/verification/checks/links.py",
+      "owner": "M08.links",
+      "reason": "Prune dependency and local diagnostic directories before traversal; keep missing and unstable project links fail-closed.",
+      "cases": [
+        "M08-LINKS-01"
+      ],
+      "dependencies": []
+    },
+    {
       "path": "harness/verification/checks/module_coverage.contract.json",
       "owner": "M08.module_verification",
       "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
@@ -1566,6 +1575,15 @@
           ]
         }
       ]
+    },
+    {
+      "path": "harness/verification/tests/test_links.py",
+      "owner": "M08.links",
+      "reason": "Prune dependency and local diagnostic directories before traversal; keep missing and unstable project links fail-closed.",
+      "cases": [
+        "M08-LINKS-01"
+      ],
+      "dependencies": []
     },
     {
       "path": "harness/verification/tests/test_selected_prerequisites.py",

@@ -1,6 +1,139 @@
 {
   "schema_version": 2,
   "task_id": "20260906-harness-impact-completion",
-  "status": "pending",
-  "note": "Link placeholder only. The canonical runner must replace this; it is not execution evidence."
+  "created_at": "2026-09-05T16:41:11.166042+00:00",
+  "command": "python -m tools.harness verify 20260906-harness-impact-completion --fresh",
+  "status": "failed",
+  "acceptance_criteria": [],
+  "criteria_results": [],
+  "verification_profile": "",
+  "fingerprints": {},
+  "documentation": {},
+  "execution": {},
+  "verification_cases": {},
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.751
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "105 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 155.975
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 68.571
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.523
+    },
+    {
+      "name": "links",
+      "details": [
+        ".run/impact-acceptance/final-comparison/harness-after/close-assets/20260906-acceptance-harness.md: missing link target ../../verification/evidence/20260906-acceptance-harness.json",
+        ".run/impact-acceptance/final-comparison/harness-before/close-assets/20260906-acceptance-harness.md: missing link target ../../verification/evidence/20260906-acceptance-harness.json",
+        ".run/impact-acceptance/final-comparison/profile-api-after/close-assets/20260906-acceptance-profile-api.md: missing link target ../../verification/evidence/20260906-acceptance-profile-api.json",
+        ".run/impact-acceptance/final-comparison/profile-api-before/close-assets/20260906-acceptance-profile-api.md: missing link target ../../verification/evidence/20260906-acceptance-profile-api.json",
+        ".run/impact-acceptance/harness-after-retry/close-assets/20260906-acceptance-harness.md: missing link target ../../verification/evidence/20260906-acceptance-harness.json",
+        ".run/impact-acceptance/profile-api-after-retry/close-assets/20260906-acceptance-profile-api.md: missing link target ../../verification/evidence/20260906-acceptance-profile-api.json",
+        ".run/impact-acceptance/profile-api-before-retry/close-assets/20260906-acceptance-profile-api.md: missing link target ../../verification/evidence/20260906-acceptance-profile-api.json",
+        ".run/impact-acceptance/run-1788625792327620400/harness-after/close-assets/20260906-acceptance-harness.md: missing link target ../../verification/evidence/20260906-acceptance-harness.json",
+        ".run/impact-acceptance/run-1788625792327620400/harness-before/close-assets/20260906-acceptance-harness.md: missing link target ../../verification/evidence/20260906-acceptance-harness.json",
+        ".run/impact-acceptance/run-1788625792327620400/profile-api-after/close-assets/20260906-acceptance-profile-api.md: missing link target ../../verification/evidence/20260906-acceptance-profile-api.json",
+        ".run/impact-acceptance/run-1788625792327620400/profile-api-before/close-assets/20260906-acceptance-profile-api.md: missing link target ../../verification/evidence/20260906-acceptance-profile-api.json",
+        ".run/impact-acceptance/run-1788625792327620400/profile-web-after/close-assets/20260906-acceptance-profile-web.md: missing link target ../../verification/evidence/20260906-acceptance-profile-web.json"
+      ],
+      "status": "failed",
+      "duration_ms": 4431.532
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "211 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 58.852
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "10 modules, 143 cases, 286 expectations, 606 exact test references; contract sha256 52170e9181f3"
+      ],
+      "status": "passed",
+      "duration_ms": 333.846
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.187
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.117
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 84.206
+    },
+    {
+      "name": "task-verification-precondition",
+      "kind": "product",
+      "command": "",
+      "status": "failed",
+      "duration_ms": 0,
+      "covers": [],
+      "details": [
+        "global preflight failed; product gates were not started"
+      ]
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 11,
+      "passed": 9,
+      "failed": 2
+    },
+    "duration_ms": 5150.56,
+    "failures": [
+      {
+        "name": "links",
+        "kind": "check-failed",
+        "summary": ".run/impact-acceptance/final-comparison/harness-after/close-assets/20260906-acceptance-harness.md: missing link target ../../verification/evidence/20260906-acceptance-harness.json"
+      },
+      {
+        "name": "task-verification-precondition",
+        "kind": "check-failed",
+        "summary": "global preflight failed; product gates were not started"
+      }
+    ]
+  },
+  "source_commit": "783ce965934b050afc326da769c8286090e392de"
 }

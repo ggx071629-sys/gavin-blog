@@ -4432,6 +4432,16 @@
                 "M08-LINKS-01-E01",
                 "M08-LINKS-01-E02"
               ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_links.py",
+              "name": "test_link_check_never_traverses_installed_dependencies_or_local_artifacts",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-LINKS-01-E01",
+                "M08-LINKS-01-E02"
+              ]
             }
           ]
         },

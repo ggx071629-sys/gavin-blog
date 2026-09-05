@@ -72,3 +72,23 @@ def test_local_query_links_resolve_files_and_keep_missing_and_durable_checks(tmp
     result = check.run({"project_root": tmp_path})
     assert result["passed"] is False
     assert "durable Markdown must not link short-lived active spec" in result["details"][0]
+
+
+def test_link_check_never_traverses_installed_dependencies_or_local_artifacts(tmp_path, monkeypatch):
+    check=_load_check()
+    skipped=['node_modules','.venv','.run','.git','.agents','.codex']
+    for name in skipped:
+        _write(tmp_path/name/'deep'/'report.md','[broken](missing.md)')
+    _write(tmp_path/'README.md','[guide](docs/guide.md)')
+    _write(tmp_path/'docs/guide.md','[root](../README.md)')
+    original=check.os.scandir
+    visited=[]
+    def scandir(path):
+        value=Path(path)
+        if value.is_relative_to(tmp_path):
+            assert not set(value.relative_to(tmp_path).parts)&set(skipped)
+            visited.append(value)
+        return original(path)
+    monkeypatch.setattr(check.os,'scandir',scandir)
+    result=check.run({'project_root':tmp_path})
+    assert result['passed'] and len(visited)==2

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import re
 from pathlib import Path
 from typing import Any
@@ -7,6 +8,9 @@ from typing import Any
 LINK = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 SKIP_PARTS = {
     ".git",
+    ".agents",
+    ".codex",
+    ".run",
     ".nuxt",
     ".output",
     ".venv",
@@ -15,6 +19,23 @@ SKIP_PARTS = {
     "local",
     "node_modules",
 }
+
+
+def markdown_files(root: Path):
+    """Prune local/dependency trees before traversal, not after rglob scans them."""
+    def failed(error):
+        raise error
+    for directory, folders, files in os.walk(root, followlinks=False, onerror=failed):
+        parent = Path(directory)
+        folders[:] = sorted(
+            name for name in folders
+            if name not in SKIP_PARTS
+            and not (getattr((parent/name).lstat(), 'st_file_attributes', 0) & 0x400)
+            and not (parent/name).is_symlink()
+        )
+        for name in sorted(files):
+            if name.endswith('.md'):
+                yield parent/name
 
 
 def _target(raw: str) -> str:
@@ -31,9 +52,7 @@ def run(context: dict[str, Any]) -> dict[str, Any]:
     checked = 0
     active_specs = project_root / "harness" / "specs" / "active"
     specs_root = project_root / "harness" / "specs"
-    for path in sorted(project_root.rglob("*.md")):
-        if any(part in SKIP_PARTS for part in path.relative_to(project_root).parts):
-            continue
+    for path in markdown_files(project_root):
         text = path.read_text(encoding="utf-8")
         for match in LINK.finditer(text):
             raw = match.group(1)
