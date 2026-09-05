@@ -985,6 +985,38 @@
               "covers": ["M08-SPEC-01-E01", "M08-SPEC-01-E02"]
             }
           ]
+        },
+        {
+          "id": "M08-LINKS-01",
+          "priority": "P1",
+          "scenario": "本地 Markdown 查询参数只影响浏览状态，不被当成文件名。",
+          "expectations": [
+            {
+              "id": "M08-LINKS-01-E01",
+              "surface": "response",
+              "statement": "存在的文件带查询参数与片段链接检查通过。"
+            },
+            {
+              "id": "M08-LINKS-01-E02",
+              "surface": "forbidden",
+              "statement": "不存在文件和 durable 指向 active spec 的链接，即使带查询参数也不得通过。"
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_links.py",
+              "kind": "pytest",
+              "name": "test_local_query_links_resolve_files_and_keep_missing_and_durable_checks",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-LINKS-01-E01",
+                "M08-LINKS-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

@@ -51,3 +51,24 @@ def test_index_archive_and_spec_coordination_links_are_allowed(tmp_path: Path) -
     assert result["details"] == [
         "3 local Markdown links resolve without durable active-spec references"
     ]
+
+
+def test_local_query_links_resolve_files_and_keep_missing_and_durable_checks(tmp_path: Path) -> None:
+    check = _load_check()
+    (tmp_path / "desk.html").write_text("<main>Desk</main>", encoding="utf-8")
+    document = tmp_path / "README.md"
+    document.write_text("[desk](desk.html?page=articles&theme=light#main)\n[current](?theme=dark#main)", encoding="utf-8")
+    assert check.run({"project_root": tmp_path})["passed"] is True
+
+    document.write_text("[missing](missing.html?page=articles)", encoding="utf-8")
+    result = check.run({"project_root": tmp_path})
+    assert result["passed"] is False
+    assert "missing link target missing.html" in result["details"][0]
+
+    active = tmp_path / "harness" / "specs" / "active" / "20260905-example.md"
+    active.parent.mkdir(parents=True)
+    active.write_text("# Spec", encoding="utf-8")
+    document.write_text("[active](harness/specs/active/20260905-example.md?view=source#goal)", encoding="utf-8")
+    result = check.run({"project_root": tmp_path})
+    assert result["passed"] is False
+    assert "durable Markdown must not link short-lived active spec" in result["details"][0]

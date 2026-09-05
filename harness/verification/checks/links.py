@@ -21,7 +21,7 @@ def _target(raw: str) -> str:
     value = raw.strip().strip("<>")
     if " " in value and not value.startswith(("/", "./", "../")):
         value = value.split(" ", 1)[0]
-    return value.split("#", 1)[0]
+    return value.split("#", 1)[0].split("?", 1)[0]
 
 
 def run(context: dict[str, Any]) -> dict[str, Any]:
