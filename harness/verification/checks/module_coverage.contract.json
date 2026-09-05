@@ -142,6 +142,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M01-P1-04",
+          "priority": "P1",
+          "scenario": "共用外壳保持主题色、主题持久化、44px 控件、页尾入口；移动导航后焦点到正文，当前路径点击还焦点。",
+          "expectations": [
+            {
+              "id": "M01-P1-04-E01",
+              "surface": "user_visible",
+              "statement": "共用外壳保持主题色、主题持久化、44px 控件、页尾入口；移动导航后焦点到正文，当前路径点击还焦点。"
+            },
+            {
+              "id": "M01-P1-04-E02",
+              "surface": "forbidden",
+              "statement": "代表宽度不得横滚，不得恢复全屏点阵或在导航后残留 inert。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+              "kind": "playwright",
+              "name": "shared public foundations preserve themes, routes and keyboard navigation",
+              "gate": "e2e",
+              "covers": [
+                "M01-P1-04-E01",
+                "M01-P1-04-E02"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -209,6 +241,38 @@
               "covers": [
                 "M02-P1-01-E01",
                 "M02-P1-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M02-P1-02",
+          "priority": "P1",
+          "scenario": "登录后后台在浅深主题与短视口可达原有导航，当前项、主题按钮与手机焦点恢复有效。",
+          "expectations": [
+            {
+              "id": "M02-P1-02-E01",
+              "surface": "user_visible",
+              "statement": "登录后后台在浅深主题与短视口可达原有导航，当前项、主题按钮与手机焦点恢复有效。"
+            },
+            {
+              "id": "M02-P1-02-E02",
+              "surface": "forbidden",
+              "statement": "短视口不得裁掉末尾导航，跨桌面断点不得残留对话框、inert 或滚动锁。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+              "kind": "playwright",
+              "name": "shared admin foundations keep all destinations reachable in short viewports",
+              "gate": "e2e",
+              "covers": [
+                "M02-P1-02-E01",
+                "M02-P1-02-E02"
               ]
             }
           ]
