@@ -47,3 +47,4 @@ JSON 模式没有供应商端 schema 保证。等价保证仅指应用接受并�
 ## Gates
 
 - api-tests => AC-1, AC-2, AC-3
+- harness-integrity => AC-1, AC-2, AC-3
