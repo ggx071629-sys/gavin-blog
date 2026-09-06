@@ -1271,7 +1271,8 @@
         "M06.runtime_config",
         "M09.development",
         "M09.runtime",
-        "M10.operations_web"
+        "M10.operations_web",
+        "M10.capacity"
       ],
       "dependency_reasons": {
         "M06.runtime_config": [
@@ -1286,6 +1287,9 @@
         ],
         "M10.operations_web": [
           "Admin snapshot/operation HTTP contracts consumed by administration page"
+        ],
+        "M10.capacity": [
+          "capacity/capacity_roles reuse this unit through explicit development-only measurement CLI; no reverse runtime import."
         ]
       }
     },
@@ -1328,7 +1332,8 @@
         "M09.providers",
         "M09.runtime",
         "M10.operations",
-        "M10.e5_evaluation"
+        "M10.e5_evaluation",
+        "M10.capacity"
       ],
       "dependency_reasons": {
         "M01.articles": [
@@ -1384,6 +1389,9 @@
           "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/assistant_index/projector.py",
           "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/assistant_index/runtime.py",
           "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/assistant_index/worker.py"
+        ],
+        "M10.capacity": [
+          "capacity/capacity_roles reuse this unit through explicit development-only measurement CLI; no reverse runtime import."
         ]
       }
     },
@@ -1592,7 +1600,8 @@
         "M10.index",
         "M10.operations",
         "M10.qualification",
-        "M10.e5_evaluation"
+        "M10.e5_evaluation",
+        "M10.capacity"
       ],
       "dependency_reasons": {
         "M02.publishing": [
@@ -1651,6 +1660,9 @@
         "M10.e5_evaluation": [
           "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/config.py",
           "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/main.py"
+        ],
+        "M10.capacity": [
+          "capacity/capacity_roles reuse this unit through explicit development-only measurement CLI; no reverse runtime import."
         ]
       }
     },
@@ -1686,7 +1698,8 @@
         "M10.index",
         "M10.operations",
         "M10.qualification",
-        "M10.e5_evaluation"
+        "M10.e5_evaluation",
+        "M10.capacity"
       ],
       "dependency_reasons": {
         "M01.articles": [
@@ -1795,6 +1808,9 @@
         "M10.e5_evaluation": [
           "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/db.py",
           "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/models.py"
+        ],
+        "M10.capacity": [
+          "capacity/capacity_roles reuse this unit through explicit development-only measurement CLI; no reverse runtime import."
         ]
       }
     },
@@ -1903,7 +1919,8 @@
         "M06.persistence",
         "M06.runtime_config",
         "M09.runtime",
-        "M10.index"
+        "M10.index",
+        "M10.capacity"
       ],
       "dependency_reasons": {
         "M06.persistence": [
@@ -1917,6 +1934,9 @@
         ],
         "M10.index": [
           "API dependency/migration/entrypoint consumers require per-change review"
+        ],
+        "M10.capacity": [
+          "capacity/capacity_roles reuse this unit through explicit development-only measurement CLI; no reverse runtime import."
         ]
       }
     },
@@ -3310,11 +3330,15 @@
         "M09.providers",
         "M09.runtime",
         "M10.index",
-        "M10.e5_evaluation"
+        "M10.e5_evaluation",
+        "M10.capacity"
       ],
       "dependency_reasons": {
         "M10.e5_evaluation": [
           "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/local_embedding/local.py"
+        ],
+        "M10.capacity": [
+          "capacity/capacity_roles reuse this unit through explicit development-only measurement CLI; no reverse runtime import."
         ]
       }
     },
@@ -3329,6 +3353,28 @@
         "M10-EVAL-ISOLATION-01",
         "M10-EVAL-METRICS-01",
         "M10-EVAL-REPORT-01"
+      ],
+      "dependents": [
+        "M10.capacity"
+      ],
+      "dependency_reasons": {
+        "M10.capacity": [
+          "capacity/capacity_roles reuse this unit through explicit development-only measurement CLI; no reverse runtime import."
+        ]
+      }
+    },
+    "M10.capacity": {
+      "paths": [
+        "apps/api/app/local_embedding/capacity.py",
+        "apps/api/app/local_embedding/capacity_roles.py",
+        "apps/api/app/local_embedding/capacity_metrics.py",
+        "apps/api/scripts/sample-capacity.ps1",
+        "apps/api/tests/test_capacity.py"
+      ],
+      "cases": [
+        "M10-CAPACITY-METRICS-01",
+        "M10-CAPACITY-ISOLATION-01",
+        "M10-CAPACITY-REPORT-01"
       ],
       "dependents": []
     }

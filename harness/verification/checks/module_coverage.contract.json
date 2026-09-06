@@ -11146,6 +11146,102 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M10-CAPACITY-METRICS-01",
+          "priority": "P1",
+          "scenario": "进程资源统计和容量余量",
+          "expectations": [
+            {
+              "id": "M10-CAPACITY-METRICS-01-E01",
+              "surface": "response",
+              "statement": "按时间差和进程身份计算，输出完整场景与保守估算"
+            },
+            {
+              "id": "M10-CAPACITY-METRICS-01-E02",
+              "surface": "forbidden",
+              "statement": "缺失场景/角色、PID重复或计数回退不能生成有效统计"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_capacity.py",
+              "kind": "pytest",
+              "name": "test_capacity_metrics_require_complete_samples_and_bound_estimates",
+              "gate": "api-tests",
+              "covers": [
+                "M10-CAPACITY-METRICS-01-E01",
+                "M10-CAPACITY-METRICS-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-CAPACITY-ISOLATION-01",
+          "priority": "P1",
+          "scenario": "独立本机测量边界",
+          "expectations": [
+            {
+              "id": "M10-CAPACITY-ISOLATION-01-E01",
+              "surface": "response",
+              "statement": "显式GET只读测量入口鉴权，独立配置和空闲端口"
+            },
+            {
+              "id": "M10-CAPACITY-ISOLATION-01-E02",
+              "surface": "forbidden",
+              "statement": "原应用不得出现测量路由，错误配置和占用端口拒绝"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_capacity.py",
+              "kind": "pytest",
+              "name": "test_capacity_isolation_ports_configuration_and_explicit_api",
+              "gate": "api-tests",
+              "covers": [
+                "M10-CAPACITY-ISOLATION-01-E01",
+                "M10-CAPACITY-ISOLATION-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-CAPACITY-REPORT-01",
+          "priority": "P1",
+          "scenario": "容量运行资格与失败",
+          "expectations": [
+            {
+              "id": "M10-CAPACITY-REPORT-01-E01",
+              "surface": "response",
+              "statement": "完整查询负载、真实重叠和进程清理完成后才认可运行"
+            },
+            {
+              "id": "M10-CAPACITY-REPORT-01-E02",
+              "surface": "forbidden",
+              "statement": "错误、缺负载、无重叠或清理失败不能认定有效"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_capacity.py",
+              "kind": "pytest",
+              "name": "test_capacity_report_rejects_errors_missing_load_and_cleanup_failures",
+              "gate": "api-tests",
+              "covers": [
+                "M10-CAPACITY-REPORT-01-E01",
+                "M10-CAPACITY-REPORT-01-E02"
+              ]
+            }
+          ]
         }
       ]
     }
