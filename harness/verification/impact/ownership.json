@@ -1417,7 +1417,10 @@
         "M10-UNIT-ASSISTANT-BACKUP-RESTORE-01",
         "M10-UNIT-ASSISTANT-PROVIDER-QUALIFICATION-01",
         "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01",
-        "M10-UNIT-ASSISTANT-RUNTIME-PROFILE-BINDING-01"
+        "M10-UNIT-ASSISTANT-RUNTIME-PROFILE-BINDING-01",
+        "M10-LOCAL-CHAT-PROBE-01",
+        "M10-LOCAL-CHAT-BUDGET-01",
+        "M10-LOCAL-CHAT-ISOLATION-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1920,7 +1923,10 @@
         "M09-E5-ADAPTER-01",
         "M10-E5-CHUNK-01",
         "M09-E5-QUERY-01",
-        "M10-E5-LOCAL-01"
+        "M10-E5-LOCAL-01",
+        "M10-LOCAL-CHAT-PROBE-01",
+        "M10-LOCAL-CHAT-BUDGET-01",
+        "M10-LOCAL-CHAT-ISOLATION-01"
       ],
       "dependents": [
         "M06.persistence",

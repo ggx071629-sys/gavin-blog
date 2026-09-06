@@ -11378,6 +11378,162 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M10-LOCAL-CHAT-PROBE-01",
+          "priority": "P1",
+          "scenario": "显式本机探测验证配置、模型和脱敏结果。",
+          "expectations": [
+            {
+              "id": "M10-LOCAL-CHAT-PROBE-01-ALLOW",
+              "surface": "response",
+              "statement": "有效开发配置使用真实传输并记录应用schema、用量与身份来源。"
+            },
+            {
+              "id": "M10-LOCAL-CHAT-PROBE-01-DENY",
+              "surface": "forbidden",
+              "statement": "生产、在线开启、缺配置或输入不适配时不得发送请求。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "kind": "pytest",
+              "name": "test_local_chat_probe_preconditions_and_allowlisted_result",
+              "gate": "api-tests",
+              "covers": [
+                "M10-LOCAL-CHAT-PROBE-01-ALLOW",
+                "M10-LOCAL-CHAT-PROBE-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-LOCAL-CHAT-BUDGET-01",
+          "priority": "P1",
+          "scenario": "连续本机探测复用现有预算锁与结算。",
+          "expectations": [
+            {
+              "id": "M10-LOCAL-CHAT-BUDGET-01-ALLOW",
+              "surface": "response",
+              "statement": "成功按usage结算，未知usage按预留结算。"
+            },
+            {
+              "id": "M10-LOCAL-CHAT-BUDGET-01-DENY",
+              "surface": "forbidden",
+              "statement": "超额度、配置漂移或未完成/失败尝试不得再次发送。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "kind": "pytest",
+              "name": "test_local_chat_probe_reuses_budget_and_rejects_drift",
+              "gate": "api-tests",
+              "covers": [
+                "M10-LOCAL-CHAT-BUDGET-01-ALLOW",
+                "M10-LOCAL-CHAT-BUDGET-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-LOCAL-CHAT-ISOLATION-01",
+          "priority": "P1",
+          "scenario": "本机artifact与原生产探测合同并存。",
+          "expectations": [
+            {
+              "id": "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+              "surface": "response",
+              "statement": "原生产profile、用量、身份与多批次费用合同继续通过。"
+            },
+            {
+              "id": "M10-LOCAL-CHAT-ISOLATION-01-DENY",
+              "surface": "forbidden",
+              "statement": "本机artifact不得冒充生产资格，schema内容不匹配不得通过。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "kind": "pytest",
+              "name": "test_local_chat_probe_cannot_be_production_qualification",
+              "gate": "api-tests",
+              "covers": [
+                "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "kind": "pytest",
+              "name": "test_probe_requires_explicit_selection_and_exact_profile_digest",
+              "gate": "api-tests",
+              "covers": [
+                "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "kind": "pytest",
+              "name": "test_real_embedding_adapter_enforces_approved_batch_cap",
+              "gate": "api-tests",
+              "covers": [
+                "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "kind": "pytest",
+              "name": "test_probe_records_allowlisted_real_provider_facts_and_bounded_cost",
+              "gate": "api-tests",
+              "covers": [
+                "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "kind": "pytest",
+              "name": "test_missing_usage_is_measured_fail_and_conservatively_settled",
+              "gate": "api-tests",
+              "covers": [
+                "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "kind": "pytest",
+              "name": "test_cost_envelope_blocks_before_network_call",
+              "gate": "api-tests",
+              "covers": [
+                "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "kind": "pytest",
+              "name": "test_embedding_probe_counts_provider_batches_in_call_envelope",
+              "gate": "api-tests",
+              "covers": [
+                "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     }
