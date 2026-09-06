@@ -19,6 +19,8 @@ load_when:
 
 当前服务 launcher 仅绑定 loopback 且只支持 development，Bearer 内部鉴权，readiness 只返回非秘密身份。E5 production 在配置层明确拒绝；目标机五进程资源、内部可信 HTTPS 和 qualification profile 扩展仍未完成。此决定替代旧冻结生产资格 spec 中仅云端 Embedding 的方案假设，不改写旧历史，也不代表该 spec 已恢复或通过。第三方 Chat 配置须等 build-qa 阶段 D 的正式验收，真实供应商、费用预算与数据保留政策由管理员确定。
 
+E5 当前问题超长时，终态回答使用既有字符串 code 字段 `answered_lexical`，并显示“问题较长，本次仅使用关键词检索公开资料”；拒答也附相同提示。复用现有 SSE 字段，不新增协议字段。该布尔状态可进入 checkpoint，问题/历史增强文本仍遵守原有瞬态边界。
+
 本机生成回归题可用于检查代码与跨语言召回，但没有人工标注确认，不能据此宣称满足 40 条人工标注 Recall@5 验收。服务器内存/延迟目标必须在真实 2 vCPU/4 GB 上实测。
 
 官方依据：[E5 固定模型卡](https://huggingface.co/intfloat/multilingual-e5-small/blob/614241f622f53c4eeff9890bdc4f31cfecc418b3/README.md)、[Sentence Transformers CPU 后端](https://sbert.net/docs/sentence_transformer/usage/efficiency.html)。
