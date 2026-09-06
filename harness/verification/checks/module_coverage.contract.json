@@ -10218,7 +10218,17 @@
             {
               "path": "apps/api/tests/test_assistant_deepseek.py",
               "kind": "pytest",
-              "name": "test_deepseek_online_graph_settles_and_rejects_invalid_body",
+              "name": "test_deepseek_online_graph_settles_and_rejects_invalid_body[False]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEEPSEEK-VALIDATION-01-ALLOW",
+                "M09-DEEPSEEK-VALIDATION-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "kind": "pytest",
+              "name": "test_deepseek_online_graph_settles_and_rejects_invalid_body[True]",
               "gate": "api-tests",
               "covers": [
                 "M09-DEEPSEEK-VALIDATION-01-ALLOW",
