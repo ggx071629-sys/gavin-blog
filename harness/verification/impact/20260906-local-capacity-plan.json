@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "task_id": "20260906-local-capacity-plan",
+  "changes": [
+    {
+      "path": "build-qa.md",
+      "owner": "M08.documentation",
+      "reason": "User-authorized stage D plan revision: local process-group sampling and capacity estimates replace target-server measurements. Runtime contracts and historical evidence unchanged.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "User-authorized stage D plan revision: local process-group sampling and capacity estimates replace target-server measurements. Runtime contracts and historical evidence unchanged.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/docs/operations/e5-retrieval-evaluation.md",
+      "owner": "M08.documentation",
+      "reason": "User-authorized stage D plan revision: local process-group sampling and capacity estimates replace target-server measurements. Runtime contracts and historical evidence unchanged.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/docs/decisions/20260906-local-e5-retrieval.md",
+      "owner": "M08.documentation",
+      "reason": "User-authorized stage D plan revision: local process-group sampling and capacity estimates replace target-server measurements. Runtime contracts and historical evidence unchanged.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    }
+  ]
+}

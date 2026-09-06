@@ -17,10 +17,10 @@ load_when:
 
 `npm run dev:assistant:retrieval -- smoke|rebuild|finalize|query ...` 是明确的真实 Embedding 检索入口，使用 `.env.e5`，无需 Chat。rebuild 使用现有 fenced Worker，止于 ready_to_switch；finalize 以独占 API owner maintenance 运行既有 runtime/content 切换协议，保持 gate disabled。开发演示命令 `npm run dev:assistant` 保持原离线语义。不能在同一个内容库同时运行离线演示与真实检索重建。
 
-当前服务 launcher 仅绑定 loopback 且只支持 development，Bearer 内部鉴权，readiness 只返回非秘密身份。E5 production 在配置层明确拒绝；目标机五进程资源、内部可信 HTTPS 和 qualification profile 扩展仍未完成。此决定替代旧冻结生产资格 spec 中仅云端 Embedding 的方案假设，不改写旧历史，也不代表该 spec 已恢复或通过。第三方 Chat 配置须等 build-qa 阶段 D 的正式验收，真实供应商、费用预算与数据保留政策由管理员确定。
+当前服务 launcher 仅绑定 loopback 且只支持 development，Bearer 内部鉴权，readiness 只返回非秘密身份。E5 production 在配置层明确拒绝；内部可信 HTTPS 和 qualification profile 扩展留待后续实际部署任务。此决定替代旧冻结生产资格 spec 中仅云端 Embedding 的方案假设，不改写旧历史，也不代表该 spec 已恢复或通过。第三方 Chat 配置以 build-qa 阶段 D 的本机检索验收和容量推算为前置条件，真实供应商、费用预算与数据保留政策由管理员确定。
 
 E5 当前问题超长时，终态回答使用既有字符串 code 字段 `answered_lexical`，并显示“问题较长，本次仅使用关键词检索公开资料”；拒答也附相同提示。复用现有 SSE 字段，不新增协议字段。该布尔状态可进入 checkpoint，问题/历史增强文本仍遵守原有瞬态边界。
 
-本机生成回归题可用于检查代码与跨语言召回，但没有人工标注确认，不能据此宣称满足 40 条人工标注 Recall@5 验收。服务器内存/延迟目标必须在真实 2 vCPU/4 GB 上实测。
+2026-09-06 后续决策：管理员已确认 40 条正向题及边界材料人工审核通过，绑定记录见 [评估操作说明](../operations/e5-retrieval-evaluation.md)。管理员另明确要求取消阶段 D 的真实 2 vCPU / 4 GB 共驻验收，改为在本地运行完整进程组、采样资源并反推配置，不预设部署规格。具体采样、内存包络与余量、CPU 核当量和磁盘增长假设以 [build-qa](../../../build-qa.md) 为准。现有部分性能数据不是完整容量报告，仍需补测；不同硬件性能不按核数线性换算。本轮本机联调和交接无需服务器，实际部署时另处理生产资格适配，当前不修改可执行生产门禁。
 
 官方依据：[E5 固定模型卡](https://huggingface.co/intfloat/multilingual-e5-small/blob/614241f622f53c4eeff9890bdc4f31cfecc418b3/README.md)、[Sentence Transformers CPU 后端](https://sbert.net/docs/sentence_transformer/usage/efficiency.html)。
