@@ -11006,6 +11006,16 @@
                 "M10-E5-LOCAL-01-E01",
                 "M10-E5-LOCAL-01-E02"
               ]
+            },
+            {
+              "path": "apps/api/tests/test_local_e5.py",
+              "kind": "pytest",
+              "name": "test_repeated_rebuild_reuses_ready_staging",
+              "gate": "api-tests",
+              "covers": [
+                "M10-E5-LOCAL-01-E01",
+                "M10-E5-LOCAL-01-E02"
+              ]
             }
           ]
         }
