@@ -11018,6 +11018,134 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M10-EVAL-DATASET-01",
+          "priority": "P1",
+          "scenario": "严格草稿题集与人工复核材料",
+          "expectations": [
+            {
+              "id": "M10-EVAL-DATASET-01-E01",
+              "surface": "response",
+              "statement": "题集覆盖四方向与边界，gold绑定原文"
+            },
+            {
+              "id": "M10-EVAL-DATASET-01-E02",
+              "surface": "forbidden",
+              "statement": "缺失、重复、错误语言和虚构标注不能通过"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_e5_evaluation.py",
+              "kind": "pytest",
+              "name": "test_dataset_rejects_invalid_labels_and_renders_all_cases",
+              "gate": "api-tests",
+              "covers": [
+                "M10-EVAL-DATASET-01-E01",
+                "M10-EVAL-DATASET-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-EVAL-ISOLATION-01",
+          "priority": "P1",
+          "scenario": "独立发布语料与关闭状态",
+          "expectations": [
+            {
+              "id": "M10-EVAL-ISOLATION-01-E01",
+              "surface": "response",
+              "statement": "API发布到新库，文章和Profile按类型与ID映射"
+            },
+            {
+              "id": "M10-EVAL-ISOLATION-01-E02",
+              "surface": "forbidden",
+              "statement": "不覆盖已有目录、不写源库、不允许enabled或pending gate"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_e5_evaluation.py",
+              "kind": "pytest",
+              "name": "test_isolation_publishes_only_to_fresh_database",
+              "gate": "api-tests",
+              "covers": [
+                "M10-EVAL-ISOLATION-01-E01",
+                "M10-EVAL-ISOLATION-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-EVAL-METRICS-01",
+          "priority": "P1",
+          "scenario": "Recall、片段与引用独立计算",
+          "expectations": [
+            {
+              "id": "M10-EVAL-METRICS-01-E01",
+              "surface": "response",
+              "statement": "top5文档去重，片段命中要求原文及有效引用"
+            },
+            {
+              "id": "M10-EVAL-METRICS-01-E02",
+              "surface": "forbidden",
+              "statement": "失效引用、重复chunk和无证据近邻不能冒充正确"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_e5_evaluation.py",
+              "kind": "pytest",
+              "name": "test_metrics_deduplicate_documents_and_require_evidence_and_current_citation",
+              "gate": "api-tests",
+              "covers": [
+                "M10-EVAL-METRICS-01-E01",
+                "M10-EVAL-METRICS-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-EVAL-REPORT-01",
+          "priority": "P1",
+          "scenario": "失败封闭且不自动验收",
+          "expectations": [
+            {
+              "id": "M10-EVAL-REPORT-01-E01",
+              "surface": "response",
+              "statement": "报告绑定数据与generation，保留复核材料"
+            },
+            {
+              "id": "M10-EVAL-REPORT-01-E02",
+              "surface": "forbidden",
+              "statement": "服务失败、缺失结果、意外降级不成功，草稿永不自动生产放行"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_e5_evaluation.py",
+              "kind": "pytest",
+              "name": "test_reports_never_qualify_drafts_and_fail_on_drift",
+              "gate": "api-tests",
+              "covers": [
+                "M10-EVAL-REPORT-01-E01",
+                "M10-EVAL-REPORT-01-E02"
+              ]
+            }
+          ]
         }
       ]
     }

@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-06T10:00:30.701441+00:00",
+  "runner_sha256": "07ffc2010c77c2e8e05bd1e366a3fcb03c512ae03db707df5b6486fab9aa7ae5",
+  "scope": "manual-local-only-synthetic-draft",
+  "dataset_id": "e5-bilingual-v1",
+  "dataset_sha256": "1e9b70059c06ad8bba7df110258ee710ad6404c2c76ec3ff753c2b938a6cd997",
+  "annotation_status": "ai_draft_pending_human_review",
+  "model": "intfloat/multilingual-e5-small",
+  "model_version": "614241f622f53c4eeff9890bdc4f31cfecc418b3:e5-fp32-mean-l2-v1",
+  "pipeline": "assistant-e5-token384-overlap64-v1",
+  "top_k": 5,
+  "metric": "macro document recall over top five chunks; duplicate documents count once",
+  "corpora": {
+    "zh": {
+      "generation": 1,
+      "collection": "e5_eval_b0b9277a826d9ee2d3742535_zh_1",
+      "documents": 21,
+      "chunks": 21,
+      "vectors": 21,
+      "gate": "disabled"
+    },
+    "en": {
+      "generation": 1,
+      "collection": "e5_eval_adcadd910a69f0cb555f7249_en_1",
+      "documents": 21,
+      "chunks": 21,
+      "vectors": 21,
+      "gate": "disabled"
+    }
+  },
+  "groups": {
+    "all": {
+      "count": 40,
+      "recall_at_5": 0.975,
+      "evidence_recall_at_5": 0.975
+    },
+    "zh->zh": {
+      "count": 10,
+      "recall_at_5": 1.0,
+      "evidence_recall_at_5": 1.0
+    },
+    "en->en": {
+      "count": 10,
+      "recall_at_5": 1.0,
+      "evidence_recall_at_5": 1.0
+    },
+    "zh->en": {
+      "count": 10,
+      "recall_at_5": 1.0,
+      "evidence_recall_at_5": 1.0
+    },
+    "en->zh": {
+      "count": 10,
+      "recall_at_5": 0.9,
+      "evidence_recall_at_5": 0.9
+    }
+  },
+  "run_valid": true,
+  "unexpected_results": [],
+  "draft_recall_target_met": true,
+  "boundaries": [
+    {
+      "id": "zh-no-evidence",
+      "direction": "zh->zh",
+      "kind": "no_evidence",
+      "status": "ok",
+      "overlong": false,
+      "query_tokens": 20,
+      "recall_at_5": null,
+      "evidence_recall_at_5": null,
+      "citations_valid": true,
+      "unsupported_neighbors": 5,
+      "refusal_evaluated": false
+    },
+    {
+      "id": "boundary-terminology",
+      "direction": "zh->zh",
+      "kind": "terminology",
+      "status": "ok",
+      "overlong": false,
+      "query_tokens": 24,
+      "recall_at_5": 1.0,
+      "evidence_recall_at_5": 1.0,
+      "citations_valid": true,
+      "unsupported_neighbors": 0,
+      "refusal_evaluated": false
+    },
+    {
+      "id": "boundary-code",
+      "direction": "zh->zh",
+      "kind": "code",
+      "status": "ok",
+      "overlong": false,
+      "query_tokens": 31,
+      "recall_at_5": 1.0,
+      "evidence_recall_at_5": 1.0,
+      "citations_valid": true,
+      "unsupported_neighbors": 0,
+      "refusal_evaluated": false
+    },
+    {
+      "id": "boundary-long",
+      "direction": "zh->zh",
+      "kind": "long",
+      "status": "degraded",
+      "overlong": true,
+      "query_tokens": 6022,
+      "recall_at_5": 0.0,
+      "evidence_recall_at_5": 0.0,
+      "citations_valid": true,
+      "unsupported_neighbors": 0,
+      "refusal_evaluated": false
+    },
+    {
+      "id": "en-no-evidence",
+      "direction": "en->en",
+      "kind": "no_evidence",
+      "status": "ok",
+      "overlong": false,
+      "query_tokens": 19,
+      "recall_at_5": null,
+      "evidence_recall_at_5": null,
+      "citations_valid": true,
+      "unsupported_neighbors": 5,
+      "refusal_evaluated": false
+    },
+    {
+      "id": "boundary-mixed",
+      "direction": "zh->en",
+      "kind": "mixed",
+      "status": "ok",
+      "overlong": false,
+      "query_tokens": 23,
+      "recall_at_5": 1.0,
+      "evidence_recall_at_5": 1.0,
+      "citations_valid": true,
+      "unsupported_neighbors": 0,
+      "refusal_evaluated": false
+    }
+  ],
+  "missed_positive_ids": [
+    "en-zh-queue"
+  ],
+  "phase_d_passed": false,
+  "production_qualified": false,
+  "chat_called": false,
+  "pending": [
+    "human-reviewed labels",
+    "real visitor corpus coverage",
+    "2-vCPU/4-GB co-resident resource acceptance"
+  ]
+}

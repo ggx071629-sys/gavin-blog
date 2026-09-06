@@ -1327,7 +1327,8 @@
         "M09.development",
         "M09.providers",
         "M09.runtime",
-        "M10.operations"
+        "M10.operations",
+        "M10.e5_evaluation"
       ],
       "dependency_reasons": {
         "M01.articles": [
@@ -1377,6 +1378,12 @@
         ],
         "M10.operations": [
           "apps/api/app/assistant/admin_operations.py:12 imports app.assistant_index.projector"
+        ],
+        "M10.e5_evaluation": [
+          "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/assistant_index/retriever.py",
+          "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/assistant_index/projector.py",
+          "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/assistant_index/runtime.py",
+          "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/assistant_index/worker.py"
         ]
       }
     },
@@ -1584,7 +1591,8 @@
         "M09.runtime",
         "M10.index",
         "M10.operations",
-        "M10.qualification"
+        "M10.qualification",
+        "M10.e5_evaluation"
       ],
       "dependency_reasons": {
         "M02.publishing": [
@@ -1639,6 +1647,10 @@
           "apps/api/app/assistant_qualification/backup_restore.py:19 imports app.config",
           "apps/api/app/assistant_qualification/provider_probe.py:28 imports app.config",
           "apps/api/app/assistant_qualification/runtime_binding.py:13 imports app.config"
+        ],
+        "M10.e5_evaluation": [
+          "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/config.py",
+          "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/main.py"
         ]
       }
     },
@@ -1673,7 +1685,8 @@
         "M09.runtime",
         "M10.index",
         "M10.operations",
-        "M10.qualification"
+        "M10.qualification",
+        "M10.e5_evaluation"
       ],
       "dependency_reasons": {
         "M01.articles": [
@@ -1778,6 +1791,10 @@
         "M10.qualification": [
           "apps/api/app/assistant_qualification/backup_restore.py:20 imports app.content_write_fence",
           "apps/api/app/assistant_qualification/runtime_binding.py:9 imports app.content_write_fence"
+        ],
+        "M10.e5_evaluation": [
+          "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/db.py",
+          "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/models.py"
         ]
       }
     },
@@ -1802,7 +1819,8 @@
         "M06.profile",
         "M09.runtime",
         "M10.index",
-        "M10.operations"
+        "M10.operations",
+        "M10.e5_evaluation"
       ],
       "dependency_reasons": {
         "M01.articles": [
@@ -1849,6 +1867,9 @@
         ],
         "M10.operations": [
           "apps/api/app/assistant/admin_operations.py:29 imports app.time_utils"
+        ],
+        "M10.e5_evaluation": [
+          "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/time_utils.py"
         ]
       }
     },
@@ -3131,7 +3152,8 @@
         "ui-fix/PHASE-6.md",
         "ui-fix/PHASE-7.md",
         "harness/docs/decisions/20260906-local-e5-retrieval.md",
-        "build-qa.md"
+        "build-qa.md",
+        "harness/docs/operations/e5-retrieval-evaluation.md"
       ],
       "cases": [
         "M08-DOCS-01"
@@ -3287,8 +3309,28 @@
       "dependents": [
         "M09.providers",
         "M09.runtime",
-        "M10.index"
-      ]
+        "M10.index",
+        "M10.e5_evaluation"
+      ],
+      "dependency_reasons": {
+        "M10.e5_evaluation": [
+          "apps/api/app/local_embedding/evaluation.py imports existing apps/api/app/local_embedding/local.py"
+        ]
+      }
+    },
+    "M10.e5_evaluation": {
+      "paths": [
+        "apps/api/app/local_embedding/evaluation.py",
+        "apps/api/evaluation/e5-bilingual-v1.json",
+        "apps/api/tests/test_e5_evaluation.py"
+      ],
+      "cases": [
+        "M10-EVAL-DATASET-01",
+        "M10-EVAL-ISOLATION-01",
+        "M10-EVAL-METRICS-01",
+        "M10-EVAL-REPORT-01"
+      ],
+      "dependents": []
     }
   }
 }
