@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **1 active**, **1 frozen**.
+Open specifications: **0 active**, **1 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -12,7 +12,6 @@ Open specifications: **1 active**, **1 frozen**.
 | sdd-policy | — | L1 | 风险触发、短生命周期的 Spec-Driven Development 规则 | behavior-change, api-change, data-change, security-change, cross-stack-change | Gavin | [_sdd/README.md](_sdd/README.md) |
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
 | spec-20260830-public-qa-production-qualification | frozen | L1 | 用真实供应商、目标主机和可恢复基础设施证据判定公开问答是否具备生产放行资格 | task:20260830-public-qa-production-qualification | Gavin | [active/20260830-public-qa-production-qualification.md](active/20260830-public-qa-production-qualification.md) |
-| spec-20260906-local-e5-retrieval | active | L1 | 在 Windows 开发机接入固定 E5 CPU 服务和双语检索，保持生产关闭 | task:20260906-local-e5-retrieval | — | [active/20260906-local-e5-retrieval.md](active/20260906-local-e5-retrieval.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -121,6 +120,7 @@ Open specifications: **1 active**, **1 frozen**.
 | archive-20260906-harness-execution | compressed | L2 | 干净快照前检、无认证局部诊断与精确隔离执行 | task:20260906-harness-execution | Codex | [archive/20260906-harness-execution.md](archive/20260906-harness-execution.md) |
 | archive-20260906-harness-impact-completion | compressed | L2 | 完成受影响模块选择的归属、传递分析、真实产品闭环及成本验收 | task:20260906-harness-impact-completion | Codex | [archive/20260906-harness-impact-completion.md](archive/20260906-harness-impact-completion.md) |
 | archive-20260906-home-atlas | compressed | L2 | 完成视觉方案第二阶段的真实首页、有限栏目导览及状态验证 | task:20260906-home-atlas | Gavin | [archive/20260906-home-atlas.md](archive/20260906-home-atlas.md) |
+| archive-20260906-local-e5-retrieval | compressed | L2 | 在 Windows 开发机接入固定 E5 CPU 服务和双语检索，保持生产关闭 | task:20260906-local-e5-retrieval | — | [archive/20260906-local-e5-retrieval.md](archive/20260906-local-e5-retrieval.md) |
 | archive-20260906-public-assistant-ui | compressed | L2 | 完成视觉提案第六阶段的公开问答面板与状态交互 | task:20260906-public-assistant-ui | Gavin | [archive/20260906-public-assistant-ui.md](archive/20260906-public-assistant-ui.md) |
 | archive-20260906-public-reading | compressed | L2 | 完成视觉方案第三阶段的公开索引、详情与统一阅读体验 | task:20260906-public-reading | Gavin | [archive/20260906-public-reading.md](archive/20260906-public-reading.md) |
 | archive-20260906-resource-operations | compressed | L2 | 完成视觉提案第五阶段的后台资源与运营 | task:20260906-resource-operations | Gavin | [archive/20260906-resource-operations.md](archive/20260906-resource-operations.md) |
