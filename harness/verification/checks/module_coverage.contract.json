@@ -10152,6 +10152,132 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-DEEPSEEK-TRANSPORT-01",
+          "priority": "P1",
+          "scenario": "本机官方DeepSeek请求参数及生产协议隔离",
+          "expectations": [
+            {
+              "id": "M09-DEEPSEEK-TRANSPORT-01-ALLOW",
+              "surface": "response",
+              "statement": "JSON模式使用有界max_tokens、关闭thinking/retry，其他端点保持strict schema"
+            },
+            {
+              "id": "M09-DEEPSEEK-TRANSPORT-01-DENY",
+              "surface": "forbidden",
+              "statement": "生产或相似域名不得静默降级；400/429/500不得自动重试"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "kind": "pytest",
+              "name": "test_deepseek_transport_and_production_boundary",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEEPSEEK-TRANSPORT-01-ALLOW",
+                "M09-DEEPSEEK-TRANSPORT-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-DEEPSEEK-VALIDATION-01",
+          "priority": "P1",
+          "scenario": "正常、非法、截断及无usage响应进入现有问答链",
+          "expectations": [
+            {
+              "id": "M09-DEEPSEEK-VALIDATION-01-ALLOW",
+              "surface": "response",
+              "statement": "原始usage/model/finish元数据保留，正常结构进入引用校验和原有结算"
+            },
+            {
+              "id": "M09-DEEPSEEK-VALIDATION-01-DENY",
+              "surface": "forbidden",
+              "statement": "非法完整性/schema/引用或截断回答不得发布，usage缺失不得伪装已知"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "kind": "pytest",
+              "name": "test_deepseek_strict_validation_metadata_and_citations",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEEPSEEK-VALIDATION-01-ALLOW",
+                "M09-DEEPSEEK-VALIDATION-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "kind": "pytest",
+              "name": "test_deepseek_online_graph_settles_and_rejects_invalid_body",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEEPSEEK-VALIDATION-01-ALLOW",
+                "M09-DEEPSEEK-VALIDATION-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-DEEPSEEK-BUDGET-01",
+          "priority": "P1",
+          "scenario": "追加schema指令后评估实际输入与输出余量",
+          "expectations": [
+            {
+              "id": "M09-DEEPSEEK-BUDGET-01-ALLOW",
+              "surface": "response",
+              "statement": "完整schema消息进入输入估算，普通上下文校验及未知用量保守结算保持"
+            },
+            {
+              "id": "M09-DEEPSEEK-BUDGET-01-DENY",
+              "surface": "forbidden",
+              "statement": "超输入窗口不得发送Chat，不能忽略适配增加的消息字节"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "kind": "pytest",
+              "name": "test_deepseek_prompt_budget_covers_actual_schema_message",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEEPSEEK-BUDGET-01-ALLOW",
+                "M09-DEEPSEEK-BUDGET-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+              "kind": "pytest",
+              "name": "test_unprovable_prompt_fit_never_dispatches_chat_provider",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEEPSEEK-BUDGET-01-ALLOW",
+                "M09-DEEPSEEK-BUDGET-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+              "kind": "pytest",
+              "name": "test_context_window_validation_and_readiness_bind_all_token_limits",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEEPSEEK-BUDGET-01-ALLOW",
+                "M09-DEEPSEEK-BUDGET-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

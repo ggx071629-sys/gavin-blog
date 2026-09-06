@@ -1156,7 +1156,10 @@
         "M09-E5-ADAPTER-01",
         "M10-E5-CHUNK-01",
         "M09-E5-QUERY-01",
-        "M10-E5-LOCAL-01"
+        "M10-E5-LOCAL-01",
+        "M09-DEEPSEEK-TRANSPORT-01",
+        "M09-DEEPSEEK-VALIDATION-01",
+        "M09-DEEPSEEK-BUDGET-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1449,7 +1452,8 @@
     "M09.providers": {
       "paths": [
         "apps/api/app/assistant/providers.py",
-        "apps/api/tests/test_assistant_provider_facts.py"
+        "apps/api/tests/test_assistant_provider_facts.py",
+        "apps/api/tests/test_assistant_deepseek.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1459,7 +1463,10 @@
         "M09-E5-ADAPTER-01",
         "M10-E5-CHUNK-01",
         "M09-E5-QUERY-01",
-        "M10-E5-LOCAL-01"
+        "M10-E5-LOCAL-01",
+        "M09-DEEPSEEK-TRANSPORT-01",
+        "M09-DEEPSEEK-VALIDATION-01",
+        "M09-DEEPSEEK-BUDGET-01"
       ],
       "dependents": [
         "M09.runtime",
@@ -3173,7 +3180,8 @@
         "ui-fix/PHASE-7.md",
         "harness/docs/decisions/20260906-local-e5-retrieval.md",
         "build-qa.md",
-        "harness/docs/operations/e5-retrieval-evaluation.md"
+        "harness/docs/operations/e5-retrieval-evaluation.md",
+        "harness/docs/decisions/20260906-local-deepseek-chat.md"
       ],
       "cases": [
         "M08-DOCS-01"
