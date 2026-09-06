@@ -1167,8 +1167,7 @@
         "M09.providers",
         "M10.index",
         "M10.operations",
-        "M10.qualification",
-        "M09.chat_setup"
+        "M10.qualification"
       ],
       "dependency_reasons": {
         "M06.api_tooling": [
@@ -1228,9 +1227,6 @@
           "apps/api/app/assistant_qualification/provider_probe.py:18 imports app.assistant.graph",
           "apps/api/app/assistant_qualification/provider_probe.py:19 imports app.assistant.money",
           "apps/api/app/assistant_qualification/provider_probe.py:20 imports app.assistant.owner_lock"
-        ],
-        "M09.chat_setup": [
-          "CLI reuses exclusive file lock and Beijing timezone, never launches runtime."
         ]
       }
     },
@@ -1468,8 +1464,7 @@
       "dependents": [
         "M09.runtime",
         "M10.index",
-        "M10.qualification",
-        "M09.chat_setup"
+        "M10.qualification"
       ],
       "dependency_reasons": {
         "M09.runtime": [
@@ -1486,9 +1481,6 @@
         ],
         "M10.qualification": [
           "apps/api/app/assistant_qualification/provider_probe.py:21 imports app.assistant.providers"
-        ],
-        "M09.chat_setup": [
-          "Explicit CLI reuses ChatOpenAI factory and ModelAnswer."
         ]
       }
     },
@@ -1609,8 +1601,7 @@
         "M10.operations",
         "M10.qualification",
         "M10.e5_evaluation",
-        "M10.capacity",
-        "M09.chat_setup"
+        "M10.capacity"
       ],
       "dependency_reasons": {
         "M02.publishing": [
@@ -1672,9 +1663,6 @@
         ],
         "M10.capacity": [
           "capacity/capacity_roles reuse this unit through explicit development-only measurement CLI; no reverse runtime import."
-        ],
-        "M09.chat_setup": [
-          "CLI constructs development Settings for the existing model factory."
         ]
       }
     },
@@ -1932,8 +1920,7 @@
         "M06.runtime_config",
         "M09.runtime",
         "M10.index",
-        "M10.capacity",
-        "M09.chat_setup"
+        "M10.capacity"
       ],
       "dependency_reasons": {
         "M06.persistence": [
@@ -1950,9 +1937,6 @@
         ],
         "M10.capacity": [
           "capacity/capacity_roles reuse this unit through explicit development-only measurement CLI; no reverse runtime import."
-        ],
-        "M09.chat_setup": [
-          "CLI uses locked LangChain, python-dotenv (pydantic-settings dependency) and LangSmith tracing context."
         ]
       }
     },
@@ -3391,19 +3375,6 @@
         "M10-CAPACITY-METRICS-01",
         "M10-CAPACITY-ISOLATION-01",
         "M10-CAPACITY-REPORT-01"
-      ],
-      "dependents": []
-    },
-    "M09.chat_setup": {
-      "paths": [
-        "apps/api/app/assistant/chat_setup.py",
-        "apps/api/tests/test_chat_setup.py",
-        "apps/api/chat.env.example"
-      ],
-      "cases": [
-        "M09-CHAT-SETUP-CONFIG-01",
-        "M09-CHAT-SETUP-WIRE-01",
-        "M09-CHAT-SETUP-BUDGET-01"
       ],
       "dependents": []
     }

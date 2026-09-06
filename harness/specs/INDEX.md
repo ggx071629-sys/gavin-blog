@@ -123,7 +123,6 @@ Open specifications: **0 active**, **1 frozen**.
 | archive-20260906-home-atlas | compressed | L2 | 完成视觉方案第二阶段的真实首页、有限栏目导览及状态验证 | task:20260906-home-atlas | Gavin | [archive/20260906-home-atlas.md](archive/20260906-home-atlas.md) |
 | archive-20260906-local-capacity-measurement | compressed | L2 | 本机隔离完整进程组测量并推算部署资源 | task:20260906-local-capacity-measurement | — | [archive/20260906-local-capacity-measurement.md](archive/20260906-local-capacity-measurement.md) |
 | archive-20260906-local-capacity-plan | compressed | L2 | 将阶段 D 资源验收改为本机测量与容量推算 | task:20260906-local-capacity-plan | — | [archive/20260906-local-capacity-plan.md](archive/20260906-local-capacity-plan.md) |
-| archive-20260906-local-chat-setup | compressed | L2 | 本机 LangChain OpenAI 兼容 Chat 配置与显式探测 | task:20260906-local-chat-setup | — | [archive/20260906-local-chat-setup.md](archive/20260906-local-chat-setup.md) |
 | archive-20260906-local-e5-retrieval | compressed | L2 | 在 Windows 开发机接入固定 E5 CPU 服务和双语检索，保持生产关闭 | task:20260906-local-e5-retrieval | — | [archive/20260906-local-e5-retrieval.md](archive/20260906-local-e5-retrieval.md) |
 | archive-20260906-public-assistant-ui | compressed | L2 | 完成视觉提案第六阶段的公开问答面板与状态交互 | task:20260906-public-assistant-ui | Gavin | [archive/20260906-public-assistant-ui.md](archive/20260906-public-assistant-ui.md) |
 | archive-20260906-public-reading | compressed | L2 | 完成视觉方案第三阶段的公开索引、详情与统一阅读体验 | task:20260906-public-reading | Gavin | [archive/20260906-public-reading.md](archive/20260906-public-reading.md) |
