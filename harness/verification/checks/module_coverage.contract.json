@@ -10140,6 +10140,16 @@
                 "M09-E5-QUERY-01-E01",
                 "M09-E5-QUERY-01-E02"
               ]
+            },
+            {
+              "path": "apps/api/tests/test_local_e5.py",
+              "kind": "pytest",
+              "name": "test_graph_overlong_e5_query_skips_embedding_and_releases_reservation",
+              "gate": "api-tests",
+              "covers": [
+                "M09-E5-QUERY-01-E01",
+                "M09-E5-QUERY-01-E02"
+              ]
             }
           ]
         }
@@ -10919,6 +10929,16 @@
               "path": "apps/api/tests/test_assistant_index.py",
               "kind": "pytest",
               "name": "test_chunker_is_deterministic_and_strips_html_noise",
+              "gate": "api-tests",
+              "covers": [
+                "M10-E5-CHUNK-01-E01",
+                "M10-E5-CHUNK-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_local_e5.py",
+              "kind": "pytest",
+              "name": "test_worker_rejects_embedding_into_old_generation_before_call",
               "gate": "api-tests",
               "covers": [
                 "M10-E5-CHUNK-01-E01",
