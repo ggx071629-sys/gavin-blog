@@ -455,6 +455,62 @@
           "cases": []
         }
       ]
+    },
+    {
+      "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+      "owner": "M09.assistant_web",
+      "reason": "更新后台标题与访客不可用提示的精确测试定位，验证真实停用、输入禁用及零提问请求。",
+      "cases": [
+        "M09-UNIT-ASSISTANT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "仅更新后台标题的测试定位，不修改组件、代理身份、开关或准入行为。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "仅更新后台标题的测试定位，不修改组件、代理身份、开关或准入行为。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "仅更新后台标题的测试定位，不修改组件、代理身份、开关或准入行为。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+      "owner": "M09.assistant_web",
+      "reason": "平滑滚动是异步行为，使用条件轮询等待滚动位置变化，保留未读不抢位置及最新回复可见断言。",
+      "cases": [
+        "M09-UI-INTERACTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "仅更新后台标题的测试定位，不修改组件、代理身份、开关或准入行为。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "仅更新后台标题的测试定位，不修改组件、代理身份、开关或准入行为。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "仅更新后台标题的测试定位，不修改组件、代理身份、开关或准入行为。",
+          "cases": []
+        }
+      ]
     }
   ]
 }
