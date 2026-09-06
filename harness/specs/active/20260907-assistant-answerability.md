@@ -44,4 +44,5 @@ state_history:
 
 ## Gates
 
+- harness-integrity => AC-1, AC-2
 - api-tests => AC-1, AC-2
