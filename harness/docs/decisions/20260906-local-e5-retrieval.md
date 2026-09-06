@@ -21,6 +21,6 @@ load_when:
 
 E5 当前问题超长时，终态回答使用既有字符串 code 字段 `answered_lexical`，并显示“问题较长，本次仅使用关键词检索公开资料”；拒答也附相同提示。复用现有 SSE 字段，不新增协议字段。该布尔状态可进入 checkpoint，问题/历史增强文本仍遵守原有瞬态边界。
 
-2026-09-06 后续决策：管理员已确认 40 条正向题及边界材料人工审核通过，绑定记录见 [评估操作说明](../operations/e5-retrieval-evaluation.md)。管理员另明确要求取消阶段 D 的真实 2 vCPU / 4 GB 共驻验收，改为在本地运行完整进程组、采样资源并反推配置，不预设部署规格。具体采样、内存包络与余量、CPU 核当量和磁盘增长假设以 [build-qa](../../../build-qa.md) 为准。现有部分性能数据不是完整容量报告，仍需补测；不同硬件性能不按核数线性换算。本轮本机联调和交接无需服务器，实际部署时另处理生产资格适配，当前不修改可执行生产门禁。
+2026-09-06 后续决策：管理员已确认 40 条正向题及边界材料人工审核通过，绑定记录见 [评估操作说明](../operations/e5-retrieval-evaluation.md)。管理员另明确要求取消阶段 D 的真实 2 vCPU / 4 GB 共驻验收，改为在本地运行完整进程组、采样资源并反推配置，不预设部署规格。具体采样、内存包络与余量、CPU 核当量和磁盘增长假设以 [阶段 D 测量方法归档](../../../build-qa/archive/stage-d.md#method) 为准。现有部分性能数据不是完整容量报告，仍需补测；不同硬件性能不按核数线性换算。本轮本机联调和交接无需服务器，实际部署时另处理生产资格适配，当前不修改可执行生产门禁。
 
 官方依据：[E5 固定模型卡](https://huggingface.co/intfloat/multilingual-e5-small/blob/614241f622f53c4eeff9890bdc4f31cfecc418b3/README.md)、[Sentence Transformers CPU 后端](https://sbert.net/docs/sentence_transformer/usage/efficiency.html)。

@@ -11,6 +11,8 @@ author: Gavin
 
 # Decision: evidence-bound public Q&A production qualification
 
+2026-09-06：管理员取消原生产资格任务，直接移除其 spec，不生成完成归档。本文记录已实现的资格控制边界；后续如需推进生产资格，应按当时实际环境重新立项。
+
 ## Context
 
 前五阶段已交付本地 RAG、在线内核、Web 消费层、runtime 完整性和管理员运营面，但它们只证明仓库合同与本地行为。替身 provider、OpenAPI、readiness receipt、dashboard healthy 或 release gate 都不能证明最终供应商、公网代理、持久化恢复和 2 vCPU／4 GB 目标主机可安全运行。当前生产平台、域名、provider、模型、备份产品、告警渠道和阈值仍未由管理员选定，不能由实现者补猜。
@@ -30,7 +32,7 @@ author: Gavin
 
 ## Consequences
 
-- 在管理员提供最终 profile、真实目标和受控访问前，本任务不能完成，当前 production 结论保持 No-Go；这属于信息／环境缺失，不是一次完整的 `QUALIFICATION_NO_GO`。
+- 在管理员提供最终 profile、真实目标和受控访问前，生产资格无法判定，当前 production 结论保持 No-Go；这属于信息／环境缺失，不是一次完整的 `QUALIFICATION_NO_GO`。
 - 本地备份 helper、target runner、签名 verifier、32-case conformance suite 和启动绑定只是资格控制，不是目标测量。不得因这些工具存在而声称 production-qualified。
 - `QUALIFICATION_GO_CANDIDATE` 也不表示已经部署、持续可用或对普通访客开放；`QUALIFICATION_NO_GO` 只能进入 remediation／重新资格。
 - 暗发布前后 Web launcher、API capability 与 runtime gate 都保持关闭。canary 结束后无论结果都恢复关闭；永久公开启用只能由管理员在重新检查证据 freshness 后显式执行。

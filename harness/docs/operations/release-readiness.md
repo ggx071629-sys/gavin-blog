@@ -13,7 +13,7 @@ author: Gavin
 
 ## Current status
 
-项目当前处于公开问答 `LOCAL_READY` 和整站 production No-Go。`npm run quality:release` 通过只表示本地发布候选满足代码、契约、测试、构建、可访问性、性能、SEO 和 Harness 完整性门槛；它不证明真实供应商、最终 TLS／SSE 链、目标 2 vCPU／4 GB、恢复或监控。当前资格任务仍冻结，配置声明的批准非秘密 profile、匹配的 pinned public-key set 与签名 manifest 均未落盘；唯一平台部署 artifact、真实目标 47 项 case 记录也不存在。因此当前既不是有效 `QUALIFICATION_NO_GO`，也不是 `QUALIFICATION_GO_CANDIDATE`。
+项目当前处于公开问答 `LOCAL_READY` 和整站 production No-Go。`npm run quality:release` 通过只表示本地发布候选满足代码、契约、测试、构建、可访问性、性能、SEO 和 Harness 完整性门槛；它不证明真实供应商、最终 TLS／SSE 链、目标 2 vCPU／4 GB、恢复或监控。原资格任务已于 2026-09-06 按管理员要求取消并移除 spec，后续生产资格需重新立项。配置声明的批准非秘密 profile、匹配的 pinned public-key set 与签名 manifest 均未落盘；唯一平台部署 artifact、真实目标 47 项 case 记录也不存在。因此当前既不是有效 `QUALIFICATION_NO_GO`，也不是 `QUALIFICATION_GO_CANDIDATE`。
 
 资格状态只允许 `LOCAL_READY → QUALIFICATION_GO_CANDIDATE | QUALIFICATION_NO_GO`。前者要求所有必测 case 为 pass；后者要求真实 measured fail 及其无环 `blocked_by` 因果链完整，不能用 missing／unknown／没环境代替。task close 只关闭这次资格判定；只有仍新鲜的 GO candidate 才可由管理员在任务外继续 `FINAL_GO → PUBLIC_ENABLED`。部署、runner、readiness 和 close 均不得自动开启 Web launcher、API capability 或 runtime gate。
 
@@ -51,13 +51,13 @@ CI 在权威 gate 结束后以 `always()` 生成脱敏 Harness telemetry summary
 - 从干净检出使用锁文件安装依赖并通过 `npm run quality:release`。
 - 确认 Git 工作树干净，生成带版本号和 commit SHA 的发布说明。
 
-恢复资格任务前，管理员必须批准并提交配置所指向的非秘密 profile 与匹配的 pinned public-key set；versioned case suite 已在仓库中。完成一次真实目标判定后，仓库再保存签名的 `harness/verification/qualifications/20260830-public-qa-production-qualification.json`。原始 case observation、summary、provider probe ledger、重型日志、抓包、数据库副本、原问答、IP、私有 endpoint、provider raw payload 和 private key 均留在批准的 Git 外加密存储。
+后续重新立项并推进生产资格前，管理员必须批准并提交配置所指向的非秘密 profile 与匹配的 pinned public-key set；versioned case suite 已在仓库中。下文任务 ID 与 manifest 路径对应既有工具配置，不代表仍有同名开放 spec；新任务应先明确其配置绑定。完成一次真实目标判定后，仓库再保存签名的 `harness/verification/qualifications/20260830-public-qa-production-qualification.json`。原始 case observation、summary、provider probe ledger、重型日志、抓包、数据库副本、原问答、IP、私有 endpoint、provider raw payload 和 private key 均留在批准的 Git 外加密存储。
 
 `python -m tools.harness qualification-verify 20260830-public-qa-production-qualification` 校验签名、schema、源码／artifact／profile／case-suite 绑定、TTL、目标与 provider 事实、完整 case 终态和三开关关闭；缺失或过期都非零。历史 manifest 到期不拖垮未来普通本地 release，但永远不能授权 `FINAL_GO`。
 
 ### Qualification CLI contract
 
-以下命令已经存在，但当前仍被冻结状态及“管理员尚未选择 profile／平台／真实供应商与目标主机”阻断；命令可用不等于资格可执行，更不产生占位 No-Go。恢复任务并提交批准的非秘密输入后，先从 `apps/api/` 用 lock 一致的环境完成 profile 检查；真实 provider probe 必须同时显式选择 Chat 与 Embedding，并把 ledger/output 写在 profile 批准的 qualification root：
+以下命令已经存在，但原任务已取消，且管理员尚未批准完整生产 profile／平台／真实供应商与目标主机；命令可用不等于资格可执行，更不产生占位 No-Go。后续新任务明确配置绑定并提交批准的非秘密输入后，先从 `apps/api/` 用 lock 一致的环境完成 profile 检查；真实 provider probe 必须同时显式选择 Chat 与 Embedding，并把 ledger/output 写在 profile 批准的 qualification root：
 
 ```powershell
 uv run --locked python scripts/assistant_qualification.py schema

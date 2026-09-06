@@ -1245,6 +1245,9 @@
         "apps/api/app/assistant/development.py",
         "apps/api/tests/test_assistant_development.py",
         "scripts/run-assistant-dev.mjs",
+        "scripts/local_launcher.py",
+        "启动项目.cmd",
+        "停止项目.cmd",
         "apps/api/tests/test_assistant_real_development.py"
       ],
       "cases": [
