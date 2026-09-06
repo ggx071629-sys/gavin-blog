@@ -10288,6 +10288,417 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-LOCAL-REAL-BOUNDARY-01",
+          "priority": "P1",
+          "scenario": "显式真实开发启动仅接受回环与签名配置，生产和篡改均拒绝。",
+          "expectations": [
+            {
+              "id": "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+              "surface": "response",
+              "statement": "显式真实开发启动仅接受回环与签名配置，生产和篡改均拒绝。"
+            },
+            {
+              "id": "M09-LOCAL-REAL-BOUNDARY-01-DENY",
+              "surface": "forbidden",
+              "statement": "禁止配置越界、费用重置、错误答案、引用伪造、并发死锁或删除后正文复活。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_real_development_boundary_and_signed_probe",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+                "M09-LOCAL-REAL-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_development.py",
+              "name": "test_development_entry_rejects_environment_before_migration[production]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+                "M09-LOCAL-REAL-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_development.py",
+              "name": "test_development_entry_rejects_environment_before_migration[test]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+                "M09-LOCAL-REAL-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "name": "test_local_chat_probe_preconditions_and_allowlisted_result",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+                "M09-LOCAL-REAL-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "name": "test_local_chat_probe_reuses_budget_and_rejects_drift",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+                "M09-LOCAL-REAL-BOUNDARY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "name": "test_local_chat_probe_cannot_be_production_qualification",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+                "M09-LOCAL-REAL-BOUNDARY-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-LOCAL-REAL-RUNTIME-01",
+          "priority": "P1",
+          "scenario": "本机receipt和重启保留预算，生产隔离与旧离线入口继续通过。",
+          "expectations": [
+            {
+              "id": "M09-LOCAL-REAL-RUNTIME-01-ALLOW",
+              "surface": "response",
+              "statement": "本机receipt和重启保留预算，生产隔离与旧离线入口继续通过。"
+            },
+            {
+              "id": "M09-LOCAL-REAL-RUNTIME-01-DENY",
+              "surface": "forbidden",
+              "statement": "禁止配置越界、费用重置、错误答案、引用伪造、并发死锁或删除后正文复活。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_real_development_receipt_and_budget_persist",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-RUNTIME-01-ALLOW",
+                "M09-LOCAL-REAL-RUNTIME-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_development.py",
+              "name": "test_local_development_uses_existing_content_and_returns_citations",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-RUNTIME-01-ALLOW",
+                "M09-LOCAL-REAL-RUNTIME-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_online.py",
+              "name": "test_budget_exhausted_is_http_429",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-RUNTIME-01-ALLOW",
+                "M09-LOCAL-REAL-RUNTIME-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_online.py",
+              "name": "test_readiness_receipt_tamper_fails_closed",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-RUNTIME-01-ALLOW",
+                "M09-LOCAL-REAL-RUNTIME-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-LOCAL-REAL-QA-01",
+          "priority": "P1",
+          "scenario": "真实图传输合同覆盖空结果拒答、截断、故障降级和删除清理；本机实测见独立manifest。",
+          "expectations": [
+            {
+              "id": "M09-LOCAL-REAL-QA-01-ALLOW",
+              "surface": "response",
+              "statement": "真实图传输合同覆盖空结果拒答、截断、故障降级和删除清理；本机实测见独立manifest。"
+            },
+            {
+              "id": "M09-LOCAL-REAL-QA-01-DENY",
+              "surface": "forbidden",
+              "statement": "禁止配置越界、费用重置、错误答案、引用伪造、并发死锁或删除后正文复活。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "name": "test_deepseek_empty_blocks_refuses_only_complete_response[stop]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-QA-01-ALLOW",
+                "M09-LOCAL-REAL-QA-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "name": "test_deepseek_empty_blocks_refuses_only_complete_response[length]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-QA-01-ALLOW",
+                "M09-LOCAL-REAL-QA-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "name": "test_deepseek_transport_and_production_boundary",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-QA-01-ALLOW",
+                "M09-LOCAL-REAL-QA-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "name": "test_deepseek_strict_validation_metadata_and_citations",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-QA-01-ALLOW",
+                "M09-LOCAL-REAL-QA-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "name": "test_deepseek_prompt_budget_covers_actual_schema_message",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-QA-01-ALLOW",
+                "M09-LOCAL-REAL-QA-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_real_dependency_failure_preserves_fts_citation_contract[embedding]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-QA-01-ALLOW",
+                "M09-LOCAL-REAL-QA-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_real_dependency_failure_preserves_fts_citation_contract[qdrant]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-QA-01-ALLOW",
+                "M09-LOCAL-REAL-QA-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+              "name": "test_late_provider_completion_after_delete_has_no_body_checkpoint_or_delivery",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-QA-01-ALLOW",
+                "M09-LOCAL-REAL-QA-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+              "name": "test_saver_delete_failure_keeps_marker_null_and_records_retry",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-QA-01-ALLOW",
+                "M09-LOCAL-REAL-QA-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_web_delivery.py",
+              "name": "test_delete_before_sending_makes_zero_provider_calls",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-QA-01-ALLOW",
+                "M09-LOCAL-REAL-QA-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_web_delivery.py",
+              "name": "test_48h_purge_removes_minimal_rows",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-QA-01-ALLOW",
+                "M09-LOCAL-REAL-QA-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-LOCAL-REAL-CITATIONS-01",
+          "priority": "P1",
+          "scenario": "同篇多个段落编号正确闭合、定位、返回，恢复不丢编号；伪造仍隐藏。",
+          "expectations": [
+            {
+              "id": "M09-LOCAL-REAL-CITATIONS-01-ALLOW",
+              "surface": "response",
+              "statement": "同篇多个段落编号正确闭合、定位、返回，恢复不丢编号；伪造仍隐藏。"
+            },
+            {
+              "id": "M09-LOCAL-REAL-CITATIONS-01-DENY",
+              "surface": "forbidden",
+              "statement": "禁止配置越界、费用重置、错误答案、引用伪造、并发死锁或删除后正文复活。"
+            }
+          ],
+          "required_gates": [
+            "web-quality",
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "closes multiple chunk markers against a deduplicated article source",
+              "kind": "vitest",
+              "gate": "web-quality",
+              "covers": [
+                "M09-LOCAL-REAL-CITATIONS-01-ALLOW",
+                "M09-LOCAL-REAL-CITATIONS-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "closes hydrated answers before allowing source paths into Vue state",
+              "kind": "vitest",
+              "gate": "web-quality",
+              "covers": [
+                "M09-LOCAL-REAL-CITATIONS-01-ALLOW",
+                "M09-LOCAL-REAL-CITATIONS-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "closes markers only to matching citations and allowlisted sources",
+              "kind": "vitest",
+              "gate": "web-quality",
+              "covers": [
+                "M09-LOCAL-REAL-CITATIONS-01-ALLOW",
+                "M09-LOCAL-REAL-CITATIONS-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "multiple chunk citations navigate the deduplicated source live and after reload",
+              "kind": "playwright",
+              "gate": "e2e",
+              "covers": [
+                "M09-LOCAL-REAL-CITATIONS-01-ALLOW",
+                "M09-LOCAL-REAL-CITATIONS-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-LOCAL-REAL-CONCURRENCY-01",
+          "priority": "P1",
+          "scenario": "迁移保留费用、租约和saver，双图无控制写锁阻塞，正确限制容量并保留删除屏障。",
+          "expectations": [
+            {
+              "id": "M09-LOCAL-REAL-CONCURRENCY-01-ALLOW",
+              "surface": "response",
+              "statement": "迁移保留费用、租约和saver，双图无控制写锁阻塞，正确限制容量并保留删除屏障。"
+            },
+            {
+              "id": "M09-LOCAL-REAL-CONCURRENCY-01-DENY",
+              "surface": "forbidden",
+              "statement": "禁止配置越界、费用重置、错误答案、引用伪造、并发死锁或删除后正文复活。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_lease_migration.py",
+              "name": "test_lease_migration_preserves_ledger_saver_and_admits_contract_capacity",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-CONCURRENCY-01-ALLOW",
+                "M09-LOCAL-REAL-CONCURRENCY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_lease_migration.py",
+              "name": "test_concurrent_graphs_finish_without_blocking_control_on_saver_transaction",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-CONCURRENCY-01-ALLOW",
+                "M09-LOCAL-REAL-CONCURRENCY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "name": "test_http_concurrency_limited_returns_retry_after",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-CONCURRENCY-01-ALLOW",
+                "M09-LOCAL-REAL-CONCURRENCY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+              "name": "test_v1_runtime_upgrade_preserves_pinned_saver_schema",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-CONCURRENCY-01-ALLOW",
+                "M09-LOCAL-REAL-CONCURRENCY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+              "name": "test_normal_mutation_permit_requires_exact_lease_scope_keys",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-REAL-CONCURRENCY-01-ALLOW",
+                "M09-LOCAL-REAL-CONCURRENCY-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

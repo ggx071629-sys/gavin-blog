@@ -29,7 +29,8 @@
     "package-lock.json",
     ".gitignore",
     ".gitattributes",
-    "AGENTS.md"
+    "AGENTS.md",
+    "apps/api/assistant_runtime_migrations/versions/20260906_0004_lease_capacity.py"
   ],
   "units": {
     "M08.impact": {
@@ -1141,7 +1142,9 @@
         "apps/api/tests/test_assistant_online_matrix.py",
         "apps/api/tests/test_assistant_runtime_integrity.py",
         "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
-        "apps/api/tests/test_assistant_web_delivery.py"
+        "apps/api/tests/test_assistant_web_delivery.py",
+        "apps/api/tests/test_assistant_lease_migration.py",
+        "apps/api/assistant_runtime_migrations/versions/20260906_0004_lease_capacity.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1159,7 +1162,11 @@
         "M10-E5-LOCAL-01",
         "M09-DEEPSEEK-TRANSPORT-01",
         "M09-DEEPSEEK-VALIDATION-01",
-        "M09-DEEPSEEK-BUDGET-01"
+        "M09-DEEPSEEK-BUDGET-01",
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01",
+        "M09-LOCAL-REAL-CONCURRENCY-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1237,12 +1244,16 @@
       "paths": [
         "apps/api/app/assistant/development.py",
         "apps/api/tests/test_assistant_development.py",
-        "scripts/run-assistant-dev.mjs"
+        "scripts/run-assistant-dev.mjs",
+        "apps/api/tests/test_assistant_real_development.py"
       ],
       "cases": [
         "M09-P0-03",
         "M09-P1-02",
-        "M09-UNIT-ASSISTANT-DEVELOPMENT-01"
+        "M09-UNIT-ASSISTANT-DEVELOPMENT-01",
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1420,14 +1431,18 @@
         "M10-UNIT-ASSISTANT-RUNTIME-PROFILE-BINDING-01",
         "M10-LOCAL-CHAT-PROBE-01",
         "M10-LOCAL-CHAT-BUDGET-01",
-        "M10-LOCAL-CHAT-ISOLATION-01"
+        "M10-LOCAL-CHAT-ISOLATION-01",
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01"
       ],
       "dependents": [
         "M06.api_tooling",
         "M08.qualification",
         "M08.qualification_runner",
         "M09.runtime",
-        "M10.index"
+        "M10.index",
+        "M09.development"
       ],
       "dependency_reasons": {
         "M06.api_tooling": [
@@ -1449,6 +1464,9 @@
         ],
         "M10.index": [
           "apps/api/app/assistant_index/embeddings.py:82 imports app.assistant_qualification.runtime_binding"
+        ],
+        "M09.development": [
+          "real development validates the signed local probe before enabling"
         ]
       }
     },
@@ -1469,7 +1487,8 @@
         "M10-E5-LOCAL-01",
         "M09-DEEPSEEK-TRANSPORT-01",
         "M09-DEEPSEEK-VALIDATION-01",
-        "M09-DEEPSEEK-BUDGET-01"
+        "M09-DEEPSEEK-BUDGET-01",
+        "M09-LOCAL-REAL-QA-01"
       ],
       "dependents": [
         "M09.runtime",
@@ -1926,7 +1945,10 @@
         "M10-E5-LOCAL-01",
         "M10-LOCAL-CHAT-PROBE-01",
         "M10-LOCAL-CHAT-BUDGET-01",
-        "M10-LOCAL-CHAT-ISOLATION-01"
+        "M10-LOCAL-CHAT-ISOLATION-01",
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-CONCURRENCY-01"
       ],
       "dependents": [
         "M06.persistence",
@@ -2577,7 +2599,8 @@
         "M09-UI-LAYOUT-01",
         "M09-UI-INTERACTION-01",
         "M09-UI-STATES-01",
-        "M09-UI-BOUNDARY-01"
+        "M09-UI-BOUNDARY-01",
+        "M09-LOCAL-REAL-CITATIONS-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3065,7 +3088,9 @@
         "package.json"
       ],
       "cases": [
-        "M08-DOCS-01"
+        "M08-DOCS-01",
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01"
       ],
       "dependents": [
         "M08.browser_tooling",
@@ -3187,7 +3212,8 @@
         "harness/docs/decisions/20260906-local-e5-retrieval.md",
         "build-qa.md",
         "harness/docs/operations/e5-retrieval-evaluation.md",
-        "harness/docs/decisions/20260906-local-deepseek-chat.md"
+        "harness/docs/decisions/20260906-local-deepseek-chat.md",
+        "harness/docs/operations/local-real-qa.md"
       ],
       "cases": [
         "M08-DOCS-01"
