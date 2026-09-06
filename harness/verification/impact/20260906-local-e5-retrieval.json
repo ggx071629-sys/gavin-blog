@@ -3089,6 +3089,14 @@
           "cases": []
         }
       ]
+    },
+    {
+      "path": "build-qa.md",
+      "owner": "M08.documentation",
+      "reason": "记录实际本机推进状态及尚未完成的正式验收，不宣称Chat/生产完成。",
+      "cases": [],
+      "no_test_reason": "仅更新用户计划进度；结构由Harness检查，功能通过E5合同与实测验证。",
+      "dependencies": []
     }
   ]
 }
