@@ -50,4 +50,5 @@ Windows 开发机不能代表 2 vCPU/4 GB 目标机；官方模型网络可能�
 
 ## Gates
 
+- harness-integrity => AC-1, AC-2, AC-3, AC-4
 - api-tests => AC-1, AC-2, AC-3, AC-4

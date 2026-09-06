@@ -11,6 +11,8 @@ author: Gavin
 
 # Architecture boundaries
 
+- 2026-09-06 本地 E5 实施新增 API 所有的独立单 owner CPU 模型进程，API/Worker 共用内部鉴权 OpenAI-compatible Embeddings；两者只加载固定 tokenizer。制品、384 维表示与 token pipeline 绑定 generation，角色前缀仅客户端添加。当前仅 development；生产仍拒绝，需后续扩展五进程资格 profile 并测量资源。见 [本地 E5 决策](../decisions/20260906-local-e5-retrieval.md)。此决定替代旧冻结生产计划的云端 Embedding 假设，不改变既有 gate/fence/readiness 责任。
+
 - `apps/web/` 拥有浏览器交互与呈现。
 - `apps/api/` 拥有业务规则、认证、搜索、持久化与媒体协调。
 - `packages/contracts/` 只承载跨端契约。

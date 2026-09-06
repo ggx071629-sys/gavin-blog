@@ -10028,6 +10028,120 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-E5-ADAPTER-01",
+          "priority": "P1",
+          "scenario": "E5角色与模型事实",
+          "expectations": [
+            {
+              "id": "M09-E5-ADAPTER-01-E01",
+              "surface": "response",
+              "statement": "query/passage分流，版本usage核验；通用provider保留unknown"
+            },
+            {
+              "id": "M09-E5-ADAPTER-01-E02",
+              "surface": "forbidden",
+              "statement": "漂移身份及超长文本不得被接受"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_local_e5.py",
+              "kind": "pytest",
+              "name": "test_e5_adapter_roles_identity_and_usage",
+              "gate": "api-tests",
+              "covers": [
+                "M09-E5-ADAPTER-01-E01",
+                "M09-E5-ADAPTER-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_provider_facts.py",
+              "kind": "pytest",
+              "name": "test_embedding_missing_usage_and_identity_are_unknown_not_estimated",
+              "gate": "api-tests",
+              "covers": [
+                "M09-E5-ADAPTER-01-E01",
+                "M09-E5-ADAPTER-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_provider_facts.py",
+              "kind": "pytest",
+              "name": "test_embedding_preserves_only_provider_reported_usage_and_model",
+              "gate": "api-tests",
+              "covers": [
+                "M09-E5-ADAPTER-01-E01",
+                "M09-E5-ADAPTER-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-E5-QUERY-01",
+          "priority": "P1",
+          "scenario": "完整问题和瞬态历史",
+          "expectations": [
+            {
+              "id": "M09-E5-QUERY-01-E01",
+              "surface": "response",
+              "statement": "只用剩余token容纳历史，超长问题显式降级"
+            },
+            {
+              "id": "M09-E5-QUERY-01-E02",
+              "surface": "forbidden",
+              "statement": "不得截掉当前问题或保存历史query到checkpoint"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_local_e5.py",
+              "kind": "pytest",
+              "name": "test_e5_query_preserves_complete_current_and_lexical_degrades",
+              "gate": "api-tests",
+              "covers": [
+                "M09-E5-QUERY-01-E01",
+                "M09-E5-QUERY-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+              "kind": "pytest",
+              "name": "test_retrieval_query_preserves_current_question_under_long_history",
+              "gate": "api-tests",
+              "covers": [
+                "M09-E5-QUERY-01-E01",
+                "M09-E5-QUERY-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+              "kind": "pytest",
+              "name": "test_resume_discards_cached_vector_when_history_query_changes",
+              "gate": "api-tests",
+              "covers": [
+                "M09-E5-QUERY-01-E01",
+                "M09-E5-QUERY-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+              "kind": "pytest",
+              "name": "test_history_query_is_transient_and_never_enters_langgraph_state",
+              "gate": "api-tests",
+              "covers": [
+                "M09-E5-QUERY-01-E01",
+                "M09-E5-QUERY-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -10683,6 +10797,194 @@
               "covers": [
                 "M10-OPS-RUNTIME-01-E01",
                 "M10-OPS-RUNTIME-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-E5-ARTIFACT-01",
+          "priority": "P1",
+          "scenario": "固定制品和单模型owner启动",
+          "expectations": [
+            {
+              "id": "M10-E5-ARTIFACT-01-E01",
+              "surface": "response",
+              "statement": "正确哈希与独占owner成功"
+            },
+            {
+              "id": "M10-E5-ARTIFACT-01-E02",
+              "surface": "forbidden",
+              "statement": "缺失/变更制品和第二owner不能启动"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_local_e5.py",
+              "kind": "pytest",
+              "name": "test_artifact_hash_missing_and_changed_fail_closed",
+              "gate": "api-tests",
+              "covers": [
+                "M10-E5-ARTIFACT-01-E01",
+                "M10-E5-ARTIFACT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_local_e5.py",
+              "kind": "pytest",
+              "name": "test_service_owner_lock_prevents_second_process",
+              "gate": "api-tests",
+              "covers": [
+                "M10-E5-ARTIFACT-01-E01",
+                "M10-E5-ARTIFACT-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-E5-SERVICE-01",
+          "priority": "P1",
+          "scenario": "内部E5协议及跨调用者排队",
+          "expectations": [
+            {
+              "id": "M10-E5-SERVICE-01-E01",
+              "surface": "response",
+              "statement": "鉴权、384维向量、usage、float/base64、query优先可观测"
+            },
+            {
+              "id": "M10-E5-SERVICE-01-E02",
+              "surface": "forbidden",
+              "statement": "无鉴权、非法输入、超限及队列满不能推理"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_local_e5.py",
+              "kind": "pytest",
+              "name": "test_service_contract_auth_usage_encoding_and_rejections",
+              "gate": "api-tests",
+              "covers": [
+                "M10-E5-SERVICE-01-E01",
+                "M10-E5-SERVICE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_local_e5.py",
+              "kind": "pytest",
+              "name": "test_service_single_inference_priority_queue_and_timeout",
+              "gate": "api-tests",
+              "covers": [
+                "M10-E5-SERVICE-01-E01",
+                "M10-E5-SERVICE-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-E5-CHUNK-01",
+          "priority": "P1",
+          "scenario": "固定token切片",
+          "expectations": [
+            {
+              "id": "M10-E5-CHUNK-01-E01",
+              "surface": "response",
+              "statement": "保留标题、尾部、源版本，最终input符合512token"
+            },
+            {
+              "id": "M10-E5-CHUNK-01-E02",
+              "surface": "forbidden",
+              "statement": "新发布版本不得复用chunkID，不得静默截断"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_local_e5.py",
+              "kind": "pytest",
+              "name": "test_e5_chunks_preserve_content_versions_and_token_limit",
+              "gate": "api-tests",
+              "covers": [
+                "M10-E5-CHUNK-01-E01",
+                "M10-E5-CHUNK-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_index.py",
+              "kind": "pytest",
+              "name": "test_chunker_is_deterministic_and_strips_html_noise",
+              "gate": "api-tests",
+              "covers": [
+                "M10-E5-CHUNK-01-E01",
+                "M10-E5-CHUNK-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-E5-LOCAL-01",
+          "priority": "P1",
+          "scenario": "真实检索入口和既有Worker切换",
+          "expectations": [
+            {
+              "id": "M10-E5-LOCAL-01-E01",
+              "surface": "response",
+              "statement": "开发配置、重建检索与引用版本过滤可观测"
+            },
+            {
+              "id": "M10-E5-LOCAL-01-E02",
+              "surface": "forbidden",
+              "statement": "真实入口不能启用Chat/gate，失效内容不能返回"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_local_e5.py",
+              "kind": "pytest",
+              "name": "test_local_mode_configuration_rejects_online_and_identity_drift",
+              "gate": "api-tests",
+              "covers": [
+                "M10-E5-LOCAL-01-E01",
+                "M10-E5-LOCAL-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_index.py",
+              "kind": "pytest",
+              "name": "test_worker_rebuild_retriever_and_staleness",
+              "gate": "api-tests",
+              "covers": [
+                "M10-E5-LOCAL-01-E01",
+                "M10-E5-LOCAL-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_index.py",
+              "kind": "pytest",
+              "name": "test_retriever_degrades_without_dense_and_is_not_ready_without_fts",
+              "gate": "api-tests",
+              "covers": [
+                "M10-E5-LOCAL-01-E01",
+                "M10-E5-LOCAL-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_admin.py",
+              "kind": "pytest",
+              "name": "test_rebuild_request_is_durable_and_finalize_leaves_gate_disabled",
+              "gate": "api-tests",
+              "covers": [
+                "M10-E5-LOCAL-01-E01",
+                "M10-E5-LOCAL-01-E02"
               ]
             }
           ]

@@ -1150,7 +1150,13 @@
         "M09-UNIT-ASSISTANT-ONLINE-MATRIX-01",
         "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-01",
         "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-REMEDIATION-01",
-        "M09-UNIT-ASSISTANT-WEB-DELIVERY-01"
+        "M09-UNIT-ASSISTANT-WEB-DELIVERY-01",
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1302,7 +1308,13 @@
       ],
       "cases": [
         "M10-P1-01",
-        "M10-UNIT-ASSISTANT-INDEX-01"
+        "M10-UNIT-ASSISTANT-INDEX-01",
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
       ],
       "dependents": [
         "M01.articles",
@@ -1426,7 +1438,13 @@
       ],
       "cases": [
         "M09-P0-02",
-        "M09-UNIT-ASSISTANT-PROVIDER-FACTS-01"
+        "M09-UNIT-ASSISTANT-PROVIDER-FACTS-01",
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
       ],
       "dependents": [
         "M09.runtime",
@@ -1548,7 +1566,13 @@
       "cases": [
         "M06-P0-01",
         "M06-UNIT-ENVIRONMENT-ISOLATION-01",
-        "M06-UNIT-RUNTIME-SAFETY-01"
+        "M06-UNIT-RUNTIME-SAFETY-01",
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
       ],
       "dependents": [
         "M02.publishing",
@@ -1846,7 +1870,13 @@
         "apps/api/uv.lock"
       ],
       "cases": [
-        "M06-P0-01"
+        "M06-P0-01",
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
       ],
       "dependents": [
         "M06.persistence",
@@ -3099,7 +3129,9 @@
         "ui-fix/PHASE-4.md",
         "ui-fix/PHASE-5.md",
         "ui-fix/PHASE-6.md",
-        "ui-fix/PHASE-7.md"
+        "ui-fix/PHASE-7.md",
+        "harness/docs/decisions/20260906-local-e5-retrieval.md",
+        "build-qa.md"
       ],
       "cases": [
         "M08-DOCS-01"
@@ -3226,6 +3258,37 @@
           "The five admin pages import resource-operations.css; this test exercises their real UI and service boundaries."
         ]
       }
+    },
+    "M10.local_e5": {
+      "paths": [
+        "apps/api/app/local_embedding/artifact.py",
+        "apps/api/app/local_embedding/client.py",
+        "apps/api/app/local_embedding/local.py",
+        "apps/api/app/local_embedding/model.lock.json",
+        "apps/api/app/local_embedding/service.py",
+        "apps/api/app/local_embedding/tokenization.py",
+        "apps/api/app/local_embedding/__init__.py",
+        "apps/api/embedding_service/pyproject.toml",
+        "apps/api/embedding_service/uv.lock",
+        "apps/api/tests/test_local_e5.py",
+        "apps/api/scripts/download_e5.py",
+        "apps/api/scripts/run_e5_service.py",
+        "apps/api/scripts/check_e5_reference.py",
+        "scripts/run-real-retrieval.mjs"
+      ],
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependents": [
+        "M09.providers",
+        "M09.runtime",
+        "M10.index"
+      ]
     }
   }
 }
