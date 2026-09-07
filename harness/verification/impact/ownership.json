@@ -3428,7 +3428,8 @@
         "apps/api/app/about_page_service.py",
         "apps/api/app/routes/admin_about.py",
         "apps/api/app/routes/public_about.py",
-        "apps/api/tests/test_about_page.py"
+        "apps/api/tests/test_about_page.py",
+        "apps/api/migrations/versions/20260907_0024_about_page_editor.py"
       ],
       "cases": [
         "M11-MIGRATION-01",

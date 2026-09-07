@@ -73,3 +73,4 @@ state_history:
 - api-tests => AC-1, AC-2, AC-3, AC-5, AC-6
 - e2e => AC-2, AC-3, AC-4, AC-5, AC-6, AC-7
 - web-quality => AC-7
+- harness-integrity => AC-7
