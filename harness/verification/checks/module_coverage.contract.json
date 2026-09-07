@@ -11947,6 +11947,341 @@
           ]
         }
       ]
+    },
+    {
+      "id": "M11",
+      "name": "关于页内容编辑与发布",
+      "cases": [
+        {
+          "id": "M11-MIGRATION-01",
+          "priority": "P0",
+          "scenario": "升级或新建数据库后自动创建已发布 About 修订 #1，并把当前 profile.bio 拷贝为独立 statement。",
+          "expectations": [
+            {
+              "id": "M11-MIGRATION-01-E01",
+              "surface": "response",
+              "statement": "about_pages 与 about_page_revisions 存在；单例行 version 1、status published、current_revision_id 指向修订 #1，statement 为迁移前 profile.bio。"
+            },
+            {
+              "id": "M11-MIGRATION-01-E02",
+              "surface": "forbidden",
+              "statement": "升级后不得缺少初始发布修订、不得让 current_revision_id 为空，也不得把 About 文案只保存在 profiles.bio。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_migrations.py",
+              "kind": "pytest",
+              "name": "test_about_page_migration_seeds_published_snapshot",
+              "gate": "api-tests",
+              "covers": [
+                "M11-MIGRATION-01-E01",
+                "M11-MIGRATION-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M11-PUBLIC-01",
+          "priority": "P0",
+          "scenario": "公开 About 读取只使用当前发布修订，且 statement 与 profile.bio 解耦。",
+          "expectations": [
+            {
+              "id": "M11-PUBLIC-01-E01",
+              "surface": "response",
+              "statement": "公开 about-page 内容等于最近一次发布的内容；修改 profile.bio 不会改变公开 statement。"
+            },
+            {
+              "id": "M11-PUBLIC-01-E02",
+              "surface": "forbidden",
+              "statement": "显式发布前草稿文字不得出现在公开页；公开响应不得包含工作副本或版本冲突细节。"
+            }
+          ],
+          "required_gates": [
+            "api-tests",
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_about_page.py",
+              "kind": "pytest",
+              "name": "test_public_returns_defaults_without_writing_row",
+              "gate": "api-tests",
+              "covers": [
+                "M11-PUBLIC-01-E01"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_about_page.py",
+              "kind": "pytest",
+              "name": "test_publish_creates_revision_and_updates_public",
+              "gate": "api-tests",
+              "covers": [
+                "M11-PUBLIC-01-E01",
+                "M11-PUBLIC-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_about_page.py",
+              "kind": "pytest",
+              "name": "test_profile_bio_and_about_statement_are_decoupled",
+              "gate": "api-tests",
+              "covers": [
+                "M11-PUBLIC-01-E01"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about editor keeps drafts private until explicit publish",
+              "gate": "e2e",
+              "covers": [
+                "M11-PUBLIC-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M11-WORKING-COPY-01",
+          "priority": "P0",
+          "scenario": "后台编辑五块 About 文案时 PATCH 只更新工作副本并推进乐观锁。",
+          "expectations": [
+            {
+              "id": "M11-WORKING-COPY-01-E01",
+              "surface": "response",
+              "statement": "管理员保存后 admin 响应反映新文案、version 递增且 has_unpublished_changes 为 true，公开内容保持不变。"
+            },
+            {
+              "id": "M11-WORKING-COPY-01-E02",
+              "surface": "forbidden",
+              "statement": "旧 version 的保存与发布不得覆盖服务器更新；草稿不得提前改变公开页。"
+            }
+          ],
+          "required_gates": [
+            "api-tests",
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_about_page.py",
+              "kind": "pytest",
+              "name": "test_autosave_changes_working_copy_without_public_change",
+              "gate": "api-tests",
+              "covers": [
+                "M11-WORKING-COPY-01-E01",
+                "M11-WORKING-COPY-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_about_page.py",
+              "kind": "pytest",
+              "name": "test_version_conflict_blocks_autosave_and_publish",
+              "gate": "api-tests",
+              "covers": [
+                "M11-WORKING-COPY-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about editor keeps drafts private until explicit publish",
+              "gate": "e2e",
+              "covers": [
+                "M11-WORKING-COPY-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M11-PREVIEW-01",
+          "priority": "P1",
+          "scenario": "写作台预览用已保存工作副本渲染 About 展示并明确发布边界。",
+          "expectations": [
+            {
+              "id": "M11-PREVIEW-01-E01",
+              "surface": "user_visible",
+              "statement": "预览页出现工作副本文字与草稿/工作副本横幅，并保留返回编辑器入口。"
+            },
+            {
+              "id": "M11-PREVIEW-01-E02",
+              "surface": "forbidden",
+              "statement": "预览动作不得发布内容，也不得改变公开页。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about editor keeps drafts private until explicit publish",
+              "gate": "e2e",
+              "covers": [
+                "M11-PREVIEW-01-E01",
+                "M11-PREVIEW-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M11-PUBLISH-01",
+          "priority": "P0",
+          "scenario": "显式发布生成不可变修订并在成功后更新公开 About。",
+          "expectations": [
+            {
+              "id": "M11-PUBLISH-01-E01",
+              "surface": "response",
+              "statement": "发布接口校验 version、创建下一条修订、推进 current_publish_revision，发布后公开内容等于新快照。"
+            },
+            {
+              "id": "M11-PUBLISH-01-E02",
+              "surface": "forbidden",
+              "statement": "版本冲突或未保存内容不得发布；发布成功前公开页不得出现草稿文字。"
+            }
+          ],
+          "required_gates": [
+            "api-tests",
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_about_page.py",
+              "kind": "pytest",
+              "name": "test_publish_creates_revision_and_updates_public",
+              "gate": "api-tests",
+              "covers": [
+                "M11-PUBLISH-01-E01",
+                "M11-PUBLISH-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_about_page.py",
+              "kind": "pytest",
+              "name": "test_version_conflict_blocks_autosave_and_publish",
+              "gate": "api-tests",
+              "covers": [
+                "M11-PUBLISH-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about editor keeps drafts private until explicit publish",
+              "gate": "e2e",
+              "covers": [
+                "M11-PUBLISH-01-E01",
+                "M11-PUBLISH-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M11-HISTORY-01",
+          "priority": "P1",
+          "scenario": "后台可列出、查看、比较并回滚不可变发布修订。",
+          "expectations": [
+            {
+              "id": "M11-HISTORY-01-E01",
+              "surface": "response",
+              "statement": "版本页列出修订并可按 ID 读取快照与 diff；干净状态下回滚创建 source=rollback 的新修订且不改写历史。"
+            },
+            {
+              "id": "M11-HISTORY-01-E02",
+              "surface": "forbidden",
+              "statement": "工作副本存在未发布修改时回滚被拒绝；历史修订不得被修改或删除。"
+            }
+          ],
+          "required_gates": [
+            "api-tests",
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_about_page.py",
+              "kind": "pytest",
+              "name": "test_rollback_creates_rollback_revision_without_rewriting_history",
+              "gate": "api-tests",
+              "covers": [
+                "M11-HISTORY-01-E01",
+                "M11-HISTORY-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_about_page.py",
+              "kind": "pytest",
+              "name": "test_revision_diff_returns_fields",
+              "gate": "api-tests",
+              "covers": [
+                "M11-HISTORY-01-E01"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about editor exposes history and rollback actions in the writing desk",
+              "gate": "e2e",
+              "covers": [
+                "M11-HISTORY-01-E01"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M11-ADMIN-NAV-01",
+          "priority": "P1",
+          "scenario": "写作台运营导航提供关于页入口，编辑器明确身份资料归属个人名片。",
+          "expectations": [
+            {
+              "id": "M11-ADMIN-NAV-01-E01",
+              "surface": "user_visible",
+              "statement": "后台核心导航包含 /admin/about；编辑器提供个人名片跳转与身份归属说明。"
+            },
+            {
+              "id": "M11-ADMIN-NAV-01-E02",
+              "surface": "forbidden",
+              "statement": "关于页不得出现复制 profile 字段的第二套编辑表单。"
+            }
+          ],
+          "required_gates": [
+            "e2e",
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/unit/admin.test.ts",
+              "kind": "vitest",
+              "name": "keeps every existing admin destination in the core navigation",
+              "gate": "web-quality",
+              "covers": [
+                "M11-ADMIN-NAV-01-E01"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about editor keeps drafts private until explicit publish",
+              "gate": "e2e",
+              "covers": [
+                "M11-ADMIN-NAV-01-E01"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about editor exposes history and rollback actions in the writing desk",
+              "gate": "e2e",
+              "covers": [
+                "M11-ADMIN-NAV-01-E01",
+                "M11-ADMIN-NAV-01-E02"
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
