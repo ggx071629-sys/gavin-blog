@@ -1248,7 +1248,8 @@
         "scripts/local_launcher.py",
         "启动项目.cmd",
         "停止项目.cmd",
-        "apps/api/tests/test_assistant_real_development.py"
+        "apps/api/tests/test_assistant_real_development.py",
+        "apps/api/tests/test_local_launcher.py"
       ],
       "cases": [
         "M09-P0-03",
@@ -2038,6 +2039,7 @@
         "apps/web/components/PublicPageHero.vue",
         "apps/web/components/SiteFooter.vue",
         "apps/web/components/SiteHeader.vue",
+        "apps/web/components/BlueprintWatermark.vue",
         "apps/web/components/ThemeToggle.vue",
         "apps/web/composables/usePublicOverlay.ts",
         "apps/web/error.vue",
@@ -3418,6 +3420,42 @@
         "M10-CAPACITY-METRICS-01",
         "M10-CAPACITY-ISOLATION-01",
         "M10-CAPACITY-REPORT-01"
+      ],
+      "dependents": []
+    },
+    "M11.api": {
+      "paths": [
+        "apps/api/app/about_page_service.py",
+        "apps/api/app/routes/admin_about.py",
+        "apps/api/app/routes/public_about.py",
+        "apps/api/tests/test_about_page.py"
+      ],
+      "cases": [
+        "M11-MIGRATION-01",
+        "M11-PUBLIC-01",
+        "M11-WORKING-COPY-01",
+        "M11-PUBLISH-01",
+        "M11-HISTORY-01"
+      ],
+      "dependents": []
+    },
+    "M11.web": {
+      "paths": [
+        "apps/web/assets/css/about-editorial.css",
+        "apps/web/components/AboutChannelIcon.vue",
+        "apps/web/components/AboutPublicBody.vue",
+        "apps/web/pages/admin/about.vue",
+        "apps/web/pages/admin/about/preview.vue",
+        "apps/web/pages/admin/about/revisions.vue",
+        "apps/web/tests/e2e/about-admin.spec.ts"
+      ],
+      "cases": [
+        "M11-PUBLIC-01",
+        "M11-WORKING-COPY-01",
+        "M11-PREVIEW-01",
+        "M11-PUBLISH-01",
+        "M11-HISTORY-01",
+        "M11-ADMIN-NAV-01"
       ],
       "dependents": []
     }

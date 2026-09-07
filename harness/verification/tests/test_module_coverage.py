@@ -36,6 +36,7 @@ MODULE_NAMES = {
     "M08": "工程控制面",
     "M09": "公开问答消费层（默认关闭）",
     "M10": "问答运营控制面（默认关闭）",
+    "M11": "关于页内容编辑与发布",
 }
 
 
@@ -178,10 +179,10 @@ def test_m08_trace_01_complete_contract(tmp_path: Path) -> None:
     assert errors == []
     assert validated == payload
     assert resolved["counts"] == {
-        "modules": 10,
-        "cases": 20,
-        "expectations": 40,
-        "test_refs": 20,
+        "modules": 11,
+        "cases": 22,
+        "expectations": 44,
+        "test_refs": 22,
     }
     assert resolved["digest"] == contract_digest(payload)
     assert set(case_index(payload)) == {
@@ -308,7 +309,7 @@ def test_m08_trace_04_documents_verification_case_boundaries() -> None:
 
     assert all(document.strip() for document in documents.values())
     assert all(
-        f"| M{number:02d} |" in documents["brief"] for number in range(1, 11)
+        f"| M{number:02d} |" in documents["brief"] for number in range(1, 12)
     )
     assert "稳定模块 ID" in documents["brief"]
 
@@ -521,7 +522,7 @@ def test_m08_semantics_01_resolves_the_real_repository_contract() -> None:
         collected_tests=STRUCTURE_ONLY,
     )
 
-    assert resolved["counts"]["modules"] == 10
+    assert resolved["counts"]["modules"] == 11
     assert resolved["counts"]["cases"] == len(resolved["case_index"])
     assert resolved["counts"]["test_refs"] >= resolved["counts"]["cases"]
 

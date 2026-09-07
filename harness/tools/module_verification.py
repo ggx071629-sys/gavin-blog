@@ -21,7 +21,7 @@ CONTRACT_RELATIVE_PATH = Path(
     "harness/verification/checks/module_coverage.contract.json"
 )
 AUTHORITY_REF = "harness/docs/product/brief.md#当前功能模块与责任映射"
-EXPECTED_MODULE_IDS = tuple(f"M{number:02d}" for number in range(1, 11))
+EXPECTED_MODULE_IDS = tuple(f"M{number:02d}" for number in range(1, 12))
 
 TOP_LEVEL_FIELDS = frozenset(
     {"schema_version", "contract_id", "authority_ref", "modules"}
@@ -40,8 +40,8 @@ CASE_FIELDS = frozenset(
 EXPECTATION_FIELDS = frozenset({"id", "surface", "statement"})
 REFERENCE_FIELDS = frozenset({"path", "kind", "name", "gate", "covers"})
 
-_MODULE_ID_RE = re.compile(r"M(?:0[1-9]|10)\Z")
-_SCOPED_ID_RE = re.compile(r"M(?:0[1-9]|10)(?:-[A-Z0-9]+)+\Z")
+_MODULE_ID_RE = re.compile(r"M(?:0[1-9]|1[01])\Z")
+_SCOPED_ID_RE = re.compile(r"M(?:0[1-9]|1[01])(?:-[A-Z0-9]+)+\Z")
 _PRIORITY_RE = re.compile(r"P[01]\Z")
 EXPECTATION_SURFACES = frozenset(
     {"response", "state", "side_effect", "user_visible", "forbidden"}
@@ -630,7 +630,7 @@ def _validate_payload_with_paths(
         module_name = module.get("name")
         raw_cases = module.get("cases")
         if not isinstance(module_id, str) or not _MODULE_ID_RE.fullmatch(module_id):
-            errors.append(f"{module_label}: id must be one of M01-M10")
+            errors.append(f"{module_label}: id must be one of M01-M11")
             scoped_module_id = f"{module_label}"
         else:
             scoped_module_id = module_id
