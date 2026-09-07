@@ -1,0 +1,1141 @@
+{
+  "schema_version": 2,
+  "task_id": "20260907-about-page-editor",
+  "created_at": "2026-09-07T16:21:14.986052+00:00",
+  "command": "python -m tools.harness verify 20260907-about-page-editor",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5",
+    "AC-6",
+    "AC-7"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-6",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-7",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "web-quality",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "a275202ba4e2b9d2b104922c8c86f0131033415f",
+    "active_spec_sha256": "f5fe4ae644918cec020bc95e5f91625d2633486d97e924aafc7b12a4b63fb9bf",
+    "verification_contract_sha256": "4432cba48054acd639930263ef30ca8190180a87721a0fc6cae5cc57043ee58c",
+    "gate_config_sha256": "dbe79bacf9a8f38516cdb522bc74474dc02b7b4c730e512306c2d980a848146a",
+    "documentation_contract_sha256": "0d4919a56c296b03c589a1b9e63d0833d99e227dabc5b207534226ee44b9fea4",
+    "documentation_targets_sha256": "75948ab647ebc3a10ea57962378378bda5246338b065e86e1b1cc244bc48c5b1",
+    "module_contract_sha256": "9d7a4beb79c2e918e21bbe0406240204f1b0a424947d78b8a490d076d6867389"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "新增产品模块、公开 About 数据源与管理发布生命周期，需要同步项目边界与模块映射文档。",
+    "targets": [
+      "README.md",
+      "apps/web/README.md",
+      "apps/api/README.md",
+      "harness/docs/product/brief.md"
+    ],
+    "baseline_commit": "1b9f6436bb1ef9eb4bf505085f370c86748af90c",
+    "target_blobs": {
+      "README.md": "dfe94fa5b5ead3df2126c406798718ac4a347a3f",
+      "apps/web/README.md": "60b556d2a054f41a4c597717ec5a81629449eed3",
+      "apps/api/README.md": "00b55fde0ccf23e32350be38fdcdcd8a4b1af917",
+      "harness/docs/product/brief.md": "2010cf3a83b46fec24d7874d06cddae2e957c1c7"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "c58b2740880bd8ee3699fbde2d1f6ff3b5a3865f",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260907-about-page-editor.json",
+      "sha256": "8f6c7c98449e18d5dfeac4292aa133db4b876126bbd133122977b250d8490cef",
+      "selected_cases": [
+        "M11-ADMIN-NAV-01",
+        "M11-HISTORY-01",
+        "M11-MIGRATION-01",
+        "M11-PREVIEW-01",
+        "M11-PUBLIC-01",
+        "M11-PUBLISH-01",
+        "M11-WORKING-COPY-01"
+      ],
+      "selected_refs": 11,
+      "excluded_cases": 198
+    },
+    "receipt": {
+      "run_id": "f4138e9cf56ca378f7909b9967fd3dee",
+      "identity": "b5bff583851dc5c06874c4cf4866467f94f14e1de4e1bd7f1183037ed6b76279",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": "243536fd4eac4a8151d904c2010fb267"
+        },
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": "a88d0ea9e906af16481b8582e1285b69"
+        },
+        {
+          "gate": "web-quality",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": "7cd390f2f34f3b531b2bff72fa8776f6"
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": "64d7a547f2737300549a200ade250658"
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 2412.344,
+      "plan_inputs": 1063.424,
+      "execute_cleanup_and_input_recheck": 68566.959
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "9d7a4beb79c2e918e21bbe0406240204f1b0a424947d78b8a490d076d6867389",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M11-MIGRATION-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P0",
+            "scenario": "升级或新建数据库后自动创建已发布 About 修订 #1，并把当前 profile.bio 拷贝为独立 statement。",
+            "expectations": [
+              {
+                "id": "M11-MIGRATION-01-E01",
+                "surface": "response",
+                "statement": "about_pages 与 about_page_revisions 存在；单例行 version 1、status published、current_revision_id 指向修订 #1，statement 为迁移前 profile.bio。"
+              },
+              {
+                "id": "M11-MIGRATION-01-E02",
+                "surface": "forbidden",
+                "statement": "升级后不得缺少初始发布修订、不得让 current_revision_id 为空，也不得把 About 文案只保存在 profiles.bio。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_migrations.py",
+                "kind": "pytest",
+                "name": "test_about_page_migration_seeds_published_snapshot",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-MIGRATION-01-E01",
+                  "M11-MIGRATION-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M11-PUBLIC-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P0",
+            "scenario": "公开 About 读取只使用当前发布修订，且 statement 与 profile.bio 解耦。",
+            "expectations": [
+              {
+                "id": "M11-PUBLIC-01-E01",
+                "surface": "response",
+                "statement": "公开 about-page 内容等于最近一次发布的内容；修改 profile.bio 不会改变公开 statement。"
+              },
+              {
+                "id": "M11-PUBLIC-01-E02",
+                "surface": "forbidden",
+                "statement": "显式发布前草稿文字不得出现在公开页；公开响应不得包含工作副本或版本冲突细节。"
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_about_page.py",
+                "kind": "pytest",
+                "name": "test_public_returns_defaults_without_writing_row",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-PUBLIC-01-E01"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_about_page.py",
+                "kind": "pytest",
+                "name": "test_publish_creates_revision_and_updates_public",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-PUBLIC-01-E01",
+                  "M11-PUBLIC-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_about_page.py",
+                "kind": "pytest",
+                "name": "test_profile_bio_and_about_statement_are_decoupled",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-PUBLIC-01-E01"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about editor keeps drafts private until explicit publish",
+                "gate": "e2e",
+                "covers": [
+                  "M11-PUBLIC-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              },
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "api-tests",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M11-WORKING-COPY-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P0",
+            "scenario": "后台编辑五块 About 文案时 PATCH 只更新工作副本并推进乐观锁。",
+            "expectations": [
+              {
+                "id": "M11-WORKING-COPY-01-E01",
+                "surface": "response",
+                "statement": "管理员保存后 admin 响应反映新文案、version 递增且 has_unpublished_changes 为 true，公开内容保持不变。"
+              },
+              {
+                "id": "M11-WORKING-COPY-01-E02",
+                "surface": "forbidden",
+                "statement": "旧 version 的保存与发布不得覆盖服务器更新；草稿不得提前改变公开页。"
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_about_page.py",
+                "kind": "pytest",
+                "name": "test_autosave_changes_working_copy_without_public_change",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-WORKING-COPY-01-E01",
+                  "M11-WORKING-COPY-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_about_page.py",
+                "kind": "pytest",
+                "name": "test_version_conflict_blocks_autosave_and_publish",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-WORKING-COPY-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about editor keeps drafts private until explicit publish",
+                "gate": "e2e",
+                "covers": [
+                  "M11-WORKING-COPY-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              },
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M11-PREVIEW-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P1",
+            "scenario": "写作台预览用已保存工作副本渲染 About 展示并明确发布边界。",
+            "expectations": [
+              {
+                "id": "M11-PREVIEW-01-E01",
+                "surface": "user_visible",
+                "statement": "预览页出现工作副本文字与草稿/工作副本横幅，并保留返回编辑器入口。"
+              },
+              {
+                "id": "M11-PREVIEW-01-E02",
+                "surface": "forbidden",
+                "statement": "预览动作不得发布内容，也不得改变公开页。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about editor keeps drafts private until explicit publish",
+                "gate": "e2e",
+                "covers": [
+                  "M11-PREVIEW-01-E01",
+                  "M11-PREVIEW-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-5",
+        "selected_gates": [
+          "api-tests",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M11-PUBLISH-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P0",
+            "scenario": "显式发布生成不可变修订并在成功后更新公开 About。",
+            "expectations": [
+              {
+                "id": "M11-PUBLISH-01-E01",
+                "surface": "response",
+                "statement": "发布接口校验 version、创建下一条修订、推进 current_publish_revision，发布后公开内容等于新快照。"
+              },
+              {
+                "id": "M11-PUBLISH-01-E02",
+                "surface": "forbidden",
+                "statement": "版本冲突或未保存内容不得发布；发布成功前公开页不得出现草稿文字。"
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_about_page.py",
+                "kind": "pytest",
+                "name": "test_publish_creates_revision_and_updates_public",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-PUBLISH-01-E01",
+                  "M11-PUBLISH-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_about_page.py",
+                "kind": "pytest",
+                "name": "test_version_conflict_blocks_autosave_and_publish",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-PUBLISH-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about editor keeps drafts private until explicit publish",
+                "gate": "e2e",
+                "covers": [
+                  "M11-PUBLISH-01-E01",
+                  "M11-PUBLISH-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              },
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-6",
+        "selected_gates": [
+          "api-tests",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M11-HISTORY-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P1",
+            "scenario": "后台可列出、查看、比较并回滚不可变发布修订。",
+            "expectations": [
+              {
+                "id": "M11-HISTORY-01-E01",
+                "surface": "response",
+                "statement": "版本页列出修订并可按 ID 读取快照与 diff；干净状态下回滚创建 source=rollback 的新修订且不改写历史。"
+              },
+              {
+                "id": "M11-HISTORY-01-E02",
+                "surface": "forbidden",
+                "statement": "工作副本存在未发布修改时回滚被拒绝；历史修订不得被修改或删除。"
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_about_page.py",
+                "kind": "pytest",
+                "name": "test_rollback_creates_rollback_revision_without_rewriting_history",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-HISTORY-01-E01",
+                  "M11-HISTORY-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_about_page.py",
+                "kind": "pytest",
+                "name": "test_revision_diff_returns_fields",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-HISTORY-01-E01"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about editor exposes history and rollback actions in the writing desk",
+                "gate": "e2e",
+                "covers": [
+                  "M11-HISTORY-01-E01"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              },
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-7",
+        "selected_gates": [
+          "e2e",
+          "web-quality",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M11-ADMIN-NAV-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P1",
+            "scenario": "写作台运营导航提供关于页入口，编辑器明确身份资料归属个人名片。",
+            "expectations": [
+              {
+                "id": "M11-ADMIN-NAV-01-E01",
+                "surface": "user_visible",
+                "statement": "后台核心导航包含 /admin/about；编辑器提供个人名片跳转与身份归属说明。"
+              },
+              {
+                "id": "M11-ADMIN-NAV-01-E02",
+                "surface": "forbidden",
+                "statement": "关于页不得出现复制 profile 字段的第二套编辑表单。"
+              }
+            ],
+            "required_gates": [
+              "e2e",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "kind": "vitest",
+                "name": "keeps every existing admin destination in the core navigation",
+                "gate": "web-quality",
+                "covers": [
+                  "M11-ADMIN-NAV-01-E01"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about editor keeps drafts private until explicit publish",
+                "gate": "e2e",
+                "covers": [
+                  "M11-ADMIN-NAV-01-E01"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about editor exposes history and rollback actions in the writing desk",
+                "gate": "e2e",
+                "covers": [
+                  "M11-ADMIN-NAV-01-E01",
+                  "M11-ADMIN-NAV-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.078,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "121 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 213.359,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 61.974,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.524,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "881 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1650.75,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "233 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 60.746,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 205 cases, 410 expectations, 771 exact test references; contract sha256 9d7a4beb79c2"
+      ],
+      "status": "passed",
+      "duration_ms": 330.988,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.113,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.236,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 75.973,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-7"
+      ],
+      "duration_ms": 1585.533,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "f4138e9cf56ca378f7909b9967fd3dee",
+        "attempt_id": "5fc8252d6eb53aaf59c6a04cd482f7ca"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260907-about-page-editor --gate api-tests",
+      "status": "passed",
+      "duration_ms": 8905.701,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-5",
+        "AC-6"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1399,
+        "selection_counts": {
+          "collected": 8,
+          "executed": 8
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_about_page.py",
+                "name": "test_rollback_creates_rollback_revision_without_rewriting_history"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_about_page.py",
+                "name": "test_revision_diff_returns_fields"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_migrations.py",
+                "name": "test_about_page_migration_seeds_published_snapshot"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_about_page.py",
+                "name": "test_public_returns_defaults_without_writing_row"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_about_page.py",
+                "name": "test_publish_creates_revision_and_updates_public"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_about_page.py",
+                "name": "test_profile_bio_and_about_statement_are_decoupled"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_about_page.py",
+                "name": "test_version_conflict_blocks_autosave_and_publish"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_about_page.py",
+                "name": "test_autosave_changes_working_copy_without_public_change"
+              }
+            ],
+            "duration_ms": 8489.902,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\f4138e9cf56ca378f7909b9967fd3dee\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "f4138e9cf56ca378f7909b9967fd3dee",
+        "attempt_id": "bbda9295a4ab31878d89aa76cd96b189"
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260907-about-page-editor --gate e2e",
+      "status": "passed",
+      "duration_ms": 51681.66,
+      "covers": [
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6",
+        "AC-7"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 3247,
+        "selection_counts": {
+          "collected": 2,
+          "executed": 2
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor keeps drafts private until explicit publish"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor exposes history and rollback actions in the writing desk"
+              }
+            ],
+            "duration_ms": 2907.62,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "81cf8927ce1655c3381b8444e4b42379ef65d7e7c1856a514ce77a83e6744f40",
+              "apps/web/nuxt.config.ts": "1d8d7e8e1e3f796a1435e5f9e23ccf49ee0972c2a31f570b2db61cdbe3246ea0",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor keeps drafts private until explicit publish"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor exposes history and rollback actions in the writing desk"
+              }
+            ],
+            "duration_ms": 1328.032
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor keeps drafts private until explicit publish",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about editor keeps drafts private until explicit publish"
+                ]
+              }
+            ],
+            "duration_ms": 1221.004,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor keeps drafts private until explicit publish",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about editor keeps drafts private until explicit publish"
+                ]
+              }
+            ],
+            "duration_ms": 23027.882,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor exposes history and rollback actions in the writing desk",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about editor exposes history and rollback actions in the writing desk"
+                ]
+              }
+            ],
+            "duration_ms": 1217.015,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor exposes history and rollback actions in the writing desk",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about editor exposes history and rollback actions in the writing desk"
+                ]
+              }
+            ],
+            "duration_ms": 21567.969,
+            "batch_id": "batch-0002"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\f4138e9cf56ca378f7909b9967fd3dee\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "f4138e9cf56ca378f7909b9967fd3dee",
+        "attempt_id": "d9133ac0e46be660c022044328bdf973"
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260907-about-page-editor --gate web-quality",
+      "status": "passed",
+      "duration_ms": 4583.624,
+      "covers": [
+        "AC-7"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1468,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "reused-in-worktree",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps every existing admin destination in the core navigation"
+              }
+            ],
+            "duration_ms": 4.552,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "81cf8927ce1655c3381b8444e4b42379ef65d7e7c1856a514ce77a83e6744f40",
+              "apps/web/nuxt.config.ts": "1d8d7e8e1e3f796a1435e5f9e23ccf49ee0972c2a31f570b2db61cdbe3246ea0",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps every existing admin destination in the core navigation"
+              }
+            ],
+            "duration_ms": 2051.505
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps every existing admin destination in the core navigation",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "admin navigation",
+                  "keeps every existing admin destination in the core navigation"
+                ]
+              }
+            ],
+            "duration_ms": 2110.239,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\f4138e9cf56ca378f7909b9967fd3dee\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "f4138e9cf56ca378f7909b9967fd3dee",
+        "attempt_id": "a3461026e9975f1b8ee0fb90a27560a6"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1504.718,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 15,
+      "passed": 15,
+      "failed": 0
+    },
+    "duration_ms": 70670.977,
+    "failures": []
+  },
+  "source_commit": "c58b2740880bd8ee3699fbde2d1f6ff3b5a3865f"
+}

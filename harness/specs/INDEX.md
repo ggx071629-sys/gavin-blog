@@ -4,14 +4,13 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **2 active**, **0 frozen**.
+Open specifications: **1 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
 | sdd-lifecycle | — | L1 | Active spec 从创建、验证到压缩归档的状态转换 | spec-create, spec-close | Gavin | [_sdd/lifecycle.md](_sdd/lifecycle.md) |
 | sdd-policy | — | L1 | 风险触发、短生命周期的 Spec-Driven Development 规则 | behavior-change, api-change, data-change, security-change, cross-stack-change | Gavin | [_sdd/README.md](_sdd/README.md) |
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
-| spec-20260907-about-page-editor | active | L1 | 为写作台增加关于页内容编辑器，以工作副本与不可变发布修订管理 About 页专属文案 | task:20260907-about-page-editor | Codex | [active/20260907-about-page-editor.md](active/20260907-about-page-editor.md) |
 | spec-20260907-local-launcher-feedback | active | L1 | 修复 Windows 快捷入口反馈和过期验证诊断 | task:20260907-local-launcher-feedback | — | [active/20260907-local-launcher-feedback.md](active/20260907-local-launcher-feedback.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
@@ -133,4 +132,5 @@ Open specifications: **2 active**, **0 frozen**.
 | archive-20260906-resource-operations | compressed | L2 | 完成视觉提案第五阶段的后台资源与运营 | task:20260906-resource-operations | Gavin | [archive/20260906-resource-operations.md](archive/20260906-resource-operations.md) |
 | archive-20260906-ui-delivery | compressed | L2 | 修复全站集成发现的写作预览无障碍缺陷并验证发布候选 | task:20260906-ui-delivery | Gavin | [archive/20260906-ui-delivery.md](archive/20260906-ui-delivery.md) |
 | archive-20260906-writing-desk | compressed | L2 | 完成视觉提案第四阶段的后台写作闭环 | task:20260906-writing-desk | Gavin | [archive/20260906-writing-desk.md](archive/20260906-writing-desk.md) |
+| archive-20260907-about-page-editor | compressed | L2 | 为写作台增加关于页内容编辑器，以工作副本与不可变发布修订管理 About 页专属文案 | task:20260907-about-page-editor | Codex | [archive/20260907-about-page-editor.md](archive/20260907-about-page-editor.md) |
 | archive-20260907-assistant-answerability | compressed | L2 | 修复公开资料普通问法被模型误判为证据不足 | task:20260907-assistant-answerability | — | [archive/20260907-assistant-answerability.md](archive/20260907-assistant-answerability.md) |
