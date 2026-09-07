@@ -97,7 +97,8 @@
       "owner": "M08.documentation",
       "reason": "仅还原助手展示结构、局部样式及记录；数据和交互合同不变。",
       "cases": [],
-      "dependencies": []
+      "dependencies": [],
+      "no_test_reason": "仅增加设计来源与展示范围说明，不改变命令、结构、链接目标或可执行合同。"
     }
   ]
 }
