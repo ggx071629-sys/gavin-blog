@@ -1668,6 +1668,116 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M01-CARD-FOCUS-01",
+          "priority": "P1",
+          "scenario": "Public card families share theme-colored feedback and atlas path linkage.",
+          "expectations": [
+            {
+              "id": "M01-CARD-FOCUS-01-ALLOW",
+              "surface": "user_visible",
+              "statement": "Public card families share theme-colored feedback and atlas path linkage."
+            },
+            {
+              "id": "M01-CARD-FOCUS-01-DENY",
+              "surface": "forbidden",
+              "statement": "Hover must not move cards, block links, or light the enclosing atlas."
+            },
+            {
+              "id": "M01-CARD-FOCUS-01-ASSISTANT",
+              "surface": "user_visible",
+              "statement": "Teleported assistant welcome and source cards support focus feedback and source navigation."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+              "kind": "playwright",
+              "name": "public cards share stable themed feedback across all page families",
+              "gate": "e2e",
+              "covers": [
+                "M01-CARD-FOCUS-01-ALLOW",
+                "M01-CARD-FOCUS-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "kind": "playwright",
+              "name": "teleported assistant cards share public focus feedback",
+              "gate": "e2e",
+              "covers": [
+                "M01-CARD-FOCUS-01-ASSISTANT"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M01-CARD-INPUT-01",
+          "priority": "P1",
+          "scenario": "Keyboard focus, reduced motion and touch press provide immediate feedback.",
+          "expectations": [
+            {
+              "id": "M01-CARD-INPUT-01-ALLOW",
+              "surface": "user_visible",
+              "statement": "Keyboard focus, reduced motion and touch press provide immediate feedback."
+            },
+            {
+              "id": "M01-CARD-INPUT-01-DENY",
+              "surface": "forbidden",
+              "statement": "Touch release must not retain hover feedback or add static-card tab stops."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+              "kind": "playwright",
+              "name": "card feedback supports keyboard reduced motion and touch without hover residue",
+              "gate": "e2e",
+              "covers": [
+                "M01-CARD-INPUT-01-ALLOW",
+                "M01-CARD-INPUT-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M01-CARD-SCOPE-01",
+          "priority": "P1",
+          "scenario": "Public-to-admin navigation updates the document scope, including preview and error pages.",
+          "expectations": [
+            {
+              "id": "M01-CARD-SCOPE-01-ALLOW",
+              "surface": "user_visible",
+              "statement": "Public-to-admin navigation updates the document scope, including preview and error pages."
+            },
+            {
+              "id": "M01-CARD-SCOPE-01-DENY",
+              "surface": "forbidden",
+              "statement": "No admin route or shared preview may receive the public card overlay."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+              "kind": "playwright",
+              "name": "all writing desk routes exclude public feedback including shared previews",
+              "gate": "e2e",
+              "covers": [
+                "M01-CARD-SCOPE-01-ALLOW",
+                "M01-CARD-SCOPE-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

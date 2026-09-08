@@ -1999,7 +1999,10 @@
         "M06-PROFILE-HOME-01",
         "M06-OPS-PROFILE-01",
         "M05-OPS-LAYOUT-01",
-        "M05-OPS-MEDIA-01"
+        "M05-OPS-MEDIA-01",
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2054,7 +2057,9 @@
         "apps/web/tests/unit/site.test.ts",
         "apps/web/components/NavigationArrow.vue",
         "apps/web/components/PageHeroArtwork.vue",
-        "apps/web/components/SectionHeading.vue"
+        "apps/web/components/SectionHeading.vue",
+        "apps/web/composables/usePublicCardFocus.ts",
+        "apps/web/tests/e2e/public-card-focus.spec.ts"
       ],
       "cases": [
         "M01-P1-01",
@@ -2067,7 +2072,10 @@
         "M02-P1-02",
         "M01-PUBLIC-SURFACES-01",
         "M01-PUBLIC-STATES-01",
-        "M09-P1-01"
+        "M09-P1-01",
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2150,7 +2158,10 @@
         "M01-PUBLIC-READING-01",
         "M04-PUBLIC-DETAILS-01",
         "M01-PUBLIC-SURFACES-01",
-        "M01-PUBLIC-STATES-01"
+        "M01-PUBLIC-STATES-01",
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2219,7 +2230,10 @@
         "M01-UNIT-ARCHIVE-INDEX-01",
         "M01-UNIT-ARTICLES-INDEX-01",
         "M01-UNIT-PHASE4-INDEXES-01",
-        "M01-ARCHIVE-TIMELINE-01"
+        "M01-ARCHIVE-TIMELINE-01",
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2327,7 +2341,10 @@
         "M03-P0-01",
         "M03-UNIT-SEARCH-STATES-01",
         "M03-UNIT-SEARCH-THEME-01",
-        "M03-UNIT-SEARCH-UI-01"
+        "M03-UNIT-SEARCH-UI-01",
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
       ],
       "dependents": []
     },
@@ -2362,7 +2379,10 @@
         "M04-P0-01",
         "M04-PUBLIC-DETAILS-01",
         "M04-UNIT-PROJECTS-INDEX-01",
-        "M05-OPS-MEDIA-01"
+        "M05-OPS-MEDIA-01",
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
       ],
       "dependents": []
     },
@@ -2385,7 +2405,10 @@
         "M04-P1-01",
         "M04-PUBLIC-DETAILS-01",
         "M04-UNIT-BOOKS-INDEX-01",
-        "M05-OPS-MEDIA-01"
+        "M05-OPS-MEDIA-01",
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
       ],
       "dependents": []
     },
@@ -2517,7 +2540,8 @@
         "apps/web/tests/unit/theme-structure.test.ts",
         "apps/web/tests/unit/typography.test.ts",
         "apps/web/types/markdown.d.ts",
-        "apps/web/assets/css/public-reading.css"
+        "apps/web/assets/css/public-reading.css",
+        "apps/web/assets/css/public-card-focus.css"
       ],
       "cases": [
         "M01-P1-04",
@@ -2530,7 +2554,10 @@
         "M01-PUBLIC-SURFACES-01",
         "M01-PUBLIC-READING-01",
         "M04-PUBLIC-DETAILS-01",
-        "M07-P0-01"
+        "M07-P0-01",
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2633,7 +2660,10 @@
         "M09-UI-INTERACTION-01",
         "M09-UI-STATES-01",
         "M09-UI-BOUNDARY-01",
-        "M09-LOCAL-REAL-CITATIONS-01"
+        "M09-LOCAL-REAL-CITATIONS-01",
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3292,7 +3322,10 @@
         "M01-HOME-STATES-01",
         "M01-HOME-VISUAL-01",
         "M01-HOME-LIVE-01",
-        "M07-P1-01"
+        "M07-P1-01",
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
       ],
       "dependents": []
     },
@@ -3490,7 +3523,10 @@
         "M11-HISTORY-01",
         "M11-ADMIN-NAV-01",
         "M11-CARD-EDITOR-01",
-        "M11-CARD-ICONS-01"
+        "M11-CARD-ICONS-01",
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
       ],
       "dependents": []
     }
