@@ -3290,7 +3290,14 @@
         "harness/docs/operations/e5-retrieval-evaluation.md",
         "harness/docs/decisions/20260906-local-deepseek-chat.md",
         "harness/docs/operations/local-real-qa.md",
-        "harness/docs/product/interaction-references.md"
+        "harness/docs/product/interaction-references.md",
+        "CHAT-READINESS-DESIGN.md",
+        "CHAT-READINESS-PHASE-1.md",
+        "CHAT-READINESS-PHASE-2.md",
+        "CHAT-READINESS-PLAN.md",
+        "completed/local-startup/L1.md",
+        "completed/local-startup/L2.md",
+        "completed/local-startup/L3.md"
       ],
       "cases": [
         "M08-DOCS-01"

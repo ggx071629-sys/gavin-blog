@@ -578,6 +578,62 @@
         }
       ],
       "no_test_reason": "普通文档或本任务声明数据；由Harness结构、归属与精确引用检查验证，不更改执行实现。"
+    },
+    {
+      "path": "CHAT-READINESS-DESIGN.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
+    },
+    {
+      "path": "CHAT-READINESS-PHASE-1.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
+    },
+    {
+      "path": "CHAT-READINESS-PHASE-2.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
+    },
+    {
+      "path": "CHAT-READINESS-PLAN.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
+    },
+    {
+      "path": "completed/local-startup/L1.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
+    },
+    {
+      "path": "completed/local-startup/L2.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
+    },
+    {
+      "path": "completed/local-startup/L3.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
     }
   ]
 }
