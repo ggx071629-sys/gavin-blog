@@ -29,7 +29,8 @@ state_history:
 ## Verification cases
 - AC-1 => M09-UI-DISCOVERY-01
 - AC-2 => M09-UI-DISCOVERY-01
-- AC-3 => M09-UI-DISCOVERY-01, M09-UI-BOUNDARY-01
+- AC-3 => M09-UI-DISCOVERY-01, M09-UI-BOUNDARY-01, M09-UNIT-ASSISTANT-DISABLED-01
 ## Gates
 - e2e => AC-1, AC-2, AC-3
+- web-quality => AC-3
 - harness-integrity => AC-1, AC-2, AC-3

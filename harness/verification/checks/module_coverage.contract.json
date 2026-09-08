@@ -11387,6 +11387,48 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-UI-DISCOVERY-01",
+          "priority": "P1",
+          "scenario": "导航和首页提示打开同一惰性面板，关闭偏好持久化且存储异常可降级。",
+          "expectations": [
+            {
+              "id": "M09-UI-DISCOVERY-01-ALLOW",
+              "surface": "user_visible",
+              "statement": "导航入口正常占位，提示可关闭并记忆，面板关闭恢复对应焦点。"
+            },
+            {
+              "id": "M09-UI-DISCOVERY-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得提前请求助手接口、产生横溢、残留 inert 或在禁止路径显示入口。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/discovery.spec.ts",
+              "name": "assistant discovery stays in navigation and remembers dismissal without eager requests",
+              "gate": "e2e",
+              "covers": [
+                "M09-UI-DISCOVERY-01-ALLOW",
+                "M09-UI-DISCOVERY-01-DENY"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/discovery.spec.ts",
+              "name": "assistant discovery tolerates blocked preference storage",
+              "gate": "e2e",
+              "covers": [
+                "M09-UI-DISCOVERY-01-ALLOW",
+                "M09-UI-DISCOVERY-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

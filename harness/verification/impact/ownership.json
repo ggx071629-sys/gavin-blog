@@ -2107,7 +2107,8 @@
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
-        "M01-CARD-GLOW-01"
+        "M01-CARD-GLOW-01",
+        "M09-UI-DISCOVERY-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2683,7 +2684,11 @@
         "apps/web/utils/assistant/polling.ts",
         "apps/web/utils/assistant/sse.ts",
         "apps/web/assets/css/assistant.css",
-        "apps/web/tests/e2e-assistant/panel.spec.ts"
+        "apps/web/tests/e2e-assistant/panel.spec.ts",
+        "apps/web/components/AssistantLauncher.vue",
+        "apps/web/components/AssistantDiscovery.vue",
+        "apps/web/composables/useAssistantEntry.ts",
+        "apps/web/tests/e2e-assistant/discovery.spec.ts"
       ],
       "cases": [
         "M09-P0-01",
@@ -2702,23 +2707,29 @@
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
-        "M01-CARD-GLOW-01"
+        "M01-CARD-GLOW-01",
+        "M09-UI-DISCOVERY-01"
       ],
       "dependents": [
         "M01.navigation",
         "M06.transport",
-        "M10.operations_web"
+        "M10.operations_web",
+        "M01.home"
       ],
       "dependency_reasons": {
         "M01.navigation": [
           "apps/web/layouts/default.vue imports ~/utils/assistant/flag",
-          "apps/web/layouts/default.vue renders auto-imported AssistantHost"
+          "apps/web/layouts/default.vue renders auto-imported AssistantHost",
+          "SiteHeader 渲染 AssistantLauncher，消费共享入口状态。"
         ],
         "M06.transport": [
           "apps/web/server/routes/api/v1/[...path].ts imports ~/server/utils/assistant-proxy-identity"
         ],
         "M10.operations_web": [
           "apps/web/pages/admin/assistant.vue imports ~/utils/assistant/flag"
+        ],
+        "M01.home": [
+          "首页通过 AssistantDiscovery 消费助手入口状态。"
         ]
       }
     },
@@ -3377,7 +3388,8 @@
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
-        "M01-CARD-GLOW-01"
+        "M01-CARD-GLOW-01",
+        "M09-UI-DISCOVERY-01"
       ],
       "dependents": []
     },
