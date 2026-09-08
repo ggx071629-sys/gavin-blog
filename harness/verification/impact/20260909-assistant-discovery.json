@@ -871,6 +871,22 @@
         }
       ],
       "no_test_reason": "仅登记新场景、源码归属或更新入口文档；不修改 Harness 执行逻辑和文档链接结构，由结构门禁核对。"
+    },
+    {
+      "path": "apps/web/assets/css/about-editorial.css",
+      "owner": "M11.web",
+      "reason": "本会话前序已授权关于页排版与颜色修正，单独提交保存；与助手入口变更独立。",
+      "cases": [],
+      "no_test_reason": "仅 CSS 排版、颜色继承与删除重复职业文字；已在浏览器检查，无接口、交互或数据变化。",
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/components/AboutPublicBody.vue",
+      "owner": "M11.web",
+      "reason": "本会话前序已授权关于页排版与颜色修正，单独提交保存；与助手入口变更独立。",
+      "cases": [],
+      "no_test_reason": "仅 CSS 排版、颜色继承与删除重复职业文字；已在浏览器检查，无接口、交互或数据变化。",
+      "dependencies": []
     }
   ]
 }
