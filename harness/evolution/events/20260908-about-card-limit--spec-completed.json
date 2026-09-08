@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260908-about-card-limit",
+  "created_at": "2026-09-08T14:20:23.209957+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "144b509eadca37f4c1c8bded8a6f6f1124961abcec13100ea1e200846b078f27"
+}

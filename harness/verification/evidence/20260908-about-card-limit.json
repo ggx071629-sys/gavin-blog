@@ -1,0 +1,573 @@
+{
+  "schema_version": 2,
+  "task_id": "20260908-about-card-limit",
+  "created_at": "2026-09-08T14:20:20.362349+00:00",
+  "command": "python -m tools.harness verify 20260908-about-card-limit",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "e0e2756f18baa60388f63ab2b241971cc01bef42",
+    "active_spec_sha256": "38986b33f5c87bee4d52fd0e87f004d9446b719e1e0ab48c9e6285716114d8b3",
+    "verification_contract_sha256": "9d439d74198b0f0ed40b18c742f6c8af59d46a902906abb8251d91697cd1acf1",
+    "gate_config_sha256": "c5a195c822463f8d5be7555c84eaf262ed535557eabad5ae7a217c4766120b81",
+    "documentation_contract_sha256": "67e9aa8bd6f510defab9b84f04d42216c8c98cb9f5f10f0e52a7c70c2ff6cce8",
+    "documentation_targets_sha256": "be2fd734014bab732f5c923b601bd2d9bc5d116d7e70980df2d854f0e380f0b5",
+    "module_contract_sha256": "41a22e718e8152d2ebf3a6ae474aa8f9d60258defb169da501d150ce107ff048"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录两个关于页可编辑集合各自的数量上限。",
+    "targets": [
+      "apps/web/README.md"
+    ],
+    "baseline_commit": "c8fe55445cfc26e3d6086cff02b6556840243003",
+    "target_blobs": {
+      "apps/web/README.md": "4a16864340f0bb278daf55d143a4396809c1a06b"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "c62b79a1499694ee8db3c65da7bf0ebb9dcb6787",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260908-about-card-limit.json",
+      "sha256": "61f15174b44801a0f24b2460d0eebf155dbf4aff16bff75ff459c73b3efe955b",
+      "selected_cases": [
+        "M11-CARD-EDITOR-01",
+        "M11-CARD-ICONS-01",
+        "M11-CARD-LIMIT-01"
+      ],
+      "selected_refs": 2,
+      "excluded_cases": 205
+    },
+    "receipt": {
+      "run_id": "532db653a121e97801529952195733ac",
+      "identity": "e3539a7e467cfd70466d007eb1f3242bf7f1e7b066fe7fef451413d724db3d52",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 2305.741,
+      "plan_inputs": 734.117,
+      "execute_cleanup_and_input_recheck": 65147.164
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "41a22e718e8152d2ebf3a6ae474aa8f9d60258defb169da501d150ce107ff048",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M11-CARD-EDITOR-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P1",
+            "scenario": "两个区域的十项编辑与发布闭环",
+            "expectations": [
+              {
+                "id": "M11-CARD-EDITOR-01-E01",
+                "surface": "user_visible",
+                "statement": "编辑器允许各十项，删除后可补回，预览和发布完整显示。"
+              },
+              {
+                "id": "M11-CARD-EDITOR-01-E02",
+                "surface": "forbidden",
+                "statement": "满十项不得继续新增。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about editor supports ten cards per section and re-enables add after removal",
+                "gate": "e2e",
+                "covers": [
+                  "M11-CARD-EDITOR-01-E01",
+                  "M11-CARD-EDITOR-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M11-CARD-LIMIT-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P1",
+            "scenario": "服务端数组边界与公开快照隔离",
+            "expectations": [
+              {
+                "id": "M11-CARD-LIMIT-01-E01",
+                "surface": "response",
+                "statement": "十项按顺序持久化并在显式发布后完整返回。"
+              },
+              {
+                "id": "M11-CARD-LIMIT-01-E02",
+                "surface": "forbidden",
+                "statement": "任一区域十一项返回422且不改变工作版本；草稿不影响公开快照。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_about_page.py",
+                "kind": "pytest",
+                "name": "test_about_card_limits_preserve_ten_items_and_reject_eleven",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-CARD-LIMIT-01-E01",
+                  "M11-CARD-LIMIT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M11-CARD-ICONS-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P1",
+            "scenario": "十种几何图标与受控悬停反馈",
+            "expectations": [
+              {
+                "id": "M11-CARD-ICONS-01-E01",
+                "surface": "user_visible",
+                "statement": "十项图标路径互异，每种响应鼠标悬停并复位，手机页面不横溢。"
+              },
+              {
+                "id": "M11-CARD-ICONS-01-E02",
+                "surface": "forbidden",
+                "statement": "减少动态效果和触屏不得触发图标位移动画。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about editor supports ten cards per section and re-enables add after removal",
+                "gate": "e2e",
+                "covers": [
+                  "M11-CARD-ICONS-01-E01",
+                  "M11-CARD-ICONS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.373,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "122 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 135.943,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 63.834,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.584,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "886 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1609.938,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "237 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 75.229,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 208 cases, 416 expectations, 774 exact test references; contract sha256 41a22e718e81"
+      ],
+      "status": "passed",
+      "duration_ms": 324.697,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.169,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.0,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 77.447,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "duration_ms": 1426.614,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "532db653a121e97801529952195733ac",
+        "attempt_id": "61a80743bfb669a4eff65f1511bd16f9"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260908-about-card-limit --gate e2e",
+      "status": "passed",
+      "duration_ms": 56620.353,
+      "covers": [
+        "AC-1",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 2012,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor supports ten cards per section and re-enables add after removal"
+              }
+            ],
+            "duration_ms": 2838.234,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "81cf8927ce1655c3381b8444e4b42379ef65d7e7c1856a514ce77a83e6744f40",
+              "apps/web/nuxt.config.ts": "1d8d7e8e1e3f796a1435e5f9e23ccf49ee0972c2a31f570b2db61cdbe3246ea0",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor supports ten cards per section and re-enables add after removal"
+              }
+            ],
+            "duration_ms": 1334.761
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor supports ten cards per section and re-enables add after removal",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about editor supports ten cards per section and re-enables add after removal"
+                ]
+              }
+            ],
+            "duration_ms": 1212.845,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor supports ten cards per section and re-enables add after removal",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about editor supports ten cards per section and re-enables add after removal"
+                ]
+              }
+            ],
+            "duration_ms": 50877.431,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\532db653a121e97801529952195733ac\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "532db653a121e97801529952195733ac",
+        "attempt_id": "4964d09d20e62d35932a277a1c3e8465"
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260908-about-card-limit --gate api-tests",
+      "status": "passed",
+      "duration_ms": 5284.845,
+      "covers": [
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 373,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_about_page.py",
+                "name": "test_about_card_limits_preserve_ten_items_and_reject_eleven"
+              }
+            ],
+            "duration_ms": 4926.742,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\532db653a121e97801529952195733ac\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "532db653a121e97801529952195733ac",
+        "attempt_id": "5ccf9e7584b7a1a9ef0c26faa935b7ab"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1486.324,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 67121.35,
+    "failures": []
+  },
+  "source_commit": "c62b79a1499694ee8db3c65da7bf0ebb9dcb6787"
+}

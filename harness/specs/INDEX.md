@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **5 active**, **0 frozen**.
+Open specifications: **4 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -12,7 +12,6 @@ Open specifications: **5 active**, **0 frozen**.
 | sdd-policy | — | L1 | 风险触发、短生命周期的 Spec-Driven Development 规则 | behavior-change, api-change, data-change, security-change, cross-stack-change | Gavin | [_sdd/README.md](_sdd/README.md) |
 | sdd-template | — | L1 | 短生命周期 active spec 的最小模板 | spec-create | Gavin | [_sdd/template.md](_sdd/template.md) |
 | spec-20260907-local-launcher-feedback | active | L1 | 修复 Windows 快捷入口反馈和过期验证诊断 | task:20260907-local-launcher-feedback | — | [active/20260907-local-launcher-feedback.md](active/20260907-local-launcher-feedback.md) |
-| spec-20260908-about-card-limit | active | L1 | 关于页各支持十项并提供十种不同的几何动效图标 | task:20260908-about-card-limit | — | [active/20260908-about-card-limit.md](active/20260908-about-card-limit.md) |
 | spec-20260908-article-design-v2 | active | L1 | 对齐工程设计稿的文章列表与正文阅读视觉 | task:20260908-article-design-v2 | — | [active/20260908-article-design-v2.md](active/20260908-article-design-v2.md) |
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页主题探索用栏目选择驱动多篇笔记展示 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
@@ -138,3 +137,4 @@ Open specifications: **5 active**, **0 frozen**.
 | archive-20260906-writing-desk | compressed | L2 | 完成视觉提案第四阶段的后台写作闭环 | task:20260906-writing-desk | Gavin | [archive/20260906-writing-desk.md](archive/20260906-writing-desk.md) |
 | archive-20260907-about-page-editor | compressed | L2 | 为写作台增加关于页内容编辑器，以工作副本与不可变发布修订管理 About 页专属文案 | task:20260907-about-page-editor | Codex | [archive/20260907-about-page-editor.md](archive/20260907-about-page-editor.md) |
 | archive-20260907-assistant-answerability | compressed | L2 | 修复公开资料普通问法被模型误判为证据不足 | task:20260907-assistant-answerability | — | [archive/20260907-assistant-answerability.md](archive/20260907-assistant-answerability.md) |
+| archive-20260908-about-card-limit | compressed | L2 | 关于页各支持十项并提供十种不同的几何动效图标 | task:20260908-about-card-limit | — | [archive/20260908-about-card-limit.md](archive/20260908-about-card-limit.md) |
