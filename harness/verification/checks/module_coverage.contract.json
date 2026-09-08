@@ -1636,6 +1636,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M01-ARCHIVE-TIMELINE-01",
+          "priority": "P1",
+          "scenario": "归档旗标时间轴保持真实内容和可访问布局",
+          "expectations": [
+            {
+              "id": "M01-ARCHIVE-TIMELINE-01-E01",
+              "surface": "user_visible",
+              "statement": "真实年份、篇数、日期、分类与文章目标保持，键盘焦点可见。"
+            },
+            {
+              "id": "M01-ARCHIVE-TIMELINE-01-E02",
+              "surface": "forbidden",
+              "statement": "390px手机与深浅主题不得出现页面横溢或丢失文章入口。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/archive-index.spec.ts",
+              "kind": "playwright",
+              "name": "archive uses year spine, MM.DD, and 未分类",
+              "gate": "e2e",
+              "covers": [
+                "M01-ARCHIVE-TIMELINE-01-E01",
+                "M01-ARCHIVE-TIMELINE-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

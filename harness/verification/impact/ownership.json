@@ -2218,7 +2218,8 @@
         "M01-UNIT-ARCHIVE-01",
         "M01-UNIT-ARCHIVE-INDEX-01",
         "M01-UNIT-ARTICLES-INDEX-01",
-        "M01-UNIT-PHASE4-INDEXES-01"
+        "M01-UNIT-PHASE4-INDEXES-01",
+        "M01-ARCHIVE-TIMELINE-01"
       ],
       "dependents": [
         "M01.navigation",
