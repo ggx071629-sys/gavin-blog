@@ -26,14 +26,14 @@ author: Gavin
 1. API `.env` 保持 `GAVIN_ENVIRONMENT=development`、在线开关关闭，填写真实 Chat Key 和相互独立、至少 32 字符的 session、CSRF、IP、readiness、proxy HMAC 密钥。密钥必须持久保存，不在每次启动时重新生成。模型、版本、token 上限和价格例子见 [配置模板](../../../apps/api/.env.example)。已获准本轮测试总额 1 元、Chat 北京时间每日 2 元；本次最多提交 14 个问答请求，每次最多两次模型调用。
 2. `.env.e5` 使用已固定的 E5 FP32 模型、384 tokens 切片/64 overlap、batch=1/concurrency=1，设置本地 Embedding 价格与查询/索引预算为 0；配置文件型内容 SQLite、8091 Embedding 与 8092 Qdrant。模型与 Qdrant 分别使用自己的本地鉴权密钥，不能收到 Chat Key。
 3. 按 [API E5 说明](../../../apps/api/README.md) 启动模型和 Qdrant，保留原存储目录。模型入口为 `embedding_service/.venv/Scripts/python.exe scripts/run_e5_service.py`；仅向该进程提供 `GAVIN_E5_MODEL_DIR`、`GAVIN_E5_API_KEY` 及离线 Hugging Face 设置。Qdrant 使用既有 v1.18.3 binary、`QDRANT__SERVICE__HOST=127.0.0.1`、HTTP 8092/GRPC 8093、既有 storage path，并关闭 telemetry。不要启动第二份模型，也不要将存储目录改成临时空目录。
-4. 在 `apps/api/` 使用原 CLI：`.venv/Scripts/python.exe scripts/run_assistant_provider_qualification.py --local-chat --ledger data/assistant-qualification/local-chat-ledger.json --output data/assistant-qualification/local-chat-probe.json --approve-max-micro-cny 1000000 --max-calls 3`。它会复用已有 ledger，失败/未知请求不会自动重复，原始响应和密钥不进入证据。已有新鲜成功 probe 时跳过此付费步骤。
+4. 在 `apps/api/` 使用原 CLI：`.venv/Scripts/python.exe scripts/run_assistant_provider_qualification.py --local-chat --ledger data/assistant-qualification/local-chat-ledger.json --output data/assistant-qualification/local-chat-probe.json --approve-max-micro-cny 1000000 --max-calls 3`。它会复用已有 ledger，失败/未知请求不会自动重复，原始响应和密钥不进入证据。已有签名有效且配置匹配的成功 probe 时跳过此付费步骤，单纯变旧不要求复验。
 5. 根目录执行 `npm run dev:assistant:real`，等待 ready。启动器先验证本机签名 probe、E5 健康和 active generation，再签发或复用 readiness 并打开运营 gate。Web 入口、API 能力和运营 gate 三者此时都打开；仅监听回环地址。网络沙箱必须允许 Chat 的 HTTPS 出站，服务可启动不等于 Chat 网络可达。
 
 ## 启停、更新与恢复
 
 - 停止：先 Ctrl+C 退出问答启动器，它负责停止本轮 Web/API 子进程；再停止专用模型、Qdrant 和 Worker 终端。runtime、索引、模型和费用文件保留。`npm run dev:assistant` 是独立离线入口，不能用它的成功替代真实验收。
 - 索引更新：停止真实问答以释放 runtime 锁，保留 `.env.e5` 的同一内容库；在 `apps/api/` 运行 `.venv/Scripts/python.exe -m app.local_embedding.local --env-file .env.e5 rebuild`，记录返回 generation，再用同一入口 `finalize <generation>`。如旧会话尚有 checkpoint，先按原清理流程清除；不能删 runtime 绕过残留检查。重新启动后按新 generation 校验 readiness。持续消费 outbox 的独立 Worker 使用同一 `.env.e5` 配置，不能误用 `.env` 默认库。
-- Key、模型、价格、token 或预算调整：先关闭 gate/停止 API，保留旧 probe/ledger/费用；配置变更使旧签名失效。当前本机合同绑定已批准的每日 2 元；其他额度需先更新批准范围及配置合同，再在新的明确有界测试范围内探测。旧 ledger 的配置漂移会拒绝执行，不可删除或覆盖旧 ledger 来获得新额度。24 小时后需要新鲜 probe 才能重新启动。
+- Key、模型、价格、token 或预算调整：先关闭 gate/停止 API，保留旧 probe/ledger/费用；配置变更使旧签名失效。当前本机合同绑定已批准的每日 2 元；其他额度需先更新批准范围及配置合同，再在新的明确有界测试范围内探测。旧 ledger 的配置漂移会拒绝执行，不可删除或覆盖旧 ledger 来获得新额度。正常运行及重启不检查 probe 年龄上限，启动显示最后验证时间，超过 24 小时只作提示。缺失、失败、畸形、签名异常、配置漂移或未来时间仍拒绝；旧证据不证明供应商当前可用，仍由实际问答的输出、预算和熔断保护处理。启动及本机 readiness 签发不会自动调用付费 Chat。
 - 日常费用以 `assistant_chat_budgets` 的 settled+reserved 为准；未知结果按上限计费并打开熔断。调查供应商与网络后才能恢复，不能清零费用、改日期或复制空库。本轮网络沙箱故障保留 28,608 micro-CNY 的最高费用；只在确认非计费连通性恢复、reserved=0 后解除了本机熔断，失败事实未删除。
 - v4 租约迁移：启动器在持有 runtime 独占锁时执行。旧版本同一个 scope/key 的唯一约束错误地限制了全局并发；新约束包含 owner turn。回滚需关闭入口、停止/排空租约，再执行原 Alembic 降级流程；有租约时降级拒绝，不自动丢弃它们。降级后需由对应版本的 provisioning/readiness 重新验证，禁止仅替换旧代码继续启用。
 - 日志：启动器向当前终端输出；本轮原始采样、合成问答结果和网络恢复记录仅留在 `apps/api/data/qa-real-20260906/`，不提交。控制库保留预算与必要脱敏审计；DELETE 会清除会话正文/checkpoint 并保留预算事实。生产备份仍排除 runtime。

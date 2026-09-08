@@ -10841,6 +10841,292 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-READINESS-AGE-01",
+          "priority": "P1",
+          "scenario": "24小时及十年旧成功证据可签发、复核和重启，原费用保持；lifespan仍验证本机依赖。",
+          "expectations": [
+            {
+              "id": "M09-READINESS-AGE-01-ALLOW",
+              "surface": "response",
+              "statement": "24小时及十年旧成功证据可签发、复核和重启，原费用保持；lifespan仍验证本机依赖。"
+            },
+            {
+              "id": "M09-READINESS-AGE-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得因年龄拒绝、增加Chat调用或重置费用。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_local_probe_age_does_not_expire_or_spend[86400]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-AGE-01-ALLOW",
+                "M09-READINESS-AGE-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_local_probe_age_does_not_expire_or_spend[86401]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-AGE-01-ALLOW",
+                "M09-READINESS-AGE-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_local_probe_age_does_not_expire_or_spend[315360000]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-AGE-01-ALLOW",
+                "M09-READINESS-AGE-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_old_probe_lifespan_preserves_dependency_gates[ready]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-AGE-01-ALLOW",
+                "M09-READINESS-AGE-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-READINESS-INVALID-01",
+          "priority": "P1",
+          "scenario": "无效证据、未来时间、配置漂移和生产使用本机证据被拒绝；E5或generation失败不能启用。",
+          "expectations": [
+            {
+              "id": "M09-READINESS-INVALID-01-ALLOW",
+              "surface": "response",
+              "statement": "无效证据、未来时间、配置漂移和生产使用本机证据被拒绝；E5或generation失败不能启用。"
+            },
+            {
+              "id": "M09-READINESS-INVALID-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得接受失败或不匹配证据，不得绕过生产资格或依赖门禁。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_local_probe_invalid_evidence_stays_rejected[missing]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_local_probe_invalid_evidence_stays_rejected[null]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_local_probe_invalid_evidence_stays_rejected[signature]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_local_probe_invalid_evidence_stays_rejected[failed]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_local_probe_invalid_evidence_stays_rejected[future]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_local_probe_invalid_evidence_stays_rejected[naive]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_local_probe_invalid_evidence_stays_rejected[schema]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_local_probe_invalid_evidence_stays_rejected[price]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_local_probe_invalid_evidence_stays_rejected[budget]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_local_probe_invalid_evidence_stays_rejected[production]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_old_probe_lifespan_preserves_dependency_gates[embedding]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_old_probe_lifespan_preserves_dependency_gates[generation]",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_real_development_boundary_and_signed_probe",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_real_development_receipt_and_budget_persist",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "name": "test_local_chat_probe_cannot_be_production_qualification",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-INVALID-01-ALLOW",
+                "M09-READINESS-INVALID-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-READINESS-HINT-01",
+          "priority": "P1",
+          "scenario": "可信提示显示最后验证时间且年龄只提示；无效配置不从旧时间误诊，失败只输出一次。",
+          "expectations": [
+            {
+              "id": "M09-READINESS-HINT-01-ALLOW",
+              "surface": "response",
+              "statement": "可信提示显示最后验证时间且年龄只提示；无效配置不从旧时间误诊，失败只输出一次。"
+            },
+            {
+              "id": "M09-READINESS-HINT-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得泄露凭据、要求单纯过旧付费复验或重复打印同一失败。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "name": "test_probe_notice_uses_only_validated_time",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-HINT-01-ALLOW",
+                "M09-READINESS-HINT-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_local_launcher.py",
+              "name": "test_expired_probe_does_not_misdiagnose_validation_failure",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-HINT-01-ALLOW",
+                "M09-READINESS-HINT-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_local_launcher.py",
+              "name": "test_start_prints_terminal_failure_once",
+              "kind": "pytest",
+              "gate": "api-tests",
+              "covers": [
+                "M09-READINESS-HINT-01-ALLOW",
+                "M09-READINESS-HINT-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
