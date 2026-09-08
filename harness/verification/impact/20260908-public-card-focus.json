@@ -1805,6 +1805,57 @@
         }
       ],
       "no_test_reason": "Documentation and declarative case registration only; existing Harness integrity checks validate structure."
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Register explicit new presentation files, documentation and browser cases.",
+      "cases": [],
+      "no_test_reason": "Declarative registration only; integrity checks verify this schema.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        }
+      ]
     }
   ]
 }

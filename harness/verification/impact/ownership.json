@@ -3277,7 +3277,8 @@
         "build-qa.md",
         "harness/docs/operations/e5-retrieval-evaluation.md",
         "harness/docs/decisions/20260906-local-deepseek-chat.md",
-        "harness/docs/operations/local-real-qa.md"
+        "harness/docs/operations/local-real-qa.md",
+        "harness/docs/product/interaction-references.md"
       ],
       "cases": [
         "M08-DOCS-01"
