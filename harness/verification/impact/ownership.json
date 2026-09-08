@@ -2032,7 +2032,8 @@
         "M05-OPS-MEDIA-01",
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
-        "M01-CARD-SCOPE-01"
+        "M01-CARD-SCOPE-01",
+        "M01-CARD-GLOW-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2105,7 +2106,8 @@
         "M09-P1-01",
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
-        "M01-CARD-SCOPE-01"
+        "M01-CARD-SCOPE-01",
+        "M01-CARD-GLOW-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2191,7 +2193,8 @@
         "M01-PUBLIC-STATES-01",
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
-        "M01-CARD-SCOPE-01"
+        "M01-CARD-SCOPE-01",
+        "M01-CARD-GLOW-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2263,7 +2266,8 @@
         "M01-ARCHIVE-TIMELINE-01",
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
-        "M01-CARD-SCOPE-01"
+        "M01-CARD-SCOPE-01",
+        "M01-CARD-GLOW-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2374,7 +2378,8 @@
         "M03-UNIT-SEARCH-UI-01",
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
-        "M01-CARD-SCOPE-01"
+        "M01-CARD-SCOPE-01",
+        "M01-CARD-GLOW-01"
       ],
       "dependents": []
     },
@@ -2412,7 +2417,8 @@
         "M05-OPS-MEDIA-01",
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
-        "M01-CARD-SCOPE-01"
+        "M01-CARD-SCOPE-01",
+        "M01-CARD-GLOW-01"
       ],
       "dependents": []
     },
@@ -2438,7 +2444,8 @@
         "M05-OPS-MEDIA-01",
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
-        "M01-CARD-SCOPE-01"
+        "M01-CARD-SCOPE-01",
+        "M01-CARD-GLOW-01"
       ],
       "dependents": []
     },
@@ -2587,7 +2594,8 @@
         "M07-P0-01",
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
-        "M01-CARD-SCOPE-01"
+        "M01-CARD-SCOPE-01",
+        "M01-CARD-GLOW-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2693,7 +2701,8 @@
         "M09-LOCAL-REAL-CITATIONS-01",
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
-        "M01-CARD-SCOPE-01"
+        "M01-CARD-SCOPE-01",
+        "M01-CARD-GLOW-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3367,7 +3376,8 @@
         "M07-P1-01",
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
-        "M01-CARD-SCOPE-01"
+        "M01-CARD-SCOPE-01",
+        "M01-CARD-GLOW-01"
       ],
       "dependents": []
     },
@@ -3568,7 +3578,8 @@
         "M11-CARD-ICONS-01",
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
-        "M01-CARD-SCOPE-01"
+        "M01-CARD-SCOPE-01",
+        "M01-CARD-GLOW-01"
       ],
       "dependents": []
     }

@@ -1778,6 +1778,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M01-CARD-GLOW-01",
+          "priority": "P1",
+          "scenario": "Pointer spotlight follows themed public cards and preserves atlas and writing desk boundaries.",
+          "expectations": [
+            {
+              "id": "M01-CARD-GLOW-01-ALLOW",
+              "surface": "user_visible",
+              "statement": "A rounded 160px theme spotlight follows distinct pointer positions across public page families and preserves original atlas glow."
+            },
+            {
+              "id": "M01-CARD-GLOW-01-DENY",
+              "surface": "forbidden",
+              "statement": "No card movement, nested duplicate glow, pointer interception, or residual glow after leaving, keyboard input, reduced motion, touch and admin navigation."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+              "kind": "playwright",
+              "name": "pointer spotlight follows public cards and clears across input and route changes",
+              "gate": "e2e",
+              "covers": [
+                "M01-CARD-GLOW-01-ALLOW",
+                "M01-CARD-GLOW-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

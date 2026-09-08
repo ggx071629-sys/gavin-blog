@@ -1,0 +1,458 @@
+{
+  "schema_version": 1,
+  "task_id": "20260909-public-card-glow",
+  "changes": [
+    {
+      "path": "apps/web/composables/usePublicCardFocus.ts",
+      "owner": "M01.navigation",
+      "reason": "Add and verify pointer-following glow on existing opted-in public cards.",
+      "cases": [
+        "M01-CARD-GLOW-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/assets/css/public-card-focus.css",
+      "owner": "M07.theme",
+      "reason": "Add and verify pointer-following glow on existing opted-in public cards.",
+      "cases": [
+        "M01-CARD-GLOW-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+      "owner": "M01.navigation",
+      "reason": "Add and verify pointer-following glow on existing opted-in public cards.",
+      "cases": [
+        "M01-CARD-GLOW-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "Consumes the same delegated public card spotlight; route and input guards preserve existing control behavior.",
+          "cases": [
+            "M01-CARD-GLOW-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/docs/product/interaction-references.md",
+      "owner": "M08.documentation",
+      "reason": "Record presentation scope or register exact browser cases without changing Harness execution rules.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Documentation and declarative case registration only; existing Harness integrity checks validate structure."
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Record presentation scope or register exact browser cases without changing Harness execution rules.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Documentation and declarative case registration only; existing Harness integrity checks validate structure."
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Register explicit new presentation files, documentation and browser cases.",
+      "cases": [],
+      "no_test_reason": "Declarative registration only; integrity checks verify this schema.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}
