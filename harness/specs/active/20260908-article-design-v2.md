@@ -30,5 +30,5 @@ state_history:
 - AC-2 => M01-PUBLIC-READING-01, M01-UNIT-ARTICLE-READING-01
 ## Gates
 - e2e => AC-1, AC-2
-- unit => AC-2
+- web-quality => AC-2
 - harness-integrity => AC-1, AC-2
