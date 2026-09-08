@@ -12280,6 +12280,102 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M11-CARD-EDITOR-01",
+          "priority": "P1",
+          "scenario": "两个区域的十项编辑与发布闭环",
+          "expectations": [
+            {
+              "id": "M11-CARD-EDITOR-01-E01",
+              "surface": "user_visible",
+              "statement": "编辑器允许各十项，删除后可补回，预览和发布完整显示。"
+            },
+            {
+              "id": "M11-CARD-EDITOR-01-E02",
+              "surface": "forbidden",
+              "statement": "满十项不得继续新增。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about editor supports ten cards per section and re-enables add after removal",
+              "gate": "e2e",
+              "covers": [
+                "M11-CARD-EDITOR-01-E01",
+                "M11-CARD-EDITOR-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M11-CARD-LIMIT-01",
+          "priority": "P1",
+          "scenario": "服务端数组边界与公开快照隔离",
+          "expectations": [
+            {
+              "id": "M11-CARD-LIMIT-01-E01",
+              "surface": "response",
+              "statement": "十项按顺序持久化并在显式发布后完整返回。"
+            },
+            {
+              "id": "M11-CARD-LIMIT-01-E02",
+              "surface": "forbidden",
+              "statement": "任一区域十一项返回422且不改变工作版本；草稿不影响公开快照。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_about_page.py",
+              "kind": "pytest",
+              "name": "test_about_card_limits_preserve_ten_items_and_reject_eleven",
+              "gate": "api-tests",
+              "covers": [
+                "M11-CARD-LIMIT-01-E01",
+                "M11-CARD-LIMIT-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M11-CARD-ICONS-01",
+          "priority": "P1",
+          "scenario": "十种几何图标与受控悬停反馈",
+          "expectations": [
+            {
+              "id": "M11-CARD-ICONS-01-E01",
+              "surface": "user_visible",
+              "statement": "十项图标路径互异，每种响应鼠标悬停并复位，手机页面不横溢。"
+            },
+            {
+              "id": "M11-CARD-ICONS-01-E02",
+              "surface": "forbidden",
+              "statement": "减少动态效果和触屏不得触发图标位移动画。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about editor supports ten cards per section and re-enables add after removal",
+              "gate": "e2e",
+              "covers": [
+                "M11-CARD-ICONS-01-E01",
+                "M11-CARD-ICONS-01-E02"
+              ]
+            }
+          ]
         }
       ]
     }

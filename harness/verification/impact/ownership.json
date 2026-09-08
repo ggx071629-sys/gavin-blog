@@ -1732,7 +1732,8 @@
         "M10.operations",
         "M10.qualification",
         "M10.e5_evaluation",
-        "M10.capacity"
+        "M10.capacity",
+        "M11.api"
       ],
       "dependency_reasons": {
         "M01.articles": [
@@ -1844,6 +1845,9 @@
         ],
         "M10.capacity": [
           "capacity/capacity_roles reuse this unit through explicit development-only measurement CLI; no reverse runtime import."
+        ],
+        "M11.api": [
+          "About routes and snapshots consume AboutPageContent from schemas.py."
         ]
       }
     },
@@ -2047,7 +2051,10 @@
         "apps/web/tests/e2e/public-experience.spec.ts",
         "apps/web/tests/e2e/ui-foundation.spec.ts",
         "apps/web/tests/unit/public-ui-polish.test.ts",
-        "apps/web/tests/unit/site.test.ts"
+        "apps/web/tests/unit/site.test.ts",
+        "apps/web/components/NavigationArrow.vue",
+        "apps/web/components/PageHeroArtwork.vue",
+        "apps/web/components/SectionHeading.vue"
       ],
       "cases": [
         "M01-P1-01",
@@ -2067,7 +2074,12 @@
         "M02.admin_shell",
         "M04.books_web",
         "M04.projects_web",
-        "M09.assistant_web"
+        "M09.assistant_web",
+        "M11.web",
+        "M01.home",
+        "M01.reading",
+        "M02.editing",
+        "M05.content_web"
       ],
       "dependency_reasons": {
         "M01.indexes": [
@@ -2086,6 +2098,21 @@
           "Public overlay ownership coordinates navigation and assistant modal",
           "apps/web/components/AssistantHost.vue calls auto-imported usePublicOverlay",
           "apps/web/components/AssistantPanel.vue calls auto-imported usePublicOverlay"
+        ],
+        "M11.web": [
+          "Public and writing desk surfaces consume shared decorative heading, arrow or artwork components."
+        ],
+        "M01.home": [
+          "Public and writing desk surfaces consume shared decorative heading, arrow or artwork components."
+        ],
+        "M01.reading": [
+          "Public and writing desk surfaces consume shared decorative heading, arrow or artwork components."
+        ],
+        "M02.editing": [
+          "Public and writing desk surfaces consume shared decorative heading, arrow or artwork components."
+        ],
+        "M05.content_web": [
+          "Public and writing desk surfaces consume shared decorative heading, arrow or artwork components."
         ]
       }
     },
@@ -3074,7 +3101,8 @@
       ],
       "cases": [
         "M06-P0-01",
-        "M06-PROFILE-DEFAULT-01"
+        "M06-PROFILE-DEFAULT-01",
+        "M11-CARD-LIMIT-01"
       ],
       "dependents": [
         "M06.web_types"
@@ -3254,7 +3282,8 @@
         "apps/web/utils/home.ts",
         "apps/web/tests/unit/home.test.ts",
         "apps/web/tests/e2e/home-atlas.spec.ts",
-        "apps/web/tests/quality/home-atlas.spec.ts"
+        "apps/web/tests/quality/home-atlas.spec.ts",
+        "apps/web/components/HomeNotebookHero.vue"
       ],
       "cases": [
         "M01-HOME-DATA-01",
@@ -3436,7 +3465,8 @@
         "M11-PUBLIC-01",
         "M11-WORKING-COPY-01",
         "M11-PUBLISH-01",
-        "M11-HISTORY-01"
+        "M11-HISTORY-01",
+        "M11-CARD-LIMIT-01"
       ],
       "dependents": []
     },
@@ -3448,7 +3478,8 @@
         "apps/web/pages/admin/about.vue",
         "apps/web/pages/admin/about/preview.vue",
         "apps/web/pages/admin/about/revisions.vue",
-        "apps/web/tests/e2e/about-admin.spec.ts"
+        "apps/web/tests/e2e/about-admin.spec.ts",
+        "apps/web/components/GeometricMark.vue"
       ],
       "cases": [
         "M11-PUBLIC-01",
@@ -3456,7 +3487,9 @@
         "M11-PREVIEW-01",
         "M11-PUBLISH-01",
         "M11-HISTORY-01",
-        "M11-ADMIN-NAV-01"
+        "M11-ADMIN-NAV-01",
+        "M11-CARD-EDITOR-01",
+        "M11-CARD-ICONS-01"
       ],
       "dependents": []
     }
