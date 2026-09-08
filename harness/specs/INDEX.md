@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **5 active**, **0 frozen**.
+Open specifications: **4 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -14,7 +14,6 @@ Open specifications: **5 active**, **0 frozen**.
 | spec-20260907-local-launcher-feedback | active | L1 | 修复 Windows 快捷入口反馈和过期验证诊断 | task:20260907-local-launcher-feedback | — | [active/20260907-local-launcher-feedback.md](active/20260907-local-launcher-feedback.md) |
 | spec-20260908-article-design-v2 | active | L1 | 对齐工程设计稿的文章列表与正文阅读视觉 | task:20260908-article-design-v2 | — | [active/20260908-article-design-v2.md](active/20260908-article-design-v2.md) |
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
-| spec-20260908-public-card-focus | active | L1 | 全站公开卡片统一聚焦反馈并排除全部写作台页面 | task:20260908-public-card-focus | — | [active/20260908-public-card-focus.md](active/20260908-public-card-focus.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页恢复笔记、领域和文章之间的知识路线 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
@@ -140,3 +139,4 @@ Open specifications: **5 active**, **0 frozen**.
 | archive-20260907-assistant-answerability | compressed | L2 | 修复公开资料普通问法被模型误判为证据不足 | task:20260907-assistant-answerability | — | [archive/20260907-assistant-answerability.md](archive/20260907-assistant-answerability.md) |
 | archive-20260908-about-card-limit | compressed | L2 | 关于页各支持十项并提供十种不同的几何动效图标 | task:20260908-about-card-limit | — | [archive/20260908-about-card-limit.md](archive/20260908-about-card-limit.md) |
 | archive-20260908-archive-timeline | compressed | L2 | 归档页改用年份旗标和双轨菱形时间轴 | task:20260908-archive-timeline | — | [archive/20260908-archive-timeline.md](archive/20260908-archive-timeline.md) |
+| archive-20260908-public-card-focus | compressed | L2 | 全站公开卡片统一聚焦反馈并排除全部写作台页面 | task:20260908-public-card-focus | — | [archive/20260908-public-card-focus.md](archive/20260908-public-card-focus.md) |

@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260908-public-card-focus",
+  "created_at": "2026-09-08T15:10:21.044614+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "292ee97abbb6f3c4bec17ded998d5df2d74fff1b06dd3150408d4f5e80cc9d1d"
+}
