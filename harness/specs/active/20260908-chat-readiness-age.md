@@ -33,4 +33,5 @@ state_history:
 - AC-2 => M09-READINESS-INVALID-01
 - AC-3 => M09-READINESS-HINT-01
 ## Gates
+- harness-integrity => AC-1, AC-2, AC-3
 - api-tests => AC-1, AC-2, AC-3
