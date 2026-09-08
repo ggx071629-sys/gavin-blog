@@ -33,7 +33,9 @@ author: Gavin
 
 - 停止：先 Ctrl+C 退出问答启动器，它负责停止本轮 Web/API 子进程；再停止专用模型、Qdrant 和 Worker 终端。runtime、索引、模型和费用文件保留。`npm run dev:assistant` 是独立离线入口，不能用它的成功替代真实验收。
 - 索引更新：停止真实问答以释放 runtime 锁，保留 `.env.e5` 的同一内容库；在 `apps/api/` 运行 `.venv/Scripts/python.exe -m app.local_embedding.local --env-file .env.e5 rebuild`，记录返回 generation，再用同一入口 `finalize <generation>`。如旧会话尚有 checkpoint，先按原清理流程清除；不能删 runtime 绕过残留检查。重新启动后按新 generation 校验 readiness。持续消费 outbox 的独立 Worker 使用同一 `.env.e5` 配置，不能误用 `.env` 默认库。
-- Key、模型、价格、token 或预算调整：先关闭 gate/停止 API，保留旧 probe/ledger/费用；配置变更使旧签名失效。当前本机合同绑定已批准的每日 2 元；其他额度需先更新批准范围及配置合同，再在新的明确有界测试范围内探测。旧 ledger 的配置漂移会拒绝执行，不可删除或覆盖旧 ledger 来获得新额度。正常运行及重启不检查 probe 年龄上限，启动显示最后验证时间，超过 24 小时只作提示。缺失、失败、畸形、签名异常、配置漂移或未来时间仍拒绝；旧证据不证明供应商当前可用，仍由实际问答的输出、预算和熔断保护处理。启动及本机 readiness 签发不会自动调用付费 Chat。
+- Key、endpoint、模型、token/context/timeout或输出协议改变：先关闭gate/停止API，保留原probe/ledger/费用，按明确授权执行对应兼容性探测。仅价格或证据已批准范围内日预算改变时，只本地校验费用和重签readiness；超过已批准日预算上限时先明确授权，再离线rebind-costs，不要求模型调用。v1证据必须先在原配置下离线转换，无法重建原配置不能伪造兼容性事实。
+- 探测失败与耗尽恢复：同一ledger使用唯一授权ID和累计上限，历史费用/次数不按天清零，不因新ID重置。sending/unknown按保守上限计入，measured_fail保留原费用；调查并确认进程静止后追加recover事实。恢复不增加额度、不清在线熔断、不自动请求。新v3账本签名和run lock阻止篡改及并发恢复。所有命令和证据选择方式见 [API恢复入口](../../../apps/api/README.md#本机-chat-复验与账本恢复)。
+- 正常运行及重启不检查probe年龄上限，显示最后验证时间；超过24小时只作提示。缺失、失败、畸形、签名异常、兼容性漂移或未来时间仍拒绝；历史成功不证明供应商当前可用。
 - 日常费用以 `assistant_chat_budgets` 的 settled+reserved 为准；未知结果按上限计费并打开熔断。调查供应商与网络后才能恢复，不能清零费用、改日期或复制空库。本轮网络沙箱故障保留 28,608 micro-CNY 的最高费用；只在确认非计费连通性恢复、reserved=0 后解除了本机熔断，失败事实未删除。
 - v4 租约迁移：启动器在持有 runtime 独占锁时执行。旧版本同一个 scope/key 的唯一约束错误地限制了全局并发；新约束包含 owner turn。回滚需关闭入口、停止/排空租约，再执行原 Alembic 降级流程；有租约时降级拒绝，不自动丢弃它们。降级后需由对应版本的 provisioning/readiness 重新验证，禁止仅替换旧代码继续启用。
 - 日志：启动器向当前终端输出；本轮原始采样、合成问答结果和网络恢复记录仅留在 `apps/api/data/qa-real-20260906/`，不提交。控制库保留预算与必要脱敏审计；DELETE 会清除会话正文/checkpoint 并保留预算事实。生产备份仍排除 runtime。

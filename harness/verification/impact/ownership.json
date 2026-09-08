@@ -1169,7 +1169,11 @@
         "M09-LOCAL-REAL-CONCURRENCY-01",
         "M09-READINESS-AGE-01",
         "M09-READINESS-INVALID-01",
-        "M09-READINESS-HINT-01"
+        "M09-READINESS-HINT-01",
+        "M09-REVALIDATION-COMPAT-01",
+        "M09-REVALIDATION-BUDGET-01",
+        "M09-REVALIDATION-RECOVERY-01",
+        "M09-REVALIDATION-CLI-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1263,7 +1267,11 @@
         "M09-LOCAL-REAL-QA-01",
         "M09-READINESS-AGE-01",
         "M09-READINESS-INVALID-01",
-        "M09-READINESS-HINT-01"
+        "M09-READINESS-HINT-01",
+        "M09-REVALIDATION-COMPAT-01",
+        "M09-REVALIDATION-BUDGET-01",
+        "M09-REVALIDATION-RECOVERY-01",
+        "M09-REVALIDATION-CLI-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1431,7 +1439,9 @@
         "apps/api/tests/test_assistant_backup_restore.py",
         "apps/api/tests/test_assistant_provider_qualification.py",
         "apps/api/tests/test_assistant_qualification_profile.py",
-        "apps/api/tests/test_assistant_runtime_profile_binding.py"
+        "apps/api/tests/test_assistant_runtime_profile_binding.py",
+        "apps/api/app/assistant_qualification/local_ledger.py",
+        "apps/api/tests/test_local_probe_recovery.py"
       ],
       "cases": [
         "M10-P1-01",
@@ -1447,7 +1457,11 @@
         "M09-LOCAL-REAL-QA-01",
         "M09-READINESS-AGE-01",
         "M09-READINESS-INVALID-01",
-        "M09-READINESS-HINT-01"
+        "M09-READINESS-HINT-01",
+        "M09-REVALIDATION-COMPAT-01",
+        "M09-REVALIDATION-BUDGET-01",
+        "M09-REVALIDATION-RECOVERY-01",
+        "M09-REVALIDATION-CLI-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1968,7 +1982,11 @@
         "M09-LOCAL-REAL-CONCURRENCY-01",
         "M09-READINESS-AGE-01",
         "M09-READINESS-INVALID-01",
-        "M09-READINESS-HINT-01"
+        "M09-READINESS-HINT-01",
+        "M09-REVALIDATION-COMPAT-01",
+        "M09-REVALIDATION-BUDGET-01",
+        "M09-REVALIDATION-RECOVERY-01",
+        "M09-REVALIDATION-CLI-01"
       ],
       "dependents": [
         "M06.persistence",
@@ -3297,7 +3315,11 @@
         "CHAT-READINESS-PLAN.md",
         "completed/local-startup/L1.md",
         "completed/local-startup/L2.md",
-        "completed/local-startup/L3.md"
+        "completed/local-startup/L3.md",
+        "harness/docs/decisions/20260908-local-probe-recovery.md",
+        "completed/revalidation-recovery/R1.md",
+        "completed/revalidation-recovery/R2.md",
+        "completed/revalidation-recovery/R3.md"
       ],
       "cases": [
         "M08-DOCS-01"

@@ -29,10 +29,10 @@ state_history:
 旧v1只保存混合摘要，无法从新价格反推旧兼容性，因此转换必须在原配置下验证，绝不猜测。新账本签名使用原readiness密钥，密钥轮换需另行受控迁移。累计授权不能使旧费用归零。恢复确认是操作者对进程静止和故障调查的声明，账本仍保留失败事实与保守费用。新日预算上限属于显式授权声明，不通过运行自动提升。
 # Verification plan
 ## Verification cases
-- AC-1 => M09-REVALIDATION-COMPAT-01
+- AC-1 => M09-REVALIDATION-COMPAT-01, M09-READINESS-AGE-01, M09-READINESS-INVALID-01
 - AC-2 => M09-REVALIDATION-BUDGET-01
 - AC-3 => M09-REVALIDATION-RECOVERY-01
-- AC-4 => M09-REVALIDATION-CLI-01
+- AC-4 => M09-REVALIDATION-CLI-01, M09-READINESS-HINT-01
 ## Gates
 - harness-integrity => AC-1, AC-2, AC-3, AC-4
 - api-tests => AC-1, AC-2, AC-3, AC-4
