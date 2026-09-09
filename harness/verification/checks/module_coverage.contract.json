@@ -11391,12 +11391,12 @@
         {
           "id": "M09-UI-DISCOVERY-01",
           "priority": "P1",
-          "scenario": "导航和首页提示打开同一惰性面板，关闭偏好持久化且存储异常可降级。",
+          "scenario": "保留导航与助手发现入口，当前提示由悬浮球承载，关闭偏好可持久化并安全降级。",
           "expectations": [
             {
               "id": "M09-UI-DISCOVERY-01-ALLOW",
               "surface": "user_visible",
-              "statement": "导航入口正常占位，提示可关闭并记忆，面板关闭恢复对应焦点。"
+              "statement": "导航与悬浮入口可用，首次提示可关闭并记忆，关闭面板恢复触发点焦点。"
             },
             {
               "id": "M09-UI-DISCOVERY-01-DENY",
@@ -11426,6 +11426,100 @@
               "covers": [
                 "M09-UI-DISCOVERY-01-ALLOW",
                 "M09-UI-DISCOVERY-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-UI-ORB-01",
+          "priority": "P1",
+          "scenario": "导航和双端悬浮球共用助手，三秒引导一次关闭，鼠标触摸拖动吸边且记忆，正常恢复焦点。",
+          "expectations": [
+            {
+              "id": "M09-UI-ORB-01-ALLOW",
+              "surface": "user_visible",
+              "statement": "导航和双端悬浮球共用助手，三秒引导一次关闭，鼠标触摸拖动吸边且记忆，正常恢复焦点。"
+            },
+            {
+              "id": "M09-UI-ORB-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得提前请求助手、重复引导、拖动误触、位置越界或留下模态锁。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/discovery.spec.ts",
+              "name": "assistant discovery stays in navigation and remembers dismissal without eager requests",
+              "gate": "e2e",
+              "covers": [
+                "M09-UI-ORB-01-ALLOW",
+                "M09-UI-ORB-01-DENY"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/discovery.spec.ts",
+              "name": "assistant discovery tolerates blocked preference storage",
+              "gate": "e2e",
+              "covers": [
+                "M09-UI-ORB-01-ALLOW",
+                "M09-UI-ORB-01-DENY"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/discovery.spec.ts",
+              "name": "assistant orb drags with mouse and touch without opening and restores bounded position",
+              "gate": "e2e",
+              "covers": [
+                "M09-UI-ORB-01-ALLOW",
+                "M09-UI-ORB-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-UNIT-ORB-01",
+          "priority": "P1",
+          "scenario": "偏好解析与边缘吸附在损坏存储、小视口和尺寸变化时仍给出可见坐标。",
+          "expectations": [
+            {
+              "id": "M09-UNIT-ORB-01-ALLOW",
+              "surface": "response",
+              "statement": "偏好解析与边缘吸附在损坏存储、小视口和尺寸变化时仍给出可见坐标。"
+            },
+            {
+              "id": "M09-UNIT-ORB-01-DENY",
+              "surface": "forbidden",
+              "statement": "损坏偏好不得产生 NaN、越界位置或无法恢复的悬浮球。"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-orb.test.ts",
+              "name": "rejects corrupt preferences and clamps restored positions across viewport sizes",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UNIT-ORB-01-ALLOW",
+                "M09-UNIT-ORB-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-orb.test.ts",
+              "name": "snaps by the ball center and preserves relative vertical placement",
+              "gate": "web-quality",
+              "covers": [
+                "M09-UNIT-ORB-01-ALLOW",
+                "M09-UNIT-ORB-01-DENY"
               ]
             }
           ]

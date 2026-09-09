@@ -2108,7 +2108,8 @@
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
         "M01-CARD-GLOW-01",
-        "M09-UI-DISCOVERY-01"
+        "M09-UI-DISCOVERY-01",
+        "M09-UI-ORB-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2688,7 +2689,9 @@
         "apps/web/components/AssistantLauncher.vue",
         "apps/web/components/AssistantDiscovery.vue",
         "apps/web/composables/useAssistantEntry.ts",
-        "apps/web/tests/e2e-assistant/discovery.spec.ts"
+        "apps/web/tests/e2e-assistant/discovery.spec.ts",
+        "apps/web/utils/assistant/orb.ts",
+        "apps/web/tests/unit/assistant-orb.test.ts"
       ],
       "cases": [
         "M09-P0-01",
@@ -2708,7 +2711,9 @@
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
         "M01-CARD-GLOW-01",
-        "M09-UI-DISCOVERY-01"
+        "M09-UI-DISCOVERY-01",
+        "M09-UI-ORB-01",
+        "M09-UNIT-ORB-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2729,7 +2734,7 @@
           "apps/web/pages/admin/assistant.vue imports ~/utils/assistant/flag"
         ],
         "M01.home": [
-          "首页通过 AssistantDiscovery 消费助手入口状态。"
+          "默认公开布局提供悬浮助手引导，首页不再单独渲染行内提示。"
         ]
       }
     },
@@ -3389,7 +3394,8 @@
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
         "M01-CARD-GLOW-01",
-        "M09-UI-DISCOVERY-01"
+        "M09-UI-DISCOVERY-01",
+        "M09-UI-ORB-01"
       ],
       "dependents": []
     },
