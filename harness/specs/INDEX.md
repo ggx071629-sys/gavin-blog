@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **5 active**, **0 frozen**.
+Open specifications: **4 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -15,7 +15,6 @@ Open specifications: **5 active**, **0 frozen**.
 | spec-20260908-article-design-v2 | active | L1 | 对齐工程设计稿的文章列表与正文阅读视觉 | task:20260908-article-design-v2 | — | [active/20260908-article-design-v2.md](active/20260908-article-design-v2.md) |
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页恢复笔记、领域和文章之间的知识路线 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
-| spec-20260909-assistant-orb | active | L1 | 保留导航并增加可拖动悬浮球与一次性提示 | task:20260909-assistant-orb | — | [active/20260909-assistant-orb.md](active/20260909-assistant-orb.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -144,4 +143,5 @@ Open specifications: **5 active**, **0 frozen**.
 | archive-20260908-chat-revalidation-recovery | compressed | L2 | 分离本机兼容性证据与费用授权并提供保留历史的探测恢复 | task:20260908-chat-revalidation-recovery | — | [archive/20260908-chat-revalidation-recovery.md](archive/20260908-chat-revalidation-recovery.md) |
 | archive-20260908-public-card-focus | compressed | L2 | 全站公开卡片统一聚焦反馈并排除全部写作台页面 | task:20260908-public-card-focus | — | [archive/20260908-public-card-focus.md](archive/20260908-public-card-focus.md) |
 | archive-20260909-assistant-discovery | compressed | L2 | 助手入口进入导航并提供可关闭首页提示 | task:20260909-assistant-discovery | — | [archive/20260909-assistant-discovery.md](archive/20260909-assistant-discovery.md) |
+| archive-20260909-assistant-orb | compressed | L2 | 保留导航并增加可拖动悬浮球与一次性提示 | task:20260909-assistant-orb | — | [archive/20260909-assistant-orb.md](archive/20260909-assistant-orb.md) |
 | archive-20260909-public-card-glow | compressed | L2 | 补齐公开卡片随鼠标移动的局部光晕 | task:20260909-public-card-glow | — | [archive/20260909-public-card-glow.md](archive/20260909-public-card-glow.md) |
