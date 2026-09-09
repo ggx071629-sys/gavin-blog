@@ -11523,6 +11523,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-UI-ORB-MOTION-01",
+          "priority": "P1",
+          "scenario": "持续能量球动效在暂停、减少动态效果、后台与路由生命周期中安全降级，双主题窄屏可用。",
+          "expectations": [
+            {
+              "id": "M09-UI-ORB-MOTION-01-ALLOW",
+              "surface": "user_visible",
+              "statement": "持续轨道和滚动外环可观察；暂停偏好刷新保留，聚焦及后台停止；静态双端入口保持可访问。"
+            },
+            {
+              "id": "M09-UI-ORB-MOTION-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得在减少动态效果时持续运动、卸载后写入旧节点、提前请求助手、产生横溢或新增控制台错误。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/orb-motion.spec.ts",
+              "name": "assistant orb motion pauses accessibly and cleans up across preferences and navigation",
+              "gate": "e2e",
+              "covers": [
+                "M09-UI-ORB-MOTION-01-ALLOW",
+                "M09-UI-ORB-MOTION-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
