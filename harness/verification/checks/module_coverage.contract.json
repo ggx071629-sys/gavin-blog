@@ -13549,6 +13549,43 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M10-STUDIO-STATES-01",
+          "priority": "P1",
+          "scenario": "Interrupted trial and long synchronization lists preserve real pending/error and pagination semantics.",
+          "expectations": [
+            {
+              "id": "M10-STUDIO-STATES-01-ALLOW",
+              "surface": "response",
+              "statement": "Stop retains pending/cost notice; successful restore clears old error; long themed dialog remains usable with server pagination parameters."
+            },
+            {
+              "id": "M10-STUDIO-STATES-01-DENY",
+              "surface": "forbidden",
+              "statement": "No duplicate pending submissions, false clearing on failure, stale recovery error after success, or horizontal overflow."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/studio-states.spec.ts",
+              "name": "states",
+              "gate": "e2e",
+              "config": "playwright.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "states"
+              ],
+              "covers": [
+                "M10-STUDIO-STATES-01-ALLOW",
+                "M10-STUDIO-STATES-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
