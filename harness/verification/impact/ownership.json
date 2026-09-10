@@ -2826,7 +2826,8 @@
         "M02-STUDIO-SHELL-01",
         "M02-DESK-LAYOUT-01",
         "M02-DESK-REVISIONS-01",
-        "M10-STUDIO-OVERVIEW-01"
+        "M10-STUDIO-OVERVIEW-01",
+        "M10-STUDIO-TRIAL-01"
       ],
       "dependents": []
     },

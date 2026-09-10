@@ -13438,6 +13438,54 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M10-STUDIO-TRIAL-01",
+          "priority": "P1",
+          "scenario": "Selected trial layout preserves actual sessions, safe citations, and disabled submission.",
+          "expectations": [
+            {
+              "id": "M10-STUDIO-TRIAL-01-ALLOW",
+              "surface": "response",
+              "statement": "Themed responsive trial renders actual restored answers, settled fees and collapsed validated citations; clearing empties session."
+            },
+            {
+              "id": "M10-STUDIO-TRIAL-01-DENY",
+              "surface": "forbidden",
+              "statement": "No overflow, inaccessible controls, unsafe citations, or keyboard submission while trial is unavailable."
+            }
+          ],
+          "required_gates": [
+            "e2e",
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+              "name": "management real trial budget public switch and responsive maintenance",
+              "gate": "e2e",
+              "config": "playwright.assistant.config.ts",
+              "project": "chromium",
+              "covers": [
+                "M10-STUDIO-TRIAL-01-ALLOW",
+                "M10-STUDIO-TRIAL-01-DENY"
+              ],
+              "title_path": [
+                "management real trial budget public switch and responsive maintenance"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-management.test.ts",
+              "name": "closes trial citations over safe public sources and bounded excerpts",
+              "gate": "web-quality",
+              "covers": [
+                "M10-STUDIO-TRIAL-01-ALLOW",
+                "M10-STUDIO-TRIAL-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
