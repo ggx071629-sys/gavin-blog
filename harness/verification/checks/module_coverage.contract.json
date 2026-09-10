@@ -4620,6 +4620,80 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M06-STUDIO-LOGIN-01",
+          "priority": "P1",
+          "scenario": "Centered studio login remains accessible and authenticates a real safe return path.",
+          "expectations": [
+            {
+              "id": "M06-STUDIO-LOGIN-01-E01",
+              "surface": "user_visible",
+              "statement": "Both themes share a centered 430px desktop form with safe 320/390/768px margins, heading and return link; Enter submits real credentials to the requested admin route."
+            },
+            {
+              "id": "M06-STUDIO-LOGIN-01-E02",
+              "surface": "forbidden",
+              "statement": "No obsolete two-column panel, horizontal overflow, axe violation or browser hydration warning."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+              "name": "login",
+              "gate": "e2e",
+              "covers": [
+                "M06-STUDIO-LOGIN-01-E01",
+                "M06-STUDIO-LOGIN-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-STUDIO-LOGIN-ERROR-01",
+          "priority": "P0",
+          "scenario": "Login retains pending lockout, CSRF, safe returns and classified recoverable errors.",
+          "expectations": [
+            {
+              "id": "M06-STUDIO-LOGIN-ERROR-01-E01",
+              "surface": "user_visible",
+              "statement": "Pending login is disabled and aria-busy; known HTTP and network failures produce the correct visible field-associated error; safe returnTo survives success."
+            },
+            {
+              "id": "M06-STUDIO-LOGIN-ERROR-01-E02",
+              "surface": "forbidden",
+              "statement": "Duplicate form submission during pending must not repeat CSRF or login requests; errors must not leave the form permanently disabled."
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/failure/failure-state.spec.ts",
+              "name": "login exposes its pending state before restoring an actionable error state",
+              "gate": "web-quality",
+              "covers": [
+                "M06-STUDIO-LOGIN-ERROR-01-E01",
+                "M06-STUDIO-LOGIN-ERROR-01-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/failure/failure-state.spec.ts",
+              "name": "login classifies failures and accepts only safe return targets",
+              "gate": "web-quality",
+              "covers": [
+                "M06-STUDIO-LOGIN-ERROR-01-E01",
+                "M06-STUDIO-LOGIN-ERROR-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

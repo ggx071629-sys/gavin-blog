@@ -2085,7 +2085,9 @@
         "M07-STUDIO-THEME-01",
         "M02-STUDIO-SHELL-01",
         "M02-DESK-LAYOUT-01",
-        "M02-DESK-REVISIONS-01"
+        "M02-DESK-REVISIONS-01",
+        "M06-STUDIO-LOGIN-01",
+        "M06-STUDIO-LOGIN-ERROR-01"
       ],
       "dependents": [
         "M02.admin_shell"
@@ -2650,7 +2652,10 @@
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
-        "M01-CARD-GLOW-01"
+        "M01-CARD-GLOW-01",
+        "M06-STUDIO-LOGIN-01",
+        "M06-STUDIO-LOGIN-ERROR-01",
+        "M07-STUDIO-THEME-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3741,7 +3746,9 @@
         "M07-STUDIO-FONTS-01",
         "M02-STUDIO-SHELL-01",
         "M02-DESK-LAYOUT-01",
-        "M02-DESK-REVISIONS-01"
+        "M02-DESK-REVISIONS-01",
+        "M06-STUDIO-LOGIN-01",
+        "M06-STUDIO-LOGIN-ERROR-01"
       ],
       "dependents": [
         "M02.admin_shell",
