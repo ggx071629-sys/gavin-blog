@@ -14497,6 +14497,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M11-STUDIO-ABOUT-HISTORY-01",
+          "priority": "P1",
+          "scenario": "关于页开放版本列表、真实差异和确认回滚",
+          "expectations": [
+            {
+              "id": "M11-STUDIO-ABOUT-HISTORY-01-E01",
+              "surface": "user_visible",
+              "statement": "关于页开放版本列表、真实差异和确认回滚"
+            },
+            {
+              "id": "M11-STUDIO-ABOUT-HISTORY-01-E02",
+              "surface": "forbidden",
+              "statement": "回滚不得改写历史或跳过确认；失败不得保留误导性旧快照或导致窄屏溢出。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "ah",
+              "gate": "e2e",
+              "covers": [
+                "M11-STUDIO-ABOUT-HISTORY-01-E01",
+                "M11-STUDIO-ABOUT-HISTORY-01-E02"
+              ]
+            }
+          ]
         }
       ]
     }
