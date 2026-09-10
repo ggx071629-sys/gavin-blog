@@ -5013,12 +5013,44 @@
           "test_refs": [
             {
               "kind": "playwright",
-              "path": "apps/web/tests/e2e/studio-foundation.spec.ts",
-              "name": "studio themes stay local across login shell and teleported dialog",
+              "path": "apps/web/tests/e2e/studio-theme.spec.ts",
+              "name": "theme",
               "gate": "e2e",
               "covers": [
                 "M07-STUDIO-THEME-01-E01",
                 "M07-STUDIO-THEME-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M07-STUDIO-FONTS-01",
+          "priority": "P1",
+          "scenario": "Existing local Inter and Noto font configuration remains shipped while studio theme loads.",
+          "expectations": [
+            {
+              "id": "M07-STUDIO-FONTS-01-E01",
+              "surface": "user_visible",
+              "statement": "Nuxt includes local Inter and Noto Sans SC weights needed by studio and preserves public heading configuration."
+            },
+            {
+              "id": "M07-STUDIO-FONTS-01-E02",
+              "surface": "forbidden",
+              "statement": "No external Google font import or unsupported font weight is introduced."
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/typography.test.ts",
+              "name": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts",
+              "gate": "web-quality",
+              "covers": [
+                "M07-STUDIO-FONTS-01-E01",
+                "M07-STUDIO-FONTS-01-E02"
               ]
             }
           ]

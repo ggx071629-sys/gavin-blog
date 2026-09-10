@@ -27,7 +27,7 @@ state_history:
 # Verification plan
 ## Verification cases
 - AC-1 => M07-STUDIO-THEME-01
-- AC-2 => M07-STUDIO-THEME-01, M07-UNIT-TYPOGRAPHY-01
+- AC-2 => M07-STUDIO-THEME-01, M07-STUDIO-FONTS-01
 ## Gates
 - e2e => AC-1, AC-2
 - web-quality => AC-2

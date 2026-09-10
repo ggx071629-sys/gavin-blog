@@ -3677,7 +3677,7 @@
       "paths": [
         "apps/web/assets/css/studio.css",
         "apps/web/components/StudioIcon.vue",
-        "apps/web/tests/e2e/studio-foundation.spec.ts",
+        "apps/web/tests/e2e/studio-theme.spec.ts",
         "apps/web/public/studio/README.md",
         "apps/web/public/studio/icons/alert-circle-filled.svg",
         "apps/web/public/studio/icons/alert-circle.svg",
@@ -3710,7 +3710,7 @@
       ],
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependents": [
         "M02.admin_shell",

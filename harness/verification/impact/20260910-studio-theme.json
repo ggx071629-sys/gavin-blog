@@ -8,7 +8,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -117,7 +117,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -221,12 +221,12 @@
       ]
     },
     {
-      "path": "apps/web/tests/e2e/studio-foundation.spec.ts",
+      "path": "apps/web/tests/e2e/studio-theme.spec.ts",
       "owner": "M07.studio_theme",
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -335,7 +335,7 @@
       "reason": "Resource documentation only: no routing, generated index or executable contract structure changes; documents theme and license boundary.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -444,7 +444,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -553,7 +553,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -662,7 +662,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -771,7 +771,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -880,7 +880,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -989,7 +989,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -1098,7 +1098,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -1207,7 +1207,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -1316,7 +1316,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -1425,7 +1425,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -1534,7 +1534,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -1643,7 +1643,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -1752,7 +1752,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -1861,7 +1861,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -1970,7 +1970,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -2079,7 +2079,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -2188,7 +2188,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -2297,7 +2297,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -2406,7 +2406,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -2515,7 +2515,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -2624,7 +2624,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -2733,7 +2733,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -2842,7 +2842,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -2951,7 +2951,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -3060,7 +3060,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -3169,7 +3169,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -3278,7 +3278,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
@@ -3387,7 +3387,7 @@
       "reason": "Register and load isolated studio tokens, licensed local icons, resource documentation and exact browser acceptance.",
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-UNIT-TYPOGRAPHY-01"
+        "M07-STUDIO-FONTS-01"
       ],
       "dependencies": [
         {
