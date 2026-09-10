@@ -13390,6 +13390,54 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M10-STUDIO-OVERVIEW-01",
+          "priority": "P1",
+          "scenario": "Studio overview follows selected responsive design while preserving actual management facts.",
+          "expectations": [
+            {
+              "id": "M10-STUDIO-OVERVIEW-01-ALLOW",
+              "surface": "response",
+              "statement": "Responsive themed overview displays actual budget and sync facts with accessible headings and controls."
+            },
+            {
+              "id": "M10-STUDIO-OVERVIEW-01-DENY",
+              "surface": "forbidden",
+              "statement": "Unknown or stale facts must not appear as confirmed open service or determinate budget; refresh must not issue writes."
+            }
+          ],
+          "required_gates": [
+            "e2e",
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/studio-overview.spec.ts",
+              "name": "overview",
+              "gate": "e2e",
+              "config": "playwright.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "overview"
+              ],
+              "covers": [
+                "M10-STUDIO-OVERVIEW-01-ALLOW",
+                "M10-STUDIO-OVERVIEW-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-management.test.ts",
+              "name": "never reports stale or budget blocked service as open",
+              "gate": "web-quality",
+              "covers": [
+                "M10-STUDIO-OVERVIEW-01-ALLOW",
+                "M10-STUDIO-OVERVIEW-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

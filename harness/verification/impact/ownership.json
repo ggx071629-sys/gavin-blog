@@ -2811,7 +2811,8 @@
         "apps/web/composables/useAssistantManagement.ts",
         "apps/web/utils/assistant-management.ts",
         "apps/web/tests/unit/assistant-management.test.ts",
-        "apps/web/tests/e2e-assistant/management.spec.ts"
+        "apps/web/tests/e2e-assistant/management.spec.ts",
+        "apps/web/tests/e2e/studio-overview.spec.ts"
       ],
       "cases": [
         "M10-P0-02",
@@ -2824,7 +2825,8 @@
         "M07-STUDIO-THEME-01",
         "M02-STUDIO-SHELL-01",
         "M02-DESK-LAYOUT-01",
-        "M02-DESK-REVISIONS-01"
+        "M02-DESK-REVISIONS-01",
+        "M10-STUDIO-OVERVIEW-01"
       ],
       "dependents": []
     },
@@ -3748,7 +3750,8 @@
         "M02-DESK-LAYOUT-01",
         "M02-DESK-REVISIONS-01",
         "M06-STUDIO-LOGIN-01",
-        "M06-STUDIO-LOGIN-ERROR-01"
+        "M06-STUDIO-LOGIN-ERROR-01",
+        "M10-STUDIO-OVERVIEW-01"
       ],
       "dependents": [
         "M02.admin_shell",
