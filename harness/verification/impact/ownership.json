@@ -795,12 +795,15 @@
         "apps/api/app/article_revisions.py",
         "apps/api/app/routes/admin_articles.py",
         "apps/api/app/routes/admin_publishing.py",
-        "apps/api/tests/test_article_revisions.py"
+        "apps/api/tests/test_article_revisions.py",
+        "apps/api/app/admin_list_query.py",
+        "apps/api/tests/test_admin_list_query.py"
       ],
       "cases": [
         "M02-P0-01",
         "M02-P1-01",
-        "M02-UNIT-ARTICLE-REVISIONS-01"
+        "M02-UNIT-ARTICLE-REVISIONS-01",
+        "M02-STUDIO-QUERY-01"
       ],
       "dependents": [
         "M01.articles",
@@ -920,7 +923,8 @@
       "cases": [
         "M04-P0-01",
         "M04-P1-01",
-        "M04-UNIT-PROJECTS-BOOKS-01"
+        "M04-UNIT-PROJECTS-BOOKS-01",
+        "M02-STUDIO-QUERY-01"
       ],
       "dependents": [
         "M04.books_web",
@@ -1604,7 +1608,8 @@
       ],
       "cases": [
         "M01-P0-01",
-        "M01-UNIT-PAGINATION-01"
+        "M01-UNIT-PAGINATION-01",
+        "M02-PAGINATION-01"
       ],
       "dependents": [
         "M01.articles",
@@ -1751,7 +1756,8 @@
       "cases": [
         "M06-P0-01",
         "M06-UNIT-MIGRATIONS-01",
-        "M10-TOTAL-BUDGET-01"
+        "M10-TOTAL-BUDGET-01",
+        "M02-STUDIO-QUERY-01"
       ],
       "dependents": [
         "M01.articles",
@@ -3020,7 +3026,8 @@
         "apps/web/types/api.ts"
       ],
       "cases": [
-        "M06-PROFILE-SKILLS-01"
+        "M06-PROFILE-SKILLS-01",
+        "M02-STUDIO-QUERY-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -3279,7 +3286,8 @@
         "M10-PUBLIC-AVAILABILITY-01",
         "M10-ADMIN-TRIAL-01",
         "M10-TOTAL-BUDGET-01",
-        "M10-SYNC-PRIORITY-01"
+        "M10-SYNC-PRIORITY-01",
+        "M02-STUDIO-QUERY-01"
       ],
       "dependents": [
         "M06.web_types"

@@ -2402,6 +2402,70 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M02-STUDIO-QUERY-01",
+          "priority": "P1",
+          "scenario": "三类后台列表按关键词和状态先筛选后分页并提供数据库计数。",
+          "expectations": [
+            {
+              "id": "M02-STUDIO-QUERY-01-E01",
+              "surface": "response",
+              "statement": "三类后台列表按关键词和状态先筛选后分页并提供数据库计数。"
+            },
+            {
+              "id": "M02-STUDIO-QUERY-01-E02",
+              "surface": "forbidden",
+              "statement": "不得把删除项或不匹配项纳入结果，不得在分页后执行查询。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_admin_list_query.py",
+              "kind": "pytest",
+              "name": "test_admin_queries_filter_before_pagination_and_count_real_rows",
+              "gate": "api-tests",
+              "covers": [
+                "M02-STUDIO-QUERY-01-E01",
+                "M02-STUDIO-QUERY-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M02-PAGINATION-01",
+          "priority": "P1",
+          "scenario": "公开及旧管理数组保持稳定有界分页。",
+          "expectations": [
+            {
+              "id": "M02-PAGINATION-01-E01",
+              "surface": "response",
+              "statement": "公开及旧管理数组保持稳定有界分页。"
+            },
+            {
+              "id": "M02-PAGINATION-01-E02",
+              "surface": "forbidden",
+              "statement": "不得把删除项或不匹配项纳入结果，不得在分页后执行查询。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_pagination.py",
+              "kind": "pytest",
+              "name": "test_content_lists_are_bounded_and_stably_paginated",
+              "gate": "api-tests",
+              "covers": [
+                "M02-PAGINATION-01-E01",
+                "M02-PAGINATION-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
