@@ -41,7 +41,11 @@
         "harness/verification/tests/test_impact.py",
         "harness/verification/tests/test_impact_cli.py",
         "harness/verification/tests/test_impact_graph.py",
-        "harness/verification/tests/test_impact_registry.py"
+        "harness/verification/tests/test_impact_registry.py",
+        "harness/verification/impact/20260911-assistant-about-citations.json",
+        "harness/verification/impact/20260911-assistant-about-projection.json",
+        "harness/verification/impact/20260911-assistant-about-retrieval.json",
+        "harness/verification/impact/20260911-assistant-about-sync.json"
       ],
       "cases": [
         "M08-DOCS-01",
@@ -333,7 +337,19 @@
         "harness/tools/summarizer.py",
         "harness/verification/tests/test_documentation_impact.py",
         "harness/verification/tests/test_freeze_lifecycle.py",
-        "harness/verification/tests/test_lifecycle.py"
+        "harness/verification/tests/test_lifecycle.py",
+        "harness/evolution/events/20260911-assistant-about-citations--spec-completed.json",
+        "harness/evolution/events/20260911-assistant-about-projection--spec-completed.json",
+        "harness/evolution/events/20260911-assistant-about-retrieval--spec-completed.json",
+        "harness/evolution/events/20260911-assistant-about-sync--spec-completed.json",
+        "harness/specs/archive/20260911-assistant-about-citations.md",
+        "harness/specs/archive/20260911-assistant-about-projection.md",
+        "harness/specs/archive/20260911-assistant-about-retrieval.md",
+        "harness/specs/archive/20260911-assistant-about-sync.md",
+        "harness/verification/evidence/20260911-assistant-about-citations.json",
+        "harness/verification/evidence/20260911-assistant-about-projection.json",
+        "harness/verification/evidence/20260911-assistant-about-retrieval.json",
+        "harness/verification/evidence/20260911-assistant-about-sync.json"
       ],
       "cases": [
         "M08-EVIDENCE-01",

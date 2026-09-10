@@ -2131,6 +2131,678 @@
       "cases": [],
       "dependencies": [],
       "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "harness/evolution/events/20260911-assistant-about-citations--spec-completed.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/evolution/events/20260911-assistant-about-projection--spec-completed.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/evolution/events/20260911-assistant-about-retrieval--spec-completed.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/evolution/events/20260911-assistant-about-sync--spec-completed.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/specs/archive/20260911-assistant-about-citations.md",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/specs/archive/20260911-assistant-about-projection.md",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/specs/archive/20260911-assistant-about-retrieval.md",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/specs/archive/20260911-assistant-about-sync.md",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/evidence/20260911-assistant-about-citations.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/evidence/20260911-assistant-about-projection.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/evidence/20260911-assistant-about-retrieval.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/evidence/20260911-assistant-about-sync.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/20260911-assistant-about-citations.json",
+      "owner": "M08.impact",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/20260911-assistant-about-projection.json",
+      "owner": "M08.impact",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/20260911-assistant-about-retrieval.json",
+      "owner": "M08.impact",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/20260911-assistant-about-sync.json",
+      "owner": "M08.impact",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
     }
   ]
 }
