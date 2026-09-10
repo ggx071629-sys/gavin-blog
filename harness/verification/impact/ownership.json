@@ -2063,7 +2063,9 @@
         "M02-DESK-LAYOUT-01",
         "M02-DESK-REVISIONS-01",
         "M06-STUDIO-PROFILE-01",
-        "M05-STUDIO-MEDIA-01"
+        "M05-STUDIO-MEDIA-01",
+        "M05-STUDIO-OPERATIONS-LAYOUT-01",
+        "M05-STUDIO-OPERATIONS-STATES-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2459,7 +2461,9 @@
         "M02-STUDIO-SHELL-01",
         "M02-DESK-LAYOUT-01",
         "M02-DESK-REVISIONS-01",
-        "M03-STUDIO-TAXONOMY-01"
+        "M03-STUDIO-TAXONOMY-01",
+        "M05-STUDIO-OPERATIONS-LAYOUT-01",
+        "M05-STUDIO-OPERATIONS-STATES-01"
       ],
       "dependents": []
     },
@@ -2552,7 +2556,9 @@
         "M02-DESK-LAYOUT-01",
         "M02-DESK-REVISIONS-01",
         "M02-STUDIO-WORKSPACE-01",
-        "M05-STUDIO-MEDIA-01"
+        "M05-STUDIO-MEDIA-01",
+        "M05-STUDIO-OPERATIONS-LAYOUT-01",
+        "M05-STUDIO-OPERATIONS-STATES-01"
       ],
       "dependents": [
         "M02.editing",
@@ -2594,7 +2600,9 @@
         "M02-STUDIO-SHELL-01",
         "M02-DESK-LAYOUT-01",
         "M02-DESK-REVISIONS-01",
-        "M05-STUDIO-CONTENT-01"
+        "M05-STUDIO-CONTENT-01",
+        "M05-STUDIO-OPERATIONS-LAYOUT-01",
+        "M05-STUDIO-OPERATIONS-STATES-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -3592,7 +3600,8 @@
     "M05.operations_layout": {
       "paths": [
         "apps/web/assets/css/resource-operations.css",
-        "apps/web/tests/e2e/resource-ops.spec.ts"
+        "apps/web/tests/e2e/resource-ops.spec.ts",
+        "apps/web/tests/e2e/studio-operations.spec.ts"
       ],
       "cases": [
         "M05-OPS-LAYOUT-01",
@@ -3605,14 +3614,17 @@
         "M10-MANAGEMENT-UI-01",
         "M03-STUDIO-TAXONOMY-01",
         "M05-STUDIO-MEDIA-01",
-        "M05-STUDIO-CONTENT-01"
+        "M05-STUDIO-CONTENT-01",
+        "M05-STUDIO-OPERATIONS-LAYOUT-01",
+        "M05-STUDIO-OPERATIONS-STATES-01"
       ],
       "dependents": [
         "M06.profile_web",
         "M03.taxonomy_web",
         "M05.media_web",
         "M05.content_web",
-        "M10.operations_web"
+        "M10.operations_web",
+        "M11.web"
       ],
       "dependency_reasons": {
         "M06.profile_web": [
@@ -3629,6 +3641,9 @@
         ],
         "M10.operations_web": [
           "The five admin pages import resource-operations.css; this test exercises their real UI and service boundaries."
+        ],
+        "M11.web": [
+          "About editor and history import resource-operations.css; the final operations regression also exercises all three about routes."
         ]
       }
     },
@@ -3753,7 +3768,9 @@
         "M01-CARD-GLOW-01",
         "M11-STUDIO-ABOUT-EDITOR-01",
         "M11-STUDIO-ABOUT-PREVIEW-01",
-        "M11-STUDIO-ABOUT-HISTORY-01"
+        "M11-STUDIO-ABOUT-HISTORY-01",
+        "M05-STUDIO-OPERATIONS-LAYOUT-01",
+        "M05-STUDIO-OPERATIONS-STATES-01"
       ],
       "dependents": []
     },

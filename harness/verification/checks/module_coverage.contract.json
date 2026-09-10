@@ -4048,6 +4048,70 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M05-STUDIO-OPERATIONS-LAYOUT-01",
+          "priority": "P1",
+          "scenario": "阶段五七页运营状态与响应式最终验收",
+          "expectations": [
+            {
+              "id": "M05-STUDIO-OPERATIONS-LAYOUT-01-E01",
+              "surface": "user_visible",
+              "statement": "阶段五七页运营状态与响应式最终验收"
+            },
+            {
+              "id": "M05-STUDIO-OPERATIONS-LAYOUT-01-E02",
+              "surface": "forbidden",
+              "statement": "七页不得产生横向溢出、不可访问的操作或 WCAG A/AA 违规。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/studio-operations.spec.ts",
+              "kind": "playwright",
+              "name": "o1",
+              "gate": "e2e",
+              "covers": [
+                "M05-STUDIO-OPERATIONS-LAYOUT-01-E01",
+                "M05-STUDIO-OPERATIONS-LAYOUT-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M05-STUDIO-OPERATIONS-STATES-01",
+          "priority": "P1",
+          "scenario": "运营页面冲突、保存失败重试、历史读取失败恢复及空态。",
+          "expectations": [
+            {
+              "id": "M05-STUDIO-OPERATIONS-STATES-01-E01",
+              "surface": "user_visible",
+              "statement": "冲突和失败保留输入，重试进入真实预览，历史可重读，空态显示准确。"
+            },
+            {
+              "id": "M05-STUDIO-OPERATIONS-STATES-01-E02",
+              "surface": "forbidden",
+              "statement": "失败不得丢弃草稿、跳过保存或伪造空历史。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/studio-operations.spec.ts",
+              "name": "o2",
+              "gate": "e2e",
+              "covers": [
+                "M05-STUDIO-OPERATIONS-STATES-01-E01",
+                "M05-STUDIO-OPERATIONS-STATES-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
