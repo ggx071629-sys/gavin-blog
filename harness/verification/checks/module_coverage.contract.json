@@ -13473,6 +13473,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-ABOUT-RETRIEVAL-01",
+          "priority": "P1",
+          "scenario": "about首次重建后混合召回并限制证据，更新后旧证据立即失效。",
+          "expectations": [
+            {
+              "id": "M09-ABOUT-RETRIEVAL-01-E01",
+              "surface": "response",
+              "statement": "主动about有FTS和dense切片，新版本同步后可召回；其他有效profile仍可回答。"
+            },
+            {
+              "id": "M09-ABOUT-RETRIEVAL-01-E02",
+              "surface": "forbidden",
+              "statement": "seed不入重建，超预算片段不注入，旧about描述符在新版等待期间不可恢复。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_about_retrieval.py",
+              "kind": "pytest",
+              "name": "test_about_rebuild_hybrid_budget_and_stale_evidence",
+              "gate": "api-tests",
+              "covers": [
+                "M09-ABOUT-RETRIEVAL-01-E01",
+                "M09-ABOUT-RETRIEVAL-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

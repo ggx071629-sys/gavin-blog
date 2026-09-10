@@ -1195,7 +1195,8 @@
         "M10-ADMIN-TRIAL-01",
         "M10-TOTAL-BUDGET-01",
         "M10-PUBLIC-AVAILABILITY-01",
-        "M11-ASSISTANT-SYNC-01"
+        "M11-ASSISTANT-SYNC-01",
+        "M09-ABOUT-RETRIEVAL-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1329,7 +1330,8 @@
         "M10-ADMIN-TRIAL-01",
         "M10-TOTAL-BUDGET-01",
         "M10-SYNC-PRIORITY-01",
-        "M11-ASSISTANT-SYNC-01"
+        "M11-ASSISTANT-SYNC-01",
+        "M09-ABOUT-RETRIEVAL-01"
       ],
       "dependents": [
         "M06.runtime_config",
@@ -1372,7 +1374,8 @@
         "apps/api/app/assistant_index/runtime.py",
         "apps/api/app/assistant_index/worker.py",
         "apps/api/app/assistant_index/worker_control.py",
-        "apps/api/tests/test_assistant_index.py"
+        "apps/api/tests/test_assistant_index.py",
+        "apps/api/tests/test_assistant_about_retrieval.py"
       ],
       "cases": [
         "M10-P1-01",
@@ -1386,7 +1389,8 @@
         "M10-SYNC-PRIORITY-01",
         "M10-TOTAL-BUDGET-01",
         "M11-ASSISTANT-PROJECTION-01",
-        "M11-ASSISTANT-SYNC-01"
+        "M11-ASSISTANT-SYNC-01",
+        "M09-ABOUT-RETRIEVAL-01"
       ],
       "dependents": [
         "M01.articles",
@@ -3822,7 +3826,8 @@
         "M10-EVAL-DATASET-01",
         "M10-EVAL-ISOLATION-01",
         "M10-EVAL-METRICS-01",
-        "M10-EVAL-REPORT-01"
+        "M10-EVAL-REPORT-01",
+        "M09-ABOUT-RETRIEVAL-01"
       ],
       "dependents": [
         "M10.capacity"
@@ -3844,7 +3849,8 @@
       "cases": [
         "M10-CAPACITY-METRICS-01",
         "M10-CAPACITY-ISOLATION-01",
-        "M10-CAPACITY-REPORT-01"
+        "M10-CAPACITY-REPORT-01",
+        "M09-ABOUT-RETRIEVAL-01"
       ],
       "dependents": []
     },
