@@ -3819,7 +3819,8 @@
         "M06-STUDIO-LOGIN-01",
         "M06-STUDIO-LOGIN-ERROR-01",
         "M10-STUDIO-OVERVIEW-01",
-        "M07-STUDIO-COVERAGE-01"
+        "M07-STUDIO-COVERAGE-01",
+        "M07-STUDIO-RESPONSIVE-01"
       ],
       "dependents": [
         "M02.admin_shell",

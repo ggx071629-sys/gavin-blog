@@ -5768,6 +5768,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M07-STUDIO-RESPONSIVE-01",
+          "priority": "P1",
+          "scenario": "二十页双主题响应式与键盘失败状态验收",
+          "expectations": [
+            {
+              "id": "M07-STUDIO-RESPONSIVE-01-E01",
+              "surface": "user_visible",
+              "statement": "二十页双主题六视口可读且主内容 WCAG A/AA 扫描通过。"
+            },
+            {
+              "id": "M07-STUDIO-RESPONSIVE-01-E02",
+              "surface": "forbidden",
+              "statement": "不允许横向溢出、标题丢失、浏览器异常或主内容无障碍违规。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+              "kind": "playwright",
+              "name": "r",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-RESPONSIVE-01-E01",
+                "M07-STUDIO-RESPONSIVE-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
