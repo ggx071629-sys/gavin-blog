@@ -45,7 +45,14 @@
         "harness/verification/impact/20260911-assistant-about-citations.json",
         "harness/verification/impact/20260911-assistant-about-projection.json",
         "harness/verification/impact/20260911-assistant-about-retrieval.json",
-        "harness/verification/impact/20260911-assistant-about-sync.json"
+        "harness/verification/impact/20260911-assistant-about-sync.json",
+        "harness/verification/impact/20260911-assistant-about-source.json",
+        "harness/verification/impact/20260911-assistant-resume-parse.json",
+        "harness/verification/impact/20260911-assistant-resume-download.json",
+        "harness/verification/impact/20260911-assistant-resume-admin-ui.json",
+        "harness/verification/impact/20260911-assistant-resume-refresh.json",
+        "harness/verification/impact/20260911-assistant-resume-storage.json",
+        "harness/verification/impact/20260911-assistant-resume-citations.json"
       ],
       "cases": [
         "M08-DOCS-01",
@@ -349,7 +356,28 @@
         "harness/verification/evidence/20260911-assistant-about-citations.json",
         "harness/verification/evidence/20260911-assistant-about-projection.json",
         "harness/verification/evidence/20260911-assistant-about-retrieval.json",
-        "harness/verification/evidence/20260911-assistant-about-sync.json"
+        "harness/verification/evidence/20260911-assistant-about-sync.json",
+        "harness/evolution/events/20260911-assistant-resume-storage--spec-completed.json",
+        "harness/specs/archive/20260911-assistant-resume-admin-ui.md",
+        "harness/verification/evidence/20260911-assistant-resume-citations.json",
+        "harness/specs/archive/20260911-assistant-resume-storage.md",
+        "harness/evolution/events/20260911-assistant-resume-parse--spec-completed.json",
+        "harness/verification/evidence/20260911-assistant-resume-admin-ui.json",
+        "harness/verification/evidence/20260911-assistant-resume-parse.json",
+        "harness/specs/archive/20260911-assistant-resume-refresh.md",
+        "harness/evolution/events/20260911-assistant-resume-citations--spec-completed.json",
+        "harness/evolution/events/20260911-assistant-about-source--spec-completed.json",
+        "harness/specs/archive/20260911-assistant-resume-citations.md",
+        "harness/verification/evidence/20260911-assistant-about-source.json",
+        "harness/verification/evidence/20260911-assistant-resume-download.json",
+        "harness/evolution/events/20260911-assistant-resume-refresh--spec-completed.json",
+        "harness/verification/evidence/20260911-assistant-resume-storage.json",
+        "harness/evolution/events/20260911-assistant-resume-admin-ui--spec-completed.json",
+        "harness/specs/archive/20260911-assistant-resume-parse.md",
+        "harness/evolution/events/20260911-assistant-resume-download--spec-completed.json",
+        "harness/specs/archive/20260911-assistant-about-source.md",
+        "harness/specs/archive/20260911-assistant-resume-download.md",
+        "harness/verification/evidence/20260911-assistant-resume-refresh.json"
       ],
       "cases": [
         "M08-EVIDENCE-01",
@@ -3725,7 +3753,14 @@
         "completed/assistant-upgrade-design/Q1-04.md",
         "completed/assistant-upgrade-resume/.gitkeep",
         "completed/assistant-upgrade-verification/.gitkeep",
-        "harness/docs/decisions/20260911-assistant-source-ingestion.md"
+        "harness/docs/decisions/20260911-assistant-source-ingestion.md",
+        "completed/assistant-upgrade-resume/Q3-06.md",
+        "completed/assistant-upgrade-resume/Q3-05.md",
+        "completed/assistant-upgrade-resume/Q3-04.md",
+        "completed/assistant-upgrade-resume/Q3-01.md",
+        "completed/assistant-upgrade-resume/Q3-03.md",
+        "completed/assistant-upgrade-about/Q2-05.md",
+        "completed/assistant-upgrade-resume/Q3-02.md"
       ],
       "cases": [
         "M08-DOCS-01"
