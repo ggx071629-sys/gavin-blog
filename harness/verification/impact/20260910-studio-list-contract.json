@@ -75,7 +75,8 @@
       "owner": "M02.publishing",
       "reason": "Add authenticated query-only API and matching additive schemas; existing exports and endpoints are unchanged.",
       "cases": [
-        "M02-STUDIO-QUERY-01"
+        "M02-STUDIO-QUERY-01",
+        "M02-PAGINATION-01"
       ],
       "dependencies": [
         {

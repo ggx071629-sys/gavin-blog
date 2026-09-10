@@ -803,7 +803,8 @@
         "M02-P0-01",
         "M02-P1-01",
         "M02-UNIT-ARTICLE-REVISIONS-01",
-        "M02-STUDIO-QUERY-01"
+        "M02-STUDIO-QUERY-01",
+        "M02-PAGINATION-01"
       ],
       "dependents": [
         "M01.articles",
