@@ -3740,7 +3740,8 @@
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
-        "M01-CARD-GLOW-01"
+        "M01-CARD-GLOW-01",
+        "M11-STUDIO-ABOUT-EDITOR-01"
       ],
       "dependents": []
     },

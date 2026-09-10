@@ -26,8 +26,8 @@ U5-02 按计划在前置验收归档后实施。
 保持自动保存队列和发布前保存屏障；不可把未发布修改显示为已发布。
 # Verification plan
 ## Verification cases
-- AC-1 => M06-STUDIO-ABOUT-EDITOR-01
-- AC-2 => M06-STUDIO-ABOUT-EDITOR-01
+- AC-1 => M11-STUDIO-ABOUT-EDITOR-01
+- AC-2 => M11-STUDIO-ABOUT-EDITOR-01
 ## Gates
 - e2e => AC-1, AC-2
 - harness-integrity => AC-1, AC-2
