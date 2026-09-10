@@ -5334,6 +5334,48 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M06-STUDIO-PROFILE-CONTRAST-01",
+          "priority": "P1",
+          "scenario": "配置简历链接时名片主按钮仍具有正确的前景背景对比。",
+          "expectations": [
+            {
+              "id": "M06-STUDIO-PROFILE-CONTRAST-01-E01",
+              "surface": "user_visible",
+              "statement": "首页和关于名片在深浅主题中简历链接清晰可读。"
+            },
+            {
+              "id": "M06-STUDIO-PROFILE-CONTRAST-01-E02",
+              "surface": "forbidden",
+              "statement": "禁止主按钮前景背景被不同样式混合后出现 WCAG 对比度违规。"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/quality/site-quality.spec.ts",
+              "kind": "playwright",
+              "name": "homepage captures accessible light and dark desktop and mobile evidence",
+              "gate": "web-quality",
+              "covers": [
+                "M06-STUDIO-PROFILE-CONTRAST-01-E01",
+                "M06-STUDIO-PROFILE-CONTRAST-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/quality/site-quality.spec.ts",
+              "kind": "playwright",
+              "name": "public page families capture light and dark desktop and mobile evidence",
+              "gate": "web-quality",
+              "covers": [
+                "M06-STUDIO-PROFILE-CONTRAST-01-E01",
+                "M06-STUDIO-PROFILE-CONTRAST-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

@@ -2065,11 +2065,13 @@
         "M06-STUDIO-PROFILE-01",
         "M05-STUDIO-MEDIA-01",
         "M05-STUDIO-OPERATIONS-LAYOUT-01",
-        "M05-STUDIO-OPERATIONS-STATES-01"
+        "M05-STUDIO-OPERATIONS-STATES-01",
+        "M06-STUDIO-PROFILE-CONTRAST-01"
       ],
       "dependents": [
         "M01.navigation",
-        "M01.home"
+        "M01.home",
+        "M11.web"
       ],
       "dependency_reasons": {
         "M01.navigation": [
@@ -2077,6 +2079,9 @@
         ],
         "M01.home": [
           "Homepage consumes this unit through its public utility, profile, theme, API or browser verification boundary."
+        ],
+        "M11.web": [
+          "About 页面及草稿预览使用同一公开 ProfileCard。"
         ]
       }
     },
@@ -3561,7 +3566,8 @@
         "M09-UI-DISCOVERY-01",
         "M09-UI-ORB-01",
         "M09-UI-ORB-MOTION-01",
-        "M01-STUDIO-PRODUCTION-HOME-01"
+        "M01-STUDIO-PRODUCTION-HOME-01",
+        "M06-STUDIO-PROFILE-CONTRAST-01"
       ],
       "dependents": []
     },
@@ -3779,7 +3785,8 @@
         "M11-STUDIO-ABOUT-PREVIEW-01",
         "M11-STUDIO-ABOUT-HISTORY-01",
         "M05-STUDIO-OPERATIONS-LAYOUT-01",
-        "M05-STUDIO-OPERATIONS-STATES-01"
+        "M05-STUDIO-OPERATIONS-STATES-01",
+        "M06-STUDIO-PROFILE-CONTRAST-01"
       ],
       "dependents": []
     },

@@ -360,6 +360,12 @@
           "affected": false,
           "reason": "只变更或选择验收测试与普通说明，不修改此消费者使用的产品源码/接口。",
           "cases": []
+        },
+        {
+          "unit": "M11.web",
+          "affected": false,
+          "reason": "本项只变更测试文件；实际 ProfileCard 变更及 About 消费者在独立源码条目中审查。",
+          "cases": []
         }
       ]
     },
@@ -1035,6 +1041,38 @@
       "cases": [],
       "no_test_reason": "Harness 历史完整性、结构和链接检查验证关闭产物。",
       "dependencies": []
+    },
+    {
+      "path": "apps/web/components/ProfileCard.vue",
+      "owner": "M06.profile_web",
+      "reason": "修复 intro 变体背景覆盖造成的真实简历按钮对比度缺陷；限定组件作用域。",
+      "cases": [
+        "M06-STUDIO-PROFILE-CONTRAST-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "导航不渲染名片按钮；局部组件样式不影响导航。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "此页面直接渲染名片简历按钮，验证双主题前景背景对比。",
+          "cases": [
+            "M06-STUDIO-PROFILE-CONTRAST-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "此页面直接渲染名片简历按钮，验证双主题前景背景对比。",
+          "cases": [
+            "M06-STUDIO-PROFILE-CONTRAST-01"
+          ]
+        }
+      ]
     }
   ]
 }
