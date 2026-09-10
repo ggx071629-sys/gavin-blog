@@ -5376,6 +5376,350 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M06-ACCOUNT-CREDENTIAL-01",
+          "priority": "P0",
+          "scenario": "持久凭据跨重启且旧库升级可登录",
+          "expectations": [
+            {
+              "id": "M06-ACCOUNT-CREDENTIAL-01-E01",
+              "surface": "response",
+              "statement": "持久凭据跨重启且旧库升级可登录"
+            },
+            {
+              "id": "M06-ACCOUNT-CREDENTIAL-01-E02",
+              "surface": "forbidden",
+              "statement": "配置不得覆盖已更新密码"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_credential_persists_across_password_service_restart",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-CREDENTIAL-01-E01",
+                "M06-ACCOUNT-CREDENTIAL-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_populated_legacy_database_upgrade",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-CREDENTIAL-01-E01",
+                "M06-ACCOUNT-CREDENTIAL-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-ACCOUNT-CLI-01",
+          "priority": "P0",
+          "scenario": "无邮件终端恢复更新密码并撤销全部会话",
+          "expectations": [
+            {
+              "id": "M06-ACCOUNT-CLI-01-E01",
+              "surface": "response",
+              "statement": "无邮件终端恢复更新密码并撤销全部会话"
+            },
+            {
+              "id": "M06-ACCOUNT-CLI-01-E02",
+              "surface": "forbidden",
+              "statement": "输出不得包含新密码"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_terminal_reset_without_mail_revokes_all_sessions",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-CLI-01-E01",
+                "M06-ACCOUNT-CLI-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-ACCOUNT-CODE-01",
+          "priority": "P0",
+          "scenario": "挑战有界生命周期与持久限额",
+          "expectations": [
+            {
+              "id": "M06-ACCOUNT-CODE-01-E01",
+              "surface": "response",
+              "statement": "挑战有界生命周期与持久限额"
+            },
+            {
+              "id": "M06-ACCOUNT-CODE-01-E02",
+              "surface": "forbidden",
+              "statement": "错误、过期、重复、错用途与旧秘密验证码不得成功"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_code_lifecycle_and_limits",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-CODE-01-E01",
+                "M06-ACCOUNT-CODE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_code_purpose_expiry_reuse_and_delivery_failure",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-CODE-01-E01",
+                "M06-ACCOUNT-CODE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_durable_send_budget_and_secret_rotation",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-CODE-01-E01",
+                "M06-ACCOUNT-CODE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_inflight_mail_cannot_survive_emergency_reset",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-CODE-01-E01",
+                "M06-ACCOUNT-CODE-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-ACCOUNT-PASSWORD-01",
+          "priority": "P0",
+          "scenario": "改密需要当前密码和邮箱验证码，匿名恢复原子成功",
+          "expectations": [
+            {
+              "id": "M06-ACCOUNT-PASSWORD-01-E01",
+              "surface": "response",
+              "statement": "改密需要当前密码和邮箱验证码，匿名恢复原子成功"
+            },
+            {
+              "id": "M06-ACCOUNT-PASSWORD-01-E02",
+              "surface": "forbidden",
+              "statement": "并发恢复只能消费一次，未知码不得泄露密码匹配状态"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_password_change_requires_both_factors_and_revokes_every_session",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-PASSWORD-01-E01",
+                "M06-ACCOUNT-PASSWORD-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_anonymous_recovery_revokes_sessions_and_rejects_reuse",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-PASSWORD-01-E01",
+                "M06-ACCOUNT-PASSWORD-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_concurrent_recovery_consumes_code_once",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-PASSWORD-01-E01",
+                "M06-ACCOUNT-PASSWORD-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_recovery_does_not_reveal_password_match_without_code",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-PASSWORD-01-E01",
+                "M06-ACCOUNT-PASSWORD-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-ACCOUNT-SESSION-01",
+          "priority": "P0",
+          "scenario": "列表时间与当前标记、单个及其他撤销准确",
+          "expectations": [
+            {
+              "id": "M06-ACCOUNT-SESSION-01-E01",
+              "surface": "response",
+              "statement": "列表时间与当前标记、单个及其他撤销准确"
+            },
+            {
+              "id": "M06-ACCOUNT-SESSION-01-E02",
+              "surface": "forbidden",
+              "statement": "旧密码并发登录不得留下重置后的有效会话"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_session_list_activity_and_revoke_scopes",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-SESSION-01-E01",
+                "M06-ACCOUNT-SESSION-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_concurrent_old_login_cannot_leave_session_after_reset",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-SESSION-01-E01",
+                "M06-ACCOUNT-SESSION-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-ACCOUNT-CONTRACT-01",
+          "priority": "P0",
+          "scenario": "生成认证接口契约与运行时相同，固定 TLS 收件人",
+          "expectations": [
+            {
+              "id": "M06-ACCOUNT-CONTRACT-01-E01",
+              "surface": "response",
+              "statement": "生成认证接口契约与运行时相同，固定 TLS 收件人"
+            },
+            {
+              "id": "M06-ACCOUNT-CONTRACT-01-E02",
+              "surface": "forbidden",
+              "statement": "不得跳过 TLS 主机验证或把秘密写入响应"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_account_contract_matches_generated_snapshot",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-CONTRACT-01-E01",
+                "M06-ACCOUNT-CONTRACT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_account_management.py",
+              "kind": "pytest",
+              "name": "test_smtp_adapter_uses_verified_tls_and_fixed_recipient",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-CONTRACT-01-E01",
+                "M06-ACCOUNT-CONTRACT-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-ACCOUNT-COMPAT-01",
+          "priority": "P0",
+          "scenario": "已有登录与写作授权保持兼容",
+          "expectations": [
+            {
+              "id": "M06-ACCOUNT-COMPAT-01-E01",
+              "surface": "response",
+              "statement": "有效认证可完成保存发布读取；过期会话返回401"
+            },
+            {
+              "id": "M06-ACCOUNT-COMPAT-01-E02",
+              "surface": "forbidden",
+              "statement": "缺失CSRF不得登录或修改内容"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_article_loop.py",
+              "kind": "pytest",
+              "name": "test_login_requires_csrf",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-COMPAT-01-E01",
+                "M06-ACCOUNT-COMPAT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_article_loop.py",
+              "kind": "pytest",
+              "name": "test_mutation_requires_session_csrf",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-COMPAT-01-E01",
+                "M06-ACCOUNT-COMPAT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_article_loop.py",
+              "kind": "pytest",
+              "name": "test_draft_autosave_publish_and_public_read",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-COMPAT-01-E01",
+                "M06-ACCOUNT-COMPAT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_time_semantics.py",
+              "kind": "pytest",
+              "name": "test_legacy_naive_session_expiry_is_compared_as_utc",
+              "gate": "api-tests",
+              "covers": [
+                "M06-ACCOUNT-COMPAT-01-E01",
+                "M06-ACCOUNT-COMPAT-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

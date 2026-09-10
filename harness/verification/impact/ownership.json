@@ -1014,7 +1014,14 @@
         "apps/api/app/security.py"
       ],
       "cases": [
-        "M06-P0-01"
+        "M06-P0-01",
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-CLI-01",
+        "M06-ACCOUNT-CODE-01",
+        "M06-ACCOUNT-PASSWORD-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-CONTRACT-01",
+        "M06-ACCOUNT-COMPAT-01"
       ],
       "dependents": [
         "M01.articles",
@@ -1028,7 +1035,8 @@
         "M06.profile",
         "M06.runtime_config",
         "M06.transport",
-        "M10.operations"
+        "M10.operations",
+        "M06.account"
       ],
       "dependency_reasons": {
         "M01.articles": [
@@ -1073,6 +1081,9 @@
         ],
         "M10.operations": [
           "apps/api/app/routes/admin_assistant.py:28 imports app.dependencies"
+        ],
+        "M06.account": [
+          "Account transactions consume credential/session models, security and Settings."
         ]
       }
     },
@@ -1666,7 +1677,14 @@
         "M09-E5-ADAPTER-01",
         "M10-E5-CHUNK-01",
         "M09-E5-QUERY-01",
-        "M10-E5-LOCAL-01"
+        "M10-E5-LOCAL-01",
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-CLI-01",
+        "M06-ACCOUNT-CODE-01",
+        "M06-ACCOUNT-PASSWORD-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-CONTRACT-01",
+        "M06-ACCOUNT-COMPAT-01"
       ],
       "dependents": [
         "M02.publishing",
@@ -1680,7 +1698,8 @@
         "M10.operations",
         "M10.qualification",
         "M10.e5_evaluation",
-        "M10.capacity"
+        "M10.capacity",
+        "M06.account"
       ],
       "dependency_reasons": {
         "M02.publishing": [
@@ -1742,6 +1761,9 @@
         ],
         "M10.capacity": [
           "capacity/capacity_roles reuse this unit through explicit development-only measurement CLI; no reverse runtime import."
+        ],
+        "M06.account": [
+          "Account transactions consume credential/session models, security and Settings."
         ]
       }
     },
@@ -1754,13 +1776,23 @@
         "apps/api/app/routes/__init__.py",
         "apps/api/app/schemas.py",
         "apps/api/tests/test_migrations.py",
-        "apps/api/migrations/versions/20260910_0025_assistant_total_budget.py"
+        "apps/api/migrations/versions/20260910_0025_assistant_total_budget.py",
+        "apps/api/migrations/versions/20260910_0026_account_credentials.py",
+        "apps/api/migrations/versions/20260910_0027_account_challenges.py",
+        "apps/api/migrations/versions/20260910_0028_account_sessions.py"
       ],
       "cases": [
         "M06-P0-01",
         "M06-UNIT-MIGRATIONS-01",
         "M10-TOTAL-BUDGET-01",
-        "M02-STUDIO-QUERY-01"
+        "M02-STUDIO-QUERY-01",
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-CLI-01",
+        "M06-ACCOUNT-CODE-01",
+        "M06-ACCOUNT-PASSWORD-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-CONTRACT-01",
+        "M06-ACCOUNT-COMPAT-01"
       ],
       "dependents": [
         "M01.articles",
@@ -1782,7 +1814,8 @@
         "M10.qualification",
         "M10.e5_evaluation",
         "M10.capacity",
-        "M11.api"
+        "M11.api",
+        "M06.account"
       ],
       "dependency_reasons": {
         "M01.articles": [
@@ -1897,6 +1930,9 @@
         ],
         "M11.api": [
           "About routes and snapshots consume AboutPageContent from schemas.py."
+        ],
+        "M06.account": [
+          "Account transactions consume credential/session models, security and Settings."
         ]
       }
     },
@@ -3343,7 +3379,8 @@
         "M10-ADMIN-TRIAL-01",
         "M10-TOTAL-BUDGET-01",
         "M10-SYNC-PRIORITY-01",
-        "M02-STUDIO-QUERY-01"
+        "M02-STUDIO-QUERY-01",
+        "M06-ACCOUNT-CONTRACT-01"
       ],
       "dependents": [
         "M06.web_types"
@@ -3533,7 +3570,18 @@
         "harness/verification/impact/20260910-studio-suite-management.json",
         "harness/verification/evidence/20260910-studio-suite-compat.json",
         "harness/evolution/events/20260910-studio-suite-compat--spec-completed.json",
-        "harness/specs/*/20260910-studio-suite-compat.md"
+        "harness/specs/*/20260910-studio-suite-compat.md",
+        "ACCOUNT-MANAGEMENT-DESIGN.md",
+        "ACCOUNT-MANAGEMENT-PLAN.md",
+        "ACCOUNT-MANAGEMENT-PHASE-1.md",
+        "ACCOUNT-MANAGEMENT-PHASE-2.md",
+        "ACCOUNT-MANAGEMENT-PHASE-3.md",
+        "ACCOUNT-MANAGEMENT-PHASE-4.md",
+        "harness/docs/decisions/20260910-account-management.md",
+        "completed/account-design/*",
+        "completed/account-backend/*",
+        "completed/account-ui/.gitkeep",
+        "completed/account-verification/.gitkeep"
       ],
       "cases": [
         "M08-DOCS-01"
@@ -3932,6 +3980,31 @@
         ],
         "M10.operations_web": [
           "Admin roots inherit scoped studio tokens; review typography and color only."
+        ]
+      }
+    },
+    "M06.account": {
+      "paths": [
+        "apps/api/app/account.py",
+        "apps/api/app/routes/account.py",
+        "apps/api/app/reset_admin_password.py",
+        "apps/api/tests/test_account_management.py"
+      ],
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-CLI-01",
+        "M06-ACCOUNT-CODE-01",
+        "M06-ACCOUNT-PASSWORD-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-CONTRACT-01",
+        "M06-ACCOUNT-COMPAT-01"
+      ],
+      "dependents": [
+        "M06.runtime_config"
+      ],
+      "dependency_reasons": {
+        "M06.runtime_config": [
+          "main.py registers the account router; account settings are server-only."
         ]
       }
     }
