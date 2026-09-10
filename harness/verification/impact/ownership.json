@@ -380,8 +380,7 @@
         "harness/verification/evidence/20260911-assistant-resume-refresh.json",
         "harness/specs/archive/20260911-assistant-resume-source.md",
         "harness/verification/evidence/20260911-assistant-resume-source.json",
-        "harness/evolution/events/20260911-assistant-resume-source--spec-completed.json",
-        "harness/specs/active/20260911-assistant-resume-source.md"
+        "harness/evolution/events/20260911-assistant-resume-source--spec-completed.json"
       ],
       "cases": [
         "M08-EVIDENCE-01",
