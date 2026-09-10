@@ -15,7 +15,7 @@ Open specifications: **5 active**, **0 frozen**.
 | spec-20260908-article-design-v2 | active | L1 | 对齐工程设计稿的文章列表与正文阅读视觉 | task:20260908-article-design-v2 | — | [active/20260908-article-design-v2.md](active/20260908-article-design-v2.md) |
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页恢复笔记、领域和文章之间的知识路线 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
-| spec-20260910-studio-list-states | active | L1 | 验收三类列表的跨页查询、状态恢复与响应式闭环 | task:20260910-studio-list-states | — | [active/20260910-studio-list-states.md](active/20260910-studio-list-states.md) |
+| spec-20260910-studio-workspace | active | L1 | 对齐共用写作工作面与真实 Markdown 工具栏 | task:20260910-studio-workspace | — | [active/20260910-studio-workspace.md](active/20260910-studio-workspace.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -154,6 +154,7 @@ Open specifications: **5 active**, **0 frozen**.
 | archive-20260910-studio-controls | compressed | L2 | 统一写作台共用控件状态分隔行与弹窗视觉 | task:20260910-studio-controls | — | [archive/20260910-studio-controls.md](archive/20260910-studio-controls.md) |
 | archive-20260910-studio-dialogs | compressed | L2 | 统一助手预算费用同步维护弹窗及真实确认状态 | task:20260910-studio-dialogs | — | [archive/20260910-studio-dialogs.md](archive/20260910-studio-dialogs.md) |
 | archive-20260910-studio-list-contract | compressed | L2 | 补齐后台内容列表搜索筛选计数的真实分页契约 | task:20260910-studio-list-contract | — | [archive/20260910-studio-list-contract.md](archive/20260910-studio-list-contract.md) |
+| archive-20260910-studio-list-states | compressed | L2 | 验收三类列表的跨页查询、状态恢复与响应式闭环 | task:20260910-studio-list-states | — | [archive/20260910-studio-list-states.md](archive/20260910-studio-list-states.md) |
 | archive-20260910-studio-login | compressed | L2 | 对齐居中登录稿并完成阶段一适用验收 | task:20260910-studio-login | — | [archive/20260910-studio-login.md](archive/20260910-studio-login.md) |
 | archive-20260910-studio-overview | compressed | L2 | 助手概览对齐选定设计并保留真实状态 | task:20260910-studio-overview | — | [archive/20260910-studio-overview.md](archive/20260910-studio-overview.md) |
 | archive-20260910-studio-project-list | compressed | L2 | 项目列表对齐开放行并呈现真实技术信息与查询操作 | task:20260910-studio-project-list | — | [archive/20260910-studio-project-list.md](archive/20260910-studio-project-list.md) |
