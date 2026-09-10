@@ -2381,7 +2381,8 @@
         "M02-STUDIO-WORKSPACE-01",
         "M02-STUDIO-ARTICLE-EDITOR-01",
         "M03-STUDIO-BOOK-EDITOR-01",
-        "M04-STUDIO-PROJECT-EDITOR-01"
+        "M04-STUDIO-PROJECT-EDITOR-01",
+        "M02-STUDIO-PREVIEW-01"
       ],
       "dependents": [
         "M04.books_web",
