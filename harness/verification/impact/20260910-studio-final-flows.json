@@ -168,11 +168,7 @@
       "path": "apps/web/tests/e2e/resource-ops.spec.ts",
       "owner": "M05.operations_layout",
       "reason": "本任务的精确回归场景；测试输入变化不改变产品导出或运行时行为。",
-      "cases": [
-        "M03-STUDIO-TAXONOMY-01",
-        "M05-STUDIO-CONTENT-01",
-        "M05-STUDIO-MEDIA-01"
-      ],
+      "cases": [],
       "dependencies": [
         {
           "unit": "M06.profile_web",
@@ -210,7 +206,8 @@
           "reason": "只变更或选择验收测试与普通说明，不修改此消费者使用的产品源码/接口。",
           "cases": []
         }
-      ]
+      ],
+      "no_test_reason": "此文件未再改动产品；运营场景由已关闭的独立有界验收组覆盖，普通说明由结构检查覆盖。"
     },
     {
       "path": "apps/api/tests/test_projects_books.py",
@@ -345,9 +342,7 @@
       "path": "apps/web/tests/e2e/profile.spec.ts",
       "owner": "M06.profile_web",
       "reason": "本任务的精确回归场景；测试输入变化不改变产品导出或运行时行为。",
-      "cases": [
-        "M06-STUDIO-PROFILE-01"
-      ],
+      "cases": [],
       "dependencies": [
         {
           "unit": "M01.navigation",
@@ -367,7 +362,8 @@
           "reason": "本项只变更测试文件；实际 ProfileCard 变更及 About 消费者在独立源码条目中审查。",
           "cases": []
         }
-      ]
+      ],
+      "no_test_reason": "此文件未再改动产品；运营场景由已关闭的独立有界验收组覆盖，普通说明由结构检查覆盖。"
     },
     {
       "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
@@ -383,24 +379,14 @@
         "M02-UNIT-AUTOSAVE-01",
         "M02-UNIT-EDITOR-SAVE-CONTRACT-01",
         "M03-STUDIO-BOOK-EDITOR-01",
-        "M03-STUDIO-TAXONOMY-01",
         "M04-P0-01",
         "M04-P1-01",
         "M04-STUDIO-BOOKS-01",
         "M04-STUDIO-PROJECT-EDITOR-01",
         "M04-STUDIO-PROJECTS-01",
-        "M05-STUDIO-CONTENT-01",
-        "M05-STUDIO-MEDIA-01",
         "M06-STUDIO-LOGIN-01",
-        "M06-STUDIO-PROFILE-01",
         "M07-STUDIO-FLOWS-01",
-        "M10-STUDIO-DIALOGS-01",
-        "M10-STUDIO-OVERVIEW-01",
-        "M10-STUDIO-TRIAL-01",
-        "M11-PUBLISH-01",
-        "M11-STUDIO-ABOUT-EDITOR-01",
-        "M11-STUDIO-ABOUT-HISTORY-01",
-        "M11-STUDIO-ABOUT-PREVIEW-01"
+        "M11-PUBLISH-01"
       ],
       "dependencies": [
         {
@@ -469,40 +455,33 @@
       "path": "apps/web/tests/e2e/studio-overview.spec.ts",
       "owner": "M10.operations_web",
       "reason": "本任务的精确回归场景；测试输入变化不改变产品导出或运行时行为。",
-      "cases": [
-        "M10-STUDIO-OVERVIEW-01"
-      ],
-      "dependencies": []
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "此文件未再改动产品；运营场景由已关闭的独立有界验收组覆盖，普通说明由结构检查覆盖。"
     },
     {
       "path": "apps/web/tests/unit/assistant-management.test.ts",
       "owner": "M10.operations_web",
       "reason": "本任务的精确回归场景；测试输入变化不改变产品导出或运行时行为。",
-      "cases": [
-        "M10-STUDIO-DIALOGS-01",
-        "M10-STUDIO-OVERVIEW-01",
-        "M10-STUDIO-TRIAL-01"
-      ],
-      "dependencies": []
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "此文件未再改动产品；运营场景由已关闭的独立有界验收组覆盖，普通说明由结构检查覆盖。"
     },
     {
       "path": "apps/web/tests/e2e-assistant/management.spec.ts",
       "owner": "M10.operations_web",
       "reason": "本任务的精确回归场景；测试输入变化不改变产品导出或运行时行为。",
-      "cases": [
-        "M10-STUDIO-DIALOGS-01",
-        "M10-STUDIO-TRIAL-01"
-      ],
-      "dependencies": []
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "此文件未再改动产品；运营场景由已关闭的独立有界验收组覆盖，普通说明由结构检查覆盖。"
     },
     {
       "path": "apps/web/tests/e2e/studio-dialogs.spec.ts",
       "owner": "M10.operations_web",
       "reason": "本任务的精确回归场景；测试输入变化不改变产品导出或运行时行为。",
-      "cases": [
-        "M10-STUDIO-DIALOGS-01"
-      ],
-      "dependencies": []
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "此文件未再改动产品；运营场景由已关闭的独立有界验收组覆盖，普通说明由结构检查覆盖。"
     },
     {
       "path": "apps/api/tests/test_about_page.py",
@@ -518,10 +497,7 @@
       "owner": "M11.web",
       "reason": "本任务的精确回归场景；测试输入变化不改变产品导出或运行时行为。",
       "cases": [
-        "M11-PUBLISH-01",
-        "M11-STUDIO-ABOUT-EDITOR-01",
-        "M11-STUDIO-ABOUT-HISTORY-01",
-        "M11-STUDIO-ABOUT-PREVIEW-01"
+        "M11-PUBLISH-01"
       ],
       "dependencies": []
     },
@@ -1073,6 +1049,38 @@
           ]
         }
       ]
+    },
+    {
+      "path": "harness/specs/archive/20260910-studio-final-operations.md",
+      "owner": "M08.documentation",
+      "reason": "U6-03 运营与助手验收的确定性产物，无产品行为变更。",
+      "cases": [],
+      "no_test_reason": "历史完整性、结构和链接检查验证该已通过验收组。",
+      "dependencies": []
+    },
+    {
+      "path": "harness/evolution/events/20260910-studio-final-operations--spec-completed.json",
+      "owner": "M08.documentation",
+      "reason": "U6-03 运营与助手验收的确定性产物，无产品行为变更。",
+      "cases": [],
+      "no_test_reason": "历史完整性、结构和链接检查验证该已通过验收组。",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/evidence/20260910-studio-final-operations.json",
+      "owner": "M08.documentation",
+      "reason": "U6-03 运营与助手验收的确定性产物，无产品行为变更。",
+      "cases": [],
+      "no_test_reason": "历史完整性、结构和链接检查验证该已通过验收组。",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/impact/20260910-studio-final-operations.json",
+      "owner": "M08.documentation",
+      "reason": "U6-03 运营与助手验收的确定性产物，无产品行为变更。",
+      "cases": [],
+      "no_test_reason": "历史完整性、结构和链接检查验证该已通过验收组。",
+      "dependencies": []
     }
   ]
 }

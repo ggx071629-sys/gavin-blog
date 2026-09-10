@@ -3513,7 +3513,11 @@
         "harness/specs/archive/20260910-studio-regression-guards.md",
         "harness/evolution/events/20260910-studio-regression-guards--spec-completed.json",
         "harness/verification/evidence/20260910-studio-regression-guards.json",
-        "harness/verification/impact/20260910-studio-regression-guards.json"
+        "harness/verification/impact/20260910-studio-regression-guards.json",
+        "harness/specs/archive/20260910-studio-final-operations.md",
+        "harness/evolution/events/20260910-studio-final-operations--spec-completed.json",
+        "harness/verification/evidence/20260910-studio-final-operations.json",
+        "harness/verification/impact/20260910-studio-final-operations.json"
       ],
       "cases": [
         "M08-DOCS-01"
