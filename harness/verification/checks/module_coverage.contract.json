@@ -5800,6 +5800,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M07-STUDIO-FLOWS-01",
+          "priority": "P1",
+          "scenario": "写作台真实管理闭环及共享边界最终回归",
+          "expectations": [
+            {
+              "id": "M07-STUDIO-FLOWS-01-E01",
+              "surface": "user_visible",
+              "statement": "管理登录退出与公开主题隔离真实可用。"
+            },
+            {
+              "id": "M07-STUDIO-FLOWS-01-E02",
+              "surface": "forbidden",
+              "statement": "退出后不得继续访问受保护管理页面；公开页面不得继承 Studio token。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+              "kind": "playwright",
+              "name": "f",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-FLOWS-01-E01",
+                "M07-STUDIO-FLOWS-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
