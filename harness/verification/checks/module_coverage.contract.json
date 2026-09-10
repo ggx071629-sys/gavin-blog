@@ -6088,6 +6088,132 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M06-RESUME-REFRESH-API-01",
+          "priority": "P1",
+          "scenario": "Atomic Profile binding/queue, authenticated read-only status and fenced/coalesced/cooled refresh.",
+          "expectations": [
+            {
+              "id": "M06-RESUME-REFRESH-API-01-E01",
+              "surface": "response",
+              "statement": "Atomic Profile binding/queue, authenticated read-only status and fenced/coalesced/cooled refresh."
+            },
+            {
+              "id": "M06-RESUME-REFRESH-API-01-E02",
+              "surface": "forbidden",
+              "statement": "GET cannot trigger import, late work cannot revive old content, and attempts cannot continue indefinitely."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_resume_refresh.py",
+              "kind": "pytest",
+              "name": "test_resume_refresh_api_auth_epoch_coalescing_cooldown_and_atomicity",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-REFRESH-API-01-E01",
+                "M06-RESUME-REFRESH-API-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_profile.py",
+              "kind": "pytest",
+              "name": "test_update_and_public_reflects_changes",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-REFRESH-API-01-E01",
+                "M06-RESUME-REFRESH-API-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-RESUME-REFRESH-WORKER-01",
+          "priority": "P1",
+          "scenario": "Worker imports outside write locks, drops replaced work, reuses unchanged PDFs and has no timer.",
+          "expectations": [
+            {
+              "id": "M06-RESUME-REFRESH-WORKER-01-E01",
+              "surface": "response",
+              "statement": "Worker imports outside write locks, drops replaced work, reuses unchanged PDFs and has no timer."
+            },
+            {
+              "id": "M06-RESUME-REFRESH-WORKER-01-E02",
+              "surface": "forbidden",
+              "statement": "GET cannot trigger import, late work cannot revive old content, and attempts cannot continue indefinitely."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_resume_refresh.py",
+              "kind": "pytest",
+              "name": "test_resume_worker_import_manual_reuse_no_timer_and_replacement_during_download",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-REFRESH-WORKER-01-E01",
+                "M06-RESUME-REFRESH-WORKER-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_resume_refresh.py",
+              "kind": "pytest",
+              "name": "test_resume_worker_bootstraps_existing_url_and_parse_failure_keeps_evidence_paused",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-REFRESH-WORKER-01-E01",
+                "M06-RESUME-REFRESH-WORKER-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_index.py",
+              "kind": "pytest",
+              "name": "test_worker_rebuild_retriever_and_staleness",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-REFRESH-WORKER-01-E01",
+                "M06-RESUME-REFRESH-WORKER-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-RESUME-REFRESH-RETRY-01",
+          "priority": "P1",
+          "scenario": "Transient retry pauses evidence, obeys Retry-After and stops after four total attempts including abandoned claims.",
+          "expectations": [
+            {
+              "id": "M06-RESUME-REFRESH-RETRY-01-E01",
+              "surface": "response",
+              "statement": "Transient retry pauses evidence, obeys Retry-After and stops after four total attempts including abandoned claims."
+            },
+            {
+              "id": "M06-RESUME-REFRESH-RETRY-01-E02",
+              "surface": "forbidden",
+              "statement": "GET cannot trigger import, late work cannot revive old content, and attempts cannot continue indefinitely."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_resume_refresh.py",
+              "kind": "pytest",
+              "name": "test_resume_retry_backoff_pause_and_restart_are_bounded",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-REFRESH-RETRY-01-E01",
+                "M06-RESUME-REFRESH-RETRY-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
