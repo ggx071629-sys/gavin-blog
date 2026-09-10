@@ -2820,7 +2820,8 @@
         "M09-UI-ORB-01",
         "M09-UNIT-ORB-01",
         "M09-UI-ORB-MOTION-01",
-        "M10-PUBLIC-AVAILABILITY-01"
+        "M10-PUBLIC-AVAILABILITY-01",
+        "M10-STUDIO-HOST-GUARD-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2899,7 +2900,9 @@
         "M06-UNIT-FAILURE-STATE-01",
         "M06-UNIT-FAILURE-STATE-CONTRACT-01",
         "M10-PUBLIC-AVAILABILITY-01",
-        "M10-ADMIN-TRIAL-01"
+        "M10-ADMIN-TRIAL-01",
+        "M06-STUDIO-FAILURE-GUARDS-01",
+        "M10-STUDIO-HOST-GUARD-01"
       ],
       "dependents": [
         "M01.indexes",

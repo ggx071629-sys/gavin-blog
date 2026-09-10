@@ -5270,6 +5270,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M06-STUDIO-FAILURE-GUARDS-01",
+          "priority": "P1",
+          "scenario": "列表和媒体错误优先于空态且可重试。",
+          "expectations": [
+            {
+              "id": "M06-STUDIO-FAILURE-GUARDS-01-E01",
+              "surface": "user_visible",
+              "statement": "列表和媒体错误优先于空态且可重试。"
+            },
+            {
+              "id": "M06-STUDIO-FAILURE-GUARDS-01-E02",
+              "surface": "forbidden",
+              "statement": "错误不得伪装空成功。"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/unit/failure-state-contract.test.ts",
+              "kind": "vitest",
+              "name": "keeps shared Studio lists and media errors separate from empty results",
+              "gate": "web-quality",
+              "covers": [
+                "M06-STUDIO-FAILURE-GUARDS-01-E01",
+                "M06-STUDIO-FAILURE-GUARDS-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -14255,6 +14287,38 @@
               "covers": [
                 "M10-STUDIO-STATES-01-ALLOW",
                 "M10-STUDIO-STATES-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-STUDIO-HOST-GUARD-01",
+          "priority": "P1",
+          "scenario": "助手仍使用共享可见性与激活守卫。",
+          "expectations": [
+            {
+              "id": "M10-STUDIO-HOST-GUARD-01-E01",
+              "surface": "user_visible",
+              "statement": "助手仍使用共享可见性与激活守卫。"
+            },
+            {
+              "id": "M10-STUDIO-HOST-GUARD-01-E02",
+              "surface": "forbidden",
+              "statement": "禁止绕过可用性、开关和路径限制。"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/unit/failure-state-contract.test.ts",
+              "kind": "vitest",
+              "name": "keeps assistant host visibility delegated to the shared entry guard",
+              "gate": "web-quality",
+              "covers": [
+                "M10-STUDIO-HOST-GUARD-01-E01",
+                "M10-STUDIO-HOST-GUARD-01-E02"
               ]
             }
           ]
