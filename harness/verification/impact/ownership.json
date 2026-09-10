@@ -2051,7 +2051,8 @@
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
         "M01-CARD-GLOW-01",
-        "M07-STUDIO-THEME-01"
+        "M07-STUDIO-THEME-01",
+        "M02-STUDIO-SHELL-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2079,7 +2080,8 @@
         "M06-P0-01",
         "M06-UNIT-ADMIN-01",
         "M06-UNIT-AUTH-PROXY-01",
-        "M07-STUDIO-THEME-01"
+        "M07-STUDIO-THEME-01",
+        "M02-STUDIO-SHELL-01"
       ],
       "dependents": [
         "M02.admin_shell"
@@ -2352,7 +2354,8 @@
         "M02-UNIT-EDITOR-SAVE-CONTRACT-01",
         "M05-OPS-MEDIA-01",
         "M07-UNIT-SITE-QUALITY-01",
-        "M07-STUDIO-THEME-01"
+        "M07-STUDIO-THEME-01",
+        "M02-STUDIO-SHELL-01"
       ],
       "dependents": [
         "M04.books_web",
@@ -2373,11 +2376,13 @@
       "paths": [
         "apps/web/components/AdminCoreNavigation.vue",
         "apps/web/components/AdminThemeToggle.vue",
-        "apps/web/layouts/admin-core.vue"
+        "apps/web/layouts/admin-core.vue",
+        "apps/web/tests/e2e/studio-shell.spec.ts"
       ],
       "cases": [
         "M02-P1-02",
-        "M07-STUDIO-THEME-01"
+        "M07-STUDIO-THEME-01",
+        "M02-STUDIO-SHELL-01"
       ],
       "dependents": [
         "M06.auth_web"
@@ -2417,7 +2422,8 @@
         "M03-P1-01",
         "M03-OPS-TAXONOMY-01",
         "M05-OPS-LAYOUT-01",
-        "M07-STUDIO-THEME-01"
+        "M07-STUDIO-THEME-01",
+        "M02-STUDIO-SHELL-01"
       ],
       "dependents": []
     },
@@ -2445,7 +2451,8 @@
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
         "M01-CARD-GLOW-01",
-        "M07-STUDIO-THEME-01"
+        "M07-STUDIO-THEME-01",
+        "M02-STUDIO-SHELL-01"
       ],
       "dependents": []
     },
@@ -2473,7 +2480,8 @@
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
         "M01-CARD-GLOW-01",
-        "M07-STUDIO-THEME-01"
+        "M07-STUDIO-THEME-01",
+        "M02-STUDIO-SHELL-01"
       ],
       "dependents": []
     },
@@ -2493,7 +2501,8 @@
         "M05-UNIT-MEDIA-UPLOAD-01",
         "M05-OPS-MEDIA-01",
         "M05-OPS-LAYOUT-01",
-        "M07-STUDIO-THEME-01"
+        "M07-STUDIO-THEME-01",
+        "M02-STUDIO-SHELL-01"
       ],
       "dependents": [
         "M02.editing",
@@ -2531,7 +2540,8 @@
         "M05-UNIT-CONTENT-01",
         "M05-OPS-CONTENT-01",
         "M05-OPS-LAYOUT-01",
-        "M07-STUDIO-THEME-01"
+        "M07-STUDIO-THEME-01",
+        "M02-STUDIO-SHELL-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2791,7 +2801,8 @@
         "M10-OPS-RUNTIME-01",
         "M10-MANAGEMENT-UI-01",
         "M10-ADMIN-TRIAL-01",
-        "M07-STUDIO-THEME-01"
+        "M07-STUDIO-THEME-01",
+        "M02-STUDIO-SHELL-01"
       ],
       "dependents": []
     },
@@ -3710,7 +3721,8 @@
       ],
       "cases": [
         "M07-STUDIO-THEME-01",
-        "M07-STUDIO-FONTS-01"
+        "M07-STUDIO-FONTS-01",
+        "M02-STUDIO-SHELL-01"
       ],
       "dependents": [
         "M02.admin_shell",
