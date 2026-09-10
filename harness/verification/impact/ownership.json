@@ -2379,7 +2379,8 @@
         "M04-STUDIO-PROJECTS-01",
         "M02-STUDIO-LIST-STATES-01",
         "M02-STUDIO-WORKSPACE-01",
-        "M02-STUDIO-ARTICLE-EDITOR-01"
+        "M02-STUDIO-ARTICLE-EDITOR-01",
+        "M03-STUDIO-BOOK-EDITOR-01"
       ],
       "dependents": [
         "M04.books_web",
@@ -2515,7 +2516,8 @@
         "M02-STUDIO-SHELL-01",
         "M02-DESK-REVISIONS-01",
         "M04-STUDIO-BOOKS-01",
-        "M02-STUDIO-WORKSPACE-01"
+        "M02-STUDIO-WORKSPACE-01",
+        "M03-STUDIO-BOOK-EDITOR-01"
       ],
       "dependents": []
     },
