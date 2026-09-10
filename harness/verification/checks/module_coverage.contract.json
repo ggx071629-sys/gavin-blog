@@ -2626,6 +2626,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M02-STUDIO-REVISIONS-01",
+          "priority": "P1",
+          "scenario": "版本页开放列表、当前与选中快照区分、加载错误恢复、真实比较与响应式读取。",
+          "expectations": [
+            {
+              "id": "M02-STUDIO-REVISIONS-01-E01",
+              "surface": "user_visible",
+              "statement": "版本页开放列表、当前与选中快照区分、加载错误恢复、真实比较与响应式读取。"
+            },
+            {
+              "id": "M02-STUDIO-REVISIONS-01-E02",
+              "surface": "forbidden",
+              "statement": "取消或仅自动保存不得改变公开版本，发布不得跳过保存屏障或使用旧版本。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+              "kind": "playwright",
+              "name": "revisions",
+              "gate": "e2e",
+              "covers": [
+                "M02-STUDIO-REVISIONS-01-E01",
+                "M02-STUDIO-REVISIONS-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
