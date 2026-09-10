@@ -5866,6 +5866,90 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M06-RESUME-DOWNLOAD-01",
+          "priority": "P0",
+          "scenario": "仅可信域逐跳校验后固定公网IP，保留TLS原主机校验。",
+          "expectations": [
+            {
+              "id": "M06-RESUME-DOWNLOAD-01-E01",
+              "surface": "response",
+              "statement": "可信PDF可取得完整字节/hash，TLS固定原主机并连接已校验地址。"
+            },
+            {
+              "id": "M06-RESUME-DOWNLOAD-01-E02",
+              "surface": "forbidden",
+              "statement": "非法域/私网、超限/超时被拒绝，URL秘密不进入命令行，代理和应用密钥不传入子进程。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_resume_download.py",
+              "kind": "pytest",
+              "name": "test_trusted_download_pins_each_redirect_and_preserves_tls_hostname",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-DOWNLOAD-01-E01",
+                "M06-RESUME-DOWNLOAD-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_resume_download.py",
+              "kind": "pytest",
+              "name": "test_untrusted_targets_and_mixed_dns_are_rejected_without_connecting",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-DOWNLOAD-01-E01",
+                "M06-RESUME-DOWNLOAD-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-RESUME-DOWNLOAD-LIMITS-01",
+          "priority": "P0",
+          "scenario": "PDF类型/字节/跳转及子进程总截止生效，环境与错误不泄密。",
+          "expectations": [
+            {
+              "id": "M06-RESUME-DOWNLOAD-LIMITS-01-E01",
+              "surface": "response",
+              "statement": "可信PDF可取得完整字节/hash，TLS固定原主机并连接已校验地址。"
+            },
+            {
+              "id": "M06-RESUME-DOWNLOAD-LIMITS-01-E02",
+              "surface": "forbidden",
+              "statement": "非法域/私网、超限/超时被拒绝，URL秘密不进入命令行，代理和应用密钥不传入子进程。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_resume_download.py",
+              "kind": "pytest",
+              "name": "test_download_file_redirect_and_retry_limits",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-DOWNLOAD-LIMITS-01-E01",
+                "M06-RESUME-DOWNLOAD-LIMITS-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_resume_download.py",
+              "kind": "pytest",
+              "name": "test_download_child_environment_hash_and_real_deadline",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-DOWNLOAD-LIMITS-01-E01",
+                "M06-RESUME-DOWNLOAD-LIMITS-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

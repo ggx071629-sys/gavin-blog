@@ -4139,6 +4139,18 @@
       ],
       "dependents": [],
       "dependency_reasons": {}
+    },
+    "M06.resume_download": {
+      "paths": [
+        "apps/api/app/assistant_resume/__init__.py",
+        "apps/api/app/assistant_resume/download.py",
+        "apps/api/tests/test_assistant_resume_download.py"
+      ],
+      "cases": [
+        "M06-RESUME-DOWNLOAD-01",
+        "M06-RESUME-DOWNLOAD-LIMITS-01"
+      ],
+      "dependents": []
     }
   }
 }
