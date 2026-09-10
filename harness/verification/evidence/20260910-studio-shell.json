@@ -1,0 +1,461 @@
+{
+  "schema_version": 2,
+  "task_id": "20260910-studio-shell",
+  "created_at": "2026-09-10T06:55:10.069843+00:00",
+  "command": "python -m tools.harness verify 20260910-studio-shell",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "cf26609ecb0bd0669323db9ef22a4538ed37e9d7",
+    "active_spec_sha256": "39e20482ee9863d6072d8780cc323383ac209b316f1ad64af457d38671fe5436",
+    "verification_contract_sha256": "df2c73c7f7191fb57c1982391001b2456db74ceb89c95ba8050fa95a3511e92c",
+    "gate_config_sha256": "0cafbab177d1a4ff2229e482b7eb19f42623319c32dbd9f1979ffc473b188efd",
+    "documentation_contract_sha256": "460f59e25259b08960cba6a4b976bc8df643cab6ff590dc5a5bf4620028790a3",
+    "documentation_targets_sha256": "ecb83acac0c9d16152067da17b43b855359fdbbb1db653366d1ecb758af520ab",
+    "module_contract_sha256": "ab4cfcf9b26738c19ee41fc9bcfa3841a3c8fadd9bc4e1383136504d46610ce6"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录侧栏断点、主题切换和短视口导航的持续约束。",
+    "targets": [
+      "apps/web/public/studio/README.md"
+    ],
+    "baseline_commit": "02e66c2ab7103ff345b1f8f77ce6426322ac8da6",
+    "target_blobs": {
+      "apps/web/public/studio/README.md": "98d77f92f4f0d54ff41fda324557211244ac1517"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "8d15309fae3dc39721f0c062629d65b858b85e48",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260910-studio-shell.json",
+      "sha256": "b12a6f17cf21c98b732085b10c509b25dab39105be9e3f931d2ca84014050b0d",
+      "selected_cases": [
+        "M02-STUDIO-SHELL-01"
+      ],
+      "selected_refs": 1,
+      "excluded_cases": 231
+    },
+    "receipt": {
+      "run_id": "dae1761119a2a7e1b6ebb2958083dbbf",
+      "identity": "08f6d0d94f71c5a566522c2eb53524f29c14f57438ff6c690e5b01ddf6d32ed6",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1203.006,
+      "plan_inputs": 956.994,
+      "execute_cleanup_and_input_recheck": 43286.386
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "ab4cfcf9b26738c19ee41fc9bcfa3841a3c8fadd9bc4e1383136504d46610ce6",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M02-STUDIO-SHELL-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "Reference desktop and mobile shell preserves navigation, theme, focus, logout and local icons.",
+            "expectations": [
+              {
+                "id": "M02-STUDIO-SHELL-01-E01",
+                "surface": "user_visible",
+                "statement": "Responsive sidebar dimensions, nine local navigation icons, active paths and both theme colors match the selected shell; controls remain reachable at short heights."
+              },
+              {
+                "id": "M02-STUDIO-SHELL-01-E02",
+                "surface": "forbidden",
+                "statement": "No horizontal overflow, missing icon, axe violation, trapped background or residual scroll lock after Escape, route or breakpoint close; failed logout remains visible and real retry succeeds."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/studio-shell.spec.ts",
+                "name": "shell",
+                "gate": "e2e",
+                "covers": [
+                  "M02-STUDIO-SHELL-01-E01",
+                  "M02-STUDIO-SHELL-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M02-STUDIO-SHELL-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "Reference desktop and mobile shell preserves navigation, theme, focus, logout and local icons.",
+            "expectations": [
+              {
+                "id": "M02-STUDIO-SHELL-01-E01",
+                "surface": "user_visible",
+                "statement": "Responsive sidebar dimensions, nine local navigation icons, active paths and both theme colors match the selected shell; controls remain reachable at short heights."
+              },
+              {
+                "id": "M02-STUDIO-SHELL-01-E02",
+                "surface": "forbidden",
+                "statement": "No horizontal overflow, missing icon, axe violation, trapped background or residual scroll lock after Escape, route or breakpoint close; failed logout remains visible and real retry succeeds."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/studio-shell.spec.ts",
+                "name": "shell",
+                "gate": "e2e",
+                "covers": [
+                  "M02-STUDIO-SHELL-01-E01",
+                  "M02-STUDIO-SHELL-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 7.436,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "133 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 168.113,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 70.173,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.512,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "680 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 365.229,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "252 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 84.938,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 232 cases, 465 expectations, 855 exact test references; contract sha256 ab4cfcf9b267"
+      ],
+      "status": "passed",
+      "duration_ms": 403.183,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.643,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 10.858,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 84.496,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 1730.525,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "dae1761119a2a7e1b6ebb2958083dbbf",
+        "attempt_id": "5d4d8beacd1e0fe0c63a5a44fc88ddcb"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-shell --gate e2e",
+      "status": "passed",
+      "duration_ms": 39939.863,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1590,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-shell.spec.ts",
+                "name": "shell"
+              }
+            ],
+            "duration_ms": 3415.752,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-shell.spec.ts",
+                "name": "shell"
+              }
+            ],
+            "duration_ms": 1753.068
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-shell.spec.ts",
+                "name": "shell",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "shell"
+                ]
+              }
+            ],
+            "duration_ms": 1540.553,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-shell.spec.ts",
+                "name": "shell",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "shell"
+                ]
+              }
+            ],
+            "duration_ms": 32846.264,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\9a513332054c4aa05ebb9c71540c8a27422c0b292066f2dac0c465cb7bcdfb7d\\artifacts\\dae1761119a2a7e1b6ebb2958083dbbf\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "dae1761119a2a7e1b6ebb2958083dbbf",
+        "attempt_id": "c10fab0fee373f9c2349cc9baad7fa37"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1336.867,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 44205.836,
+    "failures": []
+  },
+  "source_commit": "8d15309fae3dc39721f0c062629d65b858b85e48"
+}
