@@ -223,6 +223,28 @@
         }
       ],
       "no_test_reason": "Structural integrity checks ordinary documentation and declarative registration."
+    },
+    {
+      "path": "apps/web/tests/e2e/article-loop.spec.ts",
+      "owner": "M02.editing",
+      "reason": "Adapt the existing end-to-end loop to empty-list header actions and the reviewed trash dialog; short name permits Windows failure artifact export.",
+      "cases": [
+        "M02-UNIT-ARTICLE-LOOP-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        }
+      ]
     }
   ]
 }
