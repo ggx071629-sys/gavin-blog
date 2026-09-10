@@ -2121,7 +2121,8 @@
         "M09-REVALIDATION-CLI-01",
         "M06-RESUME-PARSE-01",
         "M06-RESUME-PARSE-LIMITS-01",
-        "M06-RESUME-REFRESH-WORKER-01"
+        "M06-RESUME-REFRESH-WORKER-01",
+        "M09-RESUME-CITATION-UI-01"
       ],
       "dependents": [
         "M06.persistence",
@@ -3049,7 +3050,8 @@
         "M10-PUBLIC-AVAILABILITY-01",
         "M10-ADMIN-TRIAL-01",
         "M06-STUDIO-FAILURE-GUARDS-01",
-        "M10-STUDIO-HOST-GUARD-01"
+        "M10-STUDIO-HOST-GUARD-01",
+        "M09-RESUME-CITATION-UI-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -3066,7 +3068,8 @@
         "M07.discovery",
         "M10.operations_web",
         "M01.home",
-        "M06.account_ui"
+        "M06.account_ui",
+        "M09.assistant_web"
       ],
       "dependency_reasons": {
         "M01.indexes": [
@@ -3137,6 +3140,9 @@
         ],
         "M06.account_ui": [
           "Account components call apiFetch and stable API error helpers."
+        ],
+        "M09.assistant_web": [
+          "Public PDF citations use the strict same-origin attachment proxy."
         ]
       }
     },

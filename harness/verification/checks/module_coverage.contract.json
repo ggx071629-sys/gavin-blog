@@ -14057,7 +14057,7 @@
         {
           "id": "M09-RESUME-CITATION-UI-01",
           "priority": "P1",
-          "scenario": "Public/admin PDF citations download exact fixture bytes through strict paths; unsafe paths are rejected and About navigation still works.",
+          "scenario": "Public/admin citations download identical PDF fixture bytes through the real Web proxy and API; unsafe paths are rejected and About navigation still works.",
           "expectations": [
             {
               "id": "M09-RESUME-CITATION-UI-01-E01",

@@ -13,20 +13,22 @@
       "dependencies": [
         {
           "unit": "M06.api_tooling",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Isolated test app seeds a transport-only PDF cache fixture; production app registers no test endpoint. The E2E verifies real proxy/API byte identity.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M06.persistence",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.runtime_config",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -48,7 +50,7 @@
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -62,26 +64,40 @@
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M01.navigation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Strict GET-only PDF path goes to the fixed API origin with redirects rejected; browser test uses the real proxy and checks attachment headers, unknown versions and query rejection.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -94,37 +110,37 @@
         {
           "unit": "M01.home",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -138,25 +154,85 @@
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
-        },
-        {
-          "unit": "M10.capacity",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.resume_storage",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.profile_web",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         }
       ]
@@ -172,20 +248,22 @@
       "dependencies": [
         {
           "unit": "M06.api_tooling",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Isolated test app seeds a transport-only PDF cache fixture; production app registers no test endpoint. The E2E verifies real proxy/API byte identity.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M06.persistence",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.runtime_config",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -207,7 +285,7 @@
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -221,26 +299,40 @@
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M01.navigation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Strict GET-only PDF path goes to the fixed API origin with redirects rejected; browser test uses the real proxy and checks attachment headers, unknown versions and query rejection.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -253,37 +345,37 @@
         {
           "unit": "M01.home",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -297,25 +389,85 @@
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
-        },
-        {
-          "unit": "M10.capacity",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.resume_storage",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.profile_web",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         }
       ]
@@ -331,20 +483,22 @@
       "dependencies": [
         {
           "unit": "M06.api_tooling",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Isolated test app seeds a transport-only PDF cache fixture; production app registers no test endpoint. The E2E verifies real proxy/API byte identity.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M06.persistence",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.runtime_config",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -366,7 +520,7 @@
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -380,26 +534,40 @@
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M01.navigation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Strict GET-only PDF path goes to the fixed API origin with redirects rejected; browser test uses the real proxy and checks attachment headers, unknown versions and query rejection.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -412,37 +580,37 @@
         {
           "unit": "M01.home",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -456,25 +624,85 @@
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
-        },
-        {
-          "unit": "M10.capacity",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.resume_storage",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.profile_web",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         }
       ]
@@ -490,20 +718,22 @@
       "dependencies": [
         {
           "unit": "M06.api_tooling",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Isolated test app seeds a transport-only PDF cache fixture; production app registers no test endpoint. The E2E verifies real proxy/API byte identity.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M06.persistence",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.runtime_config",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -525,7 +755,7 @@
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -539,26 +769,40 @@
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M01.navigation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Strict GET-only PDF path goes to the fixed API origin with redirects rejected; browser test uses the real proxy and checks attachment headers, unknown versions and query rejection.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -571,37 +815,37 @@
         {
           "unit": "M01.home",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -615,25 +859,85 @@
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
-        },
-        {
-          "unit": "M10.capacity",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.resume_storage",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.profile_web",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         }
       ]
@@ -649,20 +953,22 @@
       "dependencies": [
         {
           "unit": "M06.api_tooling",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Isolated test app seeds a transport-only PDF cache fixture; production app registers no test endpoint. The E2E verifies real proxy/API byte identity.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M06.persistence",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.runtime_config",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -684,7 +990,7 @@
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -698,26 +1004,40 @@
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M01.navigation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Strict GET-only PDF path goes to the fixed API origin with redirects rejected; browser test uses the real proxy and checks attachment headers, unknown versions and query rejection.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -730,37 +1050,37 @@
         {
           "unit": "M01.home",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -774,25 +1094,85 @@
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
-        },
-        {
-          "unit": "M10.capacity",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.resume_storage",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.profile_web",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         }
       ]
@@ -808,38 +1188,40 @@
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.api_tooling",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Isolated test app seeds a transport-only PDF cache fixture; production app registers no test endpoint. The E2E verifies real proxy/API byte identity.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M06.profile",
@@ -860,7 +1242,7 @@
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -875,43 +1257,49 @@
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.resume_storage",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
-        },
-        {
-          "unit": "M06.profile_web",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
-        },
-        {
-          "unit": "M06.runtime_config",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.persistence",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -925,20 +1313,22 @@
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M01.navigation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Strict GET-only PDF path goes to the fixed API origin with redirects rejected; browser test uses the real proxy and checks attachment headers, unknown versions and query rejection.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -951,7 +1341,73 @@
         {
           "unit": "M01.home",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         }
       ]
@@ -991,50 +1447,52 @@
         {
           "unit": "M06.profile_web",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.runtime_config",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.api_tooling",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Isolated test app seeds a transport-only PDF cache fixture; production app registers no test endpoint. The E2E verifies real proxy/API byte identity.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M09.development",
@@ -1047,7 +1505,7 @@
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -1062,31 +1520,37 @@
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.resume_storage",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.persistence",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -1100,20 +1564,22 @@
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M01.navigation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Strict GET-only PDF path goes to the fixed API origin with redirects rejected; browser test uses the real proxy and checks attachment headers, unknown versions and query rejection.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -1126,7 +1592,73 @@
         {
           "unit": "M01.home",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         }
       ]
@@ -1142,14 +1674,16 @@
         {
           "unit": "M01.navigation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Strict GET-only PDF path goes to the fixed API origin with redirects rejected; browser test uses the real proxy and checks attachment headers, unknown versions and query rejection.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -1162,7 +1696,79 @@
         {
           "unit": "M01.home",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         }
       ]
@@ -1178,14 +1784,16 @@
         {
           "unit": "M01.navigation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Strict GET-only PDF path goes to the fixed API origin with redirects rejected; browser test uses the real proxy and checks attachment headers, unknown versions and query rejection.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -1198,7 +1806,79 @@
         {
           "unit": "M01.home",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         }
       ]
@@ -1223,14 +1903,16 @@
         {
           "unit": "M01.navigation",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
-          "cases": []
+          "affected": true,
+          "reason": "Strict GET-only PDF path goes to the fixed API origin with redirects rejected; browser test uses the real proxy and checks attachment headers, unknown versions and query rejection.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -1243,7 +1925,79 @@
         {
           "unit": "M01.home",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         }
       ]
@@ -1259,13 +2013,13 @@
         {
           "unit": "M06.web_types",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.account_ui",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -1279,7 +2033,7 @@
         {
           "unit": "M06.profile_web",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         }
       ]
@@ -1295,13 +2049,13 @@
         {
           "unit": "M06.web_types",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
           "unit": "M06.account_ui",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         },
         {
@@ -1315,7 +2069,7 @@
         {
           "unit": "M06.profile_web",
           "affected": false,
-          "reason": "Existing consumer retains unchanged fields/schema/provider/budget or non-resume rendering; no change in its execution contract.",
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
           "cases": []
         }
       ]
@@ -1413,6 +2167,351 @@
       "cases": [],
       "no_test_reason": "Structural checks cover prose and declarative registration; no verifier logic change.",
       "dependencies": []
+    },
+    {
+      "path": "apps/web/server/routes/api/v1/[...path].ts",
+      "owner": "M06.transport",
+      "reason": "Strict GET-only PDF path goes to the fixed API origin with redirects rejected; browser test uses the real proxy and checks attachment headers, unknown versions and query rejection.",
+      "cases": [
+        "M09-RESUME-CITATION-UI-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Admin trial uses the same whitelist and downloads the exact fixture PDF.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Strict PDF path whitelist and ordinary download links are verified in built public UI.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "apps/api/scripts/run_assistant_e2e.py",
+      "owner": "M06.api_tooling",
+      "reason": "Isolated test app seeds a transport-only PDF cache fixture; production app registers no test endpoint. The E2E verifies real proxy/API byte identity.",
+      "cases": [
+        "M09-RESUME-CITATION-UI-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "PDF route, operational notice exception and three live source rechecks are exercised; forged aliases remain rejected.",
+          "cases": [
+            "M06-RESUME-PDF-01",
+            "M09-RESUME-FACTS-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "Index completion records the current resume version timestamp in the same content transaction.",
+          "cases": [
+            "M06-RESUME-PDF-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Strict PDF path whitelist and ordinary download links are verified in built public UI.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local deterministic graph still produces bounded cited answers after prompt/qualification additions; existing regression executes.",
+          "cases": [
+            "M09-RESUME-FACTS-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": true,
+          "reason": "Existing status route projects the retained timestamp without changing the save contract.",
+          "cases": [
+            "M06-RESUME-PDF-01"
+          ]
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "Strict GET-only PDF path goes to the fixed API origin with redirects rejected; browser test uses the real proxy and checks attachment headers, unknown versions and query rejection.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Admin trial uses the same whitelist and downloads the exact fixture PDF.",
+          "cases": [
+            "M09-RESUME-CITATION-UI-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains unchanged non-resume behavior, fields and execution contract; new attachment proxy and test fixture are scoped to resume paths.",
+          "cases": []
+        }
+      ]
     }
   ]
 }
