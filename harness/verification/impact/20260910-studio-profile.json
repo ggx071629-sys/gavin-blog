@@ -235,6 +235,14 @@
           "cases": []
         }
       ]
+    },
+    {
+      "path": "STUDIO-UI-PLAN.md",
+      "owner": "M08.documentation",
+      "reason": "更新计划入口指向本轮阶段五，明确完成后停止。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary plan navigation only; links checked structurally."
     }
   ]
 }
