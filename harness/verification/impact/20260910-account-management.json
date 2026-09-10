@@ -59,31 +59,31 @@
         {
           "unit": "M06.persistence",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.runtime_config",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         }
       ],
@@ -128,15 +128,23 @@
           ]
         },
         {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.api_tooling",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -167,115 +175,123 @@
         {
           "unit": "M09.development",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         },
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.auth_web",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.transport",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M01.links",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M11.api",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         }
       ]
@@ -299,13 +315,13 @@
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.api_tooling",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -336,49 +352,49 @@
         {
           "unit": "M09.development",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -396,70 +412,86 @@
           ]
         },
         {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.auth_web",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.transport",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M01.links",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M11.api",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         }
       ]
     },
@@ -481,55 +513,55 @@
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.auth_web",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -551,13 +583,13 @@
         {
           "unit": "M06.transport",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -577,7 +609,7 @@
         {
           "unit": "M06.api_tooling",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -593,55 +625,71 @@
         {
           "unit": "M09.development",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         },
         {
           "unit": "M01.links",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M11.api",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         }
       ]
@@ -665,13 +713,13 @@
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.api_tooling",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -702,49 +750,49 @@
         {
           "unit": "M09.development",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -762,70 +810,86 @@
           ]
         },
         {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.auth_web",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.transport",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M01.links",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M11.api",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         }
       ]
     },
@@ -842,55 +906,55 @@
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M01.links",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.api_tooling",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -911,7 +975,7 @@
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -933,49 +997,49 @@
         {
           "unit": "M09.development",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M11.api",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -993,22 +1057,38 @@
           ]
         },
         {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
           "unit": "M06.auth_web",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.transport",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         }
       ]
     },
@@ -1043,15 +1123,23 @@
           ]
         },
         {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.api_tooling",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -1082,115 +1170,123 @@
         {
           "unit": "M09.development",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         },
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.auth_web",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.transport",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M01.links",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M11.api",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         }
       ]
@@ -1226,15 +1322,23 @@
           ]
         },
         {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.api_tooling",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -1265,115 +1369,123 @@
         {
           "unit": "M09.development",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         },
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.auth_web",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.transport",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M01.links",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M11.api",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         }
       ]
@@ -1396,55 +1508,55 @@
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.auth_web",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -1466,13 +1578,13 @@
         {
           "unit": "M06.transport",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -1492,7 +1604,7 @@
         {
           "unit": "M06.api_tooling",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -1508,55 +1620,71 @@
         {
           "unit": "M09.development",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         },
         {
           "unit": "M01.links",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M11.api",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         }
       ]
@@ -1579,55 +1707,55 @@
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.auth_web",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -1649,13 +1777,13 @@
         {
           "unit": "M06.transport",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -1675,7 +1803,7 @@
         {
           "unit": "M06.api_tooling",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -1691,55 +1819,71 @@
         {
           "unit": "M09.development",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         },
         {
           "unit": "M01.links",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M11.api",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         }
       ]
@@ -1757,55 +1901,55 @@
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M01.links",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.api_tooling",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -1826,7 +1970,7 @@
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -1848,49 +1992,49 @@
         {
           "unit": "M09.development",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M11.api",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -1908,22 +2052,38 @@
           ]
         },
         {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
           "unit": "M06.auth_web",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.transport",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         }
       ]
     },
@@ -1940,55 +2100,55 @@
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M01.links",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.api_tooling",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -2009,7 +2169,7 @@
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -2031,49 +2191,49 @@
         {
           "unit": "M09.development",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M11.api",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -2091,22 +2251,38 @@
           ]
         },
         {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
           "unit": "M06.auth_web",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.transport",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         }
       ]
     },
@@ -2123,55 +2299,55 @@
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M01.links",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.api_tooling",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -2192,7 +2368,7 @@
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -2214,49 +2390,49 @@
         {
           "unit": "M09.development",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M11.api",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -2274,22 +2450,38 @@
           ]
         },
         {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
           "unit": "M06.auth_web",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.transport",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         }
       ]
     },
@@ -2324,15 +2516,23 @@
           ]
         },
         {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.api_tooling",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
@@ -2363,115 +2563,123 @@
         {
           "unit": "M09.development",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.providers",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.qualification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.capacity",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         },
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.taxonomy",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.auth_web",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.transport",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M01.links",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M11.api",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         }
       ]
@@ -2487,79 +2695,79 @@
         {
           "unit": "M01.articles",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M02.publishing",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M03.search",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M04.projects",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.media",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M05.portability",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.auth",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.persistence",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M06.profile",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M09.runtime",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.index",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.operations",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M10.e5_evaluation",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         }
       ]
@@ -2693,19 +2901,19 @@
         {
           "unit": "M08.impact",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M08.product_verification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M08.execution_protocol",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         }
       ],
@@ -2720,43 +2928,43 @@
         {
           "unit": "M08.isolated_verification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M08.lifecycle",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M08.module_verification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M08.product_verification",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M08.selected_tests",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M08.verification_resume",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         },
         {
           "unit": "M08.execution_protocol",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
         }
       ],
@@ -2781,8 +2989,16 @@
         {
           "unit": "M06.web_types",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         }
       ]
     },
@@ -2797,8 +3013,16 @@
         {
           "unit": "M06.web_types",
           "affected": false,
-          "reason": "No existing consumed content fields or endpoint/CSRF signatures change; new account API has no Web consumer in phase two. This is account-only schema or declarative documentation, not a change to this consumer implementation.",
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
           "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
         }
       ]
     },
@@ -2809,6 +3033,262 @@
       "cases": [],
       "dependencies": [],
       "no_test_reason": "Historical report links to exact verified commit and machine evidence; no product change."
+    },
+    {
+      "path": "apps/web/components/AccountPasswordForm.vue",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/components/AccountSessions.vue",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/pages/admin/account.vue",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/pages/admin/recover.vue",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/types/account.ts",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/utils/account.ts",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-FEEDBACK-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/unit/account.test.ts",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-FEEDBACK-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/e2e/account.spec.ts",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/api/scripts/run_account_fixture.py",
+      "owner": "M06.account_fixture",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-FLOW-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/e2e/account-flow.spec.ts",
+      "owner": "M06.account_fixture",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-FLOW-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/components/AdminCoreNavigation.vue",
+      "owner": "M02.admin_shell",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "cases": [],
+          "reason": "Consumer does not use added account fields, endpoints or pages."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/admin/login.vue",
+      "owner": "M06.auth_web",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.admin_shell",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "Account navigation affects desktop/mobile shell reachability and active state."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/utils/admin.ts",
+      "owner": "M06.auth_web",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.admin_shell",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "Account navigation affects desktop/mobile shell reachability and active state."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/unit/admin.test.ts",
+      "owner": "M06.auth_web",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-UNIT-ADMIN-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.admin_shell",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "Account navigation affects desktop/mobile shell reachability and active state."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/ACCOUNT-MANAGEMENT.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-ui/A3-01.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-ui/A3-02.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-ui/A3-03.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-ui/A3-04.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-ui/A3-05.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-verification/A4-01.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-verification/A4-03.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
     }
   ]
 }

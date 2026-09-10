@@ -1699,7 +1699,8 @@
         "M10.qualification",
         "M10.e5_evaluation",
         "M10.capacity",
-        "M06.account"
+        "M06.account",
+        "M06.account_fixture"
       ],
       "dependency_reasons": {
         "M02.publishing": [
@@ -1764,6 +1765,9 @@
         ],
         "M06.account": [
           "Account transactions consume credential/session models, security and Settings."
+        ],
+        "M06.account_fixture": [
+          "Isolated HTTP fixture constructs Settings and create_app without local env."
         ]
       }
     },
@@ -1815,7 +1819,8 @@
         "M10.e5_evaluation",
         "M10.capacity",
         "M11.api",
-        "M06.account"
+        "M06.account",
+        "M06.account_fixture"
       ],
       "dependency_reasons": {
         "M01.articles": [
@@ -1933,6 +1938,9 @@
         ],
         "M06.account": [
           "Account transactions consume credential/session models, security and Settings."
+        ],
+        "M06.account_fixture": [
+          "Isolated fixture applies Alembic migrations to its temporary database."
         ]
       }
     },
@@ -2143,14 +2151,19 @@
         "M02-DESK-LAYOUT-01",
         "M02-DESK-REVISIONS-01",
         "M06-STUDIO-LOGIN-01",
-        "M06-STUDIO-LOGIN-ERROR-01"
+        "M06-STUDIO-LOGIN-ERROR-01",
+        "M06-ACCOUNT-UI-01"
       ],
       "dependents": [
-        "M02.admin_shell"
+        "M02.admin_shell",
+        "M06.account_ui"
       ],
       "dependency_reasons": {
         "M02.admin_shell": [
           "apps/web/components/AdminCoreNavigation.vue imports ~/utils/admin"
+        ],
+        "M06.account_ui": [
+          "Account pages consume the existing auth middleware and login/recovery navigation."
         ]
       }
     },
@@ -2466,14 +2479,19 @@
         "M07-STUDIO-THEME-01",
         "M02-STUDIO-SHELL-01",
         "M02-DESK-LAYOUT-01",
-        "M02-DESK-REVISIONS-01"
+        "M02-DESK-REVISIONS-01",
+        "M06-ACCOUNT-UI-01"
       ],
       "dependents": [
-        "M06.auth_web"
+        "M06.auth_web",
+        "M06.account_ui"
       ],
       "dependency_reasons": {
         "M06.auth_web": [
           "apps/web/pages/admin/login.vue renders auto-imported AdminThemeToggle"
+        ],
+        "M06.account_ui": [
+          "Account pages consume admin-core navigation/layout and shared Studio theme."
         ]
       }
     },
@@ -2970,7 +2988,8 @@
         "M06.profile_web",
         "M07.discovery",
         "M10.operations_web",
-        "M01.home"
+        "M01.home",
+        "M06.account_ui"
       ],
       "dependency_reasons": {
         "M01.indexes": [
@@ -3038,6 +3057,9 @@
         ],
         "M01.home": [
           "Homepage consumes this unit through its public utility, profile, theme, API or browser verification boundary."
+        ],
+        "M06.account_ui": [
+          "Account components call apiFetch and stable API error helpers."
         ]
       }
     },
@@ -3384,11 +3406,15 @@
         "M06-ACCOUNT-CONTRACT-01"
       ],
       "dependents": [
-        "M06.web_types"
+        "M06.web_types",
+        "M06.account_ui"
       ],
       "dependency_reasons": {
         "M06.web_types": [
           "OpenAPI schema is the normative model for the Web consumption types"
+        ],
+        "M06.account_ui": [
+          "types/account.ts imports generated components schemas directly."
         ]
       }
     },
@@ -3582,7 +3608,10 @@
         "completed/account-design/*",
         "completed/account-backend/*",
         "completed/account-ui/.gitkeep",
-        "completed/account-verification/.gitkeep"
+        "completed/account-verification/.gitkeep",
+        "apps/web/ACCOUNT-MANAGEMENT.md",
+        "completed/account-ui/*.md",
+        "completed/account-verification/*.md"
       ],
       "cases": [
         "M08-DOCS-01"
@@ -4001,13 +4030,47 @@
         "M06-ACCOUNT-COMPAT-01"
       ],
       "dependents": [
-        "M06.runtime_config"
+        "M06.runtime_config",
+        "M06.account_ui"
       ],
       "dependency_reasons": {
         "M06.runtime_config": [
           "main.py registers the account router; account settings are server-only."
+        ],
+        "M06.account_ui": [
+          "Account and recovery pages consume the new account endpoints."
         ]
       }
+    },
+    "M06.account_ui": {
+      "paths": [
+        "apps/web/components/AccountPasswordForm.vue",
+        "apps/web/components/AccountSessions.vue",
+        "apps/web/pages/admin/account.vue",
+        "apps/web/pages/admin/recover.vue",
+        "apps/web/types/account.ts",
+        "apps/web/utils/account.ts",
+        "apps/web/tests/unit/account.test.ts",
+        "apps/web/tests/e2e/account.spec.ts"
+      ],
+      "cases": [
+        "M06-ACCOUNT-UI-01",
+        "M06-ACCOUNT-FLOW-01",
+        "M06-ACCOUNT-FEEDBACK-01"
+      ],
+      "dependents": [],
+      "dependency_reasons": {}
+    },
+    "M06.account_fixture": {
+      "paths": [
+        "apps/api/scripts/run_account_fixture.py",
+        "apps/web/tests/e2e/account-flow.spec.ts"
+      ],
+      "cases": [
+        "M06-ACCOUNT-FLOW-01"
+      ],
+      "dependents": [],
+      "dependency_reasons": {}
     }
   }
 }

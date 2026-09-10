@@ -13,13 +13,14 @@ documentation_targets:
   - apps/api/README.md
   - packages/contracts/README.md
   - harness/docs/decisions/20260910-account-management.md
+  - apps/web/ACCOUNT-MANAGEMENT.md
 documentation_reason: 固化凭据初始化、邮件配置、终端恢复及跨端契约并登记验收结果。
 state_history:
 ---
 # Context
 用户按四阶段主计划授权设计、实施与验收。原进程内密码已在阶段二改为持久凭据；本轮继续 Web 消费及联调。已有写作台 UI 和无关工作区改动必须保留。
 # Goal
-本次按最新指令继续第三阶段页面与第四阶段验收。本机邮件配置已填写，发送授权正在单独确认；A4-02 的真实 SMTP 接受、实际收取和验证码闭环未全部完成前不关闭。不以替身或隔离验证替代真实投递。
+本次按最新指令继续第三阶段页面与第四阶段验收。本机邮件配置已填写且用户已授权真实验收发信；A4-02 的真实 SMTP 接受、实际收取和验证码闭环未全部完成前不关闭。不以替身或隔离验证替代真实投递。
 按根目录 ACCOUNT-MANAGEMENT-DESIGN.md 六章契约提供固定单管理员账号、持久密码、邮件验证改密/恢复及会话管理。
 # Non-goals
 不新增注册、多用户、换绑邮箱、日常登录验证码；不部署、不修改真实日常凭据、不把邮件替身当实投证据。

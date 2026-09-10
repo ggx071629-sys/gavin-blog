@@ -5720,6 +5720,152 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M06-ACCOUNT-UI-01",
+          "priority": "P0",
+          "scenario": "Account navigation, password/recovery forms, real session revocation and responsive accessible feedback.",
+          "expectations": [
+            {
+              "id": "M06-ACCOUNT-UI-01-E01",
+              "surface": "user_visible",
+              "statement": "Account navigation, password/recovery forms, real session revocation and responsive accessible feedback."
+            },
+            {
+              "id": "M06-ACCOUNT-UI-01-E02",
+              "surface": "forbidden",
+              "statement": "No false success for delivery or failed revocation; no overflow, raw backend errors or unauthenticated continuation."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/account.spec.ts",
+              "kind": "playwright",
+              "name": "account information and navigation",
+              "gate": "e2e",
+              "covers": [
+                "M06-ACCOUNT-UI-01-E01",
+                "M06-ACCOUNT-UI-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/account.spec.ts",
+              "kind": "playwright",
+              "name": "password form verifies errors confirmation and success",
+              "gate": "e2e",
+              "covers": [
+                "M06-ACCOUNT-UI-01-E01",
+                "M06-ACCOUNT-UI-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/account.spec.ts",
+              "kind": "playwright",
+              "name": "recovery entry csrf and reset feedback",
+              "gate": "e2e",
+              "covers": [
+                "M06-ACCOUNT-UI-01-E01",
+                "M06-ACCOUNT-UI-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/account.spec.ts",
+              "kind": "playwright",
+              "name": "sessions revoke selected others and current with real API",
+              "gate": "e2e",
+              "covers": [
+                "M06-ACCOUNT-UI-01-E01",
+                "M06-ACCOUNT-UI-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/account.spec.ts",
+              "kind": "playwright",
+              "name": "account pages themes responsive keyboard and failure states",
+              "gate": "e2e",
+              "covers": [
+                "M06-ACCOUNT-UI-01-E01",
+                "M06-ACCOUNT-UI-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-ACCOUNT-FLOW-01",
+          "priority": "P0",
+          "scenario": "Real HTTP password change and recovery update persistent credentials and revoke existing sessions.",
+          "expectations": [
+            {
+              "id": "M06-ACCOUNT-FLOW-01-E01",
+              "surface": "user_visible",
+              "statement": "Real HTTP password change and recovery update persistent credentials and revoke existing sessions."
+            },
+            {
+              "id": "M06-ACCOUNT-FLOW-01-E02",
+              "surface": "forbidden",
+              "statement": "Wrong factors must fail; previous sessions cannot remain authenticated; test fixture never loads real mail secrets."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/account-flow.spec.ts",
+              "kind": "playwright",
+              "name": "real HTTP password change recovery and revocation",
+              "gate": "e2e",
+              "covers": [
+                "M06-ACCOUNT-FLOW-01-E01",
+                "M06-ACCOUNT-FLOW-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-ACCOUNT-FEEDBACK-01",
+          "priority": "P0",
+          "scenario": "Account error mapping honors Retry-After and stable security errors.",
+          "expectations": [
+            {
+              "id": "M06-ACCOUNT-FEEDBACK-01-E01",
+              "surface": "response",
+              "statement": "Account error mapping honors Retry-After and stable security errors."
+            },
+            {
+              "id": "M06-ACCOUNT-FEEDBACK-01-E02",
+              "surface": "forbidden",
+              "statement": "Provider details and invalid retry values cannot leak into UI."
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/unit/account.test.ts",
+              "kind": "vitest",
+              "name": "maps security errors without exposing backend details",
+              "gate": "web-quality",
+              "covers": [
+                "M06-ACCOUNT-FEEDBACK-01-E01",
+                "M06-ACCOUNT-FEEDBACK-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/unit/account.test.ts",
+              "kind": "vitest",
+              "name": "honors server retry seconds and rejects invalid values",
+              "gate": "web-quality",
+              "covers": [
+                "M06-ACCOUNT-FEEDBACK-01-E01",
+                "M06-ACCOUNT-FEEDBACK-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
