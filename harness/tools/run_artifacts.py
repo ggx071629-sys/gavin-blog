@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import contextvars
+import os
 import shutil
 import time
 from pathlib import Path
@@ -18,7 +19,20 @@ log_path: contextvars.ContextVar[Path | None] = contextvars.ContextVar(
 )
 
 
+def _io_path(path: Path) -> Path:
+    """Use Windows extended paths without changing the diagnostic layout."""
+    if os.name != "nt":
+        return path
+    absolute = str(path.resolve())
+    if absolute.startswith("\\\\?\\"):
+        return Path(absolute)
+    if absolute.startswith("\\\\"):
+        return Path("\\\\?\\UNC\\" + absolute[2:])
+    return Path("\\\\?\\" + absolute)
+
+
 def retain(root: Path, destination: Path) -> None:
+    root, destination = _io_path(root), _io_path(destination)
     destination.mkdir(parents=True, exist_ok=True)
     used = sum(path.stat().st_size for path in destination.rglob("*") if path.is_file())
     omitted = 0
@@ -52,7 +66,7 @@ def retain(root: Path, destination: Path) -> None:
 
 
 def prune() -> None:
-    roots = [run_store.store_root() / "artifacts", run_store.store_root() / "diagnostics" / "artifacts"]
+    roots = [_io_path(run_store.store_root() / "artifacts"), _io_path(run_store.store_root() / "diagnostics" / "artifacts")]
     entries = []
     for root in roots:
         if not root.is_dir():

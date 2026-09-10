@@ -9914,6 +9914,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M08-ARTIFACT-PATHS-01",
+          "priority": "P1",
+          "scenario": "Windows 长路径诊断导出及保留清理兼容性。",
+          "expectations": [
+            {
+              "id": "M08-ARTIFACT-PATHS-01-E01",
+              "surface": "state",
+              "statement": "超过 260 字符路径的报告完整保留，按原规则过期清理。"
+            },
+            {
+              "id": "M08-ARTIFACT-PATHS-01-E02",
+              "surface": "forbidden",
+              "statement": "不得放宽容量上限或吞掉复制失败，不删除原始产物。"
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "harness/verification/tests/test_verification_resume.py",
+              "kind": "pytest",
+              "name": "test_diagnostic_long_paths_preserve_bytes_limits_errors_and_pruning",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-ARTIFACT-PATHS-01-E01",
+                "M08-ARTIFACT-PATHS-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

@@ -519,3 +519,46 @@ def test_invalidation_reasons_compare_canonical_mapping_values(runtime):
     }
     plan = resume.gate_plan(prepared, ledger)
     assert plan[0]["reason"] == "input identity changed: head"
+
+
+def test_diagnostic_long_paths_preserve_bytes_limits_errors_and_pruning(tmp_path, monkeypatch):
+    import os
+    import shutil
+    from pathlib import Path
+    from harness.tools import run_artifacts as artifacts
+
+    def native(path):
+        # Independent setup/read oracle, including when system long paths are disabled.
+        return Path("\\\\?\\" + str(path.absolute())) if os.name == "nt" else path
+
+    root = tmp_path / "source"
+    relative = Path("test-results") / ("nested-" + "a" * 95) / ("b" * 95) / "report.json"
+    source = native(root / relative)
+    source.parent.mkdir(parents=True)
+    source.write_bytes(b'{"expected":1}')
+    store = tmp_path / "store"
+    destination = store / "artifacts" / ("run-" + "c" * 80)
+    try:
+        artifacts.retain(root, destination)
+        assert native(destination / "artifacts" / relative).read_bytes() == source.read_bytes()
+        capped = store / "artifacts" / "capped"
+        monkeypatch.setattr(artifacts, "RUN_LIMIT", 1)
+        artifacts.retain(root, capped)
+        assert not native(capped / "artifacts" / relative).exists()
+        assert "1 files omitted" in (capped / "omitted.txt").read_text()
+        monkeypatch.setattr(artifacts, "RUN_LIMIT", 64 * 1024 * 1024)
+        with monkeypatch.context() as context:
+            def denied(*args, **kwargs):
+                raise PermissionError("copy denied")
+            context.setattr(artifacts.shutil, "copyfile", denied)
+            with pytest.raises(PermissionError, match="copy denied"):
+                artifacts.retain(root, store / "artifacts" / "denied")
+        monkeypatch.setattr(run_store, "store_root", lambda: store)
+        monkeypatch.setattr(artifacts, "RETENTION_SECONDS", -1)
+        artifacts.prune()
+        assert not destination.exists()
+        assert source.read_bytes() == b'{"expected":1}'
+    finally:
+        shutil.rmtree(native(root))
+        if store.exists():
+            shutil.rmtree(native(store))

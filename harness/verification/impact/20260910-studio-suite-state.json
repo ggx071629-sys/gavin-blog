@@ -537,6 +537,114 @@
       "cases": [],
       "dependencies": [],
       "no_test_reason": "链接、结构及归档完整性检查覆盖；直接引用已有验收，不重跑产品测试。"
+    },
+    {
+      "path": "harness/tools/run_artifacts.py",
+      "owner": "M08.verification_resume",
+      "reason": "修复已复现的 WinError 206；通过 Windows 扩展路径执行相同目录/字节/容量/错误传播与清理规则。",
+      "cases": [
+        "M08-ARTIFACT-PATHS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": true,
+          "reason": "隔离结束调用 retain，长路径导出由失败恢复为完整保留；原清理及认证门禁不变。",
+          "cases": [
+            "M08-ARTIFACT-PATHS-01"
+          ]
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "仅诊断文件的 Windows 原生路径表示变化；该消费者使用的认证、输入身份、日志上下文或状态接口不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "仅诊断文件的 Windows 原生路径表示变化；该消费者使用的认证、输入身份、日志上下文或状态接口不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "仅诊断文件的 Windows 原生路径表示变化；该消费者使用的认证、输入身份、日志上下文或状态接口不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": false,
+          "reason": "仅诊断文件的 Windows 原生路径表示变化；该消费者使用的认证、输入身份、日志上下文或状态接口不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "仅诊断文件的 Windows 原生路径表示变化；该消费者使用的认证、输入身份、日志上下文或状态接口不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.acceptance",
+          "affected": false,
+          "reason": "隔离结果结构、认证与关闭规则不变；仅消除路径系统限制，不引入新消费合同。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_verification_resume.py",
+      "owner": "M08.verification_resume",
+      "reason": "修复已复现的 WinError 206；通过 Windows 扩展路径执行相同目录/字节/容量/错误传播与清理规则。",
+      "cases": [
+        "M08-ARTIFACT-PATHS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": true,
+          "reason": "隔离结束调用 retain，长路径导出由失败恢复为完整保留；原清理及认证门禁不变。",
+          "cases": [
+            "M08-ARTIFACT-PATHS-01"
+          ]
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "仅诊断文件的 Windows 原生路径表示变化；该消费者使用的认证、输入身份、日志上下文或状态接口不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "仅诊断文件的 Windows 原生路径表示变化；该消费者使用的认证、输入身份、日志上下文或状态接口不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "仅诊断文件的 Windows 原生路径表示变化；该消费者使用的认证、输入身份、日志上下文或状态接口不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": false,
+          "reason": "仅诊断文件的 Windows 原生路径表示变化；该消费者使用的认证、输入身份、日志上下文或状态接口不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "仅诊断文件的 Windows 原生路径表示变化；该消费者使用的认证、输入身份、日志上下文或状态接口不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.acceptance",
+          "affected": false,
+          "reason": "隔离结果结构、认证与关闭规则不变；仅消除路径系统限制，不引入新消费合同。",
+          "cases": []
+        }
+      ]
     }
   ]
 }

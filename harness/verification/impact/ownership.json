@@ -189,7 +189,8 @@
         "M08-RESUME-01",
         "M08-RESUME-02",
         "M08-RESUME-03",
-        "M08-RESUME-04"
+        "M08-RESUME-04",
+        "M08-ARTIFACT-PATHS-01"
       ],
       "dependents": [
         "M08.isolated_verification",
@@ -296,7 +297,8 @@
         "harness/verification/tests/test_isolated_verification.py"
       ],
       "cases": [
-        "M08-IMPACT-EXECUTION-03"
+        "M08-IMPACT-EXECUTION-03",
+        "M08-ARTIFACT-PATHS-01"
       ],
       "dependents": [
         "M08.acceptance",
