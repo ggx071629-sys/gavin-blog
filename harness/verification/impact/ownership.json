@@ -2356,7 +2356,8 @@
         "apps/web/tests/e2e/writing-desk.spec.ts",
         "apps/web/components/StudioContentList.vue",
         "apps/web/tests/e2e/studio-lists.spec.ts",
-        "apps/web/tests/e2e/studio-writing.spec.ts"
+        "apps/web/tests/e2e/studio-writing.spec.ts",
+        "apps/web/components/StudioPublishConfirmation.vue"
       ],
       "cases": [
         "M02-DESK-LAYOUT-01",
@@ -2377,7 +2378,8 @@
         "M04-STUDIO-BOOKS-01",
         "M04-STUDIO-PROJECTS-01",
         "M02-STUDIO-LIST-STATES-01",
-        "M02-STUDIO-WORKSPACE-01"
+        "M02-STUDIO-WORKSPACE-01",
+        "M02-STUDIO-ARTICLE-EDITOR-01"
       ],
       "dependents": [
         "M04.books_web",
