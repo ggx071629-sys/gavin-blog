@@ -2812,7 +2812,8 @@
         "apps/web/utils/assistant-management.ts",
         "apps/web/tests/unit/assistant-management.test.ts",
         "apps/web/tests/e2e-assistant/management.spec.ts",
-        "apps/web/tests/e2e/studio-overview.spec.ts"
+        "apps/web/tests/e2e/studio-overview.spec.ts",
+        "apps/web/tests/e2e/studio-dialogs.spec.ts"
       ],
       "cases": [
         "M10-P0-02",
@@ -2827,7 +2828,8 @@
         "M02-DESK-LAYOUT-01",
         "M02-DESK-REVISIONS-01",
         "M10-STUDIO-OVERVIEW-01",
-        "M10-STUDIO-TRIAL-01"
+        "M10-STUDIO-TRIAL-01",
+        "M10-STUDIO-DIALOGS-01"
       ],
       "dependents": []
     },

@@ -13486,6 +13486,69 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M10-STUDIO-DIALOGS-01",
+          "priority": "P1",
+          "scenario": "Assistant details, maintenance and confirmations share one accessible dialog and retain actual operation semantics.",
+          "expectations": [
+            {
+              "id": "M10-STUDIO-DIALOGS-01-ALLOW",
+              "surface": "response",
+              "statement": "Responsive themed dialogs preserve focus, direct maintenance links, exact budget/version requests, single-item retries and visible failures."
+            },
+            {
+              "id": "M10-STUDIO-DIALOGS-01-DENY",
+              "surface": "forbidden",
+              "statement": "No nested dialogs, hidden failure confirmation, unsafe retry for unknown provider result, writes on cancel, or loss of budget input on conflict."
+            }
+          ],
+          "required_gates": [
+            "e2e",
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/studio-dialogs.spec.ts",
+              "name": "dialogs",
+              "gate": "e2e",
+              "config": "playwright.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "dialogs"
+              ],
+              "covers": [
+                "M10-STUDIO-DIALOGS-01-ALLOW",
+                "M10-STUDIO-DIALOGS-01-DENY"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+              "name": "management real trial budget public switch and responsive maintenance",
+              "gate": "e2e",
+              "config": "playwright.assistant.config.ts",
+              "project": "chromium",
+              "covers": [
+                "M10-STUDIO-DIALOGS-01-ALLOW",
+                "M10-STUDIO-DIALOGS-01-DENY"
+              ],
+              "title_path": [
+                "management real trial budget public switch and responsive maintenance"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-management.test.ts",
+              "name": "uses exact decimal micro currency and rejects ambiguous values",
+              "gate": "web-quality",
+              "covers": [
+                "M10-STUDIO-DIALOGS-01-ALLOW",
+                "M10-STUDIO-DIALOGS-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
