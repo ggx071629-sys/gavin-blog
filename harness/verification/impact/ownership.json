@@ -1943,7 +1943,8 @@
       ],
       "cases": [
         "M06-P0-01",
-        "M06-UNIT-TIME-SEMANTICS-01"
+        "M06-UNIT-TIME-SEMANTICS-01",
+        "M06-ACCOUNT-COMPAT-01"
       ],
       "dependents": [
         "M01.articles",
