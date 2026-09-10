@@ -3769,6 +3769,70 @@
       "cases": [],
       "dependencies": [],
       "no_test_reason": "Plan links and structure checked by harness-integrity; this document does not alter product behavior."
+    },
+    {
+      "path": "studio-ui-design/design-qa.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve exact selected design text and empty history directory placeholders so plan references resolve in committed snapshots. No product or executable documentation contract changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary plan support files checked by harness-integrity links; visual assets remain local."
+    },
+    {
+      "path": "studio-ui-design/README.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve exact selected design text and empty history directory placeholders so plan references resolve in committed snapshots. No product or executable documentation contract changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary plan support files checked by harness-integrity links; visual assets remain local."
+    },
+    {
+      "path": "completed/studio-ui-assistant/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve exact selected design text and empty history directory placeholders so plan references resolve in committed snapshots. No product or executable documentation contract changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary plan support files checked by harness-integrity links; visual assets remain local."
+    },
+    {
+      "path": "completed/studio-ui-foundation/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve exact selected design text and empty history directory placeholders so plan references resolve in committed snapshots. No product or executable documentation contract changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary plan support files checked by harness-integrity links; visual assets remain local."
+    },
+    {
+      "path": "completed/studio-ui-lists/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve exact selected design text and empty history directory placeholders so plan references resolve in committed snapshots. No product or executable documentation contract changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary plan support files checked by harness-integrity links; visual assets remain local."
+    },
+    {
+      "path": "completed/studio-ui-operations/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve exact selected design text and empty history directory placeholders so plan references resolve in committed snapshots. No product or executable documentation contract changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary plan support files checked by harness-integrity links; visual assets remain local."
+    },
+    {
+      "path": "completed/studio-ui-verification/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve exact selected design text and empty history directory placeholders so plan references resolve in committed snapshots. No product or executable documentation contract changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary plan support files checked by harness-integrity links; visual assets remain local."
+    },
+    {
+      "path": "completed/studio-ui-writing/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve exact selected design text and empty history directory placeholders so plan references resolve in committed snapshots. No product or executable documentation contract changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary plan support files checked by harness-integrity links; visual assets remain local."
     }
   ]
 }

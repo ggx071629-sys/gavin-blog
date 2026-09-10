@@ -3406,7 +3406,15 @@
         "STUDIO-UI-PHASE-4.md",
         "STUDIO-UI-PHASE-5.md",
         "STUDIO-UI-PHASE-6.md",
-        "completed/studio-ui-foundation/U1-01.md"
+        "completed/studio-ui-foundation/U1-01.md",
+        "studio-ui-design/design-qa.md",
+        "studio-ui-design/README.md",
+        "completed/studio-ui-assistant/.gitkeep",
+        "completed/studio-ui-foundation/.gitkeep",
+        "completed/studio-ui-lists/.gitkeep",
+        "completed/studio-ui-operations/.gitkeep",
+        "completed/studio-ui-verification/.gitkeep",
+        "completed/studio-ui-writing/.gitkeep"
       ],
       "cases": [
         "M08-DOCS-01"
