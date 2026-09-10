@@ -3741,7 +3741,8 @@
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
         "M01-CARD-GLOW-01",
-        "M11-STUDIO-ABOUT-EDITOR-01"
+        "M11-STUDIO-ABOUT-EDITOR-01",
+        "M11-STUDIO-ABOUT-PREVIEW-01"
       ],
       "dependents": []
     },

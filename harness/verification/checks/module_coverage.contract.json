@@ -14465,6 +14465,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M11-STUDIO-ABOUT-PREVIEW-01",
+          "priority": "P1",
+          "scenario": "关于草稿预览与共用身份资料",
+          "expectations": [
+            {
+              "id": "M11-STUDIO-ABOUT-PREVIEW-01-E01",
+              "surface": "user_visible",
+              "statement": "关于草稿预览与共用身份资料"
+            },
+            {
+              "id": "M11-STUDIO-ABOUT-PREVIEW-01-E02",
+              "surface": "forbidden",
+              "statement": "不得把草稿误示为公开、泄露隐藏资料或发生窄屏横向溢出。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "ap",
+              "gate": "e2e",
+              "covers": [
+                "M11-STUDIO-ABOUT-PREVIEW-01-E01",
+                "M11-STUDIO-ABOUT-PREVIEW-01-E02"
+              ]
+            }
+          ]
         }
       ]
     }
