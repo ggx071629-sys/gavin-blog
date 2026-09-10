@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **6 active**, **0 frozen**.
+Open specifications: **5 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -15,7 +15,6 @@ Open specifications: **6 active**, **0 frozen**.
 | spec-20260908-article-design-v2 | active | L1 | 对齐工程设计稿的文章列表与正文阅读视觉 | task:20260908-article-design-v2 | — | [active/20260908-article-design-v2.md](active/20260908-article-design-v2.md) |
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页恢复笔记、领域和文章之间的知识路线 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
-| spec-20260910-studio-api-static | active | L1 | 补齐列表查询的类型和格式静态检查 | task:20260910-studio-api-static | — | [active/20260910-studio-api-static.md](active/20260910-studio-api-static.md) |
 | spec-20260910-studio-final-flows | active | L1 | 写作台真实管理闭环及共享边界最终回归 | task:20260910-studio-final-flows | — | [active/20260910-studio-final-flows.md](active/20260910-studio-final-flows.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
@@ -152,6 +151,7 @@ Open specifications: **6 active**, **0 frozen**.
 | archive-20260910-studio-about-editor | compressed | L2 | 关于页开放内容分区与真实保存发布状态 | task:20260910-studio-about-editor | — | [archive/20260910-studio-about-editor.md](archive/20260910-studio-about-editor.md) |
 | archive-20260910-studio-about-history | compressed | L2 | 关于页开放版本列表、真实差异和确认回滚 | task:20260910-studio-about-history | — | [archive/20260910-studio-about-history.md](archive/20260910-studio-about-history.md) |
 | archive-20260910-studio-about-preview | compressed | L2 | 关于草稿预览与共用身份资料 | task:20260910-studio-about-preview | — | [archive/20260910-studio-about-preview.md](archive/20260910-studio-about-preview.md) |
+| archive-20260910-studio-api-static | compressed | L2 | 补齐列表查询的类型和格式静态检查 | task:20260910-studio-api-static | — | [archive/20260910-studio-api-static.md](archive/20260910-studio-api-static.md) |
 | archive-20260910-studio-article-editor | compressed | L2 | 文章新建编辑对齐设置分区并明确保存与发布确认 | task:20260910-studio-article-editor | — | [archive/20260910-studio-article-editor.md](archive/20260910-studio-article-editor.md) |
 | archive-20260910-studio-article-list | compressed | L2 | 文章列表接通真实查询并对齐开放行设计 | task:20260910-studio-article-list | — | [archive/20260910-studio-article-list.md](archive/20260910-studio-article-list.md) |
 | archive-20260910-studio-article-preview | compressed | L2 | 文章草稿预览接入 Studio 阅读工作副本与返回编辑导航 | task:20260910-studio-article-preview | — | [archive/20260910-studio-article-preview.md](archive/20260910-studio-article-preview.md) |
