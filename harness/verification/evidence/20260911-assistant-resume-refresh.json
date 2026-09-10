@@ -1,0 +1,522 @@
+{
+  "schema_version": 2,
+  "task_id": "20260911-assistant-resume-refresh",
+  "created_at": "2026-09-10T18:14:31.082295+00:00",
+  "command": "python -m tools.harness verify 20260911-assistant-resume-refresh",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "5d15d262ab1ceaacd1756c347862db451e6cb2f4",
+    "active_spec_sha256": "bafafaae867ab14ea0f6b29e5899bbba3d51646cd2880c5ff703118513dc16fe",
+    "verification_contract_sha256": "728dea92e1a693ab606b9a75fe00abea447806097e0cdcb15c7d1bd44a81d5f0",
+    "gate_config_sha256": "611c3082a372a9bd258e9895fd4b745809afb086d85f8a4d7465fa5c112e7649",
+    "documentation_contract_sha256": "81ba1cb97500e58b3a24ec544dc32e2228f834dbadab503b2aa7891b35248ae9",
+    "documentation_targets_sha256": "41d306febfabdb7edbedcac569eaed19e68273d0d818f1afe3d7d540130fcaab",
+    "module_contract_sha256": "4cacf392b50f4d7c4aa4dcef5ec40f1b14fab2d34342afb0fe1d1e50c2679432"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录可信域配置、HTTP操作及有界重试。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "75cd6f4007c2eb75862ded67edc3afddd9a5e9a5",
+    "target_blobs": {
+      "apps/api/README.md": "c0dc8a7539276cfe44d7f398b192b0c1744a3eb9"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "182503c3067a727d969b0e1acfc1033a13b68e99",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260911-assistant-resume-refresh.json",
+      "sha256": "28c6b28c1789763ed7010dc235959563e1ea101646684deb698ae894bcff24fc",
+      "selected_cases": [
+        "M06-RESUME-REFRESH-API-01",
+        "M06-RESUME-REFRESH-RETRY-01",
+        "M06-RESUME-REFRESH-WORKER-01"
+      ],
+      "selected_refs": 6,
+      "excluded_cases": 293
+    },
+    "receipt": {
+      "run_id": "bd427d3d1dd24829bdf187b72ba4fab1",
+      "identity": "e2709d6b58c11c5083874a647af0acf81c65939bee7a778c4369b5cfd53696b7",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1450.909,
+      "plan_inputs": 973.201,
+      "execute_cleanup_and_input_recheck": 14799.827
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "4cacf392b50f4d7c4aa4dcef5ec40f1b14fab2d34342afb0fe1d1e50c2679432",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-RESUME-REFRESH-API-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Atomic Profile binding/queue, authenticated read-only status and fenced/coalesced/cooled refresh.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-REFRESH-API-01-E01",
+                "surface": "response",
+                "statement": "Atomic Profile binding/queue, authenticated read-only status and fenced/coalesced/cooled refresh."
+              },
+              {
+                "id": "M06-RESUME-REFRESH-API-01-E02",
+                "surface": "forbidden",
+                "statement": "GET cannot trigger import, late work cannot revive old content, and attempts cannot continue indefinitely."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_refresh_api_auth_epoch_coalescing_cooldown_and_atomicity",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-API-01-E01",
+                  "M06-RESUME-REFRESH-API-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_profile.py",
+                "kind": "pytest",
+                "name": "test_update_and_public_reflects_changes",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-API-01-E01",
+                  "M06-RESUME-REFRESH-API-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-RESUME-REFRESH-WORKER-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Worker imports outside write locks, drops replaced work, reuses unchanged PDFs and has no timer.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-REFRESH-WORKER-01-E01",
+                "surface": "response",
+                "statement": "Worker imports outside write locks, drops replaced work, reuses unchanged PDFs and has no timer."
+              },
+              {
+                "id": "M06-RESUME-REFRESH-WORKER-01-E02",
+                "surface": "forbidden",
+                "statement": "GET cannot trigger import, late work cannot revive old content, and attempts cannot continue indefinitely."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_worker_import_manual_reuse_no_timer_and_replacement_during_download",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-WORKER-01-E01",
+                  "M06-RESUME-REFRESH-WORKER-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_worker_bootstraps_existing_url_and_parse_failure_keeps_evidence_paused",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-WORKER-01-E01",
+                  "M06-RESUME-REFRESH-WORKER-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_index.py",
+                "kind": "pytest",
+                "name": "test_worker_rebuild_retriever_and_staleness",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-WORKER-01-E01",
+                  "M06-RESUME-REFRESH-WORKER-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-RESUME-REFRESH-RETRY-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Transient retry pauses evidence, obeys Retry-After and stops after four total attempts including abandoned claims.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-REFRESH-RETRY-01-E01",
+                "surface": "response",
+                "statement": "Transient retry pauses evidence, obeys Retry-After and stops after four total attempts including abandoned claims."
+              },
+              {
+                "id": "M06-RESUME-REFRESH-RETRY-01-E02",
+                "surface": "forbidden",
+                "statement": "GET cannot trigger import, late work cannot revive old content, and attempts cannot continue indefinitely."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_retry_backoff_pause_and_restart_are_bounded",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-RETRY-01-E01",
+                  "M06-RESUME-REFRESH-RETRY-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 3.968,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "178 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 210.237,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 78.296,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.493,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "983 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 426.876,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "300 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 92.053,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 296 cases, 593 expectations, 982 exact test references; contract sha256 4cacf392b50f"
+      ],
+      "status": "passed",
+      "duration_ms": 537.102,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.145,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.422,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 87.792,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "duration_ms": 1978.137,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "bd427d3d1dd24829bdf187b72ba4fab1",
+        "attempt_id": "7a70c59edafe481e2402030021fee386"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-assistant-resume-refresh --gate api-tests",
+      "status": "passed",
+      "duration_ms": 10407.119,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1229,
+        "selection_counts": {
+          "collected": 6,
+          "executed": 6
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "name": "test_resume_refresh_api_auth_epoch_coalescing_cooldown_and_atomicity"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_profile.py",
+                "name": "test_update_and_public_reflects_changes"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "name": "test_resume_retry_backoff_pause_and_restart_are_bounded"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "name": "test_resume_worker_import_manual_reuse_no_timer_and_replacement_during_download"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "name": "test_resume_worker_bootstraps_existing_url_and_parse_failure_keeps_evidence_paused"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_worker_rebuild_retriever_and_staleness"
+              }
+            ],
+            "duration_ms": 10014.662,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\46cfcc2183ce96dd38b1dab98370a972b7ae9c0040dbe9cd731aacc997bb65cf\\artifacts\\bd427d3d1dd24829bdf187b72ba4fab1\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "bd427d3d1dd24829bdf187b72ba4fab1",
+        "attempt_id": "c988b12c393af4da030b1a38bbae5737"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2064.202,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 15897.842,
+    "failures": []
+  },
+  "source_commit": "182503c3067a727d969b0e1acfc1033a13b68e99"
+}

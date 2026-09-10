@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260911-assistant-resume-refresh",
+  "created_at": "2026-09-10T18:14:33.315073+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "5073de43582994f78c2420c1a3a3798f45e17f6c7934922bbcb2833a3c6b4150"
+}
