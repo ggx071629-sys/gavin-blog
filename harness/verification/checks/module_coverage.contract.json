@@ -3984,6 +3984,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M05-STUDIO-MEDIA-01",
+          "priority": "P1",
+          "scenario": "媒体库类型筛选真实查询与资源操作",
+          "expectations": [
+            {
+              "id": "M05-STUDIO-MEDIA-01-E01",
+              "surface": "user_visible",
+              "statement": "媒体库类型筛选真实查询与资源操作"
+            },
+            {
+              "id": "M05-STUDIO-MEDIA-01-E02",
+              "surface": "forbidden",
+              "statement": "未提交筛选不能混入另一类型；读/批量失败不伪造空库或成功，编辑内容不得被筛选丢弃。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "kind": "playwright",
+              "name": "md",
+              "gate": "e2e",
+              "covers": [
+                "M05-STUDIO-MEDIA-01-E01",
+                "M05-STUDIO-MEDIA-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

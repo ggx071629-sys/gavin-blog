@@ -2062,7 +2062,8 @@
         "M02-STUDIO-SHELL-01",
         "M02-DESK-LAYOUT-01",
         "M02-DESK-REVISIONS-01",
-        "M06-STUDIO-PROFILE-01"
+        "M06-STUDIO-PROFILE-01",
+        "M05-STUDIO-MEDIA-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2384,7 +2385,8 @@
         "M03-STUDIO-BOOK-EDITOR-01",
         "M04-STUDIO-PROJECT-EDITOR-01",
         "M02-STUDIO-PREVIEW-01",
-        "M02-STUDIO-REVISIONS-01"
+        "M02-STUDIO-REVISIONS-01",
+        "M05-STUDIO-MEDIA-01"
       ],
       "dependents": [
         "M04.books_web",
@@ -2490,7 +2492,8 @@
         "M02-DESK-REVISIONS-01",
         "M04-STUDIO-PROJECTS-01",
         "M02-STUDIO-WORKSPACE-01",
-        "M04-STUDIO-PROJECT-EDITOR-01"
+        "M04-STUDIO-PROJECT-EDITOR-01",
+        "M05-STUDIO-MEDIA-01"
       ],
       "dependents": []
     },
@@ -2523,7 +2526,8 @@
         "M02-DESK-REVISIONS-01",
         "M04-STUDIO-BOOKS-01",
         "M02-STUDIO-WORKSPACE-01",
-        "M03-STUDIO-BOOK-EDITOR-01"
+        "M03-STUDIO-BOOK-EDITOR-01",
+        "M05-STUDIO-MEDIA-01"
       ],
       "dependents": []
     },
@@ -2547,7 +2551,8 @@
         "M02-STUDIO-SHELL-01",
         "M02-DESK-LAYOUT-01",
         "M02-DESK-REVISIONS-01",
-        "M02-STUDIO-WORKSPACE-01"
+        "M02-STUDIO-WORKSPACE-01",
+        "M05-STUDIO-MEDIA-01"
       ],
       "dependents": [
         "M02.editing",
@@ -3597,7 +3602,8 @@
         "M10-OPS-UI-01",
         "M07-P1-01",
         "M10-MANAGEMENT-UI-01",
-        "M03-STUDIO-TAXONOMY-01"
+        "M03-STUDIO-TAXONOMY-01",
+        "M05-STUDIO-MEDIA-01"
       ],
       "dependents": [
         "M06.profile_web",
