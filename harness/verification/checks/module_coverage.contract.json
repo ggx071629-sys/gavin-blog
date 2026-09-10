@@ -15893,6 +15893,48 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M11-ASSISTANT-PROJECTION-01",
+          "priority": "P1",
+          "scenario": "主动发布的当前关于修订可投影，seed和草稿排除；新迁移保留四类来源数据并扩展about约束。",
+          "expectations": [
+            {
+              "id": "M11-ASSISTANT-PROJECTION-01-E01",
+              "surface": "response",
+              "statement": "发布正文包含结构字段且版本绑定当前主动修订；旧库四类任务及个人资料保持。"
+            },
+            {
+              "id": "M11-ASSISTANT-PROJECTION-01-E02",
+              "surface": "forbidden",
+              "statement": "seed、草稿和无发布指针不可投影；非法来源类型入库失败。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_about_projection.py",
+              "kind": "pytest",
+              "name": "test_about_projection_excludes_seed_and_draft_and_preserves_published_structure",
+              "gate": "api-tests",
+              "covers": [
+                "M11-ASSISTANT-PROJECTION-01-E01",
+                "M11-ASSISTANT-PROJECTION-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_about_projection.py",
+              "kind": "pytest",
+              "name": "test_about_migration_preserves_existing_sources_and_qualifies_only_explicit_revisions",
+              "gate": "api-tests",
+              "covers": [
+                "M11-ASSISTANT-PROJECTION-01-E01",
+                "M11-ASSISTANT-PROJECTION-01-E02"
+              ]
+            }
+          ]
         }
       ]
     }

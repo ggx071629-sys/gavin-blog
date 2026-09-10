@@ -1382,7 +1382,8 @@
         "M09-E5-QUERY-01",
         "M10-E5-LOCAL-01",
         "M10-SYNC-PRIORITY-01",
-        "M10-TOTAL-BUDGET-01"
+        "M10-TOTAL-BUDGET-01",
+        "M11-ASSISTANT-PROJECTION-01"
       ],
       "dependents": [
         "M01.articles",
@@ -1796,7 +1797,8 @@
         "M06-ACCOUNT-PASSWORD-01",
         "M06-ACCOUNT-SESSION-01",
         "M06-ACCOUNT-CONTRACT-01",
-        "M06-ACCOUNT-COMPAT-01"
+        "M06-ACCOUNT-COMPAT-01",
+        "M11-ASSISTANT-PROJECTION-01"
       ],
       "dependents": [
         "M01.articles",
@@ -3846,7 +3848,9 @@
         "apps/api/app/routes/admin_about.py",
         "apps/api/app/routes/public_about.py",
         "apps/api/tests/test_about_page.py",
-        "apps/api/migrations/versions/20260907_0024_about_page_editor.py"
+        "apps/api/migrations/versions/20260907_0024_about_page_editor.py",
+        "apps/api/tests/test_assistant_about_projection.py",
+        "apps/api/migrations/versions/20260911_0029_assistant_about.py"
       ],
       "cases": [
         "M11-MIGRATION-01",
@@ -3854,9 +3858,17 @@
         "M11-WORKING-COPY-01",
         "M11-PUBLISH-01",
         "M11-HISTORY-01",
-        "M11-CARD-LIMIT-01"
+        "M11-CARD-LIMIT-01",
+        "M11-ASSISTANT-PROJECTION-01"
       ],
-      "dependents": []
+      "dependents": [
+        "M10.index"
+      ],
+      "dependency_reasons": {
+        "M10.index": [
+          "assistant_index.projector.project_about consumes about_page_service.parse_content and singleton ID."
+        ]
+      }
     },
     "M11.web": {
       "paths": [
