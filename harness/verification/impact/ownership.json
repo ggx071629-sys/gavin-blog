@@ -3109,7 +3109,8 @@
         "M01-PUBLIC-SURFACES-01",
         "M07-P1-01",
         "M08-IMPACT-RUNNERS-01",
-        "M09-UI-ORB-MOTION-01"
+        "M09-UI-ORB-MOTION-01",
+        "M07-STUDIO-THEME-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3645,6 +3646,90 @@
         "M01-CARD-GLOW-01"
       ],
       "dependents": []
+    },
+    "M07.studio_theme": {
+      "paths": [
+        "apps/web/assets/css/studio.css",
+        "apps/web/components/StudioIcon.vue",
+        "apps/web/tests/e2e/studio-foundation.spec.ts",
+        "apps/web/public/studio/README.md",
+        "apps/web/public/studio/icons/alert-circle-filled.svg",
+        "apps/web/public/studio/icons/alert-circle.svg",
+        "apps/web/public/studio/icons/arrow-left.svg",
+        "apps/web/public/studio/icons/book.svg",
+        "apps/web/public/studio/icons/check.svg",
+        "apps/web/public/studio/icons/chevron-right.svg",
+        "apps/web/public/studio/icons/dots.svg",
+        "apps/web/public/studio/icons/external-link.svg",
+        "apps/web/public/studio/icons/file-description.svg",
+        "apps/web/public/studio/icons/folder.svg",
+        "apps/web/public/studio/icons/info-circle.svg",
+        "apps/web/public/studio/icons/LICENSE",
+        "apps/web/public/studio/icons/LICENSE-lucide",
+        "apps/web/public/studio/icons/message-circle-filled.svg",
+        "apps/web/public/studio/icons/message-circle.svg",
+        "apps/web/public/studio/icons/message-dots.svg",
+        "apps/web/public/studio/icons/moon.svg",
+        "apps/web/public/studio/icons/photo.svg",
+        "apps/web/public/studio/icons/plus.svg",
+        "apps/web/public/studio/icons/refresh.svg",
+        "apps/web/public/studio/icons/search.svg",
+        "apps/web/public/studio/icons/send.svg",
+        "apps/web/public/studio/icons/settings.svg",
+        "apps/web/public/studio/icons/sun.svg",
+        "apps/web/public/studio/icons/tag.svg",
+        "apps/web/public/studio/icons/trash.svg",
+        "apps/web/public/studio/icons/user-square.svg",
+        "apps/web/public/studio/icons/x.svg"
+      ],
+      "cases": [
+        "M07-STUDIO-THEME-01",
+        "M07-UNIT-TYPOGRAPHY-01"
+      ],
+      "dependents": [
+        "M02.admin_shell",
+        "M02.editing",
+        "M03.taxonomy_web",
+        "M04.books_web",
+        "M04.projects_web",
+        "M05.content_web",
+        "M05.media_web",
+        "M06.auth_web",
+        "M06.profile_web",
+        "M10.operations_web"
+      ],
+      "dependency_reasons": {
+        "M02.admin_shell": [
+          "Admin roots inherit scoped studio tokens; review typography and color only."
+        ],
+        "M02.editing": [
+          "Admin roots inherit scoped studio tokens; review typography and color only."
+        ],
+        "M03.taxonomy_web": [
+          "Admin roots inherit scoped studio tokens; review typography and color only."
+        ],
+        "M04.books_web": [
+          "Admin roots inherit scoped studio tokens; review typography and color only."
+        ],
+        "M04.projects_web": [
+          "Admin roots inherit scoped studio tokens; review typography and color only."
+        ],
+        "M05.content_web": [
+          "Admin roots inherit scoped studio tokens; review typography and color only."
+        ],
+        "M05.media_web": [
+          "Admin roots inherit scoped studio tokens; review typography and color only."
+        ],
+        "M06.auth_web": [
+          "Admin roots inherit scoped studio tokens; review typography and color only."
+        ],
+        "M06.profile_web": [
+          "Admin roots inherit scoped studio tokens; review typography and color only."
+        ],
+        "M10.operations_web": [
+          "Admin roots inherit scoped studio tokens; review typography and color only."
+        ]
+      }
     }
   }
 }

@@ -4990,6 +4990,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M07-STUDIO-THEME-01",
+          "priority": "P1",
+          "scenario": "Studio login, authenticated shell and real rollback dialog use independent blue themes without changing public colors.",
+          "expectations": [
+            {
+              "id": "M07-STUDIO-THEME-01-E01",
+              "surface": "user_visible",
+              "statement": "Light and dark studio roots and teleported dialog have the selected canvas, text, primary and local font stack."
+            },
+            {
+              "id": "M07-STUDIO-THEME-01-E02",
+              "surface": "forbidden",
+              "statement": "Public root colors must not change or inherit studio tokens; no external image or font requests."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/studio-foundation.spec.ts",
+              "name": "studio themes stay local across login shell and teleported dialog",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-THEME-01-E01",
+                "M07-STUDIO-THEME-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
