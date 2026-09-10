@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **6 active**, **0 frozen**.
+Open specifications: **5 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -15,7 +15,6 @@ Open specifications: **6 active**, **0 frozen**.
 | spec-20260908-article-design-v2 | active | L1 | 对齐工程设计稿的文章列表与正文阅读视觉 | task:20260908-article-design-v2 | — | [active/20260908-article-design-v2.md](active/20260908-article-design-v2.md) |
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页恢复笔记、领域和文章之间的知识路线 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
-| spec-20260910-studio-suite-compat | active | L1 | 整套浏览器联跑的真实数据与现行页面定位对齐 | task:20260910-studio-suite-compat | — | [active/20260910-studio-suite-compat.md](active/20260910-studio-suite-compat.md) |
 | spec-20260910-studio-suite-state | active | L1 | 收敛全套联跑的媒体空态、旧定位和动画时序前置 | task:20260910-studio-suite-state | — | [active/20260910-studio-suite-state.md](active/20260910-studio-suite-state.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
@@ -178,6 +177,7 @@ Open specifications: **6 active**, **0 frozen**.
 | archive-20260910-studio-regression-guards | compressed | L2 | 修正整体验收暴露的旧源码断言与无用助手变量 | task:20260910-studio-regression-guards | — | [archive/20260910-studio-regression-guards.md](archive/20260910-studio-regression-guards.md) |
 | archive-20260910-studio-responsive | compressed | L2 | 二十页双主题响应式与键盘失败状态验收 | task:20260910-studio-responsive | — | [archive/20260910-studio-responsive.md](archive/20260910-studio-responsive.md) |
 | archive-20260910-studio-shell | compressed | L2 | 对齐第二版写作台侧栏移动导航品牌及页头 | task:20260910-studio-shell | — | [archive/20260910-studio-shell.md](archive/20260910-studio-shell.md) |
+| archive-20260910-studio-suite-compat | compressed | L2 | 整套浏览器联跑的真实数据与现行页面定位对齐 | task:20260910-studio-suite-compat | — | [archive/20260910-studio-suite-compat.md](archive/20260910-studio-suite-compat.md) |
 | archive-20260910-studio-suite-management | compressed | L2 | 后台联跑的保存发布、名片夹具与主题等待修复 | task:20260910-studio-suite-management | — | [archive/20260910-studio-suite-management.md](archive/20260910-studio-suite-management.md) |
 | archive-20260910-studio-taxonomy | compressed | L2 | 栏目标签开放列表、编辑与关联约束提示 | task:20260910-studio-taxonomy | — | [archive/20260910-studio-taxonomy.md](archive/20260910-studio-taxonomy.md) |
 | archive-20260910-studio-theme | compressed | L2 | 为第二版写作台建立独立双主题和本地图标基础 | task:20260910-studio-theme | — | [archive/20260910-studio-theme.md](archive/20260910-studio-theme.md) |

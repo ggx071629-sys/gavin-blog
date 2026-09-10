@@ -2157,7 +2157,8 @@
         "M09-UI-ORB-MOTION-01",
         "M10-PUBLIC-AVAILABILITY-01",
         "M02-DESK-LAYOUT-01",
-        "M07-STUDIO-SUITE-01"
+        "M07-STUDIO-SUITE-01",
+        "M07-STUDIO-SUITE-STATE-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2453,7 +2454,8 @@
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
-        "M01-CARD-GLOW-01"
+        "M01-CARD-GLOW-01",
+        "M07-STUDIO-SUITE-STATE-01"
       ],
       "dependents": []
     },
@@ -2709,7 +2711,8 @@
         "M06-STUDIO-LOGIN-01",
         "M06-STUDIO-LOGIN-ERROR-01",
         "M07-STUDIO-THEME-01",
-        "M07-STUDIO-PRODUCTION-01"
+        "M07-STUDIO-PRODUCTION-01",
+        "M07-STUDIO-SUITE-STATE-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3525,7 +3528,10 @@
         "harness/specs/archive/20260910-studio-suite-management.md",
         "harness/verification/evidence/20260910-studio-suite-management.json",
         "harness/evolution/events/20260910-studio-suite-management--spec-completed.json",
-        "harness/verification/impact/20260910-studio-suite-management.json"
+        "harness/verification/impact/20260910-studio-suite-management.json",
+        "harness/specs/archive/20260910-studio-suite-compat.md",
+        "harness/verification/evidence/20260910-studio-suite-compat.json",
+        "harness/evolution/events/20260910-studio-suite-compat--spec-completed.json"
       ],
       "cases": [
         "M08-DOCS-01"
@@ -3645,7 +3651,8 @@
         "M05-STUDIO-CONTENT-01",
         "M05-STUDIO-OPERATIONS-LAYOUT-01",
         "M05-STUDIO-OPERATIONS-STATES-01",
-        "M07-STUDIO-SUITE-MANAGEMENT-01"
+        "M07-STUDIO-SUITE-MANAGEMENT-01",
+        "M07-STUDIO-SUITE-STATE-01"
       ],
       "dependents": [
         "M06.profile_web",

@@ -6274,6 +6274,118 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M07-STUDIO-SUITE-STATE-01",
+          "priority": "P1",
+          "scenario": "全套共享数据、动态几何与现行结构的联跑回归。",
+          "expectations": [
+            {
+              "id": "M07-STUDIO-SUITE-STATE-01-E01",
+              "surface": "user_visible",
+              "statement": "媒体分页、恢复、助手状态和响应式导航结构保持正确。"
+            },
+            {
+              "id": "M07-STUDIO-SUITE-STATE-01-E02",
+              "surface": "forbidden",
+              "statement": "不得因共享样例、动画中间帧或旧选择器制造错误结果。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "kind": "playwright",
+              "name": "ops content",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-STATE-01-E01",
+                "M07-STUDIO-SUITE-STATE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "kind": "playwright",
+              "name": "ops assistant",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-STATE-01-E01",
+                "M07-STUDIO-SUITE-STATE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "kind": "playwright",
+              "name": "md",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-STATE-01-E01",
+                "M07-STUDIO-SUITE-STATE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+              "kind": "playwright",
+              "name": "pointer spotlight follows public cards and clears across input and route changes",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-STATE-01-E01",
+                "M07-STUDIO-SUITE-STATE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/search-theme.spec.ts",
+              "kind": "playwright",
+              "name": "1024 keeps desktop search content with mobile chrome, 1280 uses desktop nav",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-STATE-01-E01",
+                "M07-STUDIO-SUITE-STATE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/studio-operations.spec.ts",
+              "kind": "playwright",
+              "name": "o2",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-STATE-01-E01",
+                "M07-STUDIO-SUITE-STATE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+              "kind": "playwright",
+              "name": "desktop homepage and article list share the dark canonical structure",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-STATE-01-E01",
+                "M07-STUDIO-SUITE-STATE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+              "kind": "playwright",
+              "name": "mobile article list stacks card content with date, title and reading time",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-STATE-01-E01",
+                "M07-STUDIO-SUITE-STATE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+              "kind": "playwright",
+              "name": "shared admin foundations keep all destinations reachable in short viewports",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-STATE-01-E01",
+                "M07-STUDIO-SUITE-STATE-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
