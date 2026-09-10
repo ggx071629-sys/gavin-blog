@@ -7,7 +7,8 @@
       "owner": "M02.editing",
       "reason": "版本页开放列表、当前与选中快照区分、加载错误恢复、真实比较与响应式读取。",
       "cases": [
-        "M02-STUDIO-REVISIONS-01"
+        "M02-STUDIO-REVISIONS-01",
+        "M02-DESK-REVISIONS-01"
       ],
       "dependencies": [
         {
