@@ -2490,7 +2490,7 @@
             {
               "path": "apps/web/tests/e2e/studio-lists.spec.ts",
               "kind": "playwright",
-              "name": "article list query and actions",
+              "name": "articles",
               "gate": "e2e",
               "covers": [
                 "M02-STUDIO-LIST-01-E01",
