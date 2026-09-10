@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **6 active**, **0 frozen**.
+Open specifications: **5 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -15,7 +15,6 @@ Open specifications: **6 active**, **0 frozen**.
 | spec-20260908-article-design-v2 | active | L1 | 对齐工程设计稿的文章列表与正文阅读视觉 | task:20260908-article-design-v2 | — | [active/20260908-article-design-v2.md](active/20260908-article-design-v2.md) |
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页恢复笔记、领域和文章之间的知识路线 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
-| spec-20260911-assistant-resume-admin-ui | active | L1 | Q3-05 简历同步状态与立即刷新管理界面 | task:20260911-assistant-resume-admin-ui | — | [active/20260911-assistant-resume-admin-ui.md](active/20260911-assistant-resume-admin-ui.md) |
 | spec-20260911-assistant-resume-source | active | L1 | 以可信 PDF 链接和显式刷新为问答助手提供可撤销版本化简历证据 | task:20260911-assistant-resume-source | — | [active/20260911-assistant-resume-source.md](active/20260911-assistant-resume-source.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
@@ -192,6 +191,7 @@ Open specifications: **6 active**, **0 frozen**.
 | archive-20260911-assistant-about-retrieval | compressed | L2 | Q2-03 将关于页加入初次重建与有界混合检索 | task:20260911-assistant-about-retrieval | — | [archive/20260911-assistant-about-retrieval.md](archive/20260911-assistant-about-retrieval.md) |
 | archive-20260911-assistant-about-source | compressed | L2 | 将管理员主动发布的关于页纳入现有问答检索和引用 | task:20260911-assistant-about-source | — | [archive/20260911-assistant-about-source.md](archive/20260911-assistant-about-source.md) |
 | archive-20260911-assistant-about-sync | compressed | L2 | Q2-02 关于页发布回滚原子触发索引并撤销旧版本资格 | task:20260911-assistant-about-sync | — | [archive/20260911-assistant-about-sync.md](archive/20260911-assistant-about-sync.md) |
+| archive-20260911-assistant-resume-admin-ui | compressed | L2 | Q3-05 简历同步状态与立即刷新管理界面 | task:20260911-assistant-resume-admin-ui | — | [archive/20260911-assistant-resume-admin-ui.md](archive/20260911-assistant-resume-admin-ui.md) |
 | archive-20260911-assistant-resume-download | compressed | L2 | Q3-01 以可信域名和固定公网连接有界下载简历 PDF | task:20260911-assistant-resume-download | — | [archive/20260911-assistant-resume-download.md](archive/20260911-assistant-resume-download.md) |
 | archive-20260911-assistant-resume-parse | compressed | L2 | Q3-02 在资源受限子进程中提取文本 PDF 简历 | task:20260911-assistant-resume-parse | — | [archive/20260911-assistant-resume-parse.md](archive/20260911-assistant-resume-parse.md) |
 | archive-20260911-assistant-resume-refresh | compressed | L2 | Q3-04 首次换址自动导入和显式简历刷新 | task:20260911-assistant-resume-refresh | — | [archive/20260911-assistant-resume-refresh.md](archive/20260911-assistant-resume-refresh.md) |
