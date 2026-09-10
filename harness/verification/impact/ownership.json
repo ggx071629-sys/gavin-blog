@@ -1194,7 +1194,8 @@
         "M09-REVALIDATION-CLI-01",
         "M10-ADMIN-TRIAL-01",
         "M10-TOTAL-BUDGET-01",
-        "M10-PUBLIC-AVAILABILITY-01"
+        "M10-PUBLIC-AVAILABILITY-01",
+        "M11-ASSISTANT-SYNC-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1327,7 +1328,8 @@
         "M10-PUBLIC-AVAILABILITY-01",
         "M10-ADMIN-TRIAL-01",
         "M10-TOTAL-BUDGET-01",
-        "M10-SYNC-PRIORITY-01"
+        "M10-SYNC-PRIORITY-01",
+        "M11-ASSISTANT-SYNC-01"
       ],
       "dependents": [
         "M06.runtime_config",
@@ -1383,7 +1385,8 @@
         "M10-E5-LOCAL-01",
         "M10-SYNC-PRIORITY-01",
         "M10-TOTAL-BUDGET-01",
-        "M11-ASSISTANT-PROJECTION-01"
+        "M11-ASSISTANT-PROJECTION-01",
+        "M11-ASSISTANT-SYNC-01"
       ],
       "dependents": [
         "M01.articles",
@@ -2948,7 +2951,8 @@
         "M10-STUDIO-OVERVIEW-01",
         "M10-STUDIO-TRIAL-01",
         "M10-STUDIO-DIALOGS-01",
-        "M10-STUDIO-STATES-01"
+        "M10-STUDIO-STATES-01",
+        "M11-ASSISTANT-SYNC-01"
       ],
       "dependents": []
     },
@@ -3144,7 +3148,8 @@
       ],
       "cases": [
         "M06-PROFILE-SKILLS-01",
-        "M02-STUDIO-QUERY-01"
+        "M02-STUDIO-QUERY-01",
+        "M11-ASSISTANT-SYNC-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -3405,7 +3410,8 @@
         "M10-TOTAL-BUDGET-01",
         "M10-SYNC-PRIORITY-01",
         "M02-STUDIO-QUERY-01",
-        "M06-ACCOUNT-CONTRACT-01"
+        "M06-ACCOUNT-CONTRACT-01",
+        "M11-ASSISTANT-SYNC-01"
       ],
       "dependents": [
         "M06.web_types",
@@ -3850,7 +3856,8 @@
         "apps/api/tests/test_about_page.py",
         "apps/api/migrations/versions/20260907_0024_about_page_editor.py",
         "apps/api/tests/test_assistant_about_projection.py",
-        "apps/api/migrations/versions/20260911_0029_assistant_about.py"
+        "apps/api/migrations/versions/20260911_0029_assistant_about.py",
+        "apps/api/tests/test_assistant_about_sync.py"
       ],
       "cases": [
         "M11-MIGRATION-01",
@@ -3859,7 +3866,8 @@
         "M11-PUBLISH-01",
         "M11-HISTORY-01",
         "M11-CARD-LIMIT-01",
-        "M11-ASSISTANT-PROJECTION-01"
+        "M11-ASSISTANT-PROJECTION-01",
+        "M11-ASSISTANT-SYNC-01"
       ],
       "dependents": [
         "M10.index"

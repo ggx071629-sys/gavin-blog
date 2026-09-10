@@ -15935,6 +15935,48 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M11-ASSISTANT-SYNC-01",
+          "priority": "P1",
+          "scenario": "关于页主动发布/回滚原子排队并立即改变来源版本资格。",
+          "expectations": [
+            {
+              "id": "M11-ASSISTANT-SYNC-01-E01",
+              "surface": "response",
+              "statement": "发布回滚合并最新about任务，管理schema和OpenAPI接受about。"
+            },
+            {
+              "id": "M11-ASSISTANT-SYNC-01-E02",
+              "surface": "forbidden",
+              "statement": "草稿不排队；入队失败无修订泄漏；旧来源fence拒绝。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_about_sync.py",
+              "kind": "pytest",
+              "name": "test_about_publish_rollback_outbox_and_source_fence",
+              "gate": "api-tests",
+              "covers": [
+                "M11-ASSISTANT-SYNC-01-E01",
+                "M11-ASSISTANT-SYNC-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_about_sync.py",
+              "kind": "pytest",
+              "name": "test_about_failed_enqueue_rolls_back_publish_transaction",
+              "gate": "api-tests",
+              "covers": [
+                "M11-ASSISTANT-SYNC-01-E01",
+                "M11-ASSISTANT-SYNC-01-E02"
+              ]
+            }
+          ]
         }
       ]
     }
