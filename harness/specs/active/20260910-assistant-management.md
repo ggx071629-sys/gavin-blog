@@ -43,6 +43,8 @@ state_history:
 
 # Verification plan
 
+另执行 API Ruff、Mypy 与 Web 类型检查；当前 Harness 普通任务只接受已登记 exact test refs 的 gate 集合，静态工具检查单独记录。
+
 ## Verification cases
 
 - AC-1 => M10-MANAGEMENT-UI-01
@@ -50,13 +52,11 @@ state_history:
 - AC-3 => M10-ADMIN-TRIAL-01
 - AC-4 => M10-TOTAL-BUDGET-01
 - AC-5 => M10-SYNC-PRIORITY-01
-- AC-6 => M10-MANAGEMENT-UI-01, M10-ADMIN-TRIAL-01
+- AC-6 => M10-MANAGEMENT-UI-01, M10-ADMIN-TRIAL-01, M08-DOCS-01
 
 ## Gates
 
 - web-quality => AC-1, AC-2, AC-6
 - e2e => AC-1, AC-2, AC-3, AC-6
 - api-tests => AC-2, AC-3, AC-4, AC-5, AC-6
-- api-lint => AC-3, AC-4, AC-5
-- api-typecheck => AC-3, AC-4, AC-5
 - harness-integrity => AC-6

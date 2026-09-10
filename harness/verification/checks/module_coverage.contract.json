@@ -12801,6 +12801,425 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M10-MANAGEMENT-UI-01",
+          "priority": "P1",
+          "scenario": "Real overview, trial, maintenance, budget dialog and responsive themes use API facts; stale data is visible and citations stay collapsed.",
+          "expectations": [
+            {
+              "id": "M10-MANAGEMENT-UI-01-ALLOW",
+              "surface": "response",
+              "statement": "Real overview, trial, maintenance, budget dialog and responsive themes use API facts; stale data is visible and citations stay collapsed."
+            },
+            {
+              "id": "M10-MANAGEMENT-UI-01-DENY",
+              "surface": "forbidden",
+              "statement": "No anonymous access to admin trials, overspending from duplicate reservations, stale open status, invented fees or unvalidated citation paths."
+            }
+          ],
+          "required_gates": [
+            "e2e",
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+              "name": "management real trial budget public switch and responsive maintenance",
+              "gate": "e2e",
+              "config": "apps/web/playwright.assistant.config.ts",
+              "project": "chromium",
+              "covers": [
+                "M10-MANAGEMENT-UI-01-ALLOW",
+                "M10-MANAGEMENT-UI-01-DENY"
+              ],
+              "title_path": [
+                "management real trial budget public switch and responsive maintenance"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "name": "ops assistant",
+              "gate": "e2e",
+              "config": "apps/web/playwright.config.ts",
+              "project": "chromium",
+              "covers": [
+                "M10-MANAGEMENT-UI-01-ALLOW",
+                "M10-MANAGEMENT-UI-01-DENY"
+              ],
+              "title_path": [
+                "ops assistant"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-management.test.ts",
+              "name": "uses exact decimal micro currency and rejects ambiguous values",
+              "gate": "web-quality",
+              "covers": [
+                "M10-MANAGEMENT-UI-01-ALLOW",
+                "M10-MANAGEMENT-UI-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-management.test.ts",
+              "name": "closes trial citations over safe public sources and bounded excerpts",
+              "gate": "web-quality",
+              "covers": [
+                "M10-MANAGEMENT-UI-01-ALLOW",
+                "M10-MANAGEMENT-UI-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-admin.test.ts",
+              "name": "keeps polling visibility-bound and renders errors as text",
+              "gate": "web-quality",
+              "covers": [
+                "M10-MANAGEMENT-UI-01-ALLOW",
+                "M10-MANAGEMENT-UI-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-PUBLIC-AVAILABILITY-01",
+          "priority": "P1",
+          "scenario": "Public switch fences admission and a passive no-store projection hides the entry; stale or budget-blocked state is not shown as available.",
+          "expectations": [
+            {
+              "id": "M10-PUBLIC-AVAILABILITY-01-ALLOW",
+              "surface": "response",
+              "statement": "Public switch fences admission and a passive no-store projection hides the entry; stale or budget-blocked state is not shown as available."
+            },
+            {
+              "id": "M10-PUBLIC-AVAILABILITY-01-DENY",
+              "surface": "forbidden",
+              "statement": "No anonymous access to admin trials, overspending from duplicate reservations, stale open status, invented fees or unvalidated citation paths."
+            }
+          ],
+          "required_gates": [
+            "api-tests",
+            "e2e",
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_management.py",
+              "name": "test_sync_is_bounded_and_public_availability_is_passive",
+              "gate": "api-tests",
+              "covers": [
+                "M10-PUBLIC-AVAILABILITY-01-ALLOW",
+                "M10-PUBLIC-AVAILABILITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_admin.py",
+              "name": "test_safety_disable_beats_stale_version_and_blocks_new_sessions",
+              "gate": "api-tests",
+              "covers": [
+                "M10-PUBLIC-AVAILABILITY-01-ALLOW",
+                "M10-PUBLIC-AVAILABILITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-management.test.ts",
+              "name": "never reports stale or budget blocked service as open",
+              "gate": "web-quality",
+              "covers": [
+                "M10-PUBLIC-AVAILABILITY-01-ALLOW",
+                "M10-PUBLIC-AVAILABILITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+              "name": "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay",
+              "gate": "e2e",
+              "config": "apps/web/playwright.assistant.config.ts",
+              "project": "chromium",
+              "covers": [
+                "M10-PUBLIC-AVAILABILITY-01-ALLOW",
+                "M10-PUBLIC-AVAILABILITY-01-DENY"
+              ],
+              "title_path": [
+                "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+              "name": "admin kill switch is explicit and prevents a later anonymous admission",
+              "gate": "e2e",
+              "config": "apps/web/playwright.assistant.config.ts",
+              "project": "chromium",
+              "covers": [
+                "M10-PUBLIC-AVAILABILITY-01-ALLOW",
+                "M10-PUBLIC-AVAILABILITY-01-DENY"
+              ],
+              "title_path": [
+                "admin kill switch is explicit and prevents a later anonymous admission"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-ADMIN-TRIAL-01",
+          "priority": "P1",
+          "scenario": "Authenticated CSRF-bound admin trial remains usable with public off; shared execution fences, expiry, deletion and global stop prevent late delivery.",
+          "expectations": [
+            {
+              "id": "M10-ADMIN-TRIAL-01-ALLOW",
+              "surface": "response",
+              "statement": "Authenticated CSRF-bound admin trial remains usable with public off; shared execution fences, expiry, deletion and global stop prevent late delivery."
+            },
+            {
+              "id": "M10-ADMIN-TRIAL-01-DENY",
+              "surface": "forbidden",
+              "statement": "No anonymous access to admin trials, overspending from duplicate reservations, stale open status, invented fees or unvalidated citation paths."
+            }
+          ],
+          "required_gates": [
+            "api-tests",
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+              "name": "management real trial budget public switch and responsive maintenance",
+              "gate": "e2e",
+              "config": "apps/web/playwright.assistant.config.ts",
+              "project": "chromium",
+              "covers": [
+                "M10-ADMIN-TRIAL-01-ALLOW",
+                "M10-ADMIN-TRIAL-01-DENY"
+              ],
+              "title_path": [
+                "management real trial budget public switch and responsive maintenance"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_management.py",
+              "name": "test_admin_trial_closed_public_isolated_authenticated_and_emergency_stopped",
+              "gate": "api-tests",
+              "covers": [
+                "M10-ADMIN-TRIAL-01-ALLOW",
+                "M10-ADMIN-TRIAL-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+              "name": "test_late_provider_completion_after_delete_has_no_body_checkpoint_or_delivery",
+              "gate": "api-tests",
+              "covers": [
+                "M10-ADMIN-TRIAL-01-ALLOW",
+                "M10-ADMIN-TRIAL-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+              "name": "test_normal_mutation_permit_requires_exact_lease_scope_keys",
+              "gate": "api-tests",
+              "covers": [
+                "M10-ADMIN-TRIAL-01-ALLOW",
+                "M10-ADMIN-TRIAL-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_expiry_serialization.py",
+              "name": "test_expiry_waits_for_saver_and_fences_old_identity",
+              "gate": "api-tests",
+              "covers": [
+                "M10-ADMIN-TRIAL-01-ALLOW",
+                "M10-ADMIN-TRIAL-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_online.py",
+              "name": "test_question_happy_path_and_idempotent_replay",
+              "gate": "api-tests",
+              "covers": [
+                "M10-ADMIN-TRIAL-01-ALLOW",
+                "M10-ADMIN-TRIAL-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_admin.py",
+              "name": "test_rebuild_request_is_durable_and_finalize_leaves_gate_disabled",
+              "gate": "api-tests",
+              "covers": [
+                "M10-ADMIN-TRIAL-01-ALLOW",
+                "M10-ADMIN-TRIAL-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-TOTAL-BUDGET-01",
+          "priority": "P1",
+          "scenario": "Shared atomic reservations serialize competing scopes; versioned edits, deployment caps, exact settlement and restored-day lock preserve spending authority.",
+          "expectations": [
+            {
+              "id": "M10-TOTAL-BUDGET-01-ALLOW",
+              "surface": "response",
+              "statement": "Shared atomic reservations serialize competing scopes; versioned edits, deployment caps, exact settlement and restored-day lock preserve spending authority."
+            },
+            {
+              "id": "M10-TOTAL-BUDGET-01-DENY",
+              "surface": "forbidden",
+              "statement": "No anonymous access to admin trials, overspending from duplicate reservations, stale open status, invented fees or unvalidated citation paths."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_management.py",
+              "name": "test_atomic_shared_budget_question_priority_and_monotonic_settlement",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TOTAL-BUDGET-01-ALLOW",
+                "M10-TOTAL-BUDGET-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_management.py",
+              "name": "test_budget_edit_conflict_zero_and_deployment_ceiling",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TOTAL-BUDGET-01-ALLOW",
+                "M10-TOTAL-BUDGET-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_backup_restore.py",
+              "name": "test_restore_uses_fresh_paths_migrates_checks_fts_and_locks_online_budget",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TOTAL-BUDGET-01-ALLOW",
+                "M10-TOTAL-BUDGET-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_online.py",
+              "name": "test_content_migration_adds_index_ledger",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TOTAL-BUDGET-01-ALLOW",
+                "M10-TOTAL-BUDGET-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "name": "test_local_chat_probe_preconditions_and_allowlisted_result",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TOTAL-BUDGET-01-ALLOW",
+                "M10-TOTAL-BUDGET-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_provider_qualification.py",
+              "name": "test_local_chat_probe_reuses_budget_and_rejects_drift",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TOTAL-BUDGET-01-ALLOW",
+                "M10-TOTAL-BUDGET-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_backup_restore.py",
+              "name": "test_restore_previous_schema_creates_shared_budget_and_keeps_restore_lock",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TOTAL-BUDGET-01-ALLOW",
+                "M10-TOTAL-BUDGET-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-SYNC-PRIORITY-01",
+          "priority": "P1",
+          "scenario": "Index batches defer for question headroom while deletion and withdrawal remain independent of paid budget; task views identify current public revisions.",
+          "expectations": [
+            {
+              "id": "M10-SYNC-PRIORITY-01-ALLOW",
+              "surface": "response",
+              "statement": "Index batches defer for question headroom while deletion and withdrawal remain independent of paid budget; task views identify current public revisions."
+            },
+            {
+              "id": "M10-SYNC-PRIORITY-01-DENY",
+              "surface": "forbidden",
+              "statement": "No anonymous access to admin trials, overspending from duplicate reservations, stale open status, invented fees or unvalidated citation paths."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_management.py",
+              "name": "test_index_budget_defers_paid_batch_but_deletion_still_completes",
+              "gate": "api-tests",
+              "covers": [
+                "M10-SYNC-PRIORITY-01-ALLOW",
+                "M10-SYNC-PRIORITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_management.py",
+              "name": "test_sync_is_bounded_and_public_availability_is_passive",
+              "gate": "api-tests",
+              "covers": [
+                "M10-SYNC-PRIORITY-01-ALLOW",
+                "M10-SYNC-PRIORITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_index.py",
+              "name": "test_outbox_records_lifecycle_in_the_same_transaction",
+              "gate": "api-tests",
+              "covers": [
+                "M10-SYNC-PRIORITY-01-ALLOW",
+                "M10-SYNC-PRIORITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_index.py",
+              "name": "test_worker_rebuild_retriever_and_staleness",
+              "gate": "api-tests",
+              "covers": [
+                "M10-SYNC-PRIORITY-01-ALLOW",
+                "M10-SYNC-PRIORITY-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
