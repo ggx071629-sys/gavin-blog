@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "task_id": "20260910-account-management",
-  "created_at": "2026-09-10T15:35:07.771727+00:00",
+  "created_at": "2026-09-10T16:34:44.037645+00:00",
   "command": "python -m tools.harness verify 20260910-account-management",
   "status": "passed",
   "acceptance_criteria": [
@@ -9,7 +9,8 @@
     "AC-2",
     "AC-3",
     "AC-4",
-    "AC-5"
+    "AC-5",
+    "AC-6"
   ],
   "criteria_results": [
     {
@@ -51,17 +52,26 @@
         "api-tests",
         "harness-integrity"
       ]
+    },
+    {
+      "id": "AC-6",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "web-quality",
+        "harness-integrity"
+      ]
     }
   ],
   "verification_profile": "focused",
   "fingerprints": {
-    "source_tree": "a7f99c29a04877fd740841e857d16fd2550c73e7",
-    "active_spec_sha256": "ed3d95e0e03fe1009d091d4d7414ae32e52b1f773174c425074d75b9d6ce2a91",
-    "verification_contract_sha256": "6eaad47f9977d29f8d5da5cadafd1e979c30e14519f7fb18edbbff715bba03f9",
-    "gate_config_sha256": "f19a5c75710f5783f57e45925f25471f53012396fed66ef2442d5ae1b761c212",
-    "documentation_contract_sha256": "918569ff08619c95b50fa7728f5c61da099e1e63153184747eabb08546fa5d5c",
-    "documentation_targets_sha256": "03d1de2fc46f785ec9389f55611b7556d4436b2f1024bf13c94a9dbe23a081fe",
-    "module_contract_sha256": "963c695922e90f058071f02c6e347170048a7d1f8a3564a76c1c2738b8275211"
+    "source_tree": "a12b6d44acd761565db62aeb2d06d9bb5da394f5",
+    "active_spec_sha256": "3a120f12c1839647620bfc9b126c2ffee944d93c4cf9a64e81b4332b4316dbeb",
+    "verification_contract_sha256": "e7e98430f6144ba1a4b1c5dbcd648f6912458be8ea24ab33dccc89501ffb2b17",
+    "gate_config_sha256": "2d7f14a4a471877aef144777f9ce484206430ba79754c7dafaa27dd614329156",
+    "documentation_contract_sha256": "89b2314f7bf5657453dc7e622bf1727715e6afba6efae6b985d4e9fa2a904e1b",
+    "documentation_targets_sha256": "6118ff826b7886cbd42ca85bb33a9295cec49592dae510bb48203229a9a39367",
+    "module_contract_sha256": "6e019e676b6eb409ed23170f6cfa75690efa447a37a5674e5218d604215b08ea"
   },
   "documentation": {
     "impact": "required",
@@ -70,46 +80,66 @@
       "ACCOUNT-MANAGEMENT-DESIGN.md",
       "apps/api/README.md",
       "packages/contracts/README.md",
-      "harness/docs/decisions/20260910-account-management.md"
+      "harness/docs/decisions/20260910-account-management.md",
+      "apps/web/ACCOUNT-MANAGEMENT.md"
     ],
     "baseline_commit": "609067c6290f2338c499b8c4755020f02a7ffac8",
     "target_blobs": {
-      "ACCOUNT-MANAGEMENT-DESIGN.md": "4858ae3ec2ff434218d6355a804db54095da31b3",
+      "ACCOUNT-MANAGEMENT-DESIGN.md": "be8220d4a3704767b91a1e9b127efc53213a6e9e",
       "apps/api/README.md": "745a4c0dc9d40d73e6025692e066380bf3086022",
       "packages/contracts/README.md": "19afdea7094532285796a30777c69ebe6779da6a",
-      "harness/docs/decisions/20260910-account-management.md": "367cdeaf809cca6a7e6bc3c047eff5426c269af2"
+      "harness/docs/decisions/20260910-account-management.md": "54ff433b923421be6857954d7024f1d709ef2ab7",
+      "apps/web/ACCOUNT-MANAGEMENT.md": "c722ddc4f7d409535c5ff55901580db9c3877904"
     }
   },
   "execution": {
     "mode": "git-worktree",
-    "source_commit": "ccdb4443455fd179be066e835c212917d42b3aa2",
+    "source_commit": "7d7b2d658b17e69c5ccd4a17e247cb03ae6d15f8",
     "cleanup_status": "passed",
-    "reused_paths": 1,
+    "reused_paths": 3,
     "impact": {
       "plan": "harness/verification/impact/20260910-account-management.json",
-      "sha256": "33c53b46a67f46ecf03ba9e27ef7486bc3859a7ea60ed8847e6bcd8dfec18d4b",
+      "sha256": "20a843f9718cdabd23293258f6d490e1e2aa07274e856401ef373a38bbe166cd",
       "selected_cases": [
         "M06-ACCOUNT-CLI-01",
         "M06-ACCOUNT-CODE-01",
         "M06-ACCOUNT-COMPAT-01",
         "M06-ACCOUNT-CONTRACT-01",
         "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-FEEDBACK-01",
+        "M06-ACCOUNT-FLOW-01",
         "M06-ACCOUNT-PASSWORD-01",
         "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-UI-01",
         "M06-P0-01",
+        "M06-UNIT-ADMIN-01",
         "M06-UNIT-ENVIRONMENT-ISOLATION-01",
         "M06-UNIT-MIGRATIONS-01",
         "M06-UNIT-RUNTIME-SAFETY-01"
       ],
-      "selected_refs": 35,
-      "excluded_cases": 267
+      "selected_refs": 50,
+      "excluded_cases": 266
     },
     "receipt": {
-      "run_id": "34eb3ac24829d4fa414cc6fa528732b7",
-      "identity": "454220eee5dee955f6bab78b79ffa8e10ca389f93de25558fff77bc297835440",
+      "run_id": "6a227786829d588d24bed0d30ddb7865",
+      "identity": "0790feb6ab081e7cf6bfff7421377f934904e83b71225d374e2a071c3535adc7",
       "plan": [
         {
           "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "web-quality",
           "action": "execute",
           "state": "fresh-required",
           "reason": "reuse disabled; execute selected scope",
@@ -125,15 +155,15 @@
       ]
     },
     "phase_durations_ms": {
-      "preflight_checks": 1414.672,
-      "plan_inputs": 1446.761,
-      "execute_cleanup_and_input_recheck": 34645.974
+      "preflight_checks": 1272.881,
+      "plan_inputs": 1426.967,
+      "execute_cleanup_and_input_recheck": 271625.146
     }
   },
   "verification_cases": {
     "schema_version": 1,
     "contract_id": "gavin-module-coverage-v1",
-    "contract_sha256": "963c695922e90f058071f02c6e347170048a7d1f8a3564a76c1c2738b8275211",
+    "contract_sha256": "6e019e676b6eb409ed23170f6cfa75690efa447a37a5674e5218d604215b08ea",
     "criteria": [
       {
         "criterion": "AC-1",
@@ -870,6 +900,290 @@
             ]
           }
         ]
+      },
+      {
+        "criterion": "AC-6",
+        "selected_gates": [
+          "e2e",
+          "web-quality",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-ACCOUNT-UI-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P0",
+            "scenario": "Account navigation, password/recovery forms, real session revocation and responsive accessible feedback.",
+            "expectations": [
+              {
+                "id": "M06-ACCOUNT-UI-01-E01",
+                "surface": "user_visible",
+                "statement": "Account navigation, password/recovery forms, real session revocation and responsive accessible feedback."
+              },
+              {
+                "id": "M06-ACCOUNT-UI-01-E02",
+                "surface": "forbidden",
+                "statement": "No false success for delivery or failed revocation; no overflow, raw backend errors or unauthenticated continuation."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "kind": "playwright",
+                "name": "account information and navigation",
+                "gate": "e2e",
+                "covers": [
+                  "M06-ACCOUNT-UI-01-E01",
+                  "M06-ACCOUNT-UI-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "kind": "playwright",
+                "name": "password form verifies errors confirmation and success",
+                "gate": "e2e",
+                "covers": [
+                  "M06-ACCOUNT-UI-01-E01",
+                  "M06-ACCOUNT-UI-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "kind": "playwright",
+                "name": "recovery entry csrf and reset feedback",
+                "gate": "e2e",
+                "covers": [
+                  "M06-ACCOUNT-UI-01-E01",
+                  "M06-ACCOUNT-UI-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "kind": "playwright",
+                "name": "sessions revoke selected others and current with real API",
+                "gate": "e2e",
+                "covers": [
+                  "M06-ACCOUNT-UI-01-E01",
+                  "M06-ACCOUNT-UI-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "kind": "playwright",
+                "name": "account pages themes responsive keyboard and failure states",
+                "gate": "e2e",
+                "covers": [
+                  "M06-ACCOUNT-UI-01-E01",
+                  "M06-ACCOUNT-UI-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-ACCOUNT-FLOW-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P0",
+            "scenario": "Real HTTP password change and recovery update persistent credentials and revoke existing sessions.",
+            "expectations": [
+              {
+                "id": "M06-ACCOUNT-FLOW-01-E01",
+                "surface": "user_visible",
+                "statement": "Real HTTP password change and recovery update persistent credentials and revoke existing sessions."
+              },
+              {
+                "id": "M06-ACCOUNT-FLOW-01-E02",
+                "surface": "forbidden",
+                "statement": "Wrong factors must fail; previous sessions cannot remain authenticated; test fixture never loads real mail secrets."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/account-flow.spec.ts",
+                "kind": "playwright",
+                "name": "real HTTP password change recovery and revocation",
+                "gate": "e2e",
+                "covers": [
+                  "M06-ACCOUNT-FLOW-01-E01",
+                  "M06-ACCOUNT-FLOW-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-ACCOUNT-FEEDBACK-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P0",
+            "scenario": "Account error mapping honors Retry-After and stable security errors.",
+            "expectations": [
+              {
+                "id": "M06-ACCOUNT-FEEDBACK-01-E01",
+                "surface": "response",
+                "statement": "Account error mapping honors Retry-After and stable security errors."
+              },
+              {
+                "id": "M06-ACCOUNT-FEEDBACK-01-E02",
+                "surface": "forbidden",
+                "statement": "Provider details and invalid retry values cannot leak into UI."
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/unit/account.test.ts",
+                "kind": "vitest",
+                "name": "maps security errors without exposing backend details",
+                "gate": "web-quality",
+                "covers": [
+                  "M06-ACCOUNT-FEEDBACK-01-E01",
+                  "M06-ACCOUNT-FEEDBACK-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/unit/account.test.ts",
+                "kind": "vitest",
+                "name": "honors server retry seconds and rejects invalid values",
+                "gate": "web-quality",
+                "covers": [
+                  "M06-ACCOUNT-FEEDBACK-01-E01",
+                  "M06-ACCOUNT-FEEDBACK-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-UNIT-ADMIN-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "M06.auth_web: admin scenarios at the existing module boundary.",
+            "expectations": [
+              {
+                "id": "M06-UNIT-ADMIN-01-E01",
+                "surface": "response",
+                "statement": "keeps every existing admin destination in the core navigation; keeps raw Tailwind palette classes out of admin and shared component templates; prevents substring compatibility selectors and duplicate admin status tokens; keeps admin-core as the only protected admin shell; keeps SSR theme colors synchronized with the canvas tokens; keeps one accent per theme with accessible signal contrast"
+              },
+              {
+                "id": "M06-UNIT-ADMIN-01-E02",
+                "surface": "forbidden",
+                "statement": "marks nested editor routes active without matching similar prefixes"
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps every existing admin destination in the core navigation",
+                "gate": "web-quality",
+                "covers": [
+                  "M06-UNIT-ADMIN-01-E01",
+                  "M06-UNIT-ADMIN-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "marks nested editor routes active without matching similar prefixes",
+                "gate": "web-quality",
+                "covers": [
+                  "M06-UNIT-ADMIN-01-E01",
+                  "M06-UNIT-ADMIN-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps raw Tailwind palette classes out of admin and shared component templates",
+                "gate": "web-quality",
+                "covers": [
+                  "M06-UNIT-ADMIN-01-E01",
+                  "M06-UNIT-ADMIN-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "prevents substring compatibility selectors and duplicate admin status tokens",
+                "gate": "web-quality",
+                "covers": [
+                  "M06-UNIT-ADMIN-01-E01",
+                  "M06-UNIT-ADMIN-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps admin-core as the only protected admin shell",
+                "gate": "web-quality",
+                "covers": [
+                  "M06-UNIT-ADMIN-01-E01",
+                  "M06-UNIT-ADMIN-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps SSR theme colors synchronized with the canvas tokens",
+                "gate": "web-quality",
+                "covers": [
+                  "M06-UNIT-ADMIN-01-E01",
+                  "M06-UNIT-ADMIN-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps one accent per theme with accessible signal contrast",
+                "gate": "web-quality",
+                "covers": [
+                  "M06-UNIT-ADMIN-01-E01",
+                  "M06-UNIT-ADMIN-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -880,7 +1194,7 @@
         "1 subsumption contracts bind 7 registered child gates"
       ],
       "status": "passed",
-      "duration_ms": 5.778,
+      "duration_ms": 4.059,
       "provenance": {
         "scope": "workspace"
       }
@@ -891,7 +1205,7 @@
         "169 deterministic closes retain archive, evidence, event, and active-spec history"
       ],
       "status": "passed",
-      "duration_ms": 283.814,
+      "duration_ms": 197.534,
       "provenance": {
         "scope": "workspace"
       }
@@ -902,7 +1216,7 @@
         "9 generated indexes are current"
       ],
       "status": "passed",
-      "duration_ms": 79.814,
+      "duration_ms": 73.426,
       "provenance": {
         "scope": "workspace"
       }
@@ -913,7 +1227,7 @@
         "AGENTS.md is the unique L0 and stays within 60-80 lines"
       ],
       "status": "passed",
-      "duration_ms": 2.015,
+      "duration_ms": 0.61,
       "provenance": {
         "scope": "workspace"
       }
@@ -921,10 +1235,10 @@
     {
       "name": "links",
       "details": [
-        "884 local Markdown links resolve without durable active-spec references"
+        "881 local Markdown links resolve without durable active-spec references"
       ],
       "status": "passed",
-      "duration_ms": 408.49,
+      "duration_ms": 384.04,
       "provenance": {
         "scope": "workspace"
       }
@@ -935,7 +1249,7 @@
         "289 routed Markdown documents have valid metadata"
       ],
       "status": "passed",
-      "duration_ms": 100.212,
+      "duration_ms": 87.323,
       "provenance": {
         "scope": "workspace"
       }
@@ -943,10 +1257,10 @@
     {
       "name": "module-coverage",
       "details": [
-        "11 modules, 278 cases, 557 expectations, 951 exact test references; contract sha256 963c695922e9"
+        "11 modules, 281 cases, 563 expectations, 959 exact test references; contract sha256 6e019e676b6e"
       ],
       "status": "passed",
-      "duration_ms": 434.328,
+      "duration_ms": 434.378,
       "provenance": {
         "scope": "workspace"
       }
@@ -957,7 +1271,7 @@
         "configured qualification manifests have valid historical bindings"
       ],
       "status": "passed",
-      "duration_ms": 4.412,
+      "duration_ms": 3.034,
       "provenance": {
         "scope": "workspace"
       }
@@ -968,7 +1282,7 @@
         "28 required paths exist"
       ],
       "status": "passed",
-      "duration_ms": 10.735,
+      "duration_ms": 8.425,
       "provenance": {
         "scope": "workspace"
       }
@@ -979,7 +1293,7 @@
         "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
       ],
       "status": "passed",
-      "duration_ms": 82.24,
+      "duration_ms": 77.367,
       "provenance": {
         "scope": "workspace"
       }
@@ -994,16 +1308,17 @@
         "AC-2",
         "AC-3",
         "AC-4",
-        "AC-5"
+        "AC-5",
+        "AC-6"
       ],
-      "duration_ms": 1982.597,
+      "duration_ms": 1850.217,
       "details": [],
       "provenance": {
         "mode": "executed",
         "phase": "snapshot",
         "scope": "committed-snapshot",
-        "run_id": "34eb3ac24829d4fa414cc6fa528732b7",
-        "attempt_id": "9696bcbda54243e39bb3a42c13a2d13c"
+        "run_id": "6a227786829d588d24bed0d30ddb7865",
+        "attempt_id": "a22931ecadaa83e89681a29fdaed9caf"
       },
       "result": {
         "exit_code": 0
@@ -1014,7 +1329,7 @@
       "kind": "product",
       "command": "{api_python} -m harness.tools.selected_tests --task 20260910-account-management --gate api-tests",
       "status": "passed",
-      "duration_ms": 30514.747,
+      "duration_ms": 34061.152,
       "covers": [
         "AC-1",
         "AC-2",
@@ -1025,7 +1340,7 @@
       "details": [],
       "result": {
         "exit_code": 0,
-        "output_bytes": 5554,
+        "output_bytes": 5555,
         "selection_counts": {
           "collected": 35,
           "executed": 35
@@ -1248,16 +1563,696 @@
                 "name": "test_sqlite_connections_enforce_foreign_keys"
               }
             ],
-            "duration_ms": 30074.78,
+            "duration_ms": 33654.446,
             "batch_id": "batch-0001"
           }
         ],
-        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\14bc28465dd88a4dfcecbcd45e5be0c7a0ab50829f65b28f6230ef6f1645ec6b\\artifacts\\34eb3ac24829d4fa414cc6fa528732b7\\api-tests\\output.log"
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\bfb973cd95e838fa26508926d0f4c3468d4d4df165c882e43550c1e6fe531d84\\artifacts\\6a227786829d588d24bed0d30ddb7865\\api-tests\\output.log"
       },
       "provenance": {
         "mode": "executed",
-        "run_id": "34eb3ac24829d4fa414cc6fa528732b7",
-        "attempt_id": "0e244c87896db7790acb772cc947d79a"
+        "run_id": "6a227786829d588d24bed0d30ddb7865",
+        "attempt_id": "bdbdf55147bbef32c3e4c5487af117e4"
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-account-management --gate e2e",
+      "status": "passed",
+      "duration_ms": 223120.86,
+      "covers": [
+        "AC-6"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 8075,
+        "selection_counts": {
+          "collected": 6,
+          "executed": 6
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account-flow.spec.ts",
+                "name": "real HTTP password change recovery and revocation"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "account information and navigation"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "password form verifies errors confirmation and success"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "recovery entry csrf and reset feedback"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "sessions revoke selected others and current with real API"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "account pages themes responsive keyboard and failure states"
+              }
+            ],
+            "duration_ms": 4422.886,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account-flow.spec.ts",
+                "name": "real HTTP password change recovery and revocation"
+              }
+            ],
+            "duration_ms": 1413.332
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "account information and navigation"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "password form verifies errors confirmation and success"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "recovery entry csrf and reset feedback"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "sessions revoke selected others and current with real API"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "account pages themes responsive keyboard and failure states"
+              }
+            ],
+            "duration_ms": 1427.132
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account-flow.spec.ts",
+                "name": "real HTTP password change recovery and revocation",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "real HTTP password change recovery and revocation"
+                ]
+              }
+            ],
+            "duration_ms": 1267.802,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account-flow.spec.ts",
+                "name": "real HTTP password change recovery and revocation",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "real HTTP password change recovery and revocation"
+                ]
+              }
+            ],
+            "duration_ms": 47942.867,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "account information and navigation",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "account information and navigation"
+                ]
+              }
+            ],
+            "duration_ms": 1429.873,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "account information and navigation",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "account information and navigation"
+                ]
+              }
+            ],
+            "duration_ms": 30031.997,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "password form verifies errors confirmation and success",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "password form verifies errors confirmation and success"
+                ]
+              }
+            ],
+            "duration_ms": 1429.397,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "password form verifies errors confirmation and success",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "password form verifies errors confirmation and success"
+                ]
+              }
+            ],
+            "duration_ms": 28717.978,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "recovery entry csrf and reset feedback",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "recovery entry csrf and reset feedback"
+                ]
+              }
+            ],
+            "duration_ms": 1438.66,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "recovery entry csrf and reset feedback",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "recovery entry csrf and reset feedback"
+                ]
+              }
+            ],
+            "duration_ms": 25975.731,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "sessions revoke selected others and current with real API",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "sessions revoke selected others and current with real API"
+                ]
+              }
+            ],
+            "duration_ms": 1495.848,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "sessions revoke selected others and current with real API",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "sessions revoke selected others and current with real API"
+                ]
+              }
+            ],
+            "duration_ms": 31207.95,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "account pages themes responsive keyboard and failure states",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "account pages themes responsive keyboard and failure states"
+                ]
+              }
+            ],
+            "duration_ms": 1423.791,
+            "batch_id": "batch-0006"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/account.spec.ts",
+                "name": "account pages themes responsive keyboard and failure states",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "account pages themes responsive keyboard and failure states"
+                ]
+              }
+            ],
+            "duration_ms": 43085.948,
+            "batch_id": "batch-0006"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\bfb973cd95e838fa26508926d0f4c3468d4d4df165c882e43550c1e6fe531d84\\artifacts\\6a227786829d588d24bed0d30ddb7865\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "6a227786829d588d24bed0d30ddb7865",
+        "attempt_id": "41ff61c50bf8fef3f1b1e5f036447f27"
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-account-management --gate web-quality",
+      "status": "passed",
+      "duration_ms": 9998.151,
+      "covers": [
+        "AC-6"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 7006,
+        "selection_counts": {
+          "collected": 9,
+          "executed": 9
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "reused-in-worktree",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/account.test.ts",
+                "name": "maps security errors without exposing backend details"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/account.test.ts",
+                "name": "honors server retry seconds and rejects invalid values"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps every existing admin destination in the core navigation"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "marks nested editor routes active without matching similar prefixes"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps raw Tailwind palette classes out of admin and shared component templates"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "prevents substring compatibility selectors and duplicate admin status tokens"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps admin-core as the only protected admin shell"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps SSR theme colors synchronized with the canvas tokens"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps one accent per theme with accessible signal contrast"
+              }
+            ],
+            "duration_ms": 5.063,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/account.test.ts",
+                "name": "maps security errors without exposing backend details"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/account.test.ts",
+                "name": "honors server retry seconds and rejects invalid values"
+              }
+            ],
+            "duration_ms": 2354.76
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps every existing admin destination in the core navigation"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "marks nested editor routes active without matching similar prefixes"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps raw Tailwind palette classes out of admin and shared component templates"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "prevents substring compatibility selectors and duplicate admin status tokens"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps admin-core as the only protected admin shell"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps SSR theme colors synchronized with the canvas tokens"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps one accent per theme with accessible signal contrast"
+              }
+            ],
+            "duration_ms": 2395.66
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/account.test.ts",
+                "name": "maps security errors without exposing backend details",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "account feedback",
+                  "maps security errors without exposing backend details"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/account.test.ts",
+                "name": "honors server retry seconds and rejects invalid values",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "account feedback",
+                  "honors server retry seconds and rejects invalid values"
+                ]
+              }
+            ],
+            "duration_ms": 2451.506,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps every existing admin destination in the core navigation",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "admin navigation",
+                  "keeps every existing admin destination in the core navigation"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "marks nested editor routes active without matching similar prefixes",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "admin navigation",
+                  "marks nested editor routes active without matching similar prefixes"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps raw Tailwind palette classes out of admin and shared component templates",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "electric editorial hardening guardrails",
+                  "keeps raw Tailwind palette classes out of admin and shared component templates"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "prevents substring compatibility selectors and duplicate admin status tokens",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "electric editorial hardening guardrails",
+                  "prevents substring compatibility selectors and duplicate admin status tokens"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps admin-core as the only protected admin shell",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "electric editorial hardening guardrails",
+                  "keeps admin-core as the only protected admin shell"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps SSR theme colors synchronized with the canvas tokens",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "electric editorial hardening guardrails",
+                  "keeps SSR theme colors synchronized with the canvas tokens"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/admin.test.ts",
+                "name": "keeps one accent per theme with accessible signal contrast",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "electric editorial hardening guardrails",
+                  "keeps one accent per theme with accessible signal contrast"
+                ]
+              }
+            ],
+            "duration_ms": 2356.489,
+            "batch_id": "batch-0002"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\bfb973cd95e838fa26508926d0f4c3468d4d4df165c882e43550c1e6fe531d84\\artifacts\\6a227786829d588d24bed0d30ddb7865\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "6a227786829d588d24bed0d30ddb7865",
+        "attempt_id": "73a299db72d2927eb5fcdbe01ffb574a"
       }
     },
     {
@@ -1265,7 +2260,7 @@
       "kind": "isolation",
       "command": "git worktree add --detach <temporary> HEAD",
       "status": "passed",
-      "duration_ms": 1868.428,
+      "duration_ms": 2261.603,
       "covers": [],
       "details": [
         "temporary worktree and dependency links were removed"
@@ -1277,12 +2272,12 @@
   ],
   "summary": {
     "checks": {
-      "total": 13,
-      "passed": 13,
+      "total": 15,
+      "passed": 15,
       "failed": 0
     },
-    "duration_ms": 35777.61,
+    "duration_ms": 272562.179,
     "failures": []
   },
-  "source_commit": "ccdb4443455fd179be066e835c212917d42b3aa2"
+  "source_commit": "7d7b2d658b17e69c5ccd4a17e247cb03ae6d15f8"
 }
