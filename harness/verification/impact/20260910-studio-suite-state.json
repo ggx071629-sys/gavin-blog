@@ -439,10 +439,10 @@
     {
       "path": "STUDIO-UI-PHASE-6.md",
       "owner": "M08.documentation",
-      "reason": "普通说明、声明式映射及此前确定性归档。",
+      "reason": "更新分轮通过事实、剩余正式证据状态和单次验收授权；普通状态文档，无可执行合同或产品行为变更。",
       "cases": [],
       "dependencies": [],
-      "no_test_reason": "结构和历史检查覆盖普通文档，前次产品验收已独立通过。"
+      "no_test_reason": "由链接、结构及历史完整性检查验证状态引用；不新增产品测试范围。"
     },
     {
       "path": "harness/verification/checks/module_coverage.contract.json",
@@ -529,6 +529,14 @@
       "cases": [],
       "dependencies": [],
       "no_test_reason": "结构和历史检查覆盖普通文档，前次产品验收已独立通过。"
+    },
+    {
+      "path": "STUDIO-UI-PLAN.md",
+      "owner": "M08.documentation",
+      "reason": "最新总计划状态同步及阶段入口说明；普通导航文档，无可执行合同或消费者行为变化。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "链接、结构及归档完整性检查覆盖；直接引用已有验收，不重跑产品测试。"
     }
   ]
 }
