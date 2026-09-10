@@ -13505,6 +13505,70 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-ABOUT-CITATION-01",
+          "priority": "P1",
+          "scenario": "关于页引用在公开与管理消费中可点击，明确自述与冲突处理规则。",
+          "expectations": [
+            {
+              "id": "M09-ABOUT-CITATION-01-E01",
+              "surface": "response",
+              "statement": "关于Gavin引用打开/about；规则接受明确自述并要求冲突引用双方。"
+            },
+            {
+              "id": "M09-ABOUT-CITATION-01-E02",
+              "surface": "forbidden",
+              "statement": "任意外链/虚构alias被拒绝；文章主题不得冒充个人能力。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+              "kind": "playwright",
+              "name": "about citations navigate in public answers and admin trial",
+              "gate": "e2e",
+              "covers": [
+                "M09-ABOUT-CITATION-01-E01",
+                "M09-ABOUT-CITATION-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-ABOUT-FACTS-01",
+          "priority": "P1",
+          "scenario": "关于页引用在公开与管理消费中可点击，明确自述与冲突处理规则。",
+          "expectations": [
+            {
+              "id": "M09-ABOUT-FACTS-01-E01",
+              "surface": "response",
+              "statement": "关于Gavin引用打开/about；规则接受明确自述并要求冲突引用双方。"
+            },
+            {
+              "id": "M09-ABOUT-FACTS-01-E02",
+              "surface": "forbidden",
+              "statement": "任意外链/虚构alias被拒绝；文章主题不得冒充个人能力。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_about_facts.py",
+              "kind": "pytest",
+              "name": "test_about_self_report_prompt_and_bound_citations",
+              "gate": "api-tests",
+              "covers": [
+                "M09-ABOUT-FACTS-01-E01",
+                "M09-ABOUT-FACTS-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
