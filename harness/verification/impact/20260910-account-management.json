@@ -3289,6 +3289,22 @@
       "cases": [],
       "dependencies": [],
       "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-verification/A4-02.md",
+      "owner": "M08.documentation",
+      "reason": "Compact factual acceptance record; no executable contract change.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Historical result and evidence references only, checked structurally."
+    },
+    {
+      "path": "completed/account-verification/A4-04.md",
+      "owner": "M08.documentation",
+      "reason": "Compact factual acceptance record; no executable contract change.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Historical result and evidence references only, checked structurally."
     }
   ]
 }
