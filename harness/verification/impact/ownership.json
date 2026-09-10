@@ -377,7 +377,11 @@
         "harness/evolution/events/20260911-assistant-resume-download--spec-completed.json",
         "harness/specs/archive/20260911-assistant-about-source.md",
         "harness/specs/archive/20260911-assistant-resume-download.md",
-        "harness/verification/evidence/20260911-assistant-resume-refresh.json"
+        "harness/verification/evidence/20260911-assistant-resume-refresh.json",
+        "harness/specs/archive/20260911-assistant-resume-source.md",
+        "harness/verification/evidence/20260911-assistant-resume-source.json",
+        "harness/evolution/events/20260911-assistant-resume-source--spec-completed.json",
+        "harness/specs/active/20260911-assistant-resume-source.md"
       ],
       "cases": [
         "M08-EVIDENCE-01",
@@ -3760,7 +3764,9 @@
         "completed/assistant-upgrade-resume/Q3-01.md",
         "completed/assistant-upgrade-resume/Q3-03.md",
         "completed/assistant-upgrade-about/Q2-05.md",
-        "completed/assistant-upgrade-resume/Q3-02.md"
+        "completed/assistant-upgrade-resume/Q3-02.md",
+        "completed/assistant-upgrade-resume/Q3-07.md",
+        "completed/assistant-upgrade-verification/Q4-01.md"
       ],
       "cases": [
         "M08-DOCS-01"
@@ -4361,6 +4367,19 @@
           "Admin profile mounts resume sync control alongside URL settings."
         ]
       }
+    },
+    "M09.source_integration": {
+      "paths": [
+        "apps/api/tests/test_assistant_source_integration.py"
+      ],
+      "cases": [
+        "M09-SOURCE-INTEGRATION-01",
+        "M09-SOURCE-INTEGRATION-02",
+        "M09-ABOUT-CITATION-01",
+        "M09-RESUME-CITATION-UI-01",
+        "M06-RESUME-ADMIN-UI-01"
+      ],
+      "dependents": []
     }
   }
 }

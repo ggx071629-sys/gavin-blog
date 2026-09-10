@@ -14085,6 +14085,70 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-SOURCE-INTEGRATION-01",
+          "priority": "P1",
+          "scenario": "Admin publication and initial PDF import use the real parser, worker, mixed retrieval and answer graph; both citations and exact PDF bytes survive alongside existing article answers.",
+          "expectations": [
+            {
+              "id": "M09-SOURCE-INTEGRATION-01-E01",
+              "surface": "response",
+              "statement": "Admin publication and initial PDF import use the real parser, worker, mixed retrieval and answer graph; both citations and exact PDF bytes survive alongside existing article answers."
+            },
+            {
+              "id": "M09-SOURCE-INTEGRATION-01-E02",
+              "surface": "forbidden",
+              "statement": "No invented alias, repeated provider call, budget overflow or article regression."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_source_integration.py",
+              "kind": "pytest",
+              "name": "test_two_sources_import_retrieve_answer_and_keep_article_flow",
+              "gate": "api-tests",
+              "covers": [
+                "M09-SOURCE-INTEGRATION-01-E01",
+                "M09-SOURCE-INTEGRATION-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-SOURCE-INTEGRATION-02",
+          "priority": "P1",
+          "scenario": "Manual same-URL replacement changes version; failed download pauses PDF evidence while about yields a cited partial answer; clear deletes cache and about publish invalidates old descriptors.",
+          "expectations": [
+            {
+              "id": "M09-SOURCE-INTEGRATION-02-E01",
+              "surface": "response",
+              "statement": "Manual same-URL replacement changes version; failed download pauses PDF evidence while about yields a cited partial answer; clear deletes cache and about publish invalidates old descriptors."
+            },
+            {
+              "id": "M09-SOURCE-INTEGRATION-02-E02",
+              "surface": "forbidden",
+              "statement": "No old-version download, stale resume citation, uncited personal assertion or stale about descriptor after mutation."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_source_integration.py",
+              "kind": "pytest",
+              "name": "test_two_sources_replace_pause_clear_and_about_publication_gap",
+              "gate": "api-tests",
+              "covers": [
+                "M09-SOURCE-INTEGRATION-02-E01",
+                "M09-SOURCE-INTEGRATION-02-E02"
+              ]
+            }
+          ]
         }
       ]
     },
