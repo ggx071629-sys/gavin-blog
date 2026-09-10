@@ -3529,10 +3529,9 @@
         "harness/verification/evidence/20260910-studio-suite-management.json",
         "harness/evolution/events/20260910-studio-suite-management--spec-completed.json",
         "harness/verification/impact/20260910-studio-suite-management.json",
-        "harness/specs/archive/20260910-studio-suite-compat.md",
         "harness/verification/evidence/20260910-studio-suite-compat.json",
         "harness/evolution/events/20260910-studio-suite-compat--spec-completed.json",
-        "harness/specs/active/20260910-studio-suite-compat.md"
+        "harness/specs/*/20260910-studio-suite-compat.md"
       ],
       "cases": [
         "M08-DOCS-01"
