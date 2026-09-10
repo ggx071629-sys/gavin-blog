@@ -9,7 +9,7 @@ status: active
 verification_profile: focused
 documentation_impact: required
 documentation_targets:
-  - completed/studio-ui-foundation/U1-02.md
+  - apps/web/public/studio/README.md
 documentation_reason: 记录后台主题作用域、资源来源、许可证及验证结论供后续阶段复用。
 state_history:
 ---
@@ -27,7 +27,7 @@ state_history:
 # Verification plan
 ## Verification cases
 - AC-1 => M07-STUDIO-THEME-01
-- AC-2 => M07-STUDIO-THEME-01
+- AC-2 => M07-STUDIO-THEME-01, M07-UNIT-TYPOGRAPHY-01
 ## Gates
 - e2e => AC-1, AC-2
 - web-quality => AC-2
