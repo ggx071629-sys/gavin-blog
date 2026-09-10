@@ -5760,7 +5760,7 @@
             {
               "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
               "kind": "playwright",
-              "name": "coverage",
+              "name": "c",
               "gate": "e2e",
               "covers": [
                 "M07-STUDIO-COVERAGE-01-E01",
