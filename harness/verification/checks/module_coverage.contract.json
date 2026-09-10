@@ -2466,6 +2466,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M02-STUDIO-LIST-01",
+          "priority": "P1",
+          "scenario": "文章列表完整搜索、状态计数、分页、操作和跨尺寸可访问性。",
+          "expectations": [
+            {
+              "id": "M02-STUDIO-LIST-01-E01",
+              "surface": "user_visible",
+              "statement": "关键词与状态对应真实总数，页码复位及分页保持条件，更多入口保留预览、历史及确认删除。"
+            },
+            {
+              "id": "M02-STUDIO-LIST-01-E02",
+              "surface": "forbidden",
+              "statement": "双主题手机不得横溢或有 axe 违规，读取失败不得显示空集。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/studio-lists.spec.ts",
+              "kind": "playwright",
+              "name": "article list query and actions",
+              "gate": "e2e",
+              "covers": [
+                "M02-STUDIO-LIST-01-E01",
+                "M02-STUDIO-LIST-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
