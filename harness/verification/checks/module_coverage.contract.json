@@ -2530,6 +2530,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M02-STUDIO-WORKSPACE-01",
+          "priority": "P1",
+          "scenario": "六个写作入口的工作面、手机上下排列、真实工具栏与预览保持可操作。",
+          "expectations": [
+            {
+              "id": "M02-STUDIO-WORKSPACE-01-E01",
+              "surface": "user_visible",
+              "statement": "六个写作入口的工作面、手机上下排列、真实工具栏与预览保持可操作。"
+            },
+            {
+              "id": "M02-STUDIO-WORKSPACE-01-E02",
+              "surface": "forbidden",
+              "statement": "不得替换真实媒体和保存队列，不得产生横溢、axe 违规或页面错误。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+              "kind": "playwright",
+              "name": "workspace",
+              "gate": "e2e",
+              "covers": [
+                "M02-STUDIO-WORKSPACE-01-E01",
+                "M02-STUDIO-WORKSPACE-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

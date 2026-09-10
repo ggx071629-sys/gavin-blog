@@ -2355,7 +2355,8 @@
         "apps/web/assets/css/writing-desk.css",
         "apps/web/tests/e2e/writing-desk.spec.ts",
         "apps/web/components/StudioContentList.vue",
-        "apps/web/tests/e2e/studio-lists.spec.ts"
+        "apps/web/tests/e2e/studio-lists.spec.ts",
+        "apps/web/tests/e2e/studio-writing.spec.ts"
       ],
       "cases": [
         "M02-DESK-LAYOUT-01",
@@ -2375,7 +2376,8 @@
         "M02-STUDIO-LIST-01",
         "M04-STUDIO-BOOKS-01",
         "M04-STUDIO-PROJECTS-01",
-        "M02-STUDIO-LIST-STATES-01"
+        "M02-STUDIO-LIST-STATES-01",
+        "M02-STUDIO-WORKSPACE-01"
       ],
       "dependents": [
         "M04.books_web",
@@ -2478,7 +2480,8 @@
         "M07-STUDIO-THEME-01",
         "M02-STUDIO-SHELL-01",
         "M02-DESK-REVISIONS-01",
-        "M04-STUDIO-PROJECTS-01"
+        "M04-STUDIO-PROJECTS-01",
+        "M02-STUDIO-WORKSPACE-01"
       ],
       "dependents": []
     },
@@ -2509,7 +2512,8 @@
         "M07-STUDIO-THEME-01",
         "M02-STUDIO-SHELL-01",
         "M02-DESK-REVISIONS-01",
-        "M04-STUDIO-BOOKS-01"
+        "M04-STUDIO-BOOKS-01",
+        "M02-STUDIO-WORKSPACE-01"
       ],
       "dependents": []
     },
@@ -2532,7 +2536,8 @@
         "M07-STUDIO-THEME-01",
         "M02-STUDIO-SHELL-01",
         "M02-DESK-LAYOUT-01",
-        "M02-DESK-REVISIONS-01"
+        "M02-DESK-REVISIONS-01",
+        "M02-STUDIO-WORKSPACE-01"
       ],
       "dependents": [
         "M02.editing",
