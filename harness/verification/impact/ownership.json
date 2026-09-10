@@ -2061,7 +2061,8 @@
         "M07-STUDIO-THEME-01",
         "M02-STUDIO-SHELL-01",
         "M02-DESK-LAYOUT-01",
-        "M02-DESK-REVISIONS-01"
+        "M02-DESK-REVISIONS-01",
+        "M06-STUDIO-PROFILE-01"
       ],
       "dependents": [
         "M01.navigation",

@@ -5078,6 +5078,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M06-STUDIO-PROFILE-01",
+          "priority": "P1",
+          "scenario": "名片分区、排序、可见性与双主题响应式。",
+          "expectations": [
+            {
+              "id": "M06-STUDIO-PROFILE-01-E01",
+              "surface": "user_visible",
+              "statement": "四个分组可达，技能可增删排序，保存与预览真实可用。"
+            },
+            {
+              "id": "M06-STUDIO-PROFILE-01-E02",
+              "surface": "forbidden",
+              "statement": "隐藏城市不得出现在预览，窄屏不得横向溢出。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/profile.spec.ts",
+              "name": "studio profile",
+              "gate": "e2e",
+              "covers": [
+                "M06-STUDIO-PROFILE-01-E01",
+                "M06-STUDIO-PROFILE-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
