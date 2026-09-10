@@ -521,6 +521,14 @@
         }
       ],
       "no_test_reason": "结构和历史检查覆盖普通文档，前次产品验收已独立通过。"
+    },
+    {
+      "path": "harness/specs/active/20260910-studio-suite-compat.md",
+      "owner": "M08.documentation",
+      "reason": "普通说明、声明式映射及此前确定性归档。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "结构和历史检查覆盖普通文档，前次产品验收已独立通过。"
     }
   ]
 }
