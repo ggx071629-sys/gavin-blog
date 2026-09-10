@@ -1426,7 +1426,7 @@
             {
               "kind": "playwright",
               "path": "apps/web/tests/quality/home-atlas.spec.ts",
-              "name": "production homepage records real payloads, first paint and dual theme composition",
+              "name": "q3",
               "gate": "web-quality",
               "covers": [
                 "M01-HOME-VISUAL-01-E01",
@@ -1479,7 +1479,7 @@
             {
               "kind": "playwright",
               "path": "apps/web/tests/quality/home-atlas.spec.ts",
-              "name": "production homepage records real payloads, first paint and dual theme composition",
+              "name": "q3",
               "gate": "web-quality",
               "covers": [
                 "M01-HOME-LIVE-01-E01",
@@ -1565,7 +1565,7 @@
             {
               "kind": "playwright",
               "path": "apps/web/tests/quality/site-quality.spec.ts",
-              "name": "public page families capture light and dark desktop and mobile evidence",
+              "name": "q5",
               "gate": "web-quality",
               "covers": [
                 "M01-PUBLIC-SURFACES-01-E01",
@@ -1834,7 +1834,7 @@
             {
               "path": "apps/web/tests/quality/home-atlas.spec.ts",
               "kind": "playwright",
-              "name": "production homepage records real payloads, first paint and dual theme composition",
+              "name": "q3",
               "gate": "web-quality",
               "covers": [
                 "M01-STUDIO-PRODUCTION-HOME-01-E01",
@@ -5358,7 +5358,7 @@
             {
               "path": "apps/web/tests/quality/site-quality.spec.ts",
               "kind": "playwright",
-              "name": "homepage captures accessible light and dark desktop and mobile evidence",
+              "name": "q4",
               "gate": "web-quality",
               "covers": [
                 "M06-STUDIO-PROFILE-CONTRAST-01-E01",
@@ -5368,7 +5368,7 @@
             {
               "path": "apps/web/tests/quality/site-quality.spec.ts",
               "kind": "playwright",
-              "name": "public page families capture light and dark desktop and mobile evidence",
+              "name": "q5",
               "gate": "web-quality",
               "covers": [
                 "M06-STUDIO-PROFILE-CONTRAST-01-E01",
@@ -5584,7 +5584,7 @@
             {
               "kind": "playwright",
               "path": "apps/web/tests/quality/site-quality.spec.ts",
-              "name": "admin core production pages pass the visual matrix",
+              "name": "q1",
               "gate": "web-quality",
               "covers": [
                 "M07-UNIT-SITE-QUALITY-01-E01",
@@ -5594,7 +5594,7 @@
             {
               "kind": "playwright",
               "path": "apps/web/tests/quality/site-quality.spec.ts",
-              "name": "mobile admin drawer traps focus and skill actions meet touch targets",
+              "name": "q2",
               "gate": "web-quality",
               "covers": [
                 "M07-UNIT-SITE-QUALITY-01-E01",
@@ -5604,7 +5604,7 @@
             {
               "kind": "playwright",
               "path": "apps/web/tests/quality/site-quality.spec.ts",
-              "name": "homepage captures accessible light and dark desktop and mobile evidence",
+              "name": "q4",
               "gate": "web-quality",
               "covers": [
                 "M07-UNIT-SITE-QUALITY-01-E01",
@@ -5614,7 +5614,7 @@
             {
               "kind": "playwright",
               "path": "apps/web/tests/quality/site-quality.spec.ts",
-              "name": "public page families capture light and dark desktop and mobile evidence",
+              "name": "q5",
               "gate": "web-quality",
               "covers": [
                 "M07-UNIT-SITE-QUALITY-01-E01",
@@ -5962,7 +5962,7 @@
             {
               "path": "apps/web/tests/quality/site-quality.spec.ts",
               "kind": "playwright",
-              "name": "admin core production pages pass the visual matrix",
+              "name": "q1",
               "gate": "web-quality",
               "covers": [
                 "M07-STUDIO-PRODUCTION-01-E01",
@@ -5972,7 +5972,7 @@
             {
               "path": "apps/web/tests/quality/site-quality.spec.ts",
               "kind": "playwright",
-              "name": "mobile admin drawer traps focus and skill actions meet touch targets",
+              "name": "q2",
               "gate": "web-quality",
               "covers": [
                 "M07-STUDIO-PRODUCTION-01-E01",
