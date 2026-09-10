@@ -1081,6 +1081,14 @@
       "cases": [],
       "no_test_reason": "历史完整性、结构和链接检查验证该已通过验收组。",
       "dependencies": []
+    },
+    {
+      "path": "STUDIO-UI-PHASE-6.md",
+      "owner": "M08.documentation",
+      "reason": "就地记录当前 U6-03 进度、修复与有界验收组，不改变产品行为。",
+      "cases": [],
+      "no_test_reason": "计划中的事实由任务正式证据和整体状态检查支撑，Markdown 链接结构由 Harness 检查。",
+      "dependencies": []
     }
   ]
 }
