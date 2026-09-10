@@ -2084,14 +2084,17 @@
         "M09-REVALIDATION-COMPAT-01",
         "M09-REVALIDATION-BUDGET-01",
         "M09-REVALIDATION-RECOVERY-01",
-        "M09-REVALIDATION-CLI-01"
+        "M09-REVALIDATION-CLI-01",
+        "M06-RESUME-PARSE-01",
+        "M06-RESUME-PARSE-LIMITS-01"
       ],
       "dependents": [
         "M06.persistence",
         "M06.runtime_config",
         "M09.runtime",
         "M10.index",
-        "M10.capacity"
+        "M10.capacity",
+        "M06.resume_parse"
       ],
       "dependency_reasons": {
         "M06.persistence": [
@@ -2108,6 +2111,9 @@
         ],
         "M10.capacity": [
           "capacity/capacity_roles reuse this unit through explicit development-only measurement CLI; no reverse runtime import."
+        ],
+        "M06.resume_parse": [
+          "PDF worker consumes locked pypdf dependency and downloader byte limit/environment."
         ]
       }
     },
@@ -4150,7 +4156,27 @@
         "M06-RESUME-DOWNLOAD-01",
         "M06-RESUME-DOWNLOAD-LIMITS-01"
       ],
-      "dependents": []
+      "dependents": [
+        "M06.resume_parse"
+      ],
+      "dependency_reasons": {
+        "M06.resume_parse": [
+          "PDF worker consumes locked pypdf dependency and downloader byte limit/environment."
+        ]
+      }
+    },
+    "M06.resume_parse": {
+      "paths": [
+        "apps/api/app/assistant_resume/isolation.py",
+        "apps/api/app/assistant_resume/parse.py",
+        "apps/api/tests/test_assistant_resume_parse.py"
+      ],
+      "cases": [
+        "M06-RESUME-PARSE-01",
+        "M06-RESUME-PARSE-LIMITS-01"
+      ],
+      "dependents": [],
+      "dependency_reasons": {}
     }
   }
 }

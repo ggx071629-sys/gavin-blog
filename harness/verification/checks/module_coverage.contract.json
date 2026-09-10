@@ -5950,6 +5950,80 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M06-RESUME-PARSE-01",
+          "priority": "P1",
+          "scenario": "Text PDF extraction preserves pages and rejects unsupported content.",
+          "expectations": [
+            {
+              "id": "M06-RESUME-PARSE-01-E01",
+              "surface": "response",
+              "statement": "Text PDF extraction preserves pages and rejects unsupported content."
+            },
+            {
+              "id": "M06-RESUME-PARSE-01-E02",
+              "surface": "forbidden",
+              "statement": "Unsupported or unbounded parsing must never yield usable evidence."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_resume_parse.py",
+              "kind": "pytest",
+              "name": "test_pdf_text_pages_and_unsupported_files",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-PARSE-01-E01",
+                "M06-RESUME-PARSE-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-RESUME-PARSE-LIMITS-01",
+          "priority": "P1",
+          "scenario": "Real child process enforces resource and IO boundaries and is reaped on deadline.",
+          "expectations": [
+            {
+              "id": "M06-RESUME-PARSE-LIMITS-01-E01",
+              "surface": "response",
+              "statement": "Real child process enforces resource and IO boundaries and is reaped on deadline."
+            },
+            {
+              "id": "M06-RESUME-PARSE-LIMITS-01-E02",
+              "surface": "forbidden",
+              "statement": "Unsupported or unbounded parsing must never yield usable evidence."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_resume_parse.py",
+              "kind": "pytest",
+              "name": "test_parser_memory_and_io_are_enforced_in_real_process",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-PARSE-LIMITS-01-E01",
+                "M06-RESUME-PARSE-LIMITS-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_resume_parse.py",
+              "kind": "pytest",
+              "name": "test_parser_deadline_and_unavailable_boundary",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-PARSE-LIMITS-01-E01",
+                "M06-RESUME-PARSE-LIMITS-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
