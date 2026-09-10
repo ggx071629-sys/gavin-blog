@@ -176,6 +176,26 @@
       "cases": [],
       "dependencies": [],
       "no_test_reason": "Ordinary task status only; no executable contract."
+    },
+    {
+      "path": "apps/web/pages/admin/assistant.vue",
+      "owner": "M10.operations_web",
+      "reason": "Explicitly associate sync filter label without including option text; retain responsive label/control layout.",
+      "cases": [
+        "M10-STUDIO-STATES-01",
+        "M10-STUDIO-OVERVIEW-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/assets/css/assistant-management.css",
+      "owner": "M10.operations_web",
+      "reason": "Explicitly associate sync filter label without including option text; retain responsive label/control layout.",
+      "cases": [
+        "M10-STUDIO-STATES-01",
+        "M10-STUDIO-OVERVIEW-01"
+      ],
+      "dependencies": []
     }
   ]
 }
