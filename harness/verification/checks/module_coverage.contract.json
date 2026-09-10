@@ -2498,6 +2498,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M02-STUDIO-LIST-STATES-01",
+          "priority": "P1",
+          "scenario": "三类列表真实跨页查询、返回恢复、读取中与失败空集分型及手机焦点验收。",
+          "expectations": [
+            {
+              "id": "M02-STUDIO-LIST-STATES-01-E01",
+              "surface": "user_visible",
+              "statement": "三类列表真实跨页查询、返回恢复、读取中与失败空集分型及手机焦点验收。"
+            },
+            {
+              "id": "M02-STUDIO-LIST-STATES-01-E02",
+              "surface": "forbidden",
+              "statement": "加载和失败不得冒充空集合或显示旧行，弹窗关闭不得遗留滚动锁或丢失触发点焦点。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/studio-lists.spec.ts",
+              "kind": "playwright",
+              "name": "states",
+              "gate": "e2e",
+              "covers": [
+                "M02-STUDIO-LIST-STATES-01-E01",
+                "M02-STUDIO-LIST-STATES-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

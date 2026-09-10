@@ -2374,7 +2374,8 @@
         "M02-STUDIO-SHELL-01",
         "M02-STUDIO-LIST-01",
         "M04-STUDIO-BOOKS-01",
-        "M04-STUDIO-PROJECTS-01"
+        "M04-STUDIO-PROJECTS-01",
+        "M02-STUDIO-LIST-STATES-01"
       ],
       "dependents": [
         "M04.books_web",
