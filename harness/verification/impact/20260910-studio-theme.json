@@ -3705,6 +3705,70 @@
         }
       ],
       "no_test_reason": "Declarative case and ownership registration; existing harness structure checks validate it; no executable harness changes."
+    },
+    {
+      "path": "STUDIO-UI-PLAN.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized six-stage plan and record baseline completion/current task; ordinary Markdown changes no executable contracts or generated Harness metadata.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Plan links and structure checked by harness-integrity; this document does not alter product behavior."
+    },
+    {
+      "path": "STUDIO-UI-PHASE-1.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized six-stage plan and record baseline completion/current task; ordinary Markdown changes no executable contracts or generated Harness metadata.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Plan links and structure checked by harness-integrity; this document does not alter product behavior."
+    },
+    {
+      "path": "STUDIO-UI-PHASE-2.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized six-stage plan and record baseline completion/current task; ordinary Markdown changes no executable contracts or generated Harness metadata.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Plan links and structure checked by harness-integrity; this document does not alter product behavior."
+    },
+    {
+      "path": "STUDIO-UI-PHASE-3.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized six-stage plan and record baseline completion/current task; ordinary Markdown changes no executable contracts or generated Harness metadata.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Plan links and structure checked by harness-integrity; this document does not alter product behavior."
+    },
+    {
+      "path": "STUDIO-UI-PHASE-4.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized six-stage plan and record baseline completion/current task; ordinary Markdown changes no executable contracts or generated Harness metadata.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Plan links and structure checked by harness-integrity; this document does not alter product behavior."
+    },
+    {
+      "path": "STUDIO-UI-PHASE-5.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized six-stage plan and record baseline completion/current task; ordinary Markdown changes no executable contracts or generated Harness metadata.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Plan links and structure checked by harness-integrity; this document does not alter product behavior."
+    },
+    {
+      "path": "STUDIO-UI-PHASE-6.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized six-stage plan and record baseline completion/current task; ordinary Markdown changes no executable contracts or generated Harness metadata.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Plan links and structure checked by harness-integrity; this document does not alter product behavior."
+    },
+    {
+      "path": "completed/studio-ui-foundation/U1-01.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized six-stage plan and record baseline completion/current task; ordinary Markdown changes no executable contracts or generated Harness metadata.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Plan links and structure checked by harness-integrity; this document does not alter product behavior."
     }
   ]
 }

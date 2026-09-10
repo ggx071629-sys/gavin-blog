@@ -2050,7 +2050,8 @@
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
-        "M01-CARD-GLOW-01"
+        "M01-CARD-GLOW-01",
+        "M07-STUDIO-THEME-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2077,7 +2078,8 @@
         "M02-P1-02",
         "M06-P0-01",
         "M06-UNIT-ADMIN-01",
-        "M06-UNIT-AUTH-PROXY-01"
+        "M06-UNIT-AUTH-PROXY-01",
+        "M07-STUDIO-THEME-01"
       ],
       "dependents": [
         "M02.admin_shell"
@@ -2349,7 +2351,8 @@
         "M02-UNIT-AUTOSAVE-01",
         "M02-UNIT-EDITOR-SAVE-CONTRACT-01",
         "M05-OPS-MEDIA-01",
-        "M07-UNIT-SITE-QUALITY-01"
+        "M07-UNIT-SITE-QUALITY-01",
+        "M07-STUDIO-THEME-01"
       ],
       "dependents": [
         "M04.books_web",
@@ -2373,7 +2376,8 @@
         "apps/web/layouts/admin-core.vue"
       ],
       "cases": [
-        "M02-P1-02"
+        "M02-P1-02",
+        "M07-STUDIO-THEME-01"
       ],
       "dependents": [
         "M06.auth_web"
@@ -2412,7 +2416,8 @@
       "cases": [
         "M03-P1-01",
         "M03-OPS-TAXONOMY-01",
-        "M05-OPS-LAYOUT-01"
+        "M05-OPS-LAYOUT-01",
+        "M07-STUDIO-THEME-01"
       ],
       "dependents": []
     },
@@ -2439,7 +2444,8 @@
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
-        "M01-CARD-GLOW-01"
+        "M01-CARD-GLOW-01",
+        "M07-STUDIO-THEME-01"
       ],
       "dependents": []
     },
@@ -2466,7 +2472,8 @@
         "M01-CARD-FOCUS-01",
         "M01-CARD-INPUT-01",
         "M01-CARD-SCOPE-01",
-        "M01-CARD-GLOW-01"
+        "M01-CARD-GLOW-01",
+        "M07-STUDIO-THEME-01"
       ],
       "dependents": []
     },
@@ -2485,7 +2492,8 @@
         "M05-UNIT-MARKDOWN-MEDIA-01",
         "M05-UNIT-MEDIA-UPLOAD-01",
         "M05-OPS-MEDIA-01",
-        "M05-OPS-LAYOUT-01"
+        "M05-OPS-LAYOUT-01",
+        "M07-STUDIO-THEME-01"
       ],
       "dependents": [
         "M02.editing",
@@ -2522,7 +2530,8 @@
         "M05-P1-01",
         "M05-UNIT-CONTENT-01",
         "M05-OPS-CONTENT-01",
-        "M05-OPS-LAYOUT-01"
+        "M05-OPS-LAYOUT-01",
+        "M07-STUDIO-THEME-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2781,7 +2790,8 @@
         "M05-OPS-LAYOUT-01",
         "M10-OPS-RUNTIME-01",
         "M10-MANAGEMENT-UI-01",
-        "M10-ADMIN-TRIAL-01"
+        "M10-ADMIN-TRIAL-01",
+        "M07-STUDIO-THEME-01"
       ],
       "dependents": []
     },
@@ -3388,7 +3398,15 @@
         "completed/revalidation-recovery/R2.md",
         "completed/revalidation-recovery/R3.md",
         "harness/docs/product/assistant-management-design.md",
-        "harness/docs/decisions/20260910-assistant-management.md"
+        "harness/docs/decisions/20260910-assistant-management.md",
+        "STUDIO-UI-PLAN.md",
+        "STUDIO-UI-PHASE-1.md",
+        "STUDIO-UI-PHASE-2.md",
+        "STUDIO-UI-PHASE-3.md",
+        "STUDIO-UI-PHASE-4.md",
+        "STUDIO-UI-PHASE-5.md",
+        "STUDIO-UI-PHASE-6.md",
+        "completed/studio-ui-foundation/U1-01.md"
       ],
       "cases": [
         "M08-DOCS-01"
