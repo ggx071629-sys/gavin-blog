@@ -2801,6 +2801,14 @@
           "cases": []
         }
       ]
+    },
+    {
+      "path": "completed/account-backend/A2-07.md",
+      "owner": "M08.documentation",
+      "reason": "Archive phase two backend acceptance without changing executable behavior.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Historical report links to exact verified commit and machine evidence; no product change."
     }
   ]
 }
