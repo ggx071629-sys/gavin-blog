@@ -15,7 +15,7 @@ Open specifications: **5 active**, **0 frozen**.
 | spec-20260908-article-design-v2 | active | L1 | 对齐工程设计稿的文章列表与正文阅读视觉 | task:20260908-article-design-v2 | — | [active/20260908-article-design-v2.md](active/20260908-article-design-v2.md) |
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页恢复笔记、领域和文章之间的知识路线 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
-| spec-20260910-studio-book-editor | active | L1 | 读书新建编辑与页内预览对齐写作区和书籍设置 | task:20260910-studio-book-editor | — | [active/20260910-studio-book-editor.md](active/20260910-studio-book-editor.md) |
+| spec-20260910-studio-project-editor | active | L1 | 项目新建编辑与页内预览对齐项目链接与关联文章设置 | task:20260910-studio-project-editor | — | [active/20260910-studio-project-editor.md](active/20260910-studio-project-editor.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -151,6 +151,7 @@ Open specifications: **5 active**, **0 frozen**.
 | archive-20260910-studio-article-editor | compressed | L2 | 文章新建编辑对齐设置分区并明确保存与发布确认 | task:20260910-studio-article-editor | — | [archive/20260910-studio-article-editor.md](archive/20260910-studio-article-editor.md) |
 | archive-20260910-studio-article-list | compressed | L2 | 文章列表接通真实查询并对齐开放行设计 | task:20260910-studio-article-list | — | [archive/20260910-studio-article-list.md](archive/20260910-studio-article-list.md) |
 | archive-20260910-studio-assistant-states | compressed | L2 | 补齐助手中断恢复与长内容状态验收 | task:20260910-studio-assistant-states | — | [archive/20260910-studio-assistant-states.md](archive/20260910-studio-assistant-states.md) |
+| archive-20260910-studio-book-editor | compressed | L2 | 读书新建编辑与页内预览对齐写作区和书籍设置 | task:20260910-studio-book-editor | — | [archive/20260910-studio-book-editor.md](archive/20260910-studio-book-editor.md) |
 | archive-20260910-studio-book-list | compressed | L2 | 读书列表对齐设计并接通完整书名作者查询 | task:20260910-studio-book-list | — | [archive/20260910-studio-book-list.md](archive/20260910-studio-book-list.md) |
 | archive-20260910-studio-controls | compressed | L2 | 统一写作台共用控件状态分隔行与弹窗视觉 | task:20260910-studio-controls | — | [archive/20260910-studio-controls.md](archive/20260910-studio-controls.md) |
 | archive-20260910-studio-dialogs | compressed | L2 | 统一助手预算费用同步维护弹窗及真实确认状态 | task:20260910-studio-dialogs | — | [archive/20260910-studio-dialogs.md](archive/20260910-studio-dialogs.md) |
