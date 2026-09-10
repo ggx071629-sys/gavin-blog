@@ -89,9 +89,13 @@
     {
       "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
       "owner": "M07.studio_theme",
-      "reason": "本任务的精确回归场景；测试输入变化不改变产品导出或运行时行为。",
+      "reason": "二十页新增组合矩阵，连同同一主题体系的键盘与错误恢复精确场景验证全部状态；不修改产品导出。",
       "cases": [
-        "M07-STUDIO-RESPONSIVE-01"
+        "M02-STUDIO-LIST-STATES-01",
+        "M02-STUDIO-SHELL-01",
+        "M05-STUDIO-OPERATIONS-STATES-01",
+        "M07-STUDIO-RESPONSIVE-01",
+        "M10-STUDIO-STATES-01"
       ],
       "dependencies": [
         {

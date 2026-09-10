@@ -3820,7 +3820,10 @@
         "M06-STUDIO-LOGIN-ERROR-01",
         "M10-STUDIO-OVERVIEW-01",
         "M07-STUDIO-COVERAGE-01",
-        "M07-STUDIO-RESPONSIVE-01"
+        "M07-STUDIO-RESPONSIVE-01",
+        "M02-STUDIO-LIST-STATES-01",
+        "M05-STUDIO-OPERATIONS-STATES-01",
+        "M10-STUDIO-STATES-01"
       ],
       "dependents": [
         "M02.admin_shell",
