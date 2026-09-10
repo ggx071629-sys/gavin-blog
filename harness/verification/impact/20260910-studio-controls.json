@@ -442,6 +442,100 @@
         }
       ],
       "no_test_reason": "Existing Harness structural checks cover registry changes; no runner changes."
+    },
+    {
+      "path": "apps/web/components/ThemeToggle.vue",
+      "owner": "M01.navigation",
+      "reason": "Real admin revision preview also mounts the shared public ThemeToggle; gate its initial accessibility state until mounted to eliminate dark-preference hydration warnings. Public visual CSS and toggle action are unchanged.",
+      "cases": [
+        "M02-DESK-LAYOUT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "No navigation routes, component props, events, color-mode values or layout CSS changed; only ThemeToggle internal initial aria/text rendering is stabilized.",
+          "cases": []
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No navigation routes, component props, events, color-mode values or layout CSS changed; only ThemeToggle internal initial aria/text rendering is stabilized.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "No navigation routes, component props, events, color-mode values or layout CSS changed; only ThemeToggle internal initial aria/text rendering is stabilized.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "No navigation routes, component props, events, color-mode values or layout CSS changed; only ThemeToggle internal initial aria/text rendering is stabilized.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No navigation routes, component props, events, color-mode values or layout CSS changed; only ThemeToggle internal initial aria/text rendering is stabilized.",
+          "cases": []
+        },
+        {
+          "unit": "M11.web",
+          "affected": false,
+          "reason": "No navigation routes, component props, events, color-mode values or layout CSS changed; only ThemeToggle internal initial aria/text rendering is stabilized.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "No navigation routes, component props, events, color-mode values or layout CSS changed; only ThemeToggle internal initial aria/text rendering is stabilized.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "No navigation routes, component props, events, color-mode values or layout CSS changed; only ThemeToggle internal initial aria/text rendering is stabilized.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No navigation routes, component props, events, color-mode values or layout CSS changed; only ThemeToggle internal initial aria/text rendering is stabilized.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No navigation routes, component props, events, color-mode values or layout CSS changed; only ThemeToggle internal initial aria/text rendering is stabilized.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+      "owner": "M02.editing",
+      "reason": "Shorten only local screenshot filenames to fit Windows diagnostic export paths; no test identities, assertions, thresholds or business flows changed.",
+      "cases": [
+        "M02-DESK-LAYOUT-01",
+        "M02-DESK-REVISIONS-01",
+        "M07-STUDIO-THEME-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Only screenshot filenames changed; writing component exports and their consumers are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Only screenshot filenames changed; writing component exports and their consumers are unchanged.",
+          "cases": []
+        }
+      ]
     }
   ]
 }
