@@ -6246,6 +6246,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M06-RESUME-PDF-01",
+          "priority": "P1",
+          "scenario": "Current indexed PDF bytes are served without sessions; revocation returns 404 and last successful index time survives failure.",
+          "expectations": [
+            {
+              "id": "M06-RESUME-PDF-01-E01",
+              "surface": "response",
+              "statement": "Current indexed PDF bytes are served without sessions; revocation returns 404 and last successful index time survives failure."
+            },
+            {
+              "id": "M06-RESUME-PDF-01-E02",
+              "surface": "forbidden",
+              "statement": "Unavailable versions, forged aliases and arbitrary URLs must not become downloadable/current evidence; status is not a factual source."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_resume_citations.py",
+              "kind": "pytest",
+              "name": "test_resume_pdf_snapshot_is_exact_revocable_and_read_only",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-PDF-01-E01",
+                "M06-RESUME-PDF-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -13946,6 +13978,110 @@
               "covers": [
                 "M09-ABOUT-FACTS-01-E01",
                 "M09-ABOUT-FACTS-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-RESUME-FACTS-01",
+          "priority": "P1",
+          "scenario": "Self-report/conflict policy and fixed unaliased notice preserve citation validation; graph rejects revoked resume before sending, validation and final publish.",
+          "expectations": [
+            {
+              "id": "M09-RESUME-FACTS-01-E01",
+              "surface": "response",
+              "statement": "Self-report/conflict policy and fixed unaliased notice preserve citation validation; graph rejects revoked resume before sending, validation and final publish."
+            },
+            {
+              "id": "M09-RESUME-FACTS-01-E02",
+              "surface": "forbidden",
+              "statement": "Unavailable versions, forged aliases and arbitrary URLs must not become downloadable/current evidence; status is not a factual source."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_resume_citations.py",
+              "kind": "pytest",
+              "name": "test_resume_self_report_conflict_and_unaliased_operational_notice",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RESUME-FACTS-01-E01",
+                "M09-RESUME-FACTS-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_resume_citations.py",
+              "kind": "pytest",
+              "name": "test_resume_graph_rechecks_before_provider_and_after_generation",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RESUME-FACTS-01-E01",
+                "M09-RESUME-FACTS-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_about_facts.py",
+              "kind": "pytest",
+              "name": "test_about_self_report_prompt_and_bound_citations",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RESUME-FACTS-01-E01",
+                "M09-RESUME-FACTS-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "kind": "pytest",
+              "name": "test_security_forged_citations_not_streamed_as_answer",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RESUME-FACTS-01-E01",
+                "M09-RESUME-FACTS-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_development.py",
+              "kind": "pytest",
+              "name": "test_local_development_uses_existing_content_and_returns_citations",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RESUME-FACTS-01-E01",
+                "M09-RESUME-FACTS-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-RESUME-CITATION-UI-01",
+          "priority": "P1",
+          "scenario": "Public/admin PDF citations download exact fixture bytes through strict paths; unsafe paths are rejected and About navigation still works.",
+          "expectations": [
+            {
+              "id": "M09-RESUME-CITATION-UI-01-E01",
+              "surface": "response",
+              "statement": "Public/admin PDF citations download exact fixture bytes through strict paths; unsafe paths are rejected and About navigation still works."
+            },
+            {
+              "id": "M09-RESUME-CITATION-UI-01-E02",
+              "surface": "forbidden",
+              "statement": "Unavailable versions, forged aliases and arbitrary URLs must not become downloadable/current evidence; status is not a factual source."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+              "kind": "playwright",
+              "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths",
+              "gate": "e2e",
+              "covers": [
+                "M09-RESUME-CITATION-UI-01-E01",
+                "M09-RESUME-CITATION-UI-01-E02"
               ]
             }
           ]
