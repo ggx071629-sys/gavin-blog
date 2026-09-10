@@ -6024,6 +6024,70 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M06-RESUME-STORAGE-01",
+          "priority": "P1",
+          "scenario": "Bounded content cache, migration, same-hash reuse and binding revocation.",
+          "expectations": [
+            {
+              "id": "M06-RESUME-STORAGE-01-E01",
+              "surface": "response",
+              "statement": "Bounded content cache, migration, same-hash reuse and binding revocation."
+            },
+            {
+              "id": "M06-RESUME-STORAGE-01-E02",
+              "surface": "forbidden",
+              "statement": "Revoked, failed or superseded resume versions must never be usable or overwrite a current version."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_resume_storage.py",
+              "kind": "pytest",
+              "name": "test_resume_cache_reuse_binding_revocation_and_migration",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-STORAGE-01-E01",
+                "M06-RESUME-STORAGE-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-RESUME-FENCE-01",
+          "priority": "P1",
+          "scenario": "Every lease identity is checked and failure or new bytes revoke old eligibility.",
+          "expectations": [
+            {
+              "id": "M06-RESUME-FENCE-01-E01",
+              "surface": "response",
+              "statement": "Every lease identity is checked and failure or new bytes revoke old eligibility."
+            },
+            {
+              "id": "M06-RESUME-FENCE-01-E02",
+              "surface": "forbidden",
+              "statement": "Revoked, failed or superseded resume versions must never be usable or overwrite a current version."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_resume_storage.py",
+              "kind": "pytest",
+              "name": "test_resume_late_results_fail_closed_and_new_hash_suspends_before_parse",
+              "gate": "api-tests",
+              "covers": [
+                "M06-RESUME-FENCE-01-E01",
+                "M06-RESUME-FENCE-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -15617,6 +15681,38 @@
               "covers": [
                 "M10-STUDIO-HOST-GUARD-01-E01",
                 "M10-STUDIO-HOST-GUARD-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-RESUME-INDEX-01",
+          "priority": "P1",
+          "scenario": "Hybrid retrieval and cross-generation version purge preserve new evidence.",
+          "expectations": [
+            {
+              "id": "M10-RESUME-INDEX-01-E01",
+              "surface": "response",
+              "statement": "Hybrid retrieval and cross-generation version purge preserve new evidence."
+            },
+            {
+              "id": "M10-RESUME-INDEX-01-E02",
+              "surface": "forbidden",
+              "statement": "Revoked, failed or superseded resume versions must never be usable or overwrite a current version."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_resume_storage.py",
+              "kind": "pytest",
+              "name": "test_resume_retrieval_and_delayed_version_purge_preserve_new_version",
+              "gate": "api-tests",
+              "covers": [
+                "M10-RESUME-INDEX-01-E01",
+                "M10-RESUME-INDEX-01-E02"
               ]
             }
           ]

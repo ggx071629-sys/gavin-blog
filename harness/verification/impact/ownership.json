@@ -1214,7 +1214,8 @@
         "M10-PUBLIC-AVAILABILITY-01",
         "M11-ASSISTANT-SYNC-01",
         "M09-ABOUT-RETRIEVAL-01",
-        "M09-ABOUT-FACTS-01"
+        "M09-ABOUT-FACTS-01",
+        "M10-RESUME-INDEX-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1349,7 +1350,8 @@
         "M10-TOTAL-BUDGET-01",
         "M10-SYNC-PRIORITY-01",
         "M11-ASSISTANT-SYNC-01",
-        "M09-ABOUT-RETRIEVAL-01"
+        "M09-ABOUT-RETRIEVAL-01",
+        "M06-RESUME-STORAGE-01"
       ],
       "dependents": [
         "M06.runtime_config",
@@ -1408,7 +1410,10 @@
         "M10-TOTAL-BUDGET-01",
         "M11-ASSISTANT-PROJECTION-01",
         "M11-ASSISTANT-SYNC-01",
-        "M09-ABOUT-RETRIEVAL-01"
+        "M09-ABOUT-RETRIEVAL-01",
+        "M06-RESUME-STORAGE-01",
+        "M06-RESUME-FENCE-01",
+        "M10-RESUME-INDEX-01"
       ],
       "dependents": [
         "M01.articles",
@@ -1423,7 +1428,8 @@
         "M09.runtime",
         "M10.operations",
         "M10.e5_evaluation",
-        "M10.capacity"
+        "M10.capacity",
+        "M06.resume_storage"
       ],
       "dependency_reasons": {
         "M01.articles": [
@@ -1482,6 +1488,9 @@
         ],
         "M10.capacity": [
           "capacity/capacity_roles reuse this unit through explicit development-only measurement CLI; no reverse runtime import."
+        ],
+        "M06.resume_storage": [
+          "Resume lifecycle consumes persistence, index outbox, parsed/downloaded PDF contracts."
         ]
       }
     },
@@ -1823,7 +1832,10 @@
         "M06-ACCOUNT-SESSION-01",
         "M06-ACCOUNT-CONTRACT-01",
         "M06-ACCOUNT-COMPAT-01",
-        "M11-ASSISTANT-PROJECTION-01"
+        "M11-ASSISTANT-PROJECTION-01",
+        "M06-RESUME-STORAGE-01",
+        "M06-RESUME-FENCE-01",
+        "M10-RESUME-INDEX-01"
       ],
       "dependents": [
         "M01.articles",
@@ -1847,7 +1859,8 @@
         "M10.capacity",
         "M11.api",
         "M06.account",
-        "M06.account_fixture"
+        "M06.account_fixture",
+        "M06.resume_storage"
       ],
       "dependency_reasons": {
         "M01.articles": [
@@ -1968,6 +1981,9 @@
         ],
         "M06.account_fixture": [
           "Isolated fixture applies Alembic migrations to its temporary database."
+        ],
+        "M06.resume_storage": [
+          "Resume lifecycle consumes persistence, index outbox, parsed/downloaded PDF contracts."
         ]
       }
     },
@@ -2983,7 +2999,8 @@
         "M10-STUDIO-DIALOGS-01",
         "M10-STUDIO-STATES-01",
         "M11-ASSISTANT-SYNC-01",
-        "M09-ABOUT-CITATION-01"
+        "M09-ABOUT-CITATION-01",
+        "M06-RESUME-STORAGE-01"
       ],
       "dependents": []
     },
@@ -3180,7 +3197,8 @@
       "cases": [
         "M06-PROFILE-SKILLS-01",
         "M02-STUDIO-QUERY-01",
-        "M11-ASSISTANT-SYNC-01"
+        "M11-ASSISTANT-SYNC-01",
+        "M06-RESUME-STORAGE-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -3442,7 +3460,8 @@
         "M10-SYNC-PRIORITY-01",
         "M02-STUDIO-QUERY-01",
         "M06-ACCOUNT-CONTRACT-01",
-        "M11-ASSISTANT-SYNC-01"
+        "M11-ASSISTANT-SYNC-01",
+        "M06-RESUME-STORAGE-01"
       ],
       "dependents": [
         "M06.web_types",
@@ -4157,11 +4176,15 @@
         "M06-RESUME-DOWNLOAD-LIMITS-01"
       ],
       "dependents": [
-        "M06.resume_parse"
+        "M06.resume_parse",
+        "M06.resume_storage"
       ],
       "dependency_reasons": {
         "M06.resume_parse": [
           "PDF worker consumes locked pypdf dependency and downloader byte limit/environment."
+        ],
+        "M06.resume_storage": [
+          "Resume lifecycle consumes persistence, index outbox, parsed/downloaded PDF contracts."
         ]
       }
     },
@@ -4175,8 +4198,35 @@
         "M06-RESUME-PARSE-01",
         "M06-RESUME-PARSE-LIMITS-01"
       ],
-      "dependents": [],
-      "dependency_reasons": {}
+      "dependents": [
+        "M06.resume_storage"
+      ],
+      "dependency_reasons": {
+        "M06.resume_storage": [
+          "Resume lifecycle consumes persistence, index outbox, parsed/downloaded PDF contracts."
+        ]
+      }
+    },
+    "M06.resume_storage": {
+      "paths": [
+        "apps/api/app/assistant_resume/storage.py",
+        "apps/api/app/assistant_resume/index_cleanup.py",
+        "apps/api/tests/test_assistant_resume_storage.py",
+        "apps/api/migrations/versions/20260911_0030_assistant_resume.py"
+      ],
+      "cases": [
+        "M06-RESUME-STORAGE-01",
+        "M06-RESUME-FENCE-01",
+        "M10-RESUME-INDEX-01"
+      ],
+      "dependents": [
+        "M10.index"
+      ],
+      "dependency_reasons": {
+        "M10.index": [
+          "Index projection and cleanup consume resume version eligibility."
+        ]
+      }
     }
   }
 }
