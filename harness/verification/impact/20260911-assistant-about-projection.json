@@ -623,7 +623,8 @@
       "owner": "M08.documentation",
       "reason": "Ordinary documentation or exact-case declarative registration; no executable policy change.",
       "cases": [],
-      "dependencies": []
+      "dependencies": [],
+      "no_test_reason": "Ordinary documentation or declarative exact-case registration only; structural Harness checks cover the change, without product execution behavior changes."
     },
     {
       "path": "harness/verification/checks/module_coverage.contract.json",
@@ -649,7 +650,8 @@
           "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
           "cases": []
         }
-      ]
+      ],
+      "no_test_reason": "Ordinary documentation or declarative exact-case registration only; structural Harness checks cover the change, without product execution behavior changes."
     },
     {
       "path": "harness/verification/impact/ownership.json",
@@ -699,7 +701,8 @@
           "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
           "cases": []
         }
-      ]
+      ],
+      "no_test_reason": "Ordinary documentation or declarative exact-case registration only; structural Harness checks cover the change, without product execution behavior changes."
     }
   ]
 }
