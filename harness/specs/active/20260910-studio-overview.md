@@ -39,5 +39,5 @@ U2-01 接续已完成阶段一。现有助手页面已接入真实管理 API；�
 
 ## Gates
 - e2e => AC-1, AC-2
-- web-quality => AC-2
+- web-quality => AC-1, AC-2
 - harness-integrity => AC-1, AC-2
