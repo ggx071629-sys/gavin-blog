@@ -1810,6 +1810,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M01-STUDIO-PRODUCTION-HOME-01",
+          "priority": "P1",
+          "scenario": "公开首页保留可见文章入口、真实轻量载荷与深浅主题无障碍。",
+          "expectations": [
+            {
+              "id": "M01-STUDIO-PRODUCTION-HOME-01-E01",
+              "surface": "user_visible",
+              "statement": "公开首页保留可见文章入口、真实轻量载荷与深浅主题无障碍。"
+            },
+            {
+              "id": "M01-STUDIO-PRODUCTION-HOME-01-E02",
+              "surface": "forbidden",
+              "statement": "不允许横向溢出、自动无障碍违规、错误页面或失效操作。"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/quality/home-atlas.spec.ts",
+              "kind": "playwright",
+              "name": "production homepage records real payloads, first paint and dual theme composition",
+              "gate": "web-quality",
+              "covers": [
+                "M01-STUDIO-PRODUCTION-HOME-01-E01",
+                "M01-STUDIO-PRODUCTION-HOME-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -5861,6 +5893,48 @@
               "covers": [
                 "M07-STUDIO-FLOWS-01-E01",
                 "M07-STUDIO-FLOWS-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M07-STUDIO-PRODUCTION-01",
+          "priority": "P1",
+          "scenario": "生产构建保持单列登录、当前页面标题、键盘导航、触控和 WCAG A/AA。",
+          "expectations": [
+            {
+              "id": "M07-STUDIO-PRODUCTION-01-E01",
+              "surface": "user_visible",
+              "statement": "生产构建保持单列登录、当前页面标题、键盘导航、触控和 WCAG A/AA。"
+            },
+            {
+              "id": "M07-STUDIO-PRODUCTION-01-E02",
+              "surface": "forbidden",
+              "statement": "不允许横向溢出、自动无障碍违规、错误页面或失效操作。"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/quality/site-quality.spec.ts",
+              "kind": "playwright",
+              "name": "admin core production pages pass the visual matrix",
+              "gate": "web-quality",
+              "covers": [
+                "M07-STUDIO-PRODUCTION-01-E01",
+                "M07-STUDIO-PRODUCTION-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/quality/site-quality.spec.ts",
+              "kind": "playwright",
+              "name": "mobile admin drawer traps focus and skill actions meet touch targets",
+              "gate": "web-quality",
+              "covers": [
+                "M07-STUDIO-PRODUCTION-01-E01",
+                "M07-STUDIO-PRODUCTION-01-E02"
               ]
             }
           ]

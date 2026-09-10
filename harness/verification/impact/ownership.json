@@ -2699,7 +2699,8 @@
         "M01-CARD-GLOW-01",
         "M06-STUDIO-LOGIN-01",
         "M06-STUDIO-LOGIN-ERROR-01",
-        "M07-STUDIO-THEME-01"
+        "M07-STUDIO-THEME-01",
+        "M07-STUDIO-PRODUCTION-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3503,7 +3504,11 @@
         "completed/studio-ui-lists/.gitkeep",
         "completed/studio-ui-operations/.gitkeep",
         "completed/studio-ui-verification/.gitkeep",
-        "completed/studio-ui-writing/.gitkeep"
+        "completed/studio-ui-writing/.gitkeep",
+        "harness/specs/archive/20260910-studio-regression-guards.md",
+        "harness/evolution/events/20260910-studio-regression-guards--spec-completed.json",
+        "harness/verification/evidence/20260910-studio-regression-guards.json",
+        "harness/verification/impact/20260910-studio-regression-guards.json"
       ],
       "cases": [
         "M08-DOCS-01"
@@ -3555,7 +3560,8 @@
         "M01-CARD-GLOW-01",
         "M09-UI-DISCOVERY-01",
         "M09-UI-ORB-01",
-        "M09-UI-ORB-MOTION-01"
+        "M09-UI-ORB-MOTION-01",
+        "M01-STUDIO-PRODUCTION-HOME-01"
       ],
       "dependents": []
     },
