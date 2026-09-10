@@ -665,6 +665,8 @@ def test_m08_spec_01_enforces_nested_plan_and_planned_modules(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    # Keep the synthetic future module independent of the live module catalog.
+    monkeypatch.setattr(product_verification, "EXPECTED_MODULE_IDS", ("M08",))
     spec = _write_spec(
         tmp_path / f"{TASK_ID}.md",
         cases="- AC-1 => M11-FUTURE-01\n- AC-2 => M08-TRACE-02",
