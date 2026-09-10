@@ -1045,7 +1045,7 @@
             {
               "id": "M01-UNIT-ARTICLES-INDEX-01-E01",
               "surface": "response",
-              "statement": "articles index uses real categories, URL rules, and a row list; 390 filter strip scrolls internally and article rows stack"
+              "statement": "articles index uses real categories, URL rules, and a row list; 390 filters wrap within the viewport and article rows stack"
             },
             {
               "id": "M01-UNIT-ARTICLES-INDEX-01-E02",
@@ -1070,7 +1070,7 @@
             {
               "kind": "playwright",
               "path": "apps/web/tests/e2e/articles-index.spec.ts",
-              "name": "390 filter strip scrolls internally and article rows stack",
+              "name": "390 filters wrap within the viewport and article rows stack",
               "gate": "e2e",
               "covers": [
                 "M01-UNIT-ARTICLES-INDEX-01-E01",
@@ -6099,6 +6099,178 @@
               "covers": [
                 "M07-STUDIO-SUITE-MANAGEMENT-01-E01",
                 "M07-STUDIO-SUITE-MANAGEMENT-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M07-STUDIO-SUITE-01",
+          "priority": "P1",
+          "scenario": "公开阅读与导航在既有设计和真实数据上通过联跑回归。",
+          "expectations": [
+            {
+              "id": "M07-STUDIO-SUITE-01-E01",
+              "surface": "user_visible",
+              "statement": "真实公开数据、筛选链接、键盘操作、页面布局和代码语法保持可读。"
+            },
+            {
+              "id": "M07-STUDIO-SUITE-01-E02",
+              "surface": "forbidden",
+              "statement": "不得出现横向溢出、错误跳转、主题不匹配、无障碍违规或僵化初始数据假设。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/about-index.spec.ts",
+              "kind": "playwright",
+              "name": "about keeps static brand copy and real profile fields",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/article-reading.spec.ts",
+              "kind": "playwright",
+              "name": "article reading variant follows the exact Short truth table and boundaries",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/articles-index.spec.ts",
+              "kind": "playwright",
+              "name": "articles index uses real categories, URL rules, and a row list",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/articles-index.spec.ts",
+              "kind": "playwright",
+              "name": "390 filters wrap within the viewport and article rows stack",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/articles-index.spec.ts",
+              "kind": "playwright",
+              "name": "home cards and books hero do not pick up the articles list contract",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/codeblock-theme.spec.ts",
+              "kind": "playwright",
+              "name": "codeblocks keep readable syntax and switch surfaces in both color modes",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/markdown-mermaid.spec.ts",
+              "kind": "playwright",
+              "name": "Mermaid redraws for the resolved theme and invalid diagrams degrade locally",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/home-atlas.spec.ts",
+              "kind": "playwright",
+              "name": "homepage atlas supports stable selection, hover, keyboard reset and real destinations",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/home-atlas.spec.ts",
+              "kind": "playwright",
+              "name": "homepage distinguishes loading, empty, uncategorized and partial failures with retry",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/home-atlas.spec.ts",
+              "kind": "playwright",
+              "name": "homepage atlas adapts long content to both themes and narrow short viewports",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/public-experience.spec.ts",
+              "kind": "playwright",
+              "name": "desktop readers can enter the authenticated writing desk from the public header",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/public-experience.spec.ts",
+              "kind": "playwright",
+              "name": "mobile readers can navigate, switch theme, and skip to content",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/public-experience.spec.ts",
+              "kind": "playwright",
+              "name": "mobile menu switches from a full-screen route index to the tablet drawer at 640",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/public-experience.spec.ts",
+              "kind": "playwright",
+              "name": "homepage keeps product copy, dual CTAs, profile, and empty-state without a Now block",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/public-reading.spec.ts",
+              "kind": "playwright",
+              "name": "phase three public surfaces fit long content in both themes and short viewports",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-01-E01",
+                "M07-STUDIO-SUITE-01-E02"
               ]
             }
           ]

@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260910-studio-suite-management",
+  "created_at": "2026-09-10T14:04:31.398535+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "1144e7626c38fcc397efa4f6acad4827b09f609d875876ab9e36dc5509013be3"
+}
