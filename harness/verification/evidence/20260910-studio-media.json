@@ -1,0 +1,461 @@
+{
+  "schema_version": 2,
+  "task_id": "20260910-studio-media",
+  "created_at": "2026-09-10T11:18:08.437756+00:00",
+  "command": "python -m tools.harness verify 20260910-studio-media",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "44389bd9d2e204f17237c1223b0bb8b6a4e9f08d",
+    "active_spec_sha256": "928c9419989d8f511bb9688d1d20ef080c266b4bd73184333ef5ebf521aaf003",
+    "verification_contract_sha256": "ca92a0285b823aeab6d86138e510247fc154db450f116458814aed9e6320f118",
+    "gate_config_sha256": "ace595dcb08c535d901ba5bb5cb91ef53e3e67105bad6a1b808a21cdec2069cc",
+    "documentation_contract_sha256": "18c9d754ae9af8e98851c6b87dd2aa74e9b4cefa32164a698f4231e4117d28ea",
+    "documentation_targets_sha256": "d18bb38c19cce31e435c4c3b6708c6e38b23990a95423587fb742a221ae54499",
+    "module_contract_sha256": "6085b00e49f11af4b4b4a7d0e49483ff4c30592be82ed40d5ce4ec46ad758e16"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录本任务页面的设计实现及实际行为边界。",
+    "targets": [
+      "apps/web/public/studio/README.md"
+    ],
+    "baseline_commit": "be8b70d70b206a53bdcd6e9ef7563ecea5a44921",
+    "target_blobs": {
+      "apps/web/public/studio/README.md": "ede5f3f9f567f577745cc3f3ccb66686473093cc"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "8426ab69f39c97e28a6b0a03fcf09f0139ca69ee",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260910-studio-media.json",
+      "sha256": "4f35ae107bd2e4137ee81bc0fa40c9c31b76eb466df3774f26d07153c6a65e0e",
+      "selected_cases": [
+        "M05-STUDIO-MEDIA-01"
+      ],
+      "selected_refs": 1,
+      "excluded_cases": 255
+    },
+    "receipt": {
+      "run_id": "504abab57781bf5980bffacfaff5f66d",
+      "identity": "01820829d9172e6fa91226f0d62f266dc6c86ae29c7032af3aca3db1af2bc3f2",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1204.246,
+      "plan_inputs": 781.309,
+      "execute_cleanup_and_input_recheck": 45748.282
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "6085b00e49f11af4b4b4a7d0e49483ff4c30592be82ed40d5ce4ec46ad758e16",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M05-STUDIO-MEDIA-01",
+            "module_id": "M05",
+            "module_name": "媒体与内容可移植性",
+            "priority": "P1",
+            "scenario": "媒体库类型筛选真实查询与资源操作",
+            "expectations": [
+              {
+                "id": "M05-STUDIO-MEDIA-01-E01",
+                "surface": "user_visible",
+                "statement": "媒体库类型筛选真实查询与资源操作"
+              },
+              {
+                "id": "M05-STUDIO-MEDIA-01-E02",
+                "surface": "forbidden",
+                "statement": "未提交筛选不能混入另一类型；读/批量失败不伪造空库或成功，编辑内容不得被筛选丢弃。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "kind": "playwright",
+                "name": "md",
+                "gate": "e2e",
+                "covers": [
+                  "M05-STUDIO-MEDIA-01-E01",
+                  "M05-STUDIO-MEDIA-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M05-STUDIO-MEDIA-01",
+            "module_id": "M05",
+            "module_name": "媒体与内容可移植性",
+            "priority": "P1",
+            "scenario": "媒体库类型筛选真实查询与资源操作",
+            "expectations": [
+              {
+                "id": "M05-STUDIO-MEDIA-01-E01",
+                "surface": "user_visible",
+                "statement": "媒体库类型筛选真实查询与资源操作"
+              },
+              {
+                "id": "M05-STUDIO-MEDIA-01-E02",
+                "surface": "forbidden",
+                "statement": "未提交筛选不能混入另一类型；读/批量失败不伪造空库或成功，编辑内容不得被筛选丢弃。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "kind": "playwright",
+                "name": "md",
+                "gate": "e2e",
+                "covers": [
+                  "M05-STUDIO-MEDIA-01-E01",
+                  "M05-STUDIO-MEDIA-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.326,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "157 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 183.181,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 72.951,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.491,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "795 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 356.002,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "276 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 87.426,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 256 cases, 513 expectations, 884 exact test references; contract sha256 6085b00e49f1"
+      ],
+      "status": "passed",
+      "duration_ms": 406.858,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.268,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.867,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 78.093,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 1526.531,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "504abab57781bf5980bffacfaff5f66d",
+        "attempt_id": "90192477d54be531c0bf470624e1294f"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-media --gate e2e",
+      "status": "passed",
+      "duration_ms": 42496.709,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1570,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "md"
+              }
+            ],
+            "duration_ms": 2803.606,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "md"
+              }
+            ],
+            "duration_ms": 1499.81
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "md",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "md"
+                ]
+              }
+            ],
+            "duration_ms": 1339.43,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "md",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "md"
+                ]
+              }
+            ],
+            "duration_ms": 36483.631,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\4aac216400e9bf94415eb78dc59a10188cff6d4a59c1b666b0c2a06fd4681aeb\\artifacts\\504abab57781bf5980bffacfaff5f66d\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "504abab57781bf5980bffacfaff5f66d",
+        "attempt_id": "fe7681642807d0eb35e80f0c3bb2864e"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1331.672,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 46556.375,
+    "failures": []
+  },
+  "source_commit": "8426ab69f39c97e28a6b0a03fcf09f0139ca69ee"
+}
