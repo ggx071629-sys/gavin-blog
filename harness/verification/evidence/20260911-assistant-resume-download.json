@@ -1,0 +1,438 @@
+{
+  "schema_version": 2,
+  "task_id": "20260911-assistant-resume-download",
+  "created_at": "2026-09-10T17:38:55.835233+00:00",
+  "command": "python -m tools.harness verify 20260911-assistant-resume-download",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "56490e5a691b95ba88b3c98c299239e731bf3878",
+    "active_spec_sha256": "b96c7060f241c2341d3789d5e494fa5de0ac2d567de74f07320e622ef1848b03",
+    "verification_contract_sha256": "c02b55d77b59d2c053864fd88a2d55f81307e7826a4c15dd632205223a0ba794",
+    "gate_config_sha256": "ba302e0ba7ca3d545b6556e408b4cdd0b68c5ab9662168886deed7f34b63c6be",
+    "documentation_contract_sha256": "029064681cc9e360f252f1a67f09e3e93d99f7489c69e5f4be0ed4a9843dc95d",
+    "documentation_targets_sha256": "14a2dcc07b1f19b5eb4f792eb5e5f2f8209fa1f7c0c5d44944acb954d35e8ed7",
+    "module_contract_sha256": "8d8e1eb867850eaa4afcea04f7c9e7140d7dc0a07eba2088c73d38b72a4319a0"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "说明可信 PDF 下载配置、网络边界和独立截止执行。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "2e2fd4a482175873ec8823f3d67d2d7c566e7b7e",
+    "target_blobs": {
+      "apps/api/README.md": "7083883cec3215cd88ac48645e38ac421364e106"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "3a8c74c8cf5e826096ab64ed29b59bd2c19f42f2",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260911-assistant-resume-download.json",
+      "sha256": "eb7ffdd70420efa19b5e3e8eb187121399d899ca77d96d29238fa6c633603705",
+      "selected_cases": [
+        "M06-RESUME-DOWNLOAD-01",
+        "M06-RESUME-DOWNLOAD-LIMITS-01"
+      ],
+      "selected_refs": 4,
+      "excluded_cases": 286
+    },
+    "receipt": {
+      "run_id": "271ea937a7a0c3f7831c650c9ec288db",
+      "identity": "d16bb94f9f5b623f09a5dfe5276e23639ffcec1abccd8a931e01ef676a017d22",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1476.917,
+      "plan_inputs": 986.633,
+      "execute_cleanup_and_input_recheck": 9657.868
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "8d8e1eb867850eaa4afcea04f7c9e7140d7dc0a07eba2088c73d38b72a4319a0",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-RESUME-DOWNLOAD-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P0",
+            "scenario": "仅可信域逐跳校验后固定公网IP，保留TLS原主机校验。",
+            "expectations": [
+              {
+                "id": "M06-RESUME-DOWNLOAD-01-E01",
+                "surface": "response",
+                "statement": "可信PDF可取得完整字节/hash，TLS固定原主机并连接已校验地址。"
+              },
+              {
+                "id": "M06-RESUME-DOWNLOAD-01-E02",
+                "surface": "forbidden",
+                "statement": "非法域/私网、超限/超时被拒绝，URL秘密不进入命令行，代理和应用密钥不传入子进程。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "kind": "pytest",
+                "name": "test_trusted_download_pins_each_redirect_and_preserves_tls_hostname",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-DOWNLOAD-01-E01",
+                  "M06-RESUME-DOWNLOAD-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "kind": "pytest",
+                "name": "test_untrusted_targets_and_mixed_dns_are_rejected_without_connecting",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-DOWNLOAD-01-E01",
+                  "M06-RESUME-DOWNLOAD-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-RESUME-DOWNLOAD-LIMITS-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P0",
+            "scenario": "PDF类型/字节/跳转及子进程总截止生效，环境与错误不泄密。",
+            "expectations": [
+              {
+                "id": "M06-RESUME-DOWNLOAD-LIMITS-01-E01",
+                "surface": "response",
+                "statement": "可信PDF可取得完整字节/hash，TLS固定原主机并连接已校验地址。"
+              },
+              {
+                "id": "M06-RESUME-DOWNLOAD-LIMITS-01-E02",
+                "surface": "forbidden",
+                "statement": "非法域/私网、超限/超时被拒绝，URL秘密不进入命令行，代理和应用密钥不传入子进程。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "kind": "pytest",
+                "name": "test_download_file_redirect_and_retry_limits",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-DOWNLOAD-LIMITS-01-E01",
+                  "M06-RESUME-DOWNLOAD-LIMITS-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "kind": "pytest",
+                "name": "test_download_child_environment_hash_and_real_deadline",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-DOWNLOAD-LIMITS-01-E01",
+                  "M06-RESUME-DOWNLOAD-LIMITS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.317,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "175 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 234.91,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 80.682,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.602,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "969 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 423.712,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "297 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 95.812,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 288 cases, 577 expectations, 970 exact test references; contract sha256 8d8e1eb86785"
+      ],
+      "status": "passed",
+      "duration_ms": 542.372,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.307,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.619,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 79.03,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 2002.978,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "271ea937a7a0c3f7831c650c9ec288db",
+        "attempt_id": "4ef482b42c565aea2eb8f2d9df0657db"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-assistant-resume-download --gate api-tests",
+      "status": "passed",
+      "duration_ms": 5374.285,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 901,
+        "selection_counts": {
+          "collected": 4,
+          "executed": 4
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "name": "test_trusted_download_pins_each_redirect_and_preserves_tls_hostname"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "name": "test_untrusted_targets_and_mixed_dns_are_rejected_without_connecting"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "name": "test_download_file_redirect_and_retry_limits"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "name": "test_download_child_environment_hash_and_real_deadline"
+              }
+            ],
+            "duration_ms": 4988.038,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\46cfcc2183ce96dd38b1dab98370a972b7ae9c0040dbe9cd731aacc997bb65cf\\artifacts\\271ea937a7a0c3f7831c650c9ec288db\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "271ea937a7a0c3f7831c650c9ec288db",
+        "attempt_id": "25cbf7ffca5c43e1ef4edb3d49e351d8"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1977.28,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 10828.906,
+    "failures": []
+  },
+  "source_commit": "3a8c74c8cf5e826096ab64ed29b59bd2c19f42f2"
+}
