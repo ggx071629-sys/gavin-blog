@@ -2176,7 +2176,8 @@
         "M05-STUDIO-OPERATIONS-LAYOUT-01",
         "M05-STUDIO-OPERATIONS-STATES-01",
         "M06-STUDIO-PROFILE-CONTRAST-01",
-        "M07-STUDIO-SUITE-MANAGEMENT-01"
+        "M07-STUDIO-SUITE-MANAGEMENT-01",
+        "M06-RESUME-ADMIN-UI-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3479,7 +3480,8 @@
       ],
       "dependents": [
         "M06.web_types",
-        "M06.account_ui"
+        "M06.account_ui",
+        "M06.resume_admin_web"
       ],
       "dependency_reasons": {
         "M06.web_types": [
@@ -3487,6 +3489,9 @@
         ],
         "M06.account_ui": [
           "types/account.ts imports generated components schemas directly."
+        ],
+        "M06.resume_admin_web": [
+          "Admin sync component consumes generated ResumeStatus and authenticated resume endpoints."
         ]
       }
     },
@@ -4267,7 +4272,8 @@
       ],
       "dependents": [
         "M06.profile",
-        "M10.index"
+        "M10.index",
+        "M06.resume_admin_web"
       ],
       "dependency_reasons": {
         "M06.profile": [
@@ -4275,6 +4281,27 @@
         ],
         "M10.index": [
           "Existing worker runs resume queue before incremental/rebuild work."
+        ],
+        "M06.resume_admin_web": [
+          "Admin sync component consumes generated ResumeStatus and authenticated resume endpoints."
+        ]
+      }
+    },
+    "M06.resume_admin_web": {
+      "paths": [
+        "apps/web/components/ResumeSyncStatus.vue",
+        "apps/web/types/resume.ts",
+        "apps/web/tests/e2e-assistant/resume-sync.spec.ts"
+      ],
+      "cases": [
+        "M06-RESUME-ADMIN-UI-01"
+      ],
+      "dependents": [
+        "M06.profile_web"
+      ],
+      "dependency_reasons": {
+        "M06.profile_web": [
+          "Admin profile mounts resume sync control alongside URL settings."
         ]
       }
     }

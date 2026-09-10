@@ -6214,6 +6214,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M06-RESUME-ADMIN-UI-01",
+          "priority": "P1",
+          "scenario": "Resume sync status, draft-safe manual refresh, failure/cooldown handling and responsive keyboard access.",
+          "expectations": [
+            {
+              "id": "M06-RESUME-ADMIN-UI-01-E01",
+              "surface": "response",
+              "statement": "Admin sees current sync stage and actionable errors; explicit refresh preserves unsaved fields and polling stops on leave."
+            },
+            {
+              "id": "M06-RESUME-ADMIN-UI-01-E02",
+              "surface": "forbidden",
+              "statement": "Unsaved URL, stale binding and unreadable status cannot trigger refresh or claim success; no mobile overflow or axe violations."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e-assistant/resume-sync.spec.ts",
+              "kind": "playwright",
+              "name": "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes",
+              "gate": "e2e",
+              "covers": [
+                "M06-RESUME-ADMIN-UI-01-E01",
+                "M06-RESUME-ADMIN-UI-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
