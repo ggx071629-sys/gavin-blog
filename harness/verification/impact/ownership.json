@@ -2593,7 +2593,8 @@
         "M07-STUDIO-THEME-01",
         "M02-STUDIO-SHELL-01",
         "M02-DESK-LAYOUT-01",
-        "M02-DESK-REVISIONS-01"
+        "M02-DESK-REVISIONS-01",
+        "M05-STUDIO-CONTENT-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -3603,7 +3604,8 @@
         "M07-P1-01",
         "M10-MANAGEMENT-UI-01",
         "M03-STUDIO-TAXONOMY-01",
-        "M05-STUDIO-MEDIA-01"
+        "M05-STUDIO-MEDIA-01",
+        "M05-STUDIO-CONTENT-01"
       ],
       "dependents": [
         "M06.profile_web",

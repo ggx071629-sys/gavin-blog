@@ -4016,6 +4016,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M05-STUDIO-CONTENT-01",
+          "priority": "P1",
+          "scenario": "回收站恢复删除与 Markdown 迁移分区",
+          "expectations": [
+            {
+              "id": "M05-STUDIO-CONTENT-01-E01",
+              "surface": "user_visible",
+              "statement": "回收站恢复删除与 Markdown 迁移分区"
+            },
+            {
+              "id": "M05-STUDIO-CONTENT-01-E02",
+              "surface": "forbidden",
+              "statement": "取消永久删除不得移除数据；失败不丢弃记录或伪造成功；导入不得自动发布。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "kind": "playwright",
+              "name": "ct",
+              "gate": "e2e",
+              "covers": [
+                "M05-STUDIO-CONTENT-01-E01",
+                "M05-STUDIO-CONTENT-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
