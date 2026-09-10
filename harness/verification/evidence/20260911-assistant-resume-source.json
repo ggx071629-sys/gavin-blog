@@ -1,0 +1,1977 @@
+{
+  "schema_version": 2,
+  "task_id": "20260911-assistant-resume-source",
+  "created_at": "2026-09-10T18:55:51.137953+00:00",
+  "command": "python -m tools.harness verify 20260911-assistant-resume-source",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5",
+    "AC-6",
+    "AC-7"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-6",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-7",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "15eb8ca97a750b6d59926041298c96e5ed0c7f8e",
+    "active_spec_sha256": "7426e06dea3db81fa7a71567e899b5afbf64ecc2ccff6b0fd64d665da2b541de",
+    "verification_contract_sha256": "2f7c5dd81c3b366224ff08a5af725a58ad5cff0989cb31d9b9b10192fd6775f9",
+    "gate_config_sha256": "18b23b2eb3215bff1fdd183c889175fcb5c47f008226be9dcd49ff75101275c1",
+    "documentation_contract_sha256": "e8ab890670e31999cc669f72ce75cedae73e699017a74c65c13294b4d32c6639",
+    "documentation_targets_sha256": "8ce23fabe5a64f5db0e04f75f8b241e2704cfd5204759c73993ad94ac4c4dd41",
+    "module_contract_sha256": "29a20cde4331fc1f1932ca45abe953da5e55166bbbd592bbde733564637a8863"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录可信下载与解析执行边界、PDF 内容库所有权、手动刷新和版本化公开引用。",
+    "targets": [
+      "apps/api/README.md",
+      "apps/web/README.md",
+      "packages/contracts/README.md",
+      "harness/docs/architecture/boundaries.md"
+    ],
+    "baseline_commit": "bab867ff8eff1841c42af2b849085f3280b118cc",
+    "target_blobs": {
+      "apps/api/README.md": "38825d1d3826cda428fafdbca571186f58fd66f9",
+      "apps/web/README.md": "1d3e358d6aa91e6ce2bfa8b3347b13c7b8d8a645",
+      "packages/contracts/README.md": "9a7910f7e77eb00a2b52efb0adc1ccab3cfdadbf",
+      "harness/docs/architecture/boundaries.md": "b3a876099e1ffdb654748dfc804a4647a8f44fcd"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "c29d699d17d8dc5be7f9a253bb8b37ab8f1b9270",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260911-assistant-resume-source.json",
+      "sha256": "a6baa6c76844de384d4b9802d787bfc00742b6a181d984e3b162f21e15b05435",
+      "selected_cases": [
+        "M06-RESUME-ADMIN-UI-01",
+        "M06-RESUME-DOWNLOAD-01",
+        "M06-RESUME-DOWNLOAD-LIMITS-01",
+        "M06-RESUME-FENCE-01",
+        "M06-RESUME-PARSE-01",
+        "M06-RESUME-PARSE-LIMITS-01",
+        "M06-RESUME-PDF-01",
+        "M06-RESUME-REFRESH-API-01",
+        "M06-RESUME-REFRESH-RETRY-01",
+        "M06-RESUME-REFRESH-WORKER-01",
+        "M06-RESUME-STORAGE-01",
+        "M09-ABOUT-CITATION-01",
+        "M09-ABOUT-FACTS-01",
+        "M09-ABOUT-RETRIEVAL-01",
+        "M09-RESUME-CITATION-UI-01",
+        "M09-RESUME-FACTS-01",
+        "M10-RESUME-INDEX-01",
+        "M11-ASSISTANT-PROJECTION-01",
+        "M11-ASSISTANT-SYNC-01"
+      ],
+      "selected_refs": 30,
+      "excluded_cases": 281
+    },
+    "receipt": {
+      "run_id": "079eeca2c2c5f1bdb3fa7432f2a77eae",
+      "identity": "b26cda20447b62069a506850a0738e29c61400fff1df7f3cae6fa424eb325d76",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1454.969,
+      "plan_inputs": 1473.554,
+      "execute_cleanup_and_input_recheck": 223799.966
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "29a20cde4331fc1f1932ca45abe953da5e55166bbbd592bbde733564637a8863",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-RESUME-DOWNLOAD-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P0",
+            "scenario": "仅可信域逐跳校验后固定公网IP，保留TLS原主机校验。",
+            "expectations": [
+              {
+                "id": "M06-RESUME-DOWNLOAD-01-E01",
+                "surface": "response",
+                "statement": "可信PDF可取得完整字节/hash，TLS固定原主机并连接已校验地址。"
+              },
+              {
+                "id": "M06-RESUME-DOWNLOAD-01-E02",
+                "surface": "forbidden",
+                "statement": "非法域/私网、超限/超时被拒绝，URL秘密不进入命令行，代理和应用密钥不传入子进程。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "kind": "pytest",
+                "name": "test_trusted_download_pins_each_redirect_and_preserves_tls_hostname",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-DOWNLOAD-01-E01",
+                  "M06-RESUME-DOWNLOAD-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "kind": "pytest",
+                "name": "test_untrusted_targets_and_mixed_dns_are_rejected_without_connecting",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-DOWNLOAD-01-E01",
+                  "M06-RESUME-DOWNLOAD-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-DOWNLOAD-LIMITS-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P0",
+            "scenario": "PDF类型/字节/跳转及子进程总截止生效，环境与错误不泄密。",
+            "expectations": [
+              {
+                "id": "M06-RESUME-DOWNLOAD-LIMITS-01-E01",
+                "surface": "response",
+                "statement": "可信PDF可取得完整字节/hash，TLS固定原主机并连接已校验地址。"
+              },
+              {
+                "id": "M06-RESUME-DOWNLOAD-LIMITS-01-E02",
+                "surface": "forbidden",
+                "statement": "非法域/私网、超限/超时被拒绝，URL秘密不进入命令行，代理和应用密钥不传入子进程。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "kind": "pytest",
+                "name": "test_download_file_redirect_and_retry_limits",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-DOWNLOAD-LIMITS-01-E01",
+                  "M06-RESUME-DOWNLOAD-LIMITS-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "kind": "pytest",
+                "name": "test_download_child_environment_hash_and_real_deadline",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-DOWNLOAD-LIMITS-01-E01",
+                  "M06-RESUME-DOWNLOAD-LIMITS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-RESUME-PARSE-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Text PDF extraction preserves pages and rejects unsupported content.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-PARSE-01-E01",
+                "surface": "response",
+                "statement": "Text PDF extraction preserves pages and rejects unsupported content."
+              },
+              {
+                "id": "M06-RESUME-PARSE-01-E02",
+                "surface": "forbidden",
+                "statement": "Unsupported or unbounded parsing must never yield usable evidence."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_parse.py",
+                "kind": "pytest",
+                "name": "test_pdf_text_pages_and_unsupported_files",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-PARSE-01-E01",
+                  "M06-RESUME-PARSE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-PARSE-LIMITS-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Real child process enforces resource and IO boundaries and is reaped on deadline.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-PARSE-LIMITS-01-E01",
+                "surface": "response",
+                "statement": "Real child process enforces resource and IO boundaries and is reaped on deadline."
+              },
+              {
+                "id": "M06-RESUME-PARSE-LIMITS-01-E02",
+                "surface": "forbidden",
+                "statement": "Unsupported or unbounded parsing must never yield usable evidence."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_parse.py",
+                "kind": "pytest",
+                "name": "test_parser_memory_and_io_are_enforced_in_real_process",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-PARSE-LIMITS-01-E01",
+                  "M06-RESUME-PARSE-LIMITS-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_parse.py",
+                "kind": "pytest",
+                "name": "test_parser_deadline_and_unavailable_boundary",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-PARSE-LIMITS-01-E01",
+                  "M06-RESUME-PARSE-LIMITS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-RESUME-STORAGE-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Bounded content cache, migration, same-hash reuse and binding revocation.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-STORAGE-01-E01",
+                "surface": "response",
+                "statement": "Bounded content cache, migration, same-hash reuse and binding revocation."
+              },
+              {
+                "id": "M06-RESUME-STORAGE-01-E02",
+                "surface": "forbidden",
+                "statement": "Revoked, failed or superseded resume versions must never be usable or overwrite a current version."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_storage.py",
+                "kind": "pytest",
+                "name": "test_resume_cache_reuse_binding_revocation_and_migration",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-STORAGE-01-E01",
+                  "M06-RESUME-STORAGE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-FENCE-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Every lease identity is checked and failure or new bytes revoke old eligibility.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-FENCE-01-E01",
+                "surface": "response",
+                "statement": "Every lease identity is checked and failure or new bytes revoke old eligibility."
+              },
+              {
+                "id": "M06-RESUME-FENCE-01-E02",
+                "surface": "forbidden",
+                "statement": "Revoked, failed or superseded resume versions must never be usable or overwrite a current version."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_storage.py",
+                "kind": "pytest",
+                "name": "test_resume_late_results_fail_closed_and_new_hash_suspends_before_parse",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-FENCE-01-E01",
+                  "M06-RESUME-FENCE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M10-RESUME-INDEX-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "Hybrid retrieval and cross-generation version purge preserve new evidence.",
+            "expectations": [
+              {
+                "id": "M10-RESUME-INDEX-01-E01",
+                "surface": "response",
+                "statement": "Hybrid retrieval and cross-generation version purge preserve new evidence."
+              },
+              {
+                "id": "M10-RESUME-INDEX-01-E02",
+                "surface": "forbidden",
+                "statement": "Revoked, failed or superseded resume versions must never be usable or overwrite a current version."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_storage.py",
+                "kind": "pytest",
+                "name": "test_resume_retrieval_and_delayed_version_purge_preserve_new_version",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-RESUME-INDEX-01-E01",
+                  "M10-RESUME-INDEX-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-RESUME-REFRESH-API-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Atomic Profile binding/queue, authenticated read-only status and fenced/coalesced/cooled refresh.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-REFRESH-API-01-E01",
+                "surface": "response",
+                "statement": "Atomic Profile binding/queue, authenticated read-only status and fenced/coalesced/cooled refresh."
+              },
+              {
+                "id": "M06-RESUME-REFRESH-API-01-E02",
+                "surface": "forbidden",
+                "statement": "GET cannot trigger import, late work cannot revive old content, and attempts cannot continue indefinitely."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_refresh_api_auth_epoch_coalescing_cooldown_and_atomicity",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-API-01-E01",
+                  "M06-RESUME-REFRESH-API-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_profile.py",
+                "kind": "pytest",
+                "name": "test_update_and_public_reflects_changes",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-API-01-E01",
+                  "M06-RESUME-REFRESH-API-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-REFRESH-WORKER-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Worker imports outside write locks, drops replaced work, reuses unchanged PDFs and has no timer.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-REFRESH-WORKER-01-E01",
+                "surface": "response",
+                "statement": "Worker imports outside write locks, drops replaced work, reuses unchanged PDFs and has no timer."
+              },
+              {
+                "id": "M06-RESUME-REFRESH-WORKER-01-E02",
+                "surface": "forbidden",
+                "statement": "GET cannot trigger import, late work cannot revive old content, and attempts cannot continue indefinitely."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_worker_import_manual_reuse_no_timer_and_replacement_during_download",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-WORKER-01-E01",
+                  "M06-RESUME-REFRESH-WORKER-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_worker_bootstraps_existing_url_and_parse_failure_keeps_evidence_paused",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-WORKER-01-E01",
+                  "M06-RESUME-REFRESH-WORKER-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_index.py",
+                "kind": "pytest",
+                "name": "test_worker_rebuild_retriever_and_staleness",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-WORKER-01-E01",
+                  "M06-RESUME-REFRESH-WORKER-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-REFRESH-RETRY-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Transient retry pauses evidence, obeys Retry-After and stops after four total attempts including abandoned claims.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-REFRESH-RETRY-01-E01",
+                "surface": "response",
+                "statement": "Transient retry pauses evidence, obeys Retry-After and stops after four total attempts including abandoned claims."
+              },
+              {
+                "id": "M06-RESUME-REFRESH-RETRY-01-E02",
+                "surface": "forbidden",
+                "statement": "GET cannot trigger import, late work cannot revive old content, and attempts cannot continue indefinitely."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_retry_backoff_pause_and_restart_are_bounded",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-RETRY-01-E01",
+                  "M06-RESUME-REFRESH-RETRY-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-5",
+        "selected_gates": [
+          "api-tests",
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-RESUME-ADMIN-UI-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Resume sync status, draft-safe manual refresh, failure/cooldown handling and responsive keyboard access.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-ADMIN-UI-01-E01",
+                "surface": "response",
+                "statement": "Admin sees current sync stage and actionable errors; explicit refresh preserves unsaved fields and polling stops on leave."
+              },
+              {
+                "id": "M06-RESUME-ADMIN-UI-01-E02",
+                "surface": "forbidden",
+                "statement": "Unsaved URL, stale binding and unreadable status cannot trigger refresh or claim success; no mobile overflow or axe violations."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e-assistant/resume-sync.spec.ts",
+                "kind": "playwright",
+                "name": "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes",
+                "gate": "e2e",
+                "covers": [
+                  "M06-RESUME-ADMIN-UI-01-E01",
+                  "M06-RESUME-ADMIN-UI-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-REFRESH-API-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Atomic Profile binding/queue, authenticated read-only status and fenced/coalesced/cooled refresh.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-REFRESH-API-01-E01",
+                "surface": "response",
+                "statement": "Atomic Profile binding/queue, authenticated read-only status and fenced/coalesced/cooled refresh."
+              },
+              {
+                "id": "M06-RESUME-REFRESH-API-01-E02",
+                "surface": "forbidden",
+                "statement": "GET cannot trigger import, late work cannot revive old content, and attempts cannot continue indefinitely."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_refresh_api_auth_epoch_coalescing_cooldown_and_atomicity",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-API-01-E01",
+                  "M06-RESUME-REFRESH-API-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_profile.py",
+                "kind": "pytest",
+                "name": "test_update_and_public_reflects_changes",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-API-01-E01",
+                  "M06-RESUME-REFRESH-API-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-6",
+        "selected_gates": [
+          "api-tests",
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-RESUME-FACTS-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Self-report/conflict policy and fixed unaliased notice preserve citation validation; graph rejects revoked resume before sending, validation and final publish.",
+            "expectations": [
+              {
+                "id": "M09-RESUME-FACTS-01-E01",
+                "surface": "response",
+                "statement": "Self-report/conflict policy and fixed unaliased notice preserve citation validation; graph rejects revoked resume before sending, validation and final publish."
+              },
+              {
+                "id": "M09-RESUME-FACTS-01-E02",
+                "surface": "forbidden",
+                "statement": "Unavailable versions, forged aliases and arbitrary URLs must not become downloadable/current evidence; status is not a factual source."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_citations.py",
+                "kind": "pytest",
+                "name": "test_resume_self_report_conflict_and_unaliased_operational_notice",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-RESUME-FACTS-01-E01",
+                  "M09-RESUME-FACTS-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_citations.py",
+                "kind": "pytest",
+                "name": "test_resume_graph_rechecks_before_provider_and_after_generation",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-RESUME-FACTS-01-E01",
+                  "M09-RESUME-FACTS-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_about_facts.py",
+                "kind": "pytest",
+                "name": "test_about_self_report_prompt_and_bound_citations",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-RESUME-FACTS-01-E01",
+                  "M09-RESUME-FACTS-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_online_matrix.py",
+                "kind": "pytest",
+                "name": "test_security_forged_citations_not_streamed_as_answer",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-RESUME-FACTS-01-E01",
+                  "M09-RESUME-FACTS-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_development.py",
+                "kind": "pytest",
+                "name": "test_local_development_uses_existing_content_and_returns_citations",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-RESUME-FACTS-01-E01",
+                  "M09-RESUME-FACTS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-PDF-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Current indexed PDF bytes are served without sessions; revocation returns 404 and last successful index time survives failure.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-PDF-01-E01",
+                "surface": "response",
+                "statement": "Current indexed PDF bytes are served without sessions; revocation returns 404 and last successful index time survives failure."
+              },
+              {
+                "id": "M06-RESUME-PDF-01-E02",
+                "surface": "forbidden",
+                "statement": "Unavailable versions, forged aliases and arbitrary URLs must not become downloadable/current evidence; status is not a factual source."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_citations.py",
+                "kind": "pytest",
+                "name": "test_resume_pdf_snapshot_is_exact_revocable_and_read_only",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-PDF-01-E01",
+                  "M06-RESUME-PDF-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-RESUME-CITATION-UI-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Public/admin citations download identical PDF fixture bytes through the real Web proxy and API; unsafe paths are rejected and About navigation still works.",
+            "expectations": [
+              {
+                "id": "M09-RESUME-CITATION-UI-01-E01",
+                "surface": "response",
+                "statement": "Public/admin PDF citations download exact fixture bytes through strict paths; unsafe paths are rejected and About navigation still works."
+              },
+              {
+                "id": "M09-RESUME-CITATION-UI-01-E02",
+                "surface": "forbidden",
+                "statement": "Unavailable versions, forged aliases and arbitrary URLs must not become downloadable/current evidence; status is not a factual source."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "kind": "playwright",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths",
+                "gate": "e2e",
+                "covers": [
+                  "M09-RESUME-CITATION-UI-01-E01",
+                  "M09-RESUME-CITATION-UI-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-7",
+        "selected_gates": [
+          "api-tests",
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-RESUME-REFRESH-WORKER-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Worker imports outside write locks, drops replaced work, reuses unchanged PDFs and has no timer.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-REFRESH-WORKER-01-E01",
+                "surface": "response",
+                "statement": "Worker imports outside write locks, drops replaced work, reuses unchanged PDFs and has no timer."
+              },
+              {
+                "id": "M06-RESUME-REFRESH-WORKER-01-E02",
+                "surface": "forbidden",
+                "statement": "GET cannot trigger import, late work cannot revive old content, and attempts cannot continue indefinitely."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_worker_import_manual_reuse_no_timer_and_replacement_during_download",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-WORKER-01-E01",
+                  "M06-RESUME-REFRESH-WORKER-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_worker_bootstraps_existing_url_and_parse_failure_keeps_evidence_paused",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-WORKER-01-E01",
+                  "M06-RESUME-REFRESH-WORKER-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_index.py",
+                "kind": "pytest",
+                "name": "test_worker_rebuild_retriever_and_staleness",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-WORKER-01-E01",
+                  "M06-RESUME-REFRESH-WORKER-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-REFRESH-RETRY-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Transient retry pauses evidence, obeys Retry-After and stops after four total attempts including abandoned claims.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-REFRESH-RETRY-01-E01",
+                "surface": "response",
+                "statement": "Transient retry pauses evidence, obeys Retry-After and stops after four total attempts including abandoned claims."
+              },
+              {
+                "id": "M06-RESUME-REFRESH-RETRY-01-E02",
+                "surface": "forbidden",
+                "statement": "GET cannot trigger import, late work cannot revive old content, and attempts cannot continue indefinitely."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_retry_backoff_pause_and_restart_are_bounded",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-RETRY-01-E01",
+                  "M06-RESUME-REFRESH-RETRY-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-PDF-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Current indexed PDF bytes are served without sessions; revocation returns 404 and last successful index time survives failure.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-PDF-01-E01",
+                "surface": "response",
+                "statement": "Current indexed PDF bytes are served without sessions; revocation returns 404 and last successful index time survives failure."
+              },
+              {
+                "id": "M06-RESUME-PDF-01-E02",
+                "surface": "forbidden",
+                "statement": "Unavailable versions, forged aliases and arbitrary URLs must not become downloadable/current evidence; status is not a factual source."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_citations.py",
+                "kind": "pytest",
+                "name": "test_resume_pdf_snapshot_is_exact_revocable_and_read_only",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-PDF-01-E01",
+                  "M06-RESUME-PDF-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-RESUME-CITATION-UI-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Public/admin citations download identical PDF fixture bytes through the real Web proxy and API; unsafe paths are rejected and About navigation still works.",
+            "expectations": [
+              {
+                "id": "M09-RESUME-CITATION-UI-01-E01",
+                "surface": "response",
+                "statement": "Public/admin PDF citations download exact fixture bytes through strict paths; unsafe paths are rejected and About navigation still works."
+              },
+              {
+                "id": "M09-RESUME-CITATION-UI-01-E02",
+                "surface": "forbidden",
+                "statement": "Unavailable versions, forged aliases and arbitrary URLs must not become downloadable/current evidence; status is not a factual source."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "kind": "playwright",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths",
+                "gate": "e2e",
+                "covers": [
+                  "M09-RESUME-CITATION-UI-01-E01",
+                  "M09-RESUME-CITATION-UI-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M11-ASSISTANT-PROJECTION-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P1",
+            "scenario": "主动发布的当前关于修订可投影，seed和草稿排除；新迁移保留四类来源数据并扩展about约束。",
+            "expectations": [
+              {
+                "id": "M11-ASSISTANT-PROJECTION-01-E01",
+                "surface": "response",
+                "statement": "发布正文包含结构字段且版本绑定当前主动修订；旧库四类任务及个人资料保持。"
+              },
+              {
+                "id": "M11-ASSISTANT-PROJECTION-01-E02",
+                "surface": "forbidden",
+                "statement": "seed、草稿和无发布指针不可投影；非法来源类型入库失败。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_about_projection.py",
+                "kind": "pytest",
+                "name": "test_about_projection_excludes_seed_and_draft_and_preserves_published_structure",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-ASSISTANT-PROJECTION-01-E01",
+                  "M11-ASSISTANT-PROJECTION-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_about_projection.py",
+                "kind": "pytest",
+                "name": "test_about_migration_preserves_existing_sources_and_qualifies_only_explicit_revisions",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-ASSISTANT-PROJECTION-01-E01",
+                  "M11-ASSISTANT-PROJECTION-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M11-ASSISTANT-SYNC-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P1",
+            "scenario": "关于页主动发布/回滚原子排队并立即改变来源版本资格。",
+            "expectations": [
+              {
+                "id": "M11-ASSISTANT-SYNC-01-E01",
+                "surface": "response",
+                "statement": "发布回滚合并最新about任务，管理schema和OpenAPI接受about。"
+              },
+              {
+                "id": "M11-ASSISTANT-SYNC-01-E02",
+                "surface": "forbidden",
+                "statement": "草稿不排队；入队失败无修订泄漏；旧来源fence拒绝。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_about_sync.py",
+                "kind": "pytest",
+                "name": "test_about_publish_rollback_outbox_and_source_fence",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-ASSISTANT-SYNC-01-E01",
+                  "M11-ASSISTANT-SYNC-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_about_sync.py",
+                "kind": "pytest",
+                "name": "test_about_failed_enqueue_rolls_back_publish_transaction",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-ASSISTANT-SYNC-01-E01",
+                  "M11-ASSISTANT-SYNC-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-ABOUT-RETRIEVAL-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "about首次重建后混合召回并限制证据，更新后旧证据立即失效。",
+            "expectations": [
+              {
+                "id": "M09-ABOUT-RETRIEVAL-01-E01",
+                "surface": "response",
+                "statement": "主动about有FTS和dense切片，新版本同步后可召回；其他有效profile仍可回答。"
+              },
+              {
+                "id": "M09-ABOUT-RETRIEVAL-01-E02",
+                "surface": "forbidden",
+                "statement": "seed不入重建，超预算片段不注入，旧about描述符在新版等待期间不可恢复。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_about_retrieval.py",
+                "kind": "pytest",
+                "name": "test_about_rebuild_hybrid_budget_and_stale_evidence",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-ABOUT-RETRIEVAL-01-E01",
+                  "M09-ABOUT-RETRIEVAL-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-ABOUT-CITATION-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "关于页引用在公开与管理消费中可点击，明确自述与冲突处理规则。",
+            "expectations": [
+              {
+                "id": "M09-ABOUT-CITATION-01-E01",
+                "surface": "response",
+                "statement": "关于Gavin引用打开/about；规则接受明确自述并要求冲突引用双方。"
+              },
+              {
+                "id": "M09-ABOUT-CITATION-01-E02",
+                "surface": "forbidden",
+                "statement": "任意外链/虚构alias被拒绝；文章主题不得冒充个人能力。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "kind": "playwright",
+                "name": "about citations navigate in public answers and admin trial",
+                "gate": "e2e",
+                "covers": [
+                  "M09-ABOUT-CITATION-01-E01",
+                  "M09-ABOUT-CITATION-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-ABOUT-FACTS-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "关于页引用在公开与管理消费中可点击，明确自述与冲突处理规则。",
+            "expectations": [
+              {
+                "id": "M09-ABOUT-FACTS-01-E01",
+                "surface": "response",
+                "statement": "关于Gavin引用打开/about；规则接受明确自述并要求冲突引用双方。"
+              },
+              {
+                "id": "M09-ABOUT-FACTS-01-E02",
+                "surface": "forbidden",
+                "statement": "任意外链/虚构alias被拒绝；文章主题不得冒充个人能力。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_about_facts.py",
+                "kind": "pytest",
+                "name": "test_about_self_report_prompt_and_bound_citations",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-ABOUT-FACTS-01-E01",
+                  "M09-ABOUT-FACTS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.525,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "181 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 236.966,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 77.705,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.487,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "997 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 428.818,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "302 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 90.309,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 300 cases, 601 expectations, 990 exact test references; contract sha256 29a20cde4331"
+      ],
+      "status": "passed",
+      "duration_ms": 521.942,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.031,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.537,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 80.068,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6",
+        "AC-7"
+      ],
+      "duration_ms": 2111.892,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "079eeca2c2c5f1bdb3fa7432f2a77eae",
+        "attempt_id": "896b689ea59fac36d444ebb448a9ca31"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-assistant-resume-source --gate api-tests",
+      "status": "passed",
+      "duration_ms": 29153.695,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6",
+        "AC-7"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 4820,
+        "selection_counts": {
+          "collected": 27,
+          "executed": 27
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "name": "test_trusted_download_pins_each_redirect_and_preserves_tls_hostname"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "name": "test_untrusted_targets_and_mixed_dns_are_rejected_without_connecting"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "name": "test_download_file_redirect_and_retry_limits"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "name": "test_download_child_environment_hash_and_real_deadline"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_storage.py",
+                "name": "test_resume_late_results_fail_closed_and_new_hash_suspends_before_parse"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_parse.py",
+                "name": "test_pdf_text_pages_and_unsupported_files"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_parse.py",
+                "name": "test_parser_memory_and_io_are_enforced_in_real_process"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_parse.py",
+                "name": "test_parser_deadline_and_unavailable_boundary"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_citations.py",
+                "name": "test_resume_pdf_snapshot_is_exact_revocable_and_read_only"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "name": "test_resume_refresh_api_auth_epoch_coalescing_cooldown_and_atomicity"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_profile.py",
+                "name": "test_update_and_public_reflects_changes"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "name": "test_resume_retry_backoff_pause_and_restart_are_bounded"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "name": "test_resume_worker_import_manual_reuse_no_timer_and_replacement_during_download"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "name": "test_resume_worker_bootstraps_existing_url_and_parse_failure_keeps_evidence_paused"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_worker_rebuild_retriever_and_staleness"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_storage.py",
+                "name": "test_resume_cache_reuse_binding_revocation_and_migration"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_facts.py",
+                "name": "test_about_self_report_prompt_and_bound_citations"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_retrieval.py",
+                "name": "test_about_rebuild_hybrid_budget_and_stale_evidence"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_citations.py",
+                "name": "test_resume_self_report_conflict_and_unaliased_operational_notice"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_citations.py",
+                "name": "test_resume_graph_rechecks_before_provider_and_after_generation"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_online_matrix.py",
+                "name": "test_security_forged_citations_not_streamed_as_answer"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_development.py",
+                "name": "test_local_development_uses_existing_content_and_returns_citations"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_storage.py",
+                "name": "test_resume_retrieval_and_delayed_version_purge_preserve_new_version"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_projection.py",
+                "name": "test_about_projection_excludes_seed_and_draft_and_preserves_published_structure"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_projection.py",
+                "name": "test_about_migration_preserves_existing_sources_and_qualifies_only_explicit_revisions"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_sync.py",
+                "name": "test_about_publish_rollback_outbox_and_source_fence"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_sync.py",
+                "name": "test_about_failed_enqueue_rolls_back_publish_transaction"
+              }
+            ],
+            "duration_ms": 28715.617,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\46cfcc2183ce96dd38b1dab98370a972b7ae9c0040dbe9cd731aacc997bb65cf\\artifacts\\079eeca2c2c5f1bdb3fa7432f2a77eae\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "079eeca2c2c5f1bdb3fa7432f2a77eae",
+        "attempt_id": "681bc9c9f2fd2fed547b6f386bea79c6"
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-assistant-resume-source --gate e2e",
+      "status": "passed",
+      "duration_ms": 189244.463,
+      "covers": [
+        "AC-5",
+        "AC-6",
+        "AC-7"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 5420,
+        "selection_counts": {
+          "collected": 3,
+          "executed": 3
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-sync.spec.ts",
+                "name": "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "about citations navigate in public answers and admin trial"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths"
+              }
+            ],
+            "duration_ms": 3080.541,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-sync.spec.ts",
+                "name": "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes"
+              }
+            ],
+            "duration_ms": 1460.798
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "about citations navigate in public answers and admin trial"
+              }
+            ],
+            "duration_ms": 1523.121
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths"
+              }
+            ],
+            "duration_ms": 1465.281
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-sync.spec.ts",
+                "name": "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes"
+                ]
+              }
+            ],
+            "duration_ms": 1348.956,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-sync.spec.ts",
+                "name": "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes"
+                ]
+              }
+            ],
+            "duration_ms": 74092.411,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "about citations navigate in public answers and admin trial",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about citations navigate in public answers and admin trial"
+                ]
+              }
+            ],
+            "duration_ms": 1253.816,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "about citations navigate in public answers and admin trial",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about citations navigate in public answers and admin trial"
+                ]
+              }
+            ],
+            "duration_ms": 51208.479,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "versioned resume citations download exact files in public and admin answers and reject unsafe paths"
+                ]
+              }
+            ],
+            "duration_ms": 1277.022,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "versioned resume citations download exact files in public and admin answers and reject unsafe paths"
+                ]
+              }
+            ],
+            "duration_ms": 52063.516,
+            "batch_id": "batch-0003"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\46cfcc2183ce96dd38b1dab98370a972b7ae9c0040dbe9cd731aacc997bb65cf\\artifacts\\079eeca2c2c5f1bdb3fa7432f2a77eae\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "079eeca2c2c5f1bdb3fa7432f2a77eae",
+        "attempt_id": "cca3f303733abcf1558d423b26061a24"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2874.06,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 224836.498,
+    "failures": []
+  },
+  "source_commit": "c29d699d17d8dc5be7f9a253bb8b37ab8f1b9270"
+}
