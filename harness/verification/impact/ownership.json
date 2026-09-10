@@ -3807,7 +3807,8 @@
         "apps/web/public/studio/icons/tag.svg",
         "apps/web/public/studio/icons/trash.svg",
         "apps/web/public/studio/icons/user-square.svg",
-        "apps/web/public/studio/icons/x.svg"
+        "apps/web/public/studio/icons/x.svg",
+        "apps/web/tests/e2e/studio-coverage.spec.ts"
       ],
       "cases": [
         "M07-STUDIO-THEME-01",
@@ -3817,7 +3818,8 @@
         "M02-DESK-REVISIONS-01",
         "M06-STUDIO-LOGIN-01",
         "M06-STUDIO-LOGIN-ERROR-01",
-        "M10-STUDIO-OVERVIEW-01"
+        "M10-STUDIO-OVERVIEW-01",
+        "M07-STUDIO-COVERAGE-01"
       ],
       "dependents": [
         "M02.admin_shell",
