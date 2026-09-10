@@ -12828,7 +12828,7 @@
               "path": "apps/web/tests/e2e-assistant/management.spec.ts",
               "name": "management real trial budget public switch and responsive maintenance",
               "gate": "e2e",
-              "config": "apps/web/playwright.assistant.config.ts",
+              "config": "playwright.assistant.config.ts",
               "project": "chromium",
               "covers": [
                 "M10-MANAGEMENT-UI-01-ALLOW",
@@ -12843,7 +12843,7 @@
               "path": "apps/web/tests/e2e/resource-ops.spec.ts",
               "name": "ops assistant",
               "gate": "e2e",
-              "config": "apps/web/playwright.config.ts",
+              "config": "playwright.config.ts",
               "project": "chromium",
               "covers": [
                 "M10-MANAGEMENT-UI-01-ALLOW",
@@ -12942,7 +12942,7 @@
               "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
               "name": "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay",
               "gate": "e2e",
-              "config": "apps/web/playwright.assistant.config.ts",
+              "config": "playwright.assistant.config.ts",
               "project": "chromium",
               "covers": [
                 "M10-PUBLIC-AVAILABILITY-01-ALLOW",
@@ -12957,7 +12957,7 @@
               "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
               "name": "admin kill switch is explicit and prevents a later anonymous admission",
               "gate": "e2e",
-              "config": "apps/web/playwright.assistant.config.ts",
+              "config": "playwright.assistant.config.ts",
               "project": "chromium",
               "covers": [
                 "M10-PUBLIC-AVAILABILITY-01-ALLOW",
@@ -12995,7 +12995,7 @@
               "path": "apps/web/tests/e2e-assistant/management.spec.ts",
               "name": "management real trial budget public switch and responsive maintenance",
               "gate": "e2e",
-              "config": "apps/web/playwright.assistant.config.ts",
+              "config": "playwright.assistant.config.ts",
               "project": "chromium",
               "covers": [
                 "M10-ADMIN-TRIAL-01-ALLOW",
