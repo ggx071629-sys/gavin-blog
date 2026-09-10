@@ -195,6 +195,46 @@
         }
       ],
       "no_test_reason": "Ordinary documentation and declarative registrations checked by structural integrity."
+    },
+    {
+      "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+      "owner": "M05.operations_layout",
+      "reason": "名片保存回归定位公开页面唯一 H1，避免同名名片 H2 造成歧义。",
+      "cases": [
+        "M06-OPS-PROFILE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Only disambiguates profile test locator; no runtime or other test changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Only disambiguates profile test locator; no runtime or other test changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Only disambiguates profile test locator; no runtime or other test changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Only disambiguates profile test locator; no runtime or other test changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Only disambiguates profile test locator; no runtime or other test changes.",
+          "cases": []
+        }
+      ]
     }
   ]
 }
