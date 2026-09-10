@@ -1,0 +1,662 @@
+{
+  "schema_version": 2,
+  "task_id": "20260910-studio-controls",
+  "created_at": "2026-09-10T07:06:43.382306+00:00",
+  "command": "python -m tools.harness verify 20260910-studio-controls",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "84d5db852d0b3c1522a7159230a31028de260f0a",
+    "active_spec_sha256": "f85e0cd9c8f07a81acd8f5002feca5b4df089d6d0231e102cde5663fbc69cb14",
+    "verification_contract_sha256": "1f1ca4e8dbe2d91ea3b0b5a38199518933fb71fe95ba8940d5eaf4934ea88d4a",
+    "gate_config_sha256": "feb150d9742d737f492f735f266574e1750fda2a05f8ad22d8bbbb228e041d1b",
+    "documentation_contract_sha256": "4095020b9cb63041372d591b7d7674853124044c1c1b18c231f7f52fa7a2b695",
+    "documentation_targets_sha256": "3a20b07012f1442d52a2df58bbe1dd33396064f9c9e96302aad243e8ca3af685",
+    "module_contract_sha256": "ab4cfcf9b26738c19ee41fc9bcfa3841a3c8fadd9bc4e1383136504d46610ce6"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录共用控件尺度和状态语义边界供后续页面复用。",
+    "targets": [
+      "apps/web/public/studio/README.md"
+    ],
+    "baseline_commit": "feea48d4f5392d9878e1d3da721ae2fce6198f3c",
+    "target_blobs": {
+      "apps/web/public/studio/README.md": "06e1fa2a5e98d17621e5eadf892bc1dad94eac8b"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "992577263ad68044056c8381dafad08927ed24cd",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260910-studio-controls.json",
+      "sha256": "780232cddf5aa330b0ac3d36ebbe4d20dfe3a46940edefd0eb1f928021ee77eb",
+      "selected_cases": [
+        "M02-DESK-LAYOUT-01",
+        "M02-DESK-REVISIONS-01",
+        "M07-STUDIO-THEME-01"
+      ],
+      "selected_refs": 3,
+      "excluded_cases": 229
+    },
+    "receipt": {
+      "run_id": "8a7e81daed1346a7f77e83e0017a90de",
+      "identity": "f9180448417195378708e56e8754015353e91bf69ba44daf63606905ff283be7",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1156.133,
+      "plan_inputs": 781.218,
+      "execute_cleanup_and_input_recheck": 115176.034
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "ab4cfcf9b26738c19ee41fc9bcfa3841a3c8fadd9bc4e1383136504d46610ce6",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M02-DESK-LAYOUT-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "writing desk twelve surfaces preserve themes mobile panels and accessible actions",
+            "expectations": [
+              {
+                "id": "M02-DESK-LAYOUT-01-E01",
+                "surface": "user_visible",
+                "statement": "Twelve isolated login, list, creation, editor, preview and history surfaces preserve theme tokens, fit 320–1440px and 480px short viewports, switch mobile sections and Markdown/preview by keyboard, with zero axe violations."
+              },
+              {
+                "id": "M02-DESK-LAYOUT-01-E02",
+                "surface": "forbidden",
+                "statement": "No horizontal overflow, inaccessible hidden settings, duplicate visible editor/preview, browser page errors or warnings."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "desk layout",
+                "gate": "e2e",
+                "covers": [
+                  "M02-DESK-LAYOUT-01-E01",
+                  "M02-DESK-LAYOUT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M07-STUDIO-THEME-01",
+            "module_id": "M07",
+            "module_name": "内容发现输出",
+            "priority": "P1",
+            "scenario": "Studio login, authenticated shell and real rollback dialog use independent blue themes without changing public colors.",
+            "expectations": [
+              {
+                "id": "M07-STUDIO-THEME-01-E01",
+                "surface": "user_visible",
+                "statement": "Light and dark studio roots and teleported dialog have the selected canvas, text, primary and local font stack."
+              },
+              {
+                "id": "M07-STUDIO-THEME-01-E02",
+                "surface": "forbidden",
+                "statement": "Public root colors must not change or inherit studio tokens; no external image or font requests."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/studio-theme.spec.ts",
+                "name": "theme",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-THEME-01-E01",
+                  "M07-STUDIO-THEME-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M02-DESK-REVISIONS-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "writing desk previews real revisions compares and rolls back with visible failures",
+            "expectations": [
+              {
+                "id": "M02-DESK-REVISIONS-01-E01",
+                "surface": "user_visible",
+                "statement": "Preview declares its working-copy boundary and renders one H1; history reads real content and diff; accessible confirmation restores focus; rollback creates a new monotonic revision whose content is public."
+              },
+              {
+                "id": "M02-DESK-REVISIONS-01-E02",
+                "surface": "forbidden",
+                "statement": "Rollback must not rewrite a past revision; failed snapshot retrieval must not retain another snapshot as its successful result."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk previews real revisions compares and rolls back with visible failures",
+                "gate": "e2e",
+                "covers": [
+                  "M02-DESK-REVISIONS-01-E01",
+                  "M02-DESK-REVISIONS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M07-STUDIO-THEME-01",
+            "module_id": "M07",
+            "module_name": "内容发现输出",
+            "priority": "P1",
+            "scenario": "Studio login, authenticated shell and real rollback dialog use independent blue themes without changing public colors.",
+            "expectations": [
+              {
+                "id": "M07-STUDIO-THEME-01-E01",
+                "surface": "user_visible",
+                "statement": "Light and dark studio roots and teleported dialog have the selected canvas, text, primary and local font stack."
+              },
+              {
+                "id": "M07-STUDIO-THEME-01-E02",
+                "surface": "forbidden",
+                "statement": "Public root colors must not change or inherit studio tokens; no external image or font requests."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/studio-theme.spec.ts",
+                "name": "theme",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-THEME-01-E01",
+                  "M07-STUDIO-THEME-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 6.731,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "134 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 171.339,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 81.722,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.65,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "685 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 336.618,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "253 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 83.512,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 232 cases, 465 expectations, 855 exact test references; contract sha256 ab4cfcf9b267"
+      ],
+      "status": "passed",
+      "duration_ms": 382.39,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.192,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.601,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 77.308,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 1438.909,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "8a7e81daed1346a7f77e83e0017a90de",
+        "attempt_id": "7eb33528b83e41ab37e772c406f5d4cd"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-controls --gate e2e",
+      "status": "passed",
+      "duration_ms": 112042.05,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 4181,
+        "selection_counts": {
+          "collected": 3,
+          "executed": 3
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "desk layout"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk previews real revisions compares and rolls back with visible failures"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-theme.spec.ts",
+                "name": "theme"
+              }
+            ],
+            "duration_ms": 2796.253,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "desk layout"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk previews real revisions compares and rolls back with visible failures"
+              }
+            ],
+            "duration_ms": 1440.243
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-theme.spec.ts",
+                "name": "theme"
+              }
+            ],
+            "duration_ms": 1356.801
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "desk layout",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "desk layout"
+                ]
+              }
+            ],
+            "duration_ms": 1330.875,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "desk layout",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "desk layout"
+                ]
+              }
+            ],
+            "duration_ms": 50647.591,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk previews real revisions compares and rolls back with visible failures",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "writing desk previews real revisions compares and rolls back with visible failures"
+                ]
+              }
+            ],
+            "duration_ms": 1281.505,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk previews real revisions compares and rolls back with visible failures",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "writing desk previews real revisions compares and rolls back with visible failures"
+                ]
+              }
+            ],
+            "duration_ms": 26137.116,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-theme.spec.ts",
+                "name": "theme",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "theme"
+                ]
+              }
+            ],
+            "duration_ms": 1228.201,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-theme.spec.ts",
+                "name": "theme",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "theme"
+                ]
+              }
+            ],
+            "duration_ms": 25457.701,
+            "batch_id": "batch-0003"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\9a513332054c4aa05ebb9c71540c8a27422c0b292066f2dac0c465cb7bcdfb7d\\artifacts\\8a7e81daed1346a7f77e83e0017a90de\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "8a7e81daed1346a7f77e83e0017a90de",
+        "attempt_id": "2c13ced6f4dd4ff40ab5c11df3a11179"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1431.482,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 116064.504,
+    "failures": []
+  },
+  "source_commit": "992577263ad68044056c8381dafad08927ed24cd"
+}
