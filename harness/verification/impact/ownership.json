@@ -2066,7 +2066,8 @@
         "M05-STUDIO-MEDIA-01",
         "M05-STUDIO-OPERATIONS-LAYOUT-01",
         "M05-STUDIO-OPERATIONS-STATES-01",
-        "M06-STUDIO-PROFILE-CONTRAST-01"
+        "M06-STUDIO-PROFILE-CONTRAST-01",
+        "M07-STUDIO-SUITE-MANAGEMENT-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3635,7 +3636,8 @@
         "M05-STUDIO-MEDIA-01",
         "M05-STUDIO-CONTENT-01",
         "M05-STUDIO-OPERATIONS-LAYOUT-01",
-        "M05-STUDIO-OPERATIONS-STATES-01"
+        "M05-STUDIO-OPERATIONS-STATES-01",
+        "M07-STUDIO-SUITE-MANAGEMENT-01"
       ],
       "dependents": [
         "M06.profile_web",
@@ -3790,7 +3792,8 @@
         "M11-STUDIO-ABOUT-HISTORY-01",
         "M05-STUDIO-OPERATIONS-LAYOUT-01",
         "M05-STUDIO-OPERATIONS-STATES-01",
-        "M06-STUDIO-PROFILE-CONTRAST-01"
+        "M06-STUDIO-PROFILE-CONTRAST-01",
+        "M07-STUDIO-SUITE-MANAGEMENT-01"
       ],
       "dependents": []
     },

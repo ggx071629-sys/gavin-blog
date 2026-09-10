@@ -5980,6 +5980,128 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M07-STUDIO-SUITE-MANAGEMENT-01",
+          "priority": "P1",
+          "scenario": "后台联跑在真实前置下验证保存发布、修订增量、名片媒体及主题。",
+          "expectations": [
+            {
+              "id": "M07-STUDIO-SUITE-MANAGEMENT-01-E01",
+              "surface": "user_visible",
+              "statement": "验证保存/发布后的服务端事实和当前运营布局。"
+            },
+            {
+              "id": "M07-STUDIO-SUITE-MANAGEMENT-01-E02",
+              "surface": "forbidden",
+              "statement": "不得以旧状态、同尾路径、固定初始计数或隐藏控件通过；不得无界等待动画。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about editor keeps drafts private until explicit publish",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E01",
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about editor supports ten cards per section and re-enables add after removal",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E01",
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "studio about editor",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E01",
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "ah",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E01",
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/profile.spec.ts",
+              "kind": "playwright",
+              "name": "homepage shows the default profile card before configuration",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E01",
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/profile.spec.ts",
+              "kind": "playwright",
+              "name": "admin edits the profile and visitors see the updated card",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E01",
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/profile.spec.ts",
+              "kind": "playwright",
+              "name": "hidden city and email never appear on the public card",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E01",
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/profile.spec.ts",
+              "kind": "playwright",
+              "name": "warns before leaving with unsaved changes",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E01",
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/profile.spec.ts",
+              "kind": "playwright",
+              "name": "studio profile",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E01",
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "kind": "playwright",
+              "name": "ops layout",
+              "gate": "e2e",
+              "covers": [
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E01",
+                "M07-STUDIO-SUITE-MANAGEMENT-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
