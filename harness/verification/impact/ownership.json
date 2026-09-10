@@ -2372,7 +2372,8 @@
         "M07-UNIT-SITE-QUALITY-01",
         "M07-STUDIO-THEME-01",
         "M02-STUDIO-SHELL-01",
-        "M02-STUDIO-LIST-01"
+        "M02-STUDIO-LIST-01",
+        "M04-STUDIO-BOOKS-01"
       ],
       "dependents": [
         "M04.books_web",
@@ -2504,7 +2505,8 @@
         "M01-CARD-GLOW-01",
         "M07-STUDIO-THEME-01",
         "M02-STUDIO-SHELL-01",
-        "M02-DESK-REVISIONS-01"
+        "M02-DESK-REVISIONS-01",
+        "M04-STUDIO-BOOKS-01"
       ],
       "dependents": []
     },

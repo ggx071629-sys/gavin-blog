@@ -3128,6 +3128,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M04-STUDIO-BOOKS-01",
+          "priority": "P1",
+          "scenario": "读书列表完整作者查询、真实阅读元信息与失败恢复；双主题窄屏可访问。",
+          "expectations": [
+            {
+              "id": "M04-STUDIO-BOOKS-01-E01",
+              "surface": "user_visible",
+              "statement": "读书列表完整作者查询、真实阅读元信息与失败恢复；双主题窄屏可访问。"
+            },
+            {
+              "id": "M04-STUDIO-BOOKS-01-E02",
+              "surface": "forbidden",
+              "statement": "不得出现文章专属版本历史、删除失败不得移除内容，双主题不得横溢或 axe 违规。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/studio-lists.spec.ts",
+              "kind": "playwright",
+              "name": "books",
+              "gate": "e2e",
+              "covers": [
+                "M04-STUDIO-BOOKS-01-E01",
+                "M04-STUDIO-BOOKS-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
