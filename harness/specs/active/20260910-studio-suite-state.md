@@ -21,11 +21,14 @@ U6-03 后半段生产联跑暴露了固定媒体总数、多个 status 的无范
 不修改产品行为、媒体去重、动画设计、数据库或任何质量阈值。
 # Acceptance criteria
 - AC-1: 媒体分页/失败重试、迁移恢复、助手陈旧状态、显式空态、卡片无位移和搜索最终布局及现行首页/列表结构、761px 后台导航断点通过真实浏览器验证。
+- AC-2: Windows 长路径诊断产物完整导出并可按原保留规则清理；保留容量限制与真实 I/O 失败传播，不改写失败运行或认证。
 # Risks
 不能清空全套测试共享数据以制造通过；空态用明确响应夹具，分页按命名样例过滤，几何仍精确比较而非放宽误差。
 # Verification plan
 ## Verification cases
 - AC-1 => M07-STUDIO-SUITE-STATE-01
+- AC-2 => M08-ARTIFACT-PATHS-01
 ## Gates
 - e2e => AC-1
-- harness-integrity => AC-1
+- harness-tests => AC-2
+- harness-integrity => AC-1, AC-2
