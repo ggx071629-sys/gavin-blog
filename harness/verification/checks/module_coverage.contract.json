@@ -3052,6 +3052,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M03-STUDIO-TAXONOMY-01",
+          "priority": "P1",
+          "scenario": "栏目标签开放列表、编辑与关联约束提示",
+          "expectations": [
+            {
+              "id": "M03-STUDIO-TAXONOMY-01-E01",
+              "surface": "user_visible",
+              "statement": "栏目标签开放列表、编辑与关联约束提示"
+            },
+            {
+              "id": "M03-STUDIO-TAXONOMY-01-E02",
+              "surface": "forbidden",
+              "statement": "关联栏目不可删除；请求失败不可丢弃输入或伪造成功；窄屏无横向溢出。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "kind": "playwright",
+              "name": "tx",
+              "gate": "e2e",
+              "covers": [
+                "M03-STUDIO-TAXONOMY-01-E01",
+                "M03-STUDIO-TAXONOMY-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
