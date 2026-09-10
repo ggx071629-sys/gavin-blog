@@ -1,0 +1,585 @@
+{
+  "schema_version": 2,
+  "task_id": "20260910-studio-regression-guards",
+  "created_at": "2026-09-10T12:39:58.702982+00:00",
+  "command": "python -m tools.harness verify 20260910-studio-regression-guards",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "d69678a7ba5acf1cc1044591d1e8a0ce09eb3e17",
+    "active_spec_sha256": "bfac9f396d5b7c77f340d8860a16bdc4a78e0ebb288cc4a4df3679635107b8fd",
+    "verification_contract_sha256": "1a78c0462045bf1a9e361194aaaab40e83951bdf0b0132b3e7ccd2d5e751a8e9",
+    "gate_config_sha256": "a5747c1ba83951dbaa6b3469f2f312d8e88c1f53aa602e4a22e516541b36d9ec",
+    "documentation_contract_sha256": "0298e808b62565ad095a114ec8582104c71aab7f72cec30cb1f57a5ac3f3361d",
+    "documentation_targets_sha256": "25969314a15b82793eb85d1c11a1147ac1d8ad9c7badf2580b2e339fcb1b3f8e",
+    "module_contract_sha256": "35a7900888f8dc1de26b1517b6b2c60bce3d0c39132cf44c0e07f807c07b721a"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录完整回归发现的旧断言与保持的错误显示合同。",
+    "targets": [
+      "apps/web/public/studio/README.md"
+    ],
+    "baseline_commit": "99f9f578becc49b53ba7bdca1cced4763419c7d7",
+    "target_blobs": {
+      "apps/web/public/studio/README.md": "362e5675599de65887c1cf77ac18f2386158da31"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "1d6fa8690513f6ba4ae2707c7c2167eef556a74e",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260910-studio-regression-guards.json",
+      "sha256": "147fa5a1b34f446fb954b2cc4958d44ce428301fe706bf531bbe40914cfaf36a",
+      "selected_cases": [
+        "M06-STUDIO-FAILURE-GUARDS-01",
+        "M07-UNIT-TYPOGRAPHY-01",
+        "M10-STUDIO-HOST-GUARD-01"
+      ],
+      "selected_refs": 4,
+      "excluded_cases": 261
+    },
+    "receipt": {
+      "run_id": "2fb8f723cc7917e2d576d037cf0dde42",
+      "identity": "f0da869a535aff2d5c6f17ed65935c498ac9aa006f2e0cd4e143ef4b045e7856",
+      "plan": [
+        {
+          "gate": "web-quality",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1283.016,
+      "plan_inputs": 811.174,
+      "execute_cleanup_and_input_recheck": 14966.422
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "35a7900888f8dc1de26b1517b6b2c60bce3d0c39132cf44c0e07f807c07b721a",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "web-quality",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-STUDIO-FAILURE-GUARDS-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "列表和媒体错误优先于空态且可重试。",
+            "expectations": [
+              {
+                "id": "M06-STUDIO-FAILURE-GUARDS-01-E01",
+                "surface": "user_visible",
+                "statement": "列表和媒体错误优先于空态且可重试。"
+              },
+              {
+                "id": "M06-STUDIO-FAILURE-GUARDS-01-E02",
+                "surface": "forbidden",
+                "statement": "错误不得伪装空成功。"
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/unit/failure-state-contract.test.ts",
+                "kind": "vitest",
+                "name": "keeps shared Studio lists and media errors separate from empty results",
+                "gate": "web-quality",
+                "covers": [
+                  "M06-STUDIO-FAILURE-GUARDS-01-E01",
+                  "M06-STUDIO-FAILURE-GUARDS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M07-UNIT-TYPOGRAPHY-01",
+            "module_id": "M07",
+            "module_name": "内容发现输出",
+            "priority": "P1",
+            "scenario": "M07.theme: typography scenarios at the existing module boundary.",
+            "expectations": [
+              {
+                "id": "M07-UNIT-TYPOGRAPHY-01-E01",
+                "surface": "response",
+                "statement": "keeps homepage empty-state copy in the shipped template"
+              },
+              {
+                "id": "M07-UNIT-TYPOGRAPHY-01-E02",
+                "surface": "forbidden",
+                "statement": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts"
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/typography.test.ts",
+                "name": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts",
+                "gate": "web-quality",
+                "covers": [
+                  "M07-UNIT-TYPOGRAPHY-01-E01",
+                  "M07-UNIT-TYPOGRAPHY-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/typography.test.ts",
+                "name": "keeps homepage empty-state copy in the shipped template",
+                "gate": "web-quality",
+                "covers": [
+                  "M07-UNIT-TYPOGRAPHY-01-E01",
+                  "M07-UNIT-TYPOGRAPHY-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "web-quality",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-STUDIO-HOST-GUARD-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "助手仍使用共享可见性与激活守卫。",
+            "expectations": [
+              {
+                "id": "M10-STUDIO-HOST-GUARD-01-E01",
+                "surface": "user_visible",
+                "statement": "助手仍使用共享可见性与激活守卫。"
+              },
+              {
+                "id": "M10-STUDIO-HOST-GUARD-01-E02",
+                "surface": "forbidden",
+                "statement": "禁止绕过可用性、开关和路径限制。"
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/unit/failure-state-contract.test.ts",
+                "kind": "vitest",
+                "name": "keeps assistant host visibility delegated to the shared entry guard",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-STUDIO-HOST-GUARD-01-E01",
+                  "M10-STUDIO-HOST-GUARD-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 3.977,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "162 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 211.364,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 75.871,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.568,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "818 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 364.843,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "282 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 87.123,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 264 cases, 529 expectations, 892 exact test references; contract sha256 35a7900888f8"
+      ],
+      "status": "passed",
+      "duration_ms": 446.703,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.136,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.619,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 78.207,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 1627.526,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "2fb8f723cc7917e2d576d037cf0dde42",
+        "attempt_id": "55458218269d3fa17d6c93492e8f74bf"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-regression-guards --gate web-quality",
+      "status": "passed",
+      "duration_ms": 11530.029,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 3941,
+        "selection_counts": {
+          "collected": 4,
+          "executed": 4
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/failure-state-contract.test.ts",
+                "name": "keeps shared Studio lists and media errors separate from empty results"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/typography.test.ts",
+                "name": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/typography.test.ts",
+                "name": "keeps homepage empty-state copy in the shipped template"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/failure-state-contract.test.ts",
+                "name": "keeps assistant host visibility delegated to the shared entry guard"
+              }
+            ],
+            "duration_ms": 2864.776,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/failure-state-contract.test.ts",
+                "name": "keeps shared Studio lists and media errors separate from empty results"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/failure-state-contract.test.ts",
+                "name": "keeps assistant host visibility delegated to the shared entry guard"
+              }
+            ],
+            "duration_ms": 2135.664
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/typography.test.ts",
+                "name": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/typography.test.ts",
+                "name": "keeps homepage empty-state copy in the shipped template"
+              }
+            ],
+            "duration_ms": 2027.006
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/failure-state-contract.test.ts",
+                "name": "keeps shared Studio lists and media errors separate from empty results",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "failure state page contracts",
+                  "keeps shared Studio lists and media errors separate from empty results"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/failure-state-contract.test.ts",
+                "name": "keeps assistant host visibility delegated to the shared entry guard",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "failure state page contracts",
+                  "keeps assistant host visibility delegated to the shared entry guard"
+                ]
+              }
+            ],
+            "duration_ms": 2050.254,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/typography.test.ts",
+                "name": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "theme typography guardrails",
+                  "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/typography.test.ts",
+                "name": "keeps homepage empty-state copy in the shipped template",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "theme typography guardrails",
+                  "keeps homepage empty-state copy in the shipped template"
+                ]
+              }
+            ],
+            "duration_ms": 2072.308,
+            "batch_id": "batch-0002"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\4aac216400e9bf94415eb78dc59a10188cff6d4a59c1b666b0c2a06fd4681aeb\\artifacts\\2fb8f723cc7917e2d576d037cf0dde42\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "2fb8f723cc7917e2d576d037cf0dde42",
+        "attempt_id": "4996107d719735893884f7bef0892b76"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1356.252,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 15794.218,
+    "failures": []
+  },
+  "source_commit": "1d6fa8690513f6ba4ae2707c7c2167eef556a74e"
+}
