@@ -2052,7 +2052,9 @@
         "M01-CARD-SCOPE-01",
         "M01-CARD-GLOW-01",
         "M07-STUDIO-THEME-01",
-        "M02-STUDIO-SHELL-01"
+        "M02-STUDIO-SHELL-01",
+        "M02-DESK-LAYOUT-01",
+        "M02-DESK-REVISIONS-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -2081,7 +2083,9 @@
         "M06-UNIT-ADMIN-01",
         "M06-UNIT-AUTH-PROXY-01",
         "M07-STUDIO-THEME-01",
-        "M02-STUDIO-SHELL-01"
+        "M02-STUDIO-SHELL-01",
+        "M02-DESK-LAYOUT-01",
+        "M02-DESK-REVISIONS-01"
       ],
       "dependents": [
         "M02.admin_shell"
@@ -2382,7 +2386,9 @@
       "cases": [
         "M02-P1-02",
         "M07-STUDIO-THEME-01",
-        "M02-STUDIO-SHELL-01"
+        "M02-STUDIO-SHELL-01",
+        "M02-DESK-LAYOUT-01",
+        "M02-DESK-REVISIONS-01"
       ],
       "dependents": [
         "M06.auth_web"
@@ -2423,7 +2429,9 @@
         "M03-OPS-TAXONOMY-01",
         "M05-OPS-LAYOUT-01",
         "M07-STUDIO-THEME-01",
-        "M02-STUDIO-SHELL-01"
+        "M02-STUDIO-SHELL-01",
+        "M02-DESK-LAYOUT-01",
+        "M02-DESK-REVISIONS-01"
       ],
       "dependents": []
     },
@@ -2452,7 +2460,8 @@
         "M01-CARD-SCOPE-01",
         "M01-CARD-GLOW-01",
         "M07-STUDIO-THEME-01",
-        "M02-STUDIO-SHELL-01"
+        "M02-STUDIO-SHELL-01",
+        "M02-DESK-REVISIONS-01"
       ],
       "dependents": []
     },
@@ -2481,7 +2490,8 @@
         "M01-CARD-SCOPE-01",
         "M01-CARD-GLOW-01",
         "M07-STUDIO-THEME-01",
-        "M02-STUDIO-SHELL-01"
+        "M02-STUDIO-SHELL-01",
+        "M02-DESK-REVISIONS-01"
       ],
       "dependents": []
     },
@@ -2502,7 +2512,9 @@
         "M05-OPS-MEDIA-01",
         "M05-OPS-LAYOUT-01",
         "M07-STUDIO-THEME-01",
-        "M02-STUDIO-SHELL-01"
+        "M02-STUDIO-SHELL-01",
+        "M02-DESK-LAYOUT-01",
+        "M02-DESK-REVISIONS-01"
       ],
       "dependents": [
         "M02.editing",
@@ -2541,7 +2553,9 @@
         "M05-OPS-CONTENT-01",
         "M05-OPS-LAYOUT-01",
         "M07-STUDIO-THEME-01",
-        "M02-STUDIO-SHELL-01"
+        "M02-STUDIO-SHELL-01",
+        "M02-DESK-LAYOUT-01",
+        "M02-DESK-REVISIONS-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2802,7 +2816,9 @@
         "M10-MANAGEMENT-UI-01",
         "M10-ADMIN-TRIAL-01",
         "M07-STUDIO-THEME-01",
-        "M02-STUDIO-SHELL-01"
+        "M02-STUDIO-SHELL-01",
+        "M02-DESK-LAYOUT-01",
+        "M02-DESK-REVISIONS-01"
       ],
       "dependents": []
     },
@@ -3722,7 +3738,9 @@
       "cases": [
         "M07-STUDIO-THEME-01",
         "M07-STUDIO-FONTS-01",
-        "M02-STUDIO-SHELL-01"
+        "M02-STUDIO-SHELL-01",
+        "M02-DESK-LAYOUT-01",
+        "M02-DESK-REVISIONS-01"
       ],
       "dependents": [
         "M02.admin_shell",
