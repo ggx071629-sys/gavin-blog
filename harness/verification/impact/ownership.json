@@ -1218,7 +1218,8 @@
         "apps/api/tests/test_assistant_input_error.py",
         "apps/api/assistant_runtime_migrations/env.py",
         "apps/api/tests/test_assistant_evidence_budget.py",
-        "apps/api/tests/test_assistant_evidence_links.py"
+        "apps/api/tests/test_assistant_evidence_links.py",
+        "apps/api/tests/test_assistant_source_diversity.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1262,7 +1263,9 @@
         "M09-EVIDENCE-BUDGET-02",
         "M09-RESUME-PAGES-01",
         "M09-EVIDENCE-LINKS-01",
-        "M09-EVIDENCE-LINKS-02"
+        "M09-EVIDENCE-LINKS-02",
+        "M09-SOURCE-TITLE-01",
+        "M10-SOURCE-DIVERSITY-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1466,7 +1469,8 @@
         "M10-RESUME-INDEX-01",
         "M06-RESUME-REFRESH-WORKER-01",
         "M06-RESUME-REFRESH-RETRY-01",
-        "M06-RESUME-PDF-01"
+        "M06-RESUME-PDF-01",
+        "M10-SOURCE-DIVERSITY-01"
       ],
       "dependents": [
         "M01.articles",
@@ -2982,7 +2986,8 @@
         "apps/web/tests/e2e-assistant/orb-motion.spec.ts",
         "apps/web/composables/useAssistantAvailability.ts",
         "apps/web/tests/e2e-assistant/about-citations.spec.ts",
-        "apps/web/tests/e2e-assistant/resume-citations.spec.ts"
+        "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+        "apps/web/tests/unit/assistant-source-title.test.ts"
       ],
       "cases": [
         "M09-P0-01",
@@ -3010,7 +3015,8 @@
         "M10-STUDIO-HOST-GUARD-01",
         "M09-ABOUT-CITATION-01",
         "M09-RESUME-CITATION-UI-01",
-        "M09-INPUT-ERROR-02"
+        "M09-INPUT-ERROR-02",
+        "M09-SOURCE-TITLE-02"
       ],
       "dependents": [
         "M01.navigation",

@@ -14605,6 +14605,70 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-SOURCE-TITLE-01",
+          "priority": "P1",
+          "scenario": "提示只提供来源标题别名，不提供路径；证据仍保留跳转目标。",
+          "expectations": [
+            {
+              "id": "M09-SOURCE-TITLE-01-ALLOW",
+              "surface": "response",
+              "statement": "提示只提供来源标题别名，不提供路径；证据仍保留跳转目标。"
+            },
+            {
+              "id": "M09-SOURCE-TITLE-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得遗漏已选来源、返回删除资料或展示裸来源路径。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_source_diversity.py",
+              "name": "test_prompt_uses_titles_without_source_paths",
+              "gate": "api-tests",
+              "covers": [
+                "M09-SOURCE-TITLE-01-ALLOW",
+                "M09-SOURCE-TITLE-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-SOURCE-TITLE-02",
+          "priority": "P1",
+          "scenario": "来源卡片显示标题，不显示路径，保留原跳转事件。",
+          "expectations": [
+            {
+              "id": "M09-SOURCE-TITLE-02-ALLOW",
+              "surface": "response",
+              "statement": "来源卡片显示标题，不显示路径，保留原跳转事件。"
+            },
+            {
+              "id": "M09-SOURCE-TITLE-02-DENY",
+              "surface": "forbidden",
+              "statement": "不得遗漏已选来源、返回删除资料或展示裸来源路径。"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-source-title.test.ts",
+              "name": "shows source titles while retaining navigation targets without path labels",
+              "gate": "web-quality",
+              "covers": [
+                "M09-SOURCE-TITLE-02-ALLOW",
+                "M09-SOURCE-TITLE-02-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -16527,6 +16591,38 @@
               "covers": [
                 "M10-RESUME-INDEX-01-E01",
                 "M10-RESUME-INDEX-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-SOURCE-DIVERSITY-01",
+          "priority": "P1",
+          "scenario": "不同公开来源优先获取候选位置；删除来源仍被拒绝。",
+          "expectations": [
+            {
+              "id": "M10-SOURCE-DIVERSITY-01-ALLOW",
+              "surface": "response",
+              "statement": "不同公开来源优先获取候选位置；删除来源仍被拒绝。"
+            },
+            {
+              "id": "M10-SOURCE-DIVERSITY-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得遗漏已选来源、返回删除资料或展示裸来源路径。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_source_diversity.py",
+              "name": "test_retrieval_spreads_limit_across_live_sources",
+              "gate": "api-tests",
+              "covers": [
+                "M10-SOURCE-DIVERSITY-01-ALLOW",
+                "M10-SOURCE-DIVERSITY-01-DENY"
               ]
             }
           ]

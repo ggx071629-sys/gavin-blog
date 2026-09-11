@@ -30,5 +30,5 @@ state_history:
 - AC-2 => M09-SOURCE-TITLE-01, M09-SOURCE-TITLE-02, M08-DOCS-01
 ## Gates
 - api-tests => AC-1, AC-2
-- web-unit => AC-2
+- web-quality => AC-2
 - harness-integrity => AC-1, AC-2
