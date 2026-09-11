@@ -15614,6 +15614,38 @@
           ]
         },
         {
+          "id": "M10-UNIT-ASSISTANT-LEGACY-SCHEMA-RESTORE-01",
+          "priority": "P1",
+          "scenario": "M10.qualification: a snapshot taken from the true previous schema revision is restored through the real migration path.",
+          "expectations": [
+            {
+              "id": "M10-UNIT-ASSISTANT-LEGACY-SCHEMA-RESTORE-01-E01",
+              "surface": "response",
+              "statement": "a database migrated to 20260907_0024 keeps that revision, lacks the shared budget tables and the later admin_credentials table; restoring its snapshot to a fresh target migrates to head, recreates the shared budget policy with an empty reservation table and keeps the restore-day budget lock"
+            },
+            {
+              "id": "M10-UNIT-ASSISTANT-LEGACY-SCHEMA-RESTORE-01-E02",
+              "surface": "forbidden",
+              "statement": "a synthetic downgrade that drops budget tables from the current schema and rewrites the version number is not accepted as the previous-schema precondition, and the restore must not fail on a duplicate table creation or skip the migration and lock steps"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_backup_restore.py",
+              "name": "test_restore_previous_schema_creates_shared_budget_and_keeps_restore_lock",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-ASSISTANT-LEGACY-SCHEMA-RESTORE-01-E01",
+                "M10-UNIT-ASSISTANT-LEGACY-SCHEMA-RESTORE-01-E02"
+              ]
+            }
+          ]
+        },
+        {
           "id": "M10-UNIT-ASSISTANT-PROVIDER-QUALIFICATION-01",
           "priority": "P1",
           "scenario": "M10.qualification: assistant_provider_qualification scenarios at the existing module boundary.",
