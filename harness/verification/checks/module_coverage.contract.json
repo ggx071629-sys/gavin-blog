@@ -16717,6 +16717,260 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M10-UNIT-INDEX-INTEGRITY-01",
+          "priority": "P0",
+          "scenario": "多代相同ID隔离、从公开事实独立推导完整性、失败阻断及带备份的FTS定向修复。",
+          "expectations": [
+            {
+              "id": "M10-UNIT-INDEX-INTEGRITY-01-ISOLATION",
+              "surface": "state",
+              "statement": "staging构建、单代更新/删除/清理不破坏另一代FTS和关键词命中。"
+            },
+            {
+              "id": "M10-UNIT-INDEX-INTEGRITY-01-DENY",
+              "surface": "forbidden",
+              "statement": "公开资料漏收、同数量错配、FTS或向量错误/不可达不得通过审计、开放真实gate或切换代次。"
+            },
+            {
+              "id": "M10-UNIT-INDEX-INTEGRITY-01-REPAIR",
+              "surface": "state",
+              "statement": "修复保留备份与非目标代次，不嵌入或写向量，失败回滚、重复执行零变化。"
+            },
+            {
+              "id": "M10-UNIT-INDEX-INTEGRITY-01-ALLOW",
+              "surface": "response",
+              "statement": "完整索引通过本地或容量HTTP finalize并保持正确runtime和围栏，切换后逐条审计通过。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_staging_same_ids_preserve_active_fts_and_generation_cleanup",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-ISOLATION"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_audit_derives_missing_whole_source_even_when_three_indexes_agree",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_audit_detects_corruption_beyond_counts[canonical_body]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_audit_detects_corruption_beyond_counts[canonical_version]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_audit_detects_corruption_beyond_counts[fts_body]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_audit_detects_corruption_beyond_counts[fts_duplicate]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_audit_detects_corruption_beyond_counts[fts_extra]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_audit_detects_corruption_beyond_counts[fts_unavailable]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_audit_detects_corruption_beyond_counts[vector_payload]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_audit_detects_corruption_beyond_counts[vector_id]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_audit_detects_corruption_beyond_counts[vector_dimension]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_audit_detects_corruption_beyond_counts[vector_nan]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_audit_detects_corruption_beyond_counts[vector_unavailable]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_fts_repair_is_backed_up_generation_scoped_and_idempotent",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-REPAIR",
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_unsafe_repair_refuses_or_rolls_back[canonical]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-REPAIR",
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_unsafe_repair_refuses_or_rolls_back[backup]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-REPAIR",
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_unsafe_repair_refuses_or_rolls_back[postcheck]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-REPAIR",
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_unsafe_repair_refuses_or_rolls_back[generation]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-REPAIR",
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_unsafe_repair_refuses_or_rolls_back[fence]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-REPAIR",
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_startup_and_finalize_checks_reject_missing_fts_without_switching",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_rebuild_cannot_become_ready_with_missing_fts",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_real_lifespan_does_not_enable_gate_when_integrity_fails",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_local_finalize_consumers_preserve_runtime_and_fence[local]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-ALLOW"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_local_finalize_consumers_preserve_runtime_and_fence[capacity]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-ALLOW"
+              ]
+            }
+          ]
         }
       ]
     },
