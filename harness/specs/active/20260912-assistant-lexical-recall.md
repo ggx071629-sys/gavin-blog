@@ -30,7 +30,7 @@ state_history:
 ## Verification cases
 - AC-1 => M10-UNIT-ASSISTANT-LEXICAL-RECALL-01
 - AC-2 => M10-UNIT-ASSISTANT-LEXICAL-RECALL-01
-- AC-3 => M10-UNIT-INDEX-INTEGRITY-01
+- AC-3 => M10-UNIT-INDEX-INTEGRITY-01, M08-DOCS-01
 ## Gates
 - api-tests => AC-1, AC-2, AC-3
 - harness-integrity => AC-1, AC-2, AC-3
