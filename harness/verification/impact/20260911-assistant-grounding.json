@@ -1159,6 +1159,159 @@
           "cases": []
         }
       ]
+    },
+    {
+      "path": "plan-build/assistant-safety/DESIGN.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/PHASE-1-BASELINE.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/PHASE-2-GROUNDING.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/PHASE-3-DEFENSE.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/PHASE-4-EVALUATION.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/PLAN.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-1-baseline/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-1-baseline/S1-01.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-1-baseline/S1-02.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-1-baseline/S1-03.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-1-baseline/S1-04.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-2-grounding/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-2-grounding/S2-01.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-2-grounding/S2-02.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-2-grounding/S2-03.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-3-defense/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-4-evaluation/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
     }
   ]
 }

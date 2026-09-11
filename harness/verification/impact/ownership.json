@@ -3819,7 +3819,24 @@
         "plan-build/assistant-upgrade/completed/assistant-upgrade-verification/Q4-02.md",
         "plan-build/assistant-upgrade/completed/assistant-upgrade-verification/Q4-03.md",
         "plan-build/assistant-upgrade/completed/assistant-upgrade-verification/Q4-04.md",
-        "harness/docs/decisions/20260911-assistant-grounding.md"
+        "harness/docs/decisions/20260911-assistant-grounding.md",
+        "plan-build/assistant-safety/DESIGN.md",
+        "plan-build/assistant-safety/PHASE-1-BASELINE.md",
+        "plan-build/assistant-safety/PHASE-2-GROUNDING.md",
+        "plan-build/assistant-safety/PHASE-3-DEFENSE.md",
+        "plan-build/assistant-safety/PHASE-4-EVALUATION.md",
+        "plan-build/assistant-safety/PLAN.md",
+        "plan-build/assistant-safety/completed/phase-1-baseline/.gitkeep",
+        "plan-build/assistant-safety/completed/phase-1-baseline/S1-01.md",
+        "plan-build/assistant-safety/completed/phase-1-baseline/S1-02.md",
+        "plan-build/assistant-safety/completed/phase-1-baseline/S1-03.md",
+        "plan-build/assistant-safety/completed/phase-1-baseline/S1-04.md",
+        "plan-build/assistant-safety/completed/phase-2-grounding/.gitkeep",
+        "plan-build/assistant-safety/completed/phase-2-grounding/S2-01.md",
+        "plan-build/assistant-safety/completed/phase-2-grounding/S2-02.md",
+        "plan-build/assistant-safety/completed/phase-2-grounding/S2-03.md",
+        "plan-build/assistant-safety/completed/phase-3-defense/.gitkeep",
+        "plan-build/assistant-safety/completed/phase-4-evaluation/.gitkeep"
       ],
       "cases": [
         "M08-DOCS-01"
