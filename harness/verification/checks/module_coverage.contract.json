@@ -14359,6 +14359,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-RESUME-PAGES-01",
+          "priority": "P1",
+          "scenario": "简历后页首项在前页追加项之前获得预算，枚举提示明确局部证据边界。",
+          "expectations": [
+            {
+              "id": "M09-RESUME-PAGES-01-ALLOW",
+              "surface": "response",
+              "statement": "两页完整项目证据均进入预算内提示，保留别名与原文。"
+            },
+            {
+              "id": "M09-RESUME-PAGES-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得用第一页追加技能挤掉可容纳的第二页项目，不得把片段当成完整清单。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_budget.py",
+              "name": "test_resume_budget_covers_later_page_before_more_from_first_page",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RESUME-PAGES-01-ALLOW",
+                "M09-RESUME-PAGES-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

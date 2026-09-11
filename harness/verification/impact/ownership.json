@@ -1258,7 +1258,8 @@
         "M09-RESUME-FACTS-01",
         "M09-INPUT-ERROR-01",
         "M09-EVIDENCE-BUDGET-01",
-        "M09-EVIDENCE-BUDGET-02"
+        "M09-EVIDENCE-BUDGET-02",
+        "M09-RESUME-PAGES-01"
       ],
       "dependents": [
         "M06.api_tooling",
