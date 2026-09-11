@@ -15014,6 +15014,192 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-DEFENSE-01",
+          "priority": "P0",
+          "scenario": "Sectioned policy preserves the existing fact, partial answer and format contracts; ordinary history remains contextual.",
+          "expectations": [
+            {
+              "id": "M09-DEFENSE-01-E01",
+              "surface": "response",
+              "statement": "Sectioned policy preserves the existing fact, partial answer and format contracts; ordinary history remains contextual."
+            },
+            {
+              "id": "M09-DEFENSE-01-E02",
+              "surface": "forbidden",
+              "statement": "Explicit instructions from old history cannot enter the generation prompt or grant authority."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "kind": "pytest",
+              "name": "test_security_prompt_sections_and_untrusted_history",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEFENSE-01-E01",
+                "M09-DEFENSE-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+              "kind": "pytest",
+              "name": "test_prompt_drops_oldest_complete_pairs_before_dispatch",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEFENSE-01-E01",
+                "M09-DEFENSE-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-DEFENSE-02",
+          "priority": "P0",
+          "scenario": "Normal safety and configuration discussions pass the fixed input examples.",
+          "expectations": [
+            {
+              "id": "M09-DEFENSE-02-E01",
+              "surface": "response",
+              "statement": "Normal safety and configuration discussions pass the fixed input examples."
+            },
+            {
+              "id": "M09-DEFENSE-02-E02",
+              "surface": "forbidden",
+              "statement": "Direct/rephrased/role/mixed/encoded/Unicode injection examples and existing credential/tool requests must not pass."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_online.py",
+              "kind": "pytest",
+              "name": "test_preflight_safety_discussion_and_rephrased_instructions",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEFENSE-02-E01",
+                "M09-DEFENSE-02-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_online.py",
+              "kind": "pytest",
+              "name": "test_preflight_matrix[security_direct_ignore_previous]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEFENSE-02-E01",
+                "M09-DEFENSE-02-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_online.py",
+              "kind": "pytest",
+              "name": "test_preflight_matrix[security_direct_role_hijack_zh]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEFENSE-02-E01",
+                "M09-DEFENSE-02-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_online.py",
+              "kind": "pytest",
+              "name": "test_preflight_matrix[security_tool_and_exfil]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEFENSE-02-E01",
+                "M09-DEFENSE-02-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_online.py",
+              "kind": "pytest",
+              "name": "test_preflight_matrix[security_pasted_job_description]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEFENSE-02-E01",
+                "M09-DEFENSE-02-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_online.py",
+              "kind": "pytest",
+              "name": "test_preflight_matrix[security_encoded_base64_prompt]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEFENSE-02-E01",
+                "M09-DEFENSE-02-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_online.py",
+              "kind": "pytest",
+              "name": "test_preflight_matrix[security_benign_hr_skills]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEFENSE-02-E01",
+                "M09-DEFENSE-02-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_online.py",
+              "kind": "pytest",
+              "name": "test_preflight_matrix[security_benign_hr_content]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEFENSE-02-E01",
+                "M09-DEFENSE-02-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-DEFENSE-03",
+          "priority": "P0",
+          "scenario": "Both retrieval and rehydration scan title, heading and body; normal published content still answers.",
+          "expectations": [
+            {
+              "id": "M09-DEFENSE-03-E01",
+              "surface": "response",
+              "statement": "Both retrieval and rehydration scan title, heading and body; normal published content still answers."
+            },
+            {
+              "id": "M09-DEFENSE-03-E02",
+              "surface": "forbidden",
+              "statement": "Published metadata cannot bypass instruction scanning or source rechecks."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "kind": "pytest",
+              "name": "test_security_evidence_metadata_and_rehydration_are_scanned",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEFENSE-03-E01",
+                "M09-DEFENSE-03-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_online.py",
+              "kind": "pytest",
+              "name": "test_question_happy_path_and_idempotent_replay",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DEFENSE-03-E01",
+                "M09-DEFENSE-03-E02"
+              ]
+            }
+          ]
         }
       ]
     },
