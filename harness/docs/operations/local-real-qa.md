@@ -59,3 +59,5 @@ author: Gavin
 快捷入口现在在E5/Qdrant就绪后启动既有索引worker，与Web/API共同接受管理进程的失败检测和Job清理。worker固定读取.env.e5，与真实问答API共用data/e5/content-verified.db；停止项目也停止worker。普通.env的data/gavin.db是另一份内容库，不能以更新它代替真实问答库。
 
 两份内容库升级前已分别备份到apps/api/data/backups/assistant-activation-20260911-094744/，升级到0030并保存用户公开简历URL；两份环境配置仅增补可信域gavingongxin.com。索引使用既有E5与Qdrant，密钥/模型/预算不变。实际验收结果持续记录在阶段四计划；不能把临时库验收当作实际启用。
+
+实际接入完成：3101入口available=true，真实库简历ready且5切片；同源PDF哈希核对、后台立即刷新经worker同版本复用、真实E5首位检索通过。服务由快捷入口保持运行。完整结果见[Q4-03实际接入补充](../../../completed/assistant-upgrade-verification/Q4-03.md)。本次未发送付费Chat问题。
