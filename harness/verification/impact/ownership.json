@@ -1404,7 +1404,8 @@
         "M11-ASSISTANT-SYNC-01",
         "M09-ABOUT-RETRIEVAL-01",
         "M06-RESUME-STORAGE-01",
-        "M09-INPUT-ERROR-01"
+        "M09-INPUT-ERROR-01",
+        "M10-VECTOR-REUSE-02"
       ],
       "dependents": [
         "M06.runtime_config",
@@ -1448,7 +1449,8 @@
         "apps/api/app/assistant_index/worker.py",
         "apps/api/app/assistant_index/worker_control.py",
         "apps/api/tests/test_assistant_index.py",
-        "apps/api/tests/test_assistant_about_retrieval.py"
+        "apps/api/tests/test_assistant_about_retrieval.py",
+        "apps/api/tests/test_index_vector_reuse.py"
       ],
       "cases": [
         "M10-P1-01",
@@ -1470,7 +1472,9 @@
         "M06-RESUME-REFRESH-WORKER-01",
         "M06-RESUME-REFRESH-RETRY-01",
         "M06-RESUME-PDF-01",
-        "M10-SOURCE-DIVERSITY-01"
+        "M10-SOURCE-DIVERSITY-01",
+        "M10-VECTOR-REUSE-01",
+        "M10-VECTOR-REUSE-02"
       ],
       "dependents": [
         "M01.articles",

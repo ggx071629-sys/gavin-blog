@@ -16636,6 +16636,110 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M10-VECTOR-REUSE-01",
+          "priority": "P1",
+          "scenario": "同正文新版本复用正确向量，正文、模型身份、维度和payload不匹配不得复用。",
+          "expectations": [
+            {
+              "id": "M10-VECTOR-REUSE-01-ALLOW",
+              "surface": "response",
+              "statement": "同正文新版本复用正确向量，正文、模型身份、维度和payload不匹配不得复用。"
+            },
+            {
+              "id": "M10-VECTOR-REUSE-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得重复调用未知请求、复用错误向量或持续重试不可重试错误。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_vector_reuse.py",
+              "name": "test_same_text_new_revision_reuses_vectors_without_provider_call",
+              "gate": "api-tests",
+              "covers": [
+                "M10-VECTOR-REUSE-01-ALLOW",
+                "M10-VECTOR-REUSE-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_vector_reuse.py",
+              "name": "test_changed_text_requires_new_embedding",
+              "gate": "api-tests",
+              "covers": [
+                "M10-VECTOR-REUSE-01-ALLOW",
+                "M10-VECTOR-REUSE-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_vector_reuse.py",
+              "name": "test_reuse_rejects_mismatched_payload_and_dimension",
+              "gate": "api-tests",
+              "covers": [
+                "M10-VECTOR-REUSE-01-ALLOW",
+                "M10-VECTOR-REUSE-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_vector_reuse.py",
+              "name": "test_model_identity_mismatch_does_not_reuse",
+              "gate": "api-tests",
+              "covers": [
+                "M10-VECTOR-REUSE-01-ALLOW",
+                "M10-VECTOR-REUSE-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-VECTOR-REUSE-02",
+          "priority": "P1",
+          "scenario": "需要介入的嵌入错误立即终止并明确诊断，临时错误仍重试。",
+          "expectations": [
+            {
+              "id": "M10-VECTOR-REUSE-02-ALLOW",
+              "surface": "response",
+              "statement": "需要介入的嵌入错误立即终止并明确诊断，临时错误仍重试。"
+            },
+            {
+              "id": "M10-VECTOR-REUSE-02-DENY",
+              "surface": "forbidden",
+              "statement": "不得重复调用未知请求、复用错误向量或持续重试不可重试错误。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_vector_reuse.py",
+              "name": "test_unavailable_success_and_unknown_stop_without_retry",
+              "gate": "api-tests",
+              "covers": [
+                "M10-VECTOR-REUSE-02-ALLOW",
+                "M10-VECTOR-REUSE-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_vector_reuse.py",
+              "name": "test_transient_store_error_still_retries",
+              "gate": "api-tests",
+              "covers": [
+                "M10-VECTOR-REUSE-02-ALLOW",
+                "M10-VECTOR-REUSE-02-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
