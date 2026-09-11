@@ -71,7 +71,7 @@
     {
       "path": "apps/api/app/assistant/readiness.py",
       "owner": "M09.runtime",
-      "reason": "C2-01/02 按 C1-01 删除无消费者函数或专用类；保留同文件现行运行行为，验证实际运行库、会话及清理路径。",
+      "reason": "只删除无调用 _generation_stub；_Gen 有 runtime.py 延迟消费者，已原样保留并通过实际运行库回归。",
       "cases": [
         "M09-UNIT-ASSISTANT-ONLINE-01"
       ],
@@ -1497,6 +1497,141 @@
       "path": "plan-build/code-cleanup/completed/phase-1-scope/C1-01.md",
       "owner": "M08.cleanup_documents",
       "reason": "保留当前工作区既有 C1-01 复核归档；只记录审查依据，不是产品执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-1-scope/.gitkeep",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-1-scope/C1-02.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-1-scope/C1-03.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-2-api/.gitkeep",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-2-api/C2-01.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-2-api/C2-02.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-2-api/C2-03.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-2-api/C2-04.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-3-web/.gitkeep",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-3-web/C3-01.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-3-web/C3-02.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-3-web/C3-03.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-3-web/C3-04.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-4-verify/.gitkeep",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/review/C4-STARTUP.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "非执行启动核对记录，区分临时服务成功与真实服务未验证；无产品/执行合同消费者。",
       "cases": [
         "M08-DOCS-01"
       ],
