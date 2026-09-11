@@ -14646,6 +14646,138 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-ANSWER-PATHS-01",
+          "priority": "P1",
+          "scenario": "Bound source addresses render as titles while navigation and output guards remain intact.",
+          "expectations": [
+            {
+              "id": "M09-ANSWER-PATHS-01-ALLOW",
+              "surface": "response",
+              "statement": "Bound source addresses render as titles while navigation and output guards remain intact."
+            },
+            {
+              "id": "M09-ANSWER-PATHS-01-DENY",
+              "surface": "forbidden",
+              "statement": "No bound source address in rendered text and no forged citation or unsafe markup accepted."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_answer_paths.py",
+              "name": "test_source_addresses_become_titles_without_changing_navigation",
+              "gate": "api-tests",
+              "covers": [
+                "M09-ANSWER-PATHS-01-ALLOW",
+                "M09-ANSWER-PATHS-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "name": "test_security_output_citation_closure_forgery_rejected",
+              "gate": "api-tests",
+              "covers": [
+                "M09-ANSWER-PATHS-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "name": "test_security_output_html_and_link_rejected",
+              "gate": "api-tests",
+              "covers": [
+                "M09-ANSWER-PATHS-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "name": "test_security_output_high_risk_claim_without_evidence_rejected",
+              "gate": "api-tests",
+              "covers": [
+                "M09-ANSWER-PATHS-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-ANSWER-PATHS-02",
+          "priority": "P1",
+          "scenario": "Technical paths retain their original text and the prompt distinguishes history from current evidence.",
+          "expectations": [
+            {
+              "id": "M09-ANSWER-PATHS-02-ALLOW",
+              "surface": "response",
+              "statement": "Technical paths retain their original text and the prompt distinguishes history from current evidence."
+            },
+            {
+              "id": "M09-ANSWER-PATHS-02-DENY",
+              "surface": "forbidden",
+              "statement": "No prefix replacement of unrelated files or paths and no instruction to trust historical answers."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_answer_paths.py",
+              "name": "test_source_path_handling_preserves_technical_content_and_prompt_boundary",
+              "gate": "api-tests",
+              "covers": [
+                "M09-ANSWER-PATHS-02-ALLOW",
+                "M09-ANSWER-PATHS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_source_diversity.py",
+              "name": "test_prompt_uses_titles_without_source_paths",
+              "gate": "api-tests",
+              "covers": [
+                "M09-ANSWER-PATHS-02-ALLOW"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-ANSWER-PATHS-03",
+          "priority": "P1",
+          "scenario": "SSE, recovered session and persisted new history share the rendered title answer with navigable source metadata.",
+          "expectations": [
+            {
+              "id": "M09-ANSWER-PATHS-03-ALLOW",
+              "surface": "response",
+              "statement": "SSE, recovered session and persisted new history share the rendered title answer with navigable source metadata."
+            },
+            {
+              "id": "M09-ANSWER-PATHS-03-DENY",
+              "surface": "forbidden",
+              "statement": "No original source address in the new answer text or divergence across stream and persistence."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_answer_paths.py",
+              "name": "test_source_path_answer_is_consistent_in_stream_session_and_history",
+              "gate": "api-tests",
+              "covers": [
+                "M09-ANSWER-PATHS-03-ALLOW",
+                "M09-ANSWER-PATHS-03-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

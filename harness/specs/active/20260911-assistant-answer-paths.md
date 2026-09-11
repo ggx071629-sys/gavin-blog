@@ -29,7 +29,7 @@ state_history:
 # Verification plan
 ## Verification cases
 - AC-1 => M09-ANSWER-PATHS-01
-- AC-2 => M09-ANSWER-PATHS-02
+- AC-2 => M09-ANSWER-PATHS-02, M09-EVIDENCE-BUDGET-01, M09-EVIDENCE-BUDGET-02, M09-RESUME-PAGES-01
 - AC-3 => M09-ANSWER-PATHS-03, M08-DOCS-01
 ## Gates
 - api-tests => AC-1, AC-2, AC-3
