@@ -14,7 +14,7 @@ documentation_reason: 记录设计来源、真实数据替代和现有模式范�
 state_history:
 ---
 # Context
-用户要求尽量一致还原 ui-fix-v2/assistant_page_preview.html；现有公开助手具有严格会话与引用合同。
+用户要求尽量一致还原 plan-build/ui-refinement/assistant_page_preview.html；现有公开助手具有严格会话与引用合同。
 # Goal
 还原主题色标识、分层面板、欢迎卡片、快捷问题、提问气泡、来源卡片和输入区，在真实问答中保持双主题和移动适配。按用户后续要求，深色强调色继承本站绿色，数据说明按钮移除加减号，保留展开交互。
 # Non-goals

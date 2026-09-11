@@ -10,6 +10,8 @@ author: Gavin
 
 # 公开问答运营控制面决策
 
+本文保留第五阶段决策。当前独立管理员试问、公开停用范围和共同总预算由 [2026-09-10 管理决策](20260910-assistant-management.md) 补充／替代相应旧描述；分类账本、被动观测、Worker 所有权与索引切换责任仍保留。
+
 ## 决策
 
 第五阶段交付单管理员 `/admin/assistant`，但不执行 production enable。部署 API capability、Web launcher flag、runtime gate、readiness receipt 和被动健康分别保留权威，不压缩成一个布尔值。概览只读 runtime/content 两库的 allowlisted 本地事实并携带各自观察时间；刷新不调用 Chat、Embedding 或 Qdrant。

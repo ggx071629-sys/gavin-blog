@@ -11,6 +11,8 @@ author: Gavin
 
 # Decision: Qdrant plus SQLite FTS5 assistant index
 
+本文保留初始索引决策。当前本机 Embedding 方案见 [本地 E5 决策](20260906-local-e5-retrieval.md)，来源范围由 [About／简历接入决策](20260911-assistant-source-ingestion.md) 扩展；旧文中的云端供应商待选与初始来源枚举仅描述当时状态。
+
 ## Status
 
 Accepted.

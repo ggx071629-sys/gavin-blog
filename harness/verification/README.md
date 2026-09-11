@@ -14,7 +14,7 @@ author: Gavin
 
 应用层 Pytest、Vitest、Playwright、类型检查和 Lighthouse 命令注册在 `config.toml` 的白名单 gate 中，不复制进 Harness checks，也不从 spec 执行任意 shell 文本。active spec 用 `gate => AC` 映射声明适用门禁。
 
-无 task ID 的 `verify` 只检查 Harness 完整性；带 task ID 的 `verify` 先检查文档影响契约，再运行 spec 声明的产品 gate，并写入 schema v2 evidence。`required` 文档目标必须存在于 HEAD、在 spec 首次提交后有已提交变更且没有工作区漂移；检查失败时不启动产品 gate。evidence 只保存命令、退出状态、耗时、AC 覆盖、profile、文档契约与目标 blob、source tree/spec/合同/gate 配置指纹和有限失败摘要，不提交重型原始日志。close 不信任磁盘上自报 passed 的 JSON：它校验本机 HMAC ledger、exact evidence digest、同 HEAD/输入和最新 attempt 后事务归档，不执行产品 gate 或全套 collector；dry-run 只验证现有凭据，不改写关闭资产。详见 [认证续跑决策](../docs/decisions/20260905-verification-resume.md)。
+无 task ID 的 `verify` 只检查 Harness 完整性；带 task ID 的 `verify` 先检查文档影响契约，再按影响计划执行 spec 对应的精确测试引用或适用检查，并写入 schema v2 evidence；普通 focused/stack 不因此执行整个注册包门禁，全量 release 只用于明确发布。`required` 文档目标必须存在于 HEAD、在 spec 首次提交后有已提交变更且没有工作区漂移；检查失败时不启动产品 gate。evidence 只保存命令、退出状态、耗时、AC 覆盖、profile、文档契约与目标 blob、source tree/spec/合同/gate 配置指纹和有限失败摘要，不提交重型原始日志。close 不信任磁盘上自报 passed 的 JSON：它校验本机 HMAC ledger、exact evidence digest、同 HEAD/输入和最新 attempt 后事务归档，不执行产品 gate 或全套 collector；`close-all --dry-run` 只验证现有凭据，不改写关闭资产；单任务 `close` 没有 `--dry-run` 参数。详见 [认证续跑决策](../docs/decisions/20260905-verification-resume.md)。
 
 全局 `metadata` check 除各生成索引作用域外，还验证 `config.toml` 中显式列出的四个项目入口／边界 README；这些文件继续由根 `AGENTS.md` 或公开入口直接路由，不为了纳入校验而复制进 Harness 生成索引。项目文档清单中的路径必须是存在的项目相对 Markdown 文件，且与索引文档共同执行必填 front matter、L1/L2、`load_when` 和全局 ID 唯一性检查。
 
@@ -30,13 +30,28 @@ schema v2 task evidence 为每个 gate 保存退出码、耗时、可识别的 P
 
 非零 gate 的 `details` 第一行是净化、最长 300 字符的 `diagnostic` 锚点，随后最多保留 11 行去重尾部；结构化 failure summary 使用同一锚点。锚点优先识别 Playwright 用例、Assertion/Error/FAILED、TypeScript 和包管理器错误，完整 stdout/stderr、trace、截图和原始报告仍属于本地重型产物。有限输出提高诊断能力但不能把启发式命中当成根因证明。
 
+## 常用入口与审查边界
+
+以下命令均从 `harness/` 执行，以 [CLI 实现](../tools/harness.py)、[验证执行器](../tools/verification_resume.py) 和 [验证工作流](../workflows/verify.md) 为准。
+
+| 命令 | 用途 |
+| --- | --- |
+| `python -m tools.harness index` | 重建配置声明的索引 |
+| `python -m tools.harness verify` | 检查工作区 Harness 结构、链接、元数据、归属及完整性，不执行产品测试 |
+| `python -m tools.harness plan <task> --json` | 只读解释影响计划与执行选择 |
+| `python -m tools.harness status <task> --json` | 只读检查派生状态与证据适用性 |
+| `python -m tools.harness verify <task> --close` | 在提交快照上验证并同进程关闭普通有测试任务 |
+| `python -m tools.harness diagnose <task> --case <case>` | 执行计划中的诊断子集，不能产生关闭凭据 |
+
+结构检查不会判断文档叙述是否符合产品行为。变更时还需人工核对实现、当前边界说明和来源时间；路径迁移更新当前文档与归属，不改写 archive、evidence、completion event 中描述历史提交的路径或摘要。
+
 ## Module verification contract
 
 模块验证合同以产品基线中的稳定模块 ID 为入口，为每个验证 case 建立 `module → scenario → observable expectations → exact test refs → leaf gates → task evidence` 链。scenario 描述要触发的用户或系统情境；observable expectations 必须同时容纳应当出现的结果与明确禁止出现的 `forbidden` 结果；exact test refs 指向可被对应 leaf gate 收集的精确 Pytest node ID、Vitest 测试或 Playwright project/spec/test；leaf gate 必须是实际执行测试或检查的注册 gate，不能只用带 `subsumption_contract` 的包门禁替代多条 case 的叶子归属。默认关闭的现行模块仍需覆盖关闭态及显式启用后的合同，不得按退役模块跳过。
 
 Active spec 在 `## Verification cases` 中把每条 AC 映射到一个或多个稳定 case ID。Specify 阶段只检查 AC／模块 ID、case ID 语法、唯一性和完整覆盖，允许引用将由本任务新增的 planned case ID；task verify 才以当前提交中的模块验证合同解析全部 case ID，并核对 exact test refs、leaf gates 与 spec 的 `gate => AC` 覆盖。到 task verify 时仍未进入当前合同、引用不存在测试定义、或没有被已选 leaf gate 收集的 case 一律失败，planned 不能成为关闭时的悬空豁免。
 
-模块引用校验直接调用 Pytest、Vitest 与 Playwright 的真实 list/collect 协议（仅限所选引用；全局结构检查不收集），并把 suite 路径绑定到 `config.toml` Gate command 及 npm script 入口；未被收集、重复、永久 skip/todo/fixme、错误 owner 或入口漂移均失败。收集清单证明测试在对应执行入口中可见，但仍不证明 scenario、required／forbidden expectations 与测试断言语义等价，也不证明本次 gate 已逐条执行每个引用。Reviewer 在每次新增或修改 case 时必须人工逐条检查 `covers` 对应的断言与正／负预期，不能把测试名、引用存在或总测试数当作语义证明。
+模块引用校验直接调用 Pytest、Vitest 与 Playwright 的真实 list/collect 协议（仅限所选引用；全局结构检查不收集），并把 suite 路径绑定到 `config.toml` Gate command 及 npm script 入口；未被收集、重复、永久 skip/todo/fixme、错误 owner 或入口漂移均失败。收集清单证明测试在对应执行入口中可见，但仍不证明 scenario、required／forbidden expectations 与测试断言语义等价，单靠 collect 也不证明本次已执行每个引用；当前执行身份合同还会核对所选与实际执行的完整测试身份集合，缺失、额外或重复执行不能用总数量相等掩盖。Reviewer 在每次新增或修改 case 时必须人工逐条检查 `covers` 对应的断言与正／负预期，不能把测试名、引用存在或总测试数当作语义证明。
 
 ## Change coverage closure
 
@@ -78,4 +93,4 @@ task gate 只有退出 0 且 proof 唯一、可解析、hash 当前、阶段完�
 
 全局 `history-integrity` check 以 compressed archive 为确定性关闭集合，验证同 task 的 passed 主 evidence、lifecycle `spec.completed` event、archive 标识与 evidence 链接，并用一次 Git 查询确认原 active spec 路径仍在当前 HEAD 历史。自 `20260901-*` task 起，archive front matter 与 schema v2 completion event 必须同时保存关闭时 exact evidence SHA-256；文件字段删除、字节篡改、digest 漂移或降级成 legacy event 都会失败。更早的 schema v1 completion event 作为明确 legacy 边界只保留身份／状态检查，不追溯补造 digest。该 check 只读且不重写、补造、迁移或删除历史资产。
 
-`plan <task>` 只读输出 gate 执行/复用与失效原因。`verify <task>` 先执行全局前检，成功后按最后有效 attempt 续跑；`--fresh` 禁止复用，release 保持 fresh。`status <task>` 报告未执行、失败、失效与可复用状态。默认不复用；启用时要求同 task、同 HEAD、同规范计划及已登记的受控依赖/环境。最终测试后可同进程关闭。
+`plan <task>` 只读输出 gate 执行/复用与失效原因。`verify <task>` 先执行全局前检，成功后执行当前选择范围；只有显式启用复用且输入合同满足时才使用最后有效 attempt；`--fresh` 禁止复用，release 保持 fresh。`status <task>` 报告未执行、失败、失效与可复用状态。默认不复用；启用时要求同 task、同 HEAD、同规范计划及已登记的受控依赖/环境。最终测试后可同进程关闭。

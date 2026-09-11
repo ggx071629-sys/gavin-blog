@@ -2296,6 +2296,7 @@
         "apps/web/components/PublicPageHero.vue",
         "apps/web/components/SiteFooter.vue",
         "apps/web/components/SiteHeader.vue",
+        "apps/web/components/SiteNavIcon.vue",
         "apps/web/components/BlueprintWatermark.vue",
         "apps/web/components/ThemeToggle.vue",
         "apps/web/composables/usePublicOverlay.ts",

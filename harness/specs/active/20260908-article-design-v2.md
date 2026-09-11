@@ -9,7 +9,7 @@ status: active
 verification_profile: focused
 documentation_impact: required
 documentation_targets:
-  - ui-fix-v2/IMPLEMENTATION.md
+  - plan-build/ui-refinement/IMPLEMENTATION.md
 documentation_reason: 记录文章页面的设计来源和阅读宽度取舍。
 state_history:
 ---

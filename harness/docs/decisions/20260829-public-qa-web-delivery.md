@@ -11,6 +11,8 @@ author: Gavin
 
 # Decision: default-off public Q&A web delivery
 
+本文保留首次 Web 交付决策。当前入口还消费服务端可用性，行为见 [管理执行与预算决策](20260910-assistant-management.md)；来源范围见 [About／简历接入决策](20260911-assistant-source-ingestion.md)。旧的单独 Web flag 条件不是当前完整可见性合同。
+
 ## Context
 
 阶段二交付了默认关闭的匿名问答 API 内核，但没有公开 Web 消费者，浏览器刷新也无法安全恢复仍在运行的 turn。Phase 2 通过的测试不能证明 tombstone fencing、runner 异常终结和公开 wire 投影已经成立。

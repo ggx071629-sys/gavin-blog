@@ -27,11 +27,11 @@ author: Gavin
 
 冻结时 Harness 对 `Goal`、`Non-goals`、`Acceptance criteria` 和 `Verification plan` 建立确定性摘要。备注、阻塞信息和证据可以继续补充；核心契约如需改变，必须先恢复。合法冻结不会拖红无 task ID 的全局 verify 或 release 门禁，但 `verify <frozen-task-id>` 不能生成成功结论，`close <frozen-task-id>` 必须在产生归档、事件或证据前失败。
 
-关闭必须使用 `python -m tools.harness close <task_id>`。close 在任何写入前校验本机 HMAC 认证的 schema v2 task evidence，不启动产品 gate 或 collector：状态必须通过、覆盖当前 spec 全部 AC、产品 gate 必须与验证计划一致、source commit 必须等于 HEAD，且配置的验证源码范围不能存在未提交变更。任一步失败时 active spec 保持不变；close 保留 verify 产生的 evidence，不用结构检查结果覆盖产品证据。
+关闭必须经过确定性 CLI 生命周期。从 `harness/` 执行；当前默认关闭复用，普通有测试任务使用 `python -m tools.harness verify <task_id> --close` 同进程完成验证与关闭。独立 `python -m tools.harness close <task_id>` 仍存在，但未登记完整安装依赖闭包时不能跨进程关闭，不能把单独运行 verify 再 close 作为通用流程。close 在任何写入前校验本机 HMAC 认证的 schema v2 task evidence，不启动产品 gate 或 collector：状态必须通过、覆盖当前 spec 全部 AC、产品 gate 必须与验证计划一致、source commit 必须等于 HEAD，且配置的验证源码范围不能存在未提交变更。任一步失败时 active spec 保持不变；close 保留 verify 产生的 evidence，不用结构检查结果覆盖产品证据。
 
 派生 verified 还要求 evidence 的隔离执行上下文对应当前提交，且临时 Git worktree 清理状态为 passed；共享工作目录执行或残留未清理的隔离环境都不能关闭。
 
-批量关闭使用 `python -m tools.harness close-all`。该命令明确跳过 frozen spec，先统一验证所有 active evidence 和 Harness 完整性，再一次性生成归档与事件；任一变更或后验检查失败时整批回滚，不保留部分关闭结果。
+满足跨进程认证与输入合同前提时，批量关闭使用 `python -m tools.harness close-all`；它不绕过上述限制。该命令明确跳过 frozen spec，先统一验证所有 active evidence 和 Harness 完整性，再一次性生成归档与事件；任一变更或后验检查失败时整批回滚，不保留部分关闭结果。
 
 关闭前可运行 `python -m tools.harness status [task_id] [--json]` 只读查看派生状态；frozen 不触发 evidence 校验。`python -m tools.harness close-all --dry-run` 复用真实批量关闭的 evidence、目标冲突和 Harness 前置检查，但不写 spec、archive、event、evidence 或索引。
 
