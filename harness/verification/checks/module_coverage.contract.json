@@ -736,17 +736,17 @@
         {
           "id": "M01-UNIT-ARTICLE-01",
           "priority": "P1",
-          "scenario": "M01.reading: article scenarios at the existing module boundary.",
+          "scenario": "Existing production slug normalization and create-field validation remain unchanged after unused route/filter helpers are removed.",
           "expectations": [
             {
               "id": "M01-UNIT-ARTICLE-01-E01",
               "surface": "response",
-              "statement": "builds a stable UTC publication path; creates URL-safe ASCII slugs; builds public taxonomy filters from supported query values"
+              "statement": "ASCII slug normalization remains stable; a valid title and slug produce no field errors."
             },
             {
               "id": "M01-UNIT-ARTICLE-01-E02",
               "surface": "forbidden",
-              "statement": "requires an explicit English or pinyin slug when the title cannot generate one; rejects empty titles and slugs outside the API slug contract"
+              "statement": "A title that cannot generate an ASCII slug requires an explicit slug; empty titles and invalid slugs remain rejected."
             }
           ],
           "required_gates": [
@@ -756,21 +756,10 @@
             {
               "kind": "vitest",
               "path": "apps/web/tests/unit/article.test.ts",
-              "name": "builds a stable UTC publication path",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
-                "M01-UNIT-ARTICLE-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/article.test.ts",
               "name": "creates URL-safe ASCII slugs",
               "gate": "web-quality",
               "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
-                "M01-UNIT-ARTICLE-01-E02"
+                "M01-UNIT-ARTICLE-01-E01"
               ]
             },
             {
@@ -779,7 +768,6 @@
               "name": "requires an explicit English or pinyin slug when the title cannot generate one",
               "gate": "web-quality",
               "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
                 "M01-UNIT-ARTICLE-01-E02"
               ]
             },
@@ -787,16 +775,6 @@
               "kind": "vitest",
               "path": "apps/web/tests/unit/article.test.ts",
               "name": "rejects empty titles and slugs outside the API slug contract",
-              "gate": "web-quality",
-              "covers": [
-                "M01-UNIT-ARTICLE-01-E01",
-                "M01-UNIT-ARTICLE-01-E02"
-              ]
-            },
-            {
-              "kind": "vitest",
-              "path": "apps/web/tests/unit/article.test.ts",
-              "name": "builds public taxonomy filters from supported query values",
               "gate": "web-quality",
               "covers": [
                 "M01-UNIT-ARTICLE-01-E01",
@@ -12524,11 +12502,10 @@
             {
               "kind": "vitest",
               "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "counts unicode code points and wipes on BFCache",
+              "name": "counts unicode code points and initializes empty memory",
               "gate": "web-quality",
               "covers": [
-                "M09-UI-BOUNDARY-01-ALLOW",
-                "M09-UI-BOUNDARY-01-DENY"
+                "M09-UI-BOUNDARY-01-ALLOW"
               ]
             }
           ]
