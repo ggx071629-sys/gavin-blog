@@ -28,7 +28,7 @@ S1-01 离线函数基线复现无关引用假奖项、累计引用及数字子�
 连续原句存在不等于语义支持，主体、否定和时间仍需代表例离线复核；不宣称通用事实验证。增加 schema 会占用既有 token 空间。拒绝未知旧输出可能减少可恢复回答。
 # Verification plan
 ## Verification cases
-- AC-1 => M09-GROUNDING-01, M09-ANSWER-PATHS-01
+- AC-1 => M09-GROUNDING-01, M09-ANSWER-PATHS-01, M09-ANSWER-PATHS-02, M08-DOCS-01
 - AC-2 => M09-GROUNDING-02, M09-EVIDENCE-BUDGET-01, M09-EVIDENCE-BUDGET-02
 - AC-3 => M09-GROUNDING-03, M09-ANSWER-PATHS-03
 ## Gates

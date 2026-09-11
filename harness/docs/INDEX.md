@@ -8,6 +8,7 @@ Read this index first. Load only entries whose `load_when` matches the task.
 | --- | --- | --- | --- | --- | --- |
 | architecture-boundaries | L1 | 当前已确认的应用、配置、存储、契约和部署边界 | architecture, cross-stack-change, deployment | Gavin | [architecture/boundaries.md](architecture/boundaries.md) |
 | decision-20260906-local-e5-retrieval | L1 | 固定本地 E5 CPU 服务、tokenizer 切片与第三方 Chat 的分阶段接入边界 | local-embedding, assistant-retrieval | — | [decisions/20260906-local-e5-retrieval.md](decisions/20260906-local-e5-retrieval.md) |
+| decision-assistant-grounding | L1 | 自然综合按块绑定内部原句并保持离线语义评估边界 | assistant-grounding | Codex | [decisions/20260911-assistant-grounding.md](decisions/20260911-assistant-grounding.md) |
 | decision-assistant-management | L1 | 真实管理试问的执行隔离与跨进程统一预算权威 | assistant-management, assistant-budget | Codex | [decisions/20260910-assistant-management.md](decisions/20260910-assistant-management.md) |
 | decision-assistant-source-ingestion | L1 | 关于页发布资格和简历显式刷新、版本化引用的用户确认边界 | assistant-sources, assistant-resume, assistant-about | Codex | [decisions/20260911-assistant-source-ingestion.md](decisions/20260911-assistant-source-ingestion.md) |
 | decision-bounded-list-pagination | L1 | 高增长数组列表使用有界 offset 分页并由完整消费者显式分批读取 | list-api-change, cross-stack-change, architecture-decision | Gavin | [decisions/0005-bounded-list-pagination.md](decisions/0005-bounded-list-pagination.md) |

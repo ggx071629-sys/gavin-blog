@@ -14778,6 +14778,222 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-GROUNDING-01",
+          "priority": "P0",
+          "scenario": "Block-local evidence preserves supported synthesis and attributed personal facts.",
+          "expectations": [
+            {
+              "id": "M09-GROUNDING-01-E01",
+              "surface": "response",
+              "statement": "Block-local evidence preserves supported synthesis and attributed personal facts."
+            },
+            {
+              "id": "M09-GROUNDING-01-E02",
+              "surface": "forbidden",
+              "statement": "Unrelated awards, cross-block support, numeric/subject/negation/time mismatches cannot pass the representative checks."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "kind": "pytest",
+              "name": "test_security_grounding_block_support_and_claims",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-01-E01",
+                "M09-GROUNDING-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_about_facts.py",
+              "kind": "pytest",
+              "name": "test_about_self_report_prompt_and_bound_citations",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-01-E01",
+                "M09-GROUNDING-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_resume_citations.py",
+              "kind": "pytest",
+              "name": "test_resume_self_report_conflict_and_unaliased_operational_notice",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-01-E01",
+                "M09-GROUNDING-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-GROUNDING-02",
+          "priority": "P0",
+          "scenario": "Both model protocols carry bounded original support quotes with exact alias binding under the existing input budget.",
+          "expectations": [
+            {
+              "id": "M09-GROUNDING-02-E01",
+              "surface": "response",
+              "statement": "Both model protocols carry bounded original support quotes with exact alias binding under the existing input budget."
+            },
+            {
+              "id": "M09-GROUNDING-02-E02",
+              "surface": "forbidden",
+              "statement": "Missing, forged or misbound support cannot bypass validation; development merging cannot drop a source alias."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "kind": "pytest",
+              "name": "test_security_grounding_missing_forged_and_misbound_support",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-02-E01",
+                "M09-GROUNDING-02-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "kind": "pytest",
+              "name": "test_deepseek_transport_and_production_boundary",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-02-E01",
+                "M09-GROUNDING-02-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "kind": "pytest",
+              "name": "test_deepseek_strict_validation_metadata_and_citations",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-02-E01",
+                "M09-GROUNDING-02-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "kind": "pytest",
+              "name": "test_deepseek_prompt_budget_covers_actual_schema_message",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-02-E01",
+                "M09-GROUNDING-02-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_development.py",
+              "kind": "pytest",
+              "name": "test_local_development_groups_chunks_from_the_same_source",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-02-E01",
+                "M09-GROUNDING-02-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-GROUNDING-03",
+          "priority": "P0",
+          "scenario": "Public/admin stream, restore and history consume validated output and authorized terminals clear internal material.",
+          "expectations": [
+            {
+              "id": "M09-GROUNDING-03-E01",
+              "surface": "response",
+              "statement": "Public/admin stream, restore and history consume validated output and authorized terminals clear internal material."
+            },
+            {
+              "id": "M09-GROUNDING-03-E02",
+              "surface": "forbidden",
+              "statement": "Support fields must not leak into responses/history/checkpoints; revoked sources and old unsupported outputs cannot publish answers."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "kind": "pytest",
+              "name": "test_security_grounding_material_is_private_and_cleared_on_terminal",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-03-E01",
+                "M09-GROUNDING-03-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "kind": "pytest",
+              "name": "test_deepseek_online_graph_settles_and_rejects_invalid_body",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-03-E01",
+                "M09-GROUNDING-03-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "kind": "pytest",
+              "name": "test_deepseek_empty_blocks_refuses_only_complete_response",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-03-E01",
+                "M09-GROUNDING-03-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_management.py",
+              "kind": "pytest",
+              "name": "test_admin_trial_closed_public_isolated_authenticated_and_emergency_stopped",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-03-E01",
+                "M09-GROUNDING-03-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_resume_citations.py",
+              "kind": "pytest",
+              "name": "test_resume_graph_rechecks_before_provider_and_after_generation",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-03-E01",
+                "M09-GROUNDING-03-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_source_integration.py",
+              "kind": "pytest",
+              "name": "test_two_sources_import_retrieve_answer_and_keep_article_flow",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-03-E01",
+                "M09-GROUNDING-03-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_source_integration.py",
+              "kind": "pytest",
+              "name": "test_two_sources_replace_pause_clear_and_about_publication_gap",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-03-E01",
+                "M09-GROUNDING-03-E02"
+              ]
+            }
+          ]
         }
       ]
     },
