@@ -1198,7 +1198,43 @@
       "dependencies": []
     },
     {
+      "path": "plan-build/code-cleanup/PHASE-4-VERIFY.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "非执行记录、操作说明或精确验证登记；不修改协议/runner。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/PLAN.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "非执行记录、操作说明或精确验证登记；不修改协议/runner。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/review/C4-STARTUP.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "非执行记录、操作说明或精确验证登记；不修改协议/runner。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
       "path": "plan-build/index-integrity/PLAN.md",
+      "owner": "M08.integrity_documents",
+      "reason": "非执行记录、操作说明或精确验证登记；不修改协议/runner。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/index-integrity/REAL.json",
       "owner": "M08.integrity_documents",
       "reason": "非执行记录、操作说明或精确验证登记；不修改协议/runner。",
       "cases": [
