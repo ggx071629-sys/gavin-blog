@@ -1777,7 +1777,8 @@
         "M06-ACCOUNT-SESSION-01",
         "M06-ACCOUNT-CONTRACT-01",
         "M06-ACCOUNT-COMPAT-01",
-        "M06-RESUME-REFRESH-WORKER-01"
+        "M06-RESUME-REFRESH-WORKER-01",
+        "M10-SOURCE-DIVERSITY-01"
       ],
       "dependents": [
         "M02.publishing",

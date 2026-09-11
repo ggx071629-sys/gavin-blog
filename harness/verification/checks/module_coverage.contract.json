@@ -16598,7 +16598,7 @@
         {
           "id": "M10-SOURCE-DIVERSITY-01",
           "priority": "P1",
-          "scenario": "不同公开来源优先获取候选位置；删除来源仍被拒绝。",
+          "scenario": "扩大可配置候选池与证据组装范围，优先覆盖不同来源，保持模型预算和可见性校验。",
           "expectations": [
             {
               "id": "M10-SOURCE-DIVERSITY-01-ALLOW",
@@ -16619,6 +16619,16 @@
               "kind": "pytest",
               "path": "apps/api/tests/test_assistant_source_diversity.py",
               "name": "test_retrieval_spreads_limit_across_live_sources",
+              "gate": "api-tests",
+              "covers": [
+                "M10-SOURCE-DIVERSITY-01-ALLOW",
+                "M10-SOURCE-DIVERSITY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_source_diversity.py",
+              "name": "test_candidate_pool_defaults_are_configurable_without_raising_model_budget",
               "gate": "api-tests",
               "covers": [
                 "M10-SOURCE-DIVERSITY-01-ALLOW",

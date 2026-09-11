@@ -407,6 +407,152 @@
           "cases": []
         }
       ]
+    },
+    {
+      "path": "apps/api/app/config.py",
+      "owner": "M06.runtime_config",
+      "reason": "按用户要求扩大默认检索及证据池，允许配置更大候选数，模型输入与费用不变。",
+      "cases": [
+        "M10-SOURCE-DIVERSITY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "消费扩大后的检索候选与证据上限，覆盖默认值、可配置性和运行检索。",
+          "cases": [
+            "M10-SOURCE-DIVERSITY-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "消费扩大后的检索候选与证据上限，覆盖默认值、可配置性和运行检索。",
+          "cases": [
+            "M10-SOURCE-DIVERSITY-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_refresh",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "仅检索候选和证据字符池默认值变化；本消费者不依赖旧默认条数，模型配置、端点、认证、持久化和发布协议不变。",
+          "cases": []
+        }
+      ]
     }
   ]
 }
