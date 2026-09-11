@@ -14936,7 +14936,7 @@
             {
               "path": "apps/api/tests/test_assistant_deepseek.py",
               "kind": "pytest",
-              "name": "test_deepseek_online_graph_settles_and_rejects_invalid_body",
+              "name": "test_deepseek_online_graph_settles_and_rejects_invalid_body[False]",
               "gate": "api-tests",
               "covers": [
                 "M09-GROUNDING-03-E01",
@@ -14946,7 +14946,27 @@
             {
               "path": "apps/api/tests/test_assistant_deepseek.py",
               "kind": "pytest",
-              "name": "test_deepseek_empty_blocks_refuses_only_complete_response",
+              "name": "test_deepseek_online_graph_settles_and_rejects_invalid_body[True]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-03-E01",
+                "M09-GROUNDING-03-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "kind": "pytest",
+              "name": "test_deepseek_empty_blocks_refuses_only_complete_response[stop]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GROUNDING-03-E01",
+                "M09-GROUNDING-03-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "kind": "pytest",
+              "name": "test_deepseek_empty_blocks_refuses_only_complete_response[length]",
               "gate": "api-tests",
               "covers": [
                 "M09-GROUNDING-03-E01",
