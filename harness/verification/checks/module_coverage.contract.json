@@ -14149,6 +14149,58 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-LIVE-WORKER-01",
+          "priority": "P1",
+          "scenario": "Managed worker reads real .env.e5, validates settings, runs against its database and closes resources on stop; existing launcher reuse and owner-stop behavior hold.",
+          "expectations": [
+            {
+              "id": "M09-LIVE-WORKER-01-E01",
+              "surface": "response",
+              "statement": "Managed worker reads real .env.e5, validates settings, runs against its database and closes resources on stop; existing launcher reuse and owner-stop behavior hold."
+            },
+            {
+              "id": "M09-LIVE-WORKER-01-E02",
+              "surface": "forbidden",
+              "statement": "Disabled worker cannot open the database; duplicate ready managers and unowned process termination are forbidden."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_local_launcher.py",
+              "kind": "pytest",
+              "name": "test_managed_worker_uses_real_config_and_cleans_resources",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-WORKER-01-E01",
+                "M09-LIVE-WORKER-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_local_launcher.py",
+              "kind": "pytest",
+              "name": "test_ready_instance_is_reused",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-WORKER-01-E01",
+                "M09-LIVE-WORKER-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_local_launcher.py",
+              "kind": "pytest",
+              "name": "test_stop_without_owner_explains_last_failure",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-WORKER-01-E01",
+                "M09-LIVE-WORKER-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

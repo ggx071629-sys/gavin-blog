@@ -1350,7 +1350,8 @@
         "M09-REVALIDATION-BUDGET-01",
         "M09-REVALIDATION-RECOVERY-01",
         "M09-REVALIDATION-CLI-01",
-        "M09-RESUME-FACTS-01"
+        "M09-RESUME-FACTS-01",
+        "M09-LIVE-WORKER-01"
       ],
       "dependents": [
         "M06.api_tooling",
