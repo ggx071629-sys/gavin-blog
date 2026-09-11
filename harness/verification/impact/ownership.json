@@ -1478,6 +1478,7 @@
       "cases": [
         "M10-P1-01",
         "M10-UNIT-ASSISTANT-INDEX-01",
+        "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01",
         "M10-E5-ARTIFACT-01",
         "M10-E5-SERVICE-01",
         "M09-E5-ADAPTER-01",

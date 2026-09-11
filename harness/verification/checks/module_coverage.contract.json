@@ -15532,6 +15532,57 @@
           ]
         },
         {
+          "id": "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01",
+          "priority": "P1",
+          "scenario": "M10.index: Chinese and English natural questions reach the lexical branch of hybrid retrieval.",
+          "expectations": [
+            {
+              "id": "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E01",
+              "surface": "response",
+              "statement": "a Chinese substring, a Chinese natural question, an English natural question, a code identifier and an exact term recall their documents through the precise, relaxed, then legacy match order, and a generation indexed before the lexical projection keeps its previous recall"
+            },
+            {
+              "id": "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E02",
+              "surface": "forbidden",
+              "statement": "an unrelated question must not be recalled, and an un-rebuilt generation must not be reported as already answering Chinese substring questions"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_index.py",
+              "name": "test_lexical_projection_recalls_chinese_substrings_and_natural_questions",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E01",
+                "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_index.py",
+              "name": "test_legacy_fts_rows_stay_queryable_until_the_index_is_rebuilt",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E01",
+                "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_index.py",
+              "name": "test_retriever_recalls_a_chinese_substring_from_the_real_index",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E01"
+              ]
+            }
+          ]
+        },
+        {
           "id": "M10-UNIT-ASSISTANT-BACKUP-RESTORE-01",
           "priority": "P1",
           "scenario": "M10.qualification: assistant_backup_restore scenarios at the existing module boundary.",
@@ -17657,6 +17708,15 @@
               "kind": "pytest",
               "path": "apps/api/tests/test_index_integrity.py",
               "name": "test_local_finalize_consumers_preserve_runtime_and_fence[capacity]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-UNIT-INDEX-INTEGRITY-01-ALLOW"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_index_integrity.py",
+              "name": "test_audit_accepts_the_original_text_projection_of_an_existing_generation",
               "gate": "api-tests",
               "covers": [
                 "M10-UNIT-INDEX-INTEGRITY-01-ALLOW"
