@@ -3765,7 +3765,9 @@
         "completed/assistant-upgrade-about/Q2-05.md",
         "completed/assistant-upgrade-resume/Q3-02.md",
         "completed/assistant-upgrade-resume/Q3-07.md",
-        "completed/assistant-upgrade-verification/Q4-01.md"
+        "completed/assistant-upgrade-verification/Q4-01.md",
+        "completed/assistant-upgrade-verification/Q4-02.md",
+        "completed/assistant-upgrade-verification/Q4-03.md"
       ],
       "cases": [
         "M08-DOCS-01"
