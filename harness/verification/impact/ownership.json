@@ -56,7 +56,8 @@
         "harness/verification/impact/20260911-assistant-resume-citations.json",
         "harness/verification/impact/20260911-assistant-answer-paths.json",
         "harness/verification/impact/20260911-assistant-grounding.json",
-        "harness/verification/impact/20260911-assistant-defense.json"
+        "harness/verification/impact/20260911-assistant-defense.json",
+        "harness/verification/impact/20260911-assistant-support-context.json"
       ],
       "cases": [
         "M08-DOCS-01",
@@ -3848,7 +3849,10 @@
         "plan-build/assistant-safety/completed/phase-2-grounding/S2-04.md",
         "plan-build/assistant-safety/completed/phase-3-defense/S3-01.md",
         "plan-build/assistant-safety/completed/phase-3-defense/S3-02.md",
-        "plan-build/assistant-safety/completed/phase-3-defense/S3-03.md"
+        "plan-build/assistant-safety/completed/phase-3-defense/S3-03.md",
+        "plan-build/assistant-safety/completed/phase-3-defense/S3-04.md",
+        "plan-build/assistant-safety/completed/phase-4-evaluation/S4-01.md",
+        "plan-build/assistant-safety/completed/phase-4-evaluation/S4-02.md"
       ],
       "cases": [
         "M08-DOCS-01"
