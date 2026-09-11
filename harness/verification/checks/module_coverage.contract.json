@@ -14265,6 +14265,100 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-EVIDENCE-BUDGET-01",
+          "priority": "P1",
+          "scenario": "在现有输入限制内选取完整去重证据，兼顾来源且保留足够时的排序和历史。",
+          "expectations": [
+            {
+              "id": "M09-EVIDENCE-BUDGET-01-ALLOW",
+              "surface": "response",
+              "statement": "在现有输入限制内选取完整去重证据，兼顾来源且保留足够时的排序和历史。"
+            },
+            {
+              "id": "M09-EVIDENCE-BUDGET-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得截断正文、修改原证据、超出输入/输出预留或因大项阻断可容纳的小项。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_budget.py",
+              "name": "test_evidence_budget_preserves_whole_ranked_diverse_sources",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-BUDGET-01-ALLOW",
+                "M09-EVIDENCE-BUDGET-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_budget.py",
+              "name": "test_evidence_budget_skips_oversized_chunk_and_honors_context_reserve",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-BUDGET-01-ALLOW",
+                "M09-EVIDENCE-BUDGET-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_budget.py",
+              "name": "test_evidence_budget_keeps_order_when_everything_fits",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-BUDGET-01-ALLOW",
+                "M09-EVIDENCE-BUDGET-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-EVIDENCE-BUDGET-02",
+          "priority": "P1",
+          "scenario": "超限候选经打包后可进入模拟Chat，引用仅能来自实际发送切片。",
+          "expectations": [
+            {
+              "id": "M09-EVIDENCE-BUDGET-02-ALLOW",
+              "surface": "response",
+              "statement": "超限候选经打包后可进入模拟Chat，引用仅能来自实际发送切片。"
+            },
+            {
+              "id": "M09-EVIDENCE-BUDGET-02-DENY",
+              "surface": "forbidden",
+              "statement": "不得采纳未发送的c99别名或因候选总长度直接拒绝可回答问题。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_budget.py",
+              "name": "test_packed_evidence_reaches_chat_and_rejects_omitted_citations[c1]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-BUDGET-02-ALLOW",
+                "M09-EVIDENCE-BUDGET-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_budget.py",
+              "name": "test_packed_evidence_reaches_chat_and_rejects_omitted_citations[c99]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-BUDGET-02-ALLOW",
+                "M09-EVIDENCE-BUDGET-02-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
