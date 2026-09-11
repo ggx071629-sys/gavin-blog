@@ -2993,7 +2993,8 @@
         "apps/web/composables/useAssistantAvailability.ts",
         "apps/web/tests/e2e-assistant/about-citations.spec.ts",
         "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
-        "apps/web/tests/unit/assistant-source-title.test.ts"
+        "apps/web/tests/unit/assistant-source-title.test.ts",
+        "apps/web/tests/helpers/assistant-sse*.ts"
       ],
       "cases": [
         "M09-P0-01",
@@ -4407,6 +4408,15 @@
         "M09-ABOUT-CITATION-01",
         "M09-RESUME-CITATION-UI-01",
         "M06-RESUME-ADMIN-UI-01"
+      ],
+      "dependents": []
+    },
+    "M08.cleanup_documents": {
+      "paths": [
+        "plan-build/code-cleanup/*"
+      ],
+      "cases": [
+        "M08-DOCS-01"
       ],
       "dependents": []
     }
