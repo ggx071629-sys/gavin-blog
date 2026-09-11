@@ -1636,6 +1636,60 @@
         "M08-DOCS-01"
       ],
       "dependencies": []
+    },
+    {
+      "path": "plan-build/README.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "C4 收尾的非执行计划入口、历史记录或脱敏紧凑启动证据；只记录真实环境、数据保留和既有 FTS 限制，不改变产品、质量门槛或执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-3-web/C3-05.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "C4 收尾的非执行计划入口、历史记录或脱敏紧凑启动证据；只记录真实环境、数据保留和既有 FTS 限制，不改变产品、质量门槛或执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-4-verify/C4-01.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "C4 收尾的非执行计划入口、历史记录或脱敏紧凑启动证据；只记录真实环境、数据保留和既有 FTS 限制，不改变产品、质量门槛或执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-4-verify/C4-02.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "C4 收尾的非执行计划入口、历史记录或脱敏紧凑启动证据；只记录真实环境、数据保留和既有 FTS 限制，不改变产品、质量门槛或执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-4-verify/C4-03.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "C4 收尾的非执行计划入口、历史记录或脱敏紧凑启动证据；只记录真实环境、数据保留和既有 FTS 限制，不改变产品、质量门槛或执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/review/C4-REAL.json",
+      "owner": "M08.cleanup_documents",
+      "reason": "C4 收尾的非执行计划入口、历史记录或脱敏紧凑启动证据；只记录真实环境、数据保留和既有 FTS 限制，不改变产品、质量门槛或执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
     }
   ]
 }

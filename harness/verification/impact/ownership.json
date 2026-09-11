@@ -4413,6 +4413,7 @@
     },
     "M08.cleanup_documents": {
       "paths": [
+        "plan-build/README.md",
         "plan-build/code-cleanup/*"
       ],
       "cases": [
