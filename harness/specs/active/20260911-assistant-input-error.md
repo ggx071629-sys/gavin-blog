@@ -27,7 +27,7 @@ state_history:
 不得将输入超限建议为刷新或重发；不得把真正未确认的调用误判为未发送。
 # Verification plan
 ## Verification cases
-- AC-1 => M09-INPUT-ERROR-01
+- AC-1 => M09-INPUT-ERROR-01, M08-DOCS-01
 - AC-2 => M09-INPUT-ERROR-02
 ## Gates
 - api-tests => AC-1

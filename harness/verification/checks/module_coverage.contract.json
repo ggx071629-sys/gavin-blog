@@ -14201,6 +14201,70 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-INPUT-ERROR-01",
+          "priority": "P1",
+          "scenario": "输入超限SSE与恢复返回独立码，诊断日志记录数字且迁移不禁用应用logger。",
+          "expectations": [
+            {
+              "id": "M09-INPUT-ERROR-01-ALLOW",
+              "surface": "response",
+              "statement": "输入超限SSE与恢复返回独立码，诊断日志记录数字且迁移不禁用应用logger。"
+            },
+            {
+              "id": "M09-INPUT-ERROR-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得调用Chat、返回provider_result_unknown或记录正文。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_input_error.py",
+              "name": "test_input_budget_error_is_persisted_without_chat_call",
+              "gate": "api-tests",
+              "covers": [
+                "M09-INPUT-ERROR-01-ALLOW",
+                "M09-INPUT-ERROR-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-INPUT-ERROR-02",
+          "priority": "P1",
+          "scenario": "输入超限明确说明未调用模型，未确认状态保留只读检查操作。",
+          "expectations": [
+            {
+              "id": "M09-INPUT-ERROR-02-ALLOW",
+              "surface": "response",
+              "statement": "输入超限明确说明未调用模型，未确认状态保留只读检查操作。"
+            },
+            {
+              "id": "M09-INPUT-ERROR-02-DENY",
+              "surface": "forbidden",
+              "statement": "不得建议原样重发输入超限或移除未知调用的检查保护。"
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "distinguishes input budget rejection from an unconfirmed answer",
+              "gate": "web-quality",
+              "covers": [
+                "M09-INPUT-ERROR-02-ALLOW",
+                "M09-INPUT-ERROR-02-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
