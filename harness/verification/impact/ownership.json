@@ -1217,7 +1217,8 @@
         "apps/api/tests/test_assistant_resume_citations.py",
         "apps/api/tests/test_assistant_input_error.py",
         "apps/api/assistant_runtime_migrations/env.py",
-        "apps/api/tests/test_assistant_evidence_budget.py"
+        "apps/api/tests/test_assistant_evidence_budget.py",
+        "apps/api/tests/test_assistant_evidence_links.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1259,7 +1260,9 @@
         "M09-INPUT-ERROR-01",
         "M09-EVIDENCE-BUDGET-01",
         "M09-EVIDENCE-BUDGET-02",
-        "M09-RESUME-PAGES-01"
+        "M09-RESUME-PAGES-01",
+        "M09-EVIDENCE-LINKS-01",
+        "M09-EVIDENCE-LINKS-02"
       ],
       "dependents": [
         "M06.api_tooling",

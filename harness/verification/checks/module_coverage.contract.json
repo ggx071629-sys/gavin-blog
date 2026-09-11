@@ -14391,6 +14391,80 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-EVIDENCE-LINKS-01",
+          "priority": "P1",
+          "scenario": "正常文档管理路径可用，不丢弃公开教程。",
+          "expectations": [
+            {
+              "id": "M09-EVIDENCE-LINKS-01-ALLOW",
+              "surface": "response",
+              "statement": "普通管理文档路径不触发隔离。"
+            },
+            {
+              "id": "M09-EVIDENCE-LINKS-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得仅因URL路径名称丢弃全文。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_public_documentation_paths_are_usable_evidence",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-01-ALLOW",
+                "M09-EVIDENCE-LINKS-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-EVIDENCE-LINKS-02",
+          "priority": "P1",
+          "scenario": "危险内容及用户问题策略保持。",
+          "expectations": [
+            {
+              "id": "M09-EVIDENCE-LINKS-02-ALLOW",
+              "surface": "response",
+              "statement": "原问题凭据链接仍被拒绝。"
+            },
+            {
+              "id": "M09-EVIDENCE-LINKS-02-DENY",
+              "surface": "forbidden",
+              "statement": "不得豁免实际密钥、查询参数或指令。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_question_credential_link_policy_is_unchanged",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
