@@ -14415,7 +14415,27 @@
             {
               "kind": "pytest",
               "path": "apps/api/tests/test_assistant_evidence_links.py",
-              "name": "test_public_documentation_paths_are_usable_evidence",
+              "name": "test_public_documentation_paths_are_usable_evidence[published-tutorial]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-01-ALLOW",
+                "M09-EVIDENCE-LINKS-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_public_documentation_paths_are_usable_evidence[nested-path]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-01-ALLOW",
+                "M09-EVIDENCE-LINKS-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_public_documentation_paths_are_usable_evidence[secret-management]",
               "gate": "api-tests",
               "covers": [
                 "M09-EVIDENCE-LINKS-01-ALLOW",
@@ -14447,7 +14467,127 @@
             {
               "kind": "pytest",
               "path": "apps/api/tests/test_assistant_evidence_links.py",
-              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[prose]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[query]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[fragment]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[userinfo]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[assignment]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[url-key]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[raw-key]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[role]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[dump]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[url-exfil]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[leak]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[tool]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-LINKS-02-ALLOW",
+                "M09-EVIDENCE-LINKS-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_links.py",
+              "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[encoded]",
               "gate": "api-tests",
               "covers": [
                 "M09-EVIDENCE-LINKS-02-ALLOW",
