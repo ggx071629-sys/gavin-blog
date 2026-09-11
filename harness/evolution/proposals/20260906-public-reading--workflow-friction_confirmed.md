@@ -14,7 +14,7 @@ author: Codex
 
 2026-09-06，状态为待评审。改造对象是 Harness 的计划解析、初始化、测试调度、诊断、证据与关闭流程；公开页面只是实测工作负载，不是本方案的产品改造对象。本次只编写方案，不修改 CLI 运行行为，也不启用结果复用。
 
-来源：[用户请求对应的显式摩擦事件](../events/20260906-public-reading--workflow-friction_confirmed.json)、[第三阶段记录](../../../ui-fix/PHASE-3.md)、[正式验收证据](../../verification/evidence/20260906-public-reading.json)。源码审查基线为 `d743082`；实测成功运行的产品和 Harness 源提交为 `fb9f06fa1a2a4f73830627f580f3f9fb0ed6fe43`。
+来源：[用户请求对应的显式摩擦事件](../events/20260906-public-reading--workflow-friction_confirmed.json)、[第三阶段记录](../../../plan-build/ui-improvement/design/PHASE-3.md)、[正式验收证据](../../verification/evidence/20260906-public-reading.json)。源码审查基线为 `d743082`；实测成功运行的产品和 Harness 源提交为 `fb9f06fa1a2a4f73830627f580f3f9fb0ed6fe43`。
 
 本方案在已实施的[受影响模块验证决策](../../docs/decisions/20260905-verification-resume.md)上增量改造。现有按影响选择测试、认证账本、失败阻断、隔离和确定性关闭均保留，不恢复旧的全目录门禁，不重做已经完成的能力。方案经确认后，实施任务再按 [SDD](../../specs/_sdd/README.md)建立 active spec、影响计划及精确验收映射；本文不是已生效的运行规范。
 

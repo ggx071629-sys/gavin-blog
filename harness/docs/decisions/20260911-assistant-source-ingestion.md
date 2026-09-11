@@ -18,4 +18,4 @@ author: Codex
 
 简历复用内容 SQLite 保存绑定代次、版本、PDF 与提取文本，独立于问答 runtime；沿用内容备份。换址/清空撤销访问并清理旧缓存；不承诺删除既有备份或访客已下载文件。可信下载与短生命周期解析子进程受资源限制，不添加常驻服务、OCR、监测、额外聊天留存或付费调用。
 
-细节见[来源契约](../../../ASSISTANT-UPGRADE-CONTRACT.md)和[最终参数](../../../completed/assistant-upgrade-design/Q1-02.md)。真实文件结果见[Q4-03](../../../completed/assistant-upgrade-verification/Q4-03.md)；隔离夹具、真实文件隔离导入和生产资格证据必须区分。
+细节见[来源契约](../../../plan-build/assistant-upgrade/ASSISTANT-UPGRADE-CONTRACT.md)和[最终参数](../../../plan-build/assistant-upgrade/completed/assistant-upgrade-design/Q1-02.md)。真实文件结果见[Q4-03](../../../plan-build/assistant-upgrade/completed/assistant-upgrade-verification/Q4-03.md)；隔离夹具、真实文件隔离导入和生产资格证据必须区分。
