@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **6 active**, **0 frozen**.
+Open specifications: **5 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -16,7 +16,6 @@ Open specifications: **6 active**, **0 frozen**.
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页恢复笔记、领域和文章之间的知识路线 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
 | spec-20260911-assistant-input-error | active | L1 | 区分问答输入超限与未确认模型调用 | task:20260911-assistant-input-error | Gavin | [active/20260911-assistant-input-error.md](active/20260911-assistant-input-error.md) |
-| spec-20260911-resume-page-coverage | active | L1 | 避免简历预算选取遗漏后页项目并将片段误作完整清单 | task:20260911-resume-page-coverage | — | [active/20260911-resume-page-coverage.md](active/20260911-resume-page-coverage.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -202,3 +201,4 @@ Open specifications: **6 active**, **0 frozen**.
 | archive-20260911-assistant-resume-source | compressed | L2 | 以可信 PDF 链接和显式刷新为问答助手提供可撤销版本化简历证据 | task:20260911-assistant-resume-source | — | [archive/20260911-assistant-resume-source.md](archive/20260911-assistant-resume-source.md) |
 | archive-20260911-assistant-resume-storage | compressed | L2 | Q3-03 简历版本缓存和索引失效边界 | task:20260911-assistant-resume-storage | — | [archive/20260911-assistant-resume-storage.md](archive/20260911-assistant-resume-storage.md) |
 | archive-20260911-assistant-source-integration | compressed | L2 | 核验关于页和简历在同一问答运行链中的成功、更新及失败闭环 | task:20260911-assistant-source-integration | — | [archive/20260911-assistant-source-integration.md](archive/20260911-assistant-source-integration.md) |
+| archive-20260911-resume-page-coverage | compressed | L2 | 避免简历预算选取遗漏后页项目并将片段误作完整清单 | task:20260911-resume-page-coverage | — | [archive/20260911-resume-page-coverage.md](archive/20260911-resume-page-coverage.md) |
