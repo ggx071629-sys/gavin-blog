@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "task_id": "20260911-code-cleanup",
-  "created_at": "2026-09-11T11:28:18.490985+00:00",
+  "created_at": "2026-09-11T11:54:59.710198+00:00",
   "command": "python -m tools.harness verify 20260911-code-cleanup",
   "status": "passed",
   "acceptance_criteria": [
@@ -55,10 +55,10 @@
   ],
   "verification_profile": "focused",
   "fingerprints": {
-    "source_tree": "90c3a2d28230bf953ed5b9ce8845ca753ef69be8",
+    "source_tree": "1fde9b8262de9f337ec9fbca81cab5e7ddb7787a",
     "active_spec_sha256": "dfd1624613d57aa57f35b4ddf4ff3e0fccb5c8a40ae11680830193d0e33fa6df",
     "verification_contract_sha256": "6211509fc24f21b99553a975a7a58e2790d892c3a485138bf6fb7476f861e3e2",
-    "gate_config_sha256": "38db31e6cdbd66d61e30648cadbc6fe36528f937a27c84e6dd03ecc2d2d41870",
+    "gate_config_sha256": "810b1cd8309e77f2630f5ed9d074017e2c926ee3d2b58080ea954ec96c8ce02c",
     "documentation_contract_sha256": "bdb4a83f8ecc4a65e1eb0a4b78fcb6a520a74ea800af74dc83dc61fbcb2e1069",
     "documentation_targets_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
     "module_contract_sha256": "98c9eb28eb8d6158d0f103d3f7c8747e81376d763b6809c6e81562b62746befe"
@@ -72,12 +72,12 @@
   },
   "execution": {
     "mode": "git-worktree",
-    "source_commit": "501cda272b615d413e6e68264a36b0ba0de604fe",
+    "source_commit": "1e6b597c9c59f458c9b303bf87045c1e8a5a7217",
     "cleanup_status": "passed",
     "reused_paths": 3,
     "impact": {
       "plan": "harness/verification/impact/20260911-code-cleanup.json",
-      "sha256": "7bd57a97276d2672c6742d5bd676d7b517601e6f1883cf8b3f26ff0acfa245d9",
+      "sha256": "3fc28353a7d60c2613abed4dba76c11a057c1cc649b92c89baf5181746f61a47",
       "selected_cases": [
         "M01-UNIT-ARTICLE-01",
         "M05-UNIT-CONTENT-PORTABILITY-01",
@@ -95,8 +95,8 @@
       "excluded_cases": 304
     },
     "receipt": {
-      "run_id": "f4b3426f8c84c8ae67640efecfa6a144",
-      "identity": "55d56cf0b040ee416ba8217431d022f374832e1cfa907a2e3a8d01d859601a6f",
+      "run_id": "e6f4e462504085a42b187f67950bece1",
+      "identity": "6f414b3a6be1fbb9169558d93a159215dee285acf0526e0d431b27ba1da19a9d",
       "plan": [
         {
           "gate": "api-tests",
@@ -129,9 +129,9 @@
       ]
     },
     "phase_durations_ms": {
-      "preflight_checks": 4372.605,
-      "plan_inputs": 1031.101,
-      "execute_cleanup_and_input_recheck": 258587.405
+      "preflight_checks": 4356.83,
+      "plan_inputs": 943.937,
+      "execute_cleanup_and_input_recheck": 293160.414
     }
   },
   "verification_cases": {
@@ -1301,7 +1301,7 @@
         "1 subsumption contracts bind 7 registered child gates"
       ],
       "status": "passed",
-      "duration_ms": 4.734,
+      "duration_ms": 5.693,
       "provenance": {
         "scope": "workspace"
       }
@@ -1312,7 +1312,7 @@
         "189 deterministic closes retain archive, evidence, event, and active-spec history"
       ],
       "status": "passed",
-      "duration_ms": 303.75,
+      "duration_ms": 410.673,
       "provenance": {
         "scope": "workspace"
       }
@@ -1323,7 +1323,7 @@
         "9 generated indexes are current"
       ],
       "status": "passed",
-      "duration_ms": 93.278,
+      "duration_ms": 121.097,
       "provenance": {
         "scope": "workspace"
       }
@@ -1334,7 +1334,7 @@
         "AGENTS.md is the unique L0 and stays within 60-80 lines"
       ],
       "status": "passed",
-      "duration_ms": 0.678,
+      "duration_ms": 1.227,
       "provenance": {
         "scope": "workspace"
       }
@@ -1342,10 +1342,10 @@
     {
       "name": "links",
       "details": [
-        "1533 local Markdown links resolve without durable active-spec references"
+        "1540 local Markdown links resolve without durable active-spec references"
       ],
       "status": "passed",
-      "duration_ms": 2916.455,
+      "duration_ms": 2839.806,
       "provenance": {
         "scope": "workspace"
       }
@@ -1356,7 +1356,7 @@
         "311 routed Markdown documents have valid metadata"
       ],
       "status": "passed",
-      "duration_ms": 124.847,
+      "duration_ms": 103.573,
       "provenance": {
         "scope": "workspace"
       }
@@ -1367,7 +1367,7 @@
         "11 modules, 315 cases, 631 expectations, 1028 exact test references; contract sha256 98c9eb28eb8d"
       ],
       "status": "passed",
-      "duration_ms": 785.05,
+      "duration_ms": 756.37,
       "provenance": {
         "scope": "workspace"
       }
@@ -1378,7 +1378,7 @@
         "configured qualification manifests have valid historical bindings"
       ],
       "status": "passed",
-      "duration_ms": 4.906,
+      "duration_ms": 3.788,
       "provenance": {
         "scope": "workspace"
       }
@@ -1389,7 +1389,7 @@
         "28 required paths exist"
       ],
       "status": "passed",
-      "duration_ms": 11.203,
+      "duration_ms": 9.654,
       "provenance": {
         "scope": "workspace"
       }
@@ -1400,7 +1400,7 @@
         "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
       ],
       "status": "passed",
-      "duration_ms": 123.928,
+      "duration_ms": 101.614,
       "provenance": {
         "scope": "workspace"
       }
@@ -1417,14 +1417,14 @@
         "AC-4",
         "AC-5"
       ],
-      "duration_ms": 2240.649,
+      "duration_ms": 2341.115,
       "details": [],
       "provenance": {
         "mode": "executed",
         "phase": "snapshot",
         "scope": "committed-snapshot",
-        "run_id": "f4b3426f8c84c8ae67640efecfa6a144",
-        "attempt_id": "57fcbe07bd69a5457a5ad11efb2a43d3"
+        "run_id": "e6f4e462504085a42b187f67950bece1",
+        "attempt_id": "cf453d8db10a6e774cd2c9ebd84e8454"
       },
       "result": {
         "exit_code": 0
@@ -1435,7 +1435,7 @@
       "kind": "product",
       "command": "{api_python} -m harness.tools.selected_tests --task 20260911-code-cleanup --gate api-tests",
       "status": "passed",
-      "duration_ms": 42063.235,
+      "duration_ms": 40772.005,
       "covers": [
         "AC-1",
         "AC-2"
@@ -1762,16 +1762,16 @@
                 "name": "test_existing_search_and_openapi_are_unchanged_by_assistant_index"
               }
             ],
-            "duration_ms": 41586.068,
+            "duration_ms": 40302.618,
             "batch_id": "batch-0001"
           }
         ],
-        "log": "D:\\Project\\my_blog\\.run\\cleanup\\final-isolation\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\f4b3426f8c84c8ae67640efecfa6a144\\api-tests\\output.log"
+        "log": "D:\\Project\\my_blog\\.run\\cleanup\\close-isolation\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\e6f4e462504085a42b187f67950bece1\\api-tests\\output.log"
       },
       "provenance": {
         "mode": "executed",
-        "run_id": "f4b3426f8c84c8ae67640efecfa6a144",
-        "attempt_id": "0350c7ecf164a51e517e7bcc16923c60"
+        "run_id": "e6f4e462504085a42b187f67950bece1",
+        "attempt_id": "e444a45cca9aafeaa12a48a344e2042a"
       }
     },
     {
@@ -1779,14 +1779,14 @@
       "kind": "product",
       "command": "{api_python} -m harness.tools.selected_tests --task 20260911-code-cleanup --gate web-quality",
       "status": "passed",
-      "duration_ms": 12128.693,
+      "duration_ms": 14954.227,
       "covers": [
         "AC-3"
       ],
       "details": [],
       "result": {
         "exit_code": 0,
-        "output_bytes": 14568,
+        "output_bytes": 14566,
         "selection_counts": {
           "collected": 21,
           "executed": 21
@@ -1925,7 +1925,7 @@
                 "name": "counts unicode code points and initializes empty memory"
               }
             ],
-            "duration_ms": 2977.921,
+            "duration_ms": 4224.107,
             "prerequisite": "nuxt-prepare",
             "input_sha256": {
               "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
@@ -1958,7 +1958,7 @@
                 "name": "rejects empty titles and slugs outside the API slug contract"
               }
             ],
-            "duration_ms": 2251.581
+            "duration_ms": 2636.63
           },
           {
             "version": 3,
@@ -2075,7 +2075,7 @@
                 "name": "counts unicode code points and initializes empty memory"
               }
             ],
-            "duration_ms": 2132.482
+            "duration_ms": 2774.072
           },
           {
             "version": 3,
@@ -2120,7 +2120,7 @@
                 ]
               }
             ],
-            "duration_ms": 2105.404,
+            "duration_ms": 2374.021,
             "batch_id": "batch-0001"
           },
           {
@@ -2346,16 +2346,16 @@
                 ]
               }
             ],
-            "duration_ms": 2231.382,
+            "duration_ms": 2420.05,
             "batch_id": "batch-0002"
           }
         ],
-        "log": "D:\\Project\\my_blog\\.run\\cleanup\\final-isolation\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\f4b3426f8c84c8ae67640efecfa6a144\\web-quality\\output.log"
+        "log": "D:\\Project\\my_blog\\.run\\cleanup\\close-isolation\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\e6f4e462504085a42b187f67950bece1\\web-quality\\output.log"
       },
       "provenance": {
         "mode": "executed",
-        "run_id": "f4b3426f8c84c8ae67640efecfa6a144",
-        "attempt_id": "b7794296e7a51c682527d2c0908a1cb4"
+        "run_id": "e6f4e462504085a42b187f67950bece1",
+        "attempt_id": "f7775a549218f9bac6eb519fbaf2eb42"
       }
     },
     {
@@ -2363,7 +2363,7 @@
       "kind": "product",
       "command": "{api_python} -m harness.tools.selected_tests --task 20260911-code-cleanup --gate e2e",
       "status": "passed",
-      "duration_ms": 199829.611,
+      "duration_ms": 232488.029,
       "covers": [
         "AC-3",
         "AC-4"
@@ -2371,7 +2371,7 @@
       "details": [],
       "result": {
         "exit_code": 0,
-        "output_bytes": 6355,
+        "output_bytes": 6356,
         "selection_counts": {
           "collected": 4,
           "executed": 4
@@ -2408,7 +2408,7 @@
                 "name": "panel state recovery"
               }
             ],
-            "duration_ms": 4.744,
+            "duration_ms": 5.535,
             "prerequisite": "nuxt-prepare",
             "input_sha256": {
               "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
@@ -2435,7 +2435,7 @@
                 "name": "assistant discovery tolerates blocked preference storage"
               }
             ],
-            "duration_ms": 1422.422
+            "duration_ms": 1510.012
           },
           {
             "version": 3,
@@ -2450,7 +2450,7 @@
                 "name": "assistant orb motion pauses accessibly and cleans up across preferences and navigation"
               }
             ],
-            "duration_ms": 1374.828
+            "duration_ms": 1531.298
           },
           {
             "version": 3,
@@ -2465,7 +2465,7 @@
                 "name": "panel state recovery"
               }
             ],
-            "duration_ms": 1405.606
+            "duration_ms": 1594.715
           },
           {
             "version": 3,
@@ -2485,7 +2485,7 @@
                 ]
               }
             ],
-            "duration_ms": 1229.49,
+            "duration_ms": 1345.487,
             "batch_id": "batch-0001"
           },
           {
@@ -2506,7 +2506,7 @@
                 ]
               }
             ],
-            "duration_ms": 47908.136,
+            "duration_ms": 54305.67,
             "batch_id": "batch-0001"
           },
           {
@@ -2527,7 +2527,7 @@
                 ]
               }
             ],
-            "duration_ms": 1260.683,
+            "duration_ms": 1530.429,
             "batch_id": "batch-0002"
           },
           {
@@ -2548,7 +2548,7 @@
                 ]
               }
             ],
-            "duration_ms": 45372.037,
+            "duration_ms": 54062.715,
             "batch_id": "batch-0002"
           },
           {
@@ -2569,7 +2569,7 @@
                 ]
               }
             ],
-            "duration_ms": 1300.896,
+            "duration_ms": 1583.847,
             "batch_id": "batch-0003"
           },
           {
@@ -2590,7 +2590,7 @@
                 ]
               }
             ],
-            "duration_ms": 45491.298,
+            "duration_ms": 52229.118,
             "batch_id": "batch-0003"
           },
           {
@@ -2611,7 +2611,7 @@
                 ]
               }
             ],
-            "duration_ms": 1317.98,
+            "duration_ms": 1523.362,
             "batch_id": "batch-0004"
           },
           {
@@ -2632,16 +2632,16 @@
                 ]
               }
             ],
-            "duration_ms": 51302.262,
+            "duration_ms": 60804.668,
             "batch_id": "batch-0004"
           }
         ],
-        "log": "D:\\Project\\my_blog\\.run\\cleanup\\final-isolation\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\f4b3426f8c84c8ae67640efecfa6a144\\e2e\\output.log"
+        "log": "D:\\Project\\my_blog\\.run\\cleanup\\close-isolation\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\e6f4e462504085a42b187f67950bece1\\e2e\\output.log"
       },
       "provenance": {
         "mode": "executed",
-        "run_id": "f4b3426f8c84c8ae67640efecfa6a144",
-        "attempt_id": "b9e31a84d626650cdb3bfa6a8f094eb2"
+        "run_id": "e6f4e462504085a42b187f67950bece1",
+        "attempt_id": "86a375f56a3f9a3c713c1ebe6551818e"
       }
     },
     {
@@ -2649,7 +2649,7 @@
       "kind": "isolation",
       "command": "git worktree add --detach <temporary> HEAD",
       "status": "passed",
-      "duration_ms": 2039.519,
+      "duration_ms": 2287.047,
       "covers": [],
       "details": [
         "temporary worktree and dependency links were removed"
@@ -2665,8 +2665,8 @@
       "passed": 15,
       "failed": 0
     },
-    "duration_ms": 262670.536,
+    "duration_ms": 297195.918,
     "failures": []
   },
-  "source_commit": "501cda272b615d413e6e68264a36b0ba0de604fe"
+  "source_commit": "1e6b597c9c59f458c9b303bf87045c1e8a5a7217"
 }
