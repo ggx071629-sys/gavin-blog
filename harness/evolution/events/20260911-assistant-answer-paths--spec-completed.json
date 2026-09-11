@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260911-assistant-answer-paths",
+  "created_at": "2026-09-11T13:23:55.069327+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "090c6eb622f7353d5767c0e3ce0a9ac11ef5b6b623e2031f112c3ce3efc7bd22"
+}
