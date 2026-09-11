@@ -9,6 +9,7 @@ Read this index first. Load only entries whose `load_when` matches the task.
 | architecture-boundaries | L1 | 当前已确认的应用、配置、存储、契约和部署边界 | architecture, cross-stack-change, deployment | Gavin | [architecture/boundaries.md](architecture/boundaries.md) |
 | decision-20260906-local-e5-retrieval | L1 | 固定本地 E5 CPU 服务、tokenizer 切片与第三方 Chat 的分阶段接入边界 | local-embedding, assistant-retrieval | — | [decisions/20260906-local-e5-retrieval.md](decisions/20260906-local-e5-retrieval.md) |
 | decision-assistant-defense | L1 | 技术词汇讨论与执行指令分离并覆盖元数据和历史入口 | assistant-defense | Codex | [decisions/20260911-assistant-defense.md](decisions/20260911-assistant-defense.md) |
+| decision-assistant-gap-closure | L1 | 中文数值与完整句校验及明确教程引文的有限豁免 | assistant-grounding, assistant-defense | Codex | [decisions/20260911-assistant-gap-closure.md](decisions/20260911-assistant-gap-closure.md) |
 | decision-assistant-grounding | L1 | 自然综合按块绑定内部原句并保持离线语义评估边界 | assistant-grounding | Codex | [decisions/20260911-assistant-grounding.md](decisions/20260911-assistant-grounding.md) |
 | decision-assistant-management | L1 | 真实管理试问的执行隔离与跨进程统一预算权威 | assistant-management, assistant-budget | Codex | [decisions/20260910-assistant-management.md](decisions/20260910-assistant-management.md) |
 | decision-assistant-source-ingestion | L1 | 关于页发布资格和简历显式刷新、版本化引用的用户确认边界 | assistant-sources, assistant-resume, assistant-about | Codex | [decisions/20260911-assistant-source-ingestion.md](decisions/20260911-assistant-source-ingestion.md) |

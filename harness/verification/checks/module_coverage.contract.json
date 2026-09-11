@@ -15200,6 +15200,112 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-GAP-NUMBERS-01",
+          "priority": "P0",
+          "scenario": "Numeric boundaries and complete clauses",
+          "expectations": [
+            {
+              "id": "M09-GAP-NUMBERS-01-E01",
+              "surface": "response",
+              "statement": "Representative supported statements and explanatory discussion pass."
+            },
+            {
+              "id": "M09-GAP-NUMBERS-01-E02",
+              "surface": "forbidden",
+              "statement": "Altered facts, unsupported claims or mixed execution requests do not pass."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "kind": "pytest",
+              "name": "test_security_gap_numbers_and_complete_clauses",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GAP-NUMBERS-01-E01",
+                "M09-GAP-NUMBERS-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-GAP-CLAIMS-01",
+          "priority": "P0",
+          "scenario": "Attributed self reports and unsupported claims",
+          "expectations": [
+            {
+              "id": "M09-GAP-CLAIMS-01-E01",
+              "surface": "response",
+              "statement": "Representative supported statements and explanatory discussion pass."
+            },
+            {
+              "id": "M09-GAP-CLAIMS-01-E02",
+              "surface": "forbidden",
+              "statement": "Altered facts, unsupported claims or mixed execution requests do not pass."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "kind": "pytest",
+              "name": "test_security_gap_self_report_and_unsupported_claims",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GAP-CLAIMS-01-E01",
+                "M09-GAP-CLAIMS-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-GAP-DISCUSSION-01",
+          "priority": "P0",
+          "scenario": "Quoted tutorial discussion and mixed instructions",
+          "expectations": [
+            {
+              "id": "M09-GAP-DISCUSSION-01-E01",
+              "surface": "response",
+              "statement": "Representative supported statements and explanatory discussion pass."
+            },
+            {
+              "id": "M09-GAP-DISCUSSION-01-E02",
+              "surface": "forbidden",
+              "statement": "Altered facts, unsupported claims or mixed execution requests do not pass."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_online.py",
+              "kind": "pytest",
+              "name": "test_preflight_gap_tutorial_quotes_and_mixed_requests",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GAP-DISCUSSION-01-E01",
+                "M09-GAP-DISCUSSION-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "kind": "pytest",
+              "name": "test_security_prompt_sections_and_untrusted_history",
+              "gate": "api-tests",
+              "covers": [
+                "M09-GAP-DISCUSSION-01-E01",
+                "M09-GAP-DISCUSSION-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

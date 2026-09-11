@@ -57,7 +57,8 @@
         "harness/verification/impact/20260911-assistant-answer-paths.json",
         "harness/verification/impact/20260911-assistant-grounding.json",
         "harness/verification/impact/20260911-assistant-defense.json",
-        "harness/verification/impact/20260911-assistant-support-context.json"
+        "harness/verification/impact/20260911-assistant-support-context.json",
+        "harness/verification/impact/20260911-assistant-gap-closure.json"
       ],
       "cases": [
         "M08-DOCS-01",
@@ -1279,7 +1280,10 @@
         "M09-GROUNDING-03",
         "M09-DEFENSE-01",
         "M09-DEFENSE-02",
-        "M09-DEFENSE-03"
+        "M09-DEFENSE-03",
+        "M09-GAP-NUMBERS-01",
+        "M09-GAP-CLAIMS-01",
+        "M09-GAP-DISCUSSION-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -3852,7 +3856,8 @@
         "plan-build/assistant-safety/completed/phase-3-defense/S3-03.md",
         "plan-build/assistant-safety/completed/phase-3-defense/S3-04.md",
         "plan-build/assistant-safety/completed/phase-4-evaluation/S4-01.md",
-        "plan-build/assistant-safety/completed/phase-4-evaluation/S4-02.md"
+        "plan-build/assistant-safety/completed/phase-4-evaluation/S4-02.md",
+        "harness/docs/decisions/20260911-assistant-gap-closure.md"
       ],
       "cases": [
         "M08-DOCS-01"
