@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **6 active**, **0 frozen**.
+Open specifications: **5 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -15,7 +15,6 @@ Open specifications: **6 active**, **0 frozen**.
 | spec-20260908-article-design-v2 | active | L1 | 对齐工程设计稿的文章列表与正文阅读视觉 | task:20260908-article-design-v2 | — | [active/20260908-article-design-v2.md](active/20260908-article-design-v2.md) |
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页恢复笔记、领域和文章之间的知识路线 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
-| spec-20260911-assistant-evidence-budget | active | L1 | 按模型剩余输入空间选取可引用的本站证据 | task:20260911-assistant-evidence-budget | — | [active/20260911-assistant-evidence-budget.md](active/20260911-assistant-evidence-budget.md) |
 | spec-20260911-assistant-input-error | active | L1 | 区分问答输入超限与未确认模型调用 | task:20260911-assistant-input-error | Gavin | [active/20260911-assistant-input-error.md](active/20260911-assistant-input-error.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
@@ -192,6 +191,7 @@ Open specifications: **6 active**, **0 frozen**.
 | archive-20260911-assistant-about-retrieval | compressed | L2 | Q2-03 将关于页加入初次重建与有界混合检索 | task:20260911-assistant-about-retrieval | — | [archive/20260911-assistant-about-retrieval.md](archive/20260911-assistant-about-retrieval.md) |
 | archive-20260911-assistant-about-source | compressed | L2 | 将管理员主动发布的关于页纳入现有问答检索和引用 | task:20260911-assistant-about-source | — | [archive/20260911-assistant-about-source.md](archive/20260911-assistant-about-source.md) |
 | archive-20260911-assistant-about-sync | compressed | L2 | Q2-02 关于页发布回滚原子触发索引并撤销旧版本资格 | task:20260911-assistant-about-sync | — | [archive/20260911-assistant-about-sync.md](archive/20260911-assistant-about-sync.md) |
+| archive-20260911-assistant-evidence-budget | compressed | L2 | 按模型剩余输入空间选取可引用的本站证据 | task:20260911-assistant-evidence-budget | — | [archive/20260911-assistant-evidence-budget.md](archive/20260911-assistant-evidence-budget.md) |
 | archive-20260911-assistant-live-activation | compressed | L2 | 实际内容库接入并补齐本机快捷启动器的既有worker生命周期 | task:20260911-assistant-live-activation | — | [archive/20260911-assistant-live-activation.md](archive/20260911-assistant-live-activation.md) |
 | archive-20260911-assistant-resume-admin-ui | compressed | L2 | Q3-05 简历同步状态与立即刷新管理界面 | task:20260911-assistant-resume-admin-ui | — | [archive/20260911-assistant-resume-admin-ui.md](archive/20260911-assistant-resume-admin-ui.md) |
 | archive-20260911-assistant-resume-citations | compressed | L2 | Q3-06 简历事实边界与可撤销PDF版本引用 | task:20260911-assistant-resume-citations | — | [archive/20260911-assistant-resume-citations.md](archive/20260911-assistant-resume-citations.md) |
