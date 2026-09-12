@@ -2683,7 +2683,8 @@
     "M03.taxonomy_web": {
       "paths": [
         "apps/web/components/TaxonomyManager.vue",
-        "apps/web/pages/admin/taxonomy.vue"
+        "apps/web/pages/admin/taxonomy.vue",
+        "apps/web/tests/e2e/taxonomy-pending.spec.ts"
       ],
       "cases": [
         "M03-P1-01",
@@ -2695,7 +2696,10 @@
         "M02-DESK-REVISIONS-01",
         "M03-STUDIO-TAXONOMY-01",
         "M05-STUDIO-OPERATIONS-LAYOUT-01",
-        "M05-STUDIO-OPERATIONS-STATES-01"
+        "M05-STUDIO-OPERATIONS-STATES-01",
+        "M03-TAXONOMY-PENDING-01",
+        "M03-TAXONOMY-PENDING-02",
+        "M03-TAXONOMY-CONFLICT-01"
       ],
       "dependents": []
     },

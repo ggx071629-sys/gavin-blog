@@ -3196,6 +3196,117 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M03-TAXONOMY-PENDING-01",
+          "priority": "P1",
+          "scenario": "栏目与标签新增请求持续不返回时退出无限保存，并保留输入与手动核对入口。",
+          "expectations": [
+            {
+              "id": "M03-TAXONOMY-PENDING-01-E01",
+              "surface": "user_visible",
+              "statement": "15 秒等待预算后结束保存中，名称、slug、说明仍保留，显示结果尚未确认及核对最新列表入口。"
+            },
+            {
+              "id": "M03-TAXONOMY-PENDING-01-E02",
+              "surface": "forbidden",
+              "statement": "不得无限禁用表单、清空输入、假称成功或自动重放写请求。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+              "name": "taxonomy stalled creates release pending and preserve both forms without replay",
+              "gate": "e2e",
+              "covers": [
+                "M03-TAXONOMY-PENDING-01-E01",
+                "M03-TAXONOMY-PENDING-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M03-TAXONOMY-PENDING-02",
+          "priority": "P1",
+          "scenario": "真实保存成功但响应丢失，或修改、删除、只读核对悬挂时，界面保持真实未知状态并可恢复。",
+          "expectations": [
+            {
+              "id": "M03-TAXONOMY-PENDING-02-E01",
+              "surface": "state",
+              "statement": "真实 API 已创建条目但响应丢失时输入保留；手动 GET 核对可显示真实条目，GET 超时也能退出等待。"
+            },
+            {
+              "id": "M03-TAXONOMY-PENDING-02-E02",
+              "surface": "forbidden",
+              "statement": "不得把客户端超时当成服务端回滚，不自动重放 mutation，不接受迟到成功清空表单。"
+            },
+            {
+              "id": "M03-TAXONOMY-PENDING-02-E03",
+              "surface": "user_visible",
+              "statement": "修改与删除超时后保留编辑输入和列表条目，显式核对及重新删除后真实状态可刷新验证。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+              "name": "taxonomy lost save response reconciles real data and bounds a stalled read",
+              "gate": "e2e",
+              "covers": [
+                "M03-TAXONOMY-PENDING-02-E01",
+                "M03-TAXONOMY-PENDING-02-E02"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+              "name": "taxonomy stalled updates and deletes retain state and recover through explicit actions",
+              "gate": "e2e",
+              "covers": [
+                "M03-TAXONOMY-PENDING-02-E02",
+                "M03-TAXONOMY-PENDING-02-E03"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M03-TAXONOMY-CONFLICT-01",
+          "priority": "P1",
+          "scenario": "重复标签 slug 通过真实同源 API 连续返回冲突并复位按钮。",
+          "expectations": [
+            {
+              "id": "M03-TAXONOMY-CONFLICT-01-E01",
+              "surface": "user_visible",
+              "statement": "五次重复 slug 均返回真实 409 并显示既有失败提示，保留输入。"
+            },
+            {
+              "id": "M03-TAXONOMY-CONFLICT-01-E02",
+              "surface": "forbidden",
+              "statement": "不得在收到冲突后仍处于保存中或把 409 当作保存成功。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "name": "ops duplicate tag slug reports a conflict without a stuck pending state",
+              "gate": "e2e",
+              "covers": [
+                "M03-TAXONOMY-CONFLICT-01-E01",
+                "M03-TAXONOMY-CONFLICT-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
