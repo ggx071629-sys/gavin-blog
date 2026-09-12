@@ -17845,6 +17845,78 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-LIVE-LEDGER-01",
+          "priority": "P1",
+          "scenario": "Explicit local page calls reserve and settle the existing signed ledger; unknown blocks dispatch, cancellation retains accounting, and alias evidence never claims a known version or production qualification.",
+          "expectations": [
+            {
+              "id": "M09-LIVE-LEDGER-01-ALLOW",
+              "surface": "response",
+              "statement": "Explicit local page calls reserve and settle the existing signed ledger; unknown blocks dispatch, cancellation retains accounting, and alias evidence never claims a known version or production qualification."
+            },
+            {
+              "id": "M09-LIVE-LEDGER-01-DENY",
+              "surface": "forbidden",
+              "statement": "No unreserved dispatch, release of running-call accounting, or invented provider version."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_live_ledger.py",
+              "name": "test_live_ledger_reserves_every_call_and_blocks_unknown",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-LEDGER-01-ALLOW",
+                "M09-LIVE-LEDGER-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_live_ledger.py",
+              "name": "test_local_alias_probe_retains_unknown_version",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-LEDGER-01-ALLOW",
+                "M09-LIVE-LEDGER-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_live_ledger.py",
+              "name": "test_page_cancellation_does_not_release_inflight_accounting",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-LEDGER-01-ALLOW",
+                "M09-LIVE-LEDGER-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_quote_refs.py",
+              "name": "test_exact_quote_references_bind_source_and_preserve_validation",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-LEDGER-01-ALLOW",
+                "M09-LIVE-LEDGER-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_quote_refs.py",
+              "name": "test_quote_candidates_keep_complete_facts_and_exclude_clipped_bullets",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-LEDGER-01-ALLOW",
+                "M09-LIVE-LEDGER-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

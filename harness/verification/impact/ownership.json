@@ -1344,7 +1344,8 @@
         "M09-EVIDENCE-ROLE-01",
         "M09-CODE-PRESENTATION-01",
         "M09-FACT-ALIGNMENT-01",
-        "M09-FACT-ALIGNMENT-02"
+        "M09-FACT-ALIGNMENT-02",
+        "M09-LIVE-LEDGER-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1446,7 +1447,8 @@
         "M09-RESUME-FACTS-01",
         "M09-LIVE-WORKER-01",
         "M10-UNIT-INDEX-INTEGRITY-01",
-        "M09-GROUNDING-02"
+        "M09-GROUNDING-02",
+        "M09-LIVE-LEDGER-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1675,7 +1677,9 @@
         "plan-build/assistant-gap-closure/evaluation/Q5-corpus.json",
         "apps/api/tests/test_assistant_current_quality.py",
         "apps/api/tests/test_assistant_q5_review.py",
-        "plan-build/assistant-gap-closure/evaluation/Q5-holdout.json"
+        "plan-build/assistant-gap-closure/evaluation/Q5-holdout.json",
+        "apps/api/app/assistant_qualification/evaluation_guard.py",
+        "apps/api/tests/test_assistant_live_ledger.py"
       ],
       "cases": [
         "M10-P1-01",
@@ -1710,7 +1714,8 @@
         "M09-EXPANDED-INPUT-01",
         "M09-CURRENT-PROMPT-01",
         "M09-Q5-REVIEW-01",
-        "M09-Q5-REVIEW-02"
+        "M09-Q5-REVIEW-02",
+        "M09-LIVE-LEDGER-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1750,7 +1755,9 @@
       "paths": [
         "apps/api/app/assistant/providers.py",
         "apps/api/tests/test_assistant_provider_facts.py",
-        "apps/api/tests/test_assistant_deepseek.py"
+        "apps/api/tests/test_assistant_deepseek.py",
+        "apps/api/app/assistant/quote_refs.py",
+        "apps/api/tests/test_assistant_quote_refs.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1768,7 +1775,8 @@
         "M09-GROUNDING-02",
         "M09-GROUNDING-03",
         "M09-GROUNDING-01",
-        "M09-ANSWER-INSTRUCTIONS-01"
+        "M09-ANSWER-INSTRUCTIONS-01",
+        "M09-LIVE-LEDGER-01"
       ],
       "dependents": [
         "M09.runtime",
@@ -2301,7 +2309,8 @@
         "M06-RESUME-PARSE-LIMITS-01",
         "M06-RESUME-REFRESH-WORKER-01",
         "M09-RESUME-CITATION-UI-01",
-        "M09-FEEDBACK-ADMIN-01"
+        "M09-FEEDBACK-ADMIN-01",
+        "M09-LIVE-LEDGER-01"
       ],
       "dependents": [
         "M06.persistence",
