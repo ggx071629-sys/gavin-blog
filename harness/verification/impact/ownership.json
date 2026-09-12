@@ -1247,7 +1247,8 @@
         "apps/api/app/assistant/reference_context.py",
         "apps/api/tests/test_assistant_reference_context.py",
         "apps/api/app/assistant/question_scope.py",
-        "apps/api/tests/test_assistant_question_boundaries.py"
+        "apps/api/tests/test_assistant_question_boundaries.py",
+        "apps/api/tests/test_assistant_evidence_role.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1337,7 +1338,8 @@
         "M09-CONTEXT-CROSS-01",
         "M09-CONTEXT-HISTORY-01",
         "M09-CURRENT-PROMPT-01",
-        "M09-ANSWER-INSTRUCTIONS-01"
+        "M09-ANSWER-INSTRUCTIONS-01",
+        "M09-EVIDENCE-ROLE-01"
       ],
       "dependents": [
         "M06.api_tooling",

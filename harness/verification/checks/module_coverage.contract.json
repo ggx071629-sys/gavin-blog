@@ -17633,6 +17633,48 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-EVIDENCE-ROLE-01",
+          "priority": "P1",
+          "scenario": "Current published article fields distinguish metadata/body without guessing mixed or repeated text.",
+          "expectations": [
+            {
+              "id": "M09-EVIDENCE-ROLE-01-ALLOW",
+              "surface": "response",
+              "statement": "Both hydration paths derive unambiguous roles while original evidence and public descriptors stay unchanged."
+            },
+            {
+              "id": "M09-EVIDENCE-ROLE-01-DENY",
+              "surface": "forbidden",
+              "statement": "Mixed or overlapping text, descriptor input and revoked or mismatched sources cannot assert a body role."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_role.py",
+              "name": "test_role_requires_unambiguous_complete_current_field_match",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-ROLE-01-ALLOW",
+                "M09-EVIDENCE-ROLE-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_role.py",
+              "name": "test_current_article_roles_survive_restore_without_public_descriptor_change",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EVIDENCE-ROLE-01-ALLOW",
+                "M09-EVIDENCE-ROLE-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
