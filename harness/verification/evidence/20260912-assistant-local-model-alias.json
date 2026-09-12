@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
   "task_id": "20260912-assistant-local-model-alias",
-  "created_at": "2026-09-12T11:22:09.796442+00:00",
+  "created_at": "2026-09-12T11:24:42.787930+00:00",
   "command": "python -m tools.harness verify 20260912-assistant-local-model-alias",
-  "status": "failed",
+  "status": "passed",
   "acceptance_criteria": [
     "AC-1",
     "AC-2"
@@ -11,7 +11,7 @@
   "criteria_results": [
     {
       "id": "AC-1",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "api-tests",
         "harness-integrity"
@@ -19,7 +19,7 @@
     },
     {
       "id": "AC-2",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "api-tests",
         "harness-integrity"
@@ -28,10 +28,10 @@
   ],
   "verification_profile": "focused",
   "fingerprints": {
-    "source_tree": "1e05a8b2ec165c301a53201f5d41122ab926e071",
-    "active_spec_sha256": "e4d8775c3fe90c07373fccae11bf74b53f82c8fd6a395c7150215c930bf5b6fa",
+    "source_tree": "f5d81af61d791ec35e4b07d7dcea7feb9ac8f8c9",
+    "active_spec_sha256": "3422c3bb13eae516948ad9276d34f96c10a3fcea24915f64548d2e633ba396c6",
     "verification_contract_sha256": "8db647508f19ad84b2890c7da6ac5c2f6138e6b1f2e243dbea4e766048dc1e69",
-    "gate_config_sha256": "868faa5a56b0372b534f207f1e64c578716609641bb1da9f538ecc3fe76e1cea",
+    "gate_config_sha256": "54416ff0d1664ebb4838082f6f11732933e30ada785d9d23daecb8d23e5750c0",
     "documentation_contract_sha256": "39b5306dbefde7e137afb8a2dd8d2c72445a29bf54f6a31aa228deda0dcb3ae5",
     "documentation_targets_sha256": "81b5d7e3826a49d7f487c07746a2aa38740a45822507f266bf1f52a75df94f8c",
     "module_contract_sha256": "fb5f8f1ed90e062804b878fe19c2d8332235a80e9824fe9750575333fb5850dd"
@@ -49,12 +49,12 @@
   },
   "execution": {
     "mode": "git-worktree",
-    "source_commit": "9152aaecbf8895a089f34d13cd0d0d7966c0126c",
+    "source_commit": "26d3f5753d780f8199fd2aa8ec71a1a6e92a4d89",
     "cleanup_status": "passed",
     "reused_paths": 1,
     "impact": {
       "plan": "harness/verification/impact/20260912-assistant-local-model-alias.json",
-      "sha256": "3ead155dbc3e104d1630d14ed6e90c74b79d11acc3eabe3a4115ef9786f6509c",
+      "sha256": "c8bee85896fec15dfcfad7769de1d88448cd9f20def0bb0f834496de7bb766e9",
       "selected_cases": [
         "M08-DOCS-01",
         "M09-G07-RUNNER-01",
@@ -67,8 +67,8 @@
       "excluded_cases": 345
     },
     "receipt": {
-      "run_id": "86df49eb1ea93eb3b4dcbef12f8e476f",
-      "identity": "8079467cecef78122f2960333dba9d3978f542acc1abcef7a4f984cbbb9a9dd1",
+      "run_id": "fb51cc5eed1f1be4d171aeb55ef512ae",
+      "identity": "03a875105470029f9f34a699502d0a1622cab8645e230f16ad5ce70cfa5f2e2d",
       "plan": [
         {
           "gate": "api-tests",
@@ -87,9 +87,9 @@
       ]
     },
     "phase_durations_ms": {
-      "preflight_checks": 3696.586,
-      "plan_inputs": 1038.008,
-      "execute_cleanup_and_input_recheck": 16124.337
+      "preflight_checks": 3642.112,
+      "plan_inputs": 959.527,
+      "execute_cleanup_and_input_recheck": 15302.398
     }
   },
   "verification_cases": {
@@ -500,7 +500,7 @@
         "1 subsumption contracts bind 7 registered child gates"
       ],
       "status": "passed",
-      "duration_ms": 4.608,
+      "duration_ms": 4.169,
       "provenance": {
         "scope": "workspace"
       }
@@ -511,7 +511,7 @@
         "209 deterministic closes retain archive, evidence, event, and active-spec history"
       ],
       "status": "passed",
-      "duration_ms": 249.515,
+      "duration_ms": 255.085,
       "provenance": {
         "scope": "workspace"
       }
@@ -522,7 +522,7 @@
         "9 generated indexes are current"
       ],
       "status": "passed",
-      "duration_ms": 88.743,
+      "duration_ms": 88.339,
       "provenance": {
         "scope": "workspace"
       }
@@ -533,7 +533,7 @@
         "AGENTS.md is the unique L0 and stays within 60-80 lines"
       ],
       "status": "passed",
-      "duration_ms": 0.617,
+      "duration_ms": 0.558,
       "provenance": {
         "scope": "workspace"
       }
@@ -544,7 +544,7 @@
         "2065 local Markdown links resolve without durable active-spec references"
       ],
       "status": "passed",
-      "duration_ms": 2590.204,
+      "duration_ms": 2514.4,
       "provenance": {
         "scope": "workspace"
       }
@@ -555,7 +555,7 @@
         "334 routed Markdown documents have valid metadata"
       ],
       "status": "passed",
-      "duration_ms": 107.279,
+      "duration_ms": 107.025,
       "provenance": {
         "scope": "workspace"
       }
@@ -566,7 +566,7 @@
         "11 modules, 351 cases, 712 expectations, 1135 exact test references; contract sha256 fb5f8f1ed90e"
       ],
       "status": "passed",
-      "duration_ms": 561.037,
+      "duration_ms": 567.469,
       "provenance": {
         "scope": "workspace"
       }
@@ -577,7 +577,7 @@
         "configured qualification manifests have valid historical bindings"
       ],
       "status": "passed",
-      "duration_ms": 3.404,
+      "duration_ms": 3.355,
       "provenance": {
         "scope": "workspace"
       }
@@ -588,7 +588,7 @@
         "28 required paths exist"
       ],
       "status": "passed",
-      "duration_ms": 8.664,
+      "duration_ms": 9.855,
       "provenance": {
         "scope": "workspace"
       }
@@ -599,7 +599,7 @@
         "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
       ],
       "status": "passed",
-      "duration_ms": 79.857,
+      "duration_ms": 89.036,
       "provenance": {
         "scope": "workspace"
       }
@@ -613,14 +613,14 @@
         "AC-1",
         "AC-2"
       ],
-      "duration_ms": 2721.314,
+      "duration_ms": 2679.389,
       "details": [],
       "provenance": {
         "mode": "executed",
         "phase": "snapshot",
         "scope": "committed-snapshot",
-        "run_id": "86df49eb1ea93eb3b4dcbef12f8e476f",
-        "attempt_id": "ab25b785b02baf1a919c37acf72e53b8"
+        "run_id": "fb51cc5eed1f1be4d171aeb55ef512ae",
+        "attempt_id": "5df7ebe016df7ffd041732e7527dd4b3"
       },
       "result": {
         "exit_code": 0
@@ -630,25 +630,26 @@
       "name": "api-tests",
       "kind": "product",
       "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-local-model-alias --gate api-tests",
-      "status": "failed",
-      "duration_ms": 10240.705,
+      "status": "passed",
+      "duration_ms": 9501.207,
       "covers": [
         "AC-1",
         "AC-2"
       ],
-      "details": [
-        "diagnostic: HARNESS_STAGE {\"version\": 3, \"source\": \"selected-runner\", \"phase\": \"assertion\", \"status\": \"failed\", \"consumers\": [{\"kind\": \"pytest\", \"gate\": \"api-tests\", \"path\": \"apps/api/tests/test_assistant_g07_runner.py\", \"name\": \"RunnerChecks::test_unauthorized_stops_before_reservation_or_call\"}, {\"kind\": \"pyte",
-        "HARNESS_STAGE {\"version\": 3, \"source\": \"selected-runner\", \"phase\": \"execution\", \"status\": \"not-run\", \"consumers\": [], \"duration_ms\": 0.861}"
-      ],
+      "details": [],
       "result": {
-        "exit_code": 1,
-        "output_bytes": 3201,
+        "exit_code": 0,
+        "output_bytes": 3113,
+        "selection_counts": {
+          "collected": 17,
+          "executed": 17
+        },
         "stages": [
           {
             "version": 3,
             "source": "selected-runner",
-            "phase": "assertion",
-            "status": "failed",
+            "phase": "execution",
+            "status": "passed",
             "consumers": [
               {
                 "kind": "pytest",
@@ -753,30 +754,16 @@
                 "name": "test_recovery_preserves_failed_facts_and_remaining_budget[measured_fail]"
               }
             ],
-            "duration_ms": 9773.554,
+            "duration_ms": 9039.019,
             "batch_id": "batch-0001"
-          },
-          {
-            "version": 3,
-            "source": "selected-runner",
-            "phase": "execution",
-            "status": "not-run",
-            "consumers": [],
-            "duration_ms": 0.861
           }
         ],
-        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\86df49eb1ea93eb3b4dcbef12f8e476f\\api-tests\\output.log",
-        "failure": {
-          "kind": "assertion",
-          "source": "selected-runner",
-          "hint": "nonzero-exit",
-          "summary": "HARNESS_STAGE {\"version\": 3, \"source\": \"selected-runner\", \"phase\": \"assertion\", \"status\": \"failed\", \"consumers\": [{\"kind\": \"pytest\", \"gate\": \"api-tests\", \"path\": \"apps/api/tests/test_assistant_g07_runner.py\", \"name\": \"RunnerChecks::test_unauthorized_stops_before_reservation_or_call\"}, {\"kind\": \"pyte"
-        }
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\fb51cc5eed1f1be4d171aeb55ef512ae\\api-tests\\output.log"
       },
       "provenance": {
         "mode": "executed",
-        "run_id": "86df49eb1ea93eb3b4dcbef12f8e476f",
-        "attempt_id": "aba2b6b361988d674be0153e79a6a72d"
+        "run_id": "fb51cc5eed1f1be4d171aeb55ef512ae",
+        "attempt_id": "99db7f61b175a0268c936e22cde03b7c"
       }
     },
     {
@@ -784,7 +771,7 @@
       "kind": "isolation",
       "command": "git worktree add --detach <temporary> HEAD",
       "status": "passed",
-      "duration_ms": 2508.571,
+      "duration_ms": 2473.648,
       "covers": [],
       "details": [
         "temporary worktree and dependency links were removed"
@@ -797,17 +784,11 @@
   "summary": {
     "checks": {
       "total": 13,
-      "passed": 12,
-      "failed": 1
+      "passed": 13,
+      "failed": 0
     },
-    "duration_ms": 19164.518,
-    "failures": [
-      {
-        "name": "api-tests",
-        "kind": "assertion",
-        "summary": "HARNESS_STAGE {\"version\": 3, \"source\": \"selected-runner\", \"phase\": \"assertion\", \"status\": \"failed\", \"consumers\": [{\"kind\": \"pytest\", \"gate\": \"api-tests\", \"path\": \"apps/api/tests/test_assistant_g07_runner.py\", \"name\": \"RunnerChecks::test_unauthorized_stops_before_reservation_or_call\"}, {\"kind\": \"pyte"
-      }
-    ]
+    "duration_ms": 18293.535,
+    "failures": []
   },
-  "source_commit": "9152aaecbf8895a089f34d13cd0d0d7966c0126c"
+  "source_commit": "26d3f5753d780f8199fd2aa8ec71a1a6e92a4d89"
 }
