@@ -156,8 +156,11 @@
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -176,6 +179,66 @@
           "unit": "M10.capacity",
           "affected": false,
           "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
         }
       ]
     },
@@ -248,8 +311,11 @@
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -268,6 +334,66 @@
           "unit": "M10.capacity",
           "affected": false,
           "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
         }
       ]
     },
@@ -340,8 +466,11 @@
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -360,6 +489,66 @@
           "unit": "M10.capacity",
           "affected": false,
           "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
         }
       ]
     },
@@ -387,8 +576,11 @@
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -402,6 +594,66 @@
           "unit": "M01.home",
           "affected": false,
           "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
         }
       ]
     },
@@ -420,8 +672,11 @@
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -435,6 +690,66 @@
           "unit": "M01.home",
           "affected": false,
           "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
         }
       ]
     },
@@ -453,8 +768,11 @@
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -468,6 +786,66 @@
           "unit": "M01.home",
           "affected": false,
           "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
         }
       ]
     },
@@ -496,8 +874,11 @@
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -508,6 +889,66 @@
           "unit": "M01.home",
           "affected": false,
           "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
         }
       ]
     },
@@ -535,8 +976,11 @@
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -547,6 +991,66 @@
           "unit": "M01.home",
           "affected": false,
           "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
         }
       ]
     },
@@ -626,8 +1130,11 @@
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         },
         {
           "unit": "M07.discovery",
@@ -655,6 +1162,11 @@
           "unit": "M01.home",
           "affected": false,
           "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
         }
       ]
     },
@@ -682,8 +1194,11 @@
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -697,6 +1212,66 @@
           "unit": "M01.home",
           "affected": false,
           "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
         }
       ]
     },
@@ -873,8 +1448,11 @@
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         },
         {
           "unit": "M07.discovery",
@@ -999,8 +1577,11 @@
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         },
         {
           "unit": "M07.discovery",
@@ -1100,8 +1681,11 @@
         },
         {
           "unit": "M06.transport",
-          "affected": false,
-          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         },
         {
           "unit": "M10.operations_web",
@@ -1120,6 +1704,66 @@
           "unit": "M10.capacity",
           "affected": false,
           "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
         }
       ]
     },
@@ -1177,6 +1821,102 @@
           "unit": "M10.qualification",
           "affected": false,
           "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/server/routes/api/v1/[...path].ts",
+      "owner": "M06.transport",
+      "cases": [
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Allow only PUT feedback for 32-hex turn IDs with no query or hash, retaining signed identity and existing Origin/CSRF handling.",
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Feedback PUT crosses the signed same-origin proxy; public save and passive admin count are covered by the real browser test.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Feedback PUT crosses the signed same-origin proxy; public save and passive admin count are covered by the real browser test.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
         }
       ]
     }
