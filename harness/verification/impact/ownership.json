@@ -3985,7 +3985,8 @@
         "harness/docs/decisions/20260912-assistant-question-scope.md",
         "plan-build/assistant-gap-closure/*.md",
         "plan-build/assistant-gap-closure/completed/*/.gitkeep",
-        "plan-build/assistant-gap-closure/evaluation/Q5-results.json"
+        "plan-build/assistant-gap-closure/evaluation/Q5-results.json",
+        "plan-build/assistant-gap-closure/evaluation/Q5-live-results.json"
       ],
       "cases": [
         "M08-DOCS-01"
