@@ -422,6 +422,15 @@
           "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
         }
       ]
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/PHASE-3-RUNTIME-OBSERVABILITY.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Update phase three to explicitly unverified and carry a separate pending telemetry observation; ordinary plan documentation, no executable contract.",
+      "dependencies": []
     }
   ]
 }
