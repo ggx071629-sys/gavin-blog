@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "task_id": "20260912-assistant-tutorial-relations",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/output.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-G07-REPLAY-01",
+        "M09-CLAIM-CONTEXT-01",
+        "M09-QUANTITY-BINDING-01"
+      ],
+      "reason": "Compare explicit tutorial risk subject and full attached cause, and current-article labels; retain negative and retraction contexts.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Synthetic G07 runner consumes prompt/validator changes; prepare and authorization runner cases are selected for that consumer.",
+          "cases": [
+            "M09-G07-PREPARE-01",
+            "M09-G07-RUNNER-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "G07 synthetic challenge calls prompt/validator, but production qualification profile/runner, receipts and provider accounting remain unchanged; no production qualification is granted by this offline repair."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "G07 synthetic challenge calls prompt/validator, but production qualification profile/runner, receipts and provider accounting remain unchanged; no production qualification is granted by this offline repair."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/prompt.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-G07-PREPARE-01",
+        "M09-DEFENSE-01"
+      ],
+      "reason": "Explain cross-language supported answers and original-language quotes; preserve budget and history filtering.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Synthetic G07 runner consumes prompt/validator changes; prepare and authorization runner cases are selected for that consumer.",
+          "cases": [
+            "M09-G07-PREPARE-01",
+            "M09-G07-RUNNER-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "G07 synthetic challenge calls prompt/validator, but production qualification profile/runner, receipts and provider accounting remain unchanged; no production qualification is granted by this offline repair."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "G07 synthetic challenge calls prompt/validator, but production qualification profile/runner, receipts and provider accounting remain unchanged; no production qualification is granted by this offline repair."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_g07_repair.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-G07-REPLAY-01",
+        "M09-G07-PREPARE-01",
+        "M09-DISCUSSION-CONTEXT-01"
+      ],
+      "reason": "Exact synthetic replay, paired negative facts, empty failure, actual prompt preparation with prohibited network.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        }
+      ]
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/run_injection_challenges.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-G07-PREPARE-01",
+        "M09-G07-RUNNER-01"
+      ],
+      "reason": "Select only requested distinct known cases in fixture order; no continuation combination, implicit repeats or new authorization.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Documents bounded tutorial equivalence and unverified real empty-answer outcomes; no executable contract changes.",
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-G07-RUNNER-01"
+      ],
+      "reason": "Offline selected-case execution verifies exactly two calls and retained report identities; original authorization and failure checks remain.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        }
+      ]
+    }
+  ]
+}
