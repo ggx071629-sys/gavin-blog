@@ -287,6 +287,76 @@
       ],
       "reason": "Q3-03 bounded correction and failure classification; documentation is descriptive, no executable contract.",
       "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Register exact retry tests and existing frontend notice semantics under unchanged contract schema; no verifier algorithm or acceptance threshold change.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Register exact retry tests and existing frontend notice semantics under unchanged contract schema; no verifier algorithm or acceptance threshold change.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        }
+      ]
     }
   ]
 }
