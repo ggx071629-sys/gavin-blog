@@ -17601,6 +17601,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-ANSWER-INSTRUCTIONS-01",
+          "priority": "P1",
+          "scenario": "JSON data example is valid but schema keywords at every data level remain forbidden and examples cannot become evidence.",
+          "expectations": [
+            {
+              "id": "M09-ANSWER-INSTRUCTIONS-01-ALLOW",
+              "surface": "response",
+              "statement": "Valid example shape parses and raw response/usage remain available."
+            },
+            {
+              "id": "M09-ANSWER-INSTRUCTIONS-01-DENY",
+              "surface": "forbidden",
+              "statement": "additionalProperties at root, answer block or support is rejected without repair; illustrative source text cannot pass grounding."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "name": "test_schema_keywords_never_become_answer_data_or_get_repaired",
+              "gate": "api-tests",
+              "covers": [
+                "M09-ANSWER-INSTRUCTIONS-01-ALLOW",
+                "M09-ANSWER-INSTRUCTIONS-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

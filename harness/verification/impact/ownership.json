@@ -1336,7 +1336,8 @@
         "M09-SCOPE-NOTICES-01",
         "M09-CONTEXT-CROSS-01",
         "M09-CONTEXT-HISTORY-01",
-        "M09-CURRENT-PROMPT-01"
+        "M09-CURRENT-PROMPT-01",
+        "M09-ANSWER-INSTRUCTIONS-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1755,7 +1756,8 @@
         "M09-LOCAL-REAL-QA-01",
         "M09-GROUNDING-02",
         "M09-GROUNDING-03",
-        "M09-GROUNDING-01"
+        "M09-GROUNDING-01",
+        "M09-ANSWER-INSTRUCTIONS-01"
       ],
       "dependents": [
         "M09.runtime",
