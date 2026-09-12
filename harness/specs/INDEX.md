@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **6 active**, **0 frozen**.
+Open specifications: **5 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -16,7 +16,6 @@ Open specifications: **6 active**, **0 frozen**.
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页恢复笔记、领域和文章之间的知识路线 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
 | spec-20260911-assistant-input-error | active | L1 | 区分问答输入超限与未确认模型调用 | task:20260911-assistant-input-error | Gavin | [active/20260911-assistant-input-error.md](active/20260911-assistant-input-error.md) |
-| spec-20260912-assistant-tutorial-wrappers | active | L1 | 校验真实教程回答中的重复主题引介和英文完整通知关系 | task:20260912-assistant-tutorial-wrappers | Codex | [active/20260912-assistant-tutorial-wrappers.md](active/20260912-assistant-tutorial-wrappers.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -228,6 +227,7 @@ Open specifications: **6 active**, **0 frozen**.
 | archive-20260912-assistant-supported-paraphrase | compressed | L2 | 减少明确技术改写与枚举摘要的误拒并保留边界 | task:20260912-assistant-supported-paraphrase | Codex | [archive/20260912-assistant-supported-paraphrase.md](archive/20260912-assistant-supported-paraphrase.md) |
 | archive-20260912-assistant-technical-text | compressed | L2 | 允许有依据的比较符号和数组表达并保留输出安全 | task:20260912-assistant-technical-text | Codex | [archive/20260912-assistant-technical-text.md](archive/20260912-assistant-technical-text.md) |
 | archive-20260912-assistant-tutorial-relations | compressed | L2 | 保留教程风险解释关系并区分跨语言事实和支持引文 | task:20260912-assistant-tutorial-relations | Codex | [archive/20260912-assistant-tutorial-relations.md](archive/20260912-assistant-tutorial-relations.md) |
+| archive-20260912-assistant-tutorial-wrappers | compressed | L2 | 校验真实教程回答中的重复主题引介和英文完整通知关系 | task:20260912-assistant-tutorial-wrappers | Codex | [archive/20260912-assistant-tutorial-wrappers.md](archive/20260912-assistant-tutorial-wrappers.md) |
 | archive-20260912-book-cover-media-url | compressed | L2 | 读书封面接受媒体库站内地址并完成保存发布闭环 | task:20260912-book-cover-media-url | Codex | [archive/20260912-book-cover-media-url.md](archive/20260912-book-cover-media-url.md) |
 | archive-20260912-markdown-line-endings | compressed | L2 | Markdown 导入兼容 CRLF 换行且不放宽既有 front matter 校验 | task:20260912-markdown-line-endings | Codex | [archive/20260912-markdown-line-endings.md](archive/20260912-markdown-line-endings.md) |
 | archive-20260912-public-error-recovery | compressed | L2 | 公开页面首次客户端加载失败进入可恢复错误页而不是旧页面内容 | task:20260912-public-error-recovery | Codex | [archive/20260912-public-error-recovery.md](archive/20260912-public-error-recovery.md) |
