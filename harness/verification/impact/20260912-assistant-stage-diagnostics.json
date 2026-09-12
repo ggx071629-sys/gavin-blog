@@ -62,11 +62,6 @@
           "reason": "Reviewed consumer: additive optional latency/count telemetry leaves schemas, normal state transitions, prompts, provider transport and public payload unchanged; declarations keep existing verification schema."
         },
         {
-          "unit": "M09.runtime",
-          "affected": false,
-          "reason": "Existing admin snapshot field types unchanged; terminal min/max become observed values, not new API behavior or capacity policy."
-        },
-        {
           "unit": "M10.operations_web",
           "affected": false,
           "reason": "Existing admin snapshot field types unchanged; terminal min/max become observed values, not new API behavior or capacity policy."
@@ -135,11 +130,6 @@
           "reason": "Reviewed consumer: additive optional latency/count telemetry leaves schemas, normal state transitions, prompts, provider transport and public payload unchanged; declarations keep existing verification schema."
         },
         {
-          "unit": "M09.runtime",
-          "affected": false,
-          "reason": "Existing admin snapshot field types unchanged; terminal min/max become observed values, not new API behavior or capacity policy."
-        },
-        {
           "unit": "M10.operations_web",
           "affected": false,
           "reason": "Existing admin snapshot field types unchanged; terminal min/max become observed values, not new API behavior or capacity policy."
@@ -206,11 +196,6 @@
           "unit": "M10.qualification",
           "affected": false,
           "reason": "Reviewed consumer: additive optional latency/count telemetry leaves schemas, normal state transitions, prompts, provider transport and public payload unchanged; declarations keep existing verification schema."
-        },
-        {
-          "unit": "M09.runtime",
-          "affected": false,
-          "reason": "Existing admin snapshot field types unchanged; terminal min/max become observed values, not new API behavior or capacity policy."
         },
         {
           "unit": "M10.operations_web",
