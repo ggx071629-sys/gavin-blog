@@ -64,6 +64,21 @@
           "unit": "M01.navigation",
           "affected": false,
           "reason": "Layout embeds the same assistant component; error notice copy changes no navigation props, polling or availability contract."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Reviewed consumer retains the same string-code transport and component interface; only notice copy changes, with no request, navigation or serialization contract change."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Reviewed consumer retains the same string-code transport and component interface; only notice copy changes, with no request, navigation or serialization contract change."
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer retains the same string-code transport and component interface; only notice copy changes, with no request, navigation or serialization contract change."
         }
       ]
     },
@@ -128,6 +143,21 @@
           "unit": "M01.navigation",
           "affected": false,
           "reason": "Layout embeds the same assistant component; error notice copy changes no navigation props, polling or availability contract."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Reviewed consumer retains the same string-code transport and component interface; only notice copy changes, with no request, navigation or serialization contract change."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Reviewed consumer retains the same string-code transport and component interface; only notice copy changes, with no request, navigation or serialization contract change."
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer retains the same string-code transport and component interface; only notice copy changes, with no request, navigation or serialization contract change."
         }
       ]
     },
