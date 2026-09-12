@@ -1673,7 +1673,9 @@
         "plan-build/assistant-gap-closure/evaluation/run_current_quality.py",
         "plan-build/assistant-gap-closure/evaluation/Q5-cases.json",
         "plan-build/assistant-gap-closure/evaluation/Q5-corpus.json",
-        "apps/api/tests/test_assistant_current_quality.py"
+        "apps/api/tests/test_assistant_current_quality.py",
+        "apps/api/tests/test_assistant_q5_review.py",
+        "plan-build/assistant-gap-closure/evaluation/Q5-holdout.json"
       ],
       "cases": [
         "M10-P1-01",
@@ -1706,7 +1708,9 @@
         "M09-CURRENT-BUDGET-01",
         "M09-CURRENT-BROWSER-01",
         "M09-EXPANDED-INPUT-01",
-        "M09-CURRENT-PROMPT-01"
+        "M09-CURRENT-PROMPT-01",
+        "M09-Q5-REVIEW-01",
+        "M09-Q5-REVIEW-02"
       ],
       "dependents": [
         "M06.api_tooling",

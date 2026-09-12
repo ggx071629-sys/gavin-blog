@@ -17781,6 +17781,70 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-Q5-REVIEW-01",
+          "priority": "P1",
+          "scenario": "Unseen questions remain separate and read-only preparation cannot dispatch.",
+          "expectations": [
+            {
+              "id": "M09-Q5-REVIEW-01-ALLOW",
+              "surface": "response",
+              "statement": "Unseen questions remain separate and read-only preparation cannot dispatch."
+            },
+            {
+              "id": "M09-Q5-REVIEW-01-DENY",
+              "surface": "forbidden",
+              "statement": "Unknown calls cannot bypass reservation or become verified quality."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_q5_review.py",
+              "name": "test_holdout_is_frozen_and_unknown_does_not_prevent_readonly_prepare",
+              "gate": "api-tests",
+              "covers": [
+                "M09-Q5-REVIEW-01-ALLOW",
+                "M09-Q5-REVIEW-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-Q5-REVIEW-02",
+          "priority": "P1",
+          "scenario": "Unknown response preserves measured elapsed time and budget stop semantics.",
+          "expectations": [
+            {
+              "id": "M09-Q5-REVIEW-02-ALLOW",
+              "surface": "response",
+              "statement": "Unknown response preserves measured elapsed time and budget stop semantics."
+            },
+            {
+              "id": "M09-Q5-REVIEW-02-DENY",
+              "surface": "forbidden",
+              "statement": "Unknown calls cannot bypass reservation or become verified quality."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_q5_review.py",
+              "name": "test_unknown_records_elapsed_and_preserves_stop",
+              "gate": "api-tests",
+              "covers": [
+                "M09-Q5-REVIEW-02-ALLOW",
+                "M09-Q5-REVIEW-02-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
