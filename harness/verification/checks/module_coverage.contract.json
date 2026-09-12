@@ -17428,6 +17428,16 @@
                 "M09-CURRENT-BUDGET-01-ALLOW",
                 "M09-CURRENT-BUDGET-01-DENY"
               ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_current_quality.py",
+              "name": "test_evaluation_retains_input_cap_and_reserves_actual_prompt",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CURRENT-BUDGET-01-ALLOW",
+                "M09-CURRENT-BUDGET-01-DENY"
+              ]
             }
           ]
         },
