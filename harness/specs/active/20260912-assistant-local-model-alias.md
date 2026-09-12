@@ -27,7 +27,7 @@ Q2-06 首次调用的精确身份核对失败。用户明确确认 deepseek-flas
 供应商版本映射尚无独立证据，实际质量结果必须注明声明版本而非响应证明。旧probe/readiness不能自动冒充新模型资格。
 # Verification plan
 ## Verification cases
-- AC-1 => M09-LOCAL-MODEL-ALIAS-01, M08-DOCS-01
+- AC-1 => M09-LOCAL-MODEL-ALIAS-01, M09-G07-RUNNER-01, M08-DOCS-01
 - AC-2 => M09-REVALIDATION-COMPAT-01, M09-REVALIDATION-BUDGET-01, M09-REVALIDATION-RECOVERY-01
 ## Gates
 - api-tests => AC-1, AC-2
