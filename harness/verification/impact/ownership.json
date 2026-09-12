@@ -3896,7 +3896,8 @@
         "plan-build/assistant-safety/completed/phase-3-defense/S3-04.md",
         "plan-build/assistant-safety/completed/phase-4-evaluation/S4-01.md",
         "plan-build/assistant-safety/completed/phase-4-evaluation/S4-02.md",
-        "harness/docs/decisions/20260911-assistant-gap-closure.md"
+        "harness/docs/decisions/20260911-assistant-gap-closure.md",
+        "plan-build/assistant-gap-closure/evaluation/G07-EXECUTION.md"
       ],
       "cases": [
         "M08-DOCS-01"

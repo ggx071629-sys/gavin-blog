@@ -106,6 +106,51 @@
       ],
       "reason": "Records exact user approval and cumulative preservation; narrative execution record, no new gate or policy.",
       "dependencies": []
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Assigns new cases and tests to existing owners; dependency edges unchanged.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed consumer uses unchanged schema, provider transport, readiness, persistence, indexing or verifier APIs. Changes are local tutorial equivalence, prompt wording, synthetic fixtures or registration; selected tests exercise those behaviors without changing this consumer contract."
+        }
+      ]
     }
   ]
 }
