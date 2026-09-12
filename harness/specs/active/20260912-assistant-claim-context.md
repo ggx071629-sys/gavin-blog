@@ -28,7 +28,7 @@ Q2-01 的 40 个合成正反例显示当前规则放行 17 个无支持/错配�
 确定性匹配会拒绝未识别的合法改写，不能当作真实模型质量已通过；严格保护需与既有正例一起验证，未覆盖改写在后续任务继续处理。
 # Verification plan
 ## Verification cases
-- AC-1 => M09-CLAIM-CONTEXT-01, M09-GROUNDING-01, M09-GROUNDING-02, M09-GAP-CLAIMS-01
+- AC-1 => M09-CLAIM-CONTEXT-01, M09-GROUNDING-01, M09-GROUNDING-02, M09-GAP-CLAIMS-01, M09-ABOUT-FACTS-01, M09-RESUME-FACTS-01
 - AC-2 => M09-CLAIM-CONTEXT-02, M09-GROUNDING-01
 - AC-3 => M09-CLAIM-CONTEXT-03, M09-GROUNDING-03, M08-DOCS-01
 ## Gates

@@ -15692,6 +15692,102 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-CLAIM-CONTEXT-01",
+          "priority": "P1",
+          "scenario": "Ordinary statements preserve subject, negation, time and scope; supported equivalents remain usable.",
+          "expectations": [
+            {
+              "id": "M09-CLAIM-CONTEXT-01-E01",
+              "surface": "response",
+              "statement": "Ordinary statements preserve subject, negation, time and scope; supported equivalents remain usable."
+            },
+            {
+              "id": "M09-CLAIM-CONTEXT-01-E02",
+              "surface": "forbidden",
+              "statement": "Invented facts, reversed qualifiers and changed subjects never pass."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_claim_context.py",
+              "name": "test_ordinary_claims_preserve_subject_negation_time_and_scope",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CLAIM-CONTEXT-01-E01",
+                "M09-CLAIM-CONTEXT-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-CLAIM-CONTEXT-02",
+          "priority": "P1",
+          "scenario": "Adjacent retractions stay attached; explicit same-subject conflicts require both sources and values.",
+          "expectations": [
+            {
+              "id": "M09-CLAIM-CONTEXT-02-E01",
+              "surface": "response",
+              "statement": "Adjacent retractions stay attached; explicit same-subject conflicts require both sources and values."
+            },
+            {
+              "id": "M09-CLAIM-CONTEXT-02-E02",
+              "surface": "forbidden",
+              "statement": "A clipped retracted claim or one-sided conflict must not be rendered as supported."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_claim_context.py",
+              "name": "test_retractions_and_explicit_same_subject_conflicts",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CLAIM-CONTEXT-02-E01",
+                "M09-CLAIM-CONTEXT-02-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-CLAIM-CONTEXT-03",
+          "priority": "P1",
+          "scenario": "Current database/license questions match the answer topic and bounded absence notices reflect live evidence.",
+          "expectations": [
+            {
+              "id": "M09-CLAIM-CONTEXT-03-E01",
+              "surface": "response",
+              "statement": "Current database/license questions match the answer topic and bounded absence notices reflect live evidence."
+            },
+            {
+              "id": "M09-CLAIM-CONTEXT-03-E02",
+              "surface": "forbidden",
+              "statement": "Wrong-topic supported facts and false absence notices are rejected."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_claim_context.py",
+              "name": "test_question_topic_and_bounded_missing_information",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CLAIM-CONTEXT-03-E01",
+                "M09-CLAIM-CONTEXT-03-E02"
+              ]
+            }
+          ]
         }
       ]
     },

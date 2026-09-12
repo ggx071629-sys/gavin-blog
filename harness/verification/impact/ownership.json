@@ -1227,7 +1227,8 @@
         "apps/api/tests/test_assistant_evidence_budget.py",
         "apps/api/tests/test_assistant_evidence_links.py",
         "apps/api/tests/test_assistant_source_diversity.py",
-        "apps/api/tests/test_assistant_answer_paths.py"
+        "apps/api/tests/test_assistant_answer_paths.py",
+        "apps/api/tests/test_assistant_claim_context.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1285,7 +1286,10 @@
         "M09-DEFENSE-03",
         "M09-GAP-NUMBERS-01",
         "M09-GAP-CLAIMS-01",
-        "M09-GAP-DISCUSSION-01"
+        "M09-GAP-DISCUSSION-01",
+        "M09-CLAIM-CONTEXT-01",
+        "M09-CLAIM-CONTEXT-02",
+        "M09-CLAIM-CONTEXT-03"
       ],
       "dependents": [
         "M06.api_tooling",
