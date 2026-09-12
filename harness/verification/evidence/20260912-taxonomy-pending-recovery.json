@@ -1,0 +1,848 @@
+{
+  "schema_version": 2,
+  "task_id": "20260912-taxonomy-pending-recovery",
+  "created_at": "2026-09-12T05:31:45.039950+00:00",
+  "command": "python -m tools.harness verify 20260912-taxonomy-pending-recovery",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "058a57ad58835f54fc67aa29748a0d04ab1b8d55",
+    "active_spec_sha256": "7559ad8c128ed3550c9525d18ed8271c79e89b03c585ddc0499299794f8203ad",
+    "verification_contract_sha256": "06e95d2ef7f7d7d1eca1f893e0cd4bbc6fc5619c58088622192c310d645bb255",
+    "gate_config_sha256": "dc88df783349cb69591d0d021d7e238c91e6c6425da8f59d0c89760c90f1ea1d",
+    "documentation_contract_sha256": "b9ba2c07bf31ec47e74560063bb4ac6d53d0a473144d36a8903bf438c7bab9db",
+    "documentation_targets_sha256": "8f7cc8def1c02d734de26a026a43d1670ffc2549af7a8f7f07627aa418129587",
+    "module_contract_sha256": "35a3b19a3b1cd7c7b9b6841481572689dcd988f52399fafc2f0a04324393b309"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录栏目标签操作的局部等待上限、超时不等于服务端未写入、手动核对与禁止自动重放的边界。",
+    "targets": [
+      "apps/web/README.md"
+    ],
+    "baseline_commit": "a9d5df95c5bcea8c1ac64d4f25490efba0c9dd6a",
+    "target_blobs": {
+      "apps/web/README.md": "cf3fe1b12674dcfe57955a5e917fd812d7e4e444"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "74696da650959ee34845c72b07fa846289e33448",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260912-taxonomy-pending-recovery.json",
+      "sha256": "296f0ec139ce7f56ba812448fb0fc0028a280037b971561f6ddfa6c0c3ea4d35",
+      "selected_cases": [
+        "M03-OPS-TAXONOMY-01",
+        "M03-TAXONOMY-CONFLICT-01",
+        "M03-TAXONOMY-PENDING-01",
+        "M03-TAXONOMY-PENDING-02",
+        "M08-DOCS-01"
+      ],
+      "selected_refs": 5,
+      "excluded_cases": 335
+    },
+    "receipt": {
+      "run_id": "42cb91bd7b1dd951733869495e41030e",
+      "identity": "513b87928d47e9d707c1fc21c35dbc2eee37131b2cebe0845bb75a133ea92956",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 3489.123,
+      "plan_inputs": 1134.435,
+      "execute_cleanup_and_input_recheck": 268781.989
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "35a3b19a3b1cd7c7b9b6841481572689dcd988f52399fafc2f0a04324393b309",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M03-TAXONOMY-PENDING-01",
+            "module_id": "M03",
+            "module_name": "栏目、标签与全站搜索",
+            "priority": "P1",
+            "scenario": "栏目与标签新增请求持续不返回时退出无限保存，并保留输入与手动核对入口。",
+            "expectations": [
+              {
+                "id": "M03-TAXONOMY-PENDING-01-E01",
+                "surface": "user_visible",
+                "statement": "15 秒等待预算后结束保存中，名称、slug、说明仍保留，显示结果尚未确认及核对最新列表入口。"
+              },
+              {
+                "id": "M03-TAXONOMY-PENDING-01-E02",
+                "surface": "forbidden",
+                "statement": "不得无限禁用表单、清空输入、假称成功或自动重放写请求。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy stalled creates release pending and preserve both forms without replay",
+                "gate": "e2e",
+                "covers": [
+                  "M03-TAXONOMY-PENDING-01-E01",
+                  "M03-TAXONOMY-PENDING-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M03-TAXONOMY-PENDING-02",
+            "module_id": "M03",
+            "module_name": "栏目、标签与全站搜索",
+            "priority": "P1",
+            "scenario": "真实保存成功但响应丢失，或修改、删除、只读核对悬挂时，界面保持真实未知状态并可恢复。",
+            "expectations": [
+              {
+                "id": "M03-TAXONOMY-PENDING-02-E01",
+                "surface": "state",
+                "statement": "真实 API 已创建条目但响应丢失时输入保留；手动 GET 核对可显示真实条目，GET 超时也能退出等待。"
+              },
+              {
+                "id": "M03-TAXONOMY-PENDING-02-E02",
+                "surface": "forbidden",
+                "statement": "不得把客户端超时当成服务端回滚，不自动重放 mutation，不接受迟到成功清空表单。"
+              },
+              {
+                "id": "M03-TAXONOMY-PENDING-02-E03",
+                "surface": "user_visible",
+                "statement": "修改与删除超时后保留编辑输入和列表条目，显式核对及重新删除后真实状态可刷新验证。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy lost save response reconciles real data and bounds a stalled read",
+                "gate": "e2e",
+                "covers": [
+                  "M03-TAXONOMY-PENDING-02-E01",
+                  "M03-TAXONOMY-PENDING-02-E02"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy stalled updates and deletes retain state and recover through explicit actions",
+                "gate": "e2e",
+                "covers": [
+                  "M03-TAXONOMY-PENDING-02-E02",
+                  "M03-TAXONOMY-PENDING-02-E03"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M03-OPS-TAXONOMY-01",
+            "module_id": "M03",
+            "module_name": "栏目、标签与全站搜索",
+            "priority": "P1",
+            "scenario": "栏目创建编辑、关联文章发布、禁止删除使用中栏目。",
+            "expectations": [
+              {
+                "id": "M03-OPS-TAXONOMY-01-E01",
+                "surface": "user_visible",
+                "statement": "手机键盘编辑聚焦名称，改名显示到公开栏目。"
+              },
+              {
+                "id": "M03-OPS-TAXONOMY-01-E02",
+                "surface": "forbidden",
+                "statement": "仍被使用的栏目不能删除，失败保留条目。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops taxonomy",
+                "gate": "e2e",
+                "covers": [
+                  "M03-OPS-TAXONOMY-01-E01",
+                  "M03-OPS-TAXONOMY-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M03-TAXONOMY-CONFLICT-01",
+            "module_id": "M03",
+            "module_name": "栏目、标签与全站搜索",
+            "priority": "P1",
+            "scenario": "重复标签 slug 通过真实同源 API 连续返回冲突并复位按钮。",
+            "expectations": [
+              {
+                "id": "M03-TAXONOMY-CONFLICT-01-E01",
+                "surface": "user_visible",
+                "statement": "五次重复 slug 均返回真实 409 并显示既有失败提示，保留输入。"
+              },
+              {
+                "id": "M03-TAXONOMY-CONFLICT-01-E02",
+                "surface": "forbidden",
+                "statement": "不得在收到冲突后仍处于保存中或把 409 当作保存成功。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops duplicate tag slug reports a conflict without a stuck pending state",
+                "gate": "e2e",
+                "covers": [
+                  "M03-TAXONOMY-CONFLICT-01-E01",
+                  "M03-TAXONOMY-CONFLICT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.477,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "201 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 278.638,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 89.733,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.608,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "2009 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 2357.994,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "327 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 108.888,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 340 cases, 690 expectations, 1116 exact test references; contract sha256 35a3b19a3b1c"
+      ],
+      "status": "passed",
+      "duration_ms": 549.543,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.716,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.186,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 83.42,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "duration_ms": 2619.458,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "42cb91bd7b1dd951733869495e41030e",
+        "attempt_id": "e0153ca70fd9e4535cc2d8228ba5045a"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-taxonomy-pending-recovery --gate e2e",
+      "status": "passed",
+      "duration_ms": 262890.343,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 7464,
+        "selection_counts": {
+          "collected": 5,
+          "executed": 5
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops taxonomy"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops duplicate tag slug reports a conflict without a stuck pending state"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy stalled creates release pending and preserve both forms without replay"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy lost save response reconciles real data and bounds a stalled read"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy stalled updates and deletes retain state and recover through explicit actions"
+              }
+            ],
+            "duration_ms": 3324.185,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops taxonomy"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops duplicate tag slug reports a conflict without a stuck pending state"
+              }
+            ],
+            "duration_ms": 1629.425
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy stalled creates release pending and preserve both forms without replay"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy lost save response reconciles real data and bounds a stalled read"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy stalled updates and deletes retain state and recover through explicit actions"
+              }
+            ],
+            "duration_ms": 1504.765
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops taxonomy",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops taxonomy"
+                ]
+              }
+            ],
+            "duration_ms": 1492.923,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops taxonomy",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops taxonomy"
+                ]
+              }
+            ],
+            "duration_ms": 31357.729,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops duplicate tag slug reports a conflict without a stuck pending state",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops duplicate tag slug reports a conflict without a stuck pending state"
+                ]
+              }
+            ],
+            "duration_ms": 1692.642,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops duplicate tag slug reports a conflict without a stuck pending state",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops duplicate tag slug reports a conflict without a stuck pending state"
+                ]
+              }
+            ],
+            "duration_ms": 30319.419,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy stalled creates release pending and preserve both forms without replay",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "taxonomy stalled creates release pending and preserve both forms without replay"
+                ]
+              }
+            ],
+            "duration_ms": 1663.56,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy stalled creates release pending and preserve both forms without replay",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "taxonomy stalled creates release pending and preserve both forms without replay"
+                ]
+              }
+            ],
+            "duration_ms": 60709.407,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy lost save response reconciles real data and bounds a stalled read",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "taxonomy lost save response reconciles real data and bounds a stalled read"
+                ]
+              }
+            ],
+            "duration_ms": 1589.088,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy lost save response reconciles real data and bounds a stalled read",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "taxonomy lost save response reconciles real data and bounds a stalled read"
+                ]
+              }
+            ],
+            "duration_ms": 61927.734,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy stalled updates and deletes retain state and recover through explicit actions",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "taxonomy stalled updates and deletes retain state and recover through explicit actions"
+                ]
+              }
+            ],
+            "duration_ms": 1516.498,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/taxonomy-pending.spec.ts",
+                "name": "taxonomy stalled updates and deletes retain state and recover through explicit actions",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "taxonomy stalled updates and deletes retain state and recover through explicit actions"
+                ]
+              }
+            ],
+            "duration_ms": 63706.058,
+            "batch_id": "batch-0005"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\42cb91bd7b1dd951733869495e41030e\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "42cb91bd7b1dd951733869495e41030e",
+        "attempt_id": "f6eb294c9e02bf6ed24e279e97c1604e"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2597.508,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 271593.512,
+    "failures": []
+  },
+  "source_commit": "74696da650959ee34845c72b07fa846289e33448"
+}
