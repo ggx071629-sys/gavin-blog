@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **6 active**, **0 frozen**.
+Open specifications: **5 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -16,7 +16,6 @@ Open specifications: **6 active**, **0 frozen**.
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页恢复笔记、领域和文章之间的知识路线 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
 | spec-20260911-assistant-input-error | active | L1 | 区分问答输入超限与未确认模型调用 | task:20260911-assistant-input-error | Gavin | [active/20260911-assistant-input-error.md](active/20260911-assistant-input-error.md) |
-| spec-20260912-assistant-budget-calibration | active | L1 | 离线分解提示预算并与官方 tokenizer 和已保存 usage 校准 | task:20260912-assistant-budget-calibration | Codex | [active/20260912-assistant-budget-calibration.md](active/20260912-assistant-budget-calibration.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -215,6 +214,7 @@ Open specifications: **6 active**, **0 frozen**.
 | archive-20260911-resume-page-coverage | compressed | L2 | 避免简历预算选取遗漏后页项目并将片段误作完整清单 | task:20260911-resume-page-coverage | — | [archive/20260911-resume-page-coverage.md](archive/20260911-resume-page-coverage.md) |
 | archive-20260912-about-draft-preserve | compressed | L2 | 关于页自动保存不再清空尚未提交的领域标签输入 | task:20260912-about-draft-preserve | Codex | [archive/20260912-about-draft-preserve.md](archive/20260912-about-draft-preserve.md) |
 | archive-20260912-assistant-answer-language | compressed | L2 | 明确英文问句的回答语言并保留教程方式转述 | task:20260912-assistant-answer-language | Codex | [archive/20260912-assistant-answer-language.md](archive/20260912-assistant-answer-language.md) |
+| archive-20260912-assistant-budget-calibration | compressed | L2 | 离线分解提示预算并与官方 tokenizer 和已保存 usage 校准 | task:20260912-assistant-budget-calibration | Codex | [archive/20260912-assistant-budget-calibration.md](archive/20260912-assistant-budget-calibration.md) |
 | archive-20260912-assistant-claim-context | compressed | L2 | 校验普通陈述并保留否定、时间、主体和冲突语境 | task:20260912-assistant-claim-context | Codex | [archive/20260912-assistant-claim-context.md](archive/20260912-assistant-claim-context.md) |
 | archive-20260912-assistant-current-query | compressed | L2 | 让当前问题优先进入普通与 E5 检索的最终词法表达式 | task:20260912-assistant-current-query | Codex | [archive/20260912-assistant-current-query.md](archive/20260912-assistant-current-query.md) |
 | archive-20260912-assistant-discussion-context | compressed | L2 | 有限地区分技术讨论和执行请求以及示例占位符和凭据 | task:20260912-assistant-discussion-context | Codex | [archive/20260912-assistant-discussion-context.md](archive/20260912-assistant-discussion-context.md) |
