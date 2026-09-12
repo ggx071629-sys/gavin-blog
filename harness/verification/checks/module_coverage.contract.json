@@ -15788,6 +15788,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-QUANTITY-BINDING-01",
+          "priority": "P1",
+          "scenario": "Normalize quantities in place while preserving subject/property/time and bounds.",
+          "expectations": [
+            {
+              "id": "M09-QUANTITY-BINDING-01-E01",
+              "surface": "response",
+              "statement": "Chinese and Arabic counts, precise time units, ranges and finite percentages remain equivalent in the same statement."
+            },
+            {
+              "id": "M09-QUANTITY-BINDING-01-E02",
+              "surface": "forbidden",
+              "statement": "Swapped subjects, changed bounds/time/denominator, calendar guesses and rounded large-value mismatches are rejected."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_quantity_binding.py",
+              "name": "test_quantities_preserve_binding_and_allow_exact_conversions",
+              "gate": "api-tests",
+              "covers": [
+                "M09-QUANTITY-BINDING-01-E01",
+                "M09-QUANTITY-BINDING-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

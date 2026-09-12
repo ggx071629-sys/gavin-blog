@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "task_id": "20260912-assistant-quantity-binding",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/quantities.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-QUANTITY-BINDING-01"
+      ],
+      "reason": "Adds exact, in-place Chinese/time/percent normalization; preserves sentence bindings and refuses zero-denominator rates and unsupported calendar equivalences.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/output.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-QUANTITY-BINDING-01",
+        "M09-GAP-NUMBERS-01",
+        "M09-CLAIM-CONTEXT-01",
+        "M09-GAP-CLAIMS-01"
+      ],
+      "reason": "Uses the same quantity canonicalization for claim keys and numeric checks; no unbound number-set-only acceptance.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_quantity_binding.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-QUANTITY-BINDING-01"
+      ],
+      "reason": "Paired quantity/binding regressions, including large digit differences and unchanged unknown calendar semantics.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Documents supported normalization and unknown-unit/calendar limits without changing an executable gate.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Registers one exact quantity test with required and forbidden expectations.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Adds helper and test to existing runtime owner, without changing dependency edges.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only bounded quantity normalization or its tests/registry change; existing consumer APIs, wire types, lifecycle, dependencies and gate algorithms are unchanged. The runtime caller is tested through the selected claim and quantity cases."
+        }
+      ]
+    }
+  ]
+}
