@@ -55,7 +55,11 @@
         {
           "unit": "M10.qualification",
           "affected": true,
-          "reason": "Synthetic G07 runner consumes prompt/validator changes; prepare and authorization runner cases are selected for that consumer."
+          "reason": "Synthetic G07 runner consumes prompt/validator changes; prepare and authorization runner cases are selected for that consumer.",
+          "cases": [
+            "M09-G07-PREPARE-01",
+            "M09-G07-RUNNER-01"
+          ]
         },
         {
           "unit": "M08.qualification",
@@ -121,7 +125,11 @@
         {
           "unit": "M10.qualification",
           "affected": true,
-          "reason": "Synthetic G07 runner consumes prompt/validator changes; prepare and authorization runner cases are selected for that consumer."
+          "reason": "Synthetic G07 runner consumes prompt/validator changes; prepare and authorization runner cases are selected for that consumer.",
+          "cases": [
+            "M09-G07-PREPARE-01",
+            "M09-G07-RUNNER-01"
+          ]
         },
         {
           "unit": "M08.qualification",
