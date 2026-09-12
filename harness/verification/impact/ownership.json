@@ -1233,7 +1233,8 @@
         "apps/api/tests/test_assistant_quantity_binding.py",
         "apps/api/tests/test_assistant_supported_paraphrase.py",
         "apps/api/tests/test_assistant_technical_text.py",
-        "apps/api/tests/test_assistant_discussion_context.py"
+        "apps/api/tests/test_assistant_discussion_context.py",
+        "apps/api/tests/test_assistant_g07_repair.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1299,7 +1300,9 @@
         "M09-SUPPORTED-PARAPHRASE-01",
         "M09-TECHNICAL-TEXT-01",
         "M09-DISCUSSION-CONTEXT-01",
-        "M09-DISCUSSION-HYDRATE-01"
+        "M09-DISCUSSION-HYDRATE-01",
+        "M09-G07-REPLAY-01",
+        "M09-G07-PREPARE-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1645,7 +1648,8 @@
         "M09-REVALIDATION-CLI-01",
         "M10-TOTAL-BUDGET-01",
         "M09-LOCAL-MODEL-ALIAS-01",
-        "M09-G07-RUNNER-01"
+        "M09-G07-RUNNER-01",
+        "M09-G07-PREPARE-01"
       ],
       "dependents": [
         "M06.api_tooling",

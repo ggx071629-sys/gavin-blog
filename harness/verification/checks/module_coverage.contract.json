@@ -16124,6 +16124,70 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-G07-REPLAY-01",
+          "priority": "P1",
+          "scenario": "Recorded supported tutorial paraphrases and finite English mail relation retain citations.",
+          "expectations": [
+            {
+              "id": "M09-G07-REPLAY-01-ALLOW",
+              "surface": "response",
+              "statement": "Recorded supported tutorial paraphrases and finite English mail relation retain citations."
+            },
+            {
+              "id": "M09-G07-REPLAY-01-DENY",
+              "surface": "forbidden",
+              "statement": "Changed protocol, subject, negation, qualification, retraction or title cannot pass."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_g07_repair.py",
+              "name": "test_recorded_tutorial_paraphrases_and_paired_boundaries",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G07-REPLAY-01-ALLOW",
+                "M09-G07-REPLAY-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-G07-PREPARE-01",
+          "priority": "P1",
+          "scenario": "All 24 revised prompts fit the reviewed budget; six controls have supported content and pass rules.",
+          "expectations": [
+            {
+              "id": "M09-G07-PREPARE-01-ALLOW",
+              "surface": "response",
+              "statement": "All 24 revised prompts fit the reviewed budget; six controls have supported content and pass rules."
+            },
+            {
+              "id": "M09-G07-PREPARE-01-DENY",
+              "surface": "forbidden",
+              "statement": "Empty blocks remain failures; offline preparation cannot open a provider connection."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_g07_repair.py",
+              "name": "test_empty_answers_remain_failure_and_fixture_is_answerable",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G07-PREPARE-01-ALLOW",
+                "M09-G07-PREPARE-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
