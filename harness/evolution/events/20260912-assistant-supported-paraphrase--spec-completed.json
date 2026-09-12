@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260912-assistant-supported-paraphrase",
+  "created_at": "2026-09-12T06:37:53.073820+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "b27c3116926ecdf71c08b23b1d7d189374284f4f72d778163f6e6cfbb10d7f32"
+}

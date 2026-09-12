@@ -1,0 +1,544 @@
+{
+  "schema_version": 2,
+  "task_id": "20260912-assistant-supported-paraphrase",
+  "created_at": "2026-09-12T06:37:47.915296+00:00",
+  "command": "python -m tools.harness verify 20260912-assistant-supported-paraphrase",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "81ad258df911b24a164fe902453fadfdb9a7d511",
+    "active_spec_sha256": "c5c48da50ba3da8f2f44b4fcdf89836cded467fc866b5a22ba5f6e082b0a1285",
+    "verification_contract_sha256": "933a49e5e149e21623ff0d92b5be7a421601ffbd7ab85afb2bbb87df6bb3e16f",
+    "gate_config_sha256": "985163d6d590d3e4af47e6d057d8b4cb1b1e341af3465df51955c8ae426b6a96",
+    "documentation_contract_sha256": "de9e5c85b521cd76545d8908de5475c4e14ccc1d912f3492c6e5804b763b4461",
+    "documentation_targets_sha256": "88e3feacc8e11d30900204887139caf2b82cb72a5bed5e8f2d11796886c5ceea",
+    "module_contract_sha256": "6a0ecc7120c173d4f21b40c503051a80c37baf2d33e67b3d13122419263e0c7c"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录已支持的有限技术等价与显式计数摘要，以及未证明的自由语义改写。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "bcb85974866720d0c863fcfb6671ef43fab8fcd4",
+    "target_blobs": {
+      "apps/api/README.md": "f7751a6e7fc0bf954d87987af799104dc7d0ff20"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "a038a0814279ca1de102ed6b6e88ddc92fd65a5c",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260912-assistant-supported-paraphrase.json",
+      "sha256": "8dba593946bae6094e6c1fe318563bed60c1a1c13dca3db48d963ed75bf97326",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M09-CLAIM-CONTEXT-01",
+        "M09-GAP-CLAIMS-01",
+        "M09-QUANTITY-BINDING-01",
+        "M09-SUPPORTED-PARAPHRASE-01"
+      ],
+      "selected_refs": 4,
+      "excluded_cases": 340
+    },
+    "receipt": {
+      "run_id": "e5c581f47d2403466a77bb08fe173c7a",
+      "identity": "f2b15b3d67ff4e450a9763889a0439bd2ce7f38f549457eb653e633e3e09f1ad",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 4242.379,
+      "plan_inputs": 1314.448,
+      "execute_cleanup_and_input_recheck": 15159.208
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "6a0ecc7120c173d4f21b40c503051a80c37baf2d33e67b3d13122419263e0c7c",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-SUPPORTED-PARAPHRASE-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Support finite technical equivalents and consistent explicit enumeration summaries.",
+            "expectations": [
+              {
+                "id": "M09-SUPPORTED-PARAPHRASE-01-E01",
+                "surface": "response",
+                "statement": "G04 personal rewrite, database-name equivalence, time conversion and explicit list-count summary are accepted."
+              },
+              {
+                "id": "M09-SUPPORTED-PARAPHRASE-01-E02",
+                "surface": "forbidden",
+                "statement": "Wrong database, invented count, examples-only lists, duplicate entries, inconsistent cardinality and unbounded retry claims are rejected."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_supported_paraphrase.py",
+                "name": "test_supported_technical_paraphrases_and_explicit_enumeration_counts",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-SUPPORTED-PARAPHRASE-01-E01",
+                  "M09-SUPPORTED-PARAPHRASE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-GAP-CLAIMS-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P0",
+            "scenario": "Attributed self reports and unsupported claims",
+            "expectations": [
+              {
+                "id": "M09-GAP-CLAIMS-01-E01",
+                "surface": "response",
+                "statement": "Representative supported statements and explanatory discussion pass."
+              },
+              {
+                "id": "M09-GAP-CLAIMS-01-E02",
+                "surface": "forbidden",
+                "statement": "Altered facts, unsupported claims or mixed execution requests do not pass."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_online_matrix.py",
+                "kind": "pytest",
+                "name": "test_security_gap_self_report_and_unsupported_claims",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-GAP-CLAIMS-01-E01",
+                  "M09-GAP-CLAIMS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-CLAIM-CONTEXT-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Ordinary statements preserve subject, negation, time and scope; supported equivalents remain usable.",
+            "expectations": [
+              {
+                "id": "M09-CLAIM-CONTEXT-01-E01",
+                "surface": "response",
+                "statement": "Ordinary statements preserve subject, negation, time and scope; supported equivalents remain usable."
+              },
+              {
+                "id": "M09-CLAIM-CONTEXT-01-E02",
+                "surface": "forbidden",
+                "statement": "Invented facts, reversed qualifiers and changed subjects never pass."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_claim_context.py",
+                "name": "test_ordinary_claims_preserve_subject_negation_time_and_scope",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-CLAIM-CONTEXT-01-E01",
+                  "M09-CLAIM-CONTEXT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-QUANTITY-BINDING-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Normalize quantities in place while preserving subject/property/time and bounds.",
+            "expectations": [
+              {
+                "id": "M09-QUANTITY-BINDING-01-E01",
+                "surface": "response",
+                "statement": "Chinese and Arabic counts, precise time units, ranges and finite percentages remain equivalent in the same statement."
+              },
+              {
+                "id": "M09-QUANTITY-BINDING-01-E02",
+                "surface": "forbidden",
+                "statement": "Swapped subjects, changed bounds/time/denominator, calendar guesses and rounded large-value mismatches are rejected."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_quantity_binding.py",
+                "name": "test_quantities_preserve_binding_and_allow_exact_conversions",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-QUANTITY-BINDING-01-E01",
+                  "M09-QUANTITY-BINDING-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 5.476,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "206 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 387.303,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 104.206,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.865,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "2047 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 2858.386,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "331 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 124.166,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 345 cases, 700 expectations, 1121 exact test references; contract sha256 6a0ecc7120c1"
+      ],
+      "status": "passed",
+      "duration_ms": 650.57,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 4.091,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 10.383,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 92.695,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 3312.951,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "e5c581f47d2403466a77bb08fe173c7a",
+        "attempt_id": "88475699eb826d6d5f21850ea86ae052"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-supported-paraphrase --gate api-tests",
+      "status": "passed",
+      "duration_ms": 8196.254,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 911,
+        "selection_counts": {
+          "collected": 4,
+          "executed": 4
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_claim_context.py",
+                "name": "test_ordinary_claims_preserve_subject_negation_time_and_scope"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_online_matrix.py",
+                "name": "test_security_gap_self_report_and_unsupported_claims"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_quantity_binding.py",
+                "name": "test_quantities_preserve_binding_and_allow_exact_conversions"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_supported_paraphrase.py",
+                "name": "test_supported_technical_paraphrases_and_explicit_enumeration_counts"
+              }
+            ],
+            "duration_ms": 7621.823,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\e5c581f47d2403466a77bb08fe173c7a\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "e5c581f47d2403466a77bb08fe173c7a",
+        "attempt_id": "b598f1957144d2db8d462d4457af0471"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2911.795,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 18659.141,
+    "failures": []
+  },
+  "source_commit": "a038a0814279ca1de102ed6b6e88ddc92fd65a5c"
+}
