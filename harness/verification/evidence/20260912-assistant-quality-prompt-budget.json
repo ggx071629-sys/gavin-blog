@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
   "task_id": "20260912-assistant-quality-prompt-budget",
-  "created_at": "2026-09-12T15:40:34.846760+00:00",
+  "created_at": "2026-09-12T15:48:10.939751+00:00",
   "command": "python -m tools.harness verify 20260912-assistant-quality-prompt-budget",
-  "status": "failed",
+  "status": "passed",
   "acceptance_criteria": [
     "AC-1",
     "AC-2",
@@ -13,21 +13,21 @@
   "criteria_results": [
     {
       "id": "AC-1",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "api-tests"
       ]
     },
     {
       "id": "AC-2",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "api-tests"
       ]
     },
     {
       "id": "AC-3",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "api-tests"
       ]
@@ -42,13 +42,13 @@
   ],
   "verification_profile": "focused",
   "fingerprints": {
-    "source_tree": "642aae9f8e7b6292a7acd699e0f60efa2208c950",
-    "active_spec_sha256": "e67c9b9b2dfc3e3fecff4c63b981a10e0339638589a95e8f222845f20ffd93f5",
-    "verification_contract_sha256": "b48d6f95a808acfde3d097b5059bfe774f9ff2fe473e40b2dd80d7e53972a85c",
-    "gate_config_sha256": "8b9708f91067833343bdffa95189969294de1b70993abc3b50e76b3a3d0d0595",
+    "source_tree": "c457b6132a35e0f58228fd022b761ab5d4f86b20",
+    "active_spec_sha256": "465610b7604e84a5d0bbe0b1467118497beb8e1da592ff2ad88b7195f4ea832e",
+    "verification_contract_sha256": "7202eea60539dcf25e23c01f5d23ad8cea9c2f56a106081cbe7ad0f81f9f90a2",
+    "gate_config_sha256": "7445353a7ae50852b703294d9a897de5b41448b3cefbc37d33069234ca0ba03d",
     "documentation_contract_sha256": "ceb421fa2a0f9f27bd0ff031c43a391d15519d4cf3b17bd93f2f7585e72e7215",
-    "documentation_targets_sha256": "b6f81c34da863ed629d87aba88b07851cd38d84e663d5767a8fc4308bd9c9171",
-    "module_contract_sha256": "f9c882f731bb3b15aca49fe09e43906e0273fc8b1c75a5c86d0cd52abe3db2a6"
+    "documentation_targets_sha256": "c9316d0c13cbc2db281f95762a50aceeebbe385f2f28edf2a43f9bd320aa7825",
+    "module_contract_sha256": "5c22b1d5be5dd60c4f42f776f091b725b7c43ff04527d8bfd61bdf825a558958"
   },
   "documentation": {
     "impact": "required",
@@ -58,17 +58,17 @@
     ],
     "baseline_commit": "ea65d1a7b81d56ae41ba3afb9c5dee3e19ff41e2",
     "target_blobs": {
-      "plan-build/assistant-gap-closure/evaluation/Q5-EVALUATION.md": "5f61686568f630194270e32b38ca02a4cf70014c"
+      "plan-build/assistant-gap-closure/evaluation/Q5-EVALUATION.md": "f7b44562b7a3b07e2d25efb8b0ac50f31e90798b"
     }
   },
   "execution": {
     "mode": "git-worktree",
-    "source_commit": "ad70f22de9b7de56f6b77824912a618b84a61081",
+    "source_commit": "a9298783952398be086fe6a60a5cb5d18fc16ab1",
     "cleanup_status": "passed",
     "reused_paths": 1,
     "impact": {
       "plan": "harness/verification/impact/20260912-assistant-quality-prompt-budget.json",
-      "sha256": "a6a4d3c3fae6414e3c8d8564d76926a357bc4c175663452c06cecf3cab21b365",
+      "sha256": "35ef9bdc4f231096032ff786925011c21d2a3d25a63c874195bbdebbdeafae70",
       "selected_cases": [
         "M08-DOCS-01",
         "M09-CURRENT-BUDGET-01",
@@ -76,14 +76,15 @@
         "M09-GROUNDING-01",
         "M09-GROUNDING-02",
         "M09-GROUNDING-03",
+        "M09-REVALIDATION-BUDGET-01",
         "M10-TOTAL-BUDGET-01"
       ],
-      "selected_refs": 31,
-      "excluded_cases": 375
+      "selected_refs": 35,
+      "excluded_cases": 374
     },
     "receipt": {
-      "run_id": "3e68d061aad9a25026b36fdfc40c87ed",
-      "identity": "d86b58ee4a971a20c29e8487258677502307ad2608d3cb0bb8ad66ece0047774",
+      "run_id": "bfb7fdae1d882d2338c9fef6c919f9c6",
+      "identity": "199db0830dd7dc80069e970f8c44beaeee9a7c50fadd05e7ab545ab27d0698d1",
       "plan": [
         {
           "gate": "api-tests",
@@ -102,15 +103,15 @@
       ]
     },
     "phase_durations_ms": {
-      "preflight_checks": 4544.461,
-      "plan_inputs": 979.321,
-      "execute_cleanup_and_input_recheck": 47937.593
+      "preflight_checks": 3431.804,
+      "plan_inputs": 869.845,
+      "execute_cleanup_and_input_recheck": 41138.52
     }
   },
   "verification_cases": {
     "schema_version": 1,
     "contract_id": "gavin-module-coverage-v1",
-    "contract_sha256": "f9c882f731bb3b15aca49fe09e43906e0273fc8b1c75a5c86d0cd52abe3db2a6",
+    "contract_sha256": "5c22b1d5be5dd60c4f42f776f091b725b7c43ff04527d8bfd61bdf825a558958",
     "criteria": [
       {
         "criterion": "AC-1",
@@ -248,6 +249,16 @@
                   "M09-CURRENT-BUDGET-01-ALLOW",
                   "M09-CURRENT-BUDGET-01-DENY"
                 ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_current_quality.py",
+                "name": "test_evaluation_retains_input_cap_and_reserves_actual_prompt",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-CURRENT-BUDGET-01-ALLOW",
+                  "M09-CURRENT-BUDGET-01-DENY"
+                ]
               }
             ],
             "gate_satisfaction": [
@@ -348,6 +359,77 @@
                 "covers": [
                   "M10-TOTAL-BUDGET-01-ALLOW",
                   "M10-TOTAL-BUDGET-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-REVALIDATION-BUDGET-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "同一路径保留旧账本原文及费用，授权按累计额度扣减，重放ID与额度耗尽拒绝。",
+            "expectations": [
+              {
+                "id": "M09-REVALIDATION-BUDGET-01-ALLOW",
+                "surface": "response",
+                "statement": "同一路径保留旧账本原文及费用，授权按累计额度扣减，重放ID与额度耗尽拒绝。"
+              },
+              {
+                "id": "M09-REVALIDATION-BUDGET-01-DENY",
+                "surface": "forbidden",
+                "statement": "禁止新ID重置费用/次数或耗尽后调用模型；生产资格保持。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_cumulative_authorization_preserves_history_and_replay",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-BUDGET-01-ALLOW",
+                  "M09-REVALIDATION-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_cost_exhaustion_lock_and_tamper_fail_closed",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-BUDGET-01-ALLOW",
+                  "M09-REVALIDATION-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_reuses_budget_and_rejects_drift",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-BUDGET-01-ALLOW",
+                  "M09-REVALIDATION-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_probe_records_allowlisted_real_provider_facts_and_bounded_cost",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-BUDGET-01-ALLOW",
+                  "M09-REVALIDATION-BUDGET-01-DENY"
                 ]
               }
             ],
@@ -690,7 +772,7 @@
         "1 subsumption contracts bind 7 registered child gates"
       ],
       "status": "passed",
-      "duration_ms": 4.829,
+      "duration_ms": 4.308,
       "provenance": {
         "scope": "workspace"
       }
@@ -701,7 +783,7 @@
         "228 deterministic closes retain archive, evidence, event, and active-spec history"
       ],
       "status": "passed",
-      "duration_ms": 327.783,
+      "duration_ms": 261.898,
       "provenance": {
         "scope": "workspace"
       }
@@ -712,7 +794,7 @@
         "9 generated indexes are current"
       ],
       "status": "passed",
-      "duration_ms": 101.838,
+      "duration_ms": 86.838,
       "provenance": {
         "scope": "workspace"
       }
@@ -723,7 +805,7 @@
         "AGENTS.md is the unique L0 and stays within 60-80 lines"
       ],
       "status": "passed",
-      "duration_ms": 0.683,
+      "duration_ms": 0.613,
       "provenance": {
         "scope": "workspace"
       }
@@ -734,7 +816,7 @@
         "2150 local Markdown links resolve without durable active-spec references"
       ],
       "status": "passed",
-      "duration_ms": 3162.557,
+      "duration_ms": 2323.055,
       "provenance": {
         "scope": "workspace"
       }
@@ -745,7 +827,7 @@
         "355 routed Markdown documents have valid metadata"
       ],
       "status": "passed",
-      "duration_ms": 139.983,
+      "duration_ms": 102.492,
       "provenance": {
         "scope": "workspace"
       }
@@ -753,10 +835,10 @@
     {
       "name": "module-coverage",
       "details": [
-        "11 modules, 382 cases, 774 expectations, 1205 exact test references; contract sha256 f9c882f731bb"
+        "11 modules, 382 cases, 774 expectations, 1206 exact test references; contract sha256 5c22b1d5be5d"
       ],
       "status": "passed",
-      "duration_ms": 678.722,
+      "duration_ms": 557.446,
       "provenance": {
         "scope": "workspace"
       }
@@ -767,7 +849,7 @@
         "configured qualification manifests have valid historical bindings"
       ],
       "status": "passed",
-      "duration_ms": 3.553,
+      "duration_ms": 3.22,
       "provenance": {
         "scope": "workspace"
       }
@@ -778,7 +860,7 @@
         "28 required paths exist"
       ],
       "status": "passed",
-      "duration_ms": 10.746,
+      "duration_ms": 8.718,
       "provenance": {
         "scope": "workspace"
       }
@@ -789,7 +871,7 @@
         "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
       ],
       "status": "passed",
-      "duration_ms": 110.611,
+      "duration_ms": 80.081,
       "provenance": {
         "scope": "workspace"
       }
@@ -802,14 +884,14 @@
       "covers": [
         "AC-4"
       ],
-      "duration_ms": 3044.764,
+      "duration_ms": 2622.316,
       "details": [],
       "provenance": {
         "mode": "executed",
         "phase": "snapshot",
         "scope": "committed-snapshot",
-        "run_id": "3e68d061aad9a25026b36fdfc40c87ed",
-        "attempt_id": "d67084d410490e5af1b8eb0c8fcc041a"
+        "run_id": "bfb7fdae1d882d2338c9fef6c919f9c6",
+        "attempt_id": "7e64db3897697ab942af8b74cd874b7e"
       },
       "result": {
         "exit_code": 0
@@ -819,26 +901,27 @@
       "name": "api-tests",
       "kind": "product",
       "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-quality-prompt-budget --gate api-tests",
-      "status": "failed",
-      "duration_ms": 41097.961,
+      "status": "passed",
+      "duration_ms": 35367.16,
       "covers": [
         "AC-1",
         "AC-2",
         "AC-3"
       ],
-      "details": [
-        "diagnostic: HARNESS_STAGE {\"version\": 3, \"source\": \"selected-runner\", \"phase\": \"assertion\", \"status\": \"failed\", \"consumers\": [{\"kind\": \"pytest\", \"gate\": \"api-tests\", \"path\": \"apps/api/tests/test_assistant_current_quality.py\", \"name\": \"test_current_quality_budget_precedes_dispatch_and_unknown_stops\"}, {\"kind\": \"",
-        "HARNESS_STAGE {\"version\": 3, \"source\": \"selected-runner\", \"phase\": \"execution\", \"status\": \"not-run\", \"consumers\": [], \"duration_ms\": 0.89}"
-      ],
+      "details": [],
       "result": {
-        "exit_code": 1,
-        "output_bytes": 5599,
+        "exit_code": 0,
+        "output_bytes": 6194,
+        "selection_counts": {
+          "collected": 35,
+          "executed": 35
+        },
         "stages": [
           {
             "version": 3,
             "source": "selected-runner",
-            "phase": "assertion",
-            "status": "failed",
+            "phase": "execution",
+            "status": "passed",
             "consumers": [
               {
                 "kind": "pytest",
@@ -857,6 +940,12 @@
                 "gate": "api-tests",
                 "path": "apps/api/tests/test_assistant_current_quality.py",
                 "name": "test_current_quality_default_prepare_never_dispatches_or_reserves"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_current_quality.py",
+                "name": "test_evaluation_retains_input_cap_and_reserves_actual_prompt"
               },
               {
                 "kind": "pytest",
@@ -987,6 +1076,30 @@
               {
                 "kind": "pytest",
                 "gate": "api-tests",
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_cumulative_authorization_preserves_history_and_replay"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_cost_exhaustion_lock_and_tamper_fail_closed"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_reuses_budget_and_rejects_drift"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_probe_records_allowlisted_real_provider_facts_and_bounded_cost"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
                 "path": "apps/api/tests/test_assistant_management.py",
                 "name": "test_atomic_shared_budget_question_priority_and_monotonic_settlement"
               },
@@ -1017,40 +1130,20 @@
               {
                 "kind": "pytest",
                 "gate": "api-tests",
-                "path": "apps/api/tests/test_assistant_provider_qualification.py",
-                "name": "test_local_chat_probe_reuses_budget_and_rejects_drift"
-              },
-              {
-                "kind": "pytest",
-                "gate": "api-tests",
                 "path": "apps/api/tests/test_assistant_backup_restore.py",
                 "name": "test_restore_previous_schema_creates_shared_budget_and_keeps_restore_lock"
               }
             ],
-            "duration_ms": 40604.545,
+            "duration_ms": 34938.799,
             "batch_id": "batch-0001"
-          },
-          {
-            "version": 3,
-            "source": "selected-runner",
-            "phase": "execution",
-            "status": "not-run",
-            "consumers": [],
-            "duration_ms": 0.89
           }
         ],
-        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\3e68d061aad9a25026b36fdfc40c87ed\\api-tests\\output.log",
-        "failure": {
-          "kind": "assertion",
-          "source": "selected-runner",
-          "hint": "nonzero-exit",
-          "summary": "HARNESS_STAGE {\"version\": 3, \"source\": \"selected-runner\", \"phase\": \"assertion\", \"status\": \"failed\", \"consumers\": [{\"kind\": \"pytest\", \"gate\": \"api-tests\", \"path\": \"apps/api/tests/test_assistant_current_quality.py\", \"name\": \"test_current_quality_budget_precedes_dispatch_and_unknown_stops\"}, {\"kind\": \""
-        }
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\bfb7fdae1d882d2338c9fef6c919f9c6\\api-tests\\output.log"
       },
       "provenance": {
         "mode": "executed",
-        "run_id": "3e68d061aad9a25026b36fdfc40c87ed",
-        "attempt_id": "c2d3813114ab7759833a2ee246be4f80"
+        "run_id": "bfb7fdae1d882d2338c9fef6c919f9c6",
+        "attempt_id": "b8497645ade4ccb435831bde057ad70e"
       }
     },
     {
@@ -1058,7 +1151,7 @@
       "kind": "isolation",
       "command": "git worktree add --detach <temporary> HEAD",
       "status": "passed",
-      "duration_ms": 2858.265,
+      "duration_ms": 2381.076,
       "covers": [],
       "details": [
         "temporary worktree and dependency links were removed"
@@ -1071,17 +1164,11 @@
   "summary": {
     "checks": {
       "total": 13,
-      "passed": 12,
-      "failed": 1
+      "passed": 13,
+      "failed": 0
     },
-    "duration_ms": 51542.295,
-    "failures": [
-      {
-        "name": "api-tests",
-        "kind": "assertion",
-        "summary": "HARNESS_STAGE {\"version\": 3, \"source\": \"selected-runner\", \"phase\": \"assertion\", \"status\": \"failed\", \"consumers\": [{\"kind\": \"pytest\", \"gate\": \"api-tests\", \"path\": \"apps/api/tests/test_assistant_current_quality.py\", \"name\": \"test_current_quality_budget_precedes_dispatch_and_unknown_stops\"}, {\"kind\": \""
-      }
-    ]
+    "duration_ms": 43799.221,
+    "failures": []
   },
-  "source_commit": "ad70f22de9b7de56f6b77824912a618b84a61081"
+  "source_commit": "a9298783952398be086fe6a60a5cb5d18fc16ab1"
 }
