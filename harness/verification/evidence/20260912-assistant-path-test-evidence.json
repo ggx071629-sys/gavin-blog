@@ -1,0 +1,349 @@
+{
+  "schema_version": 2,
+  "task_id": "20260912-assistant-path-test-evidence",
+  "created_at": "2026-09-12T12:16:14.455431+00:00",
+  "command": "python -m tools.harness verify 20260912-assistant-path-test-evidence",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "7c2e739d07925cd801f89dfaae367dba0f93b369",
+    "active_spec_sha256": "01de3634df17c98e117d9c6329ad303572ce2ab704764cfefac0e6cdd8df74df",
+    "verification_contract_sha256": "5a5bfc2086ed53e759d1ec03fec9e7b42c88cad1ae9f73314ac9048092e97ab0",
+    "gate_config_sha256": "3ff2c231fa6eab5bf1698a0e449d9bd4e0f44093e13f8a0fc14a0441d5ea6c87",
+    "documentation_contract_sha256": "8cf45828e65f61b0b284e3b0baa2557d79a3fde9623b2516a24e74d6e3f2a10e",
+    "documentation_targets_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "module_contract_sha256": "6475527695db056dc07ba4053185db16ac1e3f6a74bce5322a4c9a1a4b4cbe21"
+  },
+  "documentation": {
+    "impact": "none",
+    "reason": "只修复既有测试证据前提，不修改产品行为、契约或持久化。",
+    "targets": [],
+    "baseline_commit": null,
+    "target_blobs": {}
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "b9816906d9aedf69e2e90c975bee8d243bd0f101",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260912-assistant-path-test-evidence.json",
+      "sha256": "ed29bf3c9a9e3bedf6d8b72c21b35046729aa94f1c83d2ec6c0db6338f40556f",
+      "selected_cases": [
+        "M09-ANSWER-PATHS-02"
+      ],
+      "selected_refs": 2,
+      "excluded_cases": 352
+    },
+    "receipt": {
+      "run_id": "eee725655d29f81ddcee46c17f415500",
+      "identity": "52759d2e76b3b845d005a1c16cdb0edfc9f2cc96c3198fb2616c4c411a67345d",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 4713.438,
+      "plan_inputs": 994.888,
+      "execute_cleanup_and_input_recheck": 16570.923
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "6475527695db056dc07ba4053185db16ac1e3f6a74bce5322a4c9a1a4b4cbe21",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-ANSWER-PATHS-02",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Technical paths retain their original text and the prompt distinguishes history from current evidence.",
+            "expectations": [
+              {
+                "id": "M09-ANSWER-PATHS-02-ALLOW",
+                "surface": "response",
+                "statement": "Technical paths retain their original text and the prompt distinguishes history from current evidence."
+              },
+              {
+                "id": "M09-ANSWER-PATHS-02-DENY",
+                "surface": "forbidden",
+                "statement": "No prefix replacement of unrelated files or paths and no instruction to trust historical answers."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_answer_paths.py",
+                "name": "test_source_path_handling_preserves_technical_content_and_prompt_boundary",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-ANSWER-PATHS-02-ALLOW",
+                  "M09-ANSWER-PATHS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_source_diversity.py",
+                "name": "test_prompt_uses_titles_without_source_paths",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-ANSWER-PATHS-02-ALLOW"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 7.915,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "216 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 336.754,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 114.037,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.862,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "2087 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 3276.202,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "341 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 141.117,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 353 cases, 716 expectations, 1137 exact test references; contract sha256 6475527695db"
+      ],
+      "status": "passed",
+      "duration_ms": 699.479,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 4.425,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 12.474,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 115.017,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1"
+      ],
+      "duration_ms": 3651.488,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "eee725655d29f81ddcee46c17f415500",
+        "attempt_id": "15be9da79f6faba2ab8b8669d631c3ab"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-path-test-evidence --gate api-tests",
+      "status": "passed",
+      "duration_ms": 8757.867,
+      "covers": [
+        "AC-1"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 557,
+        "selection_counts": {
+          "collected": 2,
+          "executed": 2
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_answer_paths.py",
+                "name": "test_source_path_handling_preserves_technical_content_and_prompt_boundary"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_source_diversity.py",
+                "name": "test_prompt_uses_titles_without_source_paths"
+              }
+            ],
+            "duration_ms": 8141.085,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\eee725655d29f81ddcee46c17f415500\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "eee725655d29f81ddcee46c17f415500",
+        "attempt_id": "e525eedb001281bc5961d9b839d25577"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 3345.283,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 20462.92,
+    "failures": []
+  },
+  "source_commit": "b9816906d9aedf69e2e90c975bee8d243bd0f101"
+}
