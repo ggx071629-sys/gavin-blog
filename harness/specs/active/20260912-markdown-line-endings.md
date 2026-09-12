@@ -31,5 +31,5 @@ state_history:
 - AC-2 => M05-CRLF-IMPORT-01
 ## Gates
 - api-tests => AC-1, AC-2
-- e2e => AC-1
+- e2e => AC-1, AC-2
 - harness-integrity => AC-1, AC-2
