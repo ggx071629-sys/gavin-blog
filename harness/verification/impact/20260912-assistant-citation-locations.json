@@ -216,6 +216,60 @@
       ],
       "reason": "Existing Q4-01 completion and resumed Q4-02 status are descriptive task routing; no executable behavior.",
       "dependencies": []
+    },
+    {
+      "path": "harness/docs/decisions/20260912-assistant-deployment-validation-scope.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Preserve user scope cancellation and record renewed execution authorization; removed deployment todo does not prove production qualification. Descriptive routing only.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/docs/decisions/20260912-assistant-question-scope.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Preserve user scope cancellation and record renewed execution authorization; removed deployment todo does not prove production qualification. Descriptive routing only.",
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/DESIGN.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Preserve user scope cancellation and record renewed execution authorization; removed deployment todo does not prove production qualification. Descriptive routing only.",
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/PHASE-5-QUALITY-EVALUATION.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Preserve user scope cancellation and record renewed execution authorization; removed deployment todo does not prove production qualification. Descriptive routing only.",
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/PHASE-6-PRODUCTION-READINESS.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Preserve user scope cancellation and record renewed execution authorization; removed deployment todo does not prove production qualification. Descriptive routing only.",
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/completed/phase-6-production-readiness/.gitkeep",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Preserve user scope cancellation and record renewed execution authorization; removed deployment todo does not prove production qualification. Descriptive routing only.",
+      "dependencies": []
     }
   ]
 }

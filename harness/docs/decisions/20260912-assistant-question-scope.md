@@ -34,6 +34,8 @@ author: Gavin
 
 本轮选择有限确定性解析与页面优先条件。暂不引入在线查询改写模型、通用语义重排或父文档扩展：尚无独立对照证明收益，增加调用或上下文会挤占既有100次/2元预算；重排也不能产生缺失的库存覆盖/时效证明。单篇深问仍可能因片段预算遗漏，不宣称通用长文问答已解决。
 
-局限：规则不能识别所有自然语言指代或复杂比较。澄清表示对象未确定；部分回答表示只有部分事实受支持；操作失败表示没有可信结果。这些状态不混用。生产资格由用户确认保留阻塞。
+局限：规则不能识别所有自然语言指代或复杂比较。澄清表示对象未确定；部分回答表示只有部分事实受支持；操作失败表示没有可信结果。这些状态不混用。用户随后[取消部署及线上验证](20260912-assistant-deployment-validation-scope.md)，生产资格不再构成本计划阻塞。
 
 依据：[阶段四计划](../../../plan-build/assistant-gap-closure/PHASE-4-CONTEXT-CITATIONS.md)、[hydrate](../../../apps/api/app/assistant/hydrate.py)、[graph](../../../apps/api/app/assistant/graph.py)、[About 投影](../../../apps/api/app/assistant_index/projector.py)、[公开 About](../../../apps/web/components/AboutPublicBody.vue)、[引用输出](../../../apps/api/app/assistant/output.py)。
+
+2026-09-12 本次恢复指令：恢复 Q4-02 并依次完成剩余 Q4/Q5，沿用累计100次/2元授权；未验证事项及 Q6 生产资格保留阻塞。取消部署执行仍有效，不将生产资格记为通过，不生成 Q6 完成归档。
