@@ -17432,7 +17432,7 @@
             {
               "kind": "pytest",
               "path": "apps/api/tests/test_assistant_current_quality.py",
-              "name": "test_evaluation_retains_input_cap_and_reserves_actual_prompt",
+              "name": "test_evaluation_uses_reviewed_input_cap_and_reserves_actual_prompt",
               "gate": "api-tests",
               "covers": [
                 "M09-CURRENT-BUDGET-01-ALLOW",
@@ -17566,6 +17566,38 @@
               "covers": [
                 "M09-CURRENT-PROMPT-01-ALLOW",
                 "M09-CURRENT-PROMPT-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-EXPANDED-INPUT-01",
+          "priority": "P1",
+          "scenario": "Reviewed 32000 input keeps representative complete multi-source evidence with unchanged context/output accounting.",
+          "expectations": [
+            {
+              "id": "M09-EXPANDED-INPUT-01-ALLOW",
+              "surface": "response",
+              "statement": "All complete representative sources fit at32000 where8000 excludes sources."
+            },
+            {
+              "id": "M09-EXPANDED-INPUT-01-DENY",
+              "surface": "forbidden",
+              "statement": "No body truncation, silent context overflow or unreviewed configuration override."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_current_quality.py",
+              "name": "test_expanded_input_keeps_complete_multi_source_evidence",
+              "gate": "api-tests",
+              "covers": [
+                "M09-EXPANDED-INPUT-01-ALLOW",
+                "M09-EXPANDED-INPUT-01-DENY"
               ]
             }
           ]

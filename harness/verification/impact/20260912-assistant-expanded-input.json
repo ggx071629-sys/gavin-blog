@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "task_id": "20260912-assistant-expanded-input",
+  "changes": [
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/run_current_quality.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-EXPANDED-INPUT-01",
+        "M09-CURRENT-PROMPT-01",
+        "M09-CURRENT-BUDGET-01"
+      ],
+      "reason": "User-authorized local input cap increase and frozen evaluation comparison; no shipped schema/provider/index or verification engine changes.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_current_quality.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-EXPANDED-INPUT-01",
+        "M09-CURRENT-PROMPT-01",
+        "M09-CURRENT-BUDGET-01"
+      ],
+      "reason": "User-authorized local input cap increase and frozen evaluation comparison; no shipped schema/provider/index or verification engine changes.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        }
+      ]
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/Q5-EVALUATION.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "User-authorized local input cap increase and frozen evaluation comparison; no shipped schema/provider/index or verification engine changes.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "User-authorized local input cap increase and frozen evaluation comparison; no shipped schema/provider/index or verification engine changes.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "User-authorized local input cap increase and frozen evaluation comparison; no shipped schema/provider/index or verification engine changes.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed consumers retain existing interfaces: only standalone evaluation input/authorization constants and local ignored configuration change; production qualification and public schema unchanged."
+        }
+      ]
+    }
+  ]
+}

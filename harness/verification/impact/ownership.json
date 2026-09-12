@@ -1696,7 +1696,9 @@
         "M09-G12-CALIBRATION-01",
         "M09-CURRENT-DATASET-01",
         "M09-CURRENT-BUDGET-01",
-        "M09-CURRENT-BROWSER-01"
+        "M09-CURRENT-BROWSER-01",
+        "M09-EXPANDED-INPUT-01",
+        "M09-CURRENT-PROMPT-01"
       ],
       "dependents": [
         "M06.api_tooling",
