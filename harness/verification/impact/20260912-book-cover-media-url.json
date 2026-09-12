@@ -41,9 +41,11 @@
         },
         {
           "unit": "M04.projects",
-          "affected": false,
-          "reason": "该消费者使用同一模型定义；本次只在既有 HttpUrl 之外增加受限站内媒体路径，未改变其成功返回、认证或存储结构。",
-          "cases": []
+          "affected": true,
+          "reason": "BookNoteCreate/Update 的 cover_url 输入契约直接改变读书创建与更新路由接受的值，必须执行路由级站内媒体路径、HTTP(S) 与非法地址回归。",
+          "cases": [
+            "M04-BOOK-COVER-01"
+          ]
         },
         {
           "unit": "M05.media",
@@ -152,6 +154,14 @@
           "affected": false,
           "reason": "该消费者使用同一模型定义；本次只在既有 HttpUrl 之外增加受限站内媒体路径，未改变其成功返回、认证或存储结构。",
           "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "读书编辑器与新建页提交封面给上述路由，需验证媒体选择、保存重读与公开图片加载。",
+          "cases": [
+            "M04-BOOK-COVER-WEB-01"
+          ]
         }
       ]
     },
