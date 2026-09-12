@@ -16678,6 +16678,171 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-FEEDBACK-API-01",
+          "priority": "P1",
+          "scenario": "Own live answer accepts one replaceable body-free vote with original session protections.",
+          "expectations": [
+            {
+              "id": "M09-FEEDBACK-API-01-ALLOW",
+              "surface": "response",
+              "statement": "Own live answer accepts one replaceable body-free vote with original session protections."
+            },
+            {
+              "id": "M09-FEEDBACK-API-01-DENY",
+              "surface": "forbidden",
+              "statement": "Cross-session, CSRF, origin, extra body, invalid vote and non-answer writes cannot succeed; no model call."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_feedback.py",
+              "name": "test_feedback_authority_idempotence_and_no_model_calls",
+              "gate": "api-tests",
+              "covers": [
+                "M09-FEEDBACK-API-01-ALLOW",
+                "M09-FEEDBACK-API-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-FEEDBACK-TTL-01",
+          "priority": "P1",
+          "scenario": "Feedback follows original answer expiry, and old diagnostics are swept.",
+          "expectations": [
+            {
+              "id": "M09-FEEDBACK-TTL-01-ALLOW",
+              "surface": "response",
+              "statement": "Feedback follows original answer expiry, and old diagnostics are swept."
+            },
+            {
+              "id": "M09-FEEDBACK-TTL-01-DENY",
+              "surface": "forbidden",
+              "statement": "Vote changes cannot extend TTL or preserve expired visible feedback."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_feedback.py",
+              "name": "test_feedback_expiry_clear_and_diagnostic_retention",
+              "gate": "api-tests",
+              "covers": [
+                "M09-FEEDBACK-TTL-01-ALLOW",
+                "M09-FEEDBACK-TTL-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-FEEDBACK-WEB-01",
+          "priority": "P1",
+          "scenario": "Visible feedback saves/restores/retracts with clear notice and strict parsing.",
+          "expectations": [
+            {
+              "id": "M09-FEEDBACK-WEB-01-ALLOW",
+              "surface": "response",
+              "statement": "Visible feedback saves/restores/retracts with clear notice and strict parsing."
+            },
+            {
+              "id": "M09-FEEDBACK-WEB-01-DENY",
+              "surface": "forbidden",
+              "statement": "Failure or a late response after clear cannot restore a stale vote or submit a model question."
+            }
+          ],
+          "required_gates": [
+            "web-quality",
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "closes hydrated answers before allowing source paths into Vue state",
+              "gate": "web-quality",
+              "covers": [
+                "M09-FEEDBACK-WEB-01-ALLOW",
+                "M09-FEEDBACK-WEB-01-DENY"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "body-free feedback saves restores retracts and ignores a late result after clear",
+              "gate": "e2e",
+              "covers": [
+                "M09-FEEDBACK-WEB-01-ALLOW",
+                "M09-FEEDBACK-WEB-01-DENY"
+              ],
+              "project": "chromium",
+              "config": "playwright.assistant.config.ts"
+            }
+          ]
+        },
+        {
+          "id": "M09-FEEDBACK-ADMIN-01",
+          "priority": "P1",
+          "scenario": "Real proxy feedback reaches passive admin counts and stage metrics; generated schemas match routes and clear deletes the vote.",
+          "expectations": [
+            {
+              "id": "M09-FEEDBACK-ADMIN-01-ALLOW",
+              "surface": "response",
+              "statement": "Real proxy feedback reaches passive admin counts and stage metrics; generated schemas match routes and clear deletes the vote."
+            },
+            {
+              "id": "M09-FEEDBACK-ADMIN-01-DENY",
+              "surface": "forbidden",
+              "statement": "Negative or body-bearing admin metrics cannot parse; UI cannot label feedback as correctness or silently retry a model."
+            }
+          ],
+          "required_gates": [
+            "api-tests",
+            "web-quality",
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_feedback.py",
+              "name": "test_feedback_admin_snapshot_and_session_delete",
+              "gate": "api-tests",
+              "covers": [
+                "M09-FEEDBACK-ADMIN-01-ALLOW",
+                "M09-FEEDBACK-ADMIN-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-admin.test.ts",
+              "name": "validates body-free feedback and observed stage metrics",
+              "gate": "web-quality",
+              "covers": [
+                "M09-FEEDBACK-ADMIN-01-ALLOW",
+                "M09-FEEDBACK-ADMIN-01-DENY"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "feedback crosses the real proxy and appears in passive admin observations",
+              "gate": "e2e",
+              "covers": [
+                "M09-FEEDBACK-ADMIN-01-ALLOW",
+                "M09-FEEDBACK-ADMIN-01-DENY"
+              ],
+              "project": "chromium",
+              "config": "playwright.assistant.config.ts"
+            }
+          ]
         }
       ]
     },

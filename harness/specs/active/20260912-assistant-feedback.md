@@ -42,5 +42,6 @@ state_history:
 - AC-4 => M09-FEEDBACK-ADMIN-01, M08-DOCS-01
 ## Gates
 - api-tests => AC-1, AC-2, AC-4
-- web-quality => AC-3
+- web-quality => AC-3, AC-4
+- e2e => AC-3, AC-4
 - harness-integrity => AC-4

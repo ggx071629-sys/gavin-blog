@@ -1240,7 +1240,9 @@
         "apps/api/app/assistant/prompt_budget.py",
         "apps/api/tests/test_assistant_prompt_budget.py",
         "apps/api/tests/test_assistant_retry_feedback.py",
-        "apps/api/tests/test_assistant_stage_diagnostics.py"
+        "apps/api/tests/test_assistant_stage_diagnostics.py",
+        "apps/api/app/assistant/feedback.py",
+        "apps/api/tests/test_assistant_feedback.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1318,7 +1320,10 @@
         "M09-RETRY-FEEDBACK-01",
         "M09-RETRY-FAILURE-01",
         "M09-STAGE-DIAGNOSTICS-01",
-        "M09-METERED-LATENCY-01"
+        "M09-METERED-LATENCY-01",
+        "M09-FEEDBACK-API-01",
+        "M09-FEEDBACK-TTL-01",
+        "M09-FEEDBACK-ADMIN-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1464,7 +1469,8 @@
         "M10-UNIT-INDEX-INTEGRITY-01",
         "M10-E5-LOCAL-01",
         "M09-GROUNDING-03",
-        "M09-METERED-LATENCY-01"
+        "M09-METERED-LATENCY-01",
+        "M09-FEEDBACK-ADMIN-01"
       ],
       "dependents": [
         "M06.runtime_config",
@@ -2259,7 +2265,8 @@
         "M06-RESUME-PARSE-01",
         "M06-RESUME-PARSE-LIMITS-01",
         "M06-RESUME-REFRESH-WORKER-01",
-        "M09-RESUME-CITATION-UI-01"
+        "M09-RESUME-CITATION-UI-01",
+        "M09-FEEDBACK-ADMIN-01"
       ],
       "dependents": [
         "M06.persistence",
@@ -3116,7 +3123,9 @@
         "M09-RESUME-CITATION-UI-01",
         "M09-INPUT-ERROR-02",
         "M09-SOURCE-TITLE-02",
-        "M09-TECHNICAL-CITATION-01"
+        "M09-TECHNICAL-CITATION-01",
+        "M09-FEEDBACK-WEB-01",
+        "M09-FEEDBACK-ADMIN-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3177,7 +3186,8 @@
         "M06-RESUME-STORAGE-01",
         "M09-RESUME-CITATION-UI-01",
         "M09-INPUT-ERROR-02",
-        "M09-TECHNICAL-CITATION-01"
+        "M09-TECHNICAL-CITATION-01",
+        "M09-FEEDBACK-ADMIN-01"
       ],
       "dependents": []
     },
@@ -3381,7 +3391,9 @@
         "M06-PROFILE-SKILLS-01",
         "M02-STUDIO-QUERY-01",
         "M11-ASSISTANT-SYNC-01",
-        "M06-RESUME-STORAGE-01"
+        "M06-RESUME-STORAGE-01",
+        "M09-FEEDBACK-WEB-01",
+        "M09-FEEDBACK-ADMIN-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -3646,7 +3658,8 @@
         "M11-ASSISTANT-SYNC-01",
         "M06-RESUME-STORAGE-01",
         "M06-RESUME-REFRESH-API-01",
-        "M06-RESUME-PDF-01"
+        "M06-RESUME-PDF-01",
+        "M09-FEEDBACK-ADMIN-01"
       ],
       "dependents": [
         "M06.web_types",
