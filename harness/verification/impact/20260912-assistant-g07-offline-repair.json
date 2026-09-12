@@ -56,6 +56,16 @@
           "unit": "M10.qualification",
           "affected": true,
           "reason": "Synthetic G07 runner consumes prompt/validator changes; prepare and authorization runner cases are selected for that consumer."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "G07 synthetic challenge calls prompt/validator, but production qualification profile/runner, receipts and provider accounting remain unchanged; no production qualification is granted by this offline repair."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "G07 synthetic challenge calls prompt/validator, but production qualification profile/runner, receipts and provider accounting remain unchanged; no production qualification is granted by this offline repair."
         }
       ]
     },
@@ -112,6 +122,16 @@
           "unit": "M10.qualification",
           "affected": true,
           "reason": "Synthetic G07 runner consumes prompt/validator changes; prepare and authorization runner cases are selected for that consumer."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "G07 synthetic challenge calls prompt/validator, but production qualification profile/runner, receipts and provider accounting remain unchanged; no production qualification is granted by this offline repair."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "G07 synthetic challenge calls prompt/validator, but production qualification profile/runner, receipts and provider accounting remain unchanged; no production qualification is granted by this offline repair."
         }
       ]
     },
