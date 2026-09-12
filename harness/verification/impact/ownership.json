@@ -980,7 +980,8 @@
         "M04-P0-01",
         "M04-P1-01",
         "M04-UNIT-PROJECTS-BOOKS-01",
-        "M02-STUDIO-QUERY-01"
+        "M02-STUDIO-QUERY-01",
+        "M04-BOOK-COVER-01"
       ],
       "dependents": [
         "M04.books_web",
@@ -1045,7 +1046,8 @@
       ],
       "cases": [
         "M05-P1-01",
-        "M05-UNIT-CONTENT-PORTABILITY-01"
+        "M05-UNIT-CONTENT-PORTABILITY-01",
+        "M05-CRLF-IMPORT-01"
       ],
       "dependents": [
         "M05.content_web",
@@ -2370,7 +2372,8 @@
         "M10-PUBLIC-AVAILABILITY-01",
         "M02-DESK-LAYOUT-01",
         "M07-STUDIO-SUITE-01",
-        "M07-STUDIO-SUITE-STATE-01"
+        "M07-STUDIO-SUITE-STATE-01",
+        "M01-PUBLIC-ERROR-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -2610,7 +2613,8 @@
         "M04-STUDIO-PROJECT-EDITOR-01",
         "M02-STUDIO-PREVIEW-01",
         "M02-STUDIO-REVISIONS-01",
-        "M05-STUDIO-MEDIA-01"
+        "M05-STUDIO-MEDIA-01",
+        "M02-WRITING-FIELD-ERROR-01"
       ],
       "dependents": [
         "M04.books_web",
@@ -2738,7 +2742,8 @@
         "apps/web/pages/admin/books/new.vue",
         "apps/web/pages/books/[year]/[month]/[slug].vue",
         "apps/web/pages/books/index.vue",
-        "apps/web/tests/e2e/books-index.spec.ts"
+        "apps/web/tests/e2e/books-index.spec.ts",
+        "apps/web/tests/e2e/book-cover.spec.ts"
       ],
       "cases": [
         "M02-DESK-LAYOUT-01",
@@ -2759,7 +2764,8 @@
         "M04-STUDIO-BOOKS-01",
         "M02-STUDIO-WORKSPACE-01",
         "M03-STUDIO-BOOK-EDITOR-01",
-        "M05-STUDIO-MEDIA-01"
+        "M05-STUDIO-MEDIA-01",
+        "M04-BOOK-COVER-WEB-01"
       ],
       "dependents": []
     },
@@ -3146,7 +3152,8 @@
         "M10-ADMIN-TRIAL-01",
         "M06-STUDIO-FAILURE-GUARDS-01",
         "M10-STUDIO-HOST-GUARD-01",
-        "M09-RESUME-CITATION-UI-01"
+        "M09-RESUME-CITATION-UI-01",
+        "M06-PUBLIC-ERROR-01"
       ],
       "dependents": [
         "M01.indexes",
@@ -4157,7 +4164,8 @@
         "M05-STUDIO-OPERATIONS-LAYOUT-01",
         "M05-STUDIO-OPERATIONS-STATES-01",
         "M06-STUDIO-PROFILE-CONTRAST-01",
-        "M07-STUDIO-SUITE-MANAGEMENT-01"
+        "M07-STUDIO-SUITE-MANAGEMENT-01",
+        "M11-ABOUT-DRAFT-01"
       ],
       "dependents": []
     },

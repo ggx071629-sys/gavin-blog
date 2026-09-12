@@ -1820,6 +1820,70 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M01-PUBLIC-ERROR-01",
+          "priority": "P1",
+          "scenario": "全站错误页的恢复入口可用，且服务端失败与公开详情缺失语义保持不变。",
+          "expectations": [
+            {
+              "id": "M01-PUBLIC-ERROR-01-E01",
+              "surface": "user_visible",
+              "statement": "解除故障后重试可加载目标路由，错误页站内入口可清除错误并进入目标页面。"
+            },
+            {
+              "id": "M01-PUBLIC-ERROR-01-E02",
+              "surface": "state",
+              "statement": "搜索后续失败仍保留关键词并可重试恢复。"
+            },
+            {
+              "id": "M01-PUBLIC-ERROR-01-E03",
+              "surface": "forbidden",
+              "statement": "错误状态不得阻止后续站内导航或在恢复后残留，直接访问失败仍须为 503 且缺失详情为 404。"
+            }
+          ],
+          "required_gates": [
+            "e2e",
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/public-experience.spec.ts",
+              "kind": "playwright",
+              "name": "error page recovery entries clear the failure and reach the target route",
+              "gate": "e2e",
+              "covers": [
+                "M01-PUBLIC-ERROR-01-E01"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/public-experience.spec.ts",
+              "kind": "playwright",
+              "name": "search failure keeps the query and recovers through retry",
+              "gate": "e2e",
+              "covers": [
+                "M01-PUBLIC-ERROR-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/failure/failure-state.spec.ts",
+              "kind": "playwright",
+              "name": "public SSR preserves upstream failures instead of rendering empty 200 pages",
+              "gate": "web-quality",
+              "covers": [
+                "M01-PUBLIC-ERROR-01-E03"
+              ]
+            },
+            {
+              "path": "apps/web/tests/failure/failure-state.spec.ts",
+              "kind": "playwright",
+              "name": "successful empty data stays 200 while details distinguish 404 and 500",
+              "gate": "web-quality",
+              "covers": [
+                "M01-PUBLIC-ERROR-01-E03"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -2668,6 +2732,44 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M02-WRITING-FIELD-ERROR-01",
+          "priority": "P1",
+          "scenario": "共享写作台支持字段级错误文案覆盖，未标注字段保持原有分类文案。",
+          "expectations": [
+            {
+              "id": "M02-WRITING-FIELD-ERROR-01-E01",
+              "surface": "user_visible",
+              "statement": "标注 data-writing-error 的字段使用字段级文案，未标注字段继续使用原有分类文案。"
+            },
+            {
+              "id": "M02-WRITING-FIELD-ERROR-01-E02",
+              "surface": "user_visible",
+              "statement": "同时接受站内媒体地址的字段显示覆盖后的准确文案。"
+            },
+            {
+              "id": "M02-WRITING-FIELD-ERROR-01-E03",
+              "surface": "forbidden",
+              "statement": "不得让接受站内媒体地址的字段显示仅限 http(s) 的错误文案。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/book-cover.spec.ts",
+              "kind": "playwright",
+              "name": "book cover chosen from the media library saves, persists, and renders for a visitor",
+              "gate": "e2e",
+              "covers": [
+                "M02-WRITING-FIELD-ERROR-01-E01",
+                "M02-WRITING-FIELD-ERROR-01-E02",
+                "M02-WRITING-FIELD-ERROR-01-E03"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -3458,6 +3560,82 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M04-BOOK-COVER-01",
+          "priority": "P1",
+          "scenario": "书籍封面地址契约接受媒体库站内路径并继续拒绝其他相对地址。",
+          "expectations": [
+            {
+              "id": "M04-BOOK-COVER-01-E01",
+              "surface": "response",
+              "statement": "创建与更新接受 /api/v1/media/{id}/webp|avif 并原样返回，http(s) 封面仍可用。"
+            },
+            {
+              "id": "M04-BOOK-COVER-01-E02",
+              "surface": "response",
+              "statement": "显式清空封面仍可保存为空值。"
+            },
+            {
+              "id": "M04-BOOK-COVER-01-E03",
+              "surface": "forbidden",
+              "statement": "其他相对路径、路径穿越、协议相对 URL、查询串及非 HTTP(S) 外部地址必须返回 422。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_projects_books.py",
+              "kind": "pytest",
+              "name": "test_book_cover_accepts_site_media_path_and_keeps_http_urls",
+              "gate": "api-tests",
+              "covers": [
+                "M04-BOOK-COVER-01-E01",
+                "M04-BOOK-COVER-01-E02",
+                "M04-BOOK-COVER-01-E03"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M04-BOOK-COVER-WEB-01",
+          "priority": "P1",
+          "scenario": "媒体库选中的站内封面可保存、刷新保持并在发布后对访客显示同一图片。",
+          "expectations": [
+            {
+              "id": "M04-BOOK-COVER-WEB-01-E01",
+              "surface": "user_visible",
+              "statement": "选择媒体库封面后表单接受站内地址，自动保存与刷新后保持，发布后访客加载同一图片。"
+            },
+            {
+              "id": "M04-BOOK-COVER-WEB-01-E02",
+              "surface": "user_visible",
+              "statement": "既有 http(s) 封面地址仍可通过同一表单校验。"
+            },
+            {
+              "id": "M04-BOOK-COVER-WEB-01-E03",
+              "surface": "forbidden",
+              "statement": "不得要求手填完整 URL 才能完成媒体库选图闭环，也不得让非法地址通过校验。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/book-cover.spec.ts",
+              "kind": "playwright",
+              "name": "book cover chosen from the media library saves, persists, and renders for a visitor",
+              "gate": "e2e",
+              "covers": [
+                "M04-BOOK-COVER-WEB-01-E01",
+                "M04-BOOK-COVER-WEB-01-E02",
+                "M04-BOOK-COVER-WEB-01-E03"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -4119,6 +4297,71 @@
               "covers": [
                 "M05-STUDIO-OPERATIONS-STATES-01-E01",
                 "M05-STUDIO-OPERATIONS-STATES-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M05-CRLF-IMPORT-01",
+          "priority": "P1",
+          "scenario": "LF 与 CRLF 的同一 Markdown 内容得到一致的导入结果，且既有 front matter 校验不放宽。",
+          "expectations": [
+            {
+              "id": "M05-CRLF-IMPORT-01-E01",
+              "surface": "response",
+              "statement": "同一内容的 LF/CRLF 文件导入得到一致的元数据、正文（不含 CR）与草稿状态。"
+            },
+            {
+              "id": "M05-CRLF-IMPORT-01-E02",
+              "surface": "forbidden",
+              "statement": "缺少或未闭合 front matter、YAML 别名、非法 YAML 与非 UTF-8 仍须 422，不得因换行兼容而放宽。"
+            },
+            {
+              "id": "M05-CRLF-IMPORT-01-E03",
+              "surface": "state",
+              "statement": "有效导入只创建草稿且不出现在公开列表，重复 slug 仍 409，ZIP 导出的元数据与正文保持。"
+            }
+          ],
+          "required_gates": [
+            "api-tests",
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_content_portability.py",
+              "kind": "pytest",
+              "name": "test_markdown_import_treats_lf_and_crlf_alike",
+              "gate": "api-tests",
+              "covers": [
+                "M05-CRLF-IMPORT-01-E01"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_content_portability.py",
+              "kind": "pytest",
+              "name": "test_markdown_import_keeps_front_matter_validation_with_crlf",
+              "gate": "api-tests",
+              "covers": [
+                "M05-CRLF-IMPORT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_content_portability.py",
+              "kind": "pytest",
+              "name": "test_markdown_export_and_safe_draft_import",
+              "gate": "api-tests",
+              "covers": [
+                "M05-CRLF-IMPORT-01-E03"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+              "kind": "playwright",
+              "name": "ops markdown import accepts CRLF drafts",
+              "gate": "e2e",
+              "covers": [
+                "M05-CRLF-IMPORT-01-E01",
+                "M05-CRLF-IMPORT-01-E03"
               ]
             }
           ]
@@ -6253,6 +6496,38 @@
               "covers": [
                 "M06-RESUME-PDF-01-E01",
                 "M06-RESUME-PDF-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M06-PUBLIC-ERROR-01",
+          "priority": "P1",
+          "scenario": "公开页面首次客户端加载命中上游失败时进入可恢复错误页而不是旧页面内容。",
+          "expectations": [
+            {
+              "id": "M06-PUBLIC-ERROR-01-E01",
+              "surface": "user_visible",
+              "statement": "首次客户端加载失败时目标路由渲染全站错误页并提供重试入口。"
+            },
+            {
+              "id": "M06-PUBLIC-ERROR-01-E02",
+              "surface": "forbidden",
+              "statement": "不得在地址已切换到目标路由后继续显示上一页内容，也不得只记录未处理拒绝而缺少恢复入口。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/public-experience.spec.ts",
+              "kind": "playwright",
+              "name": "public navigation failure renders a recoverable error page instead of the stale page",
+              "gate": "e2e",
+              "covers": [
+                "M06-PUBLIC-ERROR-01-E01",
+                "M06-PUBLIC-ERROR-01-E02"
               ]
             }
           ]
@@ -18331,6 +18606,61 @@
               "covers": [
                 "M11-ASSISTANT-SYNC-01-E01",
                 "M11-ASSISTANT-SYNC-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M11-ABOUT-DRAFT-01",
+          "priority": "P1",
+          "scenario": "关于页自动保存回声保留尚未提交的标签草稿，且临时输入跟随对应领域。",
+          "expectations": [
+            {
+              "id": "M11-ABOUT-DRAFT-01-E01",
+              "surface": "user_visible",
+              "statement": "无关字段保存完成后未提交的标签输入仍保留并可继续提交。"
+            },
+            {
+              "id": "M11-ABOUT-DRAFT-01-E02",
+              "surface": "state",
+              "statement": "领域增删排序与十项上限、草稿预览与发布隔离保持通过。"
+            },
+            {
+              "id": "M11-ABOUT-DRAFT-01-E03",
+              "surface": "forbidden",
+              "statement": "不得在自动保存回声后清空尚未提交的输入，也不得把临时草稿写入已提交内容。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about autosave keeps an unsubmitted tag draft until it is added",
+              "gate": "e2e",
+              "covers": [
+                "M11-ABOUT-DRAFT-01-E01",
+                "M11-ABOUT-DRAFT-01-E03"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about tag drafts follow their capability across reorder and removal",
+              "gate": "e2e",
+              "covers": [
+                "M11-ABOUT-DRAFT-01-E02"
+              ]
+            },
+            {
+              "path": "apps/web/tests/e2e/about-admin.spec.ts",
+              "kind": "playwright",
+              "name": "about editor supports ten cards per section and re-enables add after removal",
+              "gate": "e2e",
+              "covers": [
+                "M11-ABOUT-DRAFT-01-E02"
               ]
             }
           ]
