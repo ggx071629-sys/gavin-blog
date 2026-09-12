@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260912-assistant-retrieval-io",
+  "created_at": "2026-09-12T12:38:58.650340+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "76561cb02dceb9c72c52c7eba4e03e439955869b26f96b0e07c470d7669ba962"
+}
