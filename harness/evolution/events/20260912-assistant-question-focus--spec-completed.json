@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260912-assistant-question-focus",
+  "created_at": "2026-09-12T11:57:50.116582+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "75eef2daa2852d584ee8fb699a25c7dca48322624d9d6ef424365053766ae5dc"
+}
