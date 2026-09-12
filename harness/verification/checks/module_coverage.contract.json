@@ -16052,6 +16052,78 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-G07-RUNNER-01",
+          "priority": "P1",
+          "scenario": "Bounded evaluation retains authorization, failure diagnostics and continuation identity.",
+          "expectations": [
+            {
+              "id": "M09-G07-RUNNER-01-ALLOW",
+              "surface": "response",
+              "statement": "Known deliveries retain separate rows for review; continuation skips the attempted prefix."
+            },
+            {
+              "id": "M09-G07-RUNNER-01-DENY",
+              "surface": "forbidden",
+              "statement": "No unauthorized call, silent identity mismatch, retry after unknown failure or discarded charge."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+              "name": "RunnerChecks::test_unauthorized_stops_before_reservation_or_call",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G07-RUNNER-01-ALLOW",
+                "M09-G07-RUNNER-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+              "name": "RunnerChecks::test_known_delivery_preserves_all_cases_and_requires_review",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G07-RUNNER-01-ALLOW",
+                "M09-G07-RUNNER-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+              "name": "RunnerChecks::test_unknown_delivery_settles_conservatively_and_stops",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G07-RUNNER-01-ALLOW",
+                "M09-G07-RUNNER-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+              "name": "RunnerChecks::test_model_mismatch_is_retained_without_retry_or_relaxing_identity",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G07-RUNNER-01-ALLOW",
+                "M09-G07-RUNNER-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+              "name": "RunnerChecks::test_continuation_does_not_repeat_prior_attempt",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G07-RUNNER-01-ALLOW",
+                "M09-G07-RUNNER-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
