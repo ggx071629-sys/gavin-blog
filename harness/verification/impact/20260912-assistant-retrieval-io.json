@@ -352,6 +352,76 @@
       ],
       "reason": "Document retrieval capacity, cancellation, shutdown drain and limited synthetic performance scope; no executable documentation contract changes.",
       "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Registers three bounded retrieval IO cases and their exact pytest references without altering the runner algorithm.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Registers new tests under the existing runtime owner without changing dependency edges or selection rules.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        }
+      ]
     }
   ]
 }
