@@ -20690,10 +20690,6 @@
               "covers": [
                 "M10-SYNC-ATTENTION-02-ALLOW",
                 "M10-SYNC-ATTENTION-02-DENY"
-              ],
-              "title_path": [
-                "assistant management contracts",
-                "labels covered failures as history and never retries them"
               ]
             }
           ]
