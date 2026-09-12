@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **6 active**, **0 frozen**.
+Open specifications: **5 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -16,7 +16,6 @@ Open specifications: **6 active**, **0 frozen**.
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页恢复笔记、领域和文章之间的知识路线 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
 | spec-20260911-assistant-input-error | active | L1 | 区分问答输入超限与未确认模型调用 | task:20260911-assistant-input-error | Gavin | [active/20260911-assistant-input-error.md](active/20260911-assistant-input-error.md) |
-| spec-20260913-assistant-code-presentation | active | L1 | Q5-04命令原文在行内代码与围栏代码之间转换时保留相同事实 | task:20260913-assistant-code-presentation | Codex | [active/20260913-assistant-code-presentation.md](active/20260913-assistant-code-presentation.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -248,4 +247,5 @@ Open specifications: **6 active**, **0 frozen**.
 | archive-20260912-public-error-recovery | compressed | L2 | 公开页面首次客户端加载失败进入可恢复错误页而不是旧页面内容 | task:20260912-public-error-recovery | Codex | [archive/20260912-public-error-recovery.md](archive/20260912-public-error-recovery.md) |
 | archive-20260912-taxonomy-pending-recovery | compressed | L2 | 栏目标签请求悬挂时退出无限保存并保留输入和结果核对入口 | task:20260912-taxonomy-pending-recovery | Codex | [archive/20260912-taxonomy-pending-recovery.md](archive/20260912-taxonomy-pending-recovery.md) |
 | archive-20260913-assistant-answer-instructions | compressed | L2 | Q5-04当前内容误读和schema数据混淆的有限修复 | task:20260913-assistant-answer-instructions | Codex | [archive/20260913-assistant-answer-instructions.md](archive/20260913-assistant-answer-instructions.md) |
+| archive-20260913-assistant-code-presentation | compressed | L2 | Q5-04命令原文在行内代码与围栏代码之间转换时保留相同事实 | task:20260913-assistant-code-presentation | Codex | [archive/20260913-assistant-code-presentation.md](archive/20260913-assistant-code-presentation.md) |
 | archive-20260913-assistant-evidence-role | compressed | L2 | Q5-04从当前已发布字段区分文章元数据和正文证据 | task:20260913-assistant-evidence-role | Codex | [archive/20260913-assistant-evidence-role.md](archive/20260913-assistant-evidence-role.md) |
