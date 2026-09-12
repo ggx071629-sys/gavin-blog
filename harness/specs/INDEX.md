@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **6 active**, **0 frozen**.
+Open specifications: **5 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -16,7 +16,6 @@ Open specifications: **6 active**, **0 frozen**.
 | spec-20260908-assistant-design-v2 | active | L1 | 按助手设计稿还原公开问答浮窗与移动端视觉 | task:20260908-assistant-design-v2 | — | [active/20260908-assistant-design-v2.md](active/20260908-assistant-design-v2.md) |
 | spec-20260908-topic-explorer | active | L1 | 首页恢复笔记、领域和文章之间的知识路线 | task:20260908-topic-explorer | — | [active/20260908-topic-explorer.md](active/20260908-topic-explorer.md) |
 | spec-20260911-assistant-input-error | active | L1 | 区分问答输入超限与未确认模型调用 | task:20260911-assistant-input-error | Gavin | [active/20260911-assistant-input-error.md](active/20260911-assistant-input-error.md) |
-| spec-20260912-assistant-question-boundaries | active | L1 | Q4-04 页面优先及未核验的全量和时效请求 | task:20260912-assistant-question-boundaries | Codex | [active/20260912-assistant-question-boundaries.md](active/20260912-assistant-question-boundaries.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -227,6 +226,7 @@ Open specifications: **6 active**, **0 frozen**.
 | archive-20260912-assistant-local-model-alias | compressed | L2 | 接受用户确认的本机DeepSeek调用别名并保留身份与累计预算保护 | task:20260912-assistant-local-model-alias | Codex | [archive/20260912-assistant-local-model-alias.md](archive/20260912-assistant-local-model-alias.md) |
 | archive-20260912-assistant-path-test-evidence | compressed | L2 | 修复技术路径回归的事实支持前提并保留无据反例 | task:20260912-assistant-path-test-evidence | Codex | [archive/20260912-assistant-path-test-evidence.md](archive/20260912-assistant-path-test-evidence.md) |
 | archive-20260912-assistant-quantity-binding | compressed | L2 | 在完整陈述中规范化中文数值和明确单位换算 | task:20260912-assistant-quantity-binding | Codex | [archive/20260912-assistant-quantity-binding.md](archive/20260912-assistant-quantity-binding.md) |
+| archive-20260912-assistant-question-boundaries | compressed | L2 | Q4-04 页面优先及未核验的全量和时效请求 | task:20260912-assistant-question-boundaries | Codex | [archive/20260912-assistant-question-boundaries.md](archive/20260912-assistant-question-boundaries.md) |
 | archive-20260912-assistant-question-focus | compressed | L2 | 让当前问题在提示末尾明确回答范围和语言 | task:20260912-assistant-question-focus | Codex | [archive/20260912-assistant-question-focus.md](archive/20260912-assistant-question-focus.md) |
 | archive-20260912-assistant-reference-context | compressed | L2 | Q4-03 有限来源指代、换题隔离和专用澄清 | task:20260912-assistant-reference-context | Codex | [archive/20260912-assistant-reference-context.md](archive/20260912-assistant-reference-context.md) |
 | archive-20260912-assistant-regression-prerequisites | compressed | L2 | 修复三个失效问答回归测试的真实前置条件 | task:20260912-assistant-regression-prerequisites | Codex | [archive/20260912-assistant-regression-prerequisites.md](archive/20260912-assistant-regression-prerequisites.md) |

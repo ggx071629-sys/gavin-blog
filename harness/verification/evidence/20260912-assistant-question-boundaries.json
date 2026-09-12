@@ -1,0 +1,662 @@
+{
+  "schema_version": 2,
+  "task_id": "20260912-assistant-question-boundaries",
+  "created_at": "2026-09-12T15:09:04.938337+00:00",
+  "command": "python -m tools.harness verify 20260912-assistant-question-boundaries",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "stack",
+  "fingerprints": {
+    "source_tree": "18930bc4920d7cc0a5291dcc4014689c92ca46f7",
+    "active_spec_sha256": "2446a3ed4a5a9b3969a1840dc4644ed47f716d13bd8dac9e7365de489433f065",
+    "verification_contract_sha256": "1b7928803c0c68356c3aae2108d0c8a01e97acb8bce3406f1159e01ad58dffc7",
+    "gate_config_sha256": "cf753183ceb38f842b33da8edf0d4738caac4ac7da5c44ddf8df721e7c724335",
+    "documentation_contract_sha256": "216df7bcfdffebba2d83579725983131389c479bd9bd3e7f6631285210bb4359",
+    "documentation_targets_sha256": "f03a928b14eb91878b037ed9bfc1271029f205ce896ff91973ca72676d39c8e3",
+    "module_contract_sha256": "71b1e21d735af0bebcdf0b1e04f4edf8610cc3486790a3861802147ca4c5238f"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "明确页面候选优先条件、全量与时效请求的能力边界。",
+    "targets": [
+      "apps/api/README.md",
+      "apps/web/README.md"
+    ],
+    "baseline_commit": "e69cc1bf097e9eb6f451f91c9849cafc5e2bc46d",
+    "target_blobs": {
+      "apps/api/README.md": "34657ec99380d172faee49e5c843ca30a30a0bbc",
+      "apps/web/README.md": "03baf5b317b49d6e0c4531bd382f42a6c3a611c8"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "16a8dbb85ae788eda3fca338db5178b8b80a9b3c",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260912-assistant-question-boundaries.json",
+      "sha256": "0759f85b0607d57533dc1611ecb68013e67d6dede023e4753125deb905fdce9e",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M09-PAGE-PRIORITY-01",
+        "M09-SCOPE-NOTICES-01",
+        "M09-SCOPE-WEB-01"
+      ],
+      "selected_refs": 4,
+      "excluded_cases": 372
+    },
+    "receipt": {
+      "run_id": "8a11def859a4cad1b6ebdbff18ce88c9",
+      "identity": "fe0cb6eb09ffc69b7178f4a56757a7b73b20da9999e340e98b9b451fddd28ed6",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 3505.803,
+      "plan_inputs": 907.831,
+      "execute_cleanup_and_input_recheck": 69589.296
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "71b1e21d735af0bebcdf0b1e04f4edf8610cc3486790a3861802147ca4c5238f",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-PAGE-PRIORITY-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Only explicit page references or resolved sources boost a page.",
+            "expectations": [
+              {
+                "id": "M09-PAGE-PRIORITY-01-ALLOW",
+                "surface": "response",
+                "statement": "Only explicit page references or resolved sources boost a page."
+              },
+              {
+                "id": "M09-PAGE-PRIORITY-01-DENY",
+                "surface": "forbidden",
+                "statement": "Unverified global scope is not presented as complete/current fact or confused with no evidence; unrelated pages are not boosted."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_question_boundaries.py",
+                "name": "test_page_priority_requires_explicit_reference",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-PAGE-PRIORITY-01-ALLOW",
+                  "M09-PAGE-PRIORITY-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-SCOPE-NOTICES-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Inventory and global freshness requests stop before providers; local facts and technical terms remain eligible.",
+            "expectations": [
+              {
+                "id": "M09-SCOPE-NOTICES-01-ALLOW",
+                "surface": "response",
+                "statement": "Inventory and global freshness requests stop before providers; local facts and technical terms remain eligible."
+              },
+              {
+                "id": "M09-SCOPE-NOTICES-01-DENY",
+                "surface": "forbidden",
+                "statement": "Unverified global scope is not presented as complete/current fact or confused with no evidence; unrelated pages are not boosted."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_question_boundaries.py",
+                "name": "test_scope_rules_distinguish_inventory_freshness_and_local_facts",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-SCOPE-NOTICES-01-ALLOW",
+                  "M09-SCOPE-NOTICES-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_question_boundaries.py",
+                "name": "test_scope_notices_precede_all_provider_calls",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-SCOPE-NOTICES-01-ALLOW",
+                  "M09-SCOPE-NOTICES-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M09-SCOPE-WEB-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Completeness and freshness notices display distinctly and survive reload.",
+            "expectations": [
+              {
+                "id": "M09-SCOPE-WEB-01-ALLOW",
+                "surface": "response",
+                "statement": "Completeness and freshness notices display distinctly and survive reload."
+              },
+              {
+                "id": "M09-SCOPE-WEB-01-DENY",
+                "surface": "forbidden",
+                "statement": "Unverified global scope is not presented as complete/current fact or confused with no evidence; unrelated pages are not boosted."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "unverified completeness and freshness remain distinct after restore",
+                "gate": "e2e",
+                "covers": [
+                  "M09-SCOPE-WEB-01-ALLOW",
+                  "M09-SCOPE-WEB-01-DENY"
+                ],
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "unverified completeness and freshness remain distinct after restore"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.128,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "225 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 237.781,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 84.437,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.533,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "2137 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 2441.825,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "352 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 100.544,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 376 cases, 762 expectations, 1188 exact test references; contract sha256 71b1e21d735a"
+      ],
+      "status": "passed",
+      "duration_ms": 544.16,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 2.961,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.894,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 77.918,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-4"
+      ],
+      "duration_ms": 2541.881,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "8a11def859a4cad1b6ebdbff18ce88c9",
+        "attempt_id": "f063afcb6b9af3c670ec3ef4cc17abf7"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-question-boundaries --gate api-tests",
+      "status": "passed",
+      "duration_ms": 9352.915,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 722,
+        "selection_counts": {
+          "collected": 3,
+          "executed": 3
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_question_boundaries.py",
+                "name": "test_page_priority_requires_explicit_reference"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_question_boundaries.py",
+                "name": "test_scope_rules_distinguish_inventory_freshness_and_local_facts"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_question_boundaries.py",
+                "name": "test_scope_notices_precede_all_provider_calls"
+              }
+            ],
+            "duration_ms": 8944.796,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\8a11def859a4cad1b6ebdbff18ce88c9\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "8a11def859a4cad1b6ebdbff18ce88c9",
+        "attempt_id": "194c8fe91439f425a0bafaa344bf9b4d"
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-question-boundaries --gate e2e",
+      "status": "passed",
+      "duration_ms": 54066.392,
+      "covers": [
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 2302,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "unverified completeness and freshness remain distinct after restore",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "unverified completeness and freshness remain distinct after restore"
+                ]
+              }
+            ],
+            "duration_ms": 2939.011,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "unverified completeness and freshness remain distinct after restore",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "unverified completeness and freshness remain distinct after restore"
+                ]
+              }
+            ],
+            "duration_ms": 1477.089
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "unverified completeness and freshness remain distinct after restore",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "unverified completeness and freshness remain distinct after restore"
+                ]
+              }
+            ],
+            "duration_ms": 1295.257,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "unverified completeness and freshness remain distinct after restore",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "unverified completeness and freshness remain distinct after restore"
+                ]
+              }
+            ],
+            "duration_ms": 47936.062,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\8a11def859a4cad1b6ebdbff18ce88c9\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "8a11def859a4cad1b6ebdbff18ce88c9",
+        "attempt_id": "e7749b2009ac1a86bbb165e3c6c8a950"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2912.73,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 72377.099,
+    "failures": []
+  },
+  "source_commit": "16a8dbb85ae788eda3fca338db5178b8b80a9b3c"
+}
