@@ -59,6 +59,11 @@
           "unit": "M10.qualification",
           "affected": false,
           "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Layout embeds the same assistant component; error notice copy changes no navigation props, polling or availability contract."
         }
       ]
     },
@@ -118,6 +123,11 @@
           "unit": "M10.qualification",
           "affected": false,
           "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Layout embeds the same assistant component; error notice copy changes no navigation props, polling or availability contract."
         }
       ]
     },
