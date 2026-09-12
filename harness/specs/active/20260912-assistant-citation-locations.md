@@ -5,13 +5,17 @@ summary: Q4-02 公开 About 证据字段并展示逐引用章节页码
 load_when:
   - task:20260912-assistant-citation-locations
 task_id: 20260912-assistant-citation-locations
-status: active
 verification_profile: stack
 documentation_impact: required
 documentation_targets:
   - apps/web/README.md
 documentation_reason: 说明公开 About 与问答来源定位的可核查范围。
+status: frozen
+frozen_at: 2026-09-12T14:25:00.119450+00:00
+freeze_reason: 用户要求完成 Q4-01 后停止；Q4-02 仅准备规格，尚未实施。
+frozen_scope_sha256: 17cb647d3a04c97045e3dedaa6c07a9c2b55f4d40e00d047869b7f7315f16f3f
 state_history:
+  - {"action":"freeze","at":"2026-09-12T14:25:00.119450+00:00","reason":"用户要求完成 Q4-01 后停止；Q4-02 仅准备规格，尚未实施。","scope_sha256":"17cb647d3a04c97045e3dedaa6c07a9c2b55f4d40e00d047869b7f7315f16f3f"}
 ---
 
 # Context
