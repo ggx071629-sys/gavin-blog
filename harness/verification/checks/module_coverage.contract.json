@@ -15918,7 +15918,7 @@
             {
               "kind": "vitest",
               "path": "apps/web/tests/unit/assistant.test.ts",
-              "name": "splits each [n] marker once without duplicating preceding text",
+              "name": "splits each [n] marker once without duplicating the preceding text",
               "gate": "web-quality",
               "covers": [
                 "M09-TECHNICAL-CITATION-01-ALLOW",
