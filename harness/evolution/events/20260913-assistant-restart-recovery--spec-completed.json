@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260913-assistant-restart-recovery",
+  "created_at": "2026-09-12T19:44:15.735901+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "51e4ce1c95d8e596880ff78e224711a19db5b502dd1455d6322e2012579a0661"
+}
