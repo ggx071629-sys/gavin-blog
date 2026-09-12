@@ -3937,17 +3937,10 @@
         "plan-build/assistant-safety/completed/phase-4-evaluation/S4-01.md",
         "plan-build/assistant-safety/completed/phase-4-evaluation/S4-02.md",
         "harness/docs/decisions/20260911-assistant-gap-closure.md",
-        "plan-build/assistant-gap-closure/evaluation/G07-EXECUTION.md",
-        "plan-build/assistant-gap-closure/PHASE-3-RUNTIME-OBSERVABILITY.md",
-        "plan-build/assistant-gap-closure/PHASE-4-CONTEXT-CITATIONS.md",
-        "plan-build/assistant-gap-closure/PLAN.md",
-        "plan-build/assistant-gap-closure/completed/phase-4-context-citations/Q4-01.md",
         "harness/docs/decisions/20260912-assistant-deployment-validation-scope.md",
         "harness/docs/decisions/20260912-assistant-question-scope.md",
-        "plan-build/assistant-gap-closure/DESIGN.md",
-        "plan-build/assistant-gap-closure/PHASE-5-QUALITY-EVALUATION.md",
-        "plan-build/assistant-gap-closure/PHASE-6-PRODUCTION-READINESS.md",
-        "plan-build/assistant-gap-closure/completed/phase-6-production-readiness/.gitkeep"
+        "plan-build/assistant-gap-closure/*.md",
+        "plan-build/assistant-gap-closure/completed/*/.gitkeep"
       ],
       "cases": [
         "M08-DOCS-01"
