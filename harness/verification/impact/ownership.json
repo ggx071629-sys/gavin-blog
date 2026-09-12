@@ -1617,7 +1617,8 @@
         "apps/api/tests/test_assistant_qualification_profile.py",
         "apps/api/tests/test_assistant_runtime_profile_binding.py",
         "apps/api/app/assistant_qualification/local_ledger.py",
-        "apps/api/tests/test_local_probe_recovery.py"
+        "apps/api/tests/test_local_probe_recovery.py",
+        "apps/api/tests/test_assistant_local_model_alias.py"
       ],
       "cases": [
         "M10-P1-01",
@@ -1639,7 +1640,8 @@
         "M09-REVALIDATION-BUDGET-01",
         "M09-REVALIDATION-RECOVERY-01",
         "M09-REVALIDATION-CLI-01",
-        "M10-TOTAL-BUDGET-01"
+        "M10-TOTAL-BUDGET-01",
+        "M09-LOCAL-MODEL-ALIAS-01"
       ],
       "dependents": [
         "M06.api_tooling",

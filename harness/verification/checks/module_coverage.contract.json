@@ -16020,6 +16020,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-LOCAL-MODEL-ALIAS-01",
+          "priority": "P1",
+          "scenario": "User-confirmed local alias retains exact identity and provenance boundaries.",
+          "expectations": [
+            {
+              "id": "M09-LOCAL-MODEL-ALIAS-01-ALLOW",
+              "surface": "response",
+              "statement": "Old alias remains compatible; deepseek-flash is accepted for development with operator-declared version provenance."
+            },
+            {
+              "id": "M09-LOCAL-MODEL-ALIAS-01-DENY",
+              "surface": "forbidden",
+              "statement": "Unknown aliases, production and unproven version identity remain rejected; new alias changes authorization digest."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_local_model_alias.py",
+              "name": "test_local_alias_preserves_identity_binding_and_unknown_model_rejection",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LOCAL-MODEL-ALIAS-01-ALLOW",
+                "M09-LOCAL-MODEL-ALIAS-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
