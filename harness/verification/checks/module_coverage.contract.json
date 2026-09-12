@@ -17497,6 +17497,68 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-CURRENT-PROMPT-01",
+          "priority": "P1",
+          "scenario": "Compact policy leaves space for complete Chinese evidence without weakening byte admission or untrusted source boundaries.",
+          "expectations": [
+            {
+              "id": "M09-CURRENT-PROMPT-01-ALLOW",
+              "surface": "response",
+              "statement": "Complete representative Chinese source and all security boundaries remain in the admitted prompt."
+            },
+            {
+              "id": "M09-CURRENT-PROMPT-01-DENY",
+              "surface": "forbidden",
+              "statement": "Small input/context envelopes cannot admit truncated evidence or injected history; schema and source binding remain mandatory."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_prompt_budget.py",
+              "name": "test_current_chinese_clauses_fit_without_truncation_or_history_facts",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CURRENT-PROMPT-01-ALLOW",
+                "M09-CURRENT-PROMPT-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_prompt_budget.py",
+              "name": "test_minimum_input_and_context_boundaries_keep_original_limits",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CURRENT-PROMPT-01-ALLOW",
+                "M09-CURRENT-PROMPT-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "name": "test_security_prompt_sections_and_untrusted_history",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CURRENT-PROMPT-01-ALLOW",
+                "M09-CURRENT-PROMPT-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_g07_repair.py",
+              "name": "test_empty_answers_remain_failure_and_fixture_is_answerable",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CURRENT-PROMPT-01-ALLOW",
+                "M09-CURRENT-PROMPT-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

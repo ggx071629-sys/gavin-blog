@@ -1335,7 +1335,8 @@
         "M09-PAGE-PRIORITY-01",
         "M09-SCOPE-NOTICES-01",
         "M09-CONTEXT-CROSS-01",
-        "M09-CONTEXT-HISTORY-01"
+        "M09-CONTEXT-HISTORY-01",
+        "M09-CURRENT-PROMPT-01"
       ],
       "dependents": [
         "M06.api_tooling",
