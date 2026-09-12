@@ -16075,7 +16075,7 @@
           "test_refs": [
             {
               "kind": "pytest",
-              "path": "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+              "path": "apps/api/tests/test_assistant_g07_runner.py",
               "name": "RunnerChecks::test_unauthorized_stops_before_reservation_or_call",
               "gate": "api-tests",
               "covers": [
@@ -16085,7 +16085,7 @@
             },
             {
               "kind": "pytest",
-              "path": "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+              "path": "apps/api/tests/test_assistant_g07_runner.py",
               "name": "RunnerChecks::test_known_delivery_preserves_all_cases_and_requires_review",
               "gate": "api-tests",
               "covers": [
@@ -16095,7 +16095,7 @@
             },
             {
               "kind": "pytest",
-              "path": "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+              "path": "apps/api/tests/test_assistant_g07_runner.py",
               "name": "RunnerChecks::test_unknown_delivery_settles_conservatively_and_stops",
               "gate": "api-tests",
               "covers": [
@@ -16105,7 +16105,7 @@
             },
             {
               "kind": "pytest",
-              "path": "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+              "path": "apps/api/tests/test_assistant_g07_runner.py",
               "name": "RunnerChecks::test_model_mismatch_is_retained_without_retry_or_relaxing_identity",
               "gate": "api-tests",
               "covers": [
@@ -16115,7 +16115,7 @@
             },
             {
               "kind": "pytest",
-              "path": "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+              "path": "apps/api/tests/test_assistant_g07_runner.py",
               "name": "RunnerChecks::test_continuation_does_not_repeat_prior_attempt",
               "gate": "api-tests",
               "covers": [

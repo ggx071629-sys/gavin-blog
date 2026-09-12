@@ -1620,7 +1620,8 @@
         "apps/api/tests/test_local_probe_recovery.py",
         "apps/api/tests/test_assistant_local_model_alias.py",
         "plan-build/assistant-gap-closure/evaluation/run_injection_challenges.py",
-        "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py"
+        "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+        "apps/api/tests/test_assistant_g07_runner.py"
       ],
       "cases": [
         "M10-P1-01",

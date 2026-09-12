@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "task_id": "20260912-assistant-local-model-alias",
-  "created_at": "2026-09-12T11:19:22.954036+00:00",
+  "created_at": "2026-09-12T11:20:41.231136+00:00",
   "command": "python -m tools.harness verify 20260912-assistant-local-model-alias",
   "status": "failed",
   "acceptance_criteria": [],
@@ -18,7 +18,7 @@
         "1 subsumption contracts bind 7 registered child gates"
       ],
       "status": "passed",
-      "duration_ms": 6.886,
+      "duration_ms": 5.926,
       "provenance": {
         "scope": "workspace"
       }
@@ -29,7 +29,7 @@
         "209 deterministic closes retain archive, evidence, event, and active-spec history"
       ],
       "status": "passed",
-      "duration_ms": 329.108,
+      "duration_ms": 418.803,
       "provenance": {
         "scope": "workspace"
       }
@@ -40,7 +40,7 @@
         "9 generated indexes are current"
       ],
       "status": "passed",
-      "duration_ms": 120.926,
+      "duration_ms": 145.511,
       "provenance": {
         "scope": "workspace"
       }
@@ -51,7 +51,7 @@
         "AGENTS.md is the unique L0 and stays within 60-80 lines"
       ],
       "status": "passed",
-      "duration_ms": 0.623,
+      "duration_ms": 1.154,
       "provenance": {
         "scope": "workspace"
       }
@@ -62,7 +62,7 @@
         "2065 local Markdown links resolve without durable active-spec references"
       ],
       "status": "passed",
-      "duration_ms": 3979.219,
+      "duration_ms": 4181.776,
       "provenance": {
         "scope": "workspace"
       }
@@ -73,7 +73,7 @@
         "334 routed Markdown documents have valid metadata"
       ],
       "status": "passed",
-      "duration_ms": 183.749,
+      "duration_ms": 165.37,
       "provenance": {
         "scope": "workspace"
       }
@@ -81,10 +81,14 @@
     {
       "name": "module-coverage",
       "details": [
-        "11 modules, 350 cases, 710 expectations, 1130 exact test references; contract sha256 1f194f7c625f"
+        "M09-G07-RUNNER-01.test_refs[0]: test reference: pytest path has no registered gate ownership: plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+        "M09-G07-RUNNER-01.test_refs[1]: test reference: pytest path has no registered gate ownership: plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+        "M09-G07-RUNNER-01.test_refs[2]: test reference: pytest path has no registered gate ownership: plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+        "M09-G07-RUNNER-01.test_refs[3]: test reference: pytest path has no registered gate ownership: plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+        "M09-G07-RUNNER-01.test_refs[4]: test reference: pytest path has no registered gate ownership: plan-build/assistant-gap-closure/evaluation/test_injection_runner.py"
       ],
-      "status": "passed",
-      "duration_ms": 937.238,
+      "status": "failed",
+      "duration_ms": 769.218,
       "provenance": {
         "scope": "workspace"
       }
@@ -95,7 +99,7 @@
         "configured qualification manifests have valid historical bindings"
       ],
       "status": "passed",
-      "duration_ms": 4.972,
+      "duration_ms": 5.12,
       "provenance": {
         "scope": "workspace"
       }
@@ -106,7 +110,7 @@
         "28 required paths exist"
       ],
       "status": "passed",
-      "duration_ms": 12.577,
+      "duration_ms": 15.973,
       "provenance": {
         "scope": "workspace"
       }
@@ -117,7 +121,7 @@
         "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
       ],
       "status": "passed",
-      "duration_ms": 136.69,
+      "duration_ms": 137.025,
       "provenance": {
         "scope": "workspace"
       }
@@ -130,24 +134,29 @@
       "duration_ms": 0,
       "covers": [],
       "details": [
-        "impact gap: missing analysis for plan-build/assistant-gap-closure/evaluation/run_injection_challenges.py"
+        "global preflight failed; product gates were not started"
       ]
     }
   ],
   "summary": {
     "checks": {
       "total": 11,
-      "passed": 10,
-      "failed": 1
+      "passed": 9,
+      "failed": 2
     },
-    "duration_ms": 5711.988,
+    "duration_ms": 5845.876,
     "failures": [
+      {
+        "name": "module-coverage",
+        "kind": "check-failed",
+        "summary": "M09-G07-RUNNER-01.test_refs[0]: test reference: pytest path has no registered gate ownership: plan-build/assistant-gap-closure/evaluation/test_injection_runner.py"
+      },
       {
         "name": "task-verification-precondition",
         "kind": "check-failed",
-        "summary": "impact gap: missing analysis for plan-build/assistant-gap-closure/evaluation/run_injection_challenges.py"
+        "summary": "global preflight failed; product gates were not started"
       }
     ]
   },
-  "source_commit": "38cbd5204a79f708547714a25a255092331a0234"
+  "source_commit": "a2c8e7869f1ba266535a3e27e9074d157dcf8448"
 }
