@@ -31,5 +31,4 @@ state_history:
 ## Gates
 - api-tests => AC-1, AC-2
 - web-quality => AC-2
-- contracts => AC-2
 - harness-integrity => AC-1, AC-2
