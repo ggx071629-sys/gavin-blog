@@ -256,6 +256,15 @@
           "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
         }
       ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_source_integration.py",
+      "owner": "M09.source_integration",
+      "reason": "Bind scripted role answers to chunks that actually contain the role self-report; the former last-by-type selection could cite unrelated About content. Preserve answer, source, restore and revocation assertions.",
+      "cases": [
+        "M09-GROUNDING-03"
+      ],
+      "dependencies": []
     }
   ]
 }
