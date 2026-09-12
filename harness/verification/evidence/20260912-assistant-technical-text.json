@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
   "task_id": "20260912-assistant-technical-text",
-  "created_at": "2026-09-12T10:20:26.310134+00:00",
+  "created_at": "2026-09-12T10:21:32.561480+00:00",
   "command": "python -m tools.harness verify 20260912-assistant-technical-text",
-  "status": "failed",
+  "status": "passed",
   "acceptance_criteria": [
     "AC-1",
     "AC-2"
@@ -11,7 +11,7 @@
   "criteria_results": [
     {
       "id": "AC-1",
-      "status": "failed",
+      "status": "passed",
       "gates": [
         "api-tests",
         "web-quality",
@@ -29,13 +29,13 @@
   ],
   "verification_profile": "focused",
   "fingerprints": {
-    "source_tree": "11e0f413c041538f2a2573abbdffa93c0b9fb0e8",
+    "source_tree": "9215788be79e2a31d90a3b603a945c005f79c46d",
     "active_spec_sha256": "97bbf760dabb145b084b7c9e660a5ed954296afa8b73de2f2f4a27dbc9d84fe0",
-    "verification_contract_sha256": "4b6ddba7c673e57470594daa26397558e5131ba5f6c28007dffa504bec7f1272",
-    "gate_config_sha256": "8037d648dff6258b145e89e0d84b68230ea32f140ea8fad34fea030d1d4a4f4e",
+    "verification_contract_sha256": "58b51b84269ea32e8db128a280e4965600023ea1e8909f27b0440bb735683415",
+    "gate_config_sha256": "95f451375fd83bccf5e7ea41175398ea4ce00393c36a3e032086f51f82b000e1",
     "documentation_contract_sha256": "bc7e1e139d9751a9741623a09032e2d77df89a513ff69650a369e596a3330233",
     "documentation_targets_sha256": "934e6ea090c9bcb96742d94821318b64584dab3fcf0758eb61a0d76a9cbde581",
-    "module_contract_sha256": "b1e7a6a26e472ec0387bc7e1543434003861471e0b78249dd2f44f33aaad1893"
+    "module_contract_sha256": "a29a8c90fd356a503a548e17bc9c6db22ae7ed85756f135da9174537f64f24e0"
   },
   "documentation": {
     "impact": "required",
@@ -52,12 +52,12 @@
   },
   "execution": {
     "mode": "git-worktree",
-    "source_commit": "80b507c3d6f71e1cdb6412772ad19f14750e0459",
+    "source_commit": "622fb62e8013ed7bf6f47ac6da789d5b69c650a4",
     "cleanup_status": "passed",
     "reused_paths": 3,
     "impact": {
       "plan": "harness/verification/impact/20260912-assistant-technical-text.json",
-      "sha256": "37d1b014e3cba0c270ec6b881f0c44d2ef63d8e1d4af7ca9363ad51845c0f40a",
+      "sha256": "5643923c62c58bc92c60aa886a83fc6ab78dbdb4fe11a6b82e579c5a76b8da7d",
       "selected_cases": [
         "M08-DOCS-01",
         "M09-ANSWER-PATHS-01",
@@ -70,8 +70,8 @@
       "excluded_cases": 341
     },
     "receipt": {
-      "run_id": "fcd1ffe94cc8855b19baa85c4fffc785",
-      "identity": "2745643b0af010c5d4c7d66f13d62d149d25801869dfce72e48118e7e1cf28f9",
+      "run_id": "0096d15c502255b86d3bce5194ea43f3",
+      "identity": "ec4265d82084a03125bc2c7b42d46cbb61a3f6c8691af96849b0f1bb447eefa8",
       "plan": [
         {
           "gate": "api-tests",
@@ -97,15 +97,15 @@
       ]
     },
     "phase_durations_ms": {
-      "preflight_checks": 4890.358,
-      "plan_inputs": 918.214,
-      "execute_cleanup_and_input_recheck": 21947.994
+      "preflight_checks": 3240.912,
+      "plan_inputs": 850.283,
+      "execute_cleanup_and_input_recheck": 24078.294
     }
   },
   "verification_cases": {
     "schema_version": 1,
     "contract_id": "gavin-module-coverage-v1",
-    "contract_sha256": "b1e7a6a26e472ec0387bc7e1543434003861471e0b78249dd2f44f33aaad1893",
+    "contract_sha256": "a29a8c90fd356a503a548e17bc9c6db22ae7ed85756f135da9174537f64f24e0",
     "criteria": [
       {
         "criterion": "AC-1",
@@ -232,7 +232,7 @@
               {
                 "kind": "vitest",
                 "path": "apps/web/tests/unit/assistant.test.ts",
-                "name": "splits each [n] marker once without duplicating preceding text",
+                "name": "splits each [n] marker once without duplicating the preceding text",
                 "gate": "web-quality",
                 "covers": [
                   "M09-TECHNICAL-CITATION-01-ALLOW",
@@ -488,7 +488,7 @@
         "1 subsumption contracts bind 7 registered child gates"
       ],
       "status": "passed",
-      "duration_ms": 5.74,
+      "duration_ms": 4.006,
       "provenance": {
         "scope": "workspace"
       }
@@ -499,7 +499,7 @@
         "207 deterministic closes retain archive, evidence, event, and active-spec history"
       ],
       "status": "passed",
-      "duration_ms": 408.707,
+      "duration_ms": 205.684,
       "provenance": {
         "scope": "workspace"
       }
@@ -510,7 +510,7 @@
         "9 generated indexes are current"
       ],
       "status": "passed",
-      "duration_ms": 115.67,
+      "duration_ms": 79.055,
       "provenance": {
         "scope": "workspace"
       }
@@ -521,7 +521,7 @@
         "AGENTS.md is the unique L0 and stays within 60-80 lines"
       ],
       "status": "passed",
-      "duration_ms": 1.035,
+      "duration_ms": 0.559,
       "provenance": {
         "scope": "workspace"
       }
@@ -532,7 +532,7 @@
         "2052 local Markdown links resolve without durable active-spec references"
       ],
       "status": "passed",
-      "duration_ms": 3577.329,
+      "duration_ms": 2263.853,
       "provenance": {
         "scope": "workspace"
       }
@@ -543,7 +543,7 @@
         "332 routed Markdown documents have valid metadata"
       ],
       "status": "passed",
-      "duration_ms": 95.478,
+      "duration_ms": 92.964,
       "provenance": {
         "scope": "workspace"
       }
@@ -551,10 +551,10 @@
     {
       "name": "module-coverage",
       "details": [
-        "11 modules, 347 cases, 704 expectations, 1127 exact test references; contract sha256 b1e7a6a26e47"
+        "11 modules, 347 cases, 704 expectations, 1127 exact test references; contract sha256 a29a8c90fd35"
       ],
       "status": "passed",
-      "duration_ms": 583.605,
+      "duration_ms": 502.424,
       "provenance": {
         "scope": "workspace"
       }
@@ -565,7 +565,7 @@
         "configured qualification manifests have valid historical bindings"
       ],
       "status": "passed",
-      "duration_ms": 3.897,
+      "duration_ms": 3.079,
       "provenance": {
         "scope": "workspace"
       }
@@ -576,7 +576,7 @@
         "28 required paths exist"
       ],
       "status": "passed",
-      "duration_ms": 9.001,
+      "duration_ms": 7.631,
       "provenance": {
         "scope": "workspace"
       }
@@ -587,7 +587,7 @@
         "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
       ],
       "status": "passed",
-      "duration_ms": 87.391,
+      "duration_ms": 79.126,
       "provenance": {
         "scope": "workspace"
       }
@@ -601,14 +601,14 @@
         "AC-1",
         "AC-2"
       ],
-      "duration_ms": 2375.975,
+      "duration_ms": 2332.192,
       "details": [],
       "provenance": {
         "mode": "executed",
         "phase": "snapshot",
         "scope": "committed-snapshot",
-        "run_id": "fcd1ffe94cc8855b19baa85c4fffc785",
-        "attempt_id": "6da38169b39b314d69142ffecbdb912d"
+        "run_id": "0096d15c502255b86d3bce5194ea43f3",
+        "attempt_id": "11f29f200b41d9d1cb9e3607c91e8c0a"
       },
       "result": {
         "exit_code": 0
@@ -619,7 +619,7 @@
       "kind": "product",
       "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-technical-text --gate api-tests",
       "status": "passed",
-      "duration_ms": 9396.496,
+      "duration_ms": 7170.836,
       "covers": [
         "AC-1",
         "AC-2"
@@ -706,43 +706,35 @@
                 "name": "test_grounded_technical_text_preserves_output_guards"
               }
             ],
-            "duration_ms": 8981.603,
+            "duration_ms": 6775.703,
             "batch_id": "batch-0001"
           }
         ],
-        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\fcd1ffe94cc8855b19baa85c4fffc785\\api-tests\\output.log"
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\0096d15c502255b86d3bce5194ea43f3\\api-tests\\output.log"
       },
       "provenance": {
         "mode": "executed",
-        "run_id": "fcd1ffe94cc8855b19baa85c4fffc785",
-        "attempt_id": "c513b0d931c1732c080837de823a3af6"
+        "run_id": "0096d15c502255b86d3bce5194ea43f3",
+        "attempt_id": "714f4b36adb86d03e54653e4d2c0b256"
       }
     },
     {
       "name": "web-quality",
       "kind": "product",
       "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-technical-text --gate web-quality",
-      "status": "failed",
-      "duration_ms": 7031.375,
+      "status": "passed",
+      "duration_ms": 11836.659,
       "covers": [
         "AC-1"
       ],
-      "details": [
-        "diagnostic: ValueError: selected collection missing, duplicate or disabled: apps/web/tests/unit/assistant.test.ts::splits each [n] marker once without duplicating preceding text",
-        "raise SystemExit(main())",
-        "^^^^^^",
-        "File \"<isolated-worktree>\\harness\\tools\\selected_tests.py\", line 466, in main",
-        "return run_selected(refs)",
-        "^^^^^^^^^^^^^^^^^^",
-        "File \"<isolated-worktree>\\harness\\tools\\selected_tests.py\", line 305, in run_selected",
-        "resolved.extend(exact.resolve(group, rows))",
-        "^^^^^^^^^^^^^^^^^^^^^^^^^^",
-        "File \"<isolated-worktree>\\harness\\tools\\exact_identity.py\", line 42, in resolve",
-        "raise ValueError("
-      ],
+      "details": [],
       "result": {
-        "exit_code": 1,
-        "output_bytes": 3750,
+        "exit_code": 0,
+        "output_bytes": 4547,
+        "selection_counts": {
+          "collected": 5,
+          "executed": 5
+        },
         "stages": [
           {
             "version": 3,
@@ -760,7 +752,7 @@
                 "kind": "vitest",
                 "gate": "web-quality",
                 "path": "apps/web/tests/unit/assistant.test.ts",
-                "name": "splits each [n] marker once without duplicating preceding text"
+                "name": "splits each [n] marker once without duplicating the preceding text"
               },
               {
                 "kind": "vitest",
@@ -781,7 +773,7 @@
                 "name": "closes trial citations over safe public sources and bounded excerpts"
               }
             ],
-            "duration_ms": 4095.038,
+            "duration_ms": 2874.189,
             "prerequisite": "nuxt-prepare",
             "input_sha256": {
               "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
@@ -793,7 +785,7 @@
             "version": 3,
             "source": "selected-runner",
             "phase": "collection",
-            "status": "failed",
+            "status": "passed",
             "consumers": [
               {
                 "kind": "vitest",
@@ -805,7 +797,7 @@
                 "kind": "vitest",
                 "gate": "web-quality",
                 "path": "apps/web/tests/unit/assistant.test.ts",
-                "name": "splits each [n] marker once without duplicating preceding text"
+                "name": "splits each [n] marker once without duplicating the preceding text"
               },
               {
                 "kind": "vitest",
@@ -820,14 +812,13 @@
                 "name": "closes multiple chunk markers against a deduplicated article source"
               }
             ],
-            "duration_ms": 2551.857,
-            "summary": "selected collection missing, duplicate or disabled: apps/web/tests/unit/assistant.test.ts::splits each [n] marker once without duplicating preceding text"
+            "duration_ms": 2166.105
           },
           {
             "version": 3,
             "source": "selected-runner",
-            "phase": "execution",
-            "status": "not-run",
+            "phase": "collection",
+            "status": "passed",
             "consumers": [
               {
                 "kind": "vitest",
@@ -836,21 +827,95 @@
                 "name": "closes trial citations over safe public sources and bounded excerpts"
               }
             ],
-            "duration_ms": 0.528
+            "duration_ms": 2086.467
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "keeps array subscripts literal while closing terminal citations",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant citations",
+                  "keeps array subscripts literal while closing terminal citations"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "splits each [n] marker once without duplicating the preceding text",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant citations",
+                  "splits each [n] marker once without duplicating the preceding text"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes markers only to matching citations and allowlisted sources",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant citations",
+                  "closes markers only to matching citations and allowlisted sources"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes multiple chunk markers against a deduplicated article source",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant citations",
+                  "closes multiple chunk markers against a deduplicated article source"
+                ]
+              }
+            ],
+            "duration_ms": 2233.391,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "closes trial citations over safe public sources and bounded excerpts",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant management contracts",
+                  "closes trial citations over safe public sources and bounded excerpts"
+                ]
+              }
+            ],
+            "duration_ms": 2091.471,
+            "batch_id": "batch-0002"
           }
         ],
-        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\fcd1ffe94cc8855b19baa85c4fffc785\\web-quality\\output.log",
-        "failure": {
-          "kind": "collection",
-          "source": "selected-runner",
-          "hint": "nonzero-exit",
-          "summary": "ValueError: selected collection missing, duplicate or disabled: apps/web/tests/unit/assistant.test.ts::splits each [n] marker once without duplicating preceding text"
-        }
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\0096d15c502255b86d3bce5194ea43f3\\web-quality\\output.log"
       },
       "provenance": {
         "mode": "executed",
-        "run_id": "fcd1ffe94cc8855b19baa85c4fffc785",
-        "attempt_id": "aebed567eb4fafba9325da0b4f5993e8"
+        "run_id": "0096d15c502255b86d3bce5194ea43f3",
+        "attempt_id": "78e3e6030a05d35e8e4b04ac989c32ec"
       }
     },
     {
@@ -858,7 +923,7 @@
       "kind": "isolation",
       "command": "git worktree add --detach <temporary> HEAD",
       "status": "passed",
-      "duration_ms": 2447.986,
+      "duration_ms": 2195.85,
       "covers": [],
       "details": [
         "temporary worktree and dependency links were removed"
@@ -871,17 +936,11 @@
   "summary": {
     "checks": {
       "total": 14,
-      "passed": 13,
-      "failed": 1
+      "passed": 14,
+      "failed": 0
     },
-    "duration_ms": 26139.685,
-    "failures": [
-      {
-        "name": "web-quality",
-        "kind": "collection",
-        "summary": "ValueError: selected collection missing, duplicate or disabled: apps/web/tests/unit/assistant.test.ts::splits each [n] marker once without duplicating preceding text"
-      }
-    ]
+    "duration_ms": 26773.918,
+    "failures": []
   },
-  "source_commit": "80b507c3d6f71e1cdb6412772ad19f14750e0459"
+  "source_commit": "622fb62e8013ed7bf6f47ac6da789d5b69c650a4"
 }
