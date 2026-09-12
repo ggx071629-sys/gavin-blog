@@ -34,8 +34,10 @@ G13 将收到的非法输出与供应商结果未知混淆，第二次请求没�
 # Verification plan
 ## Verification cases
 - AC-1 => M09-RETRY-FEEDBACK-01
-- AC-2 => M09-RETRY-FAILURE-01
+- AC-2 => M09-RETRY-FAILURE-01, M09-UI-BOUNDARY-01, M09-INPUT-ERROR-02
 - AC-3 => M08-DOCS-01
 ## Gates
 - api-tests => AC-1, AC-2
-- harness-unit => AC-3
+- web-quality => AC-2
+- harness-integrity => AC-3
+

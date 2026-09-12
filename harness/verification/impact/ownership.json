@@ -1238,7 +1238,8 @@
         "apps/api/app/assistant/retrieval_io.py",
         "apps/api/tests/test_assistant_retrieval_io.py",
         "apps/api/app/assistant/prompt_budget.py",
-        "apps/api/tests/test_assistant_prompt_budget.py"
+        "apps/api/tests/test_assistant_prompt_budget.py",
+        "apps/api/tests/test_assistant_retry_feedback.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1312,7 +1313,9 @@
         "M09-RETRIEVAL-IO-03",
         "M09-G12-ACCOUNTING-01",
         "M09-G12-FIT-01",
-        "M09-G12-CALIBRATION-01"
+        "M09-G12-CALIBRATION-01",
+        "M09-RETRY-FEEDBACK-01",
+        "M09-RETRY-FAILURE-01"
       ],
       "dependents": [
         "M06.api_tooling",

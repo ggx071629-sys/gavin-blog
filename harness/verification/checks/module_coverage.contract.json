@@ -14600,12 +14600,12 @@
         {
           "id": "M09-INPUT-ERROR-02",
           "priority": "P1",
-          "scenario": "输入超限明确说明未调用模型，未确认状态保留只读检查操作。",
+          "scenario": "输入超限说明停止后续调用，未确认状态保留只读检查操作。",
           "expectations": [
             {
               "id": "M09-INPUT-ERROR-02-ALLOW",
               "surface": "response",
-              "statement": "输入超限明确说明未调用模型，未确认状态保留只读检查操作。"
+              "statement": "输入超限说明停止后续调用，未确认状态保留只读检查操作。"
             },
             {
               "id": "M09-INPUT-ERROR-02-DENY",
@@ -16527,6 +16527,70 @@
               "covers": [
                 "M09-G12-CALIBRATION-01-ALLOW",
                 "M09-G12-CALIBRATION-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-RETRY-FEEDBACK-01",
+          "priority": "P1",
+          "scenario": "Malformed output receives fixed correction, then valid answer; retries are budgeted and replayed without calls.",
+          "expectations": [
+            {
+              "id": "M09-RETRY-FEEDBACK-01-ALLOW",
+              "surface": "response",
+              "statement": "Malformed output receives fixed correction, then valid answer; retries are budgeted and replayed without calls."
+            },
+            {
+              "id": "M09-RETRY-FEEDBACK-01-DENY",
+              "surface": "forbidden",
+              "statement": "Failed body or arbitrary reasons cannot enter feedback; no third call or reserve expansion."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_retry_feedback.py",
+              "name": "test_retry_feedback_is_bounded_and_budgeted",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRY-FEEDBACK-01-ALLOW",
+                "M09-RETRY-FEEDBACK-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-RETRY-FAILURE-01",
+          "priority": "P1",
+          "scenario": "Received format/support failure and provider unknown have distinct codes and safe diagnostics.",
+          "expectations": [
+            {
+              "id": "M09-RETRY-FAILURE-01-ALLOW",
+              "surface": "response",
+              "statement": "Received format/support failure and provider unknown have distinct codes and safe diagnostics."
+            },
+            {
+              "id": "M09-RETRY-FAILURE-01-DENY",
+              "surface": "forbidden",
+              "statement": "Unknown provider result cannot trigger another call or publish invalid output."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_retry_feedback.py",
+              "name": "test_failure_classes_preserve_attempt_bound",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRY-FAILURE-01-ALLOW",
+                "M09-RETRY-FAILURE-01-DENY"
               ]
             }
           ]
