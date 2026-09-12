@@ -1236,7 +1236,9 @@
         "apps/api/tests/test_assistant_discussion_context.py",
         "apps/api/tests/test_assistant_g07_repair.py",
         "apps/api/app/assistant/retrieval_io.py",
-        "apps/api/tests/test_assistant_retrieval_io.py"
+        "apps/api/tests/test_assistant_retrieval_io.py",
+        "apps/api/app/assistant/prompt_budget.py",
+        "apps/api/tests/test_assistant_prompt_budget.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1307,7 +1309,10 @@
         "M09-G07-PREPARE-01",
         "M09-RETRIEVAL-IO-01",
         "M09-RETRIEVAL-IO-02",
-        "M09-RETRIEVAL-IO-03"
+        "M09-RETRIEVAL-IO-03",
+        "M09-G12-ACCOUNTING-01",
+        "M09-G12-FIT-01",
+        "M09-G12-CALIBRATION-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1629,7 +1634,8 @@
         "apps/api/tests/test_assistant_local_model_alias.py",
         "plan-build/assistant-gap-closure/evaluation/run_injection_challenges.py",
         "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
-        "apps/api/tests/test_assistant_g07_runner.py"
+        "apps/api/tests/test_assistant_g07_runner.py",
+        "plan-build/assistant-gap-closure/evaluation/audit_prompt_budget.py"
       ],
       "cases": [
         "M10-P1-01",
@@ -1654,7 +1660,10 @@
         "M10-TOTAL-BUDGET-01",
         "M09-LOCAL-MODEL-ALIAS-01",
         "M09-G07-RUNNER-01",
-        "M09-G07-PREPARE-01"
+        "M09-G07-PREPARE-01",
+        "M09-G12-ACCOUNTING-01",
+        "M09-G12-FIT-01",
+        "M09-G12-CALIBRATION-01"
       ],
       "dependents": [
         "M06.api_tooling",

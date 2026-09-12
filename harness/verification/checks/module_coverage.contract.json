@@ -16374,6 +16374,162 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-G12-ACCOUNTING-01",
+          "priority": "P1",
+          "scenario": "Input components distinguish bytes from nonadditive token counts and report candidates separately from selected evidence.",
+          "expectations": [
+            {
+              "id": "M09-G12-ACCOUNTING-01-ALLOW",
+              "surface": "response",
+              "statement": "Input components distinguish bytes from nonadditive token counts and report candidates separately from selected evidence."
+            },
+            {
+              "id": "M09-G12-ACCOUNTING-01-DENY",
+              "surface": "forbidden",
+              "statement": "No raw question/body is returned in numeric accounting; empty or malformed output is not nonempty valid structure."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_prompt_budget.py",
+              "name": "test_budget_accounting_preserves_units_and_omitted_evidence",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G12-ACCOUNTING-01-ALLOW",
+                "M09-G12-ACCOUNTING-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_prompt_budget.py",
+              "name": "test_output_budget_distinguishes_supports_json_and_empty_or_invalid",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G12-ACCOUNTING-01-ALLOW",
+                "M09-G12-ACCOUNTING-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-G12-FIT-01",
+          "priority": "P1",
+          "scenario": "Finite Chinese/English examples fit at the exact minimum input and context boundary with unchanged reserve.",
+          "expectations": [
+            {
+              "id": "M09-G12-FIT-01-ALLOW",
+              "surface": "response",
+              "statement": "Finite Chinese/English examples fit at the exact minimum input and context boundary with unchanged reserve."
+            },
+            {
+              "id": "M09-G12-FIT-01-DENY",
+              "surface": "forbidden",
+              "statement": "One less input/context unit cannot fit; oversized sources are omitted whole and history remains complete pairs."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_prompt_budget.py",
+              "name": "test_minimum_input_and_context_boundaries_keep_original_limits",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G12-FIT-01-ALLOW",
+                "M09-G12-FIT-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_budget.py",
+              "name": "test_evidence_budget_preserves_whole_ranked_diverse_sources",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G12-FIT-01-ALLOW",
+                "M09-G12-FIT-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_evidence_budget.py",
+              "name": "test_evidence_budget_skips_oversized_chunk_and_honors_context_reserve",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G12-FIT-01-ALLOW",
+                "M09-G12-FIT-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+              "name": "test_prompt_drops_oldest_complete_pairs_before_dispatch",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G12-FIT-01-ALLOW",
+                "M09-G12-FIT-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_deepseek.py",
+              "name": "test_deepseek_prompt_budget_covers_actual_schema_message",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G12-FIT-01-ALLOW",
+                "M09-G12-FIT-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+              "name": "test_unprovable_prompt_fit_never_dispatches_chat_provider",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G12-FIT-01-ALLOW",
+                "M09-G12-FIT-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-G12-CALIBRATION-01",
+          "priority": "P1",
+          "scenario": "Offline calibration verifies local input digests and supports only the reviewed text message shape.",
+          "expectations": [
+            {
+              "id": "M09-G12-CALIBRATION-01-ALLOW",
+              "surface": "response",
+              "statement": "Offline calibration verifies local input digests and supports only the reviewed text message shape."
+            },
+            {
+              "id": "M09-G12-CALIBRATION-01-DENY",
+              "surface": "forbidden",
+              "statement": "Modified data or unsupported role ordering is rejected before counting; no provider call or network request."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_prompt_budget.py",
+              "name": "test_calibration_rejects_changed_data_and_unsupported_message_shapes",
+              "gate": "api-tests",
+              "covers": [
+                "M09-G12-CALIBRATION-01-ALLOW",
+                "M09-G12-CALIBRATION-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
