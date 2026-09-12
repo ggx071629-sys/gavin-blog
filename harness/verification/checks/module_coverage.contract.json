@@ -17346,6 +17346,157 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-CURRENT-DATASET-01",
+          "priority": "P1",
+          "scenario": "Current source versions and debug/evaluation expectations are fixed; drift or missing support fails.",
+          "expectations": [
+            {
+              "id": "M09-CURRENT-DATASET-01-ALLOW",
+              "surface": "response",
+              "statement": "Current source versions and debug/evaluation expectations are fixed; drift or missing support fails."
+            },
+            {
+              "id": "M09-CURRENT-DATASET-01-DENY",
+              "surface": "forbidden",
+              "statement": "Preparation is not real quality proof; unsafe or unknown state cannot trigger hidden retries, budget resets or stale UI resurrection."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_current_quality.py",
+              "name": "test_current_dataset_is_versioned_split_and_rejects_drift",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CURRENT-DATASET-01-ALLOW",
+                "M09-CURRENT-DATASET-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-CURRENT-BUDGET-01",
+          "priority": "P1",
+          "scenario": "Default preparation never dispatches; cumulative exhaustion, unknown delivery and wrong identity are fail-closed.",
+          "expectations": [
+            {
+              "id": "M09-CURRENT-BUDGET-01-ALLOW",
+              "surface": "response",
+              "statement": "Default preparation never dispatches; cumulative exhaustion, unknown delivery and wrong identity are fail-closed."
+            },
+            {
+              "id": "M09-CURRENT-BUDGET-01-DENY",
+              "surface": "forbidden",
+              "statement": "Preparation is not real quality proof; unsafe or unknown state cannot trigger hidden retries, budget resets or stale UI resurrection."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_current_quality.py",
+              "name": "test_current_quality_budget_precedes_dispatch_and_unknown_stops",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CURRENT-BUDGET-01-ALLOW",
+                "M09-CURRENT-BUDGET-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_current_quality.py",
+              "name": "test_current_quality_identity_and_usage_settle_without_retry",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CURRENT-BUDGET-01-ALLOW",
+                "M09-CURRENT-BUDGET-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_current_quality.py",
+              "name": "test_current_quality_default_prepare_never_dispatches_or_reserves",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CURRENT-BUDGET-01-ALLOW",
+                "M09-CURRENT-BUDGET-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-CURRENT-BROWSER-01",
+          "priority": "P1",
+          "scenario": "Current responsive layout, keyboard/IME/source navigation and recovery remain usable with automated accessibility checks.",
+          "expectations": [
+            {
+              "id": "M09-CURRENT-BROWSER-01-ALLOW",
+              "surface": "response",
+              "statement": "Current responsive layout, keyboard/IME/source navigation and recovery remain usable with automated accessibility checks."
+            },
+            {
+              "id": "M09-CURRENT-BROWSER-01-DENY",
+              "surface": "forbidden",
+              "statement": "Preparation is not real quality proof; unsafe or unknown state cannot trigger hidden retries, budget resets or stale UI resurrection."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "panel layout",
+              "gate": "e2e",
+              "covers": [
+                "M09-CURRENT-BROWSER-01-ALLOW",
+                "M09-CURRENT-BROWSER-01-DENY"
+              ],
+              "config": "playwright.assistant.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "panel layout"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "panel interaction",
+              "gate": "e2e",
+              "covers": [
+                "M09-CURRENT-BROWSER-01-ALLOW",
+                "M09-CURRENT-BROWSER-01-DENY"
+              ],
+              "config": "playwright.assistant.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "panel interaction"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "panel state recovery",
+              "gate": "e2e",
+              "covers": [
+                "M09-CURRENT-BROWSER-01-ALLOW",
+                "M09-CURRENT-BROWSER-01-DENY"
+              ],
+              "config": "playwright.assistant.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "panel state recovery"
+              ]
+            }
+          ]
         }
       ]
     },

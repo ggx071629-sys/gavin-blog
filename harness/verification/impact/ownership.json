@@ -1660,7 +1660,11 @@
         "plan-build/assistant-gap-closure/evaluation/run_injection_challenges.py",
         "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
         "apps/api/tests/test_assistant_g07_runner.py",
-        "plan-build/assistant-gap-closure/evaluation/audit_prompt_budget.py"
+        "plan-build/assistant-gap-closure/evaluation/audit_prompt_budget.py",
+        "plan-build/assistant-gap-closure/evaluation/run_current_quality.py",
+        "plan-build/assistant-gap-closure/evaluation/Q5-cases.json",
+        "plan-build/assistant-gap-closure/evaluation/Q5-corpus.json",
+        "apps/api/tests/test_assistant_current_quality.py"
       ],
       "cases": [
         "M10-P1-01",
@@ -1688,7 +1692,10 @@
         "M09-G07-PREPARE-01",
         "M09-G12-ACCOUNTING-01",
         "M09-G12-FIT-01",
-        "M09-G12-CALIBRATION-01"
+        "M09-G12-CALIBRATION-01",
+        "M09-CURRENT-DATASET-01",
+        "M09-CURRENT-BUDGET-01",
+        "M09-CURRENT-BROWSER-01"
       ],
       "dependents": [
         "M06.api_tooling",
