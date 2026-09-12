@@ -16614,6 +16614,70 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-STAGE-DIAGNOSTICS-01",
+          "priority": "P1",
+          "scenario": "Turn-linked stage durations, retry slots, counts and versions are observed.",
+          "expectations": [
+            {
+              "id": "M09-STAGE-DIAGNOSTICS-01-ALLOW",
+              "surface": "response",
+              "statement": "Turn-linked stage durations, retry slots, counts and versions are observed."
+            },
+            {
+              "id": "M09-STAGE-DIAGNOSTICS-01-DENY",
+              "surface": "forbidden",
+              "statement": "No question, answer, title or failed output body enters diagnostic records."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_stage_diagnostics.py",
+              "name": "test_stage_diagnostics_link_retry_without_bodies",
+              "gate": "api-tests",
+              "covers": [
+                "M09-STAGE-DIAGNOSTICS-01-ALLOW",
+                "M09-STAGE-DIAGNOSTICS-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-METERED-LATENCY-01",
+          "priority": "P1",
+          "scenario": "Chat failure and query success have metered duration/cost; admin total latency excludes stage samples.",
+          "expectations": [
+            {
+              "id": "M09-METERED-LATENCY-01-ALLOW",
+              "surface": "response",
+              "statement": "Chat failure and query success have metered duration/cost; admin total latency excludes stage samples."
+            },
+            {
+              "id": "M09-METERED-LATENCY-01-DENY",
+              "surface": "forbidden",
+              "statement": "Repeated settlement cannot add a cost/event; no missing query event from stale prepared snapshot."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_stage_diagnostics.py",
+              "name": "test_metered_latency_and_query_event_are_exact_once",
+              "gate": "api-tests",
+              "covers": [
+                "M09-METERED-LATENCY-01-ALLOW",
+                "M09-METERED-LATENCY-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

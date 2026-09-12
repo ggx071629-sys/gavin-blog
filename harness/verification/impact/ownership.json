@@ -1239,7 +1239,8 @@
         "apps/api/tests/test_assistant_retrieval_io.py",
         "apps/api/app/assistant/prompt_budget.py",
         "apps/api/tests/test_assistant_prompt_budget.py",
-        "apps/api/tests/test_assistant_retry_feedback.py"
+        "apps/api/tests/test_assistant_retry_feedback.py",
+        "apps/api/tests/test_assistant_stage_diagnostics.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1315,7 +1316,9 @@
         "M09-G12-FIT-01",
         "M09-G12-CALIBRATION-01",
         "M09-RETRY-FEEDBACK-01",
-        "M09-RETRY-FAILURE-01"
+        "M09-RETRY-FAILURE-01",
+        "M09-STAGE-DIAGNOSTICS-01",
+        "M09-METERED-LATENCY-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1460,7 +1463,8 @@
         "M10-VECTOR-REUSE-02",
         "M10-UNIT-INDEX-INTEGRITY-01",
         "M10-E5-LOCAL-01",
-        "M09-GROUNDING-03"
+        "M09-GROUNDING-03",
+        "M09-METERED-LATENCY-01"
       ],
       "dependents": [
         "M06.runtime_config",

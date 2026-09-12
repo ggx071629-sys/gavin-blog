@@ -33,7 +33,7 @@ G18 尚无有效阶段耗时，query Embedding 使用发送前快照结算可能
 
 # Verification plan
 ## Verification cases
-- AC-1 => M09-STAGE-DIAGNOSTICS-01
+- AC-1 => M09-STAGE-DIAGNOSTICS-01, M09-RETRIEVAL-IO-02, M09-RETRIEVAL-IO-03, M09-RETRY-FEEDBACK-01, M09-RETRY-FAILURE-01
 - AC-2 => M09-METERED-LATENCY-01
 - AC-3 => M08-DOCS-01
 ## Gates
