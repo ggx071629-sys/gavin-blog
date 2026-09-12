@@ -3127,7 +3127,9 @@
         "M09-SOURCE-TITLE-02",
         "M09-TECHNICAL-CITATION-01",
         "M09-FEEDBACK-WEB-01",
-        "M09-FEEDBACK-ADMIN-01"
+        "M09-FEEDBACK-ADMIN-01",
+        "M09-CITATION-LOCATIONS-01",
+        "M09-ABOUT-RETRIEVAL-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3936,7 +3938,10 @@
         "plan-build/assistant-safety/completed/phase-4-evaluation/S4-02.md",
         "harness/docs/decisions/20260911-assistant-gap-closure.md",
         "plan-build/assistant-gap-closure/evaluation/G07-EXECUTION.md",
-        "plan-build/assistant-gap-closure/PHASE-3-RUNTIME-OBSERVABILITY.md"
+        "plan-build/assistant-gap-closure/PHASE-3-RUNTIME-OBSERVABILITY.md",
+        "plan-build/assistant-gap-closure/PHASE-4-CONTEXT-CITATIONS.md",
+        "plan-build/assistant-gap-closure/PLAN.md",
+        "plan-build/assistant-gap-closure/completed/phase-4-context-citations/Q4-01.md"
       ],
       "cases": [
         "M08-DOCS-01"
@@ -4235,7 +4240,8 @@
         "M05-STUDIO-OPERATIONS-STATES-01",
         "M06-STUDIO-PROFILE-CONTRAST-01",
         "M07-STUDIO-SUITE-MANAGEMENT-01",
-        "M11-ABOUT-DRAFT-01"
+        "M11-ABOUT-DRAFT-01",
+        "M09-ABOUT-VISIBLE-01"
       ],
       "dependents": []
     },
