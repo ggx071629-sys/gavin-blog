@@ -16965,6 +16965,132 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-REFERENCE-RESOLVE-01",
+          "priority": "P1",
+          "scenario": "Unique retained source is resolved and fresh evidence answers without old answer text.",
+          "expectations": [
+            {
+              "id": "M09-REFERENCE-RESOLVE-01-ALLOW",
+              "surface": "response",
+              "statement": "Unique retained source is resolved and fresh evidence answers without old answer text."
+            },
+            {
+              "id": "M09-REFERENCE-RESOLVE-01-DENY",
+              "surface": "forbidden",
+              "statement": "Unresolved or expired objects cannot dispatch a provider; prior answer prose cannot become current facts or ambiguous source focus."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_reference_context.py",
+              "name": "test_unique_reference_retrieves_current_source_without_old_answer",
+              "gate": "api-tests",
+              "covers": [
+                "M09-REFERENCE-RESOLVE-01-ALLOW",
+                "M09-REFERENCE-RESOLVE-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-REFERENCE-CLARIFY-01",
+          "priority": "P1",
+          "scenario": "Ambiguity, ordinals, expiry and withdrawal clarify before dispatch; new topic has no prior query.",
+          "expectations": [
+            {
+              "id": "M09-REFERENCE-CLARIFY-01-ALLOW",
+              "surface": "response",
+              "statement": "Ambiguity, ordinals, expiry and withdrawal clarify before dispatch; new topic has no prior query."
+            },
+            {
+              "id": "M09-REFERENCE-CLARIFY-01-DENY",
+              "surface": "forbidden",
+              "statement": "Unresolved or expired objects cannot dispatch a provider; prior answer prose cannot become current facts or ambiguous source focus."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_reference_context.py",
+              "name": "test_ambiguous_reference_clarifies_without_provider_calls",
+              "gate": "api-tests",
+              "covers": [
+                "M09-REFERENCE-CLARIFY-01-ALLOW",
+                "M09-REFERENCE-CLARIFY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_reference_context.py",
+              "name": "test_topic_switch_has_no_historical_query_or_prompt",
+              "gate": "api-tests",
+              "covers": [
+                "M09-REFERENCE-CLARIFY-01-ALLOW",
+                "M09-REFERENCE-CLARIFY-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-REFERENCE-WEB-01",
+          "priority": "P1",
+          "scenario": "Clarification remains distinct after reload and multi-citation keyboard focus follows each location.",
+          "expectations": [
+            {
+              "id": "M09-REFERENCE-WEB-01-ALLOW",
+              "surface": "response",
+              "statement": "Clarification remains distinct after reload and multi-citation keyboard focus follows each location."
+            },
+            {
+              "id": "M09-REFERENCE-WEB-01-DENY",
+              "surface": "forbidden",
+              "statement": "Unresolved or expired objects cannot dispatch a provider; prior answer prose cannot become current facts or ambiguous source focus."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "clarification is a distinct recoverable terminal notice",
+              "gate": "e2e",
+              "config": "playwright.assistant.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "clarification is a distinct recoverable terminal notice"
+              ],
+              "covers": [
+                "M09-REFERENCE-WEB-01-ALLOW",
+                "M09-REFERENCE-WEB-01-DENY"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "multiple chunk citations navigate the deduplicated source live and after reload",
+              "gate": "e2e",
+              "config": "playwright.assistant.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "multiple chunk citations navigate the deduplicated source live and after reload"
+              ],
+              "covers": [
+                "M09-REFERENCE-WEB-01-ALLOW",
+                "M09-REFERENCE-WEB-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
