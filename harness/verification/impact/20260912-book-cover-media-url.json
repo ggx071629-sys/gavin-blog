@@ -162,6 +162,12 @@
           "cases": [
             "M04-BOOK-COVER-WEB-01"
           ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "项目编辑器消费 ProjectCreate/Update；此次仅改变 BookNoteCreate/Update.cover_url，项目字段与验证不变。",
+          "cases": []
         }
       ]
     },
