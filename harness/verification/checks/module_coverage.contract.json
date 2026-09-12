@@ -17675,6 +17675,48 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-CODE-PRESENTATION-01",
+          "priority": "P1",
+          "scenario": "Single-line code wrappers may differ only when complete factual context and literal code remain identical.",
+          "expectations": [
+            {
+              "id": "M09-CODE-PRESENTATION-01-ALLOW",
+              "surface": "response",
+              "statement": "Equivalent complete command contexts pass with exact current quotes."
+            },
+            {
+              "id": "M09-CODE-PRESENTATION-01-DENY",
+              "surface": "forbidden",
+              "statement": "Modified commands, qualifiers, retractions, raw quotes, or unsupported multiline code do not pass presentation equivalence."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_code_presentation.py",
+              "name": "test_complete_single_line_code_presentation_preserves_all_facts",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CODE-PRESENTATION-01-ALLOW",
+                "M09-CODE-PRESENTATION-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_code_presentation.py",
+              "name": "test_code_presentation_cannot_repair_quotes_or_drop_retractions",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CODE-PRESENTATION-01-ALLOW",
+                "M09-CODE-PRESENTATION-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
