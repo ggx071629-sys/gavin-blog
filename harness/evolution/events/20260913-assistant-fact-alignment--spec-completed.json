@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260913-assistant-fact-alignment",
+  "created_at": "2026-09-12T16:54:22.160206+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "3d721bd0cc459ce9181821a9865040fcbc6ad1d98a7761208b3bf150985b02b3"
+}
