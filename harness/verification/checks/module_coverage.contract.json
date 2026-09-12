@@ -15956,6 +15956,70 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-DISCUSSION-CONTEXT-01",
+          "priority": "P1",
+          "scenario": "Complete technical discussion clauses and explicit placeholder assignments pass.",
+          "expectations": [
+            {
+              "id": "M09-DISCUSSION-CONTEXT-01-ALLOW",
+              "surface": "response",
+              "statement": "Complete technical discussion clauses and explicit placeholder assignments pass."
+            },
+            {
+              "id": "M09-DISCUSSION-CONTEXT-01-DENY",
+              "surface": "forbidden",
+              "statement": "Mixed execution, obfuscation, hidden-instruction extraction and actual/extended credentials stay blocked."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_discussion_context.py",
+              "name": "test_discussion_and_placeholders_preserve_execution_and_secret_guards",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DISCUSSION-CONTEXT-01-ALLOW",
+                "M09-DISCUSSION-CONTEXT-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-DISCUSSION-HYDRATE-01",
+          "priority": "P1",
+          "scenario": "A published and indexed SMTP tutorial survives retrieval and descriptor hydration.",
+          "expectations": [
+            {
+              "id": "M09-DISCUSSION-HYDRATE-01-ALLOW",
+              "surface": "response",
+              "statement": "A published and indexed SMTP tutorial survives retrieval and descriptor hydration."
+            },
+            {
+              "id": "M09-DISCUSSION-HYDRATE-01-DENY",
+              "surface": "forbidden",
+              "statement": "Malicious title, heading and body isolate the same chunk on retrieval and restoration."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_discussion_context.py",
+              "name": "test_published_discussion_hydrates_and_restores_without_exempting_metadata",
+              "gate": "api-tests",
+              "covers": [
+                "M09-DISCUSSION-HYDRATE-01-ALLOW",
+                "M09-DISCUSSION-HYDRATE-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
