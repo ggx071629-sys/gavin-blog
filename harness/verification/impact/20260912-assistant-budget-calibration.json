@@ -251,6 +251,61 @@
       ],
       "reason": "Document finite calibration and minimum input measurements, differing token units and unchanged admission/cost limits; ordinary guidance not an executable contract.",
       "dependencies": []
+    },
+    {
+      "path": "apps/api/tests/test_assistant_evidence_budget.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-G12-FIT-01"
+      ],
+      "reason": "Shorten the synthetic first source so the unchanged 8000 budget still reaches the intended deduplication and source-diversity assertions after the G07 fixed prompt growth; no product behavior change.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only a new offline numeric helper and calibration CLI; no existing production call site, provider transport, prompt selection, price, reservation or schema changes."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Only a new offline numeric helper and calibration CLI; no existing production call site, provider transport, prompt selection, price, reservation or schema changes."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Only a new offline numeric helper and calibration CLI; no existing production call site, provider transport, prompt selection, price, reservation or schema changes."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Only a new offline numeric helper and calibration CLI; no existing production call site, provider transport, prompt selection, price, reservation or schema changes."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only a new offline numeric helper and calibration CLI; no existing production call site, provider transport, prompt selection, price, reservation or schema changes."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Only a new offline numeric helper and calibration CLI; no existing production call site, provider transport, prompt selection, price, reservation or schema changes."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only a new offline numeric helper and calibration CLI; no existing production call site, provider transport, prompt selection, price, reservation or schema changes."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Only a new offline numeric helper and calibration CLI; no existing production call site, provider transport, prompt selection, price, reservation or schema changes."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Only a new offline numeric helper and calibration CLI; no existing production call site, provider transport, prompt selection, price, reservation or schema changes."
+        }
+      ]
     }
   ]
 }
