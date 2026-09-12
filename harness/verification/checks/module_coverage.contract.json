@@ -17917,6 +17917,78 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-RESTART-STATE-01",
+          "priority": "P0",
+          "scenario": "真实本机重启保留运营选择并验证依赖。",
+          "expectations": [
+            {
+              "id": "M09-RESTART-STATE-01-ALLOW",
+              "surface": "response",
+              "statement": "两次启动及退出后启停选择、管理员停止状态和索引代次保持；依赖失败阻止启动。"
+            },
+            {
+              "id": "M09-RESTART-STATE-01-DENY",
+              "surface": "forbidden",
+              "statement": "禁止正常重启自动开放、关闭访客入口或新增索引代次。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_management.py",
+              "kind": "pytest",
+              "name": "test_real_restart_preserves_operator_states[False]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RESTART-STATE-01-ALLOW",
+                "M09-RESTART-STATE-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_management.py",
+              "kind": "pytest",
+              "name": "test_real_restart_preserves_operator_states[True]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RESTART-STATE-01-ALLOW",
+                "M09-RESTART-STATE-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "kind": "pytest",
+              "name": "test_old_probe_lifespan_preserves_dependency_gates[ready]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RESTART-STATE-01-ALLOW",
+                "M09-RESTART-STATE-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "kind": "pytest",
+              "name": "test_old_probe_lifespan_preserves_dependency_gates[embedding]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RESTART-STATE-01-ALLOW",
+                "M09-RESTART-STATE-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "kind": "pytest",
+              "name": "test_old_probe_lifespan_preserves_dependency_gates[generation]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RESTART-STATE-01-ALLOW",
+                "M09-RESTART-STATE-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -20331,6 +20403,128 @@
               "gate": "api-tests",
               "covers": [
                 "M10-UNIT-INDEX-INTEGRITY-01-ALLOW"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M10-TRIAL-RECOVERY-01",
+          "priority": "P0",
+          "scenario": "显式恢复试问验证本机新索引资格并保留保护边界。",
+          "expectations": [
+            {
+              "id": "M10-TRIAL-RECOVERY-01-ALLOW",
+              "surface": "response",
+              "statement": "新索引完整时恢复试问并创建管理员会话，访客保持关闭且无新增模型调用记录。"
+            },
+            {
+              "id": "M10-TRIAL-RECOVERY-01-DENY",
+              "surface": "forbidden",
+              "statement": "禁止无效索引/探测、清理锁、恢复锁、未完成切换、缺失CSRF及非本机入口自动签发资格或开放访客。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "path": "apps/api/tests/test_assistant_management.py",
+              "kind": "pytest",
+              "name": "test_trial_revalidates_local_generation_without_reopening_public[none]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TRIAL-RECOVERY-01-ALLOW",
+                "M10-TRIAL-RECOVERY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_management.py",
+              "kind": "pytest",
+              "name": "test_trial_revalidates_local_generation_without_reopening_public[fts]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TRIAL-RECOVERY-01-ALLOW",
+                "M10-TRIAL-RECOVERY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_management.py",
+              "kind": "pytest",
+              "name": "test_trial_revalidates_local_generation_without_reopening_public[probe]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TRIAL-RECOVERY-01-ALLOW",
+                "M10-TRIAL-RECOVERY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_management.py",
+              "kind": "pytest",
+              "name": "test_trial_revalidates_local_generation_without_reopening_public[cleanup]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TRIAL-RECOVERY-01-ALLOW",
+                "M10-TRIAL-RECOVERY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_management.py",
+              "kind": "pytest",
+              "name": "test_trial_revalidates_local_generation_without_reopening_public[restore]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TRIAL-RECOVERY-01-ALLOW",
+                "M10-TRIAL-RECOVERY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_management.py",
+              "kind": "pytest",
+              "name": "test_trial_revalidates_local_generation_without_reopening_public[switch]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TRIAL-RECOVERY-01-ALLOW",
+                "M10-TRIAL-RECOVERY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_management.py",
+              "kind": "pytest",
+              "name": "test_trial_revalidates_local_generation_without_reopening_public[nonlocal]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TRIAL-RECOVERY-01-ALLOW",
+                "M10-TRIAL-RECOVERY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_management.py",
+              "kind": "pytest",
+              "name": "test_trial_revalidates_local_generation_without_reopening_public[csrf]",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TRIAL-RECOVERY-01-ALLOW",
+                "M10-TRIAL-RECOVERY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_management.py",
+              "kind": "pytest",
+              "name": "test_admin_trial_closed_public_isolated_authenticated_and_emergency_stopped",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TRIAL-RECOVERY-01-ALLOW",
+                "M10-TRIAL-RECOVERY-01-DENY"
+              ]
+            },
+            {
+              "path": "apps/api/tests/test_assistant_real_development.py",
+              "kind": "pytest",
+              "name": "test_real_development_boundary_and_signed_probe",
+              "gate": "api-tests",
+              "covers": [
+                "M10-TRIAL-RECOVERY-01-ALLOW",
+                "M10-TRIAL-RECOVERY-01-DENY"
               ]
             }
           ]
