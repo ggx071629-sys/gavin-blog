@@ -16212,7 +16212,17 @@
             {
               "kind": "pytest",
               "path": "apps/api/tests/test_assistant_retrieval_io.py",
-              "name": "test_slow_retrieval_leaves_app_loop_and_heartbeat_responsive",
+              "name": "test_slow_retrieval_leaves_app_loop_and_heartbeat_responsive[embedding]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRIEVAL-IO-01-ALLOW",
+                "M09-RETRIEVAL-IO-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_retrieval_io.py",
+              "name": "test_slow_retrieval_leaves_app_loop_and_heartbeat_responsive[hydrate]",
               "gate": "api-tests",
               "covers": [
                 "M09-RETRIEVAL-IO-01-ALLOW",
@@ -16274,7 +16284,17 @@
             {
               "kind": "pytest",
               "path": "apps/api/tests/test_assistant_retrieval_io.py",
-              "name": "test_deleted_session_drops_late_embedding_and_settles_once",
+              "name": "test_deleted_session_drops_late_embedding_and_settles_once[False]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRIEVAL-IO-02-ALLOW",
+                "M09-RETRIEVAL-IO-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_retrieval_io.py",
+              "name": "test_deleted_session_drops_late_embedding_and_settles_once[True]",
               "gate": "api-tests",
               "covers": [
                 "M09-RETRIEVAL-IO-02-ALLOW",
