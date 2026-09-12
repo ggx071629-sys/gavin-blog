@@ -1242,7 +1242,8 @@
         "apps/api/tests/test_assistant_retry_feedback.py",
         "apps/api/tests/test_assistant_stage_diagnostics.py",
         "apps/api/app/assistant/feedback.py",
-        "apps/api/tests/test_assistant_feedback.py"
+        "apps/api/tests/test_assistant_feedback.py",
+        "apps/api/tests/test_assistant_runtime_closure.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1323,7 +1324,8 @@
         "M09-METERED-LATENCY-01",
         "M09-FEEDBACK-API-01",
         "M09-FEEDBACK-TTL-01",
-        "M09-FEEDBACK-ADMIN-01"
+        "M09-FEEDBACK-ADMIN-01",
+        "M09-RUNTIME-CLOSURE-01"
       ],
       "dependents": [
         "M06.api_tooling",

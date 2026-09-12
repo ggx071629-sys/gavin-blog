@@ -16849,6 +16849,48 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-RUNTIME-CLOSURE-01",
+          "priority": "P1",
+          "scenario": "Empty provider result remains unknown without retry.",
+          "expectations": [
+            {
+              "id": "M09-RUNTIME-CLOSURE-01-ALLOW",
+              "surface": "response",
+              "statement": "No observed provider response terminates as unknown, charges the reserved maximum once and idempotent replay sends no request."
+            },
+            {
+              "id": "M09-RUNTIME-CLOSURE-01-DENY",
+              "surface": "forbidden",
+              "statement": "Missing raw and parsed results must not be recorded as successful format failures or trigger a second call."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_runtime_closure.py",
+              "name": "test_unobserved_provider_result_is_unknown_and_never_retried[none]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RUNTIME-CLOSURE-01-ALLOW",
+                "M09-RUNTIME-CLOSURE-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_runtime_closure.py",
+              "name": "test_unobserved_provider_result_is_unknown_and_never_retried[empty]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RUNTIME-CLOSURE-01-ALLOW",
+                "M09-RUNTIME-CLOSURE-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
