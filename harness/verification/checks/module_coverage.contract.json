@@ -15820,6 +15820,38 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-SUPPORTED-PARAPHRASE-01",
+          "priority": "P1",
+          "scenario": "Support finite technical equivalents and consistent explicit enumeration summaries.",
+          "expectations": [
+            {
+              "id": "M09-SUPPORTED-PARAPHRASE-01-E01",
+              "surface": "response",
+              "statement": "G04 personal rewrite, database-name equivalence, time conversion and explicit list-count summary are accepted."
+            },
+            {
+              "id": "M09-SUPPORTED-PARAPHRASE-01-E02",
+              "surface": "forbidden",
+              "statement": "Wrong database, invented count, examples-only lists, duplicate entries, inconsistent cardinality and unbounded retry claims are rejected."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_supported_paraphrase.py",
+              "name": "test_supported_technical_paraphrases_and_explicit_enumeration_counts",
+              "gate": "api-tests",
+              "covers": [
+                "M09-SUPPORTED-PARAPHRASE-01-E01",
+                "M09-SUPPORTED-PARAPHRASE-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },

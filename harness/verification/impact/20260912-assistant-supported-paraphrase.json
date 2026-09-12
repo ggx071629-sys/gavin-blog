@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "task_id": "20260912-assistant-supported-paraphrase",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/output.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-SUPPORTED-PARAPHRASE-01",
+        "M09-GAP-CLAIMS-01",
+        "M09-CLAIM-CONTEXT-01",
+        "M09-QUANTITY-BINDING-01"
+      ],
+      "reason": "Adds bounded database naming/retry equivalents and explicit consistent enumeration projection; all other support, context and numeric checks remain.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_supported_paraphrase.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-SUPPORTED-PARAPHRASE-01"
+      ],
+      "reason": "Paired G04 positive and negative regressions, including incomplete/duplicate lists and altered retry scope.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Documents finite supported rewrites and residual semantic limits; no new executable gate.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Registers one exact paired paraphrase test without changing verifier algorithms.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Adds the paraphrase test to the existing runtime owner and leaves dependency edges intact.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only bounded claim canonicalization, its paired tests or case registry change; existing consumer API, wire shape, lifecycle and verifier algorithms remain intact. Selected runtime claim/quantity cases verify the changed local behavior."
+        }
+      ]
+    }
+  ]
+}
