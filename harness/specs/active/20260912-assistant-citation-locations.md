@@ -10,12 +10,10 @@ documentation_impact: required
 documentation_targets:
   - apps/web/README.md
 documentation_reason: 说明公开 About 与问答来源定位的可核查范围。
-status: frozen
-frozen_at: 2026-09-12T14:25:00.119450+00:00
-freeze_reason: 用户要求完成 Q4-01 后停止；Q4-02 仅准备规格，尚未实施。
-frozen_scope_sha256: 17cb647d3a04c97045e3dedaa6c07a9c2b55f4d40e00d047869b7f7315f16f3f
+status: active
 state_history:
   - {"action":"freeze","at":"2026-09-12T14:25:00.119450+00:00","reason":"用户要求完成 Q4-01 后停止；Q4-02 仅准备规格，尚未实施。","scope_sha256":"17cb647d3a04c97045e3dedaa6c07a9c2b55f4d40e00d047869b7f7315f16f3f"}
+  - {"action":"resume","at":"2026-09-12T14:41:44.094380+00:00","reason":"用户要求恢复 Q4-02 并依次完成剩余任务；沿用累计100次2元上限，未验证事项和Q6生产资格保留阻塞。"}
 ---
 
 # Context
