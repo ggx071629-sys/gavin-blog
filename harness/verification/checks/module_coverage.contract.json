@@ -16586,7 +16586,27 @@
             {
               "kind": "pytest",
               "path": "apps/api/tests/test_assistant_retry_feedback.py",
-              "name": "test_failure_classes_preserve_attempt_bound",
+              "name": "test_failure_classes_preserve_attempt_bound[format]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRY-FAILURE-01-ALLOW",
+                "M09-RETRY-FAILURE-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_retry_feedback.py",
+              "name": "test_failure_classes_preserve_attempt_bound[unsupported]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRY-FAILURE-01-ALLOW",
+                "M09-RETRY-FAILURE-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_retry_feedback.py",
+              "name": "test_failure_classes_preserve_attempt_bound[unknown]",
               "gate": "api-tests",
               "covers": [
                 "M09-RETRY-FAILURE-01-ALLOW",
