@@ -1333,7 +1333,9 @@
         "M09-REFERENCE-RESOLVE-01",
         "M09-REFERENCE-CLARIFY-01",
         "M09-PAGE-PRIORITY-01",
-        "M09-SCOPE-NOTICES-01"
+        "M09-SCOPE-NOTICES-01",
+        "M09-CONTEXT-CROSS-01",
+        "M09-CONTEXT-HISTORY-01"
       ],
       "dependents": [
         "M06.api_tooling",

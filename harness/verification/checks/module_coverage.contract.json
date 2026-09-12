@@ -12046,7 +12046,7 @@
             {
               "kind": "pytest",
               "path": "apps/api/tests/test_assistant_runtime_integrity.py",
-              "name": "test_prompt_uses_latest_four_complete_unpurged_pairs_and_escapes_history",
+              "name": "test_prompt_excludes_prior_pairs_from_new_factual_question",
               "gate": "api-tests",
               "covers": [
                 "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-01-E01",
@@ -17239,6 +17239,110 @@
               "project": "chromium",
               "title_path": [
                 "unverified completeness and freshness remain distinct after restore"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-CONTEXT-CROSS-01",
+          "priority": "P1",
+          "scenario": "Cross-source claims preserve conflict and current version/citation safety.",
+          "expectations": [
+            {
+              "id": "M09-CONTEXT-CROSS-01-ALLOW",
+              "surface": "response",
+              "statement": "Cross-source claims preserve conflict and current version/citation safety."
+            },
+            {
+              "id": "M09-CONTEXT-CROSS-01-DENY",
+              "surface": "forbidden",
+              "statement": "Revoked sources, unsupported conflict resolution or old question/answer facts cannot be delivered or persisted in checkpoints."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_resume_citations.py",
+              "name": "test_resume_self_report_conflict_and_unaliased_operational_notice",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CONTEXT-CROSS-01-ALLOW",
+                "M09-CONTEXT-CROSS-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_resume_citations.py",
+              "name": "test_resume_graph_rechecks_before_provider_and_after_generation",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CONTEXT-CROSS-01-ALLOW",
+                "M09-CONTEXT-CROSS-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_about_retrieval.py",
+              "name": "test_about_rebuild_hybrid_budget_and_stale_evidence",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CONTEXT-CROSS-01-ALLOW",
+                "M09-CONTEXT-CROSS-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_claim_context.py",
+              "name": "test_retractions_and_explicit_same_subject_conflicts",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CONTEXT-CROSS-01-ALLOW",
+                "M09-CONTEXT-CROSS-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-CONTEXT-HISTORY-01",
+          "priority": "P1",
+          "scenario": "Current factual question excludes old answer prose and transient queries from prompts/checkpoints.",
+          "expectations": [
+            {
+              "id": "M09-CONTEXT-HISTORY-01-ALLOW",
+              "surface": "response",
+              "statement": "Current factual question excludes old answer prose and transient queries from prompts/checkpoints."
+            },
+            {
+              "id": "M09-CONTEXT-HISTORY-01-DENY",
+              "surface": "forbidden",
+              "statement": "Revoked sources, unsupported conflict resolution or old question/answer facts cannot be delivered or persisted in checkpoints."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+              "name": "test_prompt_excludes_prior_pairs_from_new_factual_question",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CONTEXT-HISTORY-01-ALLOW",
+                "M09-CONTEXT-HISTORY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+              "name": "test_history_query_is_transient_and_never_enters_langgraph_state",
+              "gate": "api-tests",
+              "covers": [
+                "M09-CONTEXT-HISTORY-01-ALLOW",
+                "M09-CONTEXT-HISTORY-01-DENY"
               ]
             }
           ]
