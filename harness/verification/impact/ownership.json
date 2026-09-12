@@ -1234,7 +1234,9 @@
         "apps/api/tests/test_assistant_supported_paraphrase.py",
         "apps/api/tests/test_assistant_technical_text.py",
         "apps/api/tests/test_assistant_discussion_context.py",
-        "apps/api/tests/test_assistant_g07_repair.py"
+        "apps/api/tests/test_assistant_g07_repair.py",
+        "apps/api/app/assistant/retrieval_io.py",
+        "apps/api/tests/test_assistant_retrieval_io.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1302,7 +1304,10 @@
         "M09-DISCUSSION-CONTEXT-01",
         "M09-DISCUSSION-HYDRATE-01",
         "M09-G07-REPLAY-01",
-        "M09-G07-PREPARE-01"
+        "M09-G07-PREPARE-01",
+        "M09-RETRIEVAL-IO-01",
+        "M09-RETRIEVAL-IO-02",
+        "M09-RETRIEVAL-IO-03"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1844,7 +1849,8 @@
         "M06-ACCOUNT-CONTRACT-01",
         "M06-ACCOUNT-COMPAT-01",
         "M06-RESUME-REFRESH-WORKER-01",
-        "M10-SOURCE-DIVERSITY-01"
+        "M10-SOURCE-DIVERSITY-01",
+        "M09-RETRIEVAL-IO-02"
       ],
       "dependents": [
         "M02.publishing",

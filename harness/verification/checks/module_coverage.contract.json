@@ -16188,6 +16188,172 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-RETRIEVAL-IO-01",
+          "priority": "P1",
+          "scenario": "Slow embedding and hydration allow session reads, other visitors, lease heartbeats and cleanup before completion.",
+          "expectations": [
+            {
+              "id": "M09-RETRIEVAL-IO-01-ALLOW",
+              "surface": "response",
+              "statement": "Slow embedding and hydration allow session reads, other visitors, lease heartbeats and cleanup before completion."
+            },
+            {
+              "id": "M09-RETRIEVAL-IO-01-DENY",
+              "surface": "forbidden",
+              "statement": "Synchronous waits cannot stall the application loop; persistent local Qdrant remains readable from a worker."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_retrieval_io.py",
+              "name": "test_slow_retrieval_leaves_app_loop_and_heartbeat_responsive",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRIEVAL-IO-01-ALLOW",
+                "M09-RETRIEVAL-IO-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_retrieval_io.py",
+              "name": "test_persistent_qdrant_can_query_from_retrieval_worker",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRIEVAL-IO-01-ALLOW",
+                "M09-RETRIEVAL-IO-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-RETRIEVAL-IO-02",
+          "priority": "P1",
+          "scenario": "Cancellation holds the live worker slot and shutdown drains work before closing database and owner lock.",
+          "expectations": [
+            {
+              "id": "M09-RETRIEVAL-IO-02-ALLOW",
+              "surface": "response",
+              "statement": "Cancellation holds the live worker slot and shutdown drains work before closing database and owner lock."
+            },
+            {
+              "id": "M09-RETRIEVAL-IO-02-DENY",
+              "surface": "forbidden",
+              "statement": "Queued cancellation must not dispatch; late results cannot restore deleted body or double-settle budget."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_retrieval_io.py",
+              "name": "test_retrieval_executor_capacity_cancellation_and_shutdown",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRIEVAL-IO-02-ALLOW",
+                "M09-RETRIEVAL-IO-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_retrieval_io.py",
+              "name": "test_runtime_shutdown_drains_retrieval_before_releasing_resources",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRIEVAL-IO-02-ALLOW",
+                "M09-RETRIEVAL-IO-02-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_retrieval_io.py",
+              "name": "test_deleted_session_drops_late_embedding_and_settles_once",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRIEVAL-IO-02-ALLOW",
+                "M09-RETRIEVAL-IO-02-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-RETRIEVAL-IO-03",
+          "priority": "P1",
+          "scenario": "Concurrent graph completion, query-budget FTS fallback and complete identity lease checks remain valid.",
+          "expectations": [
+            {
+              "id": "M09-RETRIEVAL-IO-03-ALLOW",
+              "surface": "response",
+              "statement": "Concurrent graph completion, query-budget FTS fallback and complete identity lease checks remain valid."
+            },
+            {
+              "id": "M09-RETRIEVAL-IO-03-DENY",
+              "surface": "forbidden",
+              "statement": "History and transient retrieval data cannot enter checkpoint state; deleted late chat cannot deliver."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_lease_migration.py",
+              "name": "test_concurrent_graphs_finish_without_blocking_control_on_saver_transaction",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRIEVAL-IO-03-ALLOW",
+                "M09-RETRIEVAL-IO-03-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_online_matrix.py",
+              "name": "test_query_embedding_budget_degrades_to_fts",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRIEVAL-IO-03-ALLOW",
+                "M09-RETRIEVAL-IO-03-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+              "name": "test_late_provider_completion_after_delete_has_no_body_checkpoint_or_delivery",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRIEVAL-IO-03-ALLOW",
+                "M09-RETRIEVAL-IO-03-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+              "name": "test_normal_mutation_permit_requires_exact_lease_scope_keys",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRIEVAL-IO-03-ALLOW",
+                "M09-RETRIEVAL-IO-03-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+              "name": "test_history_query_is_transient_and_never_enters_langgraph_state",
+              "gate": "api-tests",
+              "covers": [
+                "M09-RETRIEVAL-IO-03-ALLOW",
+                "M09-RETRIEVAL-IO-03-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
