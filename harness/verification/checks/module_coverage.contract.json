@@ -17021,7 +17021,47 @@
             {
               "kind": "pytest",
               "path": "apps/api/tests/test_assistant_reference_context.py",
-              "name": "test_ambiguous_reference_clarifies_without_provider_calls",
+              "name": "test_ambiguous_reference_clarifies_without_provider_calls[missing]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-REFERENCE-CLARIFY-01-ALLOW",
+                "M09-REFERENCE-CLARIFY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_reference_context.py",
+              "name": "test_ambiguous_reference_clarifies_without_provider_calls[multiple]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-REFERENCE-CLARIFY-01-ALLOW",
+                "M09-REFERENCE-CLARIFY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_reference_context.py",
+              "name": "test_ambiguous_reference_clarifies_without_provider_calls[ordinal]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-REFERENCE-CLARIFY-01-ALLOW",
+                "M09-REFERENCE-CLARIFY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_reference_context.py",
+              "name": "test_ambiguous_reference_clarifies_without_provider_calls[expired]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-REFERENCE-CLARIFY-01-ALLOW",
+                "M09-REFERENCE-CLARIFY-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_reference_context.py",
+              "name": "test_ambiguous_reference_clarifies_without_provider_calls[withdrawn]",
               "gate": "api-tests",
               "covers": [
                 "M09-REFERENCE-CLARIFY-01-ALLOW",
