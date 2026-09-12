@@ -1,0 +1,805 @@
+{
+  "schema_version": 2,
+  "task_id": "20260912-assistant-reference-context",
+  "created_at": "2026-09-12T15:03:21.537744+00:00",
+  "command": "python -m tools.harness verify 20260912-assistant-reference-context",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "stack",
+  "fingerprints": {
+    "source_tree": "908737e94875bb8c65030a41a3337a60c531a1ca",
+    "active_spec_sha256": "db8ae8d994fb86f2e7c1c6b2d6767493f8dbae6a4b4786e7109778d209e99bbe",
+    "verification_contract_sha256": "df6b45e08b628eaae1e366bcbea6dbb04eb441b433b7d3d56df9293b82fb8c17",
+    "gate_config_sha256": "6409607d5f761f81419db2f8a9e07d465ec26c79d79437b91a8cd3d759be7350",
+    "documentation_contract_sha256": "7aeb3575fdfffecf977f99261af79cc083860ddc9d575140a9356301796ab406",
+    "documentation_targets_sha256": "e2ae54e6571cdba3690ce8088eb1abab0dacd44db81c880374d267e9dfd12b6c",
+    "module_contract_sha256": "7be7c4c8921ca225898d386d955d5411768b1d96ef63e33de5c950c4dee53ebf"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "说明有限来源指代、专用澄清、历史不作为事实及未覆盖语言。",
+    "targets": [
+      "apps/api/README.md",
+      "apps/web/README.md"
+    ],
+    "baseline_commit": "9f22bd965b03c191f5e4a6b652d761a692669e5c",
+    "target_blobs": {
+      "apps/api/README.md": "0414e3d96a1e9bd3b94012140f39421f2b175b37",
+      "apps/web/README.md": "e55277ab2f3df796276859e03ef7e516a779ee70"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "7d69cd3b91e9c32f439c2673a2e207afe5f39707",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260912-assistant-reference-context.json",
+      "sha256": "8292716ca10beee9221dcf6b531cb20beb60258679aa5ccc7173206015ce35ad",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M09-REFERENCE-CLARIFY-01",
+        "M09-REFERENCE-RESOLVE-01",
+        "M09-REFERENCE-WEB-01"
+      ],
+      "selected_refs": 9,
+      "excluded_cases": 369
+    },
+    "receipt": {
+      "run_id": "bcbd936ea34299d2610e1883d376ea7a",
+      "identity": "ad1294f2f45cc59ca67839b6b5946759c0a33af4288450afa4da574437a0b315",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 3427.67,
+      "plan_inputs": 880.354,
+      "execute_cleanup_and_input_recheck": 125480.09
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "7be7c4c8921ca225898d386d955d5411768b1d96ef63e33de5c950c4dee53ebf",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-REFERENCE-RESOLVE-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Unique retained source is resolved and fresh evidence answers without old answer text.",
+            "expectations": [
+              {
+                "id": "M09-REFERENCE-RESOLVE-01-ALLOW",
+                "surface": "response",
+                "statement": "Unique retained source is resolved and fresh evidence answers without old answer text."
+              },
+              {
+                "id": "M09-REFERENCE-RESOLVE-01-DENY",
+                "surface": "forbidden",
+                "statement": "Unresolved or expired objects cannot dispatch a provider; prior answer prose cannot become current facts or ambiguous source focus."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_unique_reference_retrieves_current_source_without_old_answer",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REFERENCE-RESOLVE-01-ALLOW",
+                  "M09-REFERENCE-RESOLVE-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-REFERENCE-CLARIFY-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Ambiguity, ordinals, expiry and withdrawal clarify before dispatch; new topic has no prior query.",
+            "expectations": [
+              {
+                "id": "M09-REFERENCE-CLARIFY-01-ALLOW",
+                "surface": "response",
+                "statement": "Ambiguity, ordinals, expiry and withdrawal clarify before dispatch; new topic has no prior query."
+              },
+              {
+                "id": "M09-REFERENCE-CLARIFY-01-DENY",
+                "surface": "forbidden",
+                "statement": "Unresolved or expired objects cannot dispatch a provider; prior answer prose cannot become current facts or ambiguous source focus."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_ambiguous_reference_clarifies_without_provider_calls[missing]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REFERENCE-CLARIFY-01-ALLOW",
+                  "M09-REFERENCE-CLARIFY-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_ambiguous_reference_clarifies_without_provider_calls[multiple]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REFERENCE-CLARIFY-01-ALLOW",
+                  "M09-REFERENCE-CLARIFY-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_ambiguous_reference_clarifies_without_provider_calls[ordinal]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REFERENCE-CLARIFY-01-ALLOW",
+                  "M09-REFERENCE-CLARIFY-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_ambiguous_reference_clarifies_without_provider_calls[expired]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REFERENCE-CLARIFY-01-ALLOW",
+                  "M09-REFERENCE-CLARIFY-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_ambiguous_reference_clarifies_without_provider_calls[withdrawn]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REFERENCE-CLARIFY-01-ALLOW",
+                  "M09-REFERENCE-CLARIFY-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_topic_switch_has_no_historical_query_or_prompt",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REFERENCE-CLARIFY-01-ALLOW",
+                  "M09-REFERENCE-CLARIFY-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M09-REFERENCE-WEB-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Clarification remains distinct after reload and multi-citation keyboard focus follows each location.",
+            "expectations": [
+              {
+                "id": "M09-REFERENCE-WEB-01-ALLOW",
+                "surface": "response",
+                "statement": "Clarification remains distinct after reload and multi-citation keyboard focus follows each location."
+              },
+              {
+                "id": "M09-REFERENCE-WEB-01-DENY",
+                "surface": "forbidden",
+                "statement": "Unresolved or expired objects cannot dispatch a provider; prior answer prose cannot become current facts or ambiguous source focus."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "clarification is a distinct recoverable terminal notice",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "clarification is a distinct recoverable terminal notice"
+                ],
+                "covers": [
+                  "M09-REFERENCE-WEB-01-ALLOW",
+                  "M09-REFERENCE-WEB-01-DENY"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "multiple chunk citations navigate the deduplicated source live and after reload",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "multiple chunk citations navigate the deduplicated source live and after reload"
+                ],
+                "covers": [
+                  "M09-REFERENCE-WEB-01-ALLOW",
+                  "M09-REFERENCE-WEB-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 3.976,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "224 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 233.608,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 86.709,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.503,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "2132 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 2370.693,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "351 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 100.694,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 373 cases, 756 expectations, 1184 exact test references; contract sha256 7be7c4c8921c"
+      ],
+      "status": "passed",
+      "duration_ms": 538.806,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.233,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.281,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 78.504,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-4"
+      ],
+      "duration_ms": 2532.475,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "bcbd936ea34299d2610e1883d376ea7a",
+        "attempt_id": "76a03121b166a210847525108cd5d023"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-reference-context --gate api-tests",
+      "status": "passed",
+      "duration_ms": 16515.308,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1471,
+        "selection_counts": {
+          "collected": 7,
+          "executed": 7
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_ambiguous_reference_clarifies_without_provider_calls[missing]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_ambiguous_reference_clarifies_without_provider_calls[multiple]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_ambiguous_reference_clarifies_without_provider_calls[ordinal]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_ambiguous_reference_clarifies_without_provider_calls[expired]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_ambiguous_reference_clarifies_without_provider_calls[withdrawn]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_topic_switch_has_no_historical_query_or_prompt"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_reference_context.py",
+                "name": "test_unique_reference_retrieves_current_source_without_old_answer"
+              }
+            ],
+            "duration_ms": 16108.738,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\bcbd936ea34299d2610e1883d376ea7a\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "bcbd936ea34299d2610e1883d376ea7a",
+        "attempt_id": "ed2075964be51fc636be0db34c772127"
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-reference-context --gate e2e",
+      "status": "passed",
+      "duration_ms": 102818.042,
+      "covers": [
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 3990,
+        "selection_counts": {
+          "collected": 2,
+          "executed": 2
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "clarification is a distinct recoverable terminal notice",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "clarification is a distinct recoverable terminal notice"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "multiple chunk citations navigate the deduplicated source live and after reload",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "multiple chunk citations navigate the deduplicated source live and after reload"
+                ]
+              }
+            ],
+            "duration_ms": 3134.575,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "clarification is a distinct recoverable terminal notice",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "clarification is a distinct recoverable terminal notice"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "multiple chunk citations navigate the deduplicated source live and after reload",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "multiple chunk citations navigate the deduplicated source live and after reload"
+                ]
+              }
+            ],
+            "duration_ms": 1513.388
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "clarification is a distinct recoverable terminal notice",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "clarification is a distinct recoverable terminal notice"
+                ]
+              }
+            ],
+            "duration_ms": 1302.517,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "clarification is a distinct recoverable terminal notice",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "clarification is a distinct recoverable terminal notice"
+                ]
+              }
+            ],
+            "duration_ms": 47327.585,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "multiple chunk citations navigate the deduplicated source live and after reload",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "multiple chunk citations navigate the deduplicated source live and after reload"
+                ]
+              }
+            ],
+            "duration_ms": 1310.223,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "multiple chunk citations navigate the deduplicated source live and after reload",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "multiple chunk citations navigate the deduplicated source live and after reload"
+                ]
+              }
+            ],
+            "duration_ms": 47821.238,
+            "batch_id": "batch-0002"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\bcbd936ea34299d2610e1883d376ea7a\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "bcbd936ea34299d2610e1883d376ea7a",
+        "attempt_id": "0d422c259cf1b6c52af73ba1d496cda4"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2904.244,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 128195.076,
+    "failures": []
+  },
+  "source_commit": "7d69cd3b91e9c32f439c2673a2e207afe5f39707"
+}
