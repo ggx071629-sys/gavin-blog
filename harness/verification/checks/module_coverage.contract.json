@@ -16784,7 +16784,10 @@
                 "M09-FEEDBACK-WEB-01-DENY"
               ],
               "project": "chromium",
-              "config": "playwright.assistant.config.ts"
+              "config": "playwright.assistant.config.ts",
+              "title_path": [
+                "body-free feedback saves restores retracts and ignores a late result after clear"
+              ]
             }
           ]
         },
@@ -16840,7 +16843,10 @@
                 "M09-FEEDBACK-ADMIN-01-DENY"
               ],
               "project": "chromium",
-              "config": "playwright.assistant.config.ts"
+              "config": "playwright.assistant.config.ts",
+              "title_path": [
+                "feedback crosses the real proxy and appears in passive admin observations"
+              ]
             }
           ]
         }
