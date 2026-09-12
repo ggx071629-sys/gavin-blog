@@ -17717,6 +17717,70 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-FACT-ALIGNMENT-01",
+          "priority": "P1",
+          "scenario": "Whole structured facts preserve mappings, subjects, numbers, negation, qualifications and exact quotes.",
+          "expectations": [
+            {
+              "id": "M09-FACT-ALIGNMENT-01-ALLOW",
+              "surface": "response",
+              "statement": "Whole structured facts preserve mappings, subjects, numbers, negation, qualifications and exact quotes."
+            },
+            {
+              "id": "M09-FACT-ALIGNMENT-01-DENY",
+              "surface": "forbidden",
+              "statement": "Changed facts or user instructions must not gain authority."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_fact_alignment.py",
+              "name": "test_complete_structured_facts_and_counterexamples",
+              "gate": "api-tests",
+              "covers": [
+                "M09-FACT-ALIGNMENT-01-ALLOW",
+                "M09-FACT-ALIGNMENT-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-FACT-ALIGNMENT-02",
+          "priority": "P1",
+          "scenario": "English attribution questions and body sentence requests receive fixed instructions without promoting user data.",
+          "expectations": [
+            {
+              "id": "M09-FACT-ALIGNMENT-02-ALLOW",
+              "surface": "response",
+              "statement": "English attribution questions and body sentence requests receive fixed instructions without promoting user data."
+            },
+            {
+              "id": "M09-FACT-ALIGNMENT-02-DENY",
+              "surface": "forbidden",
+              "statement": "Changed facts or user instructions must not gain authority."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_fact_alignment.py",
+              "name": "test_sentence_and_english_prompt_preserve_untrusted_boundary",
+              "gate": "api-tests",
+              "covers": [
+                "M09-FACT-ALIGNMENT-02-ALLOW",
+                "M09-FACT-ALIGNMENT-02-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
