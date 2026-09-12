@@ -1231,7 +1231,8 @@
         "apps/api/tests/test_assistant_claim_context.py",
         "apps/api/app/assistant/quantities.py",
         "apps/api/tests/test_assistant_quantity_binding.py",
-        "apps/api/tests/test_assistant_supported_paraphrase.py"
+        "apps/api/tests/test_assistant_supported_paraphrase.py",
+        "apps/api/tests/test_assistant_technical_text.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1294,7 +1295,8 @@
         "M09-CLAIM-CONTEXT-02",
         "M09-CLAIM-CONTEXT-03",
         "M09-QUANTITY-BINDING-01",
-        "M09-SUPPORTED-PARAPHRASE-01"
+        "M09-SUPPORTED-PARAPHRASE-01",
+        "M09-TECHNICAL-TEXT-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -3078,7 +3080,8 @@
         "M09-ABOUT-CITATION-01",
         "M09-RESUME-CITATION-UI-01",
         "M09-INPUT-ERROR-02",
-        "M09-SOURCE-TITLE-02"
+        "M09-SOURCE-TITLE-02",
+        "M09-TECHNICAL-CITATION-01"
       ],
       "dependents": [
         "M01.navigation",
@@ -3138,7 +3141,8 @@
         "M09-ABOUT-CITATION-01",
         "M06-RESUME-STORAGE-01",
         "M09-RESUME-CITATION-UI-01",
-        "M09-INPUT-ERROR-02"
+        "M09-INPUT-ERROR-02",
+        "M09-TECHNICAL-CITATION-01"
       ],
       "dependents": []
     },

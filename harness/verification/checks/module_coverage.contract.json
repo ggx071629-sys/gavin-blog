@@ -15852,6 +15852,110 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-TECHNICAL-TEXT-01",
+          "priority": "P1",
+          "scenario": "Supported comparisons, arrays and simple generics remain literal with explicit citation boundaries.",
+          "expectations": [
+            {
+              "id": "M09-TECHNICAL-TEXT-01-ALLOW",
+              "surface": "response",
+              "statement": "Supported comparisons, arrays and simple generics remain literal with explicit citation boundaries."
+            },
+            {
+              "id": "M09-TECHNICAL-TEXT-01-DENY",
+              "surface": "forbidden",
+              "statement": "Unsafe markup, free citation markers and changed indices remain rejected."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_technical_text.py",
+              "name": "test_grounded_technical_text_preserves_output_guards",
+              "gate": "api-tests",
+              "covers": [
+                "M09-TECHNICAL-TEXT-01-ALLOW",
+                "M09-TECHNICAL-TEXT-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-TECHNICAL-CITATION-01",
+          "priority": "P1",
+          "scenario": "Literal array subscripts survive public/restored and admin parsing with real citations closed.",
+          "expectations": [
+            {
+              "id": "M09-TECHNICAL-CITATION-01-ALLOW",
+              "surface": "response",
+              "statement": "Literal array subscripts survive public/restored and admin parsing with real citations closed."
+            },
+            {
+              "id": "M09-TECHNICAL-CITATION-01-DENY",
+              "surface": "forbidden",
+              "statement": "No literal subscript becomes a citation and invalid source references fail closed."
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "keeps array subscripts literal while closing terminal citations",
+              "gate": "web-quality",
+              "covers": [
+                "M09-TECHNICAL-CITATION-01-ALLOW",
+                "M09-TECHNICAL-CITATION-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "splits each [n] marker once without duplicating preceding text",
+              "gate": "web-quality",
+              "covers": [
+                "M09-TECHNICAL-CITATION-01-ALLOW",
+                "M09-TECHNICAL-CITATION-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "closes markers only to matching citations and allowlisted sources",
+              "gate": "web-quality",
+              "covers": [
+                "M09-TECHNICAL-CITATION-01-ALLOW",
+                "M09-TECHNICAL-CITATION-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant.test.ts",
+              "name": "closes multiple chunk markers against a deduplicated article source",
+              "gate": "web-quality",
+              "covers": [
+                "M09-TECHNICAL-CITATION-01-ALLOW",
+                "M09-TECHNICAL-CITATION-01-DENY"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/assistant-management.test.ts",
+              "name": "closes trial citations over safe public sources and bounded excerpts",
+              "gate": "web-quality",
+              "covers": [
+                "M09-TECHNICAL-CITATION-01-ALLOW",
+                "M09-TECHNICAL-CITATION-01-DENY"
+              ]
+            }
+          ]
         }
       ]
     },
