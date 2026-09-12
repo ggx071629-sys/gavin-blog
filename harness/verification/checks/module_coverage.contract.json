@@ -12063,7 +12063,7 @@
             {
               "id": "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-REMEDIATION-01-E01",
               "surface": "response",
-              "statement": "estimator uses provider count only when it is more conservative; prompt drops oldest complete pairs before dispatch; retrieval query preserves current question under long history; context window validation and readiness bind all token limits; resume discards cached vector when history query changes"
+              "statement": "estimator uses provider count only when it is more conservative; prompt drops oldest complete pairs before dispatch; retrieval query preserves current question under long history; context window validation and readiness bind all token limits; resume discards cached vector when history query changes; final MATCH retains the current topic under long history and retrieves it from a real FTS5 table"
             },
             {
               "id": "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-REMEDIATION-01-E02",
@@ -12951,17 +12951,17 @@
         {
           "id": "M09-E5-QUERY-01",
           "priority": "P1",
-          "scenario": "完整问题和瞬态历史",
+          "scenario": "Current-first bounded query, final FTS terms, history and explicit E5 degradation.",
           "expectations": [
             {
               "id": "M09-E5-QUERY-01-E01",
               "surface": "response",
-              "statement": "只用剩余token容纳历史，超长问题显式降级"
+              "statement": "Current question precedes newest history within the token budget; final precise, relaxed and legacy FTS expressions retain current terms and nearby referent topics."
             },
             {
               "id": "M09-E5-QUERY-01-E02",
               "surface": "forbidden",
-              "statement": "不得截掉当前问题或保存历史query到checkpoint"
+              "statement": "Do not truncate the complete current question to fit E5 or persist the transient history query in checkpoint state."
             }
           ],
           "required_gates": [
