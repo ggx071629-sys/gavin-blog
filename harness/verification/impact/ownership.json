@@ -1245,7 +1245,9 @@
         "apps/api/tests/test_assistant_feedback.py",
         "apps/api/tests/test_assistant_runtime_closure.py",
         "apps/api/app/assistant/reference_context.py",
-        "apps/api/tests/test_assistant_reference_context.py"
+        "apps/api/tests/test_assistant_reference_context.py",
+        "apps/api/app/assistant/question_scope.py",
+        "apps/api/tests/test_assistant_question_boundaries.py"
       ],
       "cases": [
         "M09-P0-02",
@@ -1329,7 +1331,9 @@
         "M09-FEEDBACK-ADMIN-01",
         "M09-RUNTIME-CLOSURE-01",
         "M09-REFERENCE-RESOLVE-01",
-        "M09-REFERENCE-CLARIFY-01"
+        "M09-REFERENCE-CLARIFY-01",
+        "M09-PAGE-PRIORITY-01",
+        "M09-SCOPE-NOTICES-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -3134,7 +3138,8 @@
         "M09-FEEDBACK-ADMIN-01",
         "M09-CITATION-LOCATIONS-01",
         "M09-ABOUT-RETRIEVAL-01",
-        "M09-REFERENCE-WEB-01"
+        "M09-REFERENCE-WEB-01",
+        "M09-SCOPE-WEB-01"
       ],
       "dependents": [
         "M01.navigation",

@@ -17131,6 +17131,117 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-PAGE-PRIORITY-01",
+          "priority": "P1",
+          "scenario": "Only explicit page references or resolved sources boost a page.",
+          "expectations": [
+            {
+              "id": "M09-PAGE-PRIORITY-01-ALLOW",
+              "surface": "response",
+              "statement": "Only explicit page references or resolved sources boost a page."
+            },
+            {
+              "id": "M09-PAGE-PRIORITY-01-DENY",
+              "surface": "forbidden",
+              "statement": "Unverified global scope is not presented as complete/current fact or confused with no evidence; unrelated pages are not boosted."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_question_boundaries.py",
+              "name": "test_page_priority_requires_explicit_reference",
+              "gate": "api-tests",
+              "covers": [
+                "M09-PAGE-PRIORITY-01-ALLOW",
+                "M09-PAGE-PRIORITY-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-SCOPE-NOTICES-01",
+          "priority": "P1",
+          "scenario": "Inventory and global freshness requests stop before providers; local facts and technical terms remain eligible.",
+          "expectations": [
+            {
+              "id": "M09-SCOPE-NOTICES-01-ALLOW",
+              "surface": "response",
+              "statement": "Inventory and global freshness requests stop before providers; local facts and technical terms remain eligible."
+            },
+            {
+              "id": "M09-SCOPE-NOTICES-01-DENY",
+              "surface": "forbidden",
+              "statement": "Unverified global scope is not presented as complete/current fact or confused with no evidence; unrelated pages are not boosted."
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_question_boundaries.py",
+              "name": "test_scope_rules_distinguish_inventory_freshness_and_local_facts",
+              "gate": "api-tests",
+              "covers": [
+                "M09-SCOPE-NOTICES-01-ALLOW",
+                "M09-SCOPE-NOTICES-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_question_boundaries.py",
+              "name": "test_scope_notices_precede_all_provider_calls",
+              "gate": "api-tests",
+              "covers": [
+                "M09-SCOPE-NOTICES-01-ALLOW",
+                "M09-SCOPE-NOTICES-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-SCOPE-WEB-01",
+          "priority": "P1",
+          "scenario": "Completeness and freshness notices display distinctly and survive reload.",
+          "expectations": [
+            {
+              "id": "M09-SCOPE-WEB-01-ALLOW",
+              "surface": "response",
+              "statement": "Completeness and freshness notices display distinctly and survive reload."
+            },
+            {
+              "id": "M09-SCOPE-WEB-01-DENY",
+              "surface": "forbidden",
+              "statement": "Unverified global scope is not presented as complete/current fact or confused with no evidence; unrelated pages are not boosted."
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "unverified completeness and freshness remain distinct after restore",
+              "gate": "e2e",
+              "covers": [
+                "M09-SCOPE-WEB-01-ALLOW",
+                "M09-SCOPE-WEB-01-DENY"
+              ],
+              "config": "playwright.assistant.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "unverified completeness and freshness remain distinct after restore"
+              ]
+            }
+          ]
         }
       ]
     },
