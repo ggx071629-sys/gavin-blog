@@ -1474,7 +1474,8 @@
         "apps/api/app/assistant/admin_scope.py",
         "apps/api/app/assistant/management.py",
         "apps/api/app/assistant/total_budget.py",
-        "apps/api/tests/test_assistant_management.py"
+        "apps/api/tests/test_assistant_management.py",
+        "apps/api/app/assistant/sync_attention.py"
       ],
       "cases": [
         "M10-P0-01",
@@ -1497,7 +1498,9 @@
         "M09-METERED-LATENCY-01",
         "M09-FEEDBACK-ADMIN-01",
         "M10-TRIAL-RECOVERY-01",
-        "M09-RESTART-STATE-01"
+        "M09-RESTART-STATE-01",
+        "M10-SYNC-ATTENTION-01",
+        "M10-SYNC-ATTENTION-02"
       ],
       "dependents": [
         "M06.runtime_config",
@@ -3241,7 +3244,8 @@
         "M09-RESUME-CITATION-UI-01",
         "M09-INPUT-ERROR-02",
         "M09-TECHNICAL-CITATION-01",
-        "M09-FEEDBACK-ADMIN-01"
+        "M09-FEEDBACK-ADMIN-01",
+        "M10-SYNC-ATTENTION-02"
       ],
       "dependents": []
     },
@@ -3714,7 +3718,8 @@
         "M06-RESUME-STORAGE-01",
         "M06-RESUME-REFRESH-API-01",
         "M06-RESUME-PDF-01",
-        "M09-FEEDBACK-ADMIN-01"
+        "M09-FEEDBACK-ADMIN-01",
+        "M10-SYNC-ATTENTION-02"
       ],
       "dependents": [
         "M06.web_types",
