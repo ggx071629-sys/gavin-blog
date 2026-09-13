@@ -47,6 +47,5 @@ state_history:
 
 - api-tests => AC-1, AC-2
 - api-lint => AC-1, AC-2
-- web-typecheck => AC-3
-- web-tests => AC-3
+- web-quality => AC-3
 - e2e => AC-3
