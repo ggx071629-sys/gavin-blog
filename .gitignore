@@ -34,3 +34,4 @@ my_blog_fork/
 
 # Local HTML prototype mockups (dark/light); not part of the shipped apps.
 /web_prototype/
+.deploy/

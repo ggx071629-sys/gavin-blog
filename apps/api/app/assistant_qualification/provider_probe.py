@@ -152,7 +152,13 @@ def validate_provider_probe_artifact(
     if (
         not chat.get("usage_proven")
         or chat.get("finish_reason") != "stop"
-        or not chat.get("strict_schema")
+        or not (
+            chat.get("application_schema") is True
+            and chat.get("output_protocol") == "deepseek-json-object"
+            and chat.get("strict_schema") is False
+            if profile.providers.chat.output_protocol == "deepseek-json-object"
+            else chat.get("strict_schema") is True
+        )
     ):
         raise ProviderQualificationError("Chat provider contract is not proven")
     if not embedding.get("usage_proven") or not embedding.get("finite_vectors"):
@@ -393,6 +399,7 @@ def _validate_settings(settings: Settings, profile: QualificationProfile) -> Non
     embedding = profile.providers.embedding
     expected: tuple[tuple[Any, Any, str], ...] = (
         (settings.assistant_chat_provider, chat.protocol, "Chat protocol"),
+        (settings.assistant_chat_output_protocol, chat.output_protocol, "Chat output protocol"),
         (settings.assistant_chat_model, chat.model, "Chat model"),
         (settings.assistant_chat_model_version, chat.model_version, "Chat model version"),
         (settings.assistant_chat_max_input_tokens, chat.max_input_tokens, "Chat input cap"),
@@ -595,8 +602,14 @@ def _chat_probe(
             "call_count": 1,
             "reserved_micro_cny": reservation,
             "settled_micro_cny": settled,
-            "strict_schema": schema_valid and not local,
+            "strict_schema": schema_valid and not local
+            and settings.assistant_chat_output_protocol != "deepseek-json-object",
             **({"application_schema": schema_valid} if local else {}),
+            **({
+                "application_schema": schema_valid,
+                "output_protocol": "deepseek-json-object",
+            } if not local and settings.assistant_chat_output_protocol == "deepseek-json-object"
+               else {}),
             "usage_proven": usage_known,
             "input_tokens": input_tokens if usage_known else None,
             "output_tokens": output_tokens if usage_known else None,

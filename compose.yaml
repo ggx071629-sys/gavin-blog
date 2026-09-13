@@ -1,0 +1,170 @@
+name: gavin-blog
+
+x-common: &common
+  platform: linux/amd64
+  restart: unless-stopped
+  init: true
+  security_opt: ["no-new-privileges:true"]
+  cap_drop: [ALL]
+  logging:
+    driver: json-file
+    options: {max-size: "10m", max-file: "3"}
+
+x-api-environment: &api-environment
+  GAVIN_ENVIRONMENT: production
+  GAVIN_ADMIN_USERNAME: ${GAVIN_ADMIN_USERNAME:-gavin}
+  GAVIN_ADMIN_PASSWORD: ${GAVIN_ADMIN_PASSWORD:?Create .env with a strong administrator password}
+  GAVIN_COOKIE_SECURE: "true"
+  GAVIN_CORS_ORIGINS: ${SITE_URL:?Set SITE_URL to the public HTTPS origin}
+  GAVIN_DATABASE_URL: sqlite:////data/content/gavin.db
+  GAVIN_MEDIA_ROOT: /data/media
+  GAVIN_CONTENT_WRITE_FENCE_PATH: /data/content/write.lock
+  GAVIN_ASSISTANT_RUNTIME_PATH: /data/runtime/assistant.db
+  GAVIN_ASSISTANT_ONLINE_ENABLED: "false"
+  GAVIN_ASSISTANT_LOCAL_DEV_MODE: "false"
+  GAVIN_ASSISTANT_TEST_STARTUP_BOOTSTRAP: "false"
+  GAVIN_ASSISTANT_PUBLIC_ORIGIN: ${SITE_URL}
+  GAVIN_ASSISTANT_TRUSTED_PROXIES: 172.30.71.10/32
+  GAVIN_ASSISTANT_CLIENT_IP_HEADER: X-Gavin-Client-IP
+  GAVIN_ASSISTANT_PROXY_HMAC_SECRET: ${PROXY_HMAC_SECRET:?Generate independent secrets in .env}
+  GAVIN_ASSISTANT_PROXY_MAX_CLOCK_SKEW_SECONDS: "10"
+  GAVIN_ASSISTANT_EMBEDDING_API_KEY: ${E5_API_KEY:?Generate E5_API_KEY in .env}
+  GAVIN_ASSISTANT_E5_MODEL_DIR: /models
+  GAVIN_ASSISTANT_QDRANT_URL: http://qdrant:6333
+  GAVIN_ASSISTANT_QDRANT_API_KEY: ${QDRANT_API_KEY:?Generate QDRANT_API_KEY in .env}
+  GAVIN_ASSISTANT_QDRANT_VOLUME: /qdrant/storage
+
+x-api: &api
+  <<: *common
+  image: gavin-api:${IMAGE_TAG:-local}
+  build: {context: ., dockerfile: deploy/api.Dockerfile}
+  env_file:
+    - path: .env.assistant
+      required: false
+      format: raw
+  environment: *api-environment
+  read_only: true
+  tmpfs: [/tmp]
+  stop_grace_period: 60s
+
+services:
+  web:
+    <<: *common
+    image: gavin-web:${IMAGE_TAG:-local}
+    build: {context: ., dockerfile: deploy/web.Dockerfile}
+    ports: ["127.0.0.1:${WEB_PORT:-3000}:3000"]
+    environment:
+      NUXT_API_UPSTREAM: http://api:8000
+      NUXT_PUBLIC_API_BASE: /api/v1
+      NUXT_PUBLIC_SITE_URL: ${SITE_URL}
+      NUXT_PUBLIC_ASSISTANT_UI_ENABLED: "false"
+      NUXT_PUBLIC_ASSISTANT_LOCAL_DEV_MODE: "false"
+      NUXT_ASSISTANT_TRUSTED_EDGE_PROXIES: 172.30.71.1/32
+      NUXT_ASSISTANT_EDGE_CLIENT_IP_HEADER: X-Gavin-Edge-Client-IP
+      NUXT_ASSISTANT_API_CLIENT_IP_HEADER: X-Gavin-Client-IP
+      NUXT_ASSISTANT_PROXY_HMAC_SECRET: ${PROXY_HMAC_SECRET}
+    networks:
+      backend: {ipv4_address: 172.30.71.10}
+    depends_on:
+      api: {condition: service_healthy}
+    read_only: true
+    tmpfs: [/tmp]
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3000/robots.txt').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  api:
+    <<: *api
+    volumes: ["content:/data/content", "media:/data/media", "runtime:/data/runtime", "models:/models:ro"]
+    networks:
+      backend: {ipv4_address: 172.30.71.20}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health',timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  # Explicit, offline command. Never migrate while api/worker are serving writes.
+  init:
+    <<: *api
+    profiles: [tools]
+    restart: "no"
+    network_mode: none
+    command: [python, /opt/deploy/bootstrap.py]
+    volumes: ["content:/data/content", "media:/data/media", "runtime:/data/runtime"]
+
+  # Infrastructure can be prepared independently of public assistant admission.
+  e5:
+    <<: *common
+    profiles: [assistant-infra, assistant]
+    image: gavin-e5:${IMAGE_TAG:-local}
+    build: {context: ., dockerfile: deploy/e5.Dockerfile}
+    environment:
+      GAVIN_E5_MODEL_DIR: /models
+      GAVIN_E5_API_KEY: ${E5_API_KEY}
+    volumes: ["models:/models"]
+    networks:
+      backend: {ipv4_address: 172.30.71.30}
+    read_only: true
+    tmpfs: [/tmp]
+    stop_grace_period: 60s
+    healthcheck:
+      test: [CMD, python, -c, "import os,urllib.request; r=urllib.request.Request('http://127.0.0.1:8091/readyz',headers={'Authorization':'Bearer '+os.environ['GAVIN_E5_API_KEY']}); urllib.request.urlopen(r,timeout=4)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 180s
+      retries: 5
+
+  model-download:
+    <<: *common
+    profiles: [tools]
+    image: gavin-e5:${IMAGE_TAG:-local}
+    build: {context: ., dockerfile: deploy/e5.Dockerfile}
+    restart: "no"
+    command: [python, scripts/download_e5.py, --directory, /models]
+    volumes: ["models:/models"]
+
+  qdrant:
+    <<: *common
+    profiles: [assistant-infra, assistant]
+    image: qdrant/qdrant:v1.18.3
+    environment:
+      QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY}
+      QDRANT__TELEMETRY_DISABLED: "true"
+    volumes: ["vectors:/qdrant/storage", "vector-snapshots:/qdrant/snapshots"]
+    networks:
+      backend: {ipv4_address: 172.30.71.40}
+
+  # Use compose.assistant.yaml for production TLS and the selected profile.
+  worker:
+    <<: *api
+    profiles: [assistant]
+    environment:
+      <<: *api-environment
+      GAVIN_ASSISTANT_INDEX_WORKER_ENABLED: "true"
+    command: [python, -m, app.assistant_index.worker]
+    volumes: ["content:/data/content", "media:/data/media", "models:/models:ro"]
+    networks:
+      backend: {ipv4_address: 172.30.71.50}
+    depends_on:
+      e5: {condition: service_healthy}
+      qdrant: {condition: service_started}
+
+networks:
+  backend:
+    ipam:
+      config:
+        - subnet: 172.30.71.0/24
+          gateway: 172.30.71.1
+
+volumes:
+  content:
+  media:
+  runtime:
+  models:
+  vectors:
+  vector-snapshots:

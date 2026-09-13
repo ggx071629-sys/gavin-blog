@@ -1,0 +1,395 @@
+{
+  "approval": {
+    "approved": false,
+    "approved_by": "",
+    "approved_at": null,
+    "rationale": ""
+  },
+  "backup": {
+    "consistency_strategy": "write-fence-and-online-backup",
+    "destination_reference": null,
+    "encrypted": null,
+    "failure_alert_after_seconds": null,
+    "frequency_seconds": null,
+    "langgraph_checkpoints_excluded": true,
+    "outside_host_failure_domain": null,
+    "retention_count": null,
+    "rpo_seconds": null,
+    "rto_seconds": null,
+    "runtime_excluded": true,
+    "wal_shm_excluded": true
+  },
+  "e5": {
+    "ca_file": "/run/assistant/e5-ca.crt",
+    "ca_sha256": null,
+    "model_directory": "/models",
+    "model_lock_sha256": "sha256:efe25b47f036803bdcd5cd3bb198fc799ec983f697e2674a8bc4562fadea1739",
+    "single_owner": true
+  },
+  "edge": {
+    "canonical_origin": "",
+    "client_ip_header": "X-Gavin-Client-IP",
+    "csp": {
+      "mode": null,
+      "risk_expires_at": null,
+      "remediation_reference": null
+    },
+    "domain": "",
+    "heartbeat_interval_seconds": 15,
+    "hsts_max_age_seconds": 31536000,
+    "idle_timeout_seconds": 300,
+    "kind": "reverse-proxy",
+    "product": {
+      "version": null,
+      "digest": null,
+      "source": null
+    },
+    "public_ports": [
+      80,
+      443
+    ],
+    "request_timeout_seconds": 300,
+    "sse_buffering_disabled": true,
+    "strips_untrusted_forwarding_headers": true,
+    "tls_minimum_version": "1.3",
+    "trusted_proxy_cidrs": [
+      "172.30.71.10/32"
+    ]
+  },
+  "evidence": {
+    "invalidation_paths": [
+      "active_generation",
+      "artifact_digest",
+      "case_suite_digest",
+      "model_identity",
+      "profile_digest",
+      "provider_contract",
+      "provider_pricing",
+      "qdrant_contract",
+      "qualification_trust_policy",
+      "secret_rotation",
+      "source_commit",
+      "tls_proxy_contract"
+    ],
+    "raw_artifact_location_category": null,
+    "raw_artifact_retention_days": null,
+    "reviewer_attests_hashes": false,
+    "ttl_seconds": 172800
+  },
+  "governance": {
+    "data_retention_policy_reference": null,
+    "processing_region": null,
+    "raw_langsmith_tracing_enabled": false,
+    "visitor_disclosure_reference": null
+  },
+  "host": {
+    "approved_disk_watermark_percent": 80,
+    "architecture": "x86_64",
+    "cpu_cores": null,
+    "deployment_kind": "docker-compose",
+    "disk_capacity_mib": null,
+    "filesystem_type": "ext4",
+    "max_clock_drift_seconds": 5,
+    "memory_mib": null,
+    "ntp_service": "systemd-timesyncd",
+    "os_name": "Ubuntu Server",
+    "os_version": "22.04"
+  },
+  "observability": {
+    "backup_max_age_seconds": 7200,
+    "channels": [],
+    "log_retention_days": 14,
+    "provider_account_budget_alert_configured": false,
+    "raw_answers_logged": false,
+    "raw_ips_logged": false,
+    "raw_provider_payloads_logged": false,
+    "raw_questions_logged": false,
+    "tls_expiry_alert_days": 30,
+    "worker_heartbeat_stale_seconds": 60
+  },
+  "profile_id": "",
+  "profile_revision": 1,
+  "providers": {
+    "budgets": {
+      "beijing_budget_timezone": "Asia/Shanghai",
+      "chat_daily_micro_cny": 2000000,
+      "index_embedding_daily_micro_cny": 0,
+      "missing_usage_policy": "conservative-settlement-and-open-circuit",
+      "qualification_calls_approved": false,
+      "qualification_max_calls": null,
+      "qualification_max_micro_cny": null,
+      "query_embedding_daily_micro_cny": 0
+    },
+    "chat": {
+      "context_window_tokens": 1000000,
+      "endpoint": {
+        "reference": "GAVIN_ASSISTANT_CHAT_ENDPOINT",
+        "scheme": "https"
+      },
+      "input_price_micro_cny_per_million": null,
+      "max_concurrency": 3,
+      "max_input_tokens": 8000,
+      "max_output_tokens": 512,
+      "model": null,
+      "model_identity_source": "versioned-provider-contract",
+      "model_version": null,
+      "output_price_micro_cny_per_million": null,
+      "output_protocol": "deepseek-json-object",
+      "protocol": "openai-compatible",
+      "provider": "DeepSeek",
+      "provider_contract_reference": null,
+      "reports_finish_reason": true,
+      "reports_usage": true,
+      "timeout_seconds": 30
+    },
+    "embedding": {
+      "dimension": 384,
+      "endpoint": {
+        "reference": "GAVIN_ASSISTANT_EMBEDDING_ENDPOINT",
+        "scheme": "https"
+      },
+      "input_price_micro_cny_per_million": 0,
+      "max_batch_items": 1,
+      "max_concurrency": 1,
+      "max_input_tokens": 512,
+      "model": "intfloat/multilingual-e5-small",
+      "model_identity_source": "response",
+      "model_version": "614241f622f53c4eeff9890bdc4f31cfecc418b3:e5-fp32-mean-l2-v1",
+      "protocol": "openai-compatible",
+      "provider": "local-E5",
+      "provider_contract_reference": null,
+      "reports_usage": true,
+      "timeout_seconds": 30
+    }
+  },
+  "qdrant": {
+    "authentication_required": true,
+    "collection_prefix": "assistant_idx",
+    "disk_watermark_percent": 75,
+    "distance": "Cosine",
+    "pipeline_version": "assistant-e5-token384-overlap64-v1",
+    "request_timeout_seconds": 10,
+    "server": {
+      "version": "1.18.3",
+      "digest": null,
+      "source": "docker.io/qdrant/qdrant"
+    },
+    "tls_when_not_same_host": true,
+    "vector_dimension": 384
+  },
+  "runner_timing": {
+    "cleanup_margin_seconds": 10,
+    "provider_timeout_seconds": 30,
+    "runner_horizon_seconds": 50,
+    "settlement_margin_seconds": 10
+  },
+  "safety": {
+    "api_capability_enabled": false,
+    "destructive_tests_use_isolation": true,
+    "runtime_gate_enabled": false,
+    "web_launcher_enabled": false
+  },
+  "schema_version": 3,
+  "secrets": {
+    "administrator_password": {
+      "kind": "environment",
+      "reference": "",
+      "rotation_interval_days": 90,
+      "rotation_procedure": ""
+    },
+    "assistant_ip_hmac": {
+      "kind": "environment",
+      "reference": "",
+      "rotation_interval_days": 90,
+      "rotation_procedure": ""
+    },
+    "backup_encryption": {
+      "kind": "environment",
+      "reference": "",
+      "rotation_interval_days": 90,
+      "rotation_procedure": ""
+    },
+    "chat_api_key": {
+      "kind": "environment",
+      "reference": "",
+      "rotation_interval_days": 90,
+      "rotation_procedure": ""
+    },
+    "csrf": {
+      "kind": "environment",
+      "reference": "",
+      "rotation_interval_days": 90,
+      "rotation_procedure": ""
+    },
+    "embedding_api_key": {
+      "kind": "environment",
+      "reference": "",
+      "rotation_interval_days": 90,
+      "rotation_procedure": ""
+    },
+    "proxy_identity_hmac": {
+      "kind": "environment",
+      "reference": "",
+      "rotation_interval_days": 90,
+      "rotation_procedure": ""
+    },
+    "qdrant_api_key": {
+      "kind": "environment",
+      "reference": "",
+      "rotation_interval_days": 90,
+      "rotation_procedure": ""
+    },
+    "qualification_signing": {
+      "kind": "environment",
+      "reference": "",
+      "rotation_interval_days": 90,
+      "rotation_procedure": ""
+    },
+    "readiness": {
+      "kind": "environment",
+      "reference": "",
+      "rotation_interval_days": 90,
+      "rotation_procedure": ""
+    },
+    "session": {
+      "kind": "environment",
+      "reference": "",
+      "rotation_interval_days": 90,
+      "rotation_procedure": ""
+    }
+  },
+  "services": {
+    "api": {
+      "artifact": {
+        "version": null,
+        "digest": null,
+        "source": null
+      },
+      "bind_address": "172.30.71.20",
+      "graceful_shutdown_seconds": 60,
+      "health_path": "/api/health",
+      "os_user": "10001:10001",
+      "port": 8000,
+      "replicas": 1,
+      "restart_policy": "unless-stopped",
+      "startup_order": 3
+    },
+    "e5": {
+      "artifact": {
+        "version": null,
+        "digest": null,
+        "source": null
+      },
+      "bind_address": "172.30.71.30",
+      "graceful_shutdown_seconds": 60,
+      "health_path": "/readyz",
+      "os_user": "10001:10001",
+      "port": 8091,
+      "replicas": 1,
+      "restart_policy": "unless-stopped",
+      "startup_order": 2
+    },
+    "index_worker": {
+      "artifact": {
+        "version": null,
+        "digest": null,
+        "source": null
+      },
+      "bind_address": "172.30.71.50",
+      "graceful_shutdown_seconds": 60,
+      "health_path": null,
+      "os_user": "10001:10001",
+      "port": 8001,
+      "replicas": 1,
+      "restart_policy": "unless-stopped",
+      "startup_order": 4
+    },
+    "qdrant": {
+      "artifact": {
+        "version": "1.18.3",
+        "digest": null,
+        "source": "docker.io/qdrant/qdrant"
+      },
+      "bind_address": "172.30.71.40",
+      "graceful_shutdown_seconds": 60,
+      "health_path": "/healthz",
+      "os_user": "",
+      "port": 6333,
+      "replicas": 1,
+      "restart_policy": "unless-stopped",
+      "startup_order": 1
+    },
+    "web": {
+      "artifact": {
+        "version": null,
+        "digest": null,
+        "source": null
+      },
+      "bind_address": "172.30.71.10",
+      "graceful_shutdown_seconds": 60,
+      "health_path": "/",
+      "os_user": "",
+      "port": 3000,
+      "replicas": 1,
+      "restart_policy": "unless-stopped",
+      "startup_order": 5
+    }
+  },
+  "storage": {
+    "backup_staging_mib": null,
+    "content_peak_mib": null,
+    "media_backend": "local",
+    "media_peak_mib": null,
+    "paths": {
+      "assistant_runtime": "/data/runtime/assistant.db",
+      "content_sqlite": "/data/content/gavin.db",
+      "content_write_fence": "/data/content/write.lock",
+      "media_root": "/data/media",
+      "qdrant_volume": "/qdrant/storage",
+      "qualification_root": "/evidence",
+      "rollback_root": "/rollback"
+    },
+    "persistent_local_filesystem": true,
+    "qdrant_peak_mib": null,
+    "rebuild_peak_extra_mib": null,
+    "rollback_reserve_mib": null,
+    "runtime_peak_mib": null
+  },
+  "thresholds": {
+    "approval": {
+      "approved": false,
+      "approved_by": "",
+      "approved_at": null,
+      "rationale": ""
+    },
+    "basis_reference": null,
+    "full_work_cycle_seconds": null,
+    "max_disk_growth_mib_per_hour": null,
+    "max_file_descriptors": null,
+    "max_fts_p95_ms": null,
+    "max_graph_p50_ms": null,
+    "max_graph_p95_ms": null,
+    "max_process_restarts": null,
+    "max_qdrant_p95_ms": null,
+    "max_sustained_cpu_percent": null,
+    "max_swap_mib": null,
+    "max_total_rss_mib": null,
+    "scenarios": [
+      "api_restart",
+      "backup",
+      "cold_start",
+      "continuous_run",
+      "fts_degraded",
+      "full_rebuild",
+      "idle",
+      "qdrant_degraded",
+      "qdrant_restart",
+      "segment_optimization",
+      "three_concurrent_sse",
+      "two_hr_low_traffic",
+      "worker_restart"
+    ],
+    "soak_duration_seconds": null,
+    "traffic_model": null
+  }
+}

@@ -47,6 +47,7 @@ class Settings(BaseSettings):
     assistant_embedding_endpoint: str | None = None
     assistant_embedding_api_key: str | None = None
     assistant_e5_model_dir: str | None = None
+    assistant_e5_ca_file: str | None = None
     assistant_qdrant_url: str | None = None
     assistant_qdrant_api_key: str | None = None
     assistant_qdrant_path: str | None = None
@@ -82,6 +83,9 @@ class Settings(BaseSettings):
     assistant_release_id: str | None = None
     assistant_policy_version: str | None = None
     assistant_chat_provider: str | None = None
+    assistant_chat_output_protocol: Literal[
+        "provider-json-schema", "deepseek-json-object"
+    ] = "provider-json-schema"
     assistant_chat_model: str | None = None
     assistant_chat_model_version: str | None = None
     assistant_chat_provider_max_concurrency: int | None = Field(default=None, gt=0, le=8)

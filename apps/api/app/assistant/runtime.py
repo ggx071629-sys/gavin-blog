@@ -125,7 +125,7 @@ async def start_assistant_online(
             if settings.assistant_embedding_provider == "test":
                 index_runtime = build_test_runtime(settings, database)
             else:
-                index_runtime = build_runtime(settings, database)
+                index_runtime = build_runtime(settings, database, embeddings=embed)
             index_runtime.embeddings = embed
         online = AssistantOnline(
             settings=settings,

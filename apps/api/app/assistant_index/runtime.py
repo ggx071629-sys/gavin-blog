@@ -30,11 +30,13 @@ class AssistantIndexRuntime:
         return self.clock()
 
 
-def build_runtime(settings: Settings, database: Database) -> AssistantIndexRuntime:
+def build_runtime(
+    settings: Settings, database: Database, *, embeddings: Embeddings | None = None,
+) -> AssistantIndexRuntime:
     return AssistantIndexRuntime(
         settings=settings,
         database=database,
-        embeddings=build_embeddings(settings),
+        embeddings=embeddings if embeddings is not None else build_embeddings(settings),
         store=build_qdrant_store(settings),
         owner=f"{socket.gethostname()}:{os.getpid()}:{random_id()}",
     )

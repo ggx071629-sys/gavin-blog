@@ -22,7 +22,9 @@ def validate_e5_settings(settings) -> None:
             "E5 requires pinned identity, tokenizer, 384/64 chunks and batch/concurrency 1"
         )
     if settings.environment == "production":
-        raise ValueError("local E5 production qualification is pending; use development only")
+        from ..assistant_qualification.runtime_binding import validate_runtime_profile_binding
+
+        validate_runtime_profile_binding(settings)
 
 
 class E5Embeddings(OpenAICompatibleMeteredEmbeddings):

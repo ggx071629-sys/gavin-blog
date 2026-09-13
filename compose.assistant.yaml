@@ -1,0 +1,48 @@
+# Explicit production assistant overlay. Complete .env.assistant and .deploy first.
+# docker compose -f compose.yaml -f compose.assistant.yaml --profile assistant ...
+services:
+  api:
+    environment:
+      GAVIN_ASSISTANT_ONLINE_ENABLED: ${ASSISTANT_API_ENABLED:-false}
+      GAVIN_ASSISTANT_INDEX_WORKER_ENABLED: "true"
+      GAVIN_ASSISTANT_QDRANT_URL: http://172.30.71.40:6333
+      GAVIN_ASSISTANT_EMBEDDING_ENDPOINT: https://172.30.71.30:8091/v1
+      GAVIN_ASSISTANT_E5_CA_FILE: /run/assistant/e5-ca.crt
+    volumes:
+      - type: bind
+        source: ./.deploy/config
+        target: /run/assistant
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ./.deploy/evidence
+        target: /evidence
+        bind: {create_host_path: false}
+  web:
+    environment:
+      NUXT_PUBLIC_ASSISTANT_UI_ENABLED: ${ASSISTANT_UI_ENABLED:-false}
+  worker:
+    environment:
+      GAVIN_ASSISTANT_ONLINE_ENABLED: "false"
+      GAVIN_ASSISTANT_QDRANT_URL: http://172.30.71.40:6333
+      GAVIN_ASSISTANT_EMBEDDING_ENDPOINT: https://172.30.71.30:8091/v1
+      GAVIN_ASSISTANT_E5_CA_FILE: /run/assistant/e5-ca.crt
+    volumes:
+      - type: bind
+        source: ./.deploy/config
+        target: /run/assistant
+        read_only: true
+        bind: {create_host_path: false}
+  e5:
+    command: [python, -m, uvicorn, "app.local_embedding.service:create_app", --factory,
+              --host, "0.0.0.0", --port, "8091", --workers, "1",
+              --no-proxy-headers, --no-access-log,
+              --ssl-keyfile, /run/e5-tls/server.key, --ssl-certfile, /run/e5-tls/server.crt]
+    volumes:
+      - type: bind
+        source: ./.deploy/tls
+        target: /run/e5-tls
+        read_only: true
+        bind: {create_host_path: false}
+    healthcheck:
+      test: [CMD, python, -c, "import os,ssl,urllib.request; c=ssl.create_default_context(cafile='/run/e5-tls/server.crt'); r=urllib.request.Request('https://172.30.71.30:8091/readyz',headers={'Authorization':'Bearer '+os.environ['GAVIN_E5_API_KEY']}); urllib.request.urlopen(r,context=c,timeout=4)"]

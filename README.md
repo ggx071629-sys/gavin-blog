@@ -14,4 +14,4 @@ Dependency manifests and lockfiles are committed. Installed dependencies, model 
 
 Run `npm ci` and `npm run build:web` from the repository root to build the frontend. Python dependencies are managed separately with uv in the API and E5 environment directories.
 
-Docker and production deployment configuration will be added separately. An empty installation still requires database initialization, production secrets, model preparation, indexing, and assistant production qualification before public enablement.
+Ubuntu 22.04 / x86_64 container configuration is provided in [compose.yaml](compose.yaml), with the complete assistant in [compose.assistant.yaml](compose.assistant.yaml). See [deployment instructions](deploy/README.md) for internal E5 TLS, target profile, empty database initialization, model preparation and explicit assistant activation. Production-mode retrieval and real DeepSeek answers were verified in isolated Docker containers; the target server still needs its own configuration and validation. Local data and secrets are excluded from the image build context.

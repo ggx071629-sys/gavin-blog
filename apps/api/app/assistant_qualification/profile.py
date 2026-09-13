@@ -11,7 +11,7 @@ from urllib.parse import urlparse
 import yaml
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, model_validator
 
-PROFILE_SCHEMA_VERSION = 2
+PROFILE_SCHEMA_VERSION = 3
 CHAT_DAILY_BUDGET_MICRO_CNY = 2_000_000
 REQUIRED_INVALIDATION_PATHS = frozenset(
     {
@@ -226,7 +226,7 @@ class ServiceProfile(StrictModel):
     replicas: Literal[1]
     startup_order: int = Field(ge=1, le=20)
     graceful_shutdown_seconds: int = Field(ge=1, le=300)
-    restart_policy: Literal["on-failure", "always"]
+    restart_policy: Literal["on-failure", "always", "unless-stopped"]
     health_path: str | None = Field(default=None, max_length=200)
 
     @model_validator(mode="after")
@@ -243,10 +243,17 @@ class Services(StrictModel):
     api: ServiceProfile
     index_worker: ServiceProfile
     qdrant: ServiceProfile
+    e5: ServiceProfile | None = None
 
     @model_validator(mode="after")
     def unique_owners_and_ports(self) -> Services:
         services = (self.web, self.api, self.index_worker, self.qdrant)
+        if self.e5 is not None:
+            services += (self.e5,)
+            if self.e5.startup_order >= min(
+                self.api.startup_order, self.index_worker.startup_order
+            ):
+                raise ValueError("E5 must start before the API and index Worker")
         ports = [service.port for service in services]
         if len(set(ports)) != len(ports):
             raise ValueError("service ports must be unique on the single target host")
@@ -417,6 +424,9 @@ class ProviderIdentity(StrictModel):
 
 
 class ChatProvider(ProviderIdentity):
+    output_protocol: Literal[
+        "provider-json-schema", "deepseek-json-object"
+    ] = "provider-json-schema"
     max_concurrency: int = Field(ge=3, le=8)
     max_input_tokens: int = Field(ge=1)
     max_output_tokens: int = Field(ge=1)
@@ -433,11 +443,36 @@ class ChatProvider(ProviderIdentity):
 
 
 class EmbeddingProvider(ProviderIdentity):
-    max_concurrency: int = Field(ge=4, le=8)
+    max_concurrency: int = Field(ge=1, le=8)
     dimension: int = Field(ge=8)
     max_input_tokens: int = Field(ge=1)
     max_batch_items: int = Field(ge=1, le=2048)
     input_price_micro_cny_per_million: int = Field(ge=0)
+
+    @model_validator(mode="after")
+    def concurrency_contract(self) -> EmbeddingProvider:
+        from ..local_embedding.artifact import MODEL
+
+        if self.model == MODEL:
+            if self.max_concurrency != 1 or self.max_batch_items != 1:
+                raise ValueError("local E5 requires batch/concurrency 1")
+        elif self.max_concurrency < 4:
+            raise ValueError("remote embeddings require concurrency >= 4")
+        return self
+
+
+class E5Profile(StrictModel):
+    model_directory: str
+    ca_file: str
+    ca_sha256: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    model_lock_sha256: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    single_owner: Literal[True]
+
+    @model_validator(mode="after")
+    def paths(self) -> E5Profile:
+        self.model_directory = _absolute_path(self.model_directory, "E5 model directory")
+        self.ca_file = _absolute_path(self.ca_file, "E5 CA file")
+        return self
 
 
 class BudgetProfile(StrictModel):
@@ -616,7 +651,7 @@ class SafetyState(StrictModel):
 
 
 class QualificationProfile(StrictModel):
-    schema_version: Literal[2]
+    schema_version: Literal[2, 3]
     profile_id: str
     profile_revision: int = Field(ge=1)
     approval: Approval
@@ -634,9 +669,31 @@ class QualificationProfile(StrictModel):
     evidence: EvidenceProfile
     observability: ObservabilityProfile
     governance: ProviderGovernance
+    e5: E5Profile | None = None
 
     @model_validator(mode="after")
     def validate_cross_contract(self) -> QualificationProfile:
+        from ..local_embedding.artifact import DIMENSION, MODEL, PIPELINE, VERSION
+
+        local_e5 = self.providers.embedding.model == MODEL
+        json_object = self.providers.chat.output_protocol == "deepseek-json-object"
+        if self.schema_version == 2 and (
+            self.e5 is not None or self.services.e5 is not None or local_e5 or json_object
+        ):
+            raise ValueError("E5 and DeepSeek JSON mode require profile schema 3")
+        if local_e5:
+            embedding = self.providers.embedding
+            if self.e5 is None or self.services.e5 is None:
+                raise ValueError("local E5 requires service and TLS/artifact contracts")
+            if (
+                embedding.model_version != VERSION
+                or embedding.dimension != DIMENSION
+                or embedding.max_input_tokens != 512
+                or self.qdrant.pipeline_version != PIPELINE
+            ):
+                raise ValueError("local E5 model, dimension, token and pipeline pins differ")
+        elif self.e5 is not None or self.services.e5 is not None:
+            raise ValueError("E5 contracts require the pinned E5 provider")
         if not _PROFILE_ID_RE.fullmatch(self.profile_id):
             raise ValueError("profile_id must be a dated lowercase task-style identifier")
         if self.providers.chat.timeout_seconds != self.runner_timing.provider_timeout_seconds:
@@ -692,6 +749,11 @@ class QualificationProfile(StrictModel):
 
 def canonical_profile(profile: QualificationProfile) -> bytes:
     payload = profile.model_dump(mode="json", exclude_none=False)
+    if profile.schema_version == 2:
+        # Adding schema 3 must not invalidate already signed schema 2 receipts.
+        payload.pop("e5")
+        payload["services"].pop("e5")
+        payload["providers"]["chat"].pop("output_protocol")
     return json.dumps(
         payload,
         ensure_ascii=False,

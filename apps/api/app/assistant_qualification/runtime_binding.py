@@ -115,6 +115,11 @@ def _validate_providers(settings: Settings, profile: QualificationProfile) -> No
     embedding = profile.providers.embedding
     budgets = profile.providers.budgets
     values = (
+        (
+            settings.assistant_chat_output_protocol,
+            chat.output_protocol,
+            "assistant_chat_output_protocol",
+        ),
         (settings.assistant_chat_provider, chat.protocol, "assistant_chat_provider"),
         (settings.assistant_chat_model, chat.model, "assistant_chat_model"),
         (
@@ -260,7 +265,34 @@ def validate_runtime_profile_binding(settings: Settings) -> QualificationProfile
     _validate_edge(settings, profile)
     _validate_providers(settings, profile)
     _validate_qdrant(settings, profile)
+    _validate_e5(settings, profile)
     return profile
+
+
+def _validate_e5(settings: Settings, profile: QualificationProfile) -> None:
+    from ..local_embedding.artifact import LOCK_PATH, MODEL, sha256, verify_artifact
+
+    if settings.assistant_embedding_model != MODEL:
+        return
+    contract = profile.e5
+    service = profile.services.e5
+    if contract is None or service is None:
+        raise QualificationBindingError("production E5 requires a schema 3 TLS contract")
+    _expect(
+        str(settings.assistant_embedding_endpoint or "").rstrip("/"),
+        f"https://{service.bind_address}:{service.port}/v1",
+        "E5 HTTPS endpoint",
+    )
+    directory = _absolute(settings.assistant_e5_model_dir, "assistant_e5_model_dir")
+    ca = _absolute(settings.assistant_e5_ca_file, "assistant_e5_ca_file")
+    _expect(directory, Path(contract.model_directory).resolve(), "E5 model directory")
+    _expect(ca, Path(contract.ca_file).resolve(), "E5 CA path")
+    try:
+        _expect("sha256:" + sha256(ca), contract.ca_sha256, "E5 CA digest")
+        _expect("sha256:" + sha256(LOCK_PATH), contract.model_lock_sha256, "E5 lock digest")
+        verify_artifact(directory, tokenizer_only=True)
+    except (OSError, RuntimeError) as exc:
+        raise QualificationBindingError("E5 trust or tokenizer artifact is invalid") from exc
 
 
 def selected_profile_path(settings: Settings) -> Path:

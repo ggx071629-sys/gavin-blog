@@ -125,7 +125,7 @@ def answer_schema_instruction(
 
 
 class LocalDeepSeekChatOpenAI(ChatOpenAI):
-    """Development-only wire adaptation using the existing LangChain client."""
+    """DeepSeek JSON wire adapter; legacy class name retained for local ledgers."""
 
     _evaluation_guard: Any = PrivateAttr(default=None)
 
@@ -326,16 +326,25 @@ class OpenAICompatibleMeteredEmbeddings(MeteredEmbeddings):
         dimension: int,
         timeout: float,
         max_batch_items: int,
+        ca_file: str | None = None,
     ) -> None:
         self.model = model
         self.version = version
         self.dimension = dimension
         self.max_batch_items = max_batch_items
+        import ssl
+
+        from openai import DefaultHttpxClient
+
         self._client = OpenAI(
             api_key=api_key,
             base_url=base_url,
             max_retries=0,
             timeout=timeout,
+            http_client=(
+                DefaultHttpxClient(verify=ssl.create_default_context(cafile=ca_file))
+                if ca_file else None
+            ),
         )
 
     def embed_documents_metered(self, texts: list[str]) -> EmbeddingUsage:
@@ -672,9 +681,17 @@ def build_chat_model(settings: Settings) -> BaseChatModel:
     api_key = settings.assistant_chat_api_key
     if model is None or api_key is None:
         raise RuntimeError("chat provider configuration is incomplete")
-    local_deepseek = settings.environment == "development" and (
+    deepseek_endpoint = (
         (settings.assistant_chat_endpoint or "").rstrip("/")
         in {"https://api.deepseek.com", "https://api.deepseek.com/v1"}
+    )
+    explicit_deepseek = settings.assistant_chat_output_protocol == "deepseek-json-object"
+    if explicit_deepseek and not deepseek_endpoint:
+        raise RuntimeError("DeepSeek JSON protocol requires the official HTTPS endpoint")
+    if settings.environment == "production" and deepseek_endpoint and not explicit_deepseek:
+        raise RuntimeError("production DeepSeek requires an explicit JSON output contract")
+    local_deepseek = deepseek_endpoint and (
+        settings.environment == "development" or explicit_deepseek
     )
     if local_deepseek and not settings.assistant_chat_max_output_tokens:
         raise RuntimeError("local DeepSeek requires an explicit output token limit")
@@ -722,6 +739,7 @@ def build_metered_embeddings(settings: Settings) -> MeteredEmbeddings:
         validate_e5_settings(settings)
         adapter = E5Embeddings
         extra["model_directory"] = settings.assistant_e5_model_dir
+        extra["ca_file"] = settings.assistant_e5_ca_file
     return adapter(
         model=str(settings.assistant_embedding_model),
         version=str(settings.assistant_embedding_model_version),

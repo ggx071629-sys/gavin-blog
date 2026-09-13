@@ -420,14 +420,32 @@ async def ask_assistant(request: Request) -> StreamingResponse:
                         ).fetchone()
                     )
                     if turn_row and turn_row["status"] == "terminal":
-                        await _wait_runner_idle(online, turn["id"])
-                        return
-                    if time.monotonic() - last_wire_write >= heartbeat_seconds:
-                        yield ": keep-alive\n\n"
-                        last_wire_write = time.monotonic()
-                    continue
+                        item = {"event": "_end"}
+                    else:
+                        if time.monotonic() - last_wire_write >= heartbeat_seconds:
+                            yield ": keep-alive\n\n"
+                            last_wire_write = time.monotonic()
+                        continue
                 if item["event"] == "_end":
                     await _wait_runner_idle(online, turn["id"])
+                    # The terminal commit can race with the queue timeout or close.
+                    # Drain durable events before closing the client's stream.
+                    pending = online.control.read(
+                        lambda conn, cursor=last_sent: events_after(conn, turn["id"], cursor)
+                    )
+                    for fill in pending:
+                        seq = int(fill["seq"])
+                        if seq <= last_sent:
+                            continue
+                        if seq != last_sent + 1:
+                            return
+                        yield encode_sse(
+                            event_id=seq, event_name=fill["event_name"],
+                            data=parse_event_payload(fill["data_json"]),
+                        )
+                        last_sent = seq
+                        if fill["event_name"] in {"answer", "refusal", "error"}:
+                            return
                     return
                 data = parse_event_payload(item["data"])
                 seq = int(data.get("event_id") or 0)

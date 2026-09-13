@@ -1,0 +1,38 @@
+# Optional 2-vCPU / 4-GiB host runtime envelope. Include AFTER assistant overlay.
+# Local three-user online trial passed; full Ubuntu host qualification is pending.
+# All containers share the same two CPU IDs; this is not two CPUs per service.
+# Application memory limits sum to 3456 MiB, leaving 640 MiB for host services.
+# BuildKit and disk capacity are not limited by this runtime overlay.
+x-runtime-resources: &runtime-resources
+  cpuset: "0,1"
+  pids_limit: 256
+
+services:
+  web:
+    <<: *runtime-resources
+    mem_limit: 256m
+    memswap_limit: 256m
+  api:
+    <<: *runtime-resources
+    mem_limit: 768m
+    memswap_limit: 768m
+  worker:
+    <<: *runtime-resources
+    mem_limit: 640m
+    memswap_limit: 640m
+  e5:
+    <<: *runtime-resources
+    mem_limit: 1536m
+    memswap_limit: 1536m
+  qdrant:
+    <<: *runtime-resources
+    mem_limit: 256m
+    memswap_limit: 256m
+  init:
+    <<: *runtime-resources
+    mem_limit: 512m
+    memswap_limit: 512m
+  model-download:
+    <<: *runtime-resources
+    mem_limit: 512m
+    memswap_limit: 512m
