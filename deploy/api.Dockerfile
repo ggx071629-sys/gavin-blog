@@ -8,6 +8,9 @@ COPY apps/api/pyproject.toml apps/api/uv.lock ./
 RUN --mount=type=cache,target=/root/.cache/uv uv sync --locked --no-dev --no-install-project
 COPY apps/api/app ./app
 RUN --mount=type=cache,target=/root/.cache/uv uv sync --locked --no-dev --no-editable
+COPY deploy/prepare-chat-tokenizer.py /tmp/prepare-chat-tokenizer.py
+RUN .venv/bin/python /tmp/prepare-chat-tokenizer.py /opt/tokenizers/deepseek-v41
+RUN --network=none .venv/bin/python -c "from app.assistant.deepseek_tokenizer import token_ids; assert token_ids('Hello') == [19923]"
 
 FROM python:3.11-slim-bookworm AS runtime
 ENV PATH=/app/.venv/bin:$PATH PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
@@ -16,6 +19,7 @@ RUN groupadd --gid 10001 gavin && useradd --uid 10001 --gid 10001 --no-create-ho
     && mkdir -p /data/content /data/media /data/runtime /models \
     && chown 10001:10001 /data/content /data/media /data/runtime /models
 COPY --from=build /app/.venv ./.venv
+COPY --from=build /opt/tokenizers /opt/tokenizers
 COPY apps/api/app ./app
 COPY apps/api/migrations ./migrations
 COPY apps/api/assistant_runtime_migrations ./assistant_runtime_migrations

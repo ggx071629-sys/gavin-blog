@@ -191,3 +191,41 @@ dc() { docker compose -f compose.yaml -f compose.assistant.yaml -f compose.resou
 - 本任务累计 9 次有实际 usage 的 Chat 调用，保守账本累计 0.027518 元，低于累计 2 元授权。临时容器已停止，秘密、合成数据和详细账本留在本地。
 
 结论是当前小数据量、3 用户并发的应用链路可以在该资源分配内运行。尚未完成完整 Ubuntu 22.04 的 4GB 虚拟机测试、长时间负载、索引重建与在线提问同时运行，以及 70GB 实际磁盘配额测试。共享两个本机逻辑 CPU 不能保证与云服务器两个 vCPU 同速。模型卷约 471 MiB，70GB 还需容纳系统、镜像、构建缓存、媒体和备份；此 overlay 不限制构建期资源。上线前仍需目标服务器验收。
+
+
+## Offline DeepSeek V4.1 token counting
+
+The `deepseek-flash` adapter uses the official V4.1 tokenizer through LangChain's
+`custom_get_token_ids`. The API image includes `/opt/tokenizers/deepseek-v41/tokenizer.json`
+and the upstream MIT license. Builds download only these public files from pinned
+`deepseek-ai/deepseek-recipe` revision `8cadfede7063c896b944e7bae05daa3549ae97ea`.
+Tokenizer SHA-256: `81f64d1248a68ce3663e07ab3ee48b851e5df0e32d27cb98e4c9a268151e8d99`.
+The build validates the checksum and performs a network-disabled smoke check.
+Production initialization verifies/loads the file before accepting questions;
+missing/corrupt assets fail initialization instead of downloading at runtime.
+
+For local development/tests, set `DEEPSEEK_V41_TOKENIZER_PATH` to the same verified
+file. Prepare it from `apps/api/` with `python ../../deploy/prepare-chat-tokenizer.py /absolute/output/directory`. The application does not
+load model weights or run another tokenizer service. E5 keeps its own tokenizer.
+
+This counts text; it is not an exact DeepSeek message-template or billing counter.
+The existing UTF-8 byte upper bound remains authoritative when larger, so this
+change does not relax input budgets or increase selected article context. Provider
+`usage` remains the settlement source. This change addresses first-request downloads,
+not answer completeness. Other model identifiers retain their existing behavior.
+
+## Limited validation deployment
+
+Schema 4 explicitly records accepted gaps for a 3655 MiB/no-swap host, absent
+scheduled off-host backups/provider budget alerts, and skipped long-duration load
+validation. Schemas 2/3 retain their stricter contract. This is not full production
+qualification. Empty media roots are supported by the consistent backup/restore
+helper. Keep real profiles, credentials, article data, encrypted backups and raw
+evidence outside Git. The image/profile/receipt must be updated together.
+
+Before updating, preserve the previous image, server Compose override and private
+profile/env files; disable public admission, stop the single API/Worker owners,
+update the image bindings and run the bounded provider/readiness checks before
+re-enabling. Roll back by restoring these configuration files and the old image,
+then reissuing readiness if required. Never delete volumes or restore an old empty
+content snapshot over newly published articles.

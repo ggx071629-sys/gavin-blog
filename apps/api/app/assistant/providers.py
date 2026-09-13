@@ -696,6 +696,14 @@ def build_chat_model(settings: Settings) -> BaseChatModel:
     if local_deepseek and not settings.assistant_chat_max_output_tokens:
         raise RuntimeError("local DeepSeek requires an explicit output token limit")
     chat_type = LocalDeepSeekChatOpenAI if local_deepseek else ChatOpenAI
+    token_options: dict[str, Any] = {}
+    if local_deepseek and model == "deepseek-flash":
+        from .deepseek_tokenizer import token_ids
+
+        if settings.environment == "production":
+            # Fail before readiness/admission; never make the first visitor fetch assets.
+            token_ids("")
+        token_options["custom_get_token_ids"] = token_ids
     return chat_type(
         model=model,
         api_key=SecretStr(api_key),
@@ -706,6 +714,7 @@ def build_chat_model(settings: Settings) -> BaseChatModel:
         max_retries=0,
         timeout=settings.assistant_provider_timeout_seconds,
         max_completion_tokens=settings.assistant_chat_max_output_tokens,
+        **token_options,
     )
 
 

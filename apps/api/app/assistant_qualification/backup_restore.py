@@ -140,6 +140,7 @@ def _copy_media(
     destination_root: Path,
     connection: sqlite3.Connection,
 ) -> tuple[list[dict[str, Any]], int]:
+    destination_root.mkdir(parents=True, exist_ok=True)
     expected = _expected_media(connection)
     actual: dict[str, Path] = {}
     if source_root.exists():

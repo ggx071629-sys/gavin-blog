@@ -198,7 +198,7 @@ class HostProfile(StrictModel):
     architecture: Literal["x86_64", "aarch64"]
     deployment_kind: Literal["systemd", "docker-compose", "windows-service"]
     cpu_cores: Literal[2]
-    memory_mib: Literal[4096]
+    memory_mib: int = Field(ge=3072, le=4096)
     filesystem_type: Literal["ext4", "xfs", "btrfs", "zfs", "ntfs"]
     disk_capacity_mib: int = Field(ge=16_384)
     approved_disk_watermark_percent: int = Field(ge=50, le=90)
@@ -517,7 +517,7 @@ class BackupProfile(StrictModel):
     destination_reference: str = Field(min_length=3, max_length=300)
     outside_host_failure_domain: Literal[True]
     encrypted: Literal[True]
-    frequency_seconds: int = Field(ge=60)
+    frequency_seconds: int = Field(ge=0)
     retention_count: int = Field(ge=2)
     rpo_seconds: int = Field(ge=60)
     rto_seconds: int = Field(ge=60)
@@ -566,9 +566,6 @@ class ResourceThresholds(StrictModel):
         self.basis_reference = _require_text(self.basis_reference, "threshold basis")
         self.traffic_model = _require_text(self.traffic_model, "traffic model")
         present = set(self.scenarios)
-        missing = REQUIRED_SOAK_SCENARIOS - present
-        if missing:
-            raise ValueError(f"soak scenarios missing: {sorted(missing)}")
         if len(present) != len(self.scenarios):
             raise ValueError("soak scenarios must be unique")
         if self.soak_duration_seconds < self.full_work_cycle_seconds:
@@ -622,7 +619,7 @@ class ObservabilityProfile(StrictModel):
     raw_answers_logged: Literal[False]
     raw_ips_logged: Literal[False]
     raw_provider_payloads_logged: Literal[False]
-    provider_account_budget_alert_configured: Literal[True]
+    provider_account_budget_alert_configured: bool
 
 
 class ProviderGovernance(StrictModel):
@@ -650,8 +647,17 @@ class SafetyState(StrictModel):
     destructive_tests_use_isolation: Literal[True]
 
 
+class LimitedValidation(StrictModel):
+    approval: Approval
+    qualification_status: Literal["NOT_FULLY_QUALIFIED"]
+    accepted_gaps: list[Literal[
+        "reduced-host-memory", "scheduled-off-host-backup",
+        "provider-account-budget-alert", "long-duration-resource-validation",
+    ]] = Field(min_length=1)
+
+
 class QualificationProfile(StrictModel):
-    schema_version: Literal[2, 3]
+    schema_version: Literal[2, 3, 4]
     profile_id: str
     profile_revision: int = Field(ge=1)
     approval: Approval
@@ -670,10 +676,39 @@ class QualificationProfile(StrictModel):
     observability: ObservabilityProfile
     governance: ProviderGovernance
     e5: E5Profile | None = None
+    limited_validation: LimitedValidation | None = None
 
     @model_validator(mode="after")
     def validate_cross_contract(self) -> QualificationProfile:
         from ..local_embedding.artifact import DIMENSION, MODEL, PIPELINE, VERSION
+
+        gaps = set()
+        if self.host.memory_mib != 4096:
+            gaps.add("reduced-host-memory")
+        if self.backup.frequency_seconds == 0:
+            gaps.add("scheduled-off-host-backup")
+        elif self.backup.frequency_seconds < 60:
+            raise ValueError("scheduled backup frequency must be at least 60 seconds")
+        if not self.observability.provider_account_budget_alert_configured:
+            gaps.add("provider-account-budget-alert")
+        missing = REQUIRED_SOAK_SCENARIOS - set(self.thresholds.scenarios)
+        if missing:
+            gaps.add("long-duration-resource-validation")
+        if self.schema_version < 4:
+            if self.limited_validation is not None:
+                raise ValueError("limited validation requires schema 4")
+            if missing:
+                raise ValueError(f"soak scenarios missing: {sorted(missing)}")
+            if gaps:
+                raise ValueError("full qualification requires 4096 MiB and configured operations")
+        else:
+            if self.limited_validation is None:
+                raise ValueError("schema 4 requires explicit limited validation approval")
+            accepted = self.limited_validation.accepted_gaps
+            if len(accepted) != len(set(accepted)) or set(accepted) != gaps:
+                raise ValueError("accepted gaps must exactly describe deployment omissions")
+            if self.thresholds.max_total_rss_mib > self.host.memory_mib - 512:
+                raise ValueError("limited deployment must reserve at least 512 MiB for the host")
 
         local_e5 = self.providers.embedding.model == MODEL
         json_object = self.providers.chat.output_protocol == "deepseek-json-object"
@@ -749,6 +784,8 @@ class QualificationProfile(StrictModel):
 
 def canonical_profile(profile: QualificationProfile) -> bytes:
     payload = profile.model_dump(mode="json", exclude_none=False)
+    if profile.schema_version < 4:
+        payload.pop("limited_validation")
     if profile.schema_version == 2:
         # Adding schema 3 must not invalidate already signed schema 2 receipts.
         payload.pop("e5")

@@ -29,6 +29,7 @@
 !deploy/bootstrap.py
 !deploy/check_api.py
 !deploy/assistant-control.py
+!deploy/prepare-chat-tokenizer.py
 **/node_modules
 **/.venv
 **/__pycache__
