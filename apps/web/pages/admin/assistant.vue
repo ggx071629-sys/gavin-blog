@@ -50,12 +50,13 @@
         </section>
         <section v-if="panel === 'maintenance'" class="am-maintenance" aria-labelledby="maintenance-heading">
         <h2 id="maintenance-heading" tabindex="-1">高级维护</h2><p>刷新只读取已有运行事实，不发起付费探测。</p>
-        <div class="am-maintenance-row"><div><h3>后台试问</h3><p>{{ management?.trial_stopped ? '全部问答已被停止。运行条件验证通过后，可单独恢复后台试问。' : '普通对外关闭不影响试问；资格与维护保护仍然生效。' }}</p></div><button v-if="management?.trial_stopped" class="button-secondary" :disabled="mutating" @click="resumeTrial">恢复后台试问</button><NuxtLink v-else class="am-link" :to="viewLink('test')">前往试问</NuxtLink></div>
+        <div class="am-maintenance-row"><div><h3>运行资格</h3><p>切换索引后，先校验当前索引并签发资格，再恢复试问与对外开放。校验不产生模型调用费用。</p><p v-if="!management?.trial_stopped || isOpen" class="am-hint">请先停止全部问答，再执行校验。</p></div><button class="button-secondary" :disabled="mutating || stale || !management?.trial_stopped || isOpen || !snapshot.manifest.generation_id || !!snapshot.availability.switch_pending_operation_id" @click="renewReadiness">{{ renewingReadiness ? '正在校验…' : '校验并签发资格' }}</button></div>
+        <div class="am-maintenance-row"><div><h3>后台试问</h3><p>{{ management?.trial_stopped ? '全部问答已被停止。运行条件验证通过后，可单独恢复后台试问。' : '普通对外关闭不影响试问；资格与维护保护仍然生效。' }}</p></div><button v-if="management?.trial_stopped" class="button-secondary" :disabled="mutating || stale || snapshot.readiness.status !== 'healthy'" @click="resumeTrial">恢复后台试问</button><NuxtLink v-else class="am-link" :to="viewLink('test')">前往试问</NuxtLink></div>
         <div class="am-maintenance-row"><div><h3>索引维护</h3><p>重建使用今日总预算，旧索引继续提供回答。切换后全部问答暂停，需要重新验证运行资格。</p><p v-if="snapshot.operation" class="assistant-operation">当前操作：{{ operationLabel(snapshot.operation.status) }}</p></div><div class="am-row-actions"><button class="button-secondary" :disabled="mutating || nonterminalOperation" @click="confirmRebuild">重建公开知识索引</button><button v-if="snapshot.operation?.status === 'ready_to_switch'" class="button-primary" :disabled="mutating" @click="confirmFinalize">切换到新索引</button></div></div>
         <div class="am-maintenance-row"><div><h3>紧急停止全部问答</h3><p>同时撤销访客和管理员执行，已发送的调用仍可能产生费用。</p></div><button class="am-danger" :disabled="mutating" @click="confirmEmergency">紧急停止全部问答</button></div>
         <h3 class="am-diagnostics-title">运行诊断</h3><div v-for="fact in facts" :key="fact.label" class="am-diagnostic"><strong>{{ fact.label }}</strong><span>{{ assistantFactLabel[fact.fact.status] }}{{ fact.fact.stale ? '（观察已过期）' : '' }}</span><code>{{ fact.fact.reason_code }}</code></div>
         <dl class="am-technical"><div><dt>部署能力</dt><dd>{{ snapshot.deployment.api_capability ? '允许 API 运行' : 'API 未开启' }} · {{ launcherConfigured ? '访客入口配置允许' : '访客入口配置未开启' }}</dd></div><div><dt>索引版本</dt><dd>{{ snapshot.manifest.generation_id ?? '未知' }} · {{ snapshot.manifest.model || '模型未知' }}</dd></div></dl>
-        <details class="am-runbook"><summary>如何处理运行条件问题</summary><p>资格缺失或失效：在 API 主机完成现有 readiness 验证流程，再刷新状态；本页不能签发生产资格。</p><p>同步进程不可用：检查索引 Worker 进程和最近错误，恢复进程后刷新；发布与撤回仍以内容库事实为准。</p><p>调用结果未知：先核对供应商账单与后台尝试记录，避免直接重发造成重复费用。删除和撤回不等待付费预算。</p><p>数据恢复期间：等待北京时间下一日的恢复保护窗口结束，再验证索引与运行配置。</p></details>
+        <details class="am-runbook"><summary>如何处理运行条件问题</summary><p>切换索引后：点击“校验并签发资格”，通过后分别恢复后台试问和对外开放。首次部署、密钥或运行配置变更仍需在服务器完成部署资格验证。</p><p>同步进程不可用：检查索引 Worker 进程和最近错误，恢复进程后刷新；发布与撤回仍以内容库事实为准。</p><p>调用结果未知：先核对供应商账单与后台尝试记录，避免直接重发造成重复费用。删除和撤回不等待付费预算。</p><p>数据恢复期间：等待北京时间下一日的恢复保护窗口结束，再验证索引与运行配置。</p></details>
       </section>
         <form v-if="panel === 'budget'" class="am-budget-form" @submit.prevent="saveBudget"><h2 id="budget-title" tabindex="-1">修改每日预算</h2><p>北京时间每日 00:00 重置。设为 0 暂停新增付费调用。</p><label for="daily-budget">每日总预算（元）</label><input id="daily-budget" v-model="budgetInput" inputmode="decimal" autocomplete="off" autofocus><p>当前已用 {{ money(management?.usage_known && !stale ? budget?.settled_micro_cny : null) }}，预留 {{ money(management?.usage_known && !stale ? budget?.reserved_micro_cny : null) }}。部署允许上限 {{ money(budget?.ceiling_micro_cny) }}。</p><p>每日上限从 {{ money(budget?.cap_micro_cny) }} 调整为 {{ money(amountToMicro(budgetInput)) }}。</p><p v-if="budgetError" class="am-alert" role="alert">{{ budgetError }}</p><div class="am-actions"><button type="button" class="button-secondary" :disabled="mutating" @click="budgetOpen = false">取消</button><button class="button-primary" :disabled="mutating">{{ mutating ? '保存中…' : '保存预算' }}</button></div></form>
         <div v-if="panel === 'confirm'" class="am-budget-form"><h2 id="confirm-title" tabindex="-1">{{ confirmation.title }}</h2><p>{{ confirmation.body }}</p><div class="am-actions"><button class="button-secondary" :disabled="mutating" @click="confirmOpen = false">取消</button><button :class="confirmation.danger ? 'am-danger' : 'button-primary'" :disabled="mutating" @click="runConfirmed">{{ confirmation.title }}</button></div></div>
@@ -119,6 +120,18 @@ const facts = computed<{ label: string, fact: AssistantObservedFact }[]>(() => s
 ] : [])
 const key = (scope: string) => `${scope}-${crypto.randomUUID()}`
 const retry = (task: SyncTask) => mutate(() => apiFetch(`/admin/assistant/index/tasks/${task.id}/retry`, { method: 'POST', body: { expected_status: 'failed', expected_version: task.version, operator_authorized: false }, headers: { 'Idempotency-Key': key('retry') } }), '已提交此内容同步重试。')
+const renewingReadiness = ref(false)
+const renewReadiness = async () => {
+  const current = snapshot.value
+  if (!current?.manifest.generation_id || mutating.value) return
+  renewingReadiness.value = true
+  try {
+    await mutate(() => apiFetch('/admin/assistant/readiness/renew', {
+      method: 'POST', body: { expected_generation_id: current.manifest.generation_id, expected_version: current.availability.version },
+    }), '运行资格已通过校验，可分别恢复后台试问和对外开放。')
+  }
+  finally { renewingReadiness.value = false }
+}
 const resumeTrial = () => mutate(() => apiFetch('/admin/assistant/trial/resume', { method: 'POST' }), '后台试问已恢复，对外开放状态未改变。')
 const confirmOpen = ref(false)
 const confirmation = ref({ title: '', body: '', danger: false })

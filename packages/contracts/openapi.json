@@ -1289,6 +1289,117 @@
         }
       }
     },
+    "/api/v1/admin/assistant/readiness/renew": {
+      "post": {
+        "tags": [
+          "admin assistant"
+        ],
+        "summary": "Renew Readiness",
+        "operationId": "renew_readiness_api_v1_admin_assistant_readiness_renew_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReadinessRenewalRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadinessRenewalResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/admin/assistant/management": {
       "get": {
         "tags": [
@@ -10300,6 +10411,47 @@
           "latest_success_at"
         ],
         "title": "QueueView"
+      },
+      "ReadinessRenewalRequest": {
+        "properties": {
+          "expected_generation_id": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Generation Id"
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_generation_id",
+          "expected_version"
+        ],
+        "title": "ReadinessRenewalRequest"
+      },
+      "ReadinessRenewalResponse": {
+        "properties": {
+          "qualified": {
+            "type": "boolean",
+            "const": true,
+            "title": "Qualified"
+          },
+          "generation_id": {
+            "type": "integer",
+            "title": "Generation Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "qualified",
+          "generation_id"
+        ],
+        "title": "ReadinessRenewalResponse"
       },
       "RebuildRequest": {
         "properties": {},

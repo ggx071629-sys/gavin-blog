@@ -229,3 +229,12 @@ update the image bindings and run the bounded provider/readiness checks before
 re-enabling. Roll back by restoring these configuration files and the old image,
 then reissuing readiness if required. Never delete volumes or restore an old empty
 content snapshot over newly published articles.
+
+
+## 索引切换后的资格续签
+
+高级维护提供 `POST /api/v1/admin/assistant/readiness/renew`（管理员 Session/CSRF）。请求包含 `expected_generation_id` 和 `expected_version`，响应只包含 `qualified` 与 `generation_id`。操作顺序为重建、切换、校验并签发资格、恢复试问、按需对外开放；资格续签自身保持全部问答停止。
+
+API owner 在内容写围栏下核对旧资格 HMAC 和所有非索引运行绑定，并实际审计当前公开内容、切片、FTS、Qdrant 向量及模型身份。复用当前模型实例，不创建额外进程，不调用 Chat 或 Embedding，不消耗模型调用预算。审计结束再次检查运行版本、维护锁、在途问答、checkpoint 清理和凭据身份后原子续签；相同索引重复操作复用有效凭据。只读状态刷新不会续签。
+
+旧凭据缺失/无效或模型、密钥、价格、预算、部署配置变更仍须完成服务器部署资格验证，本接口不能批准这些变更。索引损坏、切换未完成、页面版本过期或会话未清理返回具体的安全错误消息；不暴露内部异常、正文或凭据。此流程不会把有限验证部署升级为完整生产资格。

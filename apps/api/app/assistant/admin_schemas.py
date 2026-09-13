@@ -42,6 +42,16 @@ class AvailabilityRequest(StrictModel):
     expected_version: int = Field(ge=0)
 
 
+class ReadinessRenewalRequest(StrictModel):
+    expected_generation_id: int = Field(ge=1)
+    expected_version: int = Field(ge=1)
+
+
+class ReadinessRenewalResponse(StrictModel):
+    qualified: Literal[True]
+    generation_id: int
+
+
 class RetryTaskRequest(StrictModel):
     expected_status: Literal["failed"]
     expected_version: int = Field(ge=1)

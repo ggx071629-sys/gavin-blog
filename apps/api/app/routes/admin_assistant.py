@@ -21,6 +21,8 @@ from ..assistant.admin_schemas import (
     FinalizeRequest,
     IndexTaskList,
     OperationView,
+    ReadinessRenewalRequest,
+    ReadinessRenewalResponse,
     RebuildRequest,
     RetryTaskRequest,
     RetryTaskResponse,
@@ -197,6 +199,26 @@ ERROR_RESPONSES: dict[int | str, dict[str, Any]] = {
 
 def _no_store(response: Response) -> None:
     response.headers["Cache-Control"] = "no-store"
+
+
+@router.post(
+    "/readiness/renew", response_model=ReadinessRenewalResponse, responses=ERROR_RESPONSES,
+)
+def renew_readiness(
+    payload: ReadinessRenewalRequest,
+    request: Request,
+    response: Response,
+    _: Annotated[AdminSession, Depends(require_session_csrf)],
+):
+    from ..assistant.readiness_renewal import renew_index_readiness
+
+    _no_store(response)
+    return renew_index_readiness(
+        getattr(request.app.state, "assistant", None),
+        expected_generation_id=payload.expected_generation_id,
+        expected_version=payload.expected_version,
+        content_fence_held=True,
+    )
 
 
 @router.get("/management", response_model=ManagementView)
