@@ -18013,7 +18013,37 @@
             {
               "kind": "pytest",
               "path": "apps/api/tests/test_assistant_live_fixes.py",
-              "name": "test_runtime_revocation_survives_content_fence",
+              "name": "test_runtime_revocation_survives_content_fence[clear-public]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-FIXES-01-ALLOW",
+                "M09-LIVE-FIXES-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_live_fixes.py",
+              "name": "test_runtime_revocation_survives_content_fence[clear-admin]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-FIXES-01-ALLOW",
+                "M09-LIVE-FIXES-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_live_fixes.py",
+              "name": "test_runtime_revocation_survives_content_fence[stop-public]",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-FIXES-01-ALLOW",
+                "M09-LIVE-FIXES-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_live_fixes.py",
+              "name": "test_runtime_revocation_survives_content_fence[stop-admin]",
               "gate": "api-tests",
               "covers": [
                 "M09-LIVE-FIXES-01-ALLOW",
