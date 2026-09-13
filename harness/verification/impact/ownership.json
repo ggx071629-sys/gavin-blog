@@ -1346,7 +1346,8 @@
         "M09-FACT-ALIGNMENT-01",
         "M09-FACT-ALIGNMENT-02",
         "M09-LIVE-LEDGER-01",
-        "M10-TRIAL-RECOVERY-01"
+        "M10-TRIAL-RECOVERY-01",
+        "M09-LIVE-FIXES-01"
       ],
       "dependents": [
         "M06.api_tooling",
@@ -1475,7 +1476,8 @@
         "apps/api/app/assistant/management.py",
         "apps/api/app/assistant/total_budget.py",
         "apps/api/tests/test_assistant_management.py",
-        "apps/api/app/assistant/sync_attention.py"
+        "apps/api/app/assistant/sync_attention.py",
+        "apps/api/tests/test_assistant_live_fixes.py"
       ],
       "cases": [
         "M10-P0-01",
@@ -1500,7 +1502,9 @@
         "M10-TRIAL-RECOVERY-01",
         "M09-RESTART-STATE-01",
         "M10-SYNC-ATTENTION-01",
-        "M10-SYNC-ATTENTION-02"
+        "M10-SYNC-ATTENTION-02",
+        "M09-LIVE-FIXES-01",
+        "M09-LIVE-FIXES-04"
       ],
       "dependents": [
         "M06.runtime_config",
@@ -1574,7 +1578,8 @@
         "M10-UNIT-INDEX-INTEGRITY-01",
         "M09-DEFENSE-01",
         "M09-DEFENSE-02",
-        "M09-DEFENSE-03"
+        "M09-DEFENSE-03",
+        "M09-LIVE-FIXES-03"
       ],
       "dependents": [
         "M01.articles",
@@ -1923,7 +1928,8 @@
         "M06-RESUME-REFRESH-WORKER-01",
         "M10-SOURCE-DIVERSITY-01",
         "M09-RETRIEVAL-IO-02",
-        "M09-RESTART-STATE-01"
+        "M09-RESTART-STATE-01",
+        "M09-LIVE-FIXES-01"
       ],
       "dependents": [
         "M02.publishing",
@@ -2319,7 +2325,8 @@
         "M09-RESUME-CITATION-UI-01",
         "M09-FEEDBACK-ADMIN-01",
         "M09-LIVE-LEDGER-01",
-        "M09-RESTART-STATE-01"
+        "M09-RESTART-STATE-01",
+        "M09-LIVE-FIXES-03"
       ],
       "dependents": [
         "M06.persistence",
@@ -3182,7 +3189,9 @@
         "M09-CITATION-LOCATIONS-01",
         "M09-ABOUT-RETRIEVAL-01",
         "M09-REFERENCE-WEB-01",
-        "M09-SCOPE-WEB-01"
+        "M09-SCOPE-WEB-01",
+        "M09-LIVE-FIXES-02",
+        "M09-LIVE-FIXES-03"
       ],
       "dependents": [
         "M01.navigation",
@@ -3220,7 +3229,8 @@
         "apps/web/tests/e2e-assistant/management.spec.ts",
         "apps/web/tests/e2e/studio-overview.spec.ts",
         "apps/web/tests/e2e/studio-dialogs.spec.ts",
-        "apps/web/tests/e2e/studio-states.spec.ts"
+        "apps/web/tests/e2e/studio-states.spec.ts",
+        "apps/web/tests/e2e-assistant/live-gaps.spec.ts"
       ],
       "cases": [
         "M10-P0-02",
@@ -3245,7 +3255,9 @@
         "M09-INPUT-ERROR-02",
         "M09-TECHNICAL-CITATION-01",
         "M09-FEEDBACK-ADMIN-01",
-        "M10-SYNC-ATTENTION-02"
+        "M10-SYNC-ATTENTION-02",
+        "M09-LIVE-FIXES-03",
+        "M09-LIVE-FIXES-04"
       ],
       "dependents": []
     },
@@ -3592,7 +3604,8 @@
         "M07-P1-01",
         "M08-IMPACT-RUNNERS-01",
         "M09-UI-ORB-MOTION-01",
-        "M07-STUDIO-THEME-01"
+        "M07-STUDIO-THEME-01",
+        "M09-LIVE-FIXES-03"
       ],
       "dependents": [
         "M01.navigation",
@@ -3673,7 +3686,8 @@
       ],
       "cases": [
         "M08-IMPACT-PREREQUISITES-01",
-        "M08-IMPACT-RUNNERS-01"
+        "M08-IMPACT-RUNNERS-01",
+        "M09-LIVE-FIXES-03"
       ],
       "dependents": [
         "M01.navigation",

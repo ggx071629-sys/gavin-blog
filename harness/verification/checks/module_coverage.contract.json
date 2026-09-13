@@ -17989,6 +17989,211 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M09-LIVE-FIXES-01",
+          "priority": "P1",
+          "scenario": "持有内容围栏时创建运行会话、清除和紧急停止成功。",
+          "expectations": [
+            {
+              "id": "M09-LIVE-FIXES-01-ALLOW",
+              "surface": "response",
+              "statement": "持有内容围栏时创建运行会话、清除和紧急停止成功。"
+            },
+            {
+              "id": "M09-LIVE-FIXES-01-DENY",
+              "surface": "forbidden",
+              "statement": "不得绕过认证或内容写保护，在途撤销后不得发布回答。"
+            }
+          ],
+          "required_gates": [
+            "api-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_live_fixes.py",
+              "name": "test_runtime_revocation_survives_content_fence",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-FIXES-01-ALLOW",
+                "M09-LIVE-FIXES-01-DENY"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_backup_restore.py",
+              "name": "test_http_mutation_is_rejected_while_backup_fence_is_held",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-FIXES-01-ALLOW",
+                "M09-LIVE-FIXES-01-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-LIVE-FIXES-02",
+          "priority": "P1",
+          "scenario": "删除拒绝保留历史，成功清除及刷新为空，旧响应被隔离。",
+          "expectations": [
+            {
+              "id": "M09-LIVE-FIXES-02-ALLOW",
+              "surface": "response",
+              "statement": "删除拒绝保留历史，成功清除及刷新为空，旧响应被隔离。"
+            },
+            {
+              "id": "M09-LIVE-FIXES-02-DENY",
+              "surface": "forbidden",
+              "statement": "不得将503或网络失败呈现为已清除，不得自动重发问题。"
+            }
+          ],
+          "required_gates": [
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "failed clear preserves visible history until server confirms deletion",
+              "gate": "e2e",
+              "config": "playwright.assistant.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "failed clear preserves visible history until server confirms deletion"
+              ],
+              "covers": [
+                "M09-LIVE-FIXES-02-ALLOW",
+                "M09-LIVE-FIXES-02-DENY"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "panel state recovery",
+              "gate": "e2e",
+              "config": "playwright.assistant.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "panel state recovery"
+              ],
+              "covers": [
+                "M09-LIVE-FIXES-02-ALLOW",
+                "M09-LIVE-FIXES-02-DENY"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+              "name": "body-free feedback saves restores retracts and ignores a late result after clear",
+              "gate": "e2e",
+              "config": "playwright.assistant.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "body-free feedback saves restores retracts and ignores a late result after clear"
+              ],
+              "covers": [
+                "M09-LIVE-FIXES-02-ALLOW",
+                "M09-LIVE-FIXES-02-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-LIVE-FIXES-03",
+          "priority": "P1",
+          "scenario": "干净E2E构建、真实试问和持续测试Worker完成，独立访客无管理员状态。",
+          "expectations": [
+            {
+              "id": "M09-LIVE-FIXES-03-ALLOW",
+              "surface": "response",
+              "statement": "干净E2E构建、真实试问和持续测试Worker完成，独立访客无管理员状态。"
+            },
+            {
+              "id": "M09-LIVE-FIXES-03-DENY",
+              "surface": "forbidden",
+              "statement": "不得用bootstrap替代持续Worker，不得打开真实付费依赖。"
+            }
+          ],
+          "required_gates": [
+            "api-tests",
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_live_fixes.py",
+              "name": "test_e2e_worker_keeps_observation_alive",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-FIXES-03-ALLOW",
+                "M09-LIVE-FIXES-03-DENY"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+              "name": "management real trial budget public switch and responsive maintenance",
+              "gate": "e2e",
+              "config": "playwright.assistant.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "management real trial budget public switch and responsive maintenance"
+              ],
+              "covers": [
+                "M09-LIVE-FIXES-03-ALLOW",
+                "M09-LIVE-FIXES-03-DENY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M09-LIVE-FIXES-04",
+          "priority": "P1",
+          "scenario": "readiness漂移显示blocked；费用身份、失败详情、无样本、过期诊断及running分支可观察。",
+          "expectations": [
+            {
+              "id": "M09-LIVE-FIXES-04-ALLOW",
+              "surface": "response",
+              "statement": "readiness漂移显示blocked；费用身份、失败详情、无样本、过期诊断及running分支可观察。"
+            },
+            {
+              "id": "M09-LIVE-FIXES-04-DENY",
+              "surface": "forbidden",
+              "statement": "不得将陈旧开放状态作为可用，不得将未知费用或耗时当零，不得重试未知调用。"
+            }
+          ],
+          "required_gates": [
+            "api-tests",
+            "e2e"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_assistant_live_fixes.py",
+              "name": "test_dashboard_reconciles_reissued_readiness",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-FIXES-04-ALLOW",
+                "M09-LIVE-FIXES-04-DENY"
+              ]
+            },
+            {
+              "kind": "playwright",
+              "path": "apps/web/tests/e2e-assistant/live-gaps.spec.ts",
+              "name": "management renders identity costs current errors stale diagnostics and running state",
+              "gate": "e2e",
+              "config": "playwright.assistant.config.ts",
+              "project": "chromium",
+              "title_path": [
+                "management renders identity costs current errors stale diagnostics and running state"
+              ],
+              "covers": [
+                "M09-LIVE-FIXES-04-ALLOW",
+                "M09-LIVE-FIXES-04-DENY"
+              ]
+            }
+          ]
         }
       ]
     },

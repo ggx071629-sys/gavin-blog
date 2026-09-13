@@ -30,11 +30,11 @@ state_history:
 不得把写内容库的问答预算准入接口排除于备份围栏；不得把断网删除未知当作删除失败可安全重发问题。
 # Verification plan
 ## Verification cases
-- AC-1 => M09-LIVE-FIXES-01
+- AC-1 => M09-LIVE-FIXES-01, M08-DOCS-01
 - AC-2 => M09-LIVE-FIXES-02
 - AC-3 => M09-LIVE-FIXES-03
 - AC-4 => M09-LIVE-FIXES-04
 ## Gates
 - api-tests => AC-1, AC-3, AC-4
-- web-quality => AC-2, AC-3, AC-4
+- e2e => AC-2, AC-3, AC-4
 - harness-integrity => AC-1, AC-2, AC-3, AC-4
