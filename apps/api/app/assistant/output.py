@@ -12,7 +12,11 @@ IMAGE_RE = re.compile(r"!\[[^\]]*\]\([^)]+\)")
 LINK_RE = re.compile(r"\[[^\]]*\]\((https?:)?[^)]+\)")
 FORBIDDEN_MD = re.compile(r"javascript:", re.IGNORECASE)
 RESERVED_MARKER_RE = re.compile(r"\[[1-9][0-9]*\]")
-ARRAY_RE = re.compile(r"(?<![A-Za-z0-9_])[A-Za-z_][A-Za-z0-9_]*\s*(?:\[\s*\d+\s*\])+")
+ARRAY_RE = re.compile(r"(?<![A-Za-z0-9_])[A-Za-z_][A-Za-z0-9_]*(?:\[[ \t]*\d+[ \t]*\])+")
+CODE_ARRAY_RE = re.compile(
+    r"(?<![A-Za-z0-9_])[A-Za-z_][A-Za-z0-9_]*[ \t]*(?:\[[ \t]*\d+[ \t]*\])+"
+)
+INLINE_CODE_RE = re.compile(r"((?<![\\`])`[^`\r\n]*(?<!\\)`(?!`))")
 GENERIC_RE = re.compile(
     r"(?<![A-Za-z0-9_])[A-Za-z_][A-Za-z0-9_]*"
     r"<[A-Za-z_][A-Za-z0-9_]*(?:,\s*[A-Za-z_][A-Za-z0-9_]*)*>"
@@ -22,7 +26,12 @@ RESUME_NOTICES = frozenset({"简历当前不可用。", "Resume evidence is curr
 
 def _unsafe_structure(text: str) -> bool:
     markup_view = GENERIC_RE.sub("type expression", text)
-    marker_view = ARRAY_RE.sub("array expression", text)
+    # Whitespace before a subscript needs an explicit code span: otherwise
+    # ordinary prose such as "See [1]" would bypass the citation marker guard.
+    marker_view = "".join(
+        (CODE_ARRAY_RE if index % 2 else ARRAY_RE).sub("array expression", part)
+        for index, part in enumerate(INLINE_CODE_RE.split(text))
+    )
     return bool(HTML_RE.search(markup_view) or IMAGE_RE.search(text) or LINK_RE.search(text)
                 or FORBIDDEN_MD.search(text) or RESERVED_MARKER_RE.search(marker_view))
 
@@ -31,7 +40,7 @@ def _render_technical_text(text: str) -> str:
     # Explicit inline-code boundaries avoid guessing whether "word[1]" is an
     # old citation or a new array subscript. Existing code spans remain intact.
     return "".join(part if index % 2 else ARRAY_RE.sub(lambda m: "`" + m[0] + "`", part)
-                   for index, part in enumerate(re.split(r"(`[^`\n]*`)", text)))
+                   for index, part in enumerate(INLINE_CODE_RE.split(text)))
 PERSONAL_CLAIM_RE = re.compile(
     r"精通|专家|\d+\s*年(?:以上)?经验|获(?:得|了|奖)|图灵奖|诺贝尔|"
     r"(?:目前|现任|现在).*(?:担任|任职|工程师|经理)|"
