@@ -1,0 +1,713 @@
+{
+  "schema_version": 2,
+  "task_id": "20260910-studio-dialogs",
+  "created_at": "2026-09-10T07:46:11.473769+00:00",
+  "command": "python -m tools.harness verify 20260910-studio-dialogs",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "web-quality",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "web-quality",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "98f21440f1c72e180bdae045fd9c53b9ea5d3f3c",
+    "active_spec_sha256": "da6bafc84c02d46c0f925dc6e887379d5f7228fe1832a9d59f1f812b66ee84e8",
+    "verification_contract_sha256": "92a73f5181e4ad09bcc948eaa9d38c9afb837400870ffe6a3e9cc4fdbc7d903e",
+    "gate_config_sha256": "f2553450642a95673fa66d51d7bd014babc2ba616019f9efac6a1829d562ab70",
+    "documentation_contract_sha256": "1f99152c277045921b0feae1d3643e7259f8539d50b162bdb4d01e327d2ca918",
+    "documentation_targets_sha256": "c93ddaeed2a9b9d8ef33506b19d1ce3e6a5365868a24f60a089716f4e91ab42d",
+    "module_contract_sha256": "670fa0b0500dd53a0eb9a922e15a83cb6e4e4a73db15a43aa9de96eddec7bd85"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录助手弹窗、维护直达链接与确认错误反馈。",
+    "targets": [
+      "apps/web/public/studio/README.md"
+    ],
+    "baseline_commit": "56b12de814d84302d6d2ad8dc0786a155b30b835",
+    "target_blobs": {
+      "apps/web/public/studio/README.md": "2fed501457c8902cf1a537ae18d4e0a3ff00f84a"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "b34554e0ee33500426d25d21a1066f62cdf780fb",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260910-studio-dialogs.json",
+      "sha256": "88127f3b8b23e065a903427b6a0e99fcf78ba377a61c1d3e055b44cc0caf8c70",
+      "selected_cases": [
+        "M10-STUDIO-DIALOGS-01"
+      ],
+      "selected_refs": 3,
+      "excluded_cases": 236
+    },
+    "receipt": {
+      "run_id": "e71d795282943a944552c9517995f145",
+      "identity": "1aab183b5c403757c2bff874e5ba92128491978479cbdb54955a73143b124238",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "web-quality",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1179.037,
+      "plan_inputs": 794.777,
+      "execute_cleanup_and_input_recheck": 106921.653
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "670fa0b0500dd53a0eb9a922e15a83cb6e4e4a73db15a43aa9de96eddec7bd85",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "web-quality",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-STUDIO-DIALOGS-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "Assistant details, maintenance and confirmations share one accessible dialog and retain actual operation semantics.",
+            "expectations": [
+              {
+                "id": "M10-STUDIO-DIALOGS-01-ALLOW",
+                "surface": "response",
+                "statement": "Responsive themed dialogs preserve focus, direct maintenance links, exact budget/version requests, single-item retries and visible failures."
+              },
+              {
+                "id": "M10-STUDIO-DIALOGS-01-DENY",
+                "surface": "forbidden",
+                "statement": "No nested dialogs, hidden failure confirmation, unsafe retry for unknown provider result, writes on cancel, or loss of budget input on conflict."
+              }
+            ],
+            "required_gates": [
+              "e2e",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/studio-dialogs.spec.ts",
+                "name": "dialogs",
+                "gate": "e2e",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "dialogs"
+                ],
+                "covers": [
+                  "M10-STUDIO-DIALOGS-01-ALLOW",
+                  "M10-STUDIO-DIALOGS-01-DENY"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "covers": [
+                  "M10-STUDIO-DIALOGS-01-ALLOW",
+                  "M10-STUDIO-DIALOGS-01-DENY"
+                ],
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "uses exact decimal micro currency and rejects ambiguous values",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-STUDIO-DIALOGS-01-ALLOW",
+                  "M10-STUDIO-DIALOGS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "web-quality",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-STUDIO-DIALOGS-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "Assistant details, maintenance and confirmations share one accessible dialog and retain actual operation semantics.",
+            "expectations": [
+              {
+                "id": "M10-STUDIO-DIALOGS-01-ALLOW",
+                "surface": "response",
+                "statement": "Responsive themed dialogs preserve focus, direct maintenance links, exact budget/version requests, single-item retries and visible failures."
+              },
+              {
+                "id": "M10-STUDIO-DIALOGS-01-DENY",
+                "surface": "forbidden",
+                "statement": "No nested dialogs, hidden failure confirmation, unsafe retry for unknown provider result, writes on cancel, or loss of budget input on conflict."
+              }
+            ],
+            "required_gates": [
+              "e2e",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/studio-dialogs.spec.ts",
+                "name": "dialogs",
+                "gate": "e2e",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "dialogs"
+                ],
+                "covers": [
+                  "M10-STUDIO-DIALOGS-01-ALLOW",
+                  "M10-STUDIO-DIALOGS-01-DENY"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "covers": [
+                  "M10-STUDIO-DIALOGS-01-ALLOW",
+                  "M10-STUDIO-DIALOGS-01-DENY"
+                ],
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "uses exact decimal micro currency and rejects ambiguous values",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-STUDIO-DIALOGS-01-ALLOW",
+                  "M10-STUDIO-DIALOGS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 3.951,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "138 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 187.617,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 74.602,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.568,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "703 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 329.006,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "257 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 80.408,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 237 cases, 475 expectations, 865 exact test references; contract sha256 670fa0b0500d"
+      ],
+      "status": "passed",
+      "duration_ms": 410.287,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.055,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.755,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 76.692,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 1502.079,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "e71d795282943a944552c9517995f145",
+        "attempt_id": "1efb9dacb62da43dbf52b1d44e4efdb7"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-dialogs --gate e2e",
+      "status": "passed",
+      "duration_ms": 98630.897,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 3642,
+        "selection_counts": {
+          "collected": 2,
+          "executed": 2
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-dialogs.spec.ts",
+                "name": "dialogs",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "dialogs"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              }
+            ],
+            "duration_ms": 2794.881,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-dialogs.spec.ts",
+                "name": "dialogs",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "dialogs"
+                ]
+              }
+            ],
+            "duration_ms": 1447.238
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              }
+            ],
+            "duration_ms": 1412.88
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-dialogs.spec.ts",
+                "name": "dialogs",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "dialogs"
+                ]
+              }
+            ],
+            "duration_ms": 1291.011,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-dialogs.spec.ts",
+                "name": "dialogs",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "dialogs"
+                ]
+              }
+            ],
+            "duration_ms": 38067.514,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              }
+            ],
+            "duration_ms": 1284.871,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              }
+            ],
+            "duration_ms": 51964.124,
+            "batch_id": "batch-0002"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\9a513332054c4aa05ebb9c71540c8a27422c0b292066f2dac0c465cb7bcdfb7d\\artifacts\\e71d795282943a944552c9517995f145\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "e71d795282943a944552c9517995f145",
+        "attempt_id": "11e5764af790b23d6e759556c7165036"
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-dialogs --gate web-quality",
+      "status": "passed",
+      "duration_ms": 4745.146,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1530,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "reused-in-worktree",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "uses exact decimal micro currency and rejects ambiguous values"
+              }
+            ],
+            "duration_ms": 4.244,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "uses exact decimal micro currency and rejects ambiguous values"
+              }
+            ],
+            "duration_ms": 2246.93
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "uses exact decimal micro currency and rejects ambiguous values",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant management contracts",
+                  "uses exact decimal micro currency and rejects ambiguous values"
+                ]
+              }
+            ],
+            "duration_ms": 2122.162,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\9a513332054c4aa05ebb9c71540c8a27422c0b292066f2dac0c465cb7bcdfb7d\\artifacts\\e71d795282943a944552c9517995f145\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "e71d795282943a944552c9517995f145",
+        "attempt_id": "c1c224b4e24efdbbbfd763fb9117b137"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1712.3,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 107766.363,
+    "failures": []
+  },
+  "source_commit": "b34554e0ee33500426d25d21a1066f62cdf780fb"
+}

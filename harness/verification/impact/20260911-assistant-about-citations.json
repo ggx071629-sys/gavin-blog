@@ -1,0 +1,364 @@
+{
+  "schema_version": 1,
+  "task_id": "20260911-assistant-about-citations",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/prompt.py",
+      "owner": "M09.runtime",
+      "reason": "About citation path and explicit self-report policy.",
+      "cases": [
+        "M09-ABOUT-FACTS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Shared prompt or citation closure is consumed here; selected API policy/citation and public/admin browser navigation tests exercise the changed behavior.",
+          "cases": [
+            "M09-ABOUT-CITATION-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Shared prompt or citation closure is consumed here; selected API policy/citation and public/admin browser navigation tests exercise the changed behavior.",
+          "cases": [
+            "M09-ABOUT-CITATION-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_about_facts.py",
+      "owner": "M09.runtime",
+      "reason": "About citation path and explicit self-report policy.",
+      "cases": [
+        "M09-ABOUT-FACTS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Shared prompt or citation closure is consumed here; selected API policy/citation and public/admin browser navigation tests exercise the changed behavior.",
+          "cases": [
+            "M09-ABOUT-CITATION-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Shared prompt or citation closure is consumed here; selected API policy/citation and public/admin browser navigation tests exercise the changed behavior.",
+          "cases": [
+            "M09-ABOUT-CITATION-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/utils/assistant/allowlist.ts",
+      "owner": "M09.assistant_web",
+      "reason": "About citation path and explicit self-report policy.",
+      "cases": [
+        "M09-ABOUT-CITATION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Shared prompt or citation closure is consumed here; selected API policy/citation and public/admin browser navigation tests exercise the changed behavior.",
+          "cases": [
+            "M09-ABOUT-CITATION-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+      "owner": "M09.assistant_web",
+      "reason": "About citation path and explicit self-report policy.",
+      "cases": [
+        "M09-ABOUT-CITATION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Shared prompt or citation closure is consumed here; selected API policy/citation and public/admin browser navigation tests exercise the changed behavior.",
+          "cases": [
+            "M09-ABOUT-CITATION-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary boundary prose or exact-case registration.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/declarative registration; no executable contract instructions changed."
+    },
+    {
+      "path": "apps/web/README.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary boundary prose or exact-case registration.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/declarative registration; no executable contract instructions changed."
+    },
+    {
+      "path": "packages/contracts/README.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary boundary prose or exact-case registration.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/declarative registration; no executable contract instructions changed."
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Ordinary boundary prose or exact-case registration.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative case registration only.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative case registration only.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative case registration only.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Ordinary prose/declarative registration; no executable contract instructions changed."
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Ordinary boundary prose or exact-case registration.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative case registration only.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative case registration only.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative case registration only.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative case registration only.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative case registration only.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative case registration only.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative case registration only.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Ordinary prose/declarative registration; no executable contract instructions changed."
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "test_id": "2c4g-blind-test",
+  "date_utc": "2026-09-06",
+  "container": "cloud-test-2c4g",
+  "limits": {
+    "cpus": 2,
+    "memory_bytes": 4294967296,
+    "swap": false
+  },
+  "conclusion": "必须优化或升级配置",
+  "conclusion_code": "must_optimize_or_upgrade",
+  "questions": {
+    "boot": {
+      "pass": false,
+      "pass_default_real_entry": false,
+      "pass_deps_model_index": true,
+      "pass_prod_web_stack": true,
+      "notes": "dev:assistant:real Nuxt-dev OOM; prod web stack boots ~2.1GiB"
+    },
+    "smooth": {
+      "pass": true,
+      "path": "production_web_plus_real_api",
+      "homepage_total_s_p50_approx": 0.056,
+      "articles_total_s_p50_approx": 0.032,
+      "ask_answered_s": [
+        1.761,
+        3.71,
+        1.444,
+        1.714
+      ]
+    },
+    "load": {
+      "pass": true,
+      "path": "production_web_plus_real_api",
+      "concurrent_two_asks_wall_s": 3.688,
+      "concurrent_both_answered": true,
+      "rebuild_under_traffic_ok": true,
+      "rebuild_peak_mem_gib_approx": 2.55,
+      "rate_limit_observed": true
+    },
+    "soak_restart": {
+      "pass": true,
+      "soak_minutes_approx": 10,
+      "soak_samples": 20,
+      "soak_errors": 0,
+      "soak_mem_mib_range": [
+        3135.1,
+        3147.2
+      ],
+      "restart_requires_e5_before_api": true,
+      "post_restart_ask_answered_s": 1.714
+    }
+  },
+  "memory": {
+    "docker_stats_peak_gib": 3.999,
+    "cgroup_memory_peak_bytes": 4295012352,
+    "oom_kill_count": 1,
+    "oom_victim": "node (Nuxt dev)",
+    "phases_peak_mib": {
+      "npm_ci": 1610.8,
+      "e5_qdrant": 2004.0,
+      "index_rebuild": 2385.9,
+      "nuxt_dev_oom": 4095.0,
+      "prod_steady": 2625.5
+    }
+  },
+  "components": {
+    "node": "22.19.0",
+    "python": "3.11.15",
+    "uv": "0.12.10",
+    "qdrant": "1.15.5-musl",
+    "e5_model": "present",
+    "chat_provider": "configured",
+    "secrets_in_report": false
+  },
+  "blockers": [
+    "Nuxt dev + E5 + API exceeds 4GiB",
+    "Qdrant 1.18.3 gnu needs newer glibc"
+  ],
+  "recommendations": [
+    "Upgrade to >=8GiB RAM",
+    "Use production Nuxt only",
+    "Start E5 before API",
+    "Off-peak index rebuild"
+  ],
+  "container_still_exists": true,
+  "app_processes_stopped": true,
+  "report_path": "/workspace/cloud-test/reports/2c4g-blind-test-report.md"
+}

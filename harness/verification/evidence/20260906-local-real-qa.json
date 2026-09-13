@@ -1,0 +1,1247 @@
+{
+  "schema_version": 2,
+  "task_id": "20260906-local-real-qa",
+  "created_at": "2026-09-06T12:29:46.920281+00:00",
+  "command": "python -m tools.harness verify 20260906-local-real-qa",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "harness-integrity",
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "025d5a3354ecdec7ba06d19a08780a8e2af23000",
+    "active_spec_sha256": "beb91687d882800e2bdaacf482723f6107a21bbb682a7d239c68b2afeb16792c",
+    "verification_contract_sha256": "8abc9b46d6c46633d2847cd1e5fca0f8217d3acf6d9055919c9312854bb32248",
+    "gate_config_sha256": "c440da183de6c4f033163aa17fa4bbf030e8bf590d02b240d56e1e2aaa556856",
+    "documentation_contract_sha256": "6974503d75325ad2cf2a362cd7f87695e6050ce2c2e4fa65bc6d30b061288ebd",
+    "documentation_targets_sha256": "259375e7d42ffe448f22ad14733bd9f0bfd71244e291778f3fa13472039ff17d",
+    "module_contract_sha256": "2735e896dd79831b33987ba92d53d2475a686ef0c62b852ff8e471fd8dec60a1"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "交付本机真实问答启停、密钥/预算/索引维护和资源实测说明。",
+    "targets": [
+      "apps/api/README.md",
+      "apps/web/README.md"
+    ],
+    "baseline_commit": "8dac52a764208dd5b7f4947b6829b0a7e0740350",
+    "target_blobs": {
+      "apps/api/README.md": "79c8a7610c8cd734ac358ccccdfe29ddc7cc8972",
+      "apps/web/README.md": "4124b0e33843c7bd1c1e74b985522507ff6256a7"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "544ccb251360f58c934d3f76f20072cb8029b077",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260906-local-real-qa.json",
+      "sha256": "35643bfb8eb2b3dc5ae398065c01d35e32eb1a237e8d79970bb109094fcdbdbb",
+      "selected_cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-CITATIONS-01",
+        "M09-LOCAL-REAL-CONCURRENCY-01",
+        "M09-LOCAL-REAL-QA-01",
+        "M09-LOCAL-REAL-RUNTIME-01"
+      ],
+      "selected_refs": 30,
+      "excluded_cases": 193
+    },
+    "receipt": {
+      "run_id": "b4d0cb3c8cabda479f49ce538c2866da",
+      "identity": "a2a198765d04ffb530432c13ce5f7173a2213124345d1f6c21ae465bb59fd51f",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "web-quality",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1123.961,
+      "plan_inputs": 1274.936,
+      "execute_cleanup_and_input_recheck": 80942.451
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "2735e896dd79831b33987ba92d53d2475a686ef0c62b852ff8e471fd8dec60a1",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-LOCAL-REAL-BOUNDARY-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "显式真实开发启动仅接受回环与签名配置，生产和篡改均拒绝。",
+            "expectations": [
+              {
+                "id": "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+                "surface": "response",
+                "statement": "显式真实开发启动仅接受回环与签名配置，生产和篡改均拒绝。"
+              },
+              {
+                "id": "M09-LOCAL-REAL-BOUNDARY-01-DENY",
+                "surface": "forbidden",
+                "statement": "禁止配置越界、费用重置、错误答案、引用伪造、并发死锁或删除后正文复活。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_real_development_boundary_and_signed_probe",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+                  "M09-LOCAL-REAL-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_development.py",
+                "name": "test_development_entry_rejects_environment_before_migration[production]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+                  "M09-LOCAL-REAL-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_development.py",
+                "name": "test_development_entry_rejects_environment_before_migration[test]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+                  "M09-LOCAL-REAL-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_preconditions_and_allowlisted_result",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+                  "M09-LOCAL-REAL-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_reuses_budget_and_rejects_drift",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+                  "M09-LOCAL-REAL-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_cannot_be_production_qualification",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-BOUNDARY-01-ALLOW",
+                  "M09-LOCAL-REAL-BOUNDARY-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-LOCAL-REAL-RUNTIME-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "本机receipt和重启保留预算，生产隔离与旧离线入口继续通过。",
+            "expectations": [
+              {
+                "id": "M09-LOCAL-REAL-RUNTIME-01-ALLOW",
+                "surface": "response",
+                "statement": "本机receipt和重启保留预算，生产隔离与旧离线入口继续通过。"
+              },
+              {
+                "id": "M09-LOCAL-REAL-RUNTIME-01-DENY",
+                "surface": "forbidden",
+                "statement": "禁止配置越界、费用重置、错误答案、引用伪造、并发死锁或删除后正文复活。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_real_development_receipt_and_budget_persist",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-RUNTIME-01-ALLOW",
+                  "M09-LOCAL-REAL-RUNTIME-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_development.py",
+                "name": "test_local_development_uses_existing_content_and_returns_citations",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-RUNTIME-01-ALLOW",
+                  "M09-LOCAL-REAL-RUNTIME-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_online.py",
+                "name": "test_budget_exhausted_is_http_429",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-RUNTIME-01-ALLOW",
+                  "M09-LOCAL-REAL-RUNTIME-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_online.py",
+                "name": "test_readiness_receipt_tamper_fails_closed",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-RUNTIME-01-ALLOW",
+                  "M09-LOCAL-REAL-RUNTIME-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-LOCAL-REAL-QA-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "真实图传输合同覆盖空结果拒答、截断、故障降级和删除清理；本机实测见独立manifest。",
+            "expectations": [
+              {
+                "id": "M09-LOCAL-REAL-QA-01-ALLOW",
+                "surface": "response",
+                "statement": "真实图传输合同覆盖空结果拒答、截断、故障降级和删除清理；本机实测见独立manifest。"
+              },
+              {
+                "id": "M09-LOCAL-REAL-QA-01-DENY",
+                "surface": "forbidden",
+                "statement": "禁止配置越界、费用重置、错误答案、引用伪造、并发死锁或删除后正文复活。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_empty_blocks_refuses_only_complete_response[stop]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-QA-01-ALLOW",
+                  "M09-LOCAL-REAL-QA-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_empty_blocks_refuses_only_complete_response[length]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-QA-01-ALLOW",
+                  "M09-LOCAL-REAL-QA-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_transport_and_production_boundary",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-QA-01-ALLOW",
+                  "M09-LOCAL-REAL-QA-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_strict_validation_metadata_and_citations",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-QA-01-ALLOW",
+                  "M09-LOCAL-REAL-QA-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_prompt_budget_covers_actual_schema_message",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-QA-01-ALLOW",
+                  "M09-LOCAL-REAL-QA-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_real_dependency_failure_preserves_fts_citation_contract[embedding]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-QA-01-ALLOW",
+                  "M09-LOCAL-REAL-QA-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_real_dependency_failure_preserves_fts_citation_contract[qdrant]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-QA-01-ALLOW",
+                  "M09-LOCAL-REAL-QA-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_late_provider_completion_after_delete_has_no_body_checkpoint_or_delivery",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-QA-01-ALLOW",
+                  "M09-LOCAL-REAL-QA-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_saver_delete_failure_keeps_marker_null_and_records_retry",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-QA-01-ALLOW",
+                  "M09-LOCAL-REAL-QA-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_web_delivery.py",
+                "name": "test_delete_before_sending_makes_zero_provider_calls",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-QA-01-ALLOW",
+                  "M09-LOCAL-REAL-QA-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_web_delivery.py",
+                "name": "test_48h_purge_removes_minimal_rows",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-QA-01-ALLOW",
+                  "M09-LOCAL-REAL-QA-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "harness-integrity",
+          "web-quality",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M09-LOCAL-REAL-CITATIONS-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "同篇多个段落编号正确闭合、定位、返回，恢复不丢编号；伪造仍隐藏。",
+            "expectations": [
+              {
+                "id": "M09-LOCAL-REAL-CITATIONS-01-ALLOW",
+                "surface": "response",
+                "statement": "同篇多个段落编号正确闭合、定位、返回，恢复不丢编号；伪造仍隐藏。"
+              },
+              {
+                "id": "M09-LOCAL-REAL-CITATIONS-01-DENY",
+                "surface": "forbidden",
+                "statement": "禁止配置越界、费用重置、错误答案、引用伪造、并发死锁或删除后正文复活。"
+              }
+            ],
+            "required_gates": [
+              "web-quality",
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes multiple chunk markers against a deduplicated article source",
+                "kind": "vitest",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-LOCAL-REAL-CITATIONS-01-ALLOW",
+                  "M09-LOCAL-REAL-CITATIONS-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes hydrated answers before allowing source paths into Vue state",
+                "kind": "vitest",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-LOCAL-REAL-CITATIONS-01-ALLOW",
+                  "M09-LOCAL-REAL-CITATIONS-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes markers only to matching citations and allowlisted sources",
+                "kind": "vitest",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-LOCAL-REAL-CITATIONS-01-ALLOW",
+                  "M09-LOCAL-REAL-CITATIONS-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "multiple chunk citations navigate the deduplicated source live and after reload",
+                "kind": "playwright",
+                "gate": "e2e",
+                "covers": [
+                  "M09-LOCAL-REAL-CITATIONS-01-ALLOW",
+                  "M09-LOCAL-REAL-CITATIONS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-5",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-LOCAL-REAL-CONCURRENCY-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "迁移保留费用、租约和saver，双图无控制写锁阻塞，正确限制容量并保留删除屏障。",
+            "expectations": [
+              {
+                "id": "M09-LOCAL-REAL-CONCURRENCY-01-ALLOW",
+                "surface": "response",
+                "statement": "迁移保留费用、租约和saver，双图无控制写锁阻塞，正确限制容量并保留删除屏障。"
+              },
+              {
+                "id": "M09-LOCAL-REAL-CONCURRENCY-01-DENY",
+                "surface": "forbidden",
+                "statement": "禁止配置越界、费用重置、错误答案、引用伪造、并发死锁或删除后正文复活。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_lease_migration.py",
+                "name": "test_lease_migration_preserves_ledger_saver_and_admits_contract_capacity",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-CONCURRENCY-01-ALLOW",
+                  "M09-LOCAL-REAL-CONCURRENCY-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_lease_migration.py",
+                "name": "test_concurrent_graphs_finish_without_blocking_control_on_saver_transaction",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-CONCURRENCY-01-ALLOW",
+                  "M09-LOCAL-REAL-CONCURRENCY-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_online_matrix.py",
+                "name": "test_http_concurrency_limited_returns_retry_after",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-CONCURRENCY-01-ALLOW",
+                  "M09-LOCAL-REAL-CONCURRENCY-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_v1_runtime_upgrade_preserves_pinned_saver_schema",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-CONCURRENCY-01-ALLOW",
+                  "M09-LOCAL-REAL-CONCURRENCY-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_normal_mutation_permit_requires_exact_lease_scope_keys",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LOCAL-REAL-CONCURRENCY-01-ALLOW",
+                  "M09-LOCAL-REAL-CONCURRENCY-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.734,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "119 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 230.157,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 75.859,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.662,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "521 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 274.806,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "231 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 59.956,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "10 modules, 198 cases, 396 expectations, 753 exact test references; contract sha256 2735e896dd79"
+      ],
+      "status": "passed",
+      "duration_ms": 382.604,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.474,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.567,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 79.373,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5"
+      ],
+      "duration_ms": 1815.928,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "b4d0cb3c8cabda479f49ce538c2866da",
+        "attempt_id": "1368fbe990837d209c1a5fa83d562bc4"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260906-local-real-qa --gate api-tests",
+      "status": "passed",
+      "duration_ms": 22769.975,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-5"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 4613,
+        "selection_counts": {
+          "collected": 26,
+          "executed": 26
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_real_development_boundary_and_signed_probe"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_development.py",
+                "name": "test_development_entry_rejects_environment_before_migration[production]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_development.py",
+                "name": "test_development_entry_rejects_environment_before_migration[test]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_preconditions_and_allowlisted_result"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_reuses_budget_and_rejects_drift"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_cannot_be_production_qualification"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_lease_migration.py",
+                "name": "test_lease_migration_preserves_ledger_saver_and_admits_contract_capacity"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_lease_migration.py",
+                "name": "test_concurrent_graphs_finish_without_blocking_control_on_saver_transaction"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_online_matrix.py",
+                "name": "test_http_concurrency_limited_returns_retry_after"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_v1_runtime_upgrade_preserves_pinned_saver_schema"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_normal_mutation_permit_requires_exact_lease_scope_keys"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_empty_blocks_refuses_only_complete_response[stop]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_empty_blocks_refuses_only_complete_response[length]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_transport_and_production_boundary"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_strict_validation_metadata_and_citations"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_prompt_budget_covers_actual_schema_message"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_real_dependency_failure_preserves_fts_citation_contract[embedding]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_real_dependency_failure_preserves_fts_citation_contract[qdrant]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_late_provider_completion_after_delete_has_no_body_checkpoint_or_delivery"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_saver_delete_failure_keeps_marker_null_and_records_retry"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_web_delivery.py",
+                "name": "test_delete_before_sending_makes_zero_provider_calls"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_web_delivery.py",
+                "name": "test_48h_purge_removes_minimal_rows"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_real_development_receipt_and_budget_persist"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_development.py",
+                "name": "test_local_development_uses_existing_content_and_returns_citations"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_online.py",
+                "name": "test_budget_exhausted_is_http_429"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_online.py",
+                "name": "test_readiness_receipt_tamper_fails_closed"
+              }
+            ],
+            "duration_ms": 22324.003,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\8d61f136e297c5f98334f04f593bdd9df4cd67785290ae0a9bbf6dbb81b945a2\\artifacts\\b4d0cb3c8cabda479f49ce538c2866da\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "b4d0cb3c8cabda479f49ce538c2866da",
+        "attempt_id": "51f677c925c59a573026d000cbe31d8d"
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260906-local-real-qa --gate web-quality",
+      "status": "passed",
+      "duration_ms": 9599.185,
+      "covers": [
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 2845,
+        "selection_counts": {
+          "collected": 3,
+          "executed": 3
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes multiple chunk markers against a deduplicated article source"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes hydrated answers before allowing source paths into Vue state"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes markers only to matching citations and allowlisted sources"
+              }
+            ],
+            "duration_ms": 4706.465,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "81cf8927ce1655c3381b8444e4b42379ef65d7e7c1856a514ce77a83e6744f40",
+              "apps/web/nuxt.config.ts": "1d8d7e8e1e3f796a1435e5f9e23ccf49ee0972c2a31f570b2db61cdbe3246ea0",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes multiple chunk markers against a deduplicated article source"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes hydrated answers before allowing source paths into Vue state"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes markers only to matching citations and allowlisted sources"
+              }
+            ],
+            "duration_ms": 2323.915
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes multiple chunk markers against a deduplicated article source",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant citations",
+                  "closes multiple chunk markers against a deduplicated article source"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes hydrated answers before allowing source paths into Vue state",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant document controller barriers",
+                  "closes hydrated answers before allowing source paths into Vue state"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes markers only to matching citations and allowlisted sources",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant citations",
+                  "closes markers only to matching citations and allowlisted sources"
+                ]
+              }
+            ],
+            "duration_ms": 2157.544,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\8d61f136e297c5f98334f04f593bdd9df4cd67785290ae0a9bbf6dbb81b945a2\\artifacts\\b4d0cb3c8cabda479f49ce538c2866da\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "b4d0cb3c8cabda479f49ce538c2866da",
+        "attempt_id": "6c62f0354a144c335d7296136a0f8579"
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260906-local-real-qa --gate e2e",
+      "status": "passed",
+      "duration_ms": 44432.117,
+      "covers": [
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 2075,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "reused-in-worktree",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "multiple chunk citations navigate the deduplicated source live and after reload"
+              }
+            ],
+            "duration_ms": 6.038,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "81cf8927ce1655c3381b8444e4b42379ef65d7e7c1856a514ce77a83e6744f40",
+              "apps/web/nuxt.config.ts": "1d8d7e8e1e3f796a1435e5f9e23ccf49ee0972c2a31f570b2db61cdbe3246ea0",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "multiple chunk citations navigate the deduplicated source live and after reload"
+              }
+            ],
+            "duration_ms": 1790.696
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "multiple chunk citations navigate the deduplicated source live and after reload",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "multiple chunk citations navigate the deduplicated source live and after reload"
+                ]
+              }
+            ],
+            "duration_ms": 1271.239,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "multiple chunk citations navigate the deduplicated source live and after reload",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "multiple chunk citations navigate the deduplicated source live and after reload"
+                ]
+              }
+            ],
+            "duration_ms": 40760.431,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\8d61f136e297c5f98334f04f593bdd9df4cd67785290ae0a9bbf6dbb81b945a2\\artifacts\\b4d0cb3c8cabda479f49ce538c2866da\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "b4d0cb3c8cabda479f49ce538c2866da",
+        "attempt_id": "63b44f59f197058e378430089762d4fb"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2039.822,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 15,
+      "passed": 15,
+      "failed": 0
+    },
+    "duration_ms": 81777.219,
+    "failures": []
+  },
+  "source_commit": "544ccb251360f58c934d3f76f20072cb8029b077"
+}

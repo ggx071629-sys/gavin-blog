@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260910-studio-operations-acceptance",
+  "created_at": "2026-09-10T11:35:39.250571+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "1a0170e9bfabff43506b61ab8eee204fd1494f6368e0abe8f9f6b5395a0363fc"
+}

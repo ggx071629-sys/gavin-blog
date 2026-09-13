@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gavin 工程设计稿全景 · 全站视觉同步交互原型</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Noto+Sans+SC:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ee-canvas: #f4f6fa;
+      --ee-surface: #ffffff;
+      --ee-surface-low: #edf0f7;
+      --ee-surface-high: #e3e8f2;
+      --ee-ink: #0c1220;
+      --ee-ink-muted: #3e4a66;
+      --ee-ink-faint: #5d688a;
+      --ee-line: #c7d0e2;
+      --ee-line-soft: #e0e5f0;
+      --ee-primary: #0b5cff;
+      --ee-primary-strong: #0946c4;
+      --ee-signal: #0b5cff;
+      --ee-signal-ink: #ffffff;
+      --ee-glow: rgba(11, 92, 255, 0.16);
+      --ee-radius-soft: 8px;
+      --blueprint-grid: rgba(11, 92, 255, 0.05);
+      --card-bg: #ffffff;
+    }
+    .dark {
+      --ee-canvas: #07080c;
+      --ee-surface: #0e1016;
+      --ee-surface-low: #141722;
+      --ee-surface-high: #1c2030;
+      --ee-ink: #e9ebf5;
+      --ee-ink-muted: #b6bdd3;
+      --ee-ink-faint: #7d86a4;
+      --ee-line: #363d54;
+      --ee-line-soft: #222737;
+      --ee-primary: #c9f24b;
+      --ee-primary-strong: #e0ff70;
+      --ee-signal: #c9f24b;
+      --ee-signal-ink: #101500;
+      --ee-glow: rgba(201, 242, 75, 0.14);
+      --ee-radius-soft: 8px;
+      --blueprint-grid: rgba(201, 242, 75, 0.05);
+      --card-bg: #0e1016;
+    }
+    body {
+      background-color: var(--ee-canvas);
+      color: var(--ee-ink);
+      font-family: Inter, "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      background-image: 
+        linear-gradient(to right, color-mix(in srgb, var(--ee-line) 28%, transparent) 1px, transparent 1px),
+        linear-gradient(to bottom, color-mix(in srgb, var(--ee-line) 28%, transparent) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .font-heading {
+      font-family: 'Space Grotesk', "Noto Sans SC", sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .giant-watermark {
+      position: absolute;
+      right: -0.5rem;
+      bottom: -1rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(4.5rem, 8vw, 6.75rem);
+      font-weight: 900;
+      line-height: 0.8;
+      letter-spacing: -0.05em;
+      opacity: 0.04;
+      pointer-events: none;
+      user-select: none;
+      color: var(--ee-ink);
+      transition: opacity 0.2s ease;
+    }
+    .blueprint-card:hover .giant-watermark {
+      opacity: 0.09;
+    }
+    .dark .giant-watermark {
+      opacity: 0.05;
+    }
+    .dark .blueprint-card:hover .giant-watermark {
+      opacity: 0.12;
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.9); }
+    }
+    .pulse-dot {
+      animation: pulse-slow 2s infinite ease-in-out;
+    }
+    .about-quote-box {
+      border-left: 4px solid var(--ee-primary);
+      background: var(--ee-surface);
+      border-top: 1px solid var(--ee-line);
+      border-right: 1px solid var(--ee-line);
+      border-bottom: 1px solid var(--ee-line);
+    }
+    .home-hero-pair-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+    @media (min-width: 768px) {
+      .home-hero-pair-grid {
+        grid-template-columns: minmax(0, 1.32fr) minmax(0, 1fr);
+        gap: 1.5rem;
+      }
+    }
+    .sys-panel {
+      position: relative;
+      border: 1px solid var(--ee-line);
+      border-radius: var(--ee-radius-soft);
+      background: var(--ee-surface);
+      box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.05);
+    }
+    .sys-panel-sig {
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      height: 3px;
+      border-radius: var(--ee-radius-soft) var(--ee-radius-soft) 0 0;
+      background: linear-gradient(90deg, var(--ee-primary) 0 34%, transparent 34%);
+    }
+    .tab-btn.active {
+      background-color: var(--ee-primary);
+      color: #07080c;
+      border-color: var(--ee-primary);
+      font-weight: 800;
+      box-shadow: 0 0 16px var(--ee-glow);
+    }
+    :root:not(.dark) .tab-btn.active {
+      color: #ffffff;
+    }
+    .blueprint-card {
+      border: 1px solid var(--ee-line);
+      background: var(--ee-surface);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .blueprint-card:hover {
+      border-color: var(--ee-primary);
+      box-shadow: 0 10px 30px -10px var(--ee-glow);
+      transform: translateY(-2px);
+    }
+    .status-chip {
+      font-family: var(--ee-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      border: 1px solid;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .chip-blue {
+      background: rgba(59, 130, 246, 0.12);
+      color: #3b82f6;
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+    .chip-emerald {
+      background: rgba(16, 185, 129, 0.12);
+      color: #10b981;
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    .chip-amber {
+      background: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+    .chip-purple {
+      background: rgba(168, 85, 247, 0.12);
+      color: #a855f7;
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+
+    /* 真实 SiteHeader.vue 样式基准 (复刻 apps/web/assets/css/main.css) */
+    .site-header {
+      background: color-mix(in srgb, var(--ee-canvas) 82%, transparent);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-color: var(--ee-line-soft);
+      color: var(--ee-ink);
+    }
+    .site-header-bar {
+      min-height: 4.25rem;
+    }
+    .site-nav-action {
+      display: inline-flex;
+      min-height: 2.75rem;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 0.875rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: var(--ee-mono);
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      text-decoration: none;
+      background: transparent;
+      border: none;
+    }
+    .site-search-action {
+      display: inline-flex;
+      min-height: 2.25rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      border: 1px solid var(--ee-line);
+      border-radius: var(--ee-radius-soft);
+      background: color-mix(in srgb, var(--ee-surface) 60%, transparent);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.375rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--ee-ink-muted);
+      font-family: var(--ee-mono);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .site-search-action:hover,
+    .site-search-action[aria-current="page"] {
+      border-color: var(--ee-primary);
+      background: var(--ee-surface);
+      color: var(--ee-primary-strong);
+      box-shadow: 0 0 14px var(--ee-glow);
+    }
+    .writing-desk-link {
+      border: 1px solid var(--ee-line-soft);
+      border-radius: var(--ee-radius-soft);
+      background: color-mix(in srgb, var(--ee-surface) 40%, transparent);
+      color: var(--ee-ink-faint);
+      min-height: 2.25rem;
+      padding: 0.375rem 0.75rem;
+      font-size: 0.75rem;
+      font-family: var(--ee-mono);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      transition: all 150ms ease;
+    }
+    .writing-desk-link:hover {
+      border-color: var(--ee-line);
+      background: var(--ee-surface);
+      color: var(--ee-ink);
+    }
+    .site-nav-index {
+      margin-right: 0.375rem;
+      font-size: 0.625rem;
+      color: var(--ee-ink-faint);
+    }
+    .nav-link {
+      position: relative;
+      border-bottom: 2px solid transparent;
+      transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
+      color: var(--ee-ink-faint);
+      text-transform: uppercase;
+    }
+    .nav-link:hover {
+      color: var(--ee-ink);
+    }
+    .nav-link-active {
+      border-bottom-color: var(--ee-signal) !important;
+      background: var(--ee-surface-low);
+      color: var(--ee-ink) !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-36 selection:bg-blue-600 selection:text-white">
+
+  <!-- ====================================================================
+       顶部浮动中控台 (Sticky Master Control Bar)
+       ==================================================================== -->
+  <div class="sticky top-0 z-50 border-b border-[var(--ee-line)] bg-[var(--ee-canvas)]/85 backdrop-blur-md px-4 sm:px-8 py-3 transition-colors">
+    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- 页面切换 Tab 矩阵 -->
+      <div class="flex flex-wrap items-center gap-1.5 p-1 rounded-lg border border-[var(--ee-line)] bg-[var(--ee-surface)] font-mono text-xs font-bold">
+        <button class="tab-btn px-2.5 py-1.5 rounded transition-all active" data-tab="home" onclick="switchTab('home')">00 首页</button>
+        <button class="tab-btn px-2.5 py-1.5 rounded transition-all text-[var(--ee-ink-muted)] hover:text-[var(--ee-ink)]" data-tab="articles" onclick="switchTab('articles')">01 文章列表</button>
+        <button class="tab-btn px-2.5 py-1.5 rounded transition-all text-[var(--ee-ink-muted)] hover:text-[var(--ee-ink)]" data-tab="article-detail" onclick="switchTab('article-detail')">02 正文阅读</button>
+        <button class="tab-btn px-2.5 py-1.5 rounded transition-all text-[var(--ee-ink-muted)] hover:text-[var(--ee-ink)]" data-tab="projects" onclick="switchTab('projects')">03 工程项目</button>
+        <button class="tab-btn px-2.5 py-1.5 rounded transition-all text-[var(--ee-ink-muted)] hover:text-[var(--ee-ink)]" data-tab="books" onclick="switchTab('books')">04 读书书架</button>
+        <button class="tab-btn px-2.5 py-1.5 rounded transition-all text-[var(--ee-ink-muted)] hover:text-[var(--ee-ink)]" data-tab="archive" onclick="switchTab('archive')">05 时间归档</button>
+        <button class="tab-btn px-2.5 py-1.5 rounded transition-all text-[var(--ee-ink-muted)] hover:text-[var(--ee-ink)]" data-tab="search" onclick="switchTab('search')">06 全文检索</button>
+        <button class="tab-btn px-2.5 py-1.5 rounded transition-all text-[var(--ee-ink-muted)] hover:text-[var(--ee-ink)]" data-tab="about" onclick="switchTab('about')">07 关于 (基准页)</button>
+      </div>
+
+      <!-- 右侧控制项：系统状态 + 浅深主题切换 -->
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[var(--ee-surface)] text-[var(--ee-ink-muted)] font-mono text-xs font-semibold border border-[var(--ee-line)]">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          DESIGN DRAFT
+        </span>
+        <button id="themeToggle" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-[var(--ee-line)] bg-[var(--ee-surface)] text-xs font-mono font-bold text-[var(--ee-ink)] hover:border-[var(--ee-primary)] transition-all shadow-sm">
+          <span id="themeIcon">☀️</span>
+          <span id="themeText">浅色</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       项目真实公共顶部导航 (复刻 SiteHeader.vue 原版真实样式与结构)
+       ==================================================================== -->
+  <header class="site-header border-b border-[var(--ee-line-soft)] bg-[var(--ee-canvas)]/85 backdrop-blur-xl mb-8 transition-colors">
+    <div class="max-w-4xl mx-auto px-6 site-header-bar flex items-center justify-between gap-5">
+      <!-- 品牌标识：经典 12px Signal 方块 + GAVIN + NOTES ON BUILDING -->
+      <a href="javascript:void(0)" onclick="switchTab('home')" class="flex min-w-0 items-center gap-2.5 group cursor-pointer select-none" aria-label="Gavin 首页">
+        <span class="w-3 h-3 shrink-0 bg-[var(--ee-signal)] transition-transform group-hover:scale-110" aria-hidden="true"></span>
+        <span class="font-heading text-lg font-bold tracking-[-0.02em] sm:text-xl text-[var(--ee-ink)]">GAVIN</span>
+        <span class="hidden font-mono text-xs font-semibold tracking-[0.08em] text-[var(--ee-ink-faint)] md:inline">/ NOTES ON BUILDING</span>
+      </a>
+
+      <!-- 核心导航项与右侧功能组件 (与 SiteHeader.vue 样式与布局完全一致) -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <nav aria-label="主导航" class="flex items-center gap-1 sm:gap-1.5">
+          <a
+            href="javascript:void(0)"
+            class="site-nav-action nav-link"
+            data-header-nav="articles"
+            onclick="switchTab('articles')"
+          >
+            <span class="site-nav-index" aria-hidden="true">01</span>
+            <span>文章</span>
+          </a>
+          <a
+            href="javascript:void(0)"
+            class="site-nav-action nav-link"
+            data-header-nav="projects"
+            onclick="switchTab('projects')"
+          >
+            <span class="site-nav-index" aria-hidden="true">02</span>
+            <span>项目</span>
+          </a>
+          <a
+            href="javascript:void(0)"
+            class="site-nav-action nav-link"
+            data-header-nav="books"
+            onclick="switchTab('books')"
+          >
+            <span class="site-nav-index" aria-hidden="true">03</span>
+            <span>读书</span>
+          </a>
+          <a
+            href="javascript:void(0)"
+            class="site-nav-action nav-link"
+            data-header-nav="archive"
+            onclick="switchTab('archive')"
+          >
+            <span class="site-nav-index" aria-hidden="true">04</span>
+            <span>归档</span>
+          </a>
+          <a
+            href="javascript:void(0)"
+            class="site-nav-action nav-link"
+            data-header-nav="about"
+            onclick="switchTab('about')"
+          >
+            <span class="site-nav-index" aria-hidden="true">05</span>
+            <span>关于</span>
+          </a>
+        </nav>
+
+        <!-- 原版搜索按钮 -->
+        <a
+          href="javascript:void(0)"
+          class="site-search-action"
+          data-header-nav="search"
+          onclick="switchTab('search')"
+          aria-label="搜索"
+        >
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-3.5-3.5" stroke-linecap="round" />
+          </svg>
+          <span class="hidden sm:inline">搜索</span>
+        </a>
+
+        <!-- 原版写作台入口 -->
+        <span class="site-nav-action writing-desk-link hidden md:inline-flex" onclick="alert('写作台功能：可在后台统一编排与管理文章、项目与读书笔记')">
+          写作台
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主体内容容器：严格约束在 max-w-4xl (896px 坚固闭环图纸轴宽) -->
+  <main class="max-w-4xl mx-auto px-6">
+
+    <!-- ====================================================================
+         00 / 首页设计稿 (/index)
+         ==================================================================== -->
+    <div id="view-home" class="page-view space-y-16">
+      
+      <!-- 00.1 首屏声明与工程坐标 -->
+      <section class="space-y-6">
+        <!-- 章节标头 -->
+        <div class="flex items-center justify-between border-b border-[var(--ee-line)] pb-3 font-mono text-xs">
+          <div class="flex items-center gap-2 font-bold uppercase text-[var(--ee-primary)]">
+            <span class="px-2 py-0.5 rounded bg-[var(--ee-primary)]/10 border border-[var(--ee-primary)]/30">00</span>
+            <span class="text-[var(--ee-line)]">//</span>
+            <span>OVERVIEW</span>
+          </div>
+        </div>
+
+        <!-- 首屏主标陈述与快捷操作 -->
+        <div class="space-y-4 pb-2">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div class="space-y-2">
+              <h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-black tracking-tight text-[var(--ee-ink)] leading-tight">
+                把复杂系统，<br class="hidden sm:inline">
+                写成<span class="text-[var(--ee-primary)] underline decoration-wavy decoration-[var(--ee-primary)]/40">可以运行的答案</span>。
+              </h1>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] font-mono text-xs font-bold text-[var(--ee-ink)]">
+                <span class="text-[var(--ee-primary)] font-black">#</span>
+                <span>后端架构 / AI 应用工程 / 可持续软件系统</span>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-3 shrink-0">
+              <button onclick="switchTab('articles')" class="px-5 py-2.5 rounded bg-[var(--ee-primary)] text-black dark:text-black font-mono font-bold text-xs hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm">
+                <span>浏览全部笔记</span>
+                <span>&rarr;</span>
+              </button>
+              <button onclick="switchTab('projects')" class="px-5 py-2.5 rounded border border-[var(--ee-line)] bg-[var(--ee-surface)] text-[var(--ee-ink)] font-mono font-bold text-xs hover:border-[var(--ee-primary)] transition-all flex items-center gap-2">
+                <span>查看交付项目</span>
+                <span>&nearr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 核心双列并列对齐布局：左侧【知识领域图谱容器】与右侧【个人名片】严格并列水平顶底对齐 -->
+        <div class="home-hero-pair-grid pt-2">
+          
+          <!-- 左侧：知识领域图谱容器 (与右侧个人名片严格并列对齐) -->
+          <div class="flex flex-col space-y-2.5 min-w-0">
+            <div class="h-7 flex items-center justify-between font-mono text-[11px] text-[var(--ee-ink-faint)] px-1">
+              <span class="font-bold text-[var(--ee-primary)]">[ 知识领域图谱 ]</span>
+              <span>从主题，找到下一篇</span>
+            </div>
+
+            <div class="flex-1 flex flex-col justify-between p-5 sm:p-6 rounded-xl border border-[var(--ee-line)] bg-[var(--ee-surface)] relative overflow-hidden shadow-sm">
+              <!-- 顶部说明与栏目数 -->
+              <div class="flex items-center justify-between pb-3 border-b border-[var(--ee-line)] font-mono text-xs">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[var(--ee-primary)]"></span>
+                  <strong class="text-[var(--ee-ink)] font-heading font-bold text-sm">系统知识领域图谱</strong>
+                </div>
+                <span class="text-[var(--ee-ink-faint)] text-[11px]">3 个核心领域 · 42 篇笔记</span>
+              </div>
+
+              <!-- 拓扑分支网络：对齐真实 HomeAtlas.vue 数据结构 -->
+              <div class="py-4 space-y-3.5 my-auto">
+                <!-- 分支 1: AI / Agent -->
+                <div class="p-3 rounded-lg border border-[var(--ee-line)] bg-[var(--ee-surface-low)] hover:border-[var(--ee-primary)] transition-all flex items-center justify-between gap-3 group cursor-pointer" onclick="switchTab('article-detail')">
+                  <div class="flex items-center gap-3 min-w-0">
+                    <span class="status-chip chip-blue shrink-0">AI / Agent (14)</span>
+                    <span class="text-xs font-medium text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors truncate">
+                      本地 E5 向量检索与混合推理内核落地
+                    </span>
+                  </div>
+                  <span class="font-mono text-[11px] text-[var(--ee-ink-faint)] shrink-0 flex items-center gap-1">
+                    <span>12 min</span>
+                    <span class="text-[var(--ee-primary)] font-bold group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+                  </span>
+                </div>
+
+                <!-- 分支 2: 后端工程 -->
+                <div class="p-3 rounded-lg border border-[var(--ee-line)] bg-[var(--ee-surface-low)] hover:border-[var(--ee-primary)] transition-all flex items-center justify-between gap-3 group cursor-pointer" onclick="switchTab('article-detail')">
+                  <div class="flex items-center gap-3 min-w-0">
+                    <span class="status-chip chip-emerald shrink-0">后端高可用 (18)</span>
+                    <span class="text-xs font-medium text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors truncate">
+                      SQLite WAL 模式下的并发排障与版本锁
+                    </span>
+                  </div>
+                  <span class="font-mono text-[11px] text-[var(--ee-ink-faint)] shrink-0 flex items-center gap-1">
+                    <span>8 min</span>
+                    <span class="text-[var(--ee-primary)] font-bold group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+                  </span>
+                </div>
+
+                <!-- 分支 3: 工具链 -->
+                <div class="p-3 rounded-lg border border-[var(--ee-line)] bg-[var(--ee-surface-low)] hover:border-[var(--ee-primary)] transition-all flex items-center justify-between gap-3 group cursor-pointer" onclick="switchTab('article-detail')">
+                  <div class="flex items-center gap-3 min-w-0">
+                    <span class="status-chip chip-purple shrink-0">工程工具链 (10)</span>
+                    <span class="text-xs font-medium text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors truncate">
+                      长生命周期状态机：LangGraph 恢复陷阱
+                    </span>
+                  </div>
+                  <span class="font-mono text-[11px] text-[var(--ee-ink-faint)] shrink-0 flex items-center gap-1">
+                    <span>15 min</span>
+                    <span class="text-[var(--ee-primary)] font-bold group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+                  </span>
+                </div>
+              </div>
+
+              <!-- 底部操作与全部入口 -->
+              <div class="pt-3 border-t border-[var(--ee-line)] flex items-center justify-between font-mono text-xs text-[var(--ee-ink-faint)]">
+                <span class="hover:text-[var(--ee-primary)] cursor-pointer transition-colors" onclick="switchTab('articles')">全部 42 篇工程笔记 ↗</span>
+                <span class="hover:text-[var(--ee-primary)] cursor-pointer transition-colors" onclick="switchTab('articles')">按栏目探索 &rarr;</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右侧：项目原有真实个人名片 (ProfileCard.vue / about-coordinates) -->
+          <div class="flex flex-col space-y-2.5 min-w-0">
+            <div class="h-7 flex items-center justify-between font-mono text-[11px] text-[var(--ee-ink-faint)] px-1">
+              <span class="font-bold text-[var(--ee-primary)]">[ 原有名片组件 ]</span>
+              <div class="flex gap-1">
+                <button type="button" id="cardTabSys" onclick="switchProfileCard('sys')" class="px-2 py-0.5 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] text-[var(--ee-primary)] font-bold">系统名片</button>
+                <button type="button" id="cardTabAbout" onclick="switchProfileCard('about')" class="px-2 py-0.5 rounded border border-[var(--ee-line)] hover:text-[var(--ee-primary)] text-[var(--ee-ink-faint)]">关于页坐标卡</button>
+              </div>
+            </div>
+
+            <!-- 模式 1：原版完整 ProfileCard.vue (sys-panel 架构) -->
+            <aside id="profileCardSys" class="sys-panel rounded-xl overflow-hidden shadow-sm flex-1 flex flex-col justify-between" data-testid="profile-card">
+              <div class="sys-panel-sig" aria-hidden="true"></div>
+              <div class="flex items-center justify-between px-4 py-3 border-b border-[var(--ee-line)] font-mono text-xs">
+                <span class="font-bold text-[var(--ee-primary)] tracking-wide">SYS.STATUS / Operator</span>
+                <span class="inline-flex items-center gap-1.5 font-bold text-emerald-500 text-[11px]">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-dot"></span>
+                  Live
+                </span>
+              </div>
+
+              <div class="p-4 flex items-center gap-3.5 border-b border-[var(--ee-line)]">
+                <div class="w-13 h-13 rounded-lg border border-[var(--ee-line)] bg-[var(--ee-surface-low)] flex items-center justify-center font-heading font-black text-2xl text-[var(--ee-primary)] shrink-0 shadow-sm">
+                  GV
+                </div>
+                <div class="min-w-0">
+                  <h2 class="font-heading font-bold text-lg text-[var(--ee-ink)] leading-tight">Gavin</h2>
+                  <div class="mt-1 flex flex-wrap items-center gap-1.5 font-mono text-xs">
+                    <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] text-[var(--ee-ink)] border border-[var(--ee-line)] font-medium">后端工程师 / AI 开发者</span>
+                    <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] text-[var(--ee-ink-faint)] border border-[var(--ee-line)]">📍 Shanghai</span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="p-4 text-xs text-[var(--ee-ink-muted)] leading-relaxed border-b border-[var(--ee-line)]">
+                我关注后端工程、AI 应用，以及如何把一个想法真正变成可以运行和长期维护的软件。
+              </p>
+
+              <div class="p-4 border-b border-[var(--ee-line)]">
+                <h3 class="font-mono text-[11px] font-bold text-[var(--ee-ink-faint)] uppercase tracking-wider mb-2">Core skills</h3>
+                <ul class="flex flex-wrap gap-1.5 font-mono text-xs">
+                  <li class="rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] px-2 py-0.5 font-semibold text-[var(--ee-ink)]">FastAPI</li>
+                  <li class="rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] px-2 py-0.5 font-semibold text-[var(--ee-ink)]">Python</li>
+                  <li class="rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] px-2 py-0.5 font-semibold text-[var(--ee-ink)]">SQLite</li>
+                  <li class="rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] px-2 py-0.5 font-semibold text-[var(--ee-ink)]">Nuxt 3</li>
+                  <li class="rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] px-2 py-0.5 font-semibold text-[var(--ee-ink)]">LangGraph</li>
+                  <li class="rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] px-2 py-0.5 font-semibold text-[var(--ee-ink)]">RAG</li>
+                </ul>
+              </div>
+
+              <div class="p-3.5 grid grid-cols-2 gap-2 font-mono text-xs">
+                <a href="https://github.com" target="_blank" class="p-2 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] hover:border-[var(--ee-primary)] hover:text-[var(--ee-primary)] flex items-center justify-center gap-1.5 font-bold transition-all text-[var(--ee-ink)]">
+                  <svg class="size-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.4 4 5 5 0 0 0 19.3.5S18.2.1 15 1.8a12.3 12.3 0 0 0-6 0C5.8.1 4.7.5 4.7.5A5 5 0 0 0 4.6 4a5.4 5.4 0 0 0-1.4 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 9 18v4" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 19c-3 .9-3-1.5-4.2-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span>GitHub</span>
+                </a>
+                <button type="button" class="p-2 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] hover:border-[var(--ee-primary)] hover:text-[var(--ee-primary)] flex items-center justify-center gap-1.5 font-bold transition-all text-[var(--ee-ink)]">
+                  <svg class="size-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                  <span>复制邮箱</span>
+                </button>
+                <a href="#" class="col-span-2 p-2 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] hover:border-[var(--ee-primary)] hover:text-[var(--ee-primary)] flex items-center justify-center gap-1.5 font-bold transition-all text-[var(--ee-ink)]">
+                  <svg class="size-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+                  <span>个人网页 ↗</span>
+                </a>
+                <a href="#" class="col-span-2 p-2 rounded bg-[var(--ee-primary)] text-black dark:text-black hover:opacity-90 flex items-center justify-center gap-1.5 font-bold transition-all shadow-sm">
+                  <svg class="size-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"/></svg>
+                  <span>查看简历 ↗</span>
+                </a>
+              </div>
+            </aside>
+
+            <!-- 模式 2：关于页坐标名片 (about.vue 的 about-coordinates) -->
+            <aside id="profileCardAbout" class="hidden p-5 rounded-xl border border-[var(--ee-line)] bg-[var(--ee-surface)] space-y-4 shadow-sm flex-1 flex flex-col justify-between" aria-label="公开个人资料">
+              <div class="flex items-center justify-between border-b border-[var(--ee-line)] pb-3 font-mono text-xs">
+                <span class="font-bold text-[var(--ee-primary)]">公开资料 / COORDINATES</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-dot"></span>
+              </div>
+              <div class="w-20 h-20 mx-auto rounded-lg overflow-hidden border border-[var(--ee-line)] bg-[var(--ee-surface-low)] flex items-center justify-center font-heading font-black text-2xl text-[var(--ee-primary)] shadow-sm">
+                GV
+              </div>
+              <p class="text-center font-mono text-xs text-[var(--ee-ink-muted)]">
+                📍 Shanghai / China
+              </p>
+              <ul class="flex flex-wrap justify-center gap-1.5 pt-2 border-t border-[var(--ee-line)] font-mono text-xs">
+                <li class="px-2 py-0.5 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] text-[var(--ee-ink)] font-semibold">Python</li>
+                <li class="px-2 py-0.5 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] text-[var(--ee-ink)] font-semibold">FastAPI</li>
+                <li class="px-2 py-0.5 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] text-[var(--ee-ink)] font-semibold">SQLite</li>
+                <li class="px-2 py-0.5 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] text-[var(--ee-ink)] font-semibold">Nuxt 3</li>
+                <li class="px-2 py-0.5 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] text-[var(--ee-ink)] font-semibold">LLM</li>
+              </ul>
+              <nav class="flex flex-col gap-2 pt-2 border-t border-[var(--ee-line)] font-mono text-xs">
+                <a href="mailto:gavin@example.com" class="flex justify-between items-center text-[var(--ee-ink)] hover:text-[var(--ee-primary)] transition-colors">
+                  <span>Email</span> <span>&nearr;</span>
+                </a>
+                <a href="https://github.com" target="_blank" class="flex justify-between items-center text-[var(--ee-ink)] hover:text-[var(--ee-primary)] transition-colors">
+                  <span>GitHub</span> <span>&nearr;</span>
+                </a>
+                <a href="#" class="flex justify-between items-center text-[var(--ee-ink)] hover:text-[var(--ee-primary)] transition-colors">
+                  <span>个人网页</span> <span>&nearr;</span>
+                </a>
+                <a href="#" class="flex justify-between items-center text-[var(--ee-ink)] hover:text-[var(--ee-primary)] transition-colors">
+                  <span>简历</span> <span>&nearr;</span>
+                </a>
+                <a href="#" class="flex justify-between items-center text-[var(--ee-ink-faint)] hover:text-[var(--ee-primary)] pt-1 text-[11px]">
+                  <span>RSS 订阅</span> <span>&nearr;</span>
+                </a>
+              </nav>
+            </aside>
+          </div>
+        </div>
+
+      <!-- 00.3 最新精选笔记 (带着关于页的水印矩阵卡片) -->
+      <section class="space-y-6">
+        <div class="flex items-center justify-between border-b border-[var(--ee-line)] pb-3 font-mono text-xs">
+          <div class="flex items-center gap-2 font-bold uppercase text-[var(--ee-primary)]">
+            <span class="px-2 py-0.5 rounded bg-[var(--ee-primary)]/10 border border-[var(--ee-primary)]/30">01</span>
+            <span class="text-[var(--ee-line)]">//</span>
+            <span>LATEST DISPATCHES</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- 重点卡片 1 -->
+          <div class="blueprint-card rounded-xl p-6 relative overflow-hidden flex flex-col justify-between group cursor-pointer" onclick="switchTab('article-detail')">
+            <div class="giant-watermark">01</div>
+            <div class="space-y-3 relative z-10">
+              <div class="flex items-center justify-between font-mono text-xs">
+                <span class="text-[var(--ee-primary)] font-bold">[ART-01]</span>
+                <span class="status-chip chip-blue">AI / RAG</span>
+              </div>
+              <h3 class="text-xl font-heading font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors leading-snug">
+                本地 E5 向量检索与混合推理内核工程落地复盘
+              </h3>
+              <p class="text-sm text-[var(--ee-ink-muted)] leading-relaxed">
+                从单进程 Tokenizer 约束到跨进程共享 Socket 通信，深度剖析如何实现零网络外显依赖的离线语义搜索与证据溯源链。
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-[var(--ee-line)] flex items-center justify-between font-mono text-xs text-[var(--ee-ink-faint)] relative z-10">
+              <div class="flex gap-2">
+                <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">FastAPI</span>
+                <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">12 min</span>
+              </div>
+              <span class="text-[var(--ee-primary)] font-bold group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+          </div>
+
+          <!-- 重点卡片 2 -->
+          <div class="blueprint-card rounded-xl p-6 relative overflow-hidden flex flex-col justify-between group cursor-pointer" onclick="switchTab('article-detail')">
+            <div class="giant-watermark">02</div>
+            <div class="space-y-3 relative z-10">
+              <div class="flex items-center justify-between font-mono text-xs">
+                <span class="text-[var(--ee-primary)] font-bold">[ART-02]</span>
+                <span class="status-chip chip-emerald">BACKEND</span>
+              </div>
+              <h3 class="text-xl font-heading font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors leading-snug">
+                SQLite WAL 模式下的并发排障与原子版本控制锁设计
+              </h3>
+              <p class="text-sm text-[var(--ee-ink-muted)] leading-relaxed">
+                单文件数据库在多连接高写入频次下的锁升级困境，以及通过单调递增版本号与状态机隔离避免脏写的工程解法。
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-[var(--ee-line)] flex items-center justify-between font-mono text-xs text-[var(--ee-ink-faint)] relative z-10">
+              <div class="flex gap-2">
+                <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">SQLite</span>
+                <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">8 min</span>
+              </div>
+              <span class="text-[var(--ee-primary)] font-bold group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ====================================================================
+         01 / 文章列表页设计稿 (/articles)
+         ==================================================================== -->
+    <div id="view-articles" class="page-view space-y-16 hidden">
+      
+      <!-- 标头与引言 -->
+      <section class="space-y-6">
+        <div class="flex items-center justify-between border-b border-[var(--ee-line)] pb-3 font-mono text-xs">
+          <div class="flex items-center gap-2 font-bold uppercase text-[var(--ee-primary)]">
+            <span class="px-2 py-0.5 rounded bg-[var(--ee-primary)]/10 border border-[var(--ee-primary)]/30">01</span>
+            <span class="text-[var(--ee-line)]">//</span>
+            <span>WRITING & LOGBOOK</span>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h1 class="text-4xl sm:text-5xl font-heading font-black tracking-tight text-[var(--ee-ink)]">
+            文章与工程笔记
+          </h1>
+          <p class="text-base sm:text-lg text-[var(--ee-ink-muted)] font-medium max-w-2xl leading-relaxed">
+            沉淀可检索、可复验、可持续修订的技术实践、排障记录与阶段复盘。
+          </p>
+        </div>
+
+        <!-- 高精度规格药丸筛选条 (对齐 about.vue) -->
+        <div class="p-4 rounded-xl border border-[var(--ee-line)] bg-[var(--ee-surface)] space-y-3 shadow-sm font-mono text-xs">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="font-bold text-[var(--ee-ink-faint)] mr-2">CATEGORIES:</span>
+            <button class="px-3 py-1 rounded bg-[var(--ee-primary)] text-black dark:text-black font-bold shadow-sm">全部 (42)</button>
+            <button class="px-3 py-1 rounded bg-[var(--ee-surface-low)] text-[var(--ee-ink)] border border-[var(--ee-line)] hover:border-[var(--ee-primary)]">后端工程 (18)</button>
+            <button class="px-3 py-1 rounded bg-[var(--ee-surface-low)] text-[var(--ee-ink)] border border-[var(--ee-line)] hover:border-[var(--ee-primary)]">AI 应用 (14)</button>
+            <button class="px-3 py-1 rounded bg-[var(--ee-surface-low)] text-[var(--ee-ink)] border border-[var(--ee-line)] hover:border-[var(--ee-primary)]">排障与复盘 (10)</button>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[var(--ee-line)]">
+            <div class="flex flex-wrap items-center gap-1.5 text-[var(--ee-ink-faint)]">
+              <span class="font-bold mr-1">HOT TAGS:</span>
+              <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">#FastAPI</span>
+              <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">#SQLite</span>
+              <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">#RAG</span>
+              <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">#Nuxt3</span>
+            </div>
+            <div class="inline-flex items-center gap-1.5 text-[var(--ee-primary)] font-bold cursor-pointer hover:underline" onclick="switchTab('search')">
+              <span>⌕ 全文检索 (FTS5)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 文章卡片流水 (工业矩阵卡片) -->
+      <section class="space-y-5">
+        
+        <!-- 列表条目 1 -->
+        <article class="blueprint-card rounded-xl p-6 relative overflow-hidden flex flex-col sm:flex-row sm:items-start justify-between gap-6 group cursor-pointer" onclick="switchTab('article-detail')">
+          <div class="giant-watermark">01</div>
+          <div class="space-y-3 max-w-2xl relative z-10">
+            <div class="flex items-center gap-3 font-mono text-xs">
+              <span class="status-chip chip-blue">AI 与 Agent</span>
+              <span class="text-[var(--ee-ink-faint)]">2026-09-06</span>
+              <span class="text-[var(--ee-ink-faint)]">&bull;</span>
+              <span class="text-[var(--ee-ink-faint)]">12 min read</span>
+            </div>
+            <h2 class="text-2xl font-heading font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors leading-snug">
+              本地 E5 向量检索与混合推理内核工程落地复盘
+            </h2>
+            <p class="text-sm text-[var(--ee-ink-muted)] leading-relaxed">
+              从单进程 CPU Tokenizer 约束到跨进程共享 Socket 通信，深度剖析如何实现零网络外显依赖的离线语义搜索与证据溯源链。
+            </p>
+            <div class="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+              <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">Embeddings</span>
+              <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">Vector Store</span>
+              <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">FastAPI</span>
+            </div>
+          </div>
+          <div class="self-start sm:self-center shrink-0 relative z-10">
+            <span class="w-9 h-9 rounded border border-[var(--ee-line)] bg-[var(--ee-surface)] group-hover:border-[var(--ee-primary)] group-hover:text-[var(--ee-primary)] flex items-center justify-center font-mono text-sm font-bold transition-all">
+              &rarr;
+            </span>
+          </div>
+        </article>
+
+        <!-- 列表条目 2 -->
+        <article class="blueprint-card rounded-xl p-6 relative overflow-hidden flex flex-col sm:flex-row sm:items-start justify-between gap-6 group cursor-pointer" onclick="switchTab('article-detail')">
+          <div class="giant-watermark">02</div>
+          <div class="space-y-3 max-w-2xl relative z-10">
+            <div class="flex items-center gap-3 font-mono text-xs">
+              <span class="status-chip chip-emerald">后端系统</span>
+              <span class="text-[var(--ee-ink-faint)]">2026-08-28</span>
+              <span class="text-[var(--ee-ink-faint)]">&bull;</span>
+              <span class="text-[var(--ee-ink-faint)]">8 min read</span>
+            </div>
+            <h2 class="text-2xl font-heading font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors leading-snug">
+              SQLite WAL 模式下的并发排障与原子版本控制锁设计
+            </h2>
+            <p class="text-sm text-[var(--ee-ink-muted)] leading-relaxed">
+              单文件数据库在多连接高写入频次下的锁升级困境，以及通过单调递增版本号与状态机隔离避免脏写的工程解法。
+            </p>
+            <div class="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+              <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">SQLite</span>
+              <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">Concurrency</span>
+              <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">Optimistic Lock</span>
+            </div>
+          </div>
+          <div class="self-start sm:self-center shrink-0 relative z-10">
+            <span class="w-9 h-9 rounded border border-[var(--ee-line)] bg-[var(--ee-surface)] group-hover:border-[var(--ee-primary)] group-hover:text-[var(--ee-primary)] flex items-center justify-center font-mono text-sm font-bold transition-all">
+              &rarr;
+            </span>
+          </div>
+        </article>
+
+        <!-- 列表条目 3 -->
+        <article class="blueprint-card rounded-xl p-6 relative overflow-hidden flex flex-col sm:flex-row sm:items-start justify-between gap-6 group cursor-pointer" onclick="switchTab('article-detail')">
+          <div class="giant-watermark">03</div>
+          <div class="space-y-3 max-w-2xl relative z-10">
+            <div class="flex items-center gap-3 font-mono text-xs">
+              <span class="status-chip chip-amber">排障与复盘</span>
+              <span class="text-[var(--ee-ink-faint)]">2026-08-11</span>
+              <span class="text-[var(--ee-ink-faint)]">&bull;</span>
+              <span class="text-[var(--ee-ink-faint)]">15 min read</span>
+            </div>
+            <h2 class="text-2xl font-heading font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors leading-snug">
+              长生命周期状态机：LangGraph Checkpointer 的断点恢复陷阱
+            </h2>
+            <p class="text-sm text-[var(--ee-ink-muted)] leading-relaxed">
+              当复杂多步 Agent 调用遭遇意外进程退出时，如何确保两阶段提交不发生幽灵写入与幂等性保障。
+            </p>
+            <div class="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+              <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">LangGraph</span>
+              <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">Checkpoints</span>
+              <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">Idempotency</span>
+            </div>
+          </div>
+          <div class="self-start sm:self-center shrink-0 relative z-10">
+            <span class="w-9 h-9 rounded border border-[var(--ee-line)] bg-[var(--ee-surface)] group-hover:border-[var(--ee-primary)] group-hover:text-[var(--ee-primary)] flex items-center justify-center font-mono text-sm font-bold transition-all">
+              &rarr;
+            </span>
+          </div>
+        </article>
+
+      </section>
+    </div>
+
+    <!-- ====================================================================
+         02 / 正文阅读页设计稿 (/notes/:slug)
+         ==================================================================== -->
+    <div id="view-article-detail" class="page-view space-y-12 hidden">
+      
+      <!-- 返回与文章标头 -->
+      <section class="space-y-6">
+        <div class="flex items-center justify-between border-b border-[var(--ee-line)] pb-3 font-mono text-xs">
+          <button onclick="switchTab('articles')" class="flex items-center gap-1.5 text-[var(--ee-primary)] font-bold hover:underline">
+            <span>&larr; BACK TO ARTICLES</span>
+          </button>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-center gap-3 font-mono text-xs text-[var(--ee-ink-faint)]">
+            <span class="status-chip chip-blue">AI 与 Agent</span>
+            <span>2026-09-06</span>
+            <span>&bull;</span>
+            <span>12 min read</span>
+          </div>
+          <h1 class="text-3xl sm:text-5xl font-heading font-black tracking-tight text-[var(--ee-ink)] leading-tight">
+            本地 E5 向量检索与混合推理内核工程落地复盘
+          </h1>
+          <p class="text-lg text-[var(--ee-ink-muted)] leading-relaxed font-medium">
+            从单进程 CPU Tokenizer 约束到跨进程共享 Socket 通信，深度剖析如何实现零网络外显依赖的离线语义搜索与证据溯源链。
+          </p>
+        </div>
+      </section>
+
+      <!-- 双栏正文与目录：正文轴严格在 740px -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- 正文主体 (740px 轴) -->
+        <div class="lg:col-span-8 space-y-6 text-[var(--ee-ink)] leading-relaxed text-base">
+          
+          <h2 class="text-2xl font-heading font-black border-b border-[var(--ee-line)] pb-2 text-[var(--ee-ink)]">
+            一、 背景与初始约束
+          </h2>
+          <p class="text-[var(--ee-ink-muted)]">
+            在一个高自主度的个人技术工作台中，外部 API 调用不仅带来网络延时与偶发抖动，还会引入不可控的数据暴露与高昂的持续 Token 成本。为了支持全站文章、项目与笔记的即时混合语义搜索，我们选择在单机本地直接挂载轻量级开源模型。
+          </p>
+
+          <!-- 4px 亮色实边引用框 (直接继承关于页核心样式) -->
+          <div class="about-quote-box p-5 rounded-lg space-y-2">
+            <p class="font-medium text-[var(--ee-ink)]">
+              “任何声称在生产环境中运行的 AI 工具，都必须先回答一个残酷的工程问题：当外部断网或服务降级时，你的系统是彻底崩溃，还是能优雅地回退到确定性状态？”
+            </p>
+            <div class="font-mono text-xs text-[var(--ee-ink-faint)]">
+              &mdash; Gavin's Engineering Principle #4
+            </div>
+          </div>
+
+          <h2 class="text-2xl font-heading font-black border-b border-[var(--ee-line)] pb-2 text-[var(--ee-ink)] pt-4">
+            二、 进程隔离与 IPC 通信拓扑
+          </h2>
+          <p class="text-[var(--ee-ink-muted)]">
+            Python Web 框架在处理 PyTorch 深度学习推理时，最容易遭遇 GIL 锁抢占导致 HTTP 请求阻塞超时。解决方案是将推理端隔离至独立 Worker 进程，通过本地 Unix Domain Socket 维持长连接通信。
+          </p>
+
+          <!-- 工业控制台风格代码块 -->
+          <div class="rounded-lg border border-[var(--ee-line)] bg-[var(--ee-surface)] overflow-hidden font-mono text-xs">
+            <div class="px-4 py-2 bg-[var(--ee-surface-low)] border-b border-[var(--ee-line)] flex items-center justify-between text-[var(--ee-ink-faint)]">
+              <span>ipc_worker.py // Socket IPC Worker</span>
+              <span class="text-[10px]">PYTHON 3.12</span>
+            </div>
+            <pre class="p-4 overflow-x-auto text-[var(--ee-ink)] leading-relaxed"><code>async def handle_vector_ipc(reader, writer):
+    data = await reader.read(4096)
+    query_tensor = tokenizer(data.decode(), return_tensors="pt")
+    with torch.inference_mode():
+        embeddings = model(**query_tensor).last_hidden_state[:, 0]
+    writer.write(embeddings.numpy().tobytes())
+    await writer.drain()
+    writer.close()</code></pre>
+          </div>
+
+          <p class="text-[var(--ee-ink-muted)]">
+            经过压测验证，在 4 核心轻量服务器上，单次查询嵌入生成延迟控制在 18ms 以内，内存常驻开销仅为 340MB，实现了真正的低噪音、确定性交付。
+          </p>
+
+        </div>
+
+        <!-- 右侧目录导航 -->
+        <aside class="hidden lg:block lg:col-span-4 sticky top-24 space-y-4 p-4 rounded-xl border border-[var(--ee-line)] bg-[var(--ee-surface)] font-mono text-xs">
+          <div class="flex items-center justify-between border-b border-[var(--ee-line)] pb-2">
+            <span class="font-bold text-[var(--ee-primary)]">TOC // 目录</span>
+          </div>
+          <nav class="space-y-2 text-[var(--ee-ink-faint)]">
+            <a href="#" class="block text-[var(--ee-primary)] font-bold pl-2 border-l-2 border-[var(--ee-primary)]">01. 背景与初始约束</a>
+            <a href="#" class="block pl-2 border-l-2 border-transparent hover:text-[var(--ee-ink)]">02. 进程隔离与 IPC 拓扑</a>
+            <a href="#" class="block pl-2 border-l-2 border-transparent hover:text-[var(--ee-ink)]">03. 内存回收与压测指标</a>
+            <a href="#" class="block pl-2 border-l-2 border-transparent hover:text-[var(--ee-ink)]">04. 最终交付与复盘</a>
+          </nav>
+        </aside>
+
+      </section>
+
+    </div>
+
+    <!-- ====================================================================
+         03 / 项目工程页设计稿 (/projects)
+         ==================================================================== -->
+    <div id="view-projects" class="page-view space-y-16 hidden">
+      
+      <section class="space-y-6">
+        <div class="flex items-center justify-between border-b border-[var(--ee-line)] pb-3 font-mono text-xs">
+          <div class="flex items-center gap-2 font-bold uppercase text-[var(--ee-primary)]">
+            <span class="px-2 py-0.5 rounded bg-[var(--ee-primary)]/10 border border-[var(--ee-primary)]/30">02</span>
+            <span class="text-[var(--ee-line)]">//</span>
+            <span>PROJECTS</span>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h1 class="text-4xl sm:text-5xl font-heading font-black tracking-tight text-[var(--ee-ink)]">
+            项目与系统实践
+          </h1>
+          <p class="text-base sm:text-lg text-[var(--ee-ink-muted)] font-medium max-w-2xl leading-relaxed">
+            从问题、约束和真实决策出发，记录可以长期复验的软件工程架构与产品落地。
+          </p>
+        </div>
+      </section>
+
+      <!-- 领衔旗舰项目卡片 (Lead Featured Project) -->
+      <section class="space-y-4">
+        <div class="flex items-center justify-between font-mono text-xs">
+          <span class="font-bold text-[var(--ee-primary)] tracking-wider">核心系统</span>
+          <span class="text-[var(--ee-ink-faint)]">v2.4.0</span>
+        </div>
+
+        <div class="blueprint-card p-8 sm:p-10 rounded-2xl relative overflow-hidden space-y-6">
+          <div class="giant-watermark text-[var(--ee-primary)] opacity-10">01</div>
+          
+          <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
+            <span class="status-chip chip-blue">全栈架构</span>
+            <span class="text-[var(--ee-ink-faint)]">4 篇工程复盘笔记</span>
+          </div>
+
+          <div class="space-y-3 max-w-2xl relative z-10">
+            <h2 class="text-3xl sm:text-4xl font-heading font-black text-[var(--ee-ink)] leading-snug">
+              Gavin Blog & Engineering Control Plane
+            </h2>
+            <p class="text-base text-[var(--ee-ink-muted)] leading-relaxed">
+              基于严格 Spec-Driven Development 协议构建的现代工程师独立刊物平台。无外部重量级依赖，同机集成自研离线向量引擎与单管理员写作运营控制台。
+            </p>
+          </div>
+
+          <!-- 技术规格标签 (对齐 about.vue) -->
+          <div class="flex flex-wrap gap-2 pt-2 border-t border-[var(--ee-line)] font-mono text-xs relative z-10">
+            <span class="px-2.5 py-1 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] text-[var(--ee-ink)] font-semibold">Nuxt 3 SSR</span>
+            <span class="px-2.5 py-1 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] text-[var(--ee-ink)] font-semibold">FastAPI Async</span>
+            <span class="px-2.5 py-1 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] text-[var(--ee-ink)] font-semibold">SQLite WAL</span>
+            <span class="px-2.5 py-1 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] text-[var(--ee-ink)] font-semibold">Local E5 Vector</span>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 pt-2 relative z-10">
+            <button class="px-5 py-2.5 rounded bg-[var(--ee-primary)] text-black dark:text-black font-mono font-bold text-xs hover:opacity-90 flex items-center gap-2">
+              <span>查看架构设计案</span>
+              <span>&rarr;</span>
+            </button>
+            <button class="px-4 py-2.5 rounded border border-[var(--ee-line)] bg-[var(--ee-surface)] text-[var(--ee-ink)] font-mono font-bold text-xs hover:border-[var(--ee-primary)] flex items-center gap-2">
+              <span>查看源码库</span>
+              <span class="text-xs">&nearr;</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 能力矩阵风格的项目网格 (2x2 Grid) -->
+      <section class="space-y-6">
+        <h3 class="font-heading font-black text-2xl text-[var(--ee-ink)]">其他工程交付</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <div class="blueprint-card p-6 rounded-xl relative overflow-hidden flex flex-col justify-between group cursor-pointer">
+            <div class="giant-watermark">02</div>
+            <div class="space-y-3 relative z-10">
+              <div class="flex items-center justify-between font-mono text-xs">
+                <span class="status-chip chip-purple">AI 工程</span>
+                <span class="text-[var(--ee-ink-faint)]">2026</span>
+              </div>
+              <h4 class="text-xl font-heading font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors">
+                Async LLM Multi-Turn Assistant
+              </h4>
+              <p class="text-sm text-[var(--ee-ink-muted)] leading-relaxed">
+                具备状态快照、版本化围栏门禁与同源 SSE 流式输出的高并发问答助手内核，带精准日用量控制账本。
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-[var(--ee-line)] flex items-center justify-between font-mono text-xs text-[var(--ee-ink-faint)] relative z-10">
+              <span>Python · LangGraph · SSE</span>
+              <span class="text-[var(--ee-primary)] font-bold group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+          </div>
+
+          <div class="blueprint-card p-6 rounded-xl relative overflow-hidden flex flex-col justify-between group cursor-pointer">
+            <div class="giant-watermark">03</div>
+            <div class="space-y-3 relative z-10">
+              <div class="flex items-center justify-between font-mono text-xs">
+                <span class="status-chip chip-blue">工具链</span>
+                <span class="text-[var(--ee-ink-faint)]">2026</span>
+              </div>
+              <h4 class="text-xl font-heading font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors">
+                Deterministic SDD Harness CLI
+              </h4>
+              <p class="text-sm text-[var(--ee-ink-muted)] leading-relaxed">
+                用于规范工程演进的规范驱动控制面工具链，覆盖零侵入遥测、影响分析图谱与自动化归档。
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-[var(--ee-line)] flex items-center justify-between font-mono text-xs text-[var(--ee-ink-faint)] relative z-10">
+              <span>Python · Click · Git Hook</span>
+              <span class="text-[var(--ee-primary)] font-bold group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ====================================================================
+         04 / 读书书架页设计稿 (/books)
+         ==================================================================== -->
+    <div id="view-books" class="page-view space-y-16 hidden">
+      
+      <section class="space-y-6">
+        <div class="flex items-center justify-between border-b border-[var(--ee-line)] pb-3 font-mono text-xs">
+          <div class="flex items-center gap-2 font-bold uppercase text-[var(--ee-primary)]">
+            <span class="px-2 py-0.5 rounded bg-[var(--ee-primary)]/10 border border-[var(--ee-primary)]/30">03</span>
+            <span class="text-[var(--ee-line)]">//</span>
+            <span>BOOKS</span>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h1 class="text-4xl sm:text-5xl font-heading font-black tracking-tight text-[var(--ee-ink)]">
+            读书与思维模型
+          </h1>
+          <p class="text-base sm:text-lg text-[var(--ee-ink-muted)] font-medium max-w-2xl leading-relaxed">
+            工程书籍、系统设计模式与认知模型的结构化索引，只记录真正改变理解和行动的部分。
+          </p>
+        </div>
+      </section>
+
+      <!-- 在读书籍特写 -->
+      <section class="space-y-4">
+        <div class="flex items-center justify-between font-mono text-xs">
+          <span class="font-bold text-[var(--ee-primary)] tracking-wider">正在阅读</span>
+        </div>
+
+        <div class="blueprint-card p-6 sm:p-8 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
+          <div class="flex items-start gap-5">
+            <!-- 拟物极简书脊 -->
+            <div class="w-16 h-24 rounded bg-gradient-to-br from-blue-700 to-indigo-950 p-2 text-white flex flex-col justify-between shadow-lg shrink-0 border-l-4 border-l-blue-400">
+              <span class="font-mono text-[8px] opacity-70">O'REILLY</span>
+              <span class="font-heading font-black text-xs leading-tight">DDIA</span>
+              <span class="font-mono text-[8px] opacity-70">MARTIN</span>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-3 font-mono text-xs">
+                <span class="status-chip chip-emerald">在读</span>
+                <span class="text-[var(--ee-ink-faint)]">分布式系统架构</span>
+              </div>
+              <h2 class="text-2xl font-heading font-bold text-[var(--ee-ink)]">
+                Designing Data-Intensive Applications
+              </h2>
+              <p class="text-xs font-mono text-[var(--ee-ink-faint)]">Martin Kleppmann &bull; 深入理解可靠、可扩展与可维护的数据系统</p>
+              <p class="text-sm text-[var(--ee-ink-muted)] pt-1 max-w-lg leading-relaxed">
+                “分布式系统的核心问题不是故障会不会发生，而是在局部故障发生时，系统如何维持既定的一致性保证。”
+              </p>
+            </div>
+          </div>
+          <button class="px-4 py-2.5 rounded bg-[var(--ee-primary)] text-black dark:text-black font-mono font-bold text-xs hover:opacity-90 shadow-sm shrink-0 flex items-center gap-2">
+            <span>阅读书摘笔记</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 已读书目矩阵 (2x2 Grid) -->
+      <section class="space-y-6">
+        <h3 class="font-heading font-black text-2xl text-[var(--ee-ink)]">已读精选归档</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <div class="blueprint-card p-6 rounded-xl space-y-4 group cursor-pointer">
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="text-[var(--ee-primary)] font-bold">★ ★ ★ ★ ★</span>
+              <span class="text-[var(--ee-ink-faint)]">2026-07</span>
+            </div>
+            <h4 class="text-xl font-heading font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors">
+              Database Internals: A Deep Dive
+            </h4>
+            <p class="text-xs font-mono text-[var(--ee-ink-faint)]">Alex Petrov</p>
+            <p class="text-sm text-[var(--ee-ink-muted)] leading-relaxed">
+              系统梳理 B-Tree、LSM-Tree 存储引擎与共识算法 Paxos / Raft 的底层机制，看清现代数据库内部流转脉络。
+            </p>
+            <div class="pt-3 border-t border-[var(--ee-line)] flex items-center justify-between font-mono text-xs">
+              <span class="text-[var(--ee-ink-faint)]">3 篇工程书摘</span>
+              <span class="text-[var(--ee-primary)] font-bold group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+          </div>
+
+          <div class="blueprint-card p-6 rounded-xl space-y-4 group cursor-pointer">
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="text-[var(--ee-primary)] font-bold">★ ★ ★ ★ ★</span>
+              <span class="text-[var(--ee-ink-faint)]">2026-05</span>
+            </div>
+            <h4 class="text-xl font-heading font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors">
+              A Philosophy of Software Design
+            </h4>
+            <p class="text-xs font-mono text-[var(--ee-ink-faint)]">John Ousterhout</p>
+            <p class="text-sm text-[var(--ee-ink-muted)] leading-relaxed">
+              关于深度模块（Deep Modules）与降低认知负荷的经典之作。好软件通过让复杂性被深藏在精简接口之后而获得寿命。
+            </p>
+            <div class="pt-3 border-t border-[var(--ee-line)] flex items-center justify-between font-mono text-xs">
+              <span class="text-[var(--ee-ink-faint)]">2 篇实践笔记</span>
+              <span class="text-[var(--ee-primary)] font-bold group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ====================================================================
+         05 / 时间归档页设计稿 (/archive)
+         ==================================================================== -->
+    <div id="view-archive" class="page-view space-y-16 hidden">
+      
+      <section class="space-y-6">
+        <div class="flex items-center justify-between border-b border-[var(--ee-line)] pb-3 font-mono text-xs">
+          <div class="flex items-center gap-2 font-bold uppercase text-[var(--ee-primary)]">
+            <span class="px-2 py-0.5 rounded bg-[var(--ee-primary)]/10 border border-[var(--ee-primary)]/30">04</span>
+            <span class="text-[var(--ee-line)]">//</span>
+            <span>ARCHIVE</span>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h1 class="text-4xl sm:text-5xl font-heading font-black tracking-tight text-[var(--ee-ink)]">
+            索引化的思考
+          </h1>
+          <p class="text-base sm:text-lg text-[var(--ee-ink-muted)] font-medium max-w-2xl leading-relaxed">
+            按时间回看已经公开的文章、系统设计与工程复盘，保留结论，也保留理解变化的轨迹。
+          </p>
+        </div>
+      </section>
+
+      <!-- 时间年轮主轴 (Chronological Spine Timeline) -->
+      <section class="space-y-12">
+        
+        <!-- 2026 年组 -->
+        <div class="relative pl-8 border-l-2 border-[var(--ee-line)] space-y-6">
+          <div class="absolute -left-[17px] top-0 flex items-center justify-center w-8 h-8 rounded-full bg-[var(--ee-surface)] border-2 border-[var(--ee-primary)] text-[var(--ee-primary)] font-mono text-xs font-bold shadow-sm">
+            26
+          </div>
+          
+          <div class="flex items-baseline justify-between pb-2">
+            <h2 class="text-3xl font-heading font-black text-[var(--ee-ink)]">2026</h2>
+            <span class="font-mono text-xs text-[var(--ee-ink-faint)]">18 篇已归档笔记</span>
+          </div>
+
+          <div class="space-y-3">
+            
+            <div class="blueprint-card p-4 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 group cursor-pointer" onclick="switchTab('article-detail')">
+              <div class="flex items-center gap-4">
+                <span class="font-mono text-xs text-[var(--ee-primary)] font-bold shrink-0">09-06</span>
+                <h3 class="text-base font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors">
+                  本地 E5 向量检索与混合推理内核工程落地复盘
+                </h3>
+              </div>
+              <div class="flex items-center gap-3 font-mono text-xs text-[var(--ee-ink-faint)] shrink-0">
+                <span class="status-chip chip-blue">AI / RAG</span>
+                <span>12 min</span>
+              </div>
+            </div>
+
+            <div class="blueprint-card p-4 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 group cursor-pointer" onclick="switchTab('article-detail')">
+              <div class="flex items-center gap-4">
+                <span class="font-mono text-xs text-[var(--ee-primary)] font-bold shrink-0">08-28</span>
+                <h3 class="text-base font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors">
+                  SQLite WAL 模式下的并发排障与原子版本控制锁设计
+                </h3>
+              </div>
+              <div class="flex items-center gap-3 font-mono text-xs text-[var(--ee-ink-faint)] shrink-0">
+                <span class="status-chip chip-emerald">Backend</span>
+                <span>8 min</span>
+              </div>
+            </div>
+
+            <div class="blueprint-card p-4 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 group cursor-pointer" onclick="switchTab('article-detail')">
+              <div class="flex items-center gap-4">
+                <span class="font-mono text-xs text-[var(--ee-primary)] font-bold shrink-0">08-11</span>
+                <h3 class="text-base font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors">
+                  长生命周期状态机：LangGraph Checkpointer 的断点恢复陷阱
+                </h3>
+              </div>
+              <div class="flex items-center gap-3 font-mono text-xs text-[var(--ee-ink-faint)] shrink-0">
+                <span class="status-chip chip-amber">Agent</span>
+                <span>15 min</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 2025 年组 -->
+        <div class="relative pl-8 border-l-2 border-[var(--ee-line)] space-y-6">
+          <div class="absolute -left-[17px] top-0 flex items-center justify-center w-8 h-8 rounded-full bg-[var(--ee-surface)] border-2 border-[var(--ee-line)] text-[var(--ee-ink-faint)] font-mono text-xs font-bold">
+            25
+          </div>
+          
+          <div class="flex items-baseline justify-between pb-2">
+            <h2 class="text-3xl font-heading font-black text-[var(--ee-ink)]">2025</h2>
+            <span class="font-mono text-xs text-[var(--ee-ink-faint)]">24 篇已归档笔记</span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="blueprint-card p-4 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 group cursor-pointer">
+              <div class="flex items-center gap-4">
+                <span class="font-mono text-xs text-[var(--ee-primary)] font-bold shrink-0">12-19</span>
+                <h3 class="text-base font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors">
+                  现代全栈开发中的类型安全边界与错误防线构建
+                </h3>
+              </div>
+              <div class="flex items-center gap-3 font-mono text-xs text-[var(--ee-ink-faint)] shrink-0">
+                <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">TypeScript</span>
+                <span>7 min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- ====================================================================
+         06 / 全文检索页设计稿 (/search)
+         ==================================================================== -->
+    <div id="view-search" class="page-view space-y-12 hidden">
+      
+      <section class="space-y-6">
+        <div class="flex items-center justify-between border-b border-[var(--ee-line)] pb-3 font-mono text-xs">
+          <div class="flex items-center gap-2 font-bold uppercase text-[var(--ee-primary)]">
+            <span class="px-2 py-0.5 rounded bg-[var(--ee-primary)]/10 border border-[var(--ee-primary)]/30">05</span>
+            <span class="text-[var(--ee-line)]">//</span>
+            <span>SEARCH</span>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h1 class="text-4xl sm:text-5xl font-heading font-black tracking-tight text-[var(--ee-ink)]">
+            全站索引检索
+          </h1>
+          <p class="text-base sm:text-lg text-[var(--ee-ink-muted)] font-medium max-w-2xl leading-relaxed">
+            实时检索已发布文章、项目实践与读书笔记的标题、结构化摘要与正文段落。
+          </p>
+        </div>
+
+        <!-- 终端风格搜索输入框 -->
+        <div class="p-3 rounded-xl border border-[var(--ee-primary)] bg-[var(--ee-surface)] shadow-lg shadow-[var(--ee-glow)] flex items-center gap-3">
+          <span class="font-mono text-base text-[var(--ee-primary)] pl-2">&gt;</span>
+          <input type="text" value="SQLite WAL 模式并发" class="bg-transparent border-0 focus:outline-none w-full font-mono text-sm text-[var(--ee-ink)]" placeholder="输入关键词或自然语言问题进行检索...">
+          <div class="flex items-center gap-2 shrink-0 font-mono text-xs">
+            <span class="px-2 py-1 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink-faint)]">ESC 清空</span>
+            <button class="px-4 py-1.5 rounded bg-[var(--ee-primary)] text-black dark:text-black font-bold">搜索</button>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 font-mono text-xs text-[var(--ee-ink-faint)]">
+          <div class="flex items-center gap-2">
+            <span>SCOPE:</span>
+            <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">全部内容 (3)</span>
+            <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)]">文章 (2)</span>
+            <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)]">项目 (1)</span>
+          </div>
+          <span>按相关度排序</span>
+        </div>
+      </section>
+
+      <!-- 搜索命中结果卡片 -->
+      <section class="space-y-4">
+        
+        <div class="blueprint-card p-6 rounded-xl space-y-3 group cursor-pointer" onclick="switchTab('article-detail')">
+          <div class="flex items-center justify-between font-mono text-xs">
+            <span class="status-chip chip-emerald">文章</span>
+            <span class="text-[var(--ee-ink-faint)]">2026-08-28</span>
+          </div>
+          <h3 class="text-xl font-heading font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors">
+            SQLite WAL 模式下的并发排障与原子版本控制锁设计
+          </h3>
+          <p class="text-sm text-[var(--ee-ink-muted)] leading-relaxed">
+            ...单文件数据库在开启 <mark class="bg-amber-400/20 text-[var(--ee-primary)] px-1 rounded font-bold">WAL 模式</mark> 后，写操作不再阻塞读操作，但在多进程同时触发检查点与写锁争用时...
+          </p>
+        </div>
+
+        <div class="blueprint-card p-6 rounded-xl space-y-3 group cursor-pointer" onclick="switchTab('projects')">
+          <div class="flex items-center justify-between font-mono text-xs">
+            <span class="status-chip chip-blue">项目</span>
+            <span class="text-[var(--ee-ink-faint)]">2026-09</span>
+          </div>
+          <h3 class="text-xl font-heading font-bold text-[var(--ee-ink)] group-hover:text-[var(--ee-primary)] transition-colors">
+            Gavin Blog & Engineering Control Plane
+          </h3>
+          <p class="text-sm text-[var(--ee-ink-muted)] leading-relaxed">
+            ...核心存储层采用零外部运维依赖的 <mark class="bg-amber-400/20 text-[var(--ee-primary)] px-1 rounded font-bold">SQLite WAL</mark> 架构，实现了毫秒级单机吞吐与原子快照回滚...
+          </p>
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- ====================================================================
+         07 / 关于基准页设计稿 (/about · 全站设计风格基准)
+         ==================================================================== -->
+    <div id="view-about" class="page-view space-y-16 hidden">
+      
+      <!-- 01 / ABOUT ME -->
+      <section class="space-y-6">
+        <div class="flex items-center justify-between border-b border-[var(--ee-line)] pb-3 font-mono text-xs">
+          <div class="flex items-center gap-2 font-bold uppercase text-[var(--ee-primary)]">
+            <span class="px-2 py-0.5 rounded bg-[var(--ee-primary)]/10 border border-[var(--ee-primary)]/30">01</span>
+            <span class="text-[var(--ee-line)]">//</span>
+            <span>ABOUT ME (设计风格基准)</span>
+          </div>
+          <div class="flex items-center gap-2 text-[var(--ee-ink-faint)]">
+            <span>LOC: ARCHITECTURE & SYSTEMS</span>
+            <span>&bull;</span>
+            <span>VER: 2026.9</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- 左侧：主视觉陈述与工程哲学引用 -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="space-y-4">
+              <h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-black tracking-tight text-[var(--ee-ink)] leading-tight">
+                我是 <span class="text-[var(--ee-primary)] underline decoration-wavy decoration-[var(--ee-primary)]/40">Gavin</span>。
+              </h1>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] font-mono text-xs font-bold text-[var(--ee-ink)]">
+                <span class="text-[var(--ee-primary)] font-black">#</span>
+                <span>后端工程师 / AI 应用开发者</span>
+              </div>
+            </div>
+
+            <div class="about-quote-box p-5 sm:p-6 rounded-r-xl space-y-4 shadow-sm">
+              <p class="text-base sm:text-lg text-[var(--ee-ink)] font-medium leading-relaxed">
+                “我关注后端工程、AI 应用，以及如何把一个想法真正变成可以运行和长期维护的软件。”
+              </p>
+              <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-[var(--ee-line-soft)] font-mono text-[11px] font-bold text-[var(--ee-ink-faint)]">
+                <span>&mdash; ZERO FLUFF</span>
+                <span>&bull;</span>
+                <span>VERIFIABLE RESULTS</span>
+                <span>&bull;</span>
+                <span>LOW NOISE</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右侧：公开资料坐标卡 (独立闭环卡片) -->
+          <aside class="lg:col-span-5 p-6 rounded-xl border border-[var(--ee-line)] bg-[var(--ee-surface)] space-y-5 shadow-sm relative overflow-hidden">
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--ee-line)]">
+              <span class="font-mono text-xs font-bold uppercase tracking-wider text-[var(--ee-ink-faint)]">公开资料 / COORDINATES</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-xl bg-[var(--ee-surface-low)] border border-[var(--ee-line)] flex items-center justify-center font-heading font-black text-2xl text-[var(--ee-primary)]">
+                G
+              </div>
+              <div class="space-y-1">
+                <div class="font-heading font-bold text-lg text-[var(--ee-ink)]">Gavin</div>
+                <div class="font-mono text-xs text-[var(--ee-ink-faint)]">📍 深圳, 中国</div>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <div class="font-mono text-[11px] font-bold text-[var(--ee-ink-muted)]">CORE SKILLS</div>
+              <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+                <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">Python</span>
+                <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">FastAPI</span>
+                <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">TypeScript</span>
+                <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">Nuxt 3</span>
+                <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">SQLite WAL</span>
+                <span class="px-2 py-0.5 rounded bg-[var(--ee-surface-low)] border border-[var(--ee-line)] text-[var(--ee-ink)]">LangChain</span>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-[var(--ee-line-soft)] flex flex-wrap gap-3 font-mono text-xs">
+              <a href="mailto:gavin@example.com" class="text-[var(--ee-ink-muted)] hover:text-[var(--ee-primary)] transition-colors">Email</a>
+              <a href="https://github.com" target="_blank" class="text-[var(--ee-ink-muted)] hover:text-[var(--ee-primary)] transition-colors">GitHub</a>
+              <a href="/rss.xml" class="text-[var(--ee-ink-muted)] hover:text-[var(--ee-primary)] transition-colors">RSS 订阅</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 02 / WHAT I DO -->
+      <section class="space-y-6">
+        <div class="flex items-center justify-between border-b border-[var(--ee-line)] pb-3 font-mono text-xs">
+          <div class="flex items-center gap-2 font-bold uppercase text-[var(--ee-primary)]">
+            <span class="px-2 py-0.5 rounded bg-[var(--ee-primary)]/10 border border-[var(--ee-primary)]/30">02</span>
+            <span class="text-[var(--ee-line)]">//</span>
+            <span>WHAT I DO</span>
+          </div>
+          <span class="text-[var(--ee-ink-faint)]">CORE CAPABILITIES MATRIX</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="blueprint-card p-5 rounded-xl space-y-2.5">
+            <div class="font-mono text-xs text-[var(--ee-primary)] font-bold">01 // BACKEND SYSTEMS</div>
+            <h3 class="font-heading font-bold text-base text-[var(--ee-ink)]">后端高并发与架构设计</h3>
+            <p class="text-xs text-[var(--ee-ink-muted)] leading-relaxed">深入 Linux 网络 IO 与异步事件循环，基于 FastAPI / Go 构建具备高吞吐、低开销特性的微服务与控制总线。</p>
+          </div>
+          <div class="blueprint-card p-5 rounded-xl space-y-2.5">
+            <div class="font-mono text-xs text-[var(--ee-primary)] font-bold">02 // AI AGENT WORKFLOWS</div>
+            <h3 class="font-heading font-bold text-base text-[var(--ee-ink)]">AI 应用工程与智能体工作流</h3>
+            <p class="text-xs text-[var(--ee-ink-muted)] leading-relaxed">落地企业级 RAG 检索增强、长上下文推理与多 Agent 协同体系，建立确定性评估闭环并杜绝模型幻觉。</p>
+          </div>
+          <div class="blueprint-card p-5 rounded-xl space-y-2.5">
+            <div class="font-mono text-xs text-[var(--ee-primary)] font-bold">03 // DETERMINISTIC DATA</div>
+            <h3 class="font-heading font-bold text-base text-[var(--ee-ink)]">确定性数据设计与状态机</h3>
+            <p class="text-xs text-[var(--ee-ink-muted)] leading-relaxed">坚持强约束 Schema、幂等事务与 WAL 存储机制，保障软件系统在极端并发下的绝对一致性与可回滚性。</p>
+          </div>
+          <div class="blueprint-card p-5 rounded-xl space-y-2.5">
+            <div class="font-mono text-xs text-[var(--ee-primary)] font-bold">04 // AUTOMATION & QUALITY</div>
+            <h3 class="font-heading font-bold text-base text-[var(--ee-ink)]">自动化交付与工程质量</h3>
+            <p class="text-xs text-[var(--ee-ink-muted)] leading-relaxed">推行测试驱动开发、契约校验与自动化流水线，确保每一次系统变更均具备可复现的验证凭证。</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- 模拟全站公共页尾 (Site Footer) -->
+  <footer class="max-w-4xl mx-auto px-6 pt-12 mt-20 border-t border-[var(--ee-line)] font-mono text-xs text-[var(--ee-ink-faint)]">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-12">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-[var(--ee-ink)]">GAVIN</span>
+        <span>&copy; 2026 Gavin. 持续修订，也持续阅读。</span>
+      </div>
+      <div class="flex items-center gap-5 text-[var(--ee-ink)]">
+        <a href="https://github.com" target="_blank" class="hover:text-[var(--ee-primary)] transition-colors">GitHub ↗</a>
+        <a href="/rss.xml" class="hover:text-[var(--ee-primary)] transition-colors">RSS ↗</a>
+        <span class="cursor-pointer hover:text-[var(--ee-primary)] transition-colors" onclick="switchTab('about')">About ↗</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 交互脚本：页面 Tab 切换与深浅主题切换 -->
+  <script>
+    function switchTab(tabId) {
+      // 隐藏所有页面视图
+      document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
+      const target = document.getElementById('view-' + tabId);
+      if (target) target.classList.remove('hidden');
+
+      // 更新顶部浮动中控台按钮高亮
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.classList.add('text-[var(--ee-ink-muted)]');
+      });
+      const topBtn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
+      if (topBtn) {
+        topBtn.classList.add('active');
+        topBtn.classList.remove('text-[var(--ee-ink-muted)]');
+      }
+
+      // 同步更新真实站点 Header 导航高亮 (与 Nuxt SiteHeader.vue 样式联动)
+      document.querySelectorAll('.site-nav-action.nav-link').forEach(link => {
+        link.classList.remove('nav-link-active');
+      });
+      const searchAction = document.querySelector('.site-search-action');
+      if (searchAction) searchAction.removeAttribute('aria-current');
+
+      // 映射并激活当前导航
+      let activeNav = tabId;
+      if (tabId === 'article-detail') activeNav = 'articles';
+
+      const currentNav = document.querySelector(`.site-nav-action.nav-link[data-header-nav="${activeNav}"]`);
+      if (currentNav) {
+        currentNav.classList.add('nav-link-active');
+      }
+      if (tabId === 'search' && searchAction) {
+        searchAction.setAttribute('aria-current', 'page');
+      }
+
+      // 滚动回页面顶部
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 主题切换逻辑
+    const themeBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+    let isDark = true;
+
+    themeBtn.addEventListener('click', () => {
+      isDark = !isDark;
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        themeIcon.textContent = '☀️';
+        themeText.textContent = '浅色';
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeIcon.textContent = '🌙';
+        themeText.textContent = '深色';
+      }
+    });
+
+    // 名片模式切换 (原版 ProfileCard vs 关于页坐标卡)
+    function switchProfileCard(type) {
+      const sysCard = document.getElementById('profileCardSys');
+      const aboutCard = document.getElementById('profileCardAbout');
+      const btnSys = document.getElementById('cardTabSys');
+      const btnAbout = document.getElementById('cardTabAbout');
+      if (type === 'sys') {
+        sysCard.classList.remove('hidden');
+        aboutCard.classList.add('hidden');
+        btnSys.className = 'px-2 py-0.5 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] text-[var(--ee-primary)] font-bold';
+        btnAbout.className = 'px-2 py-0.5 rounded border border-[var(--ee-line)] hover:text-[var(--ee-primary)] text-[var(--ee-ink-faint)]';
+      } else {
+        sysCard.classList.add('hidden');
+        aboutCard.classList.remove('hidden');
+        btnAbout.className = 'px-2 py-0.5 rounded border border-[var(--ee-line)] bg-[var(--ee-surface-low)] text-[var(--ee-primary)] font-bold';
+        btnSys.className = 'px-2 py-0.5 rounded border border-[var(--ee-line)] hover:text-[var(--ee-primary)] text-[var(--ee-ink-faint)]';
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "assurance": "manual-local-measurement-not-production-qualification",
+  "model": "intfloat/multilingual-e5-small",
+  "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "representation": "e5-fp32-mean-l2-v1",
+  "environment": {
+    "os": "Windows-10-10.0.26100-SP0",
+    "architecture": "AMD64",
+    "logical_cpus": 16,
+    "total_physical_memory_mib": 14188,
+    "available_memory_at_end_mib": 3729
+  },
+  "final_snapshot": {
+    "generation": 14,
+    "chunks": 20,
+    "vectors": 20,
+    "gate": "disabled",
+    "switch_pending": null,
+    "chinese_query_status": "ok",
+    "source_path_example": "/notes/2026/08/ssl"
+  },
+  "observations": {
+    "reference": {
+      "model": "intfloat/multilingual-e5-small",
+      "version": "614241f622f53c4eeff9890bdc4f31cfecc418b3:e5-fp32-mean-l2-v1",
+      "reference_max_abs_errors": [
+        0.0,
+        0.0,
+        1.4901161193847656e-08,
+        0.0
+      ],
+      "actual_tokens": [
+        11,
+        12,
+        18,
+        20
+      ],
+      "request_seconds": [
+        0.07240499998442829,
+        0.035614100052043796,
+        0.042269499972462654,
+        0.027407699963077903
+      ],
+      "platform_scope": "local-development-only"
+    },
+    "lifecycle": {
+      "real_e5": true,
+      "real_qdrant": true,
+      "content_scope": "isolated-snapshot",
+      "publish_dense_retrieval": true,
+      "republish_version_replaced": true,
+      "delete_invalidates_before_and_after_worker": true,
+      "chat_calls": 0
+    },
+    "benchmark": {
+      "scope": "Windows AMD64 development; not target capacity qualification",
+      "warm_query": {
+        "count": 30,
+        "tokens_min": 32,
+        "tokens_max": 128,
+        "p95_seconds": 0.08883110003080219,
+        "max_seconds": 0.11069759994279593
+      },
+      "near_limit_query": {
+        "count": 10,
+        "tokens_min": 503,
+        "tokens_max": 503,
+        "p95_seconds": 0.3520592999411747,
+        "max_seconds": 0.3520592999411747
+      },
+      "during_index_rebuild": {
+        "count": 30,
+        "observed_overlapping_requests": 24,
+        "p95_seconds": 0.32621820003259927,
+        "tokens": 125,
+        "staging_generation": 16
+      },
+      "staging_generation": 15,
+      "unauthenticated_status": {
+        "embedding": 401,
+        "qdrant": 401
+      },
+      "chat_calls": 0
+    },
+    "restart": {
+      "offline_restart_seconds": 9.014662600005977,
+      "external_socket_connect_blocked": true,
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3"
+    }
+  },
+  "raw_report_sha256": {
+    "reference": "01111d84afc9eea17bfe34be769ad6c8fcfc9b58af23f9f1257eed5fd763dd78",
+    "lifecycle": "e960586f9b4d0c0995bf5ea203deb117ace3691741f1fb80aa162662cfe8de38",
+    "benchmark": "dde49614f1b8fb9d3094ee964739208bec68651ba6e3693160e4ae6ed547fb45",
+    "restart": "c383a76958289e2bf0800ef0ec250a21de749f5ceeb0797561d6b73ee2e0dc51"
+  },
+  "not_verified": [
+    "40 human-labelled positive retrieval cases and Recall@5",
+    "2 vCPU / 4 GB five-process target qualification",
+    "third-party Chat compatibility and paid real Q&A",
+    "production TLS and qualification profile"
+  ],
+  "chat_calls": 0,
+  "observed_process_memory": {
+    "method": "Windows Get-Process working set sampled before restart; not target capacity qualification",
+    "e5_peak_working_set_bytes": 1062350848,
+    "qdrant_peak_working_set_bytes": 220893184
+  },
+  "qdrant": {
+    "version": "1.18.3",
+    "artifact_sha256": "984619bbd4032ace578656174c465c5d6b71d1267ecad5b7b4c21cc6549ca833",
+    "authenticated": true,
+    "restart_retrieval": "passed"
+  }
+}

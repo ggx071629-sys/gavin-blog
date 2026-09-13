@@ -1,0 +1,461 @@
+{
+  "schema_version": 2,
+  "task_id": "20260910-studio-book-editor",
+  "created_at": "2026-09-10T09:09:42.226998+00:00",
+  "command": "python -m tools.harness verify 20260910-studio-book-editor",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "700e92e32e7442af2e40aafee1eb22b6f7d831e6",
+    "active_spec_sha256": "dd01ba942166c2bbb0d49463d23d78129218b543e8e3fa9fe2cb24f296bb41e5",
+    "verification_contract_sha256": "cde1522c92f0802e54f1028a1bd3901f6b888d55f95d27c822a3b6ea14909f9a",
+    "gate_config_sha256": "7e3f6a254b3023e7f2ab80929ab97a111818d3acdbe1d99c2b13fba8efd5d0ab",
+    "documentation_contract_sha256": "18c9d754ae9af8e98851c6b87dd2aa74e9b4cefa32164a698f4231e4117d28ea",
+    "documentation_targets_sha256": "c78cd0e1213405b1938b505ea7010f47b228a3d6d139495a86ac22b925d4e999",
+    "module_contract_sha256": "e50d5d0ca9e044388b8c86a0688837d3069be2ea3183505fbdecb18acc4c98d4"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录本任务页面的设计实现及实际行为边界。",
+    "targets": [
+      "apps/web/public/studio/README.md"
+    ],
+    "baseline_commit": "f20286fa8d0a6bac4404709e98cb166b4b2198c4",
+    "target_blobs": {
+      "apps/web/public/studio/README.md": "f7cb8941b441b8baf1896a22ebf47f4dca9c6e47"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "1d2cd96b9aa87caba98db8a719d23e6a034305d7",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260910-studio-book-editor.json",
+      "sha256": "bbbf283a07012875c8d43cd759c28237096f85f5f6370173ddfa65b7300e690c",
+      "selected_cases": [
+        "M03-STUDIO-BOOK-EDITOR-01"
+      ],
+      "selected_refs": 1,
+      "excluded_cases": 246
+    },
+    "receipt": {
+      "run_id": "3d59a201c4a633e4d15a59d54ba1d13d",
+      "identity": "dbcb64d44426fbf0b403c057be6203bb0e630f8f772fa4563dd50d8275fd02bc",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1226.855,
+      "plan_inputs": 768.765,
+      "execute_cleanup_and_input_recheck": 43418.235
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "e50d5d0ca9e044388b8c86a0688837d3069be2ea3183505fbdecb18acc4c98d4",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M03-STUDIO-BOOK-EDITOR-01",
+            "module_id": "M03",
+            "module_name": "栏目、标签与全站搜索",
+            "priority": "P1",
+            "scenario": "读书书名与作者阅读封面设置分区，保存后确认发布和页内预览。",
+            "expectations": [
+              {
+                "id": "M03-STUDIO-BOOK-EDITOR-01-E01",
+                "surface": "user_visible",
+                "statement": "读书书名与作者阅读封面设置分区，保存后确认发布和页内预览。"
+              },
+              {
+                "id": "M03-STUDIO-BOOK-EDITOR-01-E02",
+                "surface": "forbidden",
+                "statement": "取消或仅自动保存不得改变公开版本，发布不得跳过保存屏障或使用旧版本。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "kind": "playwright",
+                "name": "book",
+                "gate": "e2e",
+                "covers": [
+                  "M03-STUDIO-BOOK-EDITOR-01-E01",
+                  "M03-STUDIO-BOOK-EDITOR-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M03-STUDIO-BOOK-EDITOR-01",
+            "module_id": "M03",
+            "module_name": "栏目、标签与全站搜索",
+            "priority": "P1",
+            "scenario": "读书书名与作者阅读封面设置分区，保存后确认发布和页内预览。",
+            "expectations": [
+              {
+                "id": "M03-STUDIO-BOOK-EDITOR-01-E01",
+                "surface": "user_visible",
+                "statement": "读书书名与作者阅读封面设置分区，保存后确认发布和页内预览。"
+              },
+              {
+                "id": "M03-STUDIO-BOOK-EDITOR-01-E02",
+                "surface": "forbidden",
+                "statement": "取消或仅自动保存不得改变公开版本，发布不得跳过保存屏障或使用旧版本。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "kind": "playwright",
+                "name": "book",
+                "gate": "e2e",
+                "covers": [
+                  "M03-STUDIO-BOOK-EDITOR-01-E01",
+                  "M03-STUDIO-BOOK-EDITOR-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.125,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "147 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 175.934,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 70.548,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.526,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "746 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 381.593,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "266 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 102.819,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 247 cases, 495 expectations, 875 exact test references; contract sha256 e50d5d0ca9e0"
+      ],
+      "status": "passed",
+      "duration_ms": 397.435,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.003,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.485,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 79.596,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 1512.999,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "3d59a201c4a633e4d15a59d54ba1d13d",
+        "attempt_id": "3114de4bc888b0f463771f556109736b"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-book-editor --gate e2e",
+      "status": "passed",
+      "duration_ms": 40307.64,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1592,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "book"
+              }
+            ],
+            "duration_ms": 2830.085,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "book"
+              }
+            ],
+            "duration_ms": 1417.688
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "book",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "book"
+                ]
+              }
+            ],
+            "duration_ms": 1303.224,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "book",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "book"
+                ]
+              }
+            ],
+            "duration_ms": 34397.408,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\4aac216400e9bf94415eb78dc59a10188cff6d4a59c1b666b0c2a06fd4681aeb\\artifacts\\3d59a201c4a633e4d15a59d54ba1d13d\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "3d59a201c4a633e4d15a59d54ba1d13d",
+        "attempt_id": "d7cf129e15a2b372ef52a1d82ee6a651"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1305.177,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 44349.88,
+    "failures": []
+  },
+  "source_commit": "1d2cd96b9aa87caba98db8a719d23e6a034305d7"
+}

@@ -1,0 +1,440 @@
+{
+  "schema_version": 2,
+  "task_id": "20260904-public-ui-refinement",
+  "created_at": "2026-09-04T15:12:14.038144+00:00",
+  "command": "python -m tools.harness verify 20260904-public-ui-refinement",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e",
+        "harness-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e",
+        "harness-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e",
+        "harness-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "74a3d5de7caab09d1bce1d3136fb5fa1ab094456",
+    "active_spec_sha256": "3bae0e3b944973484fd78a377af58e678eb743fc5f70c89897e4e22655a9309e",
+    "verification_contract_sha256": "0062dd86f9db3a117050456b42c70967a1c56708c158dfc5fd744d82e5529703",
+    "gate_config_sha256": "cab0cd9c0f3c6675af0f5dca57c35982bbf56aa379f4b474234b735fe50bce22",
+    "documentation_contract_sha256": "7fe2783e0bcb42122762a0809120558195da840b1ab7319e4beb072e191d46b7",
+    "documentation_targets_sha256": "a51fef7218333c0c69419f662e11503ad4b4ecc1fd82b49bca683b7b304604e0",
+    "module_contract_sha256": "a52c6ac2f2d63e12951627a5c0f2703c2d73fb42e53600bffd4d688aa0e36f25"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "统一移动导航顺序会更新 Web 边界文档中已明确记录的公开导航次序，其他产品边界保持不变",
+    "targets": [
+      "apps/web/README.md"
+    ],
+    "baseline_commit": "f61f6a4dcfd8b8678e1ae7a19eb02bd5a0ba5159",
+    "target_blobs": {
+      "apps/web/README.md": "93eec9b8678d2c0bf44301ff38700fd14b8f3188"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "ddecc300abecee8e6f31f17e36f01221ac8e74f6",
+    "cleanup_status": "passed",
+    "reused_paths": 3
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "a52c6ac2f2d63e12951627a5c0f2703c2d73fb42e53600bffd4d688aa0e36f25",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "web-quality",
+          "e2e",
+          "harness-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M01-P1-02",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "公开站点壳层在桌面与移动端使用同一栏目编号顺序，并在受支持窄屏保持无页面级横向溢出。",
+            "expectations": [
+              {
+                "id": "M01-P1-02-E01",
+                "surface": "user_visible",
+                "statement": "桌面与移动导航按文章、项目、读书、归档、关于的同一编号顺序呈现；移动端额外保留搜索且写作台保持独立低优先级入口。"
+              },
+              {
+                "id": "M01-P1-02-E02",
+                "surface": "forbidden",
+                "statement": "首页在 320、360、375、390、768、1024、1280 与 1440px 不得出现页面级横向溢出，移动菜单不得交换项目与读书编号。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/public-experience.spec.ts",
+                "kind": "playwright",
+                "name": "mobile menu switches from a full-screen route index to the tablet drawer at 640",
+                "gate": "e2e",
+                "covers": [
+                  "M01-P1-02-E01"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/public-experience.spec.ts",
+                "kind": "playwright",
+                "name": "public chrome keeps one navigation sequence and prevents narrow overflow",
+                "gate": "e2e",
+                "covers": [
+                  "M01-P1-02-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "web-quality",
+          "e2e",
+          "harness-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M01-P1-02",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "公开站点壳层在桌面与移动端使用同一栏目编号顺序，并在受支持窄屏保持无页面级横向溢出。",
+            "expectations": [
+              {
+                "id": "M01-P1-02-E01",
+                "surface": "user_visible",
+                "statement": "桌面与移动导航按文章、项目、读书、归档、关于的同一编号顺序呈现；移动端额外保留搜索且写作台保持独立低优先级入口。"
+              },
+              {
+                "id": "M01-P1-02-E02",
+                "surface": "forbidden",
+                "statement": "首页在 320、360、375、390、768、1024、1280 与 1440px 不得出现页面级横向溢出，移动菜单不得交换项目与读书编号。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/public-experience.spec.ts",
+                "kind": "playwright",
+                "name": "mobile menu switches from a full-screen route index to the tablet drawer at 640",
+                "gate": "e2e",
+                "covers": [
+                  "M01-P1-02-E01"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/public-experience.spec.ts",
+                "kind": "playwright",
+                "name": "public chrome keeps one navigation sequence and prevents narrow overflow",
+                "gate": "e2e",
+                "covers": [
+                  "M01-P1-02-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "web-quality",
+          "e2e",
+          "harness-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M01-P1-03",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "长文章首屏在保留阅读元信息和长短文差异的同时，让章节轨和正文入口尽早进入桌面视口。",
+            "expectations": [
+              {
+                "id": "M01-P1-03-E01",
+                "surface": "user_visible",
+                "statement": "1440×900 的无首图长文章保留日期、元数据、标题、摘要或操作，并把 Hero 高度控制在 400px 内。"
+              },
+              {
+                "id": "M01-P1-03-E02",
+                "surface": "forbidden",
+                "statement": "压缩 Hero 不得消除长短文差异，也不得把文章正文起点继续推到 900px 视口以下。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/article-reading.spec.ts",
+                "kind": "playwright",
+                "name": "article reading variant follows the exact Short truth table and boundaries",
+                "gate": "e2e",
+                "covers": [
+                  "M01-P1-03-E01",
+                  "M01-P1-03-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 5.52
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "101 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 246.931
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 62.796
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.521
+    },
+    {
+      "name": "links",
+      "details": [
+        "445 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1935.976
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "204 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 57.873
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "10 modules, 32 cases, 64 expectations, 40 exact test references; contract sha256 a52c6ac2f2d6"
+      ],
+      "status": "passed",
+      "duration_ms": 21609.644
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.343
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.705
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 78.633
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "npm run quality:web",
+      "status": "passed",
+      "duration_ms": 287955.577,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 162,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "npm run test:e2e",
+      "status": "passed",
+      "duration_ms": 175083.608,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 53,
+          "failed": 0,
+          "skipped": 1
+        }
+      }
+    },
+    {
+      "name": "harness-tests",
+      "kind": "product",
+      "command": "{api_python} -m pytest harness/verification/tests",
+      "status": "passed",
+      "duration_ms": 44839.664,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 176,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{api_python} -m tools.harness verify",
+      "status": "passed",
+      "duration_ms": 24213.542,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1129.659,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 15,
+      "passed": 15,
+      "failed": 0
+    },
+    "duration_ms": 557231.992,
+    "failures": [],
+    "test_counts": {
+      "passed": 391,
+      "failed": 0,
+      "skipped": 1
+    }
+  },
+  "source_commit": "ddecc300abecee8e6f31f17e36f01221ac8e74f6"
+}

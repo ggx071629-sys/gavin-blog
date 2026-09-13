@@ -1,0 +1,400 @@
+{
+  "schema_version": 2,
+  "task_id": "20260910-studio-coverage",
+  "created_at": "2026-09-10T12:20:56.348396+00:00",
+  "command": "python -m tools.harness verify 20260910-studio-coverage",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "661ec051c6812464b44cce37f30d65c47ce60d09",
+    "active_spec_sha256": "64930fad1ad2271c8122854094647814fdadcba33e58780157c206a17f946b66",
+    "verification_contract_sha256": "2fa0e6de006b07a573ee37cd0df250d3d343b5c7984cd65d6db87061b7a46c0e",
+    "gate_config_sha256": "4c1987fcf4ee418c084ee053ccab03d9f0ae969be114244b60573a167a223a3d",
+    "documentation_contract_sha256": "18c9d754ae9af8e98851c6b87dd2aa74e9b4cefa32164a698f4231e4117d28ea",
+    "documentation_targets_sha256": "0f7a4963ec10813aa8c352cf1427321dd6cfd117a4020a1edc3974b092b1c5b6",
+    "module_contract_sha256": "0cea35186663d6058c54e9fd5629f26674682708d9e1e992884c417e64d6182f"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录本任务页面的设计实现及实际行为边界。",
+    "targets": [
+      "apps/web/public/studio/README.md"
+    ],
+    "baseline_commit": "109c7d95a651df15b07db5af3f8c95c9401352dc",
+    "target_blobs": {
+      "apps/web/public/studio/README.md": "b2ede6abb910b3c2ca85e449fbaeb986973830d5"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "2c54658c83d507b4e3308e57adf20d31357705b8",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260910-studio-coverage.json",
+      "sha256": "1b2825b82766d064d44b884a0b47d61ccce445fe3781dca72aab90f177dc15b9",
+      "selected_cases": [
+        "M07-STUDIO-COVERAGE-01"
+      ],
+      "selected_refs": 1,
+      "excluded_cases": 259
+    },
+    "receipt": {
+      "run_id": "2ba174fde6f8985140607087ab5a3a7d",
+      "identity": "0c0b92febf0a1068ac8d829dd6ddb1110904ca467b73a0ed5499c490d145d140",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1232.599,
+      "plan_inputs": 796.488,
+      "execute_cleanup_and_input_recheck": 48699.697
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "0cea35186663d6058c54e9fd5629f26674682708d9e1e992884c417e64d6182f",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M07-STUDIO-COVERAGE-01",
+            "module_id": "M07",
+            "module_name": "内容发现输出",
+            "priority": "P1",
+            "scenario": "核对二十个真实写作台入口与同主题视觉基线",
+            "expectations": [
+              {
+                "id": "M07-STUDIO-COVERAGE-01-E01",
+                "surface": "user_visible",
+                "statement": "核对二十个真实写作台入口与同主题视觉基线"
+              },
+              {
+                "id": "M07-STUDIO-COVERAGE-01-E02",
+                "surface": "forbidden",
+                "statement": "不允许遗漏入口、错误页面或混入公开页面主题。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "kind": "playwright",
+                "name": "c",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-COVERAGE-01-E01",
+                  "M07-STUDIO-COVERAGE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.169,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "160 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 201.226,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 73.962,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.568,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "807 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 365.228,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "279 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 84.388,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 260 cases, 521 expectations, 888 exact test references; contract sha256 0cea35186663"
+      ],
+      "status": "passed",
+      "duration_ms": 408.168,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.326,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.528,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 79.237,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1"
+      ],
+      "duration_ms": 1563.675,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "2ba174fde6f8985140607087ab5a3a7d",
+        "attempt_id": "ae10941322aa5f64a1d77beb23dfada9"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-coverage --gate e2e",
+      "status": "passed",
+      "duration_ms": 45225.062,
+      "covers": [
+        "AC-1"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1578,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "name": "c"
+              }
+            ],
+            "duration_ms": 2841.188,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "name": "c"
+              }
+            ],
+            "duration_ms": 1340.834
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "name": "c",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "c"
+                ]
+              }
+            ],
+            "duration_ms": 1237.825,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "name": "c",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "c"
+                ]
+              }
+            ],
+            "duration_ms": 39421.127,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\4aac216400e9bf94415eb78dc59a10188cff6d4a59c1b666b0c2a06fd4681aeb\\artifacts\\2ba174fde6f8985140607087ab5a3a7d\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "2ba174fde6f8985140607087ab5a3a7d",
+        "attempt_id": "62363da1c9c5a9e7329c9d8722e7d818"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1468.428,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 49486.965,
+    "failures": []
+  },
+  "source_commit": "2c54658c83d507b4e3308e57adf20d31357705b8"
+}

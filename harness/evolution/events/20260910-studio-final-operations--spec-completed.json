@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260910-studio-final-operations",
+  "created_at": "2026-09-10T13:01:45.326337+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "2e3b453e9501411d6ec2e3c691b43aa6016f1b0ced7e67e2cf1770fc3946ce84"
+}

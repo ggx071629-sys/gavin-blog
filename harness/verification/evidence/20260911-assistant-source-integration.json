@@ -1,0 +1,789 @@
+{
+  "schema_version": 2,
+  "task_id": "20260911-assistant-source-integration",
+  "created_at": "2026-09-10T19:03:57.420110+00:00",
+  "command": "python -m tools.harness verify 20260911-assistant-source-integration",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "e919605951f2780e17cec86a9efd87e5c60a2fc4",
+    "active_spec_sha256": "40dde9da300983317799e09661968909df2ea381a0bfed6f1e2063fd4f16d881",
+    "verification_contract_sha256": "f98aa3dcdb7a93735d1c4531bac3bbd586e694b7a43be4fcd421b7f9f59cb64f",
+    "gate_config_sha256": "1c1e5e141f6fc84963bc21b325b5c9eb3ff337e9fd5a20e386768679d2e29e50",
+    "documentation_contract_sha256": "290c1b5f9a9f45a761da5604326db68caf8f981f134f6900df8c13b0c29eef71",
+    "documentation_targets_sha256": "0a454174e29caf1c3eb96890f9a7db8229610e6e78f9e6c786ddfee018e30b41",
+    "module_contract_sha256": "0805e6c6221d7647642f4c76846b4c49605a89afa25f5ad2c0821834fad1ada7"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录两来源联调的真实执行边界以及实际PDF仍待输入的差异。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "48729e2caf2d74aa5e29a614cdbd991034bf9222",
+    "target_blobs": {
+      "apps/api/README.md": "113989372ebedd5818e569267364b7bca3f21568"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "4d7e9dac5d740148fe214aa5bc3bb0e97d7e4de0",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260911-assistant-source-integration.json",
+      "sha256": "3b25e096045c391cf59ab9c2be273454f52abb7b098fc33c4de61bf34c0523ac",
+      "selected_cases": [
+        "M06-RESUME-ADMIN-UI-01",
+        "M09-ABOUT-CITATION-01",
+        "M09-RESUME-CITATION-UI-01",
+        "M09-SOURCE-INTEGRATION-01",
+        "M09-SOURCE-INTEGRATION-02"
+      ],
+      "selected_refs": 5,
+      "excluded_cases": 297
+    },
+    "receipt": {
+      "run_id": "dc8552d170472316df83764ace62c8b5",
+      "identity": "eeb8cdc9864082e4091218fe84b05b032256c3190ce35a72b57fa68f65bfd482",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1449.293,
+      "plan_inputs": 1010.74,
+      "execute_cleanup_and_input_recheck": 206255.226
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "0805e6c6221d7647642f4c76846b4c49605a89afa25f5ad2c0821834fad1ada7",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-SOURCE-INTEGRATION-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Admin publication and initial PDF import use the real parser, worker, mixed retrieval and answer graph; both citations and exact PDF bytes survive alongside existing article answers.",
+            "expectations": [
+              {
+                "id": "M09-SOURCE-INTEGRATION-01-E01",
+                "surface": "response",
+                "statement": "Admin publication and initial PDF import use the real parser, worker, mixed retrieval and answer graph; both citations and exact PDF bytes survive alongside existing article answers."
+              },
+              {
+                "id": "M09-SOURCE-INTEGRATION-01-E02",
+                "surface": "forbidden",
+                "statement": "No invented alias, repeated provider call, budget overflow or article regression."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_source_integration.py",
+                "kind": "pytest",
+                "name": "test_two_sources_import_retrieve_answer_and_keep_article_flow",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-SOURCE-INTEGRATION-01-E01",
+                  "M09-SOURCE-INTEGRATION-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-SOURCE-INTEGRATION-02",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Manual same-URL replacement changes version; failed download pauses PDF evidence while about yields a cited partial answer; clear deletes cache and about publish invalidates old descriptors.",
+            "expectations": [
+              {
+                "id": "M09-SOURCE-INTEGRATION-02-E01",
+                "surface": "response",
+                "statement": "Manual same-URL replacement changes version; failed download pauses PDF evidence while about yields a cited partial answer; clear deletes cache and about publish invalidates old descriptors."
+              },
+              {
+                "id": "M09-SOURCE-INTEGRATION-02-E02",
+                "surface": "forbidden",
+                "statement": "No old-version download, stale resume citation, uncited personal assertion or stale about descriptor after mutation."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_source_integration.py",
+                "kind": "pytest",
+                "name": "test_two_sources_replace_pause_clear_and_about_publication_gap",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-SOURCE-INTEGRATION-02-E01",
+                  "M09-SOURCE-INTEGRATION-02-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-ABOUT-CITATION-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "关于页引用在公开与管理消费中可点击，明确自述与冲突处理规则。",
+            "expectations": [
+              {
+                "id": "M09-ABOUT-CITATION-01-E01",
+                "surface": "response",
+                "statement": "关于Gavin引用打开/about；规则接受明确自述并要求冲突引用双方。"
+              },
+              {
+                "id": "M09-ABOUT-CITATION-01-E02",
+                "surface": "forbidden",
+                "statement": "任意外链/虚构alias被拒绝；文章主题不得冒充个人能力。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "kind": "playwright",
+                "name": "about citations navigate in public answers and admin trial",
+                "gate": "e2e",
+                "covers": [
+                  "M09-ABOUT-CITATION-01-E01",
+                  "M09-ABOUT-CITATION-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-RESUME-CITATION-UI-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Public/admin citations download identical PDF fixture bytes through the real Web proxy and API; unsafe paths are rejected and About navigation still works.",
+            "expectations": [
+              {
+                "id": "M09-RESUME-CITATION-UI-01-E01",
+                "surface": "response",
+                "statement": "Public/admin PDF citations download exact fixture bytes through strict paths; unsafe paths are rejected and About navigation still works."
+              },
+              {
+                "id": "M09-RESUME-CITATION-UI-01-E02",
+                "surface": "forbidden",
+                "statement": "Unavailable versions, forged aliases and arbitrary URLs must not become downloadable/current evidence; status is not a factual source."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "kind": "playwright",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths",
+                "gate": "e2e",
+                "covers": [
+                  "M09-RESUME-CITATION-UI-01-E01",
+                  "M09-RESUME-CITATION-UI-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-ADMIN-UI-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Resume sync status, draft-safe manual refresh, failure/cooldown handling and responsive keyboard access.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-ADMIN-UI-01-E01",
+                "surface": "response",
+                "statement": "Admin sees current sync stage and actionable errors; explicit refresh preserves unsaved fields and polling stops on leave."
+              },
+              {
+                "id": "M06-RESUME-ADMIN-UI-01-E02",
+                "surface": "forbidden",
+                "statement": "Unsaved URL, stale binding and unreadable status cannot trigger refresh or claim success; no mobile overflow or axe violations."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e-assistant/resume-sync.spec.ts",
+                "kind": "playwright",
+                "name": "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes",
+                "gate": "e2e",
+                "covers": [
+                  "M06-RESUME-ADMIN-UI-01-E01",
+                  "M06-RESUME-ADMIN-UI-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.189,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "182 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 231.469,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 77.389,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.498,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "996 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 427.725,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "303 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 87.956,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 302 cases, 605 expectations, 992 exact test references; contract sha256 0805e6c6221d"
+      ],
+      "status": "passed",
+      "duration_ms": 502.733,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.013,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 12.204,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 99.539,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "duration_ms": 2088.169,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "dc8552d170472316df83764ace62c8b5",
+        "attempt_id": "d7a59679820d7b5df3806764ea72ff7a"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-assistant-source-integration --gate api-tests",
+      "status": "passed",
+      "duration_ms": 11967.454,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 572,
+        "selection_counts": {
+          "collected": 2,
+          "executed": 2
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_source_integration.py",
+                "name": "test_two_sources_import_retrieve_answer_and_keep_article_flow"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_source_integration.py",
+                "name": "test_two_sources_replace_pause_clear_and_about_publication_gap"
+              }
+            ],
+            "duration_ms": 11565.616,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\46cfcc2183ce96dd38b1dab98370a972b7ae9c0040dbe9cd731aacc997bb65cf\\artifacts\\dc8552d170472316df83764ace62c8b5\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "dc8552d170472316df83764ace62c8b5",
+        "attempt_id": "54e59952cad6f000db66623efd065648"
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-assistant-source-integration --gate e2e",
+      "status": "passed",
+      "duration_ms": 189216.439,
+      "covers": [
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 5418,
+        "selection_counts": {
+          "collected": 3,
+          "executed": 3
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-sync.spec.ts",
+                "name": "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "about citations navigate in public answers and admin trial"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths"
+              }
+            ],
+            "duration_ms": 3124.709,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-sync.spec.ts",
+                "name": "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes"
+              }
+            ],
+            "duration_ms": 1577.156
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "about citations navigate in public answers and admin trial"
+              }
+            ],
+            "duration_ms": 1436.66
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths"
+              }
+            ],
+            "duration_ms": 1419.16
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-sync.spec.ts",
+                "name": "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes"
+                ]
+              }
+            ],
+            "duration_ms": 1384.864,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-sync.spec.ts",
+                "name": "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "resume sync shows accurate states preserves drafts and supports keyboard mobile and themes"
+                ]
+              }
+            ],
+            "duration_ms": 75159.197,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "about citations navigate in public answers and admin trial",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about citations navigate in public answers and admin trial"
+                ]
+              }
+            ],
+            "duration_ms": 1229.918,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "about citations navigate in public answers and admin trial",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about citations navigate in public answers and admin trial"
+                ]
+              }
+            ],
+            "duration_ms": 50244.031,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "versioned resume citations download exact files in public and admin answers and reject unsafe paths"
+                ]
+              }
+            ],
+            "duration_ms": 1239.532,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "versioned resume citations download exact files in public and admin answers and reject unsafe paths"
+                ]
+              }
+            ],
+            "duration_ms": 52014.942,
+            "batch_id": "batch-0003"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\46cfcc2183ce96dd38b1dab98370a972b7ae9c0040dbe9cd731aacc997bb65cf\\artifacts\\dc8552d170472316df83764ace62c8b5\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "dc8552d170472316df83764ace62c8b5",
+        "attempt_id": "5a2787a834cccdcebedb09fce3ec780c"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2595.176,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 207313.953,
+    "failures": []
+  },
+  "source_commit": "4d7e9dac5d740148fe214aa5bc3bb0e97d7e4de0"
+}

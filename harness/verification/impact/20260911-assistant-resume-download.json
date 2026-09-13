@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "task_id": "20260911-assistant-resume-download",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant_resume/__init__.py",
+      "owner": "M06.resume_download",
+      "reason": "New isolated trusted-download primitive; no runtime/API caller yet.",
+      "cases": [
+        "M06-RESUME-DOWNLOAD-01",
+        "M06-RESUME-DOWNLOAD-LIMITS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/api/app/assistant_resume/download.py",
+      "owner": "M06.resume_download",
+      "reason": "New isolated trusted-download primitive; no runtime/API caller yet.",
+      "cases": [
+        "M06-RESUME-DOWNLOAD-01",
+        "M06-RESUME-DOWNLOAD-LIMITS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/api/tests/test_assistant_resume_download.py",
+      "owner": "M06.resume_download",
+      "reason": "New isolated trusted-download primitive; no runtime/API caller yet.",
+      "cases": [
+        "M06-RESUME-DOWNLOAD-01",
+        "M06-RESUME-DOWNLOAD-LIMITS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary documentation or exact-case registration.",
+      "cases": [],
+      "no_test_reason": "Structural checks cover prose and declarative registration; no verifier logic change.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Ordinary documentation or exact-case registration.",
+      "cases": [],
+      "no_test_reason": "Structural checks cover prose and declarative registration; no verifier logic change.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Ordinary documentation or exact-case registration.",
+      "cases": [],
+      "no_test_reason": "Structural checks cover prose and declarative registration; no verifier logic change.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260912-assistant-quality-prompt-budget",
+  "created_at": "2026-09-12T15:48:14.840828+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "7b32f95092e5fa2f9f0fcfba3d1897784ce87ae5c6ea95e8653190f835d77cac"
+}

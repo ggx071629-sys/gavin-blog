@@ -1,0 +1,2808 @@
+{
+  "schema_version": 1,
+  "task_id": "20260911-assistant-about-source",
+  "changes": [
+    {
+      "path": "apps/api/app/models.py",
+      "owner": "M06.persistence",
+      "reason": "Q2-01 explicit about qualification and source projection.",
+      "cases": [
+        "M11-ASSISTANT-PROJECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "New about eligibility/projection branch consumes this changed model/service and is exercised by the projection/migration case.",
+          "cases": [
+            "M11-ASSISTANT-PROJECTION-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": true,
+          "reason": "New about eligibility/projection branch consumes this changed model/service and is exercised by the projection/migration case.",
+          "cases": [
+            "M11-ASSISTANT-PROJECTION-01"
+          ]
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/about_page_service.py",
+      "owner": "M11.api",
+      "reason": "Combined stage inputs: Q2-01 explicit about qualification and source projection.",
+      "cases": [
+        "M11-ASSISTANT-PROJECTION-01",
+        "M11-ASSISTANT-SYNC-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "Outbox target versions and source fence now carry about; the tests exercise coalescing and rejection of an old version.",
+          "cases": [
+            "M11-ASSISTANT-PROJECTION-01",
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Published pointer change invalidates old about evidence via existing project_source/version recheck; source fence is tested; hydration body is unchanged.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Management task serialization must accept new about tasks; task_view is exercised.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Existing generic task row gains only the about type label; no layout, operation or state-machine changes.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant_index/constants.py",
+      "owner": "M10.index",
+      "reason": "Q2-01 explicit about qualification and source projection.",
+      "cases": [
+        "M11-ASSISTANT-PROJECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant_index/projector.py",
+      "owner": "M10.index",
+      "reason": "Combined stage inputs: Q2-01 explicit about qualification and source projection.",
+      "cases": [
+        "M09-ABOUT-RETRIEVAL-01",
+        "M11-ASSISTANT-PROJECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Public corpus can include eligible about; shared rebuild/version/descriptor behavior is exercised by selected integration case; budgets, provider identity and consumer algorithms remain unchanged.",
+          "cases": [
+            "M09-ABOUT-RETRIEVAL-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Public corpus can include eligible about; shared rebuild/version/descriptor behavior is exercised by selected integration case; budgets, provider identity and consumer algorithms remain unchanged.",
+          "cases": [
+            "M09-ABOUT-RETRIEVAL-01"
+          ]
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": true,
+          "reason": "Public corpus can include eligible about; shared rebuild/version/descriptor behavior is exercised by selected integration case; budgets, provider identity and consumer algorithms remain unchanged.",
+          "cases": [
+            "M09-ABOUT-RETRIEVAL-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": true,
+          "reason": "Public corpus can include eligible about; shared rebuild/version/descriptor behavior is exercised by selected integration case; budgets, provider identity and consumer algorithms remain unchanged.",
+          "cases": [
+            "M09-ABOUT-RETRIEVAL-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/migrations/versions/20260911_0029_assistant_about.py",
+      "owner": "M11.api",
+      "reason": "Q2-01 explicit about qualification and source projection.",
+      "cases": [
+        "M11-ASSISTANT-PROJECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "New about eligibility/projection branch consumes this changed model/service and is exercised by the projection/migration case.",
+          "cases": [
+            "M11-ASSISTANT-PROJECTION-01"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_about_projection.py",
+      "owner": "M11.api",
+      "reason": "Q2-01 explicit about qualification and source projection.",
+      "cases": [
+        "M11-ASSISTANT-PROJECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "New about eligibility/projection branch consumes this changed model/service and is exercised by the projection/migration case.",
+          "cases": [
+            "M11-ASSISTANT-PROJECTION-01"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "Combined stage inputs: Combined stage inputs: Combined stage inputs: Ordinary documentation or exact-case declarative registration; no executable policy change.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary documentation or declarative exact-case registration only; structural Harness checks cover the change, without product execution behavior changes."
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Combined stage inputs: Combined stage inputs: Combined stage inputs: Ordinary documentation or exact-case declarative registration; no executable policy change.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Ordinary documentation or declarative exact-case registration only; structural Harness checks cover the change, without product execution behavior changes."
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Combined stage inputs: Combined stage inputs: Combined stage inputs: Ordinary documentation or exact-case declarative registration; no executable policy change.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Ordinary documentation or declarative exact-case registration only; structural Harness checks cover the change, without product execution behavior changes."
+    },
+    {
+      "path": "apps/api/app/assistant_index/outbox.py",
+      "owner": "M10.index",
+      "reason": "Outbox target versions and source fence now carry about; the tests exercise coalescing and rejection of an old version.",
+      "cases": [
+        "M11-ASSISTANT-SYNC-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Published pointer change invalidates old about evidence via existing project_source/version recheck; source fence is tested; hydration body is unchanged.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Management task serialization must accept new about tasks; task_view is exercised.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Existing generic task row gains only the about type label; no layout, operation or state-machine changes.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/admin_schemas.py",
+      "owner": "M10.operations",
+      "reason": "Management task serialization must accept new about tasks; task_view is exercised.",
+      "cases": [
+        "M11-ASSISTANT-SYNC-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Published pointer change invalidates old about evidence via existing project_source/version recheck; source fence is tested; hydration body is unchanged.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Existing generic task row gains only the about type label; no layout, operation or state-machine changes.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "Outbox target versions and source fence now carry about; the tests exercise coalescing and rejection of an old version.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_about_sync.py",
+      "owner": "M11.api",
+      "reason": "Publish and rollback now enqueue about in the same transaction; tests exercise both routes and rollback on failure.",
+      "cases": [
+        "M11-ASSISTANT-SYNC-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "Outbox target versions and source fence now carry about; the tests exercise coalescing and rejection of an old version.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Published pointer change invalidates old about evidence via existing project_source/version recheck; source fence is tested; hydration body is unchanged.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Management task serialization must accept new about tasks; task_view is exercised.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Existing generic task row gains only the about type label; no layout, operation or state-machine changes.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "apps/web/types/api.ts",
+      "owner": "M06.web_types",
+      "reason": "Type-only union is extended consistently with the generated API enum; no existing discriminant is removed.",
+      "cases": [
+        "M11-ASSISTANT-SYNC-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Existing generic task row gains only the about type label; no layout, operation or state-machine changes.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/admin/assistant.vue",
+      "owner": "M10.operations_web",
+      "reason": "Existing generic task row gains only the about type label; no layout, operation or state-machine changes.",
+      "cases": [
+        "M11-ASSISTANT-SYNC-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "packages/contracts/openapi.json",
+      "owner": "M06.shared_contracts",
+      "reason": "OpenAPI is generated from changed enum; selected test compares snapshot to runtime schema.",
+      "cases": [
+        "M11-ASSISTANT-SYNC-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.web_types",
+          "affected": true,
+          "reason": "Type-only union is extended consistently with the generated API enum; no existing discriminant is removed.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Existing generic task row gains only the about type label; no layout, operation or state-machine changes.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "packages/contracts/api-types.d.ts",
+      "owner": "M06.shared_contracts",
+      "reason": "OpenAPI is generated from changed enum; selected test compares snapshot to runtime schema.",
+      "cases": [
+        "M11-ASSISTANT-SYNC-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.web_types",
+          "affected": true,
+          "reason": "Type-only union is extended consistently with the generated API enum; no existing discriminant is removed.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Existing generic task row gains only the about type label; no layout, operation or state-machine changes.",
+          "cases": [
+            "M11-ASSISTANT-SYNC-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "This consumer uses unchanged existing fields or content kinds; about-specific task enum and outbox addition does not change its request, payload or execution contract.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "packages/contracts/README.md",
+      "owner": "M08.documentation",
+      "reason": "Combined stage inputs: Ordinary boundary prose or exact-case registration with no executable consumer change.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/declarative registration covered by structural checks; no product behavior."
+    },
+    {
+      "path": "apps/api/tests/test_assistant_about_retrieval.py",
+      "owner": "M10.index",
+      "reason": "Include eligible about in public source enumeration and verify real hybrid/hydration path.",
+      "cases": [
+        "M09-ABOUT-RETRIEVAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Public corpus can include eligible about; shared rebuild/version/descriptor behavior is exercised by selected integration case; budgets, provider identity and consumer algorithms remain unchanged.",
+          "cases": [
+            "M09-ABOUT-RETRIEVAL-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Public corpus can include eligible about; shared rebuild/version/descriptor behavior is exercised by selected integration case; budgets, provider identity and consumer algorithms remain unchanged.",
+          "cases": [
+            "M09-ABOUT-RETRIEVAL-01"
+          ]
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": true,
+          "reason": "Public corpus can include eligible about; shared rebuild/version/descriptor behavior is exercised by selected integration case; budgets, provider identity and consumer algorithms remain unchanged.",
+          "cases": [
+            "M09-ABOUT-RETRIEVAL-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": true,
+          "reason": "Public corpus can include eligible about; shared rebuild/version/descriptor behavior is exercised by selected integration case; budgets, provider identity and consumer algorithms remain unchanged.",
+          "cases": [
+            "M09-ABOUT-RETRIEVAL-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "This consumer only calls unchanged outbox or adapter APIs, or renders schemas with no change in this task; new corpus enumeration does not alter that contract.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/prompt.py",
+      "owner": "M09.runtime",
+      "reason": "About citation path and explicit self-report policy.",
+      "cases": [
+        "M09-ABOUT-FACTS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Shared prompt or citation closure is consumed here; selected API policy/citation and public/admin browser navigation tests exercise the changed behavior.",
+          "cases": [
+            "M09-ABOUT-CITATION-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Shared prompt or citation closure is consumed here; selected API policy/citation and public/admin browser navigation tests exercise the changed behavior.",
+          "cases": [
+            "M09-ABOUT-CITATION-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_about_facts.py",
+      "owner": "M09.runtime",
+      "reason": "About citation path and explicit self-report policy.",
+      "cases": [
+        "M09-ABOUT-FACTS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Shared prompt or citation closure is consumed here; selected API policy/citation and public/admin browser navigation tests exercise the changed behavior.",
+          "cases": [
+            "M09-ABOUT-CITATION-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Shared prompt or citation closure is consumed here; selected API policy/citation and public/admin browser navigation tests exercise the changed behavior.",
+          "cases": [
+            "M09-ABOUT-CITATION-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/utils/assistant/allowlist.ts",
+      "owner": "M09.assistant_web",
+      "reason": "About citation path and explicit self-report policy.",
+      "cases": [
+        "M09-ABOUT-CITATION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Shared prompt or citation closure is consumed here; selected API policy/citation and public/admin browser navigation tests exercise the changed behavior.",
+          "cases": [
+            "M09-ABOUT-CITATION-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+      "owner": "M09.assistant_web",
+      "reason": "About citation path and explicit self-report policy.",
+      "cases": [
+        "M09-ABOUT-CITATION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Shared prompt or citation closure is consumed here; selected API policy/citation and public/admin browser navigation tests exercise the changed behavior.",
+          "cases": [
+            "M09-ABOUT-CITATION-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Uses unchanged transport, session or provider interfaces; no budget, identity or schema shape changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/README.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary boundary prose or exact-case registration.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/declarative registration; no executable contract instructions changed."
+    },
+    {
+      "path": "harness/docs/decisions/20260911-assistant-source-ingestion.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary durable boundary and user-decision prose; no executable policy or process change.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Structural metadata and links checks cover ordinary prose."
+    },
+    {
+      "path": "harness/docs/architecture/boundaries.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary durable boundary and user-decision prose; no executable policy or process change.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Structural metadata and links checks cover ordinary prose."
+    },
+    {
+      "path": "ASSISTANT-UPGRADE-CONTRACT.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "ASSISTANT-UPGRADE-DESIGN.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "ASSISTANT-UPGRADE-PHASE-1.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "ASSISTANT-UPGRADE-PHASE-2.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "ASSISTANT-UPGRADE-PHASE-3.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "ASSISTANT-UPGRADE-PHASE-4.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "ASSISTANT-UPGRADE-PLAN.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "ASSISTANT-UPGRADE-Q1-02.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "completed/assistant-upgrade-about/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "completed/assistant-upgrade-about/Q2-01.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "completed/assistant-upgrade-about/Q2-02.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "completed/assistant-upgrade-about/Q2-03.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "completed/assistant-upgrade-about/Q2-04.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "completed/assistant-upgrade-design/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "completed/assistant-upgrade-design/Q1-01.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "completed/assistant-upgrade-design/Q1-02.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "completed/assistant-upgrade-design/Q1-03.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "completed/assistant-upgrade-design/Q1-04.md",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "completed/assistant-upgrade-resume/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "completed/assistant-upgrade-verification/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Task navigation, historical acceptance or user decision prose; no executable policy changes.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary prose/placeholders covered by structural links and metadata checks."
+    },
+    {
+      "path": "harness/evolution/events/20260911-assistant-about-citations--spec-completed.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/evolution/events/20260911-assistant-about-projection--spec-completed.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/evolution/events/20260911-assistant-about-retrieval--spec-completed.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/evolution/events/20260911-assistant-about-sync--spec-completed.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/specs/archive/20260911-assistant-about-citations.md",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/specs/archive/20260911-assistant-about-projection.md",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/specs/archive/20260911-assistant-about-retrieval.md",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/specs/archive/20260911-assistant-about-sync.md",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/evidence/20260911-assistant-about-citations.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/evidence/20260911-assistant-about-projection.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/evidence/20260911-assistant-about-retrieval.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/evidence/20260911-assistant-about-sync.json",
+      "owner": "M08.lifecycle",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/20260911-assistant-about-citations.json",
+      "owner": "M08.impact",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/20260911-assistant-about-projection.json",
+      "owner": "M08.impact",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/20260911-assistant-about-retrieval.json",
+      "owner": "M08.impact",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/20260911-assistant-about-sync.json",
+      "owner": "M08.impact",
+      "reason": "Prior subtask deterministic completion or reviewed impact data; records provenance without changing verifier execution.",
+      "cases": [],
+      "no_test_reason": "Subtask evidence and close events are checked by history-integrity; no new product behavior.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only concrete subtask records are added; validator algorithms, event schema and lifecycle policy are unchanged.",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}

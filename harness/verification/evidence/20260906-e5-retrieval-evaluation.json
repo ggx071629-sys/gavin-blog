@@ -1,0 +1,544 @@
+{
+  "schema_version": 2,
+  "task_id": "20260906-e5-retrieval-evaluation",
+  "created_at": "2026-09-06T10:02:19.563792+00:00",
+  "command": "python -m tools.harness verify 20260906-e5-retrieval-evaluation",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "76479937e10cdc952be4badea6ff1f9da06ffd06",
+    "active_spec_sha256": "ac6903224c00fe209a250e2dcc8962347e5f2c876e8dfff7bcffde61978879ae",
+    "verification_contract_sha256": "ec0d5c0b668ca591fcdb6e5b68bb87aa8bf88f07e925a881d19cb462f8e6423b",
+    "gate_config_sha256": "2ac3af7728454176e709e6717981a596ed0a7718c36115ac6a1705b6a054f951",
+    "documentation_contract_sha256": "34020c7b4dfd43449e0bd4109f36b33e4eebaf4f7908a12c42e92970017145b3",
+    "documentation_targets_sha256": "ffd29f740605cce082a85f991b2c62648b05e820306bf10ff7323b4761e289ea",
+    "module_contract_sha256": "f49cb6fea95a1e0de18d9feaebc7eab7eefb450b1937b45487fbeb9d53e0a7c9"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "增加独立验收入口、Recall口径、语料审核和本机/正式资格区别，需保留可复现操作说明。",
+    "targets": [
+      "apps/api/README.md",
+      "harness/docs/operations/e5-retrieval-evaluation.md"
+    ],
+    "baseline_commit": "7e11e4f1573bca3807ac1a1360be8141fb113ab6",
+    "target_blobs": {
+      "apps/api/README.md": "76671ac6ab1e4a2e7e54cca65528d442881c0096",
+      "harness/docs/operations/e5-retrieval-evaluation.md": "36120f416c35d7d44ec53f522288715d2da3f1ed"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "b871cbaaf1775333a7322d44b1fff1e467943fff",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260906-e5-retrieval-evaluation.json",
+      "sha256": "aa4d11c5bbc66790a79e64ce6205535a6b45495b96e612249dc8900666ecbf1c",
+      "selected_cases": [
+        "M10-EVAL-DATASET-01",
+        "M10-EVAL-ISOLATION-01",
+        "M10-EVAL-METRICS-01",
+        "M10-EVAL-REPORT-01"
+      ],
+      "selected_refs": 4,
+      "excluded_cases": 180
+    },
+    "receipt": {
+      "run_id": "8a4656529f07549d7e96aba359a767bf",
+      "identity": "9ef42d43a672ca0d5e8b2360271c692811ca622f6008c476ec52aa5d41ef9e8b",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1872.783,
+      "plan_inputs": 974.333,
+      "execute_cleanup_and_input_recheck": 9978.24
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "f49cb6fea95a1e0de18d9feaebc7eab7eefb450b1937b45487fbeb9d53e0a7c9",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-EVAL-DATASET-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "严格草稿题集与人工复核材料",
+            "expectations": [
+              {
+                "id": "M10-EVAL-DATASET-01-E01",
+                "surface": "response",
+                "statement": "题集覆盖四方向与边界，gold绑定原文"
+              },
+              {
+                "id": "M10-EVAL-DATASET-01-E02",
+                "surface": "forbidden",
+                "statement": "缺失、重复、错误语言和虚构标注不能通过"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_e5_evaluation.py",
+                "kind": "pytest",
+                "name": "test_dataset_rejects_invalid_labels_and_renders_all_cases",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-EVAL-DATASET-01-E01",
+                  "M10-EVAL-DATASET-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-EVAL-ISOLATION-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "独立发布语料与关闭状态",
+            "expectations": [
+              {
+                "id": "M10-EVAL-ISOLATION-01-E01",
+                "surface": "response",
+                "statement": "API发布到新库，文章和Profile按类型与ID映射"
+              },
+              {
+                "id": "M10-EVAL-ISOLATION-01-E02",
+                "surface": "forbidden",
+                "statement": "不覆盖已有目录、不写源库、不允许enabled或pending gate"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_e5_evaluation.py",
+                "kind": "pytest",
+                "name": "test_isolation_publishes_only_to_fresh_database",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-EVAL-ISOLATION-01-E01",
+                  "M10-EVAL-ISOLATION-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-EVAL-METRICS-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "Recall、片段与引用独立计算",
+            "expectations": [
+              {
+                "id": "M10-EVAL-METRICS-01-E01",
+                "surface": "response",
+                "statement": "top5文档去重，片段命中要求原文及有效引用"
+              },
+              {
+                "id": "M10-EVAL-METRICS-01-E02",
+                "surface": "forbidden",
+                "statement": "失效引用、重复chunk和无证据近邻不能冒充正确"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_e5_evaluation.py",
+                "kind": "pytest",
+                "name": "test_metrics_deduplicate_documents_and_require_evidence_and_current_citation",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-EVAL-METRICS-01-E01",
+                  "M10-EVAL-METRICS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-EVAL-REPORT-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "失败封闭且不自动验收",
+            "expectations": [
+              {
+                "id": "M10-EVAL-REPORT-01-E01",
+                "surface": "response",
+                "statement": "报告绑定数据与generation，保留复核材料"
+              },
+              {
+                "id": "M10-EVAL-REPORT-01-E02",
+                "surface": "forbidden",
+                "statement": "服务失败、缺失结果、意外降级不成功，草稿永不自动生产放行"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_e5_evaluation.py",
+                "kind": "pytest",
+                "name": "test_reports_never_qualify_drafts_and_fail_on_drift",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-EVAL-REPORT-01-E01",
+                  "M10-EVAL-REPORT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.196,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "114 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 170.681,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 60.038,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.587,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "801 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1166.743,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "224 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 56.239,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "10 modules, 184 cases, 368 expectations, 704 exact test references; contract sha256 f49cb6fea95a"
+      ],
+      "status": "passed",
+      "duration_ms": 322.378,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 2.947,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.014,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 78.396,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "duration_ms": 1360.958,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "8a4656529f07549d7e96aba359a767bf",
+        "attempt_id": "a4388f5a0d539011948ec40964a7ade7"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260906-e5-retrieval-evaluation --gate api-tests",
+      "status": "passed",
+      "duration_ms": 7014.749,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 850,
+        "selection_counts": {
+          "collected": 4,
+          "executed": 4
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_e5_evaluation.py",
+                "name": "test_dataset_rejects_invalid_labels_and_renders_all_cases"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_e5_evaluation.py",
+                "name": "test_isolation_publishes_only_to_fresh_database"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_e5_evaluation.py",
+                "name": "test_metrics_deduplicate_documents_and_require_evidence_and_current_citation"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_e5_evaluation.py",
+                "name": "test_reports_never_qualify_drafts_and_fail_on_drift"
+              }
+            ],
+            "duration_ms": 6649.19,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\8a4656529f07549d7e96aba359a767bf\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "8a4656529f07549d7e96aba359a767bf",
+        "attempt_id": "22f4eac043ae0ec444140b4129cd994c"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1321.587,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 11567.513,
+    "failures": []
+  },
+  "source_commit": "b871cbaaf1775333a7322d44b1fff1e467943fff"
+}

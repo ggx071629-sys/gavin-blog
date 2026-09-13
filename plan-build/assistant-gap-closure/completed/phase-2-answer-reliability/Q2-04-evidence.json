@@ -1,0 +1,13 @@
+{
+  "cases": 40,
+  "live_provider_calls": 0,
+  "false_accepts": [],
+  "false_rejections": [
+    "A15-valid-less-than",
+    "A16-valid-array-index",
+    "H09-distributed-count",
+    "H11-english-paraphrase"
+  ],
+  "scope": "Synthetic diagnostic sample, not actual-model quality or population accuracy",
+  "source_commit": "a038a08"
+}

@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "task_id": "20260912-assistant-claim-context",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/output.py",
+      "owner": "M09.runtime",
+      "reason": "Applies factual support to ordinary statements, bounded equivalent forms, attached retractions, direct same-subject conflicts and database/license question topics. Existing citation/structure/finish and cleanup contracts remain protected by selected cases.",
+      "cases": [
+        "M09-CLAIM-CONTEXT-01",
+        "M09-CLAIM-CONTEXT-02",
+        "M09-CLAIM-CONTEXT-03",
+        "M09-GROUNDING-01",
+        "M09-GROUNDING-02",
+        "M09-GROUNDING-03",
+        "M09-GAP-CLAIMS-01",
+        "M09-ABOUT-FACTS-01",
+        "M09-RESUME-FACTS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Web retains plain-text answer/refusal events and unchanged citation payloads; no new status code, schema or rendering behavior. Refusal and private data lifecycle are covered by M09-GROUNDING-03."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Qualification provider_probe imports graph finish/usage envelope helpers; those helpers and target-qualification requirements are unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/graph.py",
+      "owner": "M09.runtime",
+      "reason": "Passes the transient current question to validation and maps relevance failure to the existing bounded refusal/retry path; no new persisted fields or wire codes.",
+      "cases": [
+        "M09-CLAIM-CONTEXT-03",
+        "M09-GROUNDING-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Web retains plain-text answer/refusal events and unchanged citation payloads; no new status code, schema or rendering behavior. Refusal and private data lifecycle are covered by M09-GROUNDING-03."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Only answer validation internals change; this consumer retains its existing constants, owner lock, configuration, crypto, operations or CLI contract. No new persistent or HTTP shape."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Qualification provider_probe imports graph finish/usage envelope helpers; those helpers and target-qualification requirements are unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_claim_context.py",
+      "owner": "M09.runtime",
+      "reason": "Adds paired observable claims, context, conflict and question-topic regressions with synthetic evidence; no live calls.",
+      "cases": [
+        "M09-CLAIM-CONTEXT-01",
+        "M09-CLAIM-CONTEXT-02",
+        "M09-CLAIM-CONTEXT-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Test-only synthetic examples; no consumer runtime contract change."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Test-only synthetic examples; no consumer runtime contract change."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Test-only synthetic examples; no consumer runtime contract change."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Test-only synthetic examples; no consumer runtime contract change."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Test-only synthetic examples; no consumer runtime contract change."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Test-only synthetic examples; no consumer runtime contract change."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Test-only synthetic examples; no consumer runtime contract change."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Test-only synthetic examples; no consumer runtime contract change."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Test-only synthetic examples; no consumer runtime contract change."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "Documents limited matching, topic checks and unresolved semantic cases; ordinary documentation does not add a gate.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Registers three bounded claim cases and their exact pytest references without altering the runner algorithm.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Registers new tests under the existing runtime owner without changing dependency edges or selection rules.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only new case/path registry entries; no verification algorithm, execution identity or runner contract change. Structure checks and selected exact runners validate them."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_source_integration.py",
+      "owner": "M09.source_integration",
+      "reason": "Bind scripted role answers to chunks that actually contain the role self-report; the former last-by-type selection could cite unrelated About content. Preserve answer, source, restore and revocation assertions.",
+      "cases": [
+        "M09-GROUNDING-03"
+      ],
+      "dependencies": []
+    }
+  ]
+}

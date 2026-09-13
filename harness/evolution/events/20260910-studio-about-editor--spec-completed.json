@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260910-studio-about-editor",
+  "created_at": "2026-09-10T11:02:22.345655+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "6fcd59abfba1130ee39b6d4abff5fb2ffa56f2c4b1af9efa47a2febae1660d81"
+}

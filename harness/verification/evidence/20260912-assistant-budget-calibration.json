@@ -1,0 +1,606 @@
+{
+  "schema_version": 2,
+  "task_id": "20260912-assistant-budget-calibration",
+  "created_at": "2026-09-12T13:00:43.372541+00:00",
+  "command": "python -m tools.harness verify 20260912-assistant-budget-calibration",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "74f3ce9c21101cb34a14864d79716c8fc5460fc1",
+    "active_spec_sha256": "2743f32909887d1cc45c9cd410a01665375e36f130f6ae071e8e4c969f20ae90",
+    "verification_contract_sha256": "69254e9aa0887da409b1e121819cc93576088ca054e6d751a8012b781fbfaef0",
+    "gate_config_sha256": "4fb7713843596d5bdabd093a26dc0a0698882d1a9d8e7dee5759723e763aca7c",
+    "documentation_contract_sha256": "ecc698acb0c8c0c3e6ff4dae800f02dea3a859e6d64ada0776db3f4a2886786d",
+    "documentation_targets_sha256": "1f0c72a576fc52c97a9da5402e924f8d68f26d86a63a56da45bd3d99f5fd725a",
+    "module_contract_sha256": "bacd758511d516a4051da8186c5c298fc856190622d1a14951d0201527e9ba2a"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录当前最小输入、独立开销及官方 tokenizer 校准的适用范围，避免仅增大额度。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "fc653f4af3843d319436dd518128d8cc57727527",
+    "target_blobs": {
+      "apps/api/README.md": "3c5ab44a5f0ee24f604f6aaadc7ad50ef02d82ea"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "353d1c5c3d8ad790cf9a225f3ab989d95f9a4c75",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260912-assistant-budget-calibration.json",
+      "sha256": "d85e637d49036998d01d095eb553a3b51f810dcf7598ccff86f0ecccc531fd59",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M09-G12-ACCOUNTING-01",
+        "M09-G12-CALIBRATION-01",
+        "M09-G12-FIT-01"
+      ],
+      "selected_refs": 9,
+      "excluded_cases": 355
+    },
+    "receipt": {
+      "run_id": "5a619fb3cd0bc44dec385c64b161fc0c",
+      "identity": "760926d5657bec71f1a5aa80c6bfcf8c604f9a72e7b831c277d1846b66942567",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 7075.823,
+      "plan_inputs": 1819.034,
+      "execute_cleanup_and_input_recheck": 28824.027
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "bacd758511d516a4051da8186c5c298fc856190622d1a14951d0201527e9ba2a",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-G12-ACCOUNTING-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Input components distinguish bytes from nonadditive token counts and report candidates separately from selected evidence.",
+            "expectations": [
+              {
+                "id": "M09-G12-ACCOUNTING-01-ALLOW",
+                "surface": "response",
+                "statement": "Input components distinguish bytes from nonadditive token counts and report candidates separately from selected evidence."
+              },
+              {
+                "id": "M09-G12-ACCOUNTING-01-DENY",
+                "surface": "forbidden",
+                "statement": "No raw question/body is returned in numeric accounting; empty or malformed output is not nonempty valid structure."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_prompt_budget.py",
+                "name": "test_budget_accounting_preserves_units_and_omitted_evidence",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G12-ACCOUNTING-01-ALLOW",
+                  "M09-G12-ACCOUNTING-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_prompt_budget.py",
+                "name": "test_output_budget_distinguishes_supports_json_and_empty_or_invalid",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G12-ACCOUNTING-01-ALLOW",
+                  "M09-G12-ACCOUNTING-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-G12-FIT-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Finite Chinese/English examples fit at the exact minimum input and context boundary with unchanged reserve.",
+            "expectations": [
+              {
+                "id": "M09-G12-FIT-01-ALLOW",
+                "surface": "response",
+                "statement": "Finite Chinese/English examples fit at the exact minimum input and context boundary with unchanged reserve."
+              },
+              {
+                "id": "M09-G12-FIT-01-DENY",
+                "surface": "forbidden",
+                "statement": "One less input/context unit cannot fit; oversized sources are omitted whole and history remains complete pairs."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_prompt_budget.py",
+                "name": "test_minimum_input_and_context_boundaries_keep_original_limits",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G12-FIT-01-ALLOW",
+                  "M09-G12-FIT-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_evidence_budget_preserves_whole_ranked_diverse_sources",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G12-FIT-01-ALLOW",
+                  "M09-G12-FIT-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_evidence_budget_skips_oversized_chunk_and_honors_context_reserve",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G12-FIT-01-ALLOW",
+                  "M09-G12-FIT-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "name": "test_prompt_drops_oldest_complete_pairs_before_dispatch",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G12-FIT-01-ALLOW",
+                  "M09-G12-FIT-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_prompt_budget_covers_actual_schema_message",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G12-FIT-01-ALLOW",
+                  "M09-G12-FIT-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "name": "test_unprovable_prompt_fit_never_dispatches_chat_provider",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G12-FIT-01-ALLOW",
+                  "M09-G12-FIT-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-G12-CALIBRATION-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Offline calibration verifies local input digests and supports only the reviewed text message shape.",
+            "expectations": [
+              {
+                "id": "M09-G12-CALIBRATION-01-ALLOW",
+                "surface": "response",
+                "statement": "Offline calibration verifies local input digests and supports only the reviewed text message shape."
+              },
+              {
+                "id": "M09-G12-CALIBRATION-01-DENY",
+                "surface": "forbidden",
+                "statement": "Modified data or unsupported role ordering is rejected before counting; no provider call or network request."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_prompt_budget.py",
+                "name": "test_calibration_rejects_changed_data_and_unsupported_message_shapes",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G12-CALIBRATION-01-ALLOW",
+                  "M09-G12-CALIBRATION-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 8.061,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "218 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 620.833,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 189.818,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 1.909,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "2095 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 4922.281,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "343 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 170.739,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 359 cases, 728 expectations, 1158 exact test references; contract sha256 bacd758511d5"
+      ],
+      "status": "passed",
+      "duration_ms": 984.509,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 5.831,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 15.038,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 151.95,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-3"
+      ],
+      "duration_ms": 4998.335,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "5a619fb3cd0bc44dec385c64b161fc0c",
+        "attempt_id": "626a9c182dfd9a22bc4d8c474e0e9f36"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-budget-calibration --gate api-tests",
+      "status": "passed",
+      "duration_ms": 17545.822,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1798,
+        "selection_counts": {
+          "collected": 9,
+          "executed": 9
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_prompt_budget.py",
+                "name": "test_budget_accounting_preserves_units_and_omitted_evidence"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_prompt_budget.py",
+                "name": "test_output_budget_distinguishes_supports_json_and_empty_or_invalid"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_prompt_budget.py",
+                "name": "test_calibration_rejects_changed_data_and_unsupported_message_shapes"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_prompt_budget.py",
+                "name": "test_minimum_input_and_context_boundaries_keep_original_limits"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_evidence_budget_preserves_whole_ranked_diverse_sources"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_evidence_budget_skips_oversized_chunk_and_honors_context_reserve"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "name": "test_prompt_drops_oldest_complete_pairs_before_dispatch"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_prompt_budget_covers_actual_schema_message"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "name": "test_unprovable_prompt_fit_never_dispatches_chat_provider"
+              }
+            ],
+            "duration_ms": 16656.83,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\5a619fb3cd0bc44dec385c64b161fc0c\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "5a619fb3cd0bc44dec385c64b161fc0c",
+        "attempt_id": "9fea3d86ea15ea7244acb8bd5dad024a"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 4887.309,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 34502.435,
+    "failures": []
+  },
+  "source_commit": "353d1c5c3d8ad790cf9a225f3ab989d95f9a4c75"
+}

@@ -1,0 +1,3310 @@
+{
+  "schema_version": 1,
+  "task_id": "20260910-account-management",
+  "changes": [
+    {
+      "path": "ACCOUNT-MANAGEMENT-DESIGN.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "ACCOUNT-MANAGEMENT-PHASE-1.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "ACCOUNT-MANAGEMENT-PHASE-2.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "ACCOUNT-MANAGEMENT-PHASE-3.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "ACCOUNT-MANAGEMENT-PHASE-4.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "ACCOUNT-MANAGEMENT-PLAN.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "apps/api/.env.example",
+      "owner": "M06.api_tooling",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "apps/api/app/account.py",
+      "owner": "M06.account",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-CLI-01",
+        "M06-ACCOUNT-CODE-01",
+        "M06-ACCOUNT-PASSWORD-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-CONTRACT-01",
+        "M06-ACCOUNT-COMPAT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-UNIT-RUNTIME-SAFETY-01",
+            "M06-UNIT-ENVIRONMENT-ISOLATION-01"
+          ]
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-P0-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-UNIT-MIGRATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/config.py",
+      "owner": "M06.runtime_config",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-CLI-01",
+        "M06-ACCOUNT-CODE-01",
+        "M06-ACCOUNT-PASSWORD-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-CONTRACT-01",
+        "M06-ACCOUNT-COMPAT-01",
+        "M06-UNIT-RUNTIME-SAFETY-01",
+        "M06-UNIT-ENVIRONMENT-ISOLATION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-P0-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-UNIT-MIGRATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01"
+          ]
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/dependencies.py",
+      "owner": "M06.auth",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-CLI-01",
+        "M06-ACCOUNT-CODE-01",
+        "M06-ACCOUNT-PASSWORD-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-CONTRACT-01",
+        "M06-ACCOUNT-COMPAT-01",
+        "M06-P0-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-UNIT-RUNTIME-SAFETY-01",
+            "M06-UNIT-ENVIRONMENT-ISOLATION-01"
+          ]
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01"
+          ]
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-UNIT-MIGRATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/main.py",
+      "owner": "M06.runtime_config",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-CLI-01",
+        "M06-ACCOUNT-CODE-01",
+        "M06-ACCOUNT-PASSWORD-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-CONTRACT-01",
+        "M06-ACCOUNT-COMPAT-01",
+        "M06-UNIT-RUNTIME-SAFETY-01",
+        "M06-UNIT-ENVIRONMENT-ISOLATION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-P0-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-UNIT-MIGRATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01"
+          ]
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/models.py",
+      "owner": "M06.persistence",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-UNIT-MIGRATIONS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-P0-01"
+          ]
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-UNIT-RUNTIME-SAFETY-01",
+            "M06-UNIT-ENVIRONMENT-ISOLATION-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01"
+          ]
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/reset_admin_password.py",
+      "owner": "M06.account",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-CLI-01",
+        "M06-ACCOUNT-CODE-01",
+        "M06-ACCOUNT-PASSWORD-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-CONTRACT-01",
+        "M06-ACCOUNT-COMPAT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-UNIT-RUNTIME-SAFETY-01",
+            "M06-UNIT-ENVIRONMENT-ISOLATION-01"
+          ]
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-P0-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-UNIT-MIGRATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/routes/account.py",
+      "owner": "M06.account",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-CLI-01",
+        "M06-ACCOUNT-CODE-01",
+        "M06-ACCOUNT-PASSWORD-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-CONTRACT-01",
+        "M06-ACCOUNT-COMPAT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-UNIT-RUNTIME-SAFETY-01",
+            "M06-UNIT-ENVIRONMENT-ISOLATION-01"
+          ]
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-P0-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-UNIT-MIGRATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/routes/auth.py",
+      "owner": "M06.auth",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-CLI-01",
+        "M06-ACCOUNT-CODE-01",
+        "M06-ACCOUNT-PASSWORD-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-CONTRACT-01",
+        "M06-ACCOUNT-COMPAT-01",
+        "M06-P0-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-UNIT-RUNTIME-SAFETY-01",
+            "M06-UNIT-ENVIRONMENT-ISOLATION-01"
+          ]
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01"
+          ]
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-UNIT-MIGRATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/security.py",
+      "owner": "M06.auth",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-CLI-01",
+        "M06-ACCOUNT-CODE-01",
+        "M06-ACCOUNT-PASSWORD-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-CONTRACT-01",
+        "M06-ACCOUNT-COMPAT-01",
+        "M06-P0-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-UNIT-RUNTIME-SAFETY-01",
+            "M06-UNIT-ENVIRONMENT-ISOLATION-01"
+          ]
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01"
+          ]
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-UNIT-MIGRATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/migrations/versions/20260910_0026_account_credentials.py",
+      "owner": "M06.persistence",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-UNIT-MIGRATIONS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-P0-01"
+          ]
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-UNIT-RUNTIME-SAFETY-01",
+            "M06-UNIT-ENVIRONMENT-ISOLATION-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01"
+          ]
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/migrations/versions/20260910_0027_account_challenges.py",
+      "owner": "M06.persistence",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-UNIT-MIGRATIONS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-P0-01"
+          ]
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-UNIT-RUNTIME-SAFETY-01",
+            "M06-UNIT-ENVIRONMENT-ISOLATION-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01"
+          ]
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/migrations/versions/20260910_0028_account_sessions.py",
+      "owner": "M06.persistence",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-UNIT-MIGRATIONS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-P0-01"
+          ]
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-UNIT-RUNTIME-SAFETY-01",
+            "M06-UNIT-ENVIRONMENT-ISOLATION-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01"
+          ]
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_account_management.py",
+      "owner": "M06.account",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CREDENTIAL-01",
+        "M06-ACCOUNT-CLI-01",
+        "M06-ACCOUNT-CODE-01",
+        "M06-ACCOUNT-PASSWORD-01",
+        "M06-ACCOUNT-SESSION-01",
+        "M06-ACCOUNT-CONTRACT-01",
+        "M06-ACCOUNT-COMPAT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-UNIT-RUNTIME-SAFETY-01",
+            "M06-UNIT-ENVIRONMENT-ISOLATION-01"
+          ]
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-CLI-01",
+            "M06-ACCOUNT-CODE-01",
+            "M06-ACCOUNT-PASSWORD-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-ACCOUNT-CONTRACT-01",
+            "M06-ACCOUNT-COMPAT-01",
+            "M06-P0-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": true,
+          "reason": "Consumes changed credential/session/settings boundary; account tests cover refreshed transactional state.",
+          "cases": [
+            "M06-ACCOUNT-CREDENTIAL-01",
+            "M06-ACCOUNT-SESSION-01",
+            "M06-UNIT-MIGRATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-FLOW-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_time_semantics.py",
+      "owner": "M06.time",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-COMPAT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "completed/account-backend/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "completed/account-backend/A2-01.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "completed/account-backend/A2-02.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "completed/account-backend/A2-03.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "completed/account-backend/A2-04.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "completed/account-backend/A2-05.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "completed/account-backend/A2-06.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "completed/account-design/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "completed/account-design/A1-01.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "completed/account-design/A1-02.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "completed/account-design/A1-03.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "completed/account-design/A1-04.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "completed/account-ui/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "completed/account-verification/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "harness/docs/decisions/20260910-account-management.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "packages/contracts/README.md",
+      "owner": "M08.documentation",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Declarative configuration/example/history/ownership change; structure and links checked by Harness. Runtime behavior covered by account boundary cases."
+    },
+    {
+      "path": "packages/contracts/api-types.d.ts",
+      "owner": "M06.shared_contracts",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CONTRACT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.web_types",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "packages/contracts/openapi.json",
+      "owner": "M06.shared_contracts",
+      "reason": "Account backend phase: persistent credentials, bounded mail challenges, session revocation or corresponding contract/documentation.",
+      "cases": [
+        "M06-ACCOUNT-CONTRACT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.web_types",
+          "affected": false,
+          "reason": "Existing content payloads remain compatible; this consumer does not use added account UI or recovery fields.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "completed/account-backend/A2-07.md",
+      "owner": "M08.documentation",
+      "reason": "Archive phase two backend acceptance without changing executable behavior.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Historical report links to exact verified commit and machine evidence; no product change."
+    },
+    {
+      "path": "apps/web/components/AccountPasswordForm.vue",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/components/AccountSessions.vue",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/pages/admin/account.vue",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/pages/admin/recover.vue",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/types/account.ts",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/utils/account.ts",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-FEEDBACK-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/unit/account.test.ts",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-FEEDBACK-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/e2e/account.spec.ts",
+      "owner": "M06.account_ui",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/api/scripts/run_account_fixture.py",
+      "owner": "M06.account_fixture",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-FLOW-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/e2e/account-flow.spec.ts",
+      "owner": "M06.account_fixture",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-FLOW-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/components/AdminCoreNavigation.vue",
+      "owner": "M02.admin_shell",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "cases": [],
+          "reason": "Consumer does not use added account fields, endpoints or pages."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/admin/login.vue",
+      "owner": "M06.auth_web",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.admin_shell",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "Account navigation affects desktop/mobile shell reachability and active state."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/utils/admin.ts",
+      "owner": "M06.auth_web",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-ACCOUNT-UI-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.admin_shell",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "Account navigation affects desktop/mobile shell reachability and active state."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/unit/admin.test.ts",
+      "owner": "M06.auth_web",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [
+        "M06-UNIT-ADMIN-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.admin_shell",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "Account navigation affects desktop/mobile shell reachability and active state."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "cases": [
+            "M06-ACCOUNT-UI-01"
+          ],
+          "reason": "New account consumer uses this producer for authenticated/recovery workflow."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/ACCOUNT-MANAGEMENT.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-ui/A3-01.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-ui/A3-02.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-ui/A3-03.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-ui/A3-04.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-ui/A3-05.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-verification/A4-01.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-verification/A4-03.md",
+      "owner": "M08.documentation",
+      "reason": "Implement account UI/HTTP workflow or compact acceptance record.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Markdown routing/operations/history only, checked structurally; no executable contract change."
+    },
+    {
+      "path": "completed/account-verification/A4-02.md",
+      "owner": "M08.documentation",
+      "reason": "Compact factual acceptance record; no executable contract change.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Historical result and evidence references only, checked structurally."
+    },
+    {
+      "path": "completed/account-verification/A4-04.md",
+      "owner": "M08.documentation",
+      "reason": "Compact factual acceptance record; no executable contract change.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Historical result and evidence references only, checked structurally."
+    }
+  ]
+}

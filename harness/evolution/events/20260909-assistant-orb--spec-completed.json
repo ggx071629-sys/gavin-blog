@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260909-assistant-orb",
+  "created_at": "2026-09-09T13:41:26.780947+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "3807f7d0cd9ae11cdb8b8b80f3bece77ca2ad8d4f493d07f18d41f2010352174"
+}

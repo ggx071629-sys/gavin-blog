@@ -1,0 +1,128 @@
+name: Release gate
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality-release:
+    name: quality-release
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out complete history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Resolve trusted comparison refs
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_BEFORE: ${{ github.event.before }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          head_ref="${GITHUB_SHA}"
+          if [[ "${EVENT_NAME}" == "pull_request" ]]; then
+            base_ref="${PR_BASE_SHA}"
+          elif [[ "${EVENT_NAME}" == "push" && -n "${EVENT_BEFORE}" && ! "${EVENT_BEFORE}" =~ ^0+$ ]]; then
+            base_ref="${EVENT_BEFORE}"
+          else
+            base_ref="$(git rev-parse "${head_ref}^1")"
+          fi
+          if [[ -z "${base_ref}" || "${base_ref}" =~ ^0+$ || "${base_ref}" == "${head_ref}" ]]; then
+            echo "Unable to resolve a distinct, non-zero Harness comparison base." >&2
+            exit 1
+          fi
+          git cat-file -e "${base_ref}^{commit}"
+          git cat-file -e "${head_ref}^{commit}"
+          echo "HARNESS_BASE_REF=${base_ref}" >> "${GITHUB_ENV}"
+          echo "HARNESS_HEAD_REF=${head_ref}" >> "${GITHUB_ENV}"
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.11"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@ae62891fec2bb8e7d6c99fc78c9fec3a63790f8d # v10.0.0
+        with:
+          version: "0.12.4"
+          enable-cache: false
+
+      - name: Sync locked API environment
+        working-directory: apps/api
+        run: uv sync --locked --extra dev --python 3.11
+
+      - name: Set up Node 22
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install Chromium runtime
+        run: npx playwright install --with-deps chromium
+
+      - name: Run authoritative release gate
+        run: npm run quality:release
+
+      - name: Summarize sanitized Harness telemetry
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          telemetry_dir="${RUNNER_TEMP}/harness-telemetry"
+          mkdir -p "${telemetry_dir}"
+
+          (
+            cd harness
+            ../apps/api/.venv/bin/python -m tools.harness telemetry-summary --json
+          ) > "${telemetry_dir}/summary.json.tmp"
+          mv "${telemetry_dir}/summary.json.tmp" "${telemetry_dir}/summary.json"
+
+          (
+            cd harness
+            ../apps/api/.venv/bin/python -m tools.harness telemetry-health --json
+          ) > "${telemetry_dir}/health.json.tmp"
+          mv "${telemetry_dir}/health.json.tmp" "${telemetry_dir}/health.json"
+
+          {
+            echo "## Harness telemetry"
+            echo
+            echo "### Sanitized summary"
+            echo '```json'
+            cat "${telemetry_dir}/summary.json"
+            echo '```'
+            echo
+            echo "### Observation-only health"
+            echo '```json'
+            cat "${telemetry_dir}/health.json"
+            echo '```'
+          } >> "${GITHUB_STEP_SUMMARY}"
+
+      - name: Upload sanitized Harness telemetry
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: harness-telemetry-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/harness-telemetry/summary.json
+            ${{ runner.temp }}/harness-telemetry/health.json
+          if-no-files-found: error
+          retention-days: 14

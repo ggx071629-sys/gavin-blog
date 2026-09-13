@@ -1,0 +1,709 @@
+{
+  "schema_version": 2,
+  "task_id": "20260908-public-card-focus",
+  "created_at": "2026-09-08T15:10:17.958660+00:00",
+  "command": "python -m tools.harness verify 20260908-public-card-focus",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "41e84435c0fdaf300ba569d77f1b9c76778794df",
+    "active_spec_sha256": "7c6569c051a79e66f669697e03e8809c15c4d7cf9fdba191feefba9f9ee7ad61",
+    "verification_contract_sha256": "540b855dd6f56a9a20b47369f3d8db2ee03d77b48c1d6e2b5f6b2b06dd12a04b",
+    "gate_config_sha256": "b7a9836d9336fa0b56a1ce72572307b44939edd066870c5f3470a56f92ef92f4",
+    "documentation_contract_sha256": "45d036f1d7337edf47a5813133c72b97c877b82aa6c7d185aba19e27b16c703c",
+    "documentation_targets_sha256": "77c20c1e1b724d51161d404756d85532ed69f55ee403442f09b1864c9e3e3de9",
+    "module_contract_sha256": "e226a14e9e6af1f73f011dd0105b871d34814d3ae31f2d80a926b77dd3df9268"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录已授权的公开卡片覆盖范围、输入方式和写作台排除边界。",
+    "targets": [
+      "harness/docs/product/interaction-references.md"
+    ],
+    "baseline_commit": "5625d9515175fb99a4d42f22a6e0accbb74cc630",
+    "target_blobs": {
+      "harness/docs/product/interaction-references.md": "fec153f2f33a8ee4b757465e6673f9dd47c8adab"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "f786ebebb7448ac30bf1d9c8552c061c59f0ed78",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260908-public-card-focus.json",
+      "sha256": "ba5a8e442917914370f87831eb7372fea75dd9835cf2a0e452c52255748b1512",
+      "selected_cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "selected_refs": 4,
+      "excluded_cases": 209
+    },
+    "receipt": {
+      "run_id": "8a0b66a59e456a8f20847dc657ba27b4",
+      "identity": "8cefde802a7c214f982e8b0a3fc25e2f3ee16b1639aec51abbfec3792631a290",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": "e723ab634073316da9bbb295b812ce70"
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": "2df7fafdc8600f68a9969081d42eca7e"
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 2494.96,
+      "plan_inputs": 757.18,
+      "execute_cleanup_and_input_recheck": 216776.796
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "e226a14e9e6af1f73f011dd0105b871d34814d3ae31f2d80a926b77dd3df9268",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M01-CARD-FOCUS-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "Public card families share theme-colored feedback and atlas path linkage.",
+            "expectations": [
+              {
+                "id": "M01-CARD-FOCUS-01-ALLOW",
+                "surface": "user_visible",
+                "statement": "Public card families share theme-colored feedback and atlas path linkage."
+              },
+              {
+                "id": "M01-CARD-FOCUS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Hover must not move cards, block links, or light the enclosing atlas."
+              },
+              {
+                "id": "M01-CARD-FOCUS-01-ASSISTANT",
+                "surface": "user_visible",
+                "statement": "Teleported assistant welcome and source cards support focus feedback and source navigation."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "kind": "playwright",
+                "name": "public cards share stable themed feedback across all page families",
+                "gate": "e2e",
+                "covers": [
+                  "M01-CARD-FOCUS-01-ALLOW",
+                  "M01-CARD-FOCUS-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "kind": "playwright",
+                "name": "teleported assistant cards share public focus feedback",
+                "gate": "e2e",
+                "covers": [
+                  "M01-CARD-FOCUS-01-ASSISTANT"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M01-CARD-INPUT-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "Keyboard focus, reduced motion and touch press provide immediate feedback.",
+            "expectations": [
+              {
+                "id": "M01-CARD-INPUT-01-ALLOW",
+                "surface": "user_visible",
+                "statement": "Keyboard focus, reduced motion and touch press provide immediate feedback."
+              },
+              {
+                "id": "M01-CARD-INPUT-01-DENY",
+                "surface": "forbidden",
+                "statement": "Touch release must not retain hover feedback or add static-card tab stops."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "kind": "playwright",
+                "name": "card feedback supports keyboard reduced motion and touch without hover residue",
+                "gate": "e2e",
+                "covers": [
+                  "M01-CARD-INPUT-01-ALLOW",
+                  "M01-CARD-INPUT-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M01-CARD-SCOPE-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "Public-to-admin navigation updates the document scope, including preview and error pages.",
+            "expectations": [
+              {
+                "id": "M01-CARD-SCOPE-01-ALLOW",
+                "surface": "user_visible",
+                "statement": "Public-to-admin navigation updates the document scope, including preview and error pages."
+              },
+              {
+                "id": "M01-CARD-SCOPE-01-DENY",
+                "surface": "forbidden",
+                "statement": "No admin route or shared preview may receive the public card overlay."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "kind": "playwright",
+                "name": "all writing desk routes exclude public feedback including shared previews",
+                "gate": "e2e",
+                "covers": [
+                  "M01-CARD-SCOPE-01-ALLOW",
+                  "M01-CARD-SCOPE-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.261,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "124 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 152.511,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 64.844,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.491,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "891 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1742.207,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "240 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 76.501,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 212 cases, 425 expectations, 779 exact test references; contract sha256 e226a14e9e6a"
+      ],
+      "status": "passed",
+      "duration_ms": 357.377,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.244,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.043,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 81.913,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "duration_ms": 1583.628,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "8a0b66a59e456a8f20847dc657ba27b4",
+        "attempt_id": "2186add25913c31f51bc7d9665cd2178"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260908-public-card-focus --gate e2e",
+      "status": "passed",
+      "duration_ms": 212756.347,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 6255,
+        "selection_counts": {
+          "collected": 4,
+          "executed": 4
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "public cards share stable themed feedback across all page families"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "teleported assistant cards share public focus feedback"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "card feedback supports keyboard reduced motion and touch without hover residue"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "all writing desk routes exclude public feedback including shared previews"
+              }
+            ],
+            "duration_ms": 3143.126,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "81cf8927ce1655c3381b8444e4b42379ef65d7e7c1856a514ce77a83e6744f40",
+              "apps/web/nuxt.config.ts": "1d8d7e8e1e3f796a1435e5f9e23ccf49ee0972c2a31f570b2db61cdbe3246ea0",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "public cards share stable themed feedback across all page families"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "card feedback supports keyboard reduced motion and touch without hover residue"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "all writing desk routes exclude public feedback including shared previews"
+              }
+            ],
+            "duration_ms": 1444.91
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "teleported assistant cards share public focus feedback"
+              }
+            ],
+            "duration_ms": 1500.456
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "public cards share stable themed feedback across all page families",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "public cards share stable themed feedback across all page families"
+                ]
+              }
+            ],
+            "duration_ms": 1261.671,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "public cards share stable themed feedback across all page families",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "public cards share stable themed feedback across all page families"
+                ]
+              }
+            ],
+            "duration_ms": 88502.244,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "card feedback supports keyboard reduced motion and touch without hover residue",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "card feedback supports keyboard reduced motion and touch without hover residue"
+                ]
+              }
+            ],
+            "duration_ms": 1315.507,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "card feedback supports keyboard reduced motion and touch without hover residue",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "card feedback supports keyboard reduced motion and touch without hover residue"
+                ]
+              }
+            ],
+            "duration_ms": 24512.214,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "all writing desk routes exclude public feedback including shared previews",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "all writing desk routes exclude public feedback including shared previews"
+                ]
+              }
+            ],
+            "duration_ms": 1309.192,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "all writing desk routes exclude public feedback including shared previews",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "all writing desk routes exclude public feedback including shared previews"
+                ]
+              }
+            ],
+            "duration_ms": 39799.007,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "teleported assistant cards share public focus feedback",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "teleported assistant cards share public focus feedback"
+                ]
+              }
+            ],
+            "duration_ms": 1336.14,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "teleported assistant cards share public focus feedback",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "teleported assistant cards share public focus feedback"
+                ]
+              }
+            ],
+            "duration_ms": 48260.086,
+            "batch_id": "batch-0004"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\8a0b66a59e456a8f20847dc657ba27b4\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "8a0b66a59e456a8f20847dc657ba27b4",
+        "attempt_id": "5c14da0d9b51f0934dc79694b7783d91"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2046.682,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 218879.049,
+    "failures": []
+  },
+  "source_commit": "f786ebebb7448ac30bf1d9c8552c061c59f0ed78"
+}

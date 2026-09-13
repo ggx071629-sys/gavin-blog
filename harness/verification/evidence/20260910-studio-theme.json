@@ -1,0 +1,597 @@
+{
+  "schema_version": 2,
+  "task_id": "20260910-studio-theme",
+  "created_at": "2026-09-10T06:40:16.892083+00:00",
+  "command": "python -m tools.harness verify 20260910-studio-theme",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "web-quality",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "c9ef487961d14de87d416acd6ddab2a5b2181fe5",
+    "active_spec_sha256": "af5f0c66c3e0f81d8a0b6ea7bce4f946161340f47c8e65681f685f7ab84c6197",
+    "verification_contract_sha256": "d65fdf5e4945d8e22e0941a29c9ed1ae957dfb3700e6f800d57f01898551404f",
+    "gate_config_sha256": "0aa93614fc067b4cbc2f3b7a00c61c2b09fa33b6a2d37b5a8ded055a8040d7f0",
+    "documentation_contract_sha256": "8c760a4b730fb7d5defa5b711a9a461210acbc3c43507673a930c415a1c6a09a",
+    "documentation_targets_sha256": "0dcb10455aa01f135782c156efbbc80da744ce2343713232c28cb4b8eba8780a",
+    "module_contract_sha256": "2cae3ccdb10a564741c8aa3fd1da97b26c5e0f3684dace82e80627807f90b456"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录后台主题作用域、资源来源、许可证及验证结论供后续阶段复用。",
+    "targets": [
+      "apps/web/public/studio/README.md"
+    ],
+    "baseline_commit": "360bb1703deecff24753eb279de3dcb0f4a0b9d9",
+    "target_blobs": {
+      "apps/web/public/studio/README.md": "15fc1d590a04acdb30a023d2fe68ed3547be618b"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "26198f38ec55209e9b7096f3c547bb5b1d053e6c",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260910-studio-theme.json",
+      "sha256": "71de4e0fc42b86c767579b56e93eaba3a05ab3314710f3e0ed619bed6a497a2e",
+      "selected_cases": [
+        "M07-STUDIO-FONTS-01",
+        "M07-STUDIO-THEME-01"
+      ],
+      "selected_refs": 2,
+      "excluded_cases": 229
+    },
+    "receipt": {
+      "run_id": "9910be60925d4c9c18458cd85f45ad62",
+      "identity": "fa503169a7ea7ef3317280c74fdd6355cab2964dcb6cf23e5af0d95d51b08f48",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "web-quality",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1248.602,
+      "plan_inputs": 802.646,
+      "execute_cleanup_and_input_recheck": 43541.866
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "2cae3ccdb10a564741c8aa3fd1da97b26c5e0f3684dace82e80627807f90b456",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M07-STUDIO-THEME-01",
+            "module_id": "M07",
+            "module_name": "内容发现输出",
+            "priority": "P1",
+            "scenario": "Studio login, authenticated shell and real rollback dialog use independent blue themes without changing public colors.",
+            "expectations": [
+              {
+                "id": "M07-STUDIO-THEME-01-E01",
+                "surface": "user_visible",
+                "statement": "Light and dark studio roots and teleported dialog have the selected canvas, text, primary and local font stack."
+              },
+              {
+                "id": "M07-STUDIO-THEME-01-E02",
+                "surface": "forbidden",
+                "statement": "Public root colors must not change or inherit studio tokens; no external image or font requests."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/studio-theme.spec.ts",
+                "name": "theme",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-THEME-01-E01",
+                  "M07-STUDIO-THEME-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "web-quality",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M07-STUDIO-THEME-01",
+            "module_id": "M07",
+            "module_name": "内容发现输出",
+            "priority": "P1",
+            "scenario": "Studio login, authenticated shell and real rollback dialog use independent blue themes without changing public colors.",
+            "expectations": [
+              {
+                "id": "M07-STUDIO-THEME-01-E01",
+                "surface": "user_visible",
+                "statement": "Light and dark studio roots and teleported dialog have the selected canvas, text, primary and local font stack."
+              },
+              {
+                "id": "M07-STUDIO-THEME-01-E02",
+                "surface": "forbidden",
+                "statement": "Public root colors must not change or inherit studio tokens; no external image or font requests."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/studio-theme.spec.ts",
+                "name": "theme",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-THEME-01-E01",
+                  "M07-STUDIO-THEME-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M07-STUDIO-FONTS-01",
+            "module_id": "M07",
+            "module_name": "内容发现输出",
+            "priority": "P1",
+            "scenario": "Existing local Inter and Noto font configuration remains shipped while studio theme loads.",
+            "expectations": [
+              {
+                "id": "M07-STUDIO-FONTS-01-E01",
+                "surface": "user_visible",
+                "statement": "Nuxt includes local Inter and Noto Sans SC weights needed by studio and preserves public heading configuration."
+              },
+              {
+                "id": "M07-STUDIO-FONTS-01-E02",
+                "surface": "forbidden",
+                "statement": "No external Google font import or unsupported font weight is introduced."
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/typography.test.ts",
+                "name": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts",
+                "gate": "web-quality",
+                "covers": [
+                  "M07-STUDIO-FONTS-01-E01",
+                  "M07-STUDIO-FONTS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.89,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "132 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 224.665,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 95.803,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.849,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "676 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 342.195,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "251 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 79.83,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 231 cases, 463 expectations, 854 exact test references; contract sha256 2cae3ccdb10a"
+      ],
+      "status": "passed",
+      "duration_ms": 405.733,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.87,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 10.002,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 78.048,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 1440.92,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "9910be60925d4c9c18458cd85f45ad62",
+        "attempt_id": "a9911cf7037a6cf4b27e95ddd9f9b419"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-theme --gate e2e",
+      "status": "passed",
+      "duration_ms": 35937.861,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1589,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-theme.spec.ts",
+                "name": "theme"
+              }
+            ],
+            "duration_ms": 4966.523,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-theme.spec.ts",
+                "name": "theme"
+              }
+            ],
+            "duration_ms": 1409.109
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-theme.spec.ts",
+                "name": "theme",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "theme"
+                ]
+              }
+            ],
+            "duration_ms": 1237.352,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-theme.spec.ts",
+                "name": "theme",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "theme"
+                ]
+              }
+            ],
+            "duration_ms": 27942.47,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\9a513332054c4aa05ebb9c71540c8a27422c0b292066f2dac0c465cb7bcdfb7d\\artifacts\\9910be60925d4c9c18458cd85f45ad62\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "9910be60925d4c9c18458cd85f45ad62",
+        "attempt_id": "8d362c884a4f1b305d0c1954b89c8c75"
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-theme --gate web-quality",
+      "status": "passed",
+      "duration_ms": 4593.811,
+      "covers": [
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1518,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "reused-in-worktree",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/typography.test.ts",
+                "name": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts"
+              }
+            ],
+            "duration_ms": 4.783,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/typography.test.ts",
+                "name": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts"
+              }
+            ],
+            "duration_ms": 2152.965
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/typography.test.ts",
+                "name": "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "theme typography guardrails",
+                  "hosts Noto Sans SC 400/700 and Inter without Hanken or Google Fonts"
+                ]
+              }
+            ],
+            "duration_ms": 2066.839,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\9a513332054c4aa05ebb9c71540c8a27422c0b292066f2dac0c465cb7bcdfb7d\\artifacts\\9910be60925d4c9c18458cd85f45ad62\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "9910be60925d4c9c18458cd85f45ad62",
+        "attempt_id": "470210d2ff0514501bfd759b5cccaa43"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1332.286,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 44550.763,
+    "failures": []
+  },
+  "source_commit": "26198f38ec55209e9b7096f3c547bb5b1d053e6c"
+}

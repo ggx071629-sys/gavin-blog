@@ -1,0 +1,2269 @@
+{
+  "schema_version": 1,
+  "production_qualified": false,
+  "quality_acceptance": "bounded_functional_scope_passed_independent_review_unverified",
+  "source_set_sha256": "3a991db6a462da1deb27cb23107e87694a9ce25afe094d48791277bd6e7eb49b",
+  "dataset_file_sha256": "5c36d6cdc5f51b1ed79e6b12d48360e2b9d92c1306462105baefea48d650979c",
+  "annotation_review": "agent-reviewed; independent-human-unverified",
+  "budget": {
+    "cumulative_calls_limit": 250,
+    "cumulative_micro_cny_limit": 4000000,
+    "current": {
+      "authorization_id": "assistant-gap-closure-q5-250-4-20260913",
+      "calls_used": 235,
+      "micro_cny_used": 3438423,
+      "calls_remaining": 15,
+      "micro_cny_remaining": 561577,
+      "unresolved": []
+    }
+  },
+  "batches": [
+    {
+      "label": "first_evaluation",
+      "source_commit": "6e883e9",
+      "input_limit": 8000,
+      "raw_path": "apps/api/data/qa-current-20260912T153252.json",
+      "raw_sha256": "7f313de34ae840563762c3f9a1eb22303d29161879f523dd72de9a2e8f9000f3",
+      "budget_before": {
+        "authorization_id": "assistant-gap-closure-g07-100-20260912",
+        "calls_used": 78,
+        "micro_cny_used": 335376,
+        "calls_remaining": 22,
+        "micro_cny_remaining": 1664624,
+        "unresolved": []
+      },
+      "budget_after": {
+        "authorization_id": "assistant-gap-closure-g07-100-20260912",
+        "calls_used": 92,
+        "micro_cny_used": 403527,
+        "calls_remaining": 8,
+        "micro_cny_remaining": 1596473,
+        "unresolved": []
+      },
+      "calls": 14,
+      "cost_micro_cny": 68151,
+      "validator_counts": {
+        "structure": 8,
+        "grounding": 6,
+        "not_called": 5
+      },
+      "base_answer_support_coverage": {
+        "covered": 5,
+        "total": 13
+      },
+      "evaluation_base_answers_accepted": {
+        "accepted": 0,
+        "total": 10
+      },
+      "provider_latency_seconds": {
+        "n": 14,
+        "median": 0.7735,
+        "min": 0.36,
+        "max": 1.156
+      },
+      "rows": [
+        {
+          "id": "D01",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 7968,
+          "cost_micro_cny": 4545,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 0,
+          "selected_chunks": 5,
+          "selected_source_count": 4,
+          "model_abstained": true,
+          "input_tokens": 1500,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 1.093
+        },
+        {
+          "id": "D02",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 7936,
+          "cost_micro_cny": 4509,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 0,
+          "selected_chunks": 2,
+          "selected_source_count": 2,
+          "model_abstained": true,
+          "input_tokens": 1488,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.938
+        },
+        {
+          "id": "D03",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7960,
+          "cost_micro_cny": 4986,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 5,
+          "selected_source_count": 4,
+          "model_abstained": false,
+          "input_tokens": 1497,
+          "output_tokens": 55,
+          "model_version_verified": false,
+          "provider_seconds": 0.516
+        },
+        {
+          "id": "E01",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 7988,
+          "cost_micro_cny": 4581,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 0,
+          "selected_chunks": 3,
+          "selected_source_count": 3,
+          "model_abstained": true,
+          "input_tokens": 1512,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.719
+        },
+        {
+          "id": "E02",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7856,
+          "cost_micro_cny": 5457,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 2,
+          "selected_source_count": 2,
+          "model_abstained": false,
+          "input_tokens": 1477,
+          "output_tokens": 114,
+          "model_version_verified": false,
+          "provider_seconds": 0.938
+        },
+        {
+          "id": "E03",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7961,
+          "cost_micro_cny": 5562,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 3,
+          "selected_source_count": 3,
+          "model_abstained": false,
+          "input_tokens": 1527,
+          "output_tokens": 109,
+          "model_version_verified": false,
+          "provider_seconds": 0.687
+        },
+        {
+          "id": "E04",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 7966,
+          "cost_micro_cny": 4515,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 0,
+          "selected_chunks": 2,
+          "selected_source_count": 2,
+          "model_abstained": true,
+          "input_tokens": 1490,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.765
+        },
+        {
+          "id": "E05",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 7962,
+          "cost_micro_cny": 4536,
+          "expected": "answer",
+          "expected_support_count": 2,
+          "expected_support_covered": 0,
+          "selected_chunks": 5,
+          "selected_source_count": 4,
+          "model_abstained": true,
+          "input_tokens": 1497,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.765
+        },
+        {
+          "id": "E06",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 7966,
+          "cost_micro_cny": 4539,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 0,
+          "selected_chunks": 5,
+          "selected_source_count": 4,
+          "model_abstained": true,
+          "input_tokens": 1498,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.813
+        },
+        {
+          "id": "E07",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 7967,
+          "cost_micro_cny": 4545,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 0,
+          "selected_chunks": 5,
+          "selected_source_count": 4,
+          "model_abstained": true,
+          "input_tokens": 1500,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.766
+        },
+        {
+          "id": "E08",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7855,
+          "cost_micro_cny": 5610,
+          "expected": "answer",
+          "expected_support_count": 2,
+          "expected_support_covered": 1,
+          "selected_chunks": 4,
+          "selected_source_count": 3,
+          "model_abstained": false,
+          "input_tokens": 1462,
+          "output_tokens": 136,
+          "model_version_verified": false,
+          "provider_seconds": 1.156
+        },
+        {
+          "id": "E09",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 7943,
+          "cost_micro_cny": 4533,
+          "expected": "no_supported_answer",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 5,
+          "selected_source_count": 4,
+          "model_abstained": true,
+          "input_tokens": 1496,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.36
+        },
+        {
+          "id": "E10",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "completeness_unverified",
+          "expected": "completeness_unverified",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E11",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "freshness_unverified",
+          "expected": "freshness_unverified",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E12",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "clarification_required",
+          "expected": "clarification_required",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E13",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "prompt_blocked",
+          "expected": "prompt_blocked",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E14",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7953,
+          "cost_micro_cny": 4950,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 3,
+          "selected_source_count": 3,
+          "model_abstained": false,
+          "input_tokens": 1524,
+          "output_tokens": 42,
+          "model_version_verified": false,
+          "provider_seconds": 0.875
+        },
+        {
+          "id": "E14-followup",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "clarification_required",
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E15",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7853,
+          "cost_micro_cny": 5283,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 2,
+          "selected_source_count": 2,
+          "model_abstained": false,
+          "input_tokens": 1476,
+          "output_tokens": 95,
+          "model_version_verified": false,
+          "provider_seconds": 0.781
+        }
+      ]
+    },
+    {
+      "label": "compact_prompt_regression",
+      "source_commit": "2f281d1",
+      "input_limit": 8000,
+      "raw_path": "apps/api/data/qa-current-20260912T154905.json",
+      "raw_sha256": "6f188ad288de8c5755216bd602d32f93db681e49dbe398f9f96c8aee3174d6fa",
+      "budget_before": {
+        "authorization_id": "assistant-gap-closure-q5-bounded-20260912",
+        "calls_used": 92,
+        "micro_cny_used": 403527,
+        "calls_remaining": 108,
+        "micro_cny_remaining": 1596473,
+        "unresolved": []
+      },
+      "budget_after": {
+        "authorization_id": "assistant-gap-closure-q5-bounded-20260912",
+        "calls_used": 106,
+        "micro_cny_used": 478566,
+        "calls_remaining": 94,
+        "micro_cny_remaining": 1521434,
+        "unresolved": []
+      },
+      "calls": 14,
+      "cost_micro_cny": 75039,
+      "validator_counts": {
+        "grounding": 9,
+        "structure": 4,
+        "not_called": 5,
+        "schema": 1
+      },
+      "base_answer_support_coverage": {
+        "covered": 10,
+        "total": 13
+      },
+      "evaluation_base_answers_accepted": {
+        "accepted": 0,
+        "total": 10
+      },
+      "provider_latency_seconds": {
+        "n": 14,
+        "median": 0.7735,
+        "min": 0.437,
+        "max": 1.235
+      },
+      "rows": [
+        {
+          "id": "D01",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7958,
+          "cost_micro_cny": 5790,
+          "reserved_micro_cny": 28482,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 6,
+          "selected_source_count": 4,
+          "model_abstained": false,
+          "input_tokens": 1639,
+          "output_tokens": 97,
+          "model_version_verified": false,
+          "provider_seconds": 0.656
+        },
+        {
+          "id": "D02",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 7917,
+          "cost_micro_cny": 4731,
+          "reserved_micro_cny": 28359,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 0,
+          "selected_chunks": 2,
+          "selected_source_count": 2,
+          "model_abstained": true,
+          "input_tokens": 1562,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.437
+        },
+        {
+          "id": "D03",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7939,
+          "cost_micro_cny": 5202,
+          "reserved_micro_cny": 28425,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 5,
+          "selected_source_count": 4,
+          "model_abstained": false,
+          "input_tokens": 1569,
+          "output_tokens": 55,
+          "model_version_verified": false,
+          "provider_seconds": 0.735
+        },
+        {
+          "id": "E01",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7999,
+          "cost_micro_cny": 5691,
+          "reserved_micro_cny": 28605,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 6,
+          "selected_source_count": 4,
+          "model_abstained": false,
+          "input_tokens": 1651,
+          "output_tokens": 82,
+          "model_version_verified": false,
+          "provider_seconds": 0.828
+        },
+        {
+          "id": "E02",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7963,
+          "cost_micro_cny": 5829,
+          "reserved_micro_cny": 28497,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 4,
+          "selected_source_count": 4,
+          "model_abstained": false,
+          "input_tokens": 1595,
+          "output_tokens": 116,
+          "model_version_verified": false,
+          "provider_seconds": 1.172
+        },
+        {
+          "id": "E03",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7976,
+          "cost_micro_cny": 5508,
+          "reserved_micro_cny": 28536,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 5,
+          "selected_source_count": 4,
+          "model_abstained": false,
+          "input_tokens": 1671,
+          "output_tokens": 55,
+          "model_version_verified": false,
+          "provider_seconds": 0.703
+        },
+        {
+          "id": "E04",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 7835,
+          "cost_micro_cny": 4836,
+          "reserved_micro_cny": 28113,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 0,
+          "selected_chunks": 6,
+          "selected_source_count": 4,
+          "model_abstained": true,
+          "input_tokens": 1597,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.516
+        },
+        {
+          "id": "E05",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7943,
+          "cost_micro_cny": 5541,
+          "reserved_micro_cny": 28437,
+          "expected": "answer",
+          "expected_support_count": 2,
+          "expected_support_covered": 2,
+          "selected_chunks": 5,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 1571,
+          "output_tokens": 92,
+          "model_version_verified": false,
+          "provider_seconds": 1.078
+        },
+        {
+          "id": "E06",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7960,
+          "cost_micro_cny": 5901,
+          "reserved_micro_cny": 28488,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 5,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 1595,
+          "output_tokens": 124,
+          "model_version_verified": false,
+          "provider_seconds": 1.204
+        },
+        {
+          "id": "E07",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 7948,
+          "cost_micro_cny": 4767,
+          "reserved_micro_cny": 28452,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 0,
+          "selected_chunks": 5,
+          "selected_source_count": 5,
+          "model_abstained": true,
+          "input_tokens": 1574,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.484
+        },
+        {
+          "id": "E08",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7938,
+          "cost_micro_cny": 5817,
+          "reserved_micro_cny": 28422,
+          "expected": "answer",
+          "expected_support_count": 2,
+          "expected_support_covered": 2,
+          "selected_chunks": 5,
+          "selected_source_count": 4,
+          "model_abstained": false,
+          "input_tokens": 1600,
+          "output_tokens": 113,
+          "model_version_verified": false,
+          "provider_seconds": 1.172
+        },
+        {
+          "id": "E09",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 7938,
+          "cost_micro_cny": 4824,
+          "reserved_micro_cny": 28422,
+          "expected": "no_supported_answer",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 5,
+          "selected_source_count": 4,
+          "model_abstained": true,
+          "input_tokens": 1593,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.735
+        },
+        {
+          "id": "E10",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "completeness_unverified",
+          "expected": "completeness_unverified",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E11",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "freshness_unverified",
+          "expected": "freshness_unverified",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E12",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "clarification_required",
+          "expected": "clarification_required",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E13",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "prompt_blocked",
+          "expected": "prompt_blocked",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E14",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 7905,
+          "cost_micro_cny": 4938,
+          "reserved_micro_cny": 28323,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 3,
+          "selected_source_count": 3,
+          "model_abstained": false,
+          "input_tokens": 1523,
+          "output_tokens": 41,
+          "model_version_verified": false,
+          "provider_seconds": 0.812
+        },
+        {
+          "id": "E14-followup",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "clarification_required",
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E15",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "schema",
+          "estimated_input": 7960,
+          "cost_micro_cny": 5664,
+          "reserved_micro_cny": 28488,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 4,
+          "selected_source_count": 4,
+          "model_abstained": false,
+          "input_tokens": 1594,
+          "output_tokens": 98,
+          "model_version_verified": false,
+          "provider_seconds": 1.235
+        }
+      ]
+    },
+    {
+      "label": "expanded_input_regression",
+      "source_commit": "ad0eb4b",
+      "input_limit": 32000,
+      "raw_path": "apps/api/data/qa-current-20260912T155432.json",
+      "raw_sha256": "184a2cafa5ce8a9d63fb2ed7652b3d0603c2679ec054798dcaa9b4ab1b05c557",
+      "budget_before": {
+        "authorization_id": "assistant-gap-closure-q5-32k-20260912",
+        "calls_used": 106,
+        "micro_cny_used": 478566,
+        "calls_remaining": 94,
+        "micro_cny_remaining": 1521434,
+        "unresolved": []
+      },
+      "budget_after": {
+        "authorization_id": "assistant-gap-closure-q5-32k-20260912",
+        "calls_used": 120,
+        "micro_cny_used": 758778,
+        "calls_remaining": 80,
+        "micro_cny_remaining": 1241222,
+        "unresolved": []
+      },
+      "calls": 14,
+      "cost_micro_cny": 280212,
+      "validator_counts": {
+        "grounding": 10,
+        "accepted": 2,
+        "structure": 1,
+        "not_called": 5,
+        "schema": 1
+      },
+      "base_answer_support_coverage": {
+        "covered": 13,
+        "total": 13
+      },
+      "evaluation_base_answers_accepted": {
+        "accepted": 1,
+        "total": 10
+      },
+      "provider_latency_seconds": {
+        "n": 14,
+        "median": 0.992,
+        "min": 0.469,
+        "max": 1.453
+      },
+      "rows": [
+        {
+          "id": "D01",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 26546,
+          "cost_micro_cny": 19953,
+          "reserved_micro_cny": 84246,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6387,
+          "output_tokens": 88,
+          "model_version_verified": false,
+          "provider_seconds": 1.11
+        },
+        {
+          "id": "D02",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "accepted",
+          "estimated_input": 26536,
+          "cost_micro_cny": 19908,
+          "reserved_micro_cny": 84216,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6384,
+          "output_tokens": 84,
+          "model_version_verified": false,
+          "provider_seconds": 0.734,
+          "citations": [
+            {
+              "n": "1",
+              "alias": "c6",
+              "title": "配置SSL",
+              "heading_path": "**第 9 步：测试自动续期**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "answer_sha256": "8681907692443c70dd87de2152605ac5e0dfd755c998d6c09799da6f41e99757"
+        },
+        {
+          "id": "D03",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 26538,
+          "cost_micro_cny": 19692,
+          "reserved_micro_cny": 84222,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6384,
+          "output_tokens": 60,
+          "model_version_verified": false,
+          "provider_seconds": 0.734
+        },
+        {
+          "id": "E01",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 26525,
+          "cost_micro_cny": 19641,
+          "reserved_micro_cny": 84183,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6382,
+          "output_tokens": 55,
+          "model_version_verified": false,
+          "provider_seconds": 0.906
+        },
+        {
+          "id": "E02",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 26560,
+          "cost_micro_cny": 21018,
+          "reserved_micro_cny": 84288,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6391,
+          "output_tokens": 205,
+          "model_version_verified": false,
+          "provider_seconds": 1.25
+        },
+        {
+          "id": "E03",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 26535,
+          "cost_micro_cny": 20136,
+          "reserved_micro_cny": 84213,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6385,
+          "output_tokens": 109,
+          "model_version_verified": false,
+          "provider_seconds": 1.453
+        },
+        {
+          "id": "E04",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 26566,
+          "cost_micro_cny": 19914,
+          "reserved_micro_cny": 84306,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6386,
+          "output_tokens": 84,
+          "model_version_verified": false,
+          "provider_seconds": 0.953
+        },
+        {
+          "id": "E05",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 26541,
+          "cost_micro_cny": 20232,
+          "reserved_micro_cny": 84231,
+          "expected": "answer",
+          "expected_support_count": 2,
+          "expected_support_covered": 2,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6384,
+          "output_tokens": 120,
+          "model_version_verified": false,
+          "provider_seconds": 1.172
+        },
+        {
+          "id": "E06",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 26545,
+          "cost_micro_cny": 20253,
+          "reserved_micro_cny": 84243,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6385,
+          "output_tokens": 122,
+          "model_version_verified": false,
+          "provider_seconds": 1.141
+        },
+        {
+          "id": "E07",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "accepted",
+          "estimated_input": 26546,
+          "cost_micro_cny": 20151,
+          "reserved_micro_cny": 84246,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6387,
+          "output_tokens": 110,
+          "model_version_verified": false,
+          "provider_seconds": 0.766,
+          "citations": [
+            {
+              "n": "1",
+              "alias": "c6",
+              "title": "Gavin 简历",
+              "heading_path": "第 2 页",
+              "path": "/api/v1/assistant/resume/e9a93f16fd514859ab3be9a4443f78bd"
+            }
+          ],
+          "answer_sha256": "8d082e0fad5e5d67cce7fc13d95cf67abab135684964162867aba1f09f10584d"
+        },
+        {
+          "id": "E08",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 26602,
+          "cost_micro_cny": 20211,
+          "reserved_micro_cny": 84414,
+          "expected": "answer",
+          "expected_support_count": 2,
+          "expected_support_covered": 2,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6395,
+          "output_tokens": 114,
+          "model_version_verified": false,
+          "provider_seconds": 0.968
+        },
+        {
+          "id": "E09",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 26520,
+          "cost_micro_cny": 19194,
+          "reserved_micro_cny": 84168,
+          "expected": "no_supported_answer",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": true,
+          "input_tokens": 6383,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.469
+        },
+        {
+          "id": "E10",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "completeness_unverified",
+          "expected": "completeness_unverified",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E11",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "freshness_unverified",
+          "expected": "freshness_unverified",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E12",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "clarification_required",
+          "expected": "clarification_required",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E13",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "prompt_blocked",
+          "expected": "prompt_blocked",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E14",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "schema",
+          "estimated_input": 26527,
+          "cost_micro_cny": 19668,
+          "reserved_micro_cny": 84189,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6382,
+          "output_tokens": 58,
+          "model_version_verified": false,
+          "provider_seconds": 1.016
+        },
+        {
+          "id": "E14-followup",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "clarification_required",
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E15",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 26557,
+          "cost_micro_cny": 20241,
+          "reserved_micro_cny": 84279,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6390,
+          "output_tokens": 119,
+          "model_version_verified": false,
+          "provider_seconds": 1.032
+        }
+      ]
+    },
+    {
+      "label": "answer_instruction_targeted",
+      "source_commit": "278d8ae",
+      "input_limit": 32000,
+      "raw_path": "apps/api/data/qa-current-20260912T161337.json",
+      "raw_sha256": "bd22ecd3b6723b426cf4065c332505ef49e99f5f9c7c52b52b9eb35e260088c8",
+      "budget_before": {
+        "authorization_id": "assistant-gap-closure-q5-32k-20260912",
+        "calls_used": 120,
+        "micro_cny_used": 758778,
+        "calls_remaining": 80,
+        "micro_cny_remaining": 1241222,
+        "unresolved": []
+      },
+      "budget_after": {
+        "authorization_id": "assistant-gap-closure-q5-32k-20260912",
+        "calls_used": 126,
+        "micro_cny_used": 879642,
+        "calls_remaining": 74,
+        "micro_cny_remaining": 1120358,
+        "unresolved": []
+      },
+      "calls": 6,
+      "cost_micro_cny": 120864,
+      "validator_counts": {
+        "grounding": 1,
+        "accepted": 4,
+        "structure": 1
+      },
+      "base_answer_support_coverage": {
+        "covered": 5,
+        "total": 5
+      },
+      "evaluation_base_answers_accepted": {
+        "accepted": 2,
+        "total": 3
+      },
+      "provider_latency_seconds": {
+        "n": 6,
+        "median": 0.828,
+        "min": 0.578,
+        "max": 1.656
+      },
+      "rows": [
+        {
+          "id": "D01",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 27248,
+          "cost_micro_cny": 20466,
+          "reserved_micro_cny": 86352,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6534,
+          "output_tokens": 96,
+          "model_version_verified": false,
+          "provider_seconds": 1.5
+        },
+        {
+          "id": "D03",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "accepted",
+          "estimated_input": 27240,
+          "cost_micro_cny": 20106,
+          "reserved_micro_cny": 86328,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6531,
+          "output_tokens": 57,
+          "model_version_verified": false,
+          "provider_seconds": 1.656,
+          "citations": [
+            {
+              "n": "1",
+              "alias": "c1",
+              "title": "Gavin",
+              "heading_path": "",
+              "path": "/"
+            }
+          ],
+          "sources": [
+            {
+              "n": "1",
+              "title": "Gavin",
+              "heading_path": "",
+              "path": "/"
+            }
+          ],
+          "agent_source_review": "Current citations and core facts checked; not independent human review"
+        },
+        {
+          "id": "E01",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 27227,
+          "cost_micro_cny": 19632,
+          "reserved_micro_cny": 86289,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": true,
+          "input_tokens": 6529,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.593
+        },
+        {
+          "id": "E03",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "accepted",
+          "estimated_input": 27237,
+          "cost_micro_cny": 20235,
+          "reserved_micro_cny": 86319,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6532,
+          "output_tokens": 71,
+          "model_version_verified": false,
+          "provider_seconds": 0.578,
+          "citations": [
+            {
+              "n": "1",
+              "alias": "c1",
+              "title": "配置SSL",
+              "heading_path": "**第 3 步：开放 80 和 443 端口**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "sources": [
+            {
+              "n": "1",
+              "title": "配置SSL",
+              "heading_path": "**第 3 步：开放 80 和 443 端口**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "agent_source_review": "Current citations and core facts checked; not independent human review"
+        },
+        {
+          "id": "E14",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "accepted",
+          "estimated_input": 27229,
+          "cost_micro_cny": 19920,
+          "reserved_micro_cny": 86295,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6529,
+          "output_tokens": 37,
+          "model_version_verified": false,
+          "provider_seconds": 1.0,
+          "citations": [
+            {
+              "n": "1",
+              "alias": "c1",
+              "title": "配置SSL",
+              "heading_path": "**第 3 步：开放 80 和 443 端口**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "sources": [
+            {
+              "n": "1",
+              "title": "配置SSL",
+              "heading_path": "**第 3 步：开放 80 和 443 端口**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "agent_source_review": "Current citations and core facts checked; not independent human review"
+        },
+        {
+          "id": "E14-followup",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "accepted",
+          "estimated_input": 27366,
+          "cost_micro_cny": 20505,
+          "reserved_micro_cny": 86706,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6559,
+          "output_tokens": 92,
+          "model_version_verified": false,
+          "provider_seconds": 0.656,
+          "citations": [
+            {
+              "n": "1",
+              "alias": "c2",
+              "title": "配置SSL",
+              "heading_path": "**第 9 步：测试自动续期**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "sources": [
+            {
+              "n": "1",
+              "title": "配置SSL",
+              "heading_path": "**第 9 步：测试自动续期**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "agent_source_review": "Current citations and core facts checked; not independent human review"
+        }
+      ]
+    },
+    {
+      "label": "evidence_role_targeted",
+      "source_commit": "7000509",
+      "input_limit": 32000,
+      "raw_path": "apps/api/data/qa-current-20260912T162356.json",
+      "raw_sha256": "aa0dfc5cc86569a3989b8af1aabc0608bf8f28310b4c41acd76b91404ca4b67c",
+      "budget_before": {
+        "authorization_id": "assistant-gap-closure-q5-32k-20260912",
+        "calls_used": 126,
+        "micro_cny_used": 879642,
+        "calls_remaining": 74,
+        "micro_cny_remaining": 1120358,
+        "unresolved": []
+      },
+      "budget_after": {
+        "authorization_id": "assistant-gap-closure-q5-32k-20260912",
+        "calls_used": 129,
+        "micro_cny_used": 941715,
+        "calls_remaining": 71,
+        "micro_cny_remaining": 1058285,
+        "unresolved": []
+      },
+      "calls": 3,
+      "cost_micro_cny": 62073,
+      "validator_counts": {
+        "grounding": 2,
+        "accepted": 1
+      },
+      "base_answer_support_coverage": {
+        "covered": 2,
+        "total": 2
+      },
+      "evaluation_base_answers_accepted": {
+        "accepted": 1,
+        "total": 2
+      },
+      "provider_latency_seconds": {
+        "n": 3,
+        "median": 0.875,
+        "min": 0.797,
+        "max": 1.297
+      },
+      "rows": [
+        {
+          "id": "E01",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 27694,
+          "cost_micro_cny": 20304,
+          "reserved_micro_cny": 87690,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6630,
+          "output_tokens": 46,
+          "model_version_verified": false,
+          "provider_seconds": 0.797
+        },
+        {
+          "id": "E14",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "accepted",
+          "estimated_input": 27696,
+          "cost_micro_cny": 20223,
+          "reserved_micro_cny": 87696,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6630,
+          "output_tokens": 37,
+          "model_version_verified": false,
+          "provider_seconds": 0.875,
+          "citations": [
+            {
+              "n": "1",
+              "alias": "c1",
+              "title": "配置SSL",
+              "heading_path": "**第 3 步：开放 80 和 443 端口**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "sources": [
+            {
+              "n": "1",
+              "title": "配置SSL",
+              "heading_path": "**第 3 步：开放 80 和 443 端口**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "agent_source_review": "Current citations and core facts checked; not independent human review"
+        },
+        {
+          "id": "E14-followup",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 27833,
+          "cost_micro_cny": 21546,
+          "reserved_micro_cny": 88107,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6660,
+          "output_tokens": 174,
+          "model_version_verified": false,
+          "provider_seconds": 1.297
+        }
+      ]
+    },
+    {
+      "label": "code_presentation_full_regression",
+      "source_commit": "459c3cc",
+      "input_limit": 32000,
+      "raw_path": "apps/api/data/qa-current-20260912T163111.json",
+      "raw_sha256": "1f4612a24ef5b4d7958b09dcc8f071eeac369e248a7733d5f850e2c39845d110",
+      "budget_before": {
+        "authorization_id": "assistant-gap-closure-q5-32k-20260912",
+        "calls_used": 129,
+        "micro_cny_used": 941715,
+        "calls_remaining": 71,
+        "micro_cny_remaining": 1058285,
+        "unresolved": []
+      },
+      "budget_after": {
+        "authorization_id": "assistant-gap-closure-q5-32k-20260912",
+        "calls_used": 144,
+        "micro_cny_used": 1252998,
+        "calls_remaining": 56,
+        "micro_cny_remaining": 747002,
+        "unresolved": []
+      },
+      "calls": 15,
+      "cost_micro_cny": 311283,
+      "validator_counts": {
+        "grounding": 8,
+        "accepted": 6,
+        "structure": 1,
+        "not_called": 4
+      },
+      "base_answer_support_coverage": {
+        "covered": 13,
+        "total": 13
+      },
+      "evaluation_base_answers_accepted": {
+        "accepted": 3,
+        "total": 10
+      },
+      "provider_latency_seconds": {
+        "n": 15,
+        "median": 1.125,
+        "min": 0.735,
+        "max": 1.484
+      },
+      "rows": [
+        {
+          "id": "D01",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 27715,
+          "cost_micro_cny": 20832,
+          "reserved_micro_cny": 87753,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6635,
+          "output_tokens": 103,
+          "model_version_verified": false,
+          "provider_seconds": 1.407
+        },
+        {
+          "id": "D02",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "accepted",
+          "estimated_input": 27705,
+          "cost_micro_cny": 20409,
+          "reserved_micro_cny": 87723,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6632,
+          "output_tokens": 57,
+          "model_version_verified": false,
+          "provider_seconds": 0.782,
+          "citations": [
+            {
+              "n": "1",
+              "alias": "c6",
+              "title": "配置SSL",
+              "heading_path": "**第 9 步：测试自动续期**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "sources": [
+            {
+              "n": "1",
+              "title": "配置SSL",
+              "heading_path": "**第 9 步：测试自动续期**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "agent_source_review": "Current citations and core facts checked; not independent human review"
+        },
+        {
+          "id": "D03",
+          "split": "debug",
+          "chat_called": true,
+          "validator": "accepted",
+          "estimated_input": 27707,
+          "cost_micro_cny": 20301,
+          "reserved_micro_cny": 87729,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6632,
+          "output_tokens": 45,
+          "model_version_verified": false,
+          "provider_seconds": 1.484,
+          "citations": [
+            {
+              "n": "1",
+              "alias": "c1",
+              "title": "Gavin",
+              "heading_path": "",
+              "path": "/"
+            }
+          ],
+          "sources": [
+            {
+              "n": "1",
+              "title": "Gavin",
+              "heading_path": "",
+              "path": "/"
+            }
+          ],
+          "agent_source_review": "Current citations and core facts checked; not independent human review"
+        },
+        {
+          "id": "E01",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 27694,
+          "cost_micro_cny": 20871,
+          "reserved_micro_cny": 87690,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6630,
+          "output_tokens": 109,
+          "model_version_verified": false,
+          "provider_seconds": 0.844
+        },
+        {
+          "id": "E02",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 27729,
+          "cost_micro_cny": 21024,
+          "reserved_micro_cny": 87795,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6639,
+          "output_tokens": 123,
+          "model_version_verified": false,
+          "provider_seconds": 0.937
+        },
+        {
+          "id": "E03",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 27704,
+          "cost_micro_cny": 20313,
+          "reserved_micro_cny": 87720,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6633,
+          "output_tokens": 46,
+          "model_version_verified": false,
+          "provider_seconds": 1.094
+        },
+        {
+          "id": "E04",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "accepted",
+          "estimated_input": 27735,
+          "cost_micro_cny": 20487,
+          "reserved_micro_cny": 87813,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6634,
+          "output_tokens": 65,
+          "model_version_verified": false,
+          "provider_seconds": 1.125,
+          "citations": [
+            {
+              "n": "1",
+              "alias": "c6",
+              "title": "配置SSL",
+              "heading_path": "**第 9 步：测试自动续期**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "sources": [
+            {
+              "n": "1",
+              "title": "配置SSL",
+              "heading_path": "**第 9 步：测试自动续期**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "agent_source_review": "Current citations and core facts checked; not independent human review",
+          "language_review": "not_passed: English question received Chinese instruction prefix"
+        },
+        {
+          "id": "E05",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 27710,
+          "cost_micro_cny": 21282,
+          "reserved_micro_cny": 87738,
+          "expected": "answer",
+          "expected_support_count": 2,
+          "expected_support_covered": 2,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6632,
+          "output_tokens": 154,
+          "model_version_verified": false,
+          "provider_seconds": 1.313
+        },
+        {
+          "id": "E06",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 27714,
+          "cost_micro_cny": 21870,
+          "reserved_micro_cny": 87750,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6633,
+          "output_tokens": 219,
+          "model_version_verified": false,
+          "provider_seconds": 1.36
+        },
+        {
+          "id": "E07",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "accepted",
+          "estimated_input": 27715,
+          "cost_micro_cny": 20859,
+          "reserved_micro_cny": 87753,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6635,
+          "output_tokens": 106,
+          "model_version_verified": false,
+          "provider_seconds": 1.391,
+          "citations": [
+            {
+              "n": "1",
+              "alias": "c6",
+              "title": "Gavin 简历",
+              "heading_path": "第 2 页",
+              "path": "/api/v1/assistant/resume/e9a93f16fd514859ab3be9a4443f78bd"
+            }
+          ],
+          "sources": [
+            {
+              "n": "1",
+              "title": "Gavin 简历",
+              "heading_path": "第 2 页",
+              "path": "/api/v1/assistant/resume/e9a93f16fd514859ab3be9a4443f78bd"
+            }
+          ],
+          "agent_source_review": "Current citations and core facts checked; not independent human review"
+        },
+        {
+          "id": "E08",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 27771,
+          "cost_micro_cny": 20928,
+          "reserved_micro_cny": 87921,
+          "expected": "answer",
+          "expected_support_count": 2,
+          "expected_support_covered": 2,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6643,
+          "output_tokens": 111,
+          "model_version_verified": false,
+          "provider_seconds": 1.266
+        },
+        {
+          "id": "E09",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "structure",
+          "estimated_input": 27689,
+          "cost_micro_cny": 19938,
+          "reserved_micro_cny": 87675,
+          "expected": "no_supported_answer",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": true,
+          "input_tokens": 6631,
+          "output_tokens": 5,
+          "model_version_verified": false,
+          "provider_seconds": 0.735
+        },
+        {
+          "id": "E10",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "completeness_unverified",
+          "expected": "completeness_unverified",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E11",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "freshness_unverified",
+          "expected": "freshness_unverified",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E12",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "clarification_required",
+          "expected": "clarification_required",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E13",
+          "split": "evaluation",
+          "chat_called": false,
+          "code": "prompt_blocked",
+          "expected": "prompt_blocked",
+          "expected_support_count": 0,
+          "expected_support_covered": 0,
+          "selected_chunks": 0,
+          "selected_source_count": 0,
+          "model_abstained": false
+        },
+        {
+          "id": "E14",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "accepted",
+          "estimated_input": 27696,
+          "cost_micro_cny": 20232,
+          "reserved_micro_cny": 87696,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6630,
+          "output_tokens": 38,
+          "model_version_verified": false,
+          "provider_seconds": 0.875,
+          "citations": [
+            {
+              "n": "1",
+              "alias": "c1",
+              "title": "配置SSL",
+              "heading_path": "**第 3 步：开放 80 和 443 端口**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "sources": [
+            {
+              "n": "1",
+              "title": "配置SSL",
+              "heading_path": "**第 3 步：开放 80 和 443 端口**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "agent_source_review": "Current citations and core facts checked; not independent human review"
+        },
+        {
+          "id": "E14-followup",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "accepted",
+          "estimated_input": 27833,
+          "cost_micro_cny": 20511,
+          "reserved_micro_cny": 88107,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6660,
+          "output_tokens": 59,
+          "model_version_verified": false,
+          "provider_seconds": 0.937,
+          "citations": [
+            {
+              "n": "1",
+              "alias": "c2",
+              "title": "配置SSL",
+              "heading_path": "**第 9 步：测试自动续期**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "sources": [
+            {
+              "n": "1",
+              "title": "配置SSL",
+              "heading_path": "**第 9 步：测试自动续期**",
+              "path": "/notes/2026/08/ssl"
+            }
+          ],
+          "agent_source_review": "Current citations and core facts checked; not independent human review"
+        },
+        {
+          "id": "E15",
+          "split": "evaluation",
+          "chat_called": true,
+          "validator": "grounding",
+          "estimated_input": 27726,
+          "cost_micro_cny": 21426,
+          "reserved_micro_cny": 87786,
+          "expected": "answer",
+          "expected_support_count": 1,
+          "expected_support_covered": 1,
+          "selected_chunks": 25,
+          "selected_source_count": 5,
+          "model_abstained": false,
+          "input_tokens": 6638,
+          "output_tokens": 168,
+          "model_version_verified": false,
+          "provider_seconds": 1.125
+        }
+      ]
+    },
+    {
+      "label": "fact_alignment_regression_aborted",
+      "source_commit": "a380551",
+      "input_limit": 32000,
+      "raw_path": "apps/api/data/qa-current-20260912T165233.json",
+      "raw_sha256": "1ccf787a2a611cf581b2496513fe4e72e4eb8c4be4abac27f50a0d5afe3a73ed",
+      "budget_before": {
+        "authorization_id": "assistant-gap-closure-q5-32k-20260912",
+        "calls_used": 144,
+        "micro_cny_used": 1252998,
+        "calls_remaining": 56,
+        "micro_cny_remaining": 747002,
+        "unresolved": []
+      },
+      "budget_after": {
+        "authorization_id": "assistant-gap-closure-q5-32k-20260912",
+        "calls_used": 145,
+        "micro_cny_used": 1307289,
+        "calls_remaining": 55,
+        "micro_cny_remaining": 692711,
+        "unresolved": [
+          {
+            "attempt_id": "fbd93334-dc25-4a77-a7f5-5f8c2f869558",
+            "status": "unknown"
+          }
+        ]
+      },
+      "calls": 1,
+      "cost_micro_cny": 54291,
+      "cost_basis": "conservative reservation; provider billing unknown",
+      "correctness": null,
+      "citations": null,
+      "false_refusal": null,
+      "multi_turn": null,
+      "provider_latency_seconds": null,
+      "latency_reason": "old exception branch did not record elapsed time",
+      "status": "aborted_on_unknown_no_retry",
+      "rows": [
+        {
+          "id": "D01",
+          "split": "debug",
+          "degraded": true,
+          "estimated_input": 16561,
+          "chat_called": true,
+          "transport_ok": false,
+          "status": "unknown",
+          "error_type": "OpenAIConnectionError",
+          "cost_micro_cny": 54291,
+          "reserved_micro_cny": 54291,
+          "attempt_id": "fbd93334-dc25-4a77-a7f5-5f8c2f869558"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Fixed small selected dataset; not population accuracy",
+    "Only first batch was evaluated before quality-output-driven changes",
+    "No live full HTTP/SSE durable-session actual-model E2E",
+    "Provider exact response version, API retention/erasure and training exclusions unverified",
+    "Q6 cancelled: production validation is outside scope, not a blocker",
+    "Latest full E04 passed grounding but failed requested answer language; validator acceptance is not whole-task success",
+    "New held-out questions frozen and source-checked but no actual model output",
+    "One conservative unknown call blocks further paid work; no automatic recovery performed",
+    "Current local dense retrieval unavailable; lexical degraded prepare is not dense acceptance",
+    "E02/E15 old support quotes differ in whitespace from current source; rejection retained",
+    "CLI after field is not applied to durable history; E15 standalone is not topic-switch E2E",
+    "Physical mobile and manual screen-reader acceptance cancelled by user; not blockers and not passed"
+  ],
+  "offline_code_presentation_replay": {
+    "source_commit": "459c3cc",
+    "original_raw_sha256": "aa0dfc5cc86569a3989b8af1aabc0608bf8f28310b4c41acd76b91404ca4b67c",
+    "provider_calls": 0,
+    "rows": [
+      {
+        "id": "E01",
+        "original": "grounding",
+        "replayed": "grounding"
+      },
+      {
+        "id": "E14",
+        "original": "accepted",
+        "replayed": "accepted"
+      },
+      {
+        "id": "E14-followup",
+        "original": "grounding",
+        "replayed": "accepted"
+      }
+    ]
+  },
+  "offline_fact_alignment_replay": {
+    "raw_path": "apps/api/data/qa-current-20260912T163111.json",
+    "raw_sha256": "1f4612a24ef5b4d7958b09dcc8f071eeac369e248a7733d5f850e2c39845d110",
+    "provider_calls": 0,
+    "mode": "old_output_new_validator_not_new_generation",
+    "rows": [
+      {
+        "id": "D01",
+        "original": "grounding",
+        "replay": "grounding"
+      },
+      {
+        "id": "D02",
+        "original": "accepted",
+        "replay": "accepted"
+      },
+      {
+        "id": "D03",
+        "original": "accepted",
+        "replay": "accepted"
+      },
+      {
+        "id": "E01",
+        "original": "grounding",
+        "replay": "grounding"
+      },
+      {
+        "id": "E02",
+        "original": "grounding",
+        "replay": "grounding"
+      },
+      {
+        "id": "E03",
+        "original": "grounding",
+        "replay": "accepted"
+      },
+      {
+        "id": "E04",
+        "original": "accepted",
+        "replay": "accepted"
+      },
+      {
+        "id": "E05",
+        "original": "grounding",
+        "replay": "accepted"
+      },
+      {
+        "id": "E06",
+        "original": "grounding",
+        "replay": "grounding"
+      },
+      {
+        "id": "E07",
+        "original": "accepted",
+        "replay": "accepted"
+      },
+      {
+        "id": "E08",
+        "original": "grounding",
+        "replay": "grounding"
+      },
+      {
+        "id": "E09",
+        "original": "structure",
+        "replay": "structure"
+      },
+      {
+        "id": "E14",
+        "original": "accepted",
+        "replay": "accepted"
+      },
+      {
+        "id": "E14-followup",
+        "original": "accepted",
+        "replay": "accepted"
+      },
+      {
+        "id": "E15",
+        "original": "grounding",
+        "replay": "grounding"
+      }
+    ],
+    "validator_commit": "7f45d14",
+    "quality_warning": "E04 still wrong language; replay is not generation regression or held-out evaluation"
+  },
+  "holdout": {
+    "dataset_path": "Q5-holdout.json",
+    "dataset_file_sha256": "d452fa43c0111f735dec4d5a003ee8badf9f51427fffff66cdef78cb0b0de510",
+    "frozen_before_model_output": true,
+    "base_questions": 8,
+    "followups": 1,
+    "calibration_excluded": [
+      "D02"
+    ],
+    "independent_human_review": "unverified",
+    "source_review": "agent only",
+    "actual_evaluation": "unverified",
+    "correctness": null,
+    "citations": null,
+    "false_refusal": null,
+    "multi_turn": null,
+    "provider_latency_seconds": null,
+    "provider_calls": 0,
+    "cost_micro_cny": 0,
+    "prepare_raw_path": "apps/api/data/qa-current-20260912T165831.json",
+    "prepare_raw_sha256": "af2cf55c5cae5d40e75d6ef64ed41f23f2f7380ff0c7e8c13e44f9dc75297953",
+    "prepare_degraded": true,
+    "prepare_budget_unchanged": true,
+    "prepare_rows": [
+      {
+        "id": "D02",
+        "degraded": true,
+        "estimated_input": 7151,
+        "chat_called": false
+      },
+      {
+        "id": "H01",
+        "degraded": true,
+        "estimated_input": 10251,
+        "chat_called": false
+      },
+      {
+        "id": "H01-followup",
+        "code": "clarification_required",
+        "chat_called": false
+      },
+      {
+        "id": "H02",
+        "degraded": true,
+        "estimated_input": 16549,
+        "chat_called": false
+      },
+      {
+        "id": "H03",
+        "degraded": true,
+        "estimated_input": 17078,
+        "chat_called": false
+      },
+      {
+        "id": "H04",
+        "degraded": true,
+        "estimated_input": 15871,
+        "chat_called": false
+      },
+      {
+        "id": "H05",
+        "degraded": true,
+        "estimated_input": 7850,
+        "chat_called": false
+      },
+      {
+        "id": "H06",
+        "degraded": true,
+        "estimated_input": 15500,
+        "chat_called": false
+      },
+      {
+        "id": "H07",
+        "degraded": true,
+        "estimated_input": 13659,
+        "chat_called": false
+      },
+      {
+        "id": "H08",
+        "code": "prompt_blocked",
+        "chat_called": false
+      }
+    ],
+    "note": "Source/expected quote validation passed. Followup has no real prior answer in prepare. No tuning based on holdout outputs."
+  },
+  "full_chain": {
+    "status": "unverified",
+    "page_observation": "ERR_CONNECTION_REFUSED at http://127.0.0.1:3101",
+    "actual_model_dispatches": 0,
+    "sse": null,
+    "followup": null,
+    "refresh_restore": null,
+    "reason": "Signed unresolved attempt blocks new paid work; development online budgets cannot substitute for evaluation ledger"
+  },
+  "scope_update": {
+    "date": "2026-09-13",
+    "goal": "Repair assistant answers and run the real page-to-model-to-SSE-followup-refresh flow",
+    "cancelled": [
+      "physical_mobile_acceptance",
+      "manual_screen_reader_acceptance"
+    ],
+    "cancellation_is_pass": false,
+    "additional_acceptance_matrix": false,
+    "q6": "cancelled",
+    "budget_and_unknown_unchanged": true
+  },
+  "latest_live_result": "Q5-live-results.json"
+}

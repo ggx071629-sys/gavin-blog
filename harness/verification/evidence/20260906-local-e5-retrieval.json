@@ -1,0 +1,866 @@
+{
+  "schema_version": 2,
+  "task_id": "20260906-local-e5-retrieval",
+  "created_at": "2026-09-06T09:44:07.465626+00:00",
+  "command": "python -m tools.harness verify 20260906-local-e5-retrieval",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "harness-integrity",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "harness-integrity",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "harness-integrity",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "harness-integrity",
+        "api-tests"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "b7f7eb21d671dd33aa23acfb7bbdd074d3910379",
+    "active_spec_sha256": "ac5c675d2c47d7bf60c0a42cf5d682d5c998a1606f11f5931ddc03ad69af441d",
+    "verification_contract_sha256": "ae5ce3b051f515a816f58dd44b0340991ca092120c3cc59d2ab21b2116c61b55",
+    "gate_config_sha256": "208585784efc38f1fedb07e2960a8edb0e8cde87ff78307cdc8673cadef6cb3d",
+    "documentation_contract_sha256": "2fc14122e01b784c76a1b71e718aef024b945e1d082281379fcd0ed1e15eac68",
+    "documentation_targets_sha256": "5f0a7bf708ef1f716cd2e90e05f1bc1b8d2966a774c702cb0a213a90b02b1345",
+    "module_contract_sha256": "a3eba3daa535541b473058033774a4f6219d288e28ce26b67e467b91b450a9d4"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "新增独立模型进程、固定制品、token 切片及真实本地检索操作，需明确身份、资源和运维边界。",
+    "targets": [
+      "apps/api/README.md",
+      "harness/docs/architecture/boundaries.md",
+      "harness/docs/decisions/20260906-local-e5-retrieval.md"
+    ],
+    "baseline_commit": "c48ffed289cb942665c410bc84a1535929e39aa7",
+    "target_blobs": {
+      "apps/api/README.md": "bed2458b4c7c48b9c51e540956a78458228417cf",
+      "harness/docs/architecture/boundaries.md": "545ab9554a978654099ecc5a5662bb4e58423b36",
+      "harness/docs/decisions/20260906-local-e5-retrieval.md": "4a95dc17e982d942e69aae5127a91229ea75f3d8"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "a1365c6cae6c45eb931805cd585ffbb54dd65407",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260906-local-e5-retrieval.json",
+      "sha256": "ef1935d9c1c4818914a3bb101bf82919e3d91f7739d3e9b6bfebd7743106974d",
+      "selected_cases": [
+        "M09-E5-ADAPTER-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-CHUNK-01",
+        "M10-E5-LOCAL-01",
+        "M10-E5-SERVICE-01"
+      ],
+      "selected_refs": 20,
+      "excluded_cases": 174
+    },
+    "receipt": {
+      "run_id": "f1165b25587447f720576f639c3731ba",
+      "identity": "2654c22f366e37636ba703a312dc4fb3d5ebd7f97c206bfa5966c560b63b9e05",
+      "plan": [
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1590.307,
+      "plan_inputs": 1254.838,
+      "execute_cleanup_and_input_recheck": 15738.136
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "a3eba3daa535541b473058033774a4f6219d288e28ce26b67e467b91b450a9d4",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "harness-integrity",
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M10-E5-ARTIFACT-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "固定制品和单模型owner启动",
+            "expectations": [
+              {
+                "id": "M10-E5-ARTIFACT-01-E01",
+                "surface": "response",
+                "statement": "正确哈希与独占owner成功"
+              },
+              {
+                "id": "M10-E5-ARTIFACT-01-E02",
+                "surface": "forbidden",
+                "statement": "缺失/变更制品和第二owner不能启动"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_local_e5.py",
+                "kind": "pytest",
+                "name": "test_artifact_hash_missing_and_changed_fail_closed",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-ARTIFACT-01-E01",
+                  "M10-E5-ARTIFACT-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_e5.py",
+                "kind": "pytest",
+                "name": "test_service_owner_lock_prevents_second_process",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-ARTIFACT-01-E01",
+                  "M10-E5-ARTIFACT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "harness-integrity",
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M10-E5-SERVICE-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "内部E5协议及跨调用者排队",
+            "expectations": [
+              {
+                "id": "M10-E5-SERVICE-01-E01",
+                "surface": "response",
+                "statement": "鉴权、384维向量、usage、float/base64、query优先可观测"
+              },
+              {
+                "id": "M10-E5-SERVICE-01-E02",
+                "surface": "forbidden",
+                "statement": "无鉴权、非法输入、超限及队列满不能推理"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_local_e5.py",
+                "kind": "pytest",
+                "name": "test_service_contract_auth_usage_encoding_and_rejections",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-SERVICE-01-E01",
+                  "M10-E5-SERVICE-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_e5.py",
+                "kind": "pytest",
+                "name": "test_service_single_inference_priority_queue_and_timeout",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-SERVICE-01-E01",
+                  "M10-E5-SERVICE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "harness-integrity",
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-E5-ADAPTER-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "E5角色与模型事实",
+            "expectations": [
+              {
+                "id": "M09-E5-ADAPTER-01-E01",
+                "surface": "response",
+                "statement": "query/passage分流，版本usage核验；通用provider保留unknown"
+              },
+              {
+                "id": "M09-E5-ADAPTER-01-E02",
+                "surface": "forbidden",
+                "statement": "漂移身份及超长文本不得被接受"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_local_e5.py",
+                "kind": "pytest",
+                "name": "test_e5_adapter_roles_identity_and_usage",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-E5-ADAPTER-01-E01",
+                  "M09-E5-ADAPTER-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_facts.py",
+                "kind": "pytest",
+                "name": "test_embedding_missing_usage_and_identity_are_unknown_not_estimated",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-E5-ADAPTER-01-E01",
+                  "M09-E5-ADAPTER-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_facts.py",
+                "kind": "pytest",
+                "name": "test_embedding_preserves_only_provider_reported_usage_and_model",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-E5-ADAPTER-01-E01",
+                  "M09-E5-ADAPTER-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M10-E5-CHUNK-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "固定token切片",
+            "expectations": [
+              {
+                "id": "M10-E5-CHUNK-01-E01",
+                "surface": "response",
+                "statement": "保留标题、尾部、源版本，最终input符合512token"
+              },
+              {
+                "id": "M10-E5-CHUNK-01-E02",
+                "surface": "forbidden",
+                "statement": "新发布版本不得复用chunkID，不得静默截断"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_local_e5.py",
+                "kind": "pytest",
+                "name": "test_e5_chunks_preserve_content_versions_and_token_limit",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-CHUNK-01-E01",
+                  "M10-E5-CHUNK-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_index.py",
+                "kind": "pytest",
+                "name": "test_chunker_is_deterministic_and_strips_html_noise",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-CHUNK-01-E01",
+                  "M10-E5-CHUNK-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_e5.py",
+                "kind": "pytest",
+                "name": "test_worker_rejects_embedding_into_old_generation_before_call",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-CHUNK-01-E01",
+                  "M10-E5-CHUNK-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-E5-QUERY-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "完整问题和瞬态历史",
+            "expectations": [
+              {
+                "id": "M09-E5-QUERY-01-E01",
+                "surface": "response",
+                "statement": "只用剩余token容纳历史，超长问题显式降级"
+              },
+              {
+                "id": "M09-E5-QUERY-01-E02",
+                "surface": "forbidden",
+                "statement": "不得截掉当前问题或保存历史query到checkpoint"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_local_e5.py",
+                "kind": "pytest",
+                "name": "test_e5_query_preserves_complete_current_and_lexical_degrades",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-E5-QUERY-01-E01",
+                  "M09-E5-QUERY-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "kind": "pytest",
+                "name": "test_retrieval_query_preserves_current_question_under_long_history",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-E5-QUERY-01-E01",
+                  "M09-E5-QUERY-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "kind": "pytest",
+                "name": "test_resume_discards_cached_vector_when_history_query_changes",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-E5-QUERY-01-E01",
+                  "M09-E5-QUERY-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "kind": "pytest",
+                "name": "test_history_query_is_transient_and_never_enters_langgraph_state",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-E5-QUERY-01-E01",
+                  "M09-E5-QUERY-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_e5.py",
+                "kind": "pytest",
+                "name": "test_graph_overlong_e5_query_skips_embedding_and_releases_reservation",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-E5-QUERY-01-E01",
+                  "M09-E5-QUERY-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "harness-integrity",
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M10-E5-LOCAL-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "真实检索入口和既有Worker切换",
+            "expectations": [
+              {
+                "id": "M10-E5-LOCAL-01-E01",
+                "surface": "response",
+                "statement": "开发配置、重建检索与引用版本过滤可观测"
+              },
+              {
+                "id": "M10-E5-LOCAL-01-E02",
+                "surface": "forbidden",
+                "statement": "真实入口不能启用Chat/gate，失效内容不能返回"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_local_e5.py",
+                "kind": "pytest",
+                "name": "test_local_mode_configuration_rejects_online_and_identity_drift",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-LOCAL-01-E01",
+                  "M10-E5-LOCAL-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_index.py",
+                "kind": "pytest",
+                "name": "test_worker_rebuild_retriever_and_staleness",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-LOCAL-01-E01",
+                  "M10-E5-LOCAL-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_index.py",
+                "kind": "pytest",
+                "name": "test_retriever_degrades_without_dense_and_is_not_ready_without_fts",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-LOCAL-01-E01",
+                  "M10-E5-LOCAL-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "kind": "pytest",
+                "name": "test_rebuild_request_is_durable_and_finalize_leaves_gate_disabled",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-LOCAL-01-E01",
+                  "M10-E5-LOCAL-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_e5.py",
+                "kind": "pytest",
+                "name": "test_repeated_rebuild_reuses_ready_staging",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-LOCAL-01-E01",
+                  "M10-E5-LOCAL-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 6.127,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "113 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 196.092,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 72.195,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.505,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "791 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 744.852,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "222 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 62.995,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "10 modules, 180 cases, 360 expectations, 700 exact test references; contract sha256 a3eba3daa535"
+      ],
+      "status": "passed",
+      "duration_ms": 414.541,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.484,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.857,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 77.038,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "duration_ms": 1642.596,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "f1165b25587447f720576f639c3731ba",
+        "attempt_id": "87299199f561e5bd067e06e6eb5d9e06"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260906-local-e5-retrieval --gate api-tests",
+      "status": "passed",
+      "duration_ms": 12155.093,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 3439,
+        "selection_counts": {
+          "collected": 20,
+          "executed": 20
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_e5.py",
+                "name": "test_e5_adapter_roles_identity_and_usage"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_facts.py",
+                "name": "test_embedding_missing_usage_and_identity_are_unknown_not_estimated"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_facts.py",
+                "name": "test_embedding_preserves_only_provider_reported_usage_and_model"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_e5.py",
+                "name": "test_e5_query_preserves_complete_current_and_lexical_degrades"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "name": "test_retrieval_query_preserves_current_question_under_long_history"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "name": "test_resume_discards_cached_vector_when_history_query_changes"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "name": "test_history_query_is_transient_and_never_enters_langgraph_state"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_e5.py",
+                "name": "test_graph_overlong_e5_query_skips_embedding_and_releases_reservation"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_e5.py",
+                "name": "test_artifact_hash_missing_and_changed_fail_closed"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_e5.py",
+                "name": "test_service_owner_lock_prevents_second_process"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_e5.py",
+                "name": "test_e5_chunks_preserve_content_versions_and_token_limit"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_chunker_is_deterministic_and_strips_html_noise"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_e5.py",
+                "name": "test_worker_rejects_embedding_into_old_generation_before_call"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_e5.py",
+                "name": "test_local_mode_configuration_rejects_online_and_identity_drift"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_worker_rebuild_retriever_and_staleness"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_retriever_degrades_without_dense_and_is_not_ready_without_fts"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "name": "test_rebuild_request_is_durable_and_finalize_leaves_gate_disabled"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_e5.py",
+                "name": "test_repeated_rebuild_reuses_ready_staging"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_e5.py",
+                "name": "test_service_contract_auth_usage_encoding_and_rejections"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_e5.py",
+                "name": "test_service_single_inference_priority_queue_and_timeout"
+              }
+            ],
+            "duration_ms": 11702.116,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\f1165b25587447f720576f639c3731ba\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "f1165b25587447f720576f639c3731ba",
+        "attempt_id": "deb8ebec7aa8e05538adc6afd2ebf4ff"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1597.96,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 16982.335,
+    "failures": []
+  },
+  "source_commit": "a1365c6cae6c45eb931805cd585ffbb54dd65407"
+}

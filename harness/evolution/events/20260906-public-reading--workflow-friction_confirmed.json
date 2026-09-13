@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "event_type": "workflow.friction_confirmed",
+  "task_id": "20260906-public-reading",
+  "created_at": "2026-09-05T19:09:57.431668+00:00",
+  "source": "manual",
+  "reason": "用户基于第三阶段测试复盘要求编写 Harness 本身的改造方案。已核实八轮正式验收、按文件重复启动及干净检出预检缺口；本次仅形成待评审方案，不应用运行逻辑、复用策略或质量规则。",
+  "may_modify_agents_md": false
+}

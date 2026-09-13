@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260911-assistant-gap-closure",
+  "created_at": "2026-09-11T15:53:52.920850+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "a993b4ac1ee7fc9dcb69a0b0cc740e87db8ce3cddb40586697f7358247b5e853"
+}

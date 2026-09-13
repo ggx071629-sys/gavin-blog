@@ -1,0 +1,743 @@
+{
+  "schema_version": 2,
+  "task_id": "20260905-assistant-dev-integration",
+  "created_at": "2026-09-04T21:48:20.647820+00:00",
+  "command": "python -m tools.harness verify 20260905-assistant-dev-integration",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "web-quality",
+        "e2e",
+        "harness-tests",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "web-quality",
+        "e2e",
+        "harness-tests",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-tests",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "harness-tests",
+        "harness-integrity",
+        "release"
+      ]
+    }
+  ],
+  "verification_profile": "release",
+  "fingerprints": {
+    "source_tree": "091ebeb5b43149ebfec778ec30a359c24fa5521d",
+    "active_spec_sha256": "bb0ec54603dcda50e34b9a94a0f7b5b4b7d7176cce13c675c79d9b91e5dcbf9f",
+    "verification_contract_sha256": "3238d86f79fd0909b4704d7cd18d31ef277790b628cec42ba4f9d8e67f94b72a",
+    "gate_config_sha256": "8cf795c32d3b3f55b530f589c6295f031d0c2d13c35139dc0443b7f5500aed40",
+    "documentation_contract_sha256": "6699c02a569acdd1f54322dbf615fc07e8392a47693813508aa3a798912492c2",
+    "documentation_targets_sha256": "febd32f3990db340594ee5ade7bad7ef9fe2b9d0516b13a2073ded426e991fa5",
+    "module_contract_sha256": "68c0e1666cec3ffddda750ffa4f009994b90194ab58504a6bc038ec941ff48c2"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "本任务新增开发者实际使用的根命令、数据来源、离线 provider 边界和安全默认值，必须在项目与两个应用边界文档中长期说明。",
+    "targets": [
+      "README.md",
+      "apps/api/README.md",
+      "apps/web/README.md"
+    ],
+    "baseline_commit": "b9dae7433d9fd83659cef9ae74d5bc26267c54f7",
+    "target_blobs": {
+      "README.md": "975ec1f792a91442a91c9da84d82a577ca4e3bc9",
+      "apps/api/README.md": "045d0ad028dfd61865dc745ab67f742ff68a850e",
+      "apps/web/README.md": "ed7078ce26ef09fc65bfa814598905edb920d2d2"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "adc114c118fb80f9238243119780e5d1ad190246",
+    "cleanup_status": "passed",
+    "reused_paths": 3
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "68c0e1666cec3ffddda750ffa4f009994b90194ab58504a6bc038ec941ff48c2",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "web-quality",
+          "e2e",
+          "harness-tests",
+          "release"
+        ],
+        "cases": [
+          {
+            "id": "M09-P1-02",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "官方本地开发命令复用现有内容库，并在真实页面提供离线带引用问答。",
+            "expectations": [
+              {
+                "id": "M09-P1-02-E01",
+                "surface": "user_visible",
+                "statement": "启动后公开页面显示问 Gavin 悬浮入口，针对现有已发布文章的问题返回相关中文摘录、引用与来源路径。"
+              },
+              {
+                "id": "M09-P1-02-E02",
+                "surface": "forbidden",
+                "statement": "专用命令只绑定回环 Web/API，使用临时 runtime、离线 provider 和独立开发构建目录，并保留普通启动的默认关闭语义。"
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_development.py",
+                "kind": "pytest",
+                "name": "test_local_development_uses_existing_content_and_returns_citations",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-P1-02-E01"
+                ]
+              },
+              {
+                "path": "apps/web/tests/unit/assistant-development.test.ts",
+                "kind": "vitest",
+                "name": "tracked assistant development entry is loopback-only and preserves normal defaults",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-P1-02-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-P1-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "启用的确定性测试消费层恢复 active turn、支持多轮并 fence 删除后的迟到响应。",
+            "expectations": [
+              {
+                "id": "M09-P1-01-E01",
+                "surface": "user_visible",
+                "statement": "进行中的问题在 reload 后恢复为锁定状态，完成后显示答案，多轮问答和来源导航保持可用。"
+              },
+              {
+                "id": "M09-P1-01-E02",
+                "surface": "forbidden",
+                "statement": "同一 active turn 不得重复提交；确认 DELETE 后迟到 GET 不得复活正文，且响应式页面不得同时拥有两个模态对话框。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+                "kind": "playwright",
+                "name": "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay",
+                "gate": "e2e",
+                "covers": [
+                  "M09-P1-01-E01",
+                  "M09-P1-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "web-quality",
+          "e2e",
+          "harness-tests",
+          "release"
+        ],
+        "cases": [
+          {
+            "id": "M09-P0-03",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P0",
+            "scenario": "本地问答开发旁路在非开发环境、非回环来源或普通启动中保持关闭。",
+            "expectations": [
+              {
+                "id": "M09-P0-03-E01",
+                "surface": "response",
+                "statement": "API 开发配置拒绝非 development 环境和非回环 Web origin。"
+              },
+              {
+                "id": "M09-P0-03-E02",
+                "surface": "forbidden",
+                "statement": "普通 Nuxt dev/build/preview 未携带专用构建标记时不得获得直接回环代理身份或自动显示 launcher。"
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_development.py",
+                "kind": "pytest",
+                "name": "test_local_development_settings_fail_closed_outside_development",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-P0-03-E01"
+                ]
+              },
+              {
+                "path": "apps/web/tests/unit/assistant-development.test.ts",
+                "kind": "vitest",
+                "name": "tracked assistant development entry is loopback-only and preserves normal defaults",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-P0-03-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-P0-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P0",
+            "scenario": "默认关闭的公开问答 UI 对普通页面保持零挂载和零网络副作用。",
+            "expectations": [
+              {
+                "id": "M09-P0-01-E01",
+                "surface": "user_visible",
+                "statement": "关闭 UI flag 时，普通公开页面完成水合且不渲染问答 launcher 或 panel。"
+              },
+              {
+                "id": "M09-P0-01-E02",
+                "surface": "forbidden",
+                "statement": "关闭 UI flag 时，浏览器不得向任何 /api/v1/assistant 路径发起请求。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/assistant-disabled.spec.ts",
+                "kind": "playwright",
+                "name": "disabled assistant flag never mounts a launcher or assistant API traffic",
+                "gate": "e2e",
+                "covers": [
+                  "M09-P0-01-E01",
+                  "M09-P0-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-P0-02",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P0",
+            "scenario": "API runtime 未配置时公开问答 capability 默认不可用。",
+            "expectations": [
+              {
+                "id": "M09-P0-02-E01",
+                "surface": "response",
+                "statement": "默认运行时对公开问答 session、turn 与 source 路由返回不可用响应。"
+              },
+              {
+                "id": "M09-P0-02-E02",
+                "surface": "forbidden",
+                "statement": "仅存在路由或前端 flag 不得使未配置的问答 runtime 接受公开请求。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_online.py",
+                "kind": "pytest",
+                "name": "test_disabled_assistant_routes_are_unavailable_without_runtime",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-P0-02-E01",
+                  "M09-P0-02-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "api-tests",
+          "harness-tests",
+          "release"
+        ],
+        "cases": [
+          {
+            "id": "M09-P1-02",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "官方本地开发命令复用现有内容库，并在真实页面提供离线带引用问答。",
+            "expectations": [
+              {
+                "id": "M09-P1-02-E01",
+                "surface": "user_visible",
+                "statement": "启动后公开页面显示问 Gavin 悬浮入口，针对现有已发布文章的问题返回相关中文摘录、引用与来源路径。"
+              },
+              {
+                "id": "M09-P1-02-E02",
+                "surface": "forbidden",
+                "statement": "专用命令只绑定回环 Web/API，使用临时 runtime、离线 provider 和独立开发构建目录，并保留普通启动的默认关闭语义。"
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_development.py",
+                "kind": "pytest",
+                "name": "test_local_development_uses_existing_content_and_returns_citations",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-P1-02-E01"
+                ]
+              },
+              {
+                "path": "apps/web/tests/unit/assistant-development.test.ts",
+                "kind": "vitest",
+                "name": "tracked assistant development entry is loopback-only and preserves normal defaults",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-P1-02-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "release",
+                "mode": "subsumed"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "harness-tests",
+          "harness-integrity",
+          "release"
+        ],
+        "cases": [
+          {
+            "id": "M09-P1-02",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "官方本地开发命令复用现有内容库，并在真实页面提供离线带引用问答。",
+            "expectations": [
+              {
+                "id": "M09-P1-02-E01",
+                "surface": "user_visible",
+                "statement": "启动后公开页面显示问 Gavin 悬浮入口，针对现有已发布文章的问题返回相关中文摘录、引用与来源路径。"
+              },
+              {
+                "id": "M09-P1-02-E02",
+                "surface": "forbidden",
+                "statement": "专用命令只绑定回环 Web/API，使用临时 runtime、离线 provider 和独立开发构建目录，并保留普通启动的默认关闭语义。"
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_development.py",
+                "kind": "pytest",
+                "name": "test_local_development_uses_existing_content_and_returns_citations",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-P1-02-E01"
+                ]
+              },
+              {
+                "path": "apps/web/tests/unit/assistant-development.test.ts",
+                "kind": "vitest",
+                "name": "tracked assistant development entry is loopback-only and preserves normal defaults",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-P1-02-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "release",
+                "mode": "subsumed"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "release",
+                "mode": "subsumed"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.663
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "102 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 182.351
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 55.227
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.543
+    },
+    {
+      "name": "links",
+      "details": [
+        "447 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1696.687
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "205 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 51.269
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "10 modules, 34 cases, 68 expectations, 44 exact test references; contract sha256 68c0e1666cec"
+      ],
+      "status": "passed",
+      "duration_ms": 18314.567
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.056
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.43
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 77.389
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m pytest",
+      "status": "passed",
+      "duration_ms": 107743.867,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 269,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "npm run quality:web",
+      "status": "passed",
+      "duration_ms": 279377.005,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 166,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "npm run test:e2e",
+      "status": "passed",
+      "duration_ms": 178817.957,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 53,
+          "failed": 0,
+          "skipped": 1
+        }
+      }
+    },
+    {
+      "name": "harness-tests",
+      "kind": "product",
+      "command": "{api_python} -m pytest harness/verification/tests",
+      "status": "passed",
+      "duration_ms": 38975.271,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 177,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{api_python} -m tools.harness verify",
+      "status": "passed",
+      "duration_ms": 21060.24,
+      "covers": [
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "release",
+      "kind": "product",
+      "command": "npm run quality:release",
+      "status": "passed",
+      "duration_ms": 659534.342,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 665,
+          "failed": 0,
+          "skipped": 1
+        },
+        "subsumption": {
+          "contract_sha256": "c929f5ae306c7c4fca938963e97e657a000c5f5f9b13dd5f9037c0ecb10b37c6",
+          "verified": [
+            {
+              "gate": "api-lint",
+              "stage": "api-lint"
+            },
+            {
+              "gate": "api-typecheck",
+              "stage": "api-typecheck"
+            },
+            {
+              "gate": "api-tests",
+              "stage": "api-tests"
+            },
+            {
+              "gate": "harness-tests",
+              "stage": "harness-tests"
+            },
+            {
+              "gate": "web-quality",
+              "stage": "web-quality"
+            },
+            {
+              "gate": "e2e",
+              "stage": "core-e2e"
+            },
+            {
+              "gate": "harness-integrity",
+              "stage": "harness-integrity"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 988.321,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 17,
+      "passed": 17,
+      "failed": 0
+    },
+    "duration_ms": 1306891.185,
+    "failures": [],
+    "test_counts": {
+      "passed": 1330,
+      "failed": 0,
+      "skipped": 2
+    }
+  },
+  "source_commit": "adc114c118fb80f9238243119780e5d1ad190246"
+}

@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "task_id": "20260912-assistant-current-query",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/graph.py",
+      "owner": "M09.runtime",
+      "reason": "Reorders only transient retrieval query to current then newest history; keeps state, budgets, provider dispatch, APIs and vector fingerprint validation.",
+      "cases": [
+        "M09-E5-QUERY-01",
+        "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-REMEDIATION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "This consumer does not consume the transient query helper; its apps/api/scripts/assistant_readiness.py:1 imports app.assistant.readiness; apps/api/scripts/provision_assistant_runtime.py:1 imports app.assistant.provisioning; apps/api/scripts/run_assistant_dev.py:16 imports app.assistant.provisioning; apps/api/scripts/run_assistant_e2e.py:14 imports app.assistant.constants; apps/api/scripts/run_assistant_e2e.py:20 imports app.assistant.provisioning is unchanged."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "This consumer does not consume the transient query helper; its apps/api/app/content_write_fence.py:7 imports app.assistant.owner_lock is unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "This consumer does not consume the transient query helper; its apps/api/app/config.py:136 imports app.assistant.validation; apps/api/app/main.py:183 imports app.assistant.routes; apps/api/app/main.py:49 imports app.assistant.runtime; apps/api/app/main.py:53 imports app.assistant.test_bootstrap; apps/api/app/main.py:63 imports app.assistant.runtime; apps/api/app/main.py:88 imports app.assistant.errors is unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "This consumer does not consume the transient query helper; its Session/SSE HTTP contracts consumed by assistant client is unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "This consumer does not consume the transient query helper; its apps/api/app/assistant/development.py:23 imports app.assistant.constants; apps/api/app/assistant/development.py:24 imports app.assistant.readiness is unchanged."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "This consumer does not consume the transient query helper; its apps/api/app/assistant/providers.py:23 imports app.assistant.constants is unchanged."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "This consumer does not consume the transient query helper; its apps/api/app/assistant_index/index_ledger.py:12 imports app.assistant.constants; apps/api/app/assistant_index/index_ledger.py:19 imports app.assistant.crypto; apps/api/app/assistant_index/index_ledger.py:20 imports app.assistant.money; apps/api/app/assistant_index/index_ledger.py:22 imports app.assistant.time_beijing; apps/api/app/assistant_index/runtime.py:11 imports app.assistant.crypto; apps/api/app/assistant_index/worker.py:13 imports app.assistant.crypto; apps/api/app/assistant_index/worker.py:14 imports app.assistant.errors; apps/api/app/assistant_index/worker.py:547 imports app.assistant.time_beijing; apps/api/app/assistant_index/worker.py:913 imports app.assistant.time_beijing; apps/api/app/assistant_index/worker_control.py:9 imports app.assistant.crypto is unchanged."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "This consumer does not consume the transient query helper; its apps/api/app/assistant/admin_operations.py:51 imports app.assistant.crypto; apps/api/app/assistant/admin_operations.py:52 imports app.assistant.money; apps/api/app/assistant/admin_operations.py:53 imports app.assistant.operational; apps/api/app/assistant/admin_operations.py:61 imports app.assistant.readiness; apps/api/app/assistant/admin_operations.py:62 imports app.assistant.recovery; apps/api/app/assistant/admin_operations.py:63 imports app.assistant.store; apps/api/app/assistant/admin_operations.py:64 imports app.assistant.time_beijing is unchanged."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "This consumer does not consume the transient query helper; its apps/api/app/assistant_qualification/backup_restore.py:17 imports app.assistant.provisioning; apps/api/app/assistant_qualification/backup_restore.py:18 imports app.assistant.recovery; apps/api/app/assistant_qualification/provider_probe.py:16 imports app.assistant.constants; apps/api/app/assistant_qualification/provider_probe.py:17 imports app.assistant.crypto; apps/api/app/assistant_qualification/provider_probe.py:18 imports app.assistant.graph; apps/api/app/assistant_qualification/provider_probe.py:19 imports app.assistant.money; apps/api/app/assistant_qualification/provider_probe.py:20 imports app.assistant.owner_lock is unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/local_embedding/tokenization.py",
+      "owner": "M10.local_e5",
+      "reason": "Reorders query history after current text while retaining the complete-current and 512-token checks; chunking, model representation, transport and index identity are unchanged.",
+      "cases": [
+        "M09-E5-QUERY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Only query concatenation order changes; tokenizer count/split, model identity, index projection, embedding HTTP contract and return types are unchanged. Online query behavior is explicitly exercised by M09-E5-QUERY-01 in this task."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Only query concatenation order changes; tokenizer count/split, model identity, index projection, embedding HTTP contract and return types are unchanged. Online query behavior is explicitly exercised by M09-E5-QUERY-01 in this task."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only query concatenation order changes; tokenizer count/split, model identity, index projection, embedding HTTP contract and return types are unchanged. Online query behavior is explicitly exercised by M09-E5-QUERY-01 in this task."
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Only query concatenation order changes; tokenizer count/split, model identity, index projection, embedding HTTP contract and return types are unchanged. Online query behavior is explicitly exercised by M09-E5-QUERY-01 in this task."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Only query concatenation order changes; tokenizer count/split, model identity, index projection, embedding HTTP contract and return types are unchanged. Online query behavior is explicitly exercised by M09-E5-QUERY-01 in this task."
+        },
+        {
+          "unit": "M10.integrity",
+          "affected": false,
+          "reason": "Only query concatenation order changes; tokenizer count/split, model identity, index projection, embedding HTTP contract and return types are unchanged. Online query behavior is explicitly exercised by M09-E5-QUERY-01 in this task."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+      "owner": "M09.runtime",
+      "reason": "Strengthens existing exact refs with final MATCH and real FTS assertions; updates the expected transient query order and preserves checkpoint/fingerprint regressions.",
+      "cases": [
+        "M09-E5-QUERY-01",
+        "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-REMEDIATION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_local_e5.py",
+      "owner": "M10.local_e5",
+      "reason": "Adds final MATCH assertions for topic changes, Chinese terms and recent referent context to the existing bounded-query test.",
+      "cases": [
+        "M09-E5-QUERY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        },
+        {
+          "unit": "M10.integrity",
+          "affected": false,
+          "reason": "Test-only assertions; no runtime consumer contract changes."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "Documents query ordering, term limits and remaining semantic boundaries without changing an executable contract.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Strengthens observable expectations of the existing query cases; retains case identity and exact refs. Structure and selected runners validate the updated assertions.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Updates expectation descriptions of existing exact refs only; no runner, selector, schema or dependency algorithm change. Structural validation and selected tests cover the contract."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Updates expectation descriptions of existing exact refs only; no runner, selector, schema or dependency algorithm change. Structural validation and selected tests cover the contract."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Updates expectation descriptions of existing exact refs only; no runner, selector, schema or dependency algorithm change. Structural validation and selected tests cover the contract."
+        }
+      ]
+    }
+  ]
+}

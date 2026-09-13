@@ -1,0 +1,2512 @@
+{
+  "schema_version": 1,
+  "task_id": "20260906-local-real-qa",
+  "changes": [
+    {
+      "path": "apps/api/.env.example",
+      "owner": "M06.api_tooling",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-CONCURRENCY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "记录本机启停、故障、费用与容量限制；普通文档及索引，不改变执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "由Harness链接、索引和metadata完整性检查覆盖。"
+    },
+    {
+      "path": "apps/api/app/assistant/constants.py",
+      "owner": "M09.runtime",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01",
+        "M09-LOCAL-REAL-CONCURRENCY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/development.py",
+      "owner": "M09.development",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/graph.py",
+      "owner": "M09.runtime",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01",
+        "M09-LOCAL-REAL-CONCURRENCY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/providers.py",
+      "owner": "M09.providers",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-QA-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/readiness.py",
+      "owner": "M09.runtime",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01",
+        "M09-LOCAL-REAL-CONCURRENCY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/runtime.py",
+      "owner": "M09.runtime",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01",
+        "M09-LOCAL-REAL-CONCURRENCY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/runtime_models.py",
+      "owner": "M09.runtime",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01",
+        "M09-LOCAL-REAL-CONCURRENCY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant_qualification/provider_probe.py",
+      "owner": "M10.qualification",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/assistant_runtime_migrations/versions/20260906_0004_lease_capacity.py",
+      "owner": "M09.runtime",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01",
+        "M09-LOCAL-REAL-CONCURRENCY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/scripts/run_assistant_dev.py",
+      "owner": "M06.api_tooling",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-CONCURRENCY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_deepseek.py",
+      "owner": "M09.providers",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-QA-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_development.py",
+      "owner": "M09.development",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_lease_migration.py",
+      "owner": "M09.runtime",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01",
+        "M09-LOCAL-REAL-CONCURRENCY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_real_development.py",
+      "owner": "M09.development",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/README.md",
+      "owner": "M08.documentation",
+      "reason": "记录本机启停、故障、费用与容量限制；普通文档及索引，不改变执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "由Harness链接、索引和metadata完整性检查覆盖。"
+    },
+    {
+      "path": "apps/web/components/AssistantHost.vue",
+      "owner": "M09.assistant_web",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-CITATIONS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/AssistantPanel.vue",
+      "owner": "M09.assistant_web",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-CITATIONS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+      "owner": "M09.assistant_web",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-CITATIONS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/unit/assistant.test.ts",
+      "owner": "M09.assistant_web",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-CITATIONS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/utils/assistant/citations.ts",
+      "owner": "M09.assistant_web",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-CITATIONS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "harness/docs/INDEX.md",
+      "owner": "M08.documentation",
+      "reason": "记录本机启停、故障、费用与容量限制；普通文档及索引，不改变执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "由Harness链接、索引和metadata完整性检查覆盖。"
+    },
+    {
+      "path": "harness/docs/operations/local-real-qa.md",
+      "owner": "M08.documentation",
+      "reason": "记录本机启停、故障、费用与容量限制；普通文档及索引，不改变执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "由Harness链接、索引和metadata完整性检查覆盖。"
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "追加阶段F精确case、显式迁移归属和新增消费边，不修改Harness算法。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "追加登记不改变执行器算法；由结构检查及精确测试验证。",
+          "cases": [],
+          "no_test_reason": "不存在下游行为变更。"
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "追加登记不改变执行器算法；由结构检查及精确测试验证。",
+          "cases": [],
+          "no_test_reason": "不存在下游行为变更。"
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "追加登记不改变执行器算法；由结构检查及精确测试验证。",
+          "cases": [],
+          "no_test_reason": "不存在下游行为变更。"
+        }
+      ],
+      "no_test_reason": "文档和登记由完整性检查覆盖。"
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "追加阶段F精确case、显式迁移归属和新增消费边，不修改Harness算法。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "追加登记不改变执行器算法；由结构检查及精确测试验证。",
+          "cases": [],
+          "no_test_reason": "不存在下游行为变更。"
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "追加登记不改变执行器算法；由结构检查及精确测试验证。",
+          "cases": [],
+          "no_test_reason": "不存在下游行为变更。"
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "追加登记不改变执行器算法；由结构检查及精确测试验证。",
+          "cases": [],
+          "no_test_reason": "不存在下游行为变更。"
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "追加登记不改变执行器算法；由结构检查及精确测试验证。",
+          "cases": [],
+          "no_test_reason": "不存在下游行为变更。"
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "追加登记不改变执行器算法；由结构检查及精确测试验证。",
+          "cases": [],
+          "no_test_reason": "不存在下游行为变更。"
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "追加登记不改变执行器算法；由结构检查及精确测试验证。",
+          "cases": [],
+          "no_test_reason": "不存在下游行为变更。"
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "追加登记不改变执行器算法；由结构检查及精确测试验证。",
+          "cases": [],
+          "no_test_reason": "不存在下游行为变更。"
+        }
+      ],
+      "no_test_reason": "文档和登记由完整性检查覆盖。"
+    },
+    {
+      "path": "package.json",
+      "owner": "M08.installation",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.browser_tooling",
+          "affected": false,
+          "reason": "仅新增根脚本入口，没有更改浏览器工具或依赖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.release",
+          "affected": false,
+          "reason": "release命令与锁文件未改，新开发脚本不加入发布流程。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.web_tooling",
+          "affected": false,
+          "reason": "Nuxt构建与依赖未变，开发启动只设置已有运行时配置。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "scripts/run-assistant-dev.mjs",
+      "owner": "M09.development",
+      "reason": "本机真实问答、持久预算启动及联调缺陷修复。",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01",
+        "M09-LOCAL-REAL-RUNTIME-01",
+        "M09-LOCAL-REAL-QA-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings字段和create_app默认启动接口未变；显式开发wrapper及原离线启动由选定case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型/连接与content fence协议未变；仅runtime租约迁移，其数据保持由迁移case覆盖。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01",
+            "M09-LOCAL-REAL-CONCURRENCY-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引Embedding、outbox、Worker与内容表协议未改；租约是API runtime独占控制表。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "阶段D采样/负载实现未改；补测使用同一collector，统计仅作为独立实验manifest。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-CITATIONS-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理员响应schema、状态切换和预算汇总算法未改；运营gate沿用原接口。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "显式真实启动、应用图或引用消费涉及该单元，使用同一跨端边界case验证。",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01",
+            "M09-LOCAL-REAL-RUNTIME-01",
+            "M09-LOCAL-REAL-QA-01"
+          ]
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "布局/路由/launcher flag合同未改；只改面板内部引用编号定位。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "SSE代理、身份签名和HTTP路径不变；引用载荷schema原样消费。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "管理开关和snapshot schema没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "生产profile结构/校验保持，开发probe没有生产资格。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "生产资格runner及隔离协议没有变化。",
+          "cases": [],
+          "no_test_reason": "该消费接口及行为未变，结构登记由完整性检查覆盖。"
+        }
+      ]
+    },
+    {
+      "path": "harness/docs/decisions/20260906-local-deepseek-chat.md",
+      "owner": "M08.documentation",
+      "reason": "补充本机readiness、租约迁移与saver提交边界的持久决策，普通说明不改变Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "结构和链接由完整性检查覆盖。"
+    }
+  ]
+}

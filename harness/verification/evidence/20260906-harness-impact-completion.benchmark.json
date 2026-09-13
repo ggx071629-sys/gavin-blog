@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "baseline": "9a6122c76794596d03c7751f6875dbdac22450a6",
+  "candidate": "2c05100661b26e11f4456626074689e3fee15e32",
+  "method": "Same product source/checks/dependencies, one sequential paired sample per workload, plan+status+fresh verify/close wall time; setup excluded. Web closure is retained from the prior run because exact selection/collector/input/receipt/execution sources are byte-identical; only per-pass structure path caching changed and has targeted tests.",
+  "retained_web_runner_sha256": {
+    "selected_tests.py": "185365fbae9c355870742e9a923ee9d757f05cb594fde1e7fe0c20bb3b253b02",
+    "test_collection.py": "0736164f0e1429544ffa21c1b84aa07784263ddb5171f21512f849085dcad4ef",
+    "verification_inputs.py": "b4829cdb3ae3b758a8177f0e043d0698537c0186a35a9bfe3d34159115be0f9d",
+    "verification_resume.py": "6b6e2d73a27f1b1cdcf02eb4cbfcdf5a56693187ddc28b1979574c80ad9c6e11",
+    "product_verification.py": "3b1aad6068dde96f30bca03f0089627dd60cea01da05cffdb6c1794932ef8018",
+    "impact.py": "e949f08c11307aecbf12f66c8c9346aef1ac06383dd04b4738d785aeb35123dc",
+    "isolated_verification.py": "b3a6022c8435178041d588322395779f4735ff89cd6d0b6c8c18f6032dfea1bc"
+  },
+  "retained_web_candidate": "df673e785a77365575bf28dc3318df3555eb7161",
+  "errors": [],
+  "driver_recovery": "The first disposable-repository removal encountered read-only Git objects after all CLI task cleanups/closures passed. Clear only owned temporary file read-only flags and retry removal; no tests were repeated.",
+  "samples": [
+    {
+      "version": "before",
+      "workload": "harness",
+      "kind": "real-module",
+      "status": "passed",
+      "closed": true,
+      "wall_ms": 16918.001,
+      "output_bytes": 1837,
+      "commands": [
+        {
+          "command": "plan",
+          "exit_code": 0,
+          "wall_ms": 1292.064,
+          "output_bytes": 295
+        },
+        {
+          "command": "status",
+          "exit_code": 0,
+          "wall_ms": 1300.081,
+          "output_bytes": 381
+        },
+        {
+          "command": "verify",
+          "exit_code": 0,
+          "wall_ms": 14325.856,
+          "output_bytes": 1161
+        }
+      ],
+      "executed": 1,
+      "collected": 1,
+      "kinds": [
+        "pytest"
+      ],
+      "evidence_sha256": "7e523b68b7c2f022229b1d413750bc682495214b786d1e2f9c3389f9552773f1",
+      "source_commit": "c1339a3255ed5776a5efb4607f468f867ae8f7bf",
+      "repository_removed": true
+    },
+    {
+      "version": "after",
+      "workload": "harness",
+      "kind": "real-module",
+      "status": "passed",
+      "closed": true,
+      "wall_ms": 12595.078,
+      "output_bytes": 1744,
+      "commands": [
+        {
+          "command": "plan",
+          "exit_code": 0,
+          "wall_ms": 854.701,
+          "output_bytes": 265
+        },
+        {
+          "command": "status",
+          "exit_code": 0,
+          "wall_ms": 867.506,
+          "output_bytes": 351
+        },
+        {
+          "command": "verify",
+          "exit_code": 0,
+          "wall_ms": 10872.871,
+          "output_bytes": 1128
+        }
+      ],
+      "executed": 1,
+      "collected": 1,
+      "kinds": [
+        "pytest"
+      ],
+      "evidence_sha256": "0e4cc1c94e2bed7166de94d621b83718b33d816a883e75f75109ca390ae6c8dc",
+      "source_commit": "6251056e713168e8975a569c63437a143f68a830",
+      "repository_removed": true
+    },
+    {
+      "version": "before",
+      "workload": "profile-api",
+      "kind": "real-module",
+      "status": "passed",
+      "closed": true,
+      "wall_ms": 21940.098,
+      "output_bytes": 1852,
+      "commands": [
+        {
+          "command": "plan",
+          "exit_code": 0,
+          "wall_ms": 1305.476,
+          "output_bytes": 295
+        },
+        {
+          "command": "status",
+          "exit_code": 0,
+          "wall_ms": 1295.719,
+          "output_bytes": 385
+        },
+        {
+          "command": "verify",
+          "exit_code": 0,
+          "wall_ms": 19338.903,
+          "output_bytes": 1172
+        }
+      ],
+      "executed": 1,
+      "collected": 1,
+      "kinds": [
+        "pytest"
+      ],
+      "evidence_sha256": "718f951e7d7c8de95f19e3abbfa293a159338bbb34e4d081315ba7b806ef8631",
+      "source_commit": "62f9efd76073dc63afe05c38f362cb6bc93530e7",
+      "repository_removed": true
+    },
+    {
+      "version": "after",
+      "workload": "profile-api",
+      "kind": "real-module",
+      "status": "passed",
+      "closed": true,
+      "wall_ms": 18761.352,
+      "output_bytes": 1761,
+      "commands": [
+        {
+          "command": "plan",
+          "exit_code": 0,
+          "wall_ms": 852.781,
+          "output_bytes": 265
+        },
+        {
+          "command": "status",
+          "exit_code": 0,
+          "wall_ms": 854.547,
+          "output_bytes": 355
+        },
+        {
+          "command": "verify",
+          "exit_code": 0,
+          "wall_ms": 17054.024,
+          "output_bytes": 1141
+        }
+      ],
+      "executed": 1,
+      "collected": 1,
+      "kinds": [
+        "pytest"
+      ],
+      "evidence_sha256": "fcfb48b3490c8f3d48448c54fcceeb92097070c0c8dc48796086c87d033f28e5",
+      "source_commit": "efafa45af81d7eb8094bde4a08d0d2535b3ebc46",
+      "repository_removed": true
+    },
+    {
+      "version": "after",
+      "workload": "profile-web",
+      "kind": "real-module",
+      "status": "passed",
+      "closed": true,
+      "wall_ms": 69653.889,
+      "output_bytes": 2235,
+      "commands": [
+        {
+          "command": "plan",
+          "exit_code": 0,
+          "wall_ms": 1304.482,
+          "output_bytes": 397
+        },
+        {
+          "command": "status",
+          "exit_code": 0,
+          "wall_ms": 1287.956,
+          "output_bytes": 487
+        },
+        {
+          "command": "verify",
+          "exit_code": 0,
+          "wall_ms": 67061.451,
+          "output_bytes": 1351
+        }
+      ],
+      "executed": 3,
+      "collected": 3,
+      "kinds": [
+        "playwright",
+        "pytest",
+        "vitest"
+      ],
+      "evidence_sha256": "bf4ea6457d63d163aa5c94f2469dcf8e638e5b971bd9b8c3285926275ae822aa",
+      "source_commit": "a2d938442a2b86d34d8d78875a32673aa38f27ad",
+      "repository_removed": true
+    }
+  ],
+  "prior_measurements": [
+    {
+      "candidate": "df673e785a77365575bf28dc3318df3555eb7161",
+      "errors": [
+        "profile-api: total measured cost did not improve"
+      ],
+      "samples": [
+        {
+          "version": "before",
+          "workload": "harness",
+          "status": "passed",
+          "closed": true,
+          "wall_ms": 16711.389,
+          "output_bytes": 1836
+        },
+        {
+          "version": "after",
+          "workload": "harness",
+          "status": "passed",
+          "closed": true,
+          "wall_ms": 14634.949,
+          "output_bytes": 1745
+        },
+        {
+          "version": "before",
+          "workload": "profile-api",
+          "status": "passed",
+          "closed": true,
+          "wall_ms": 21761.192,
+          "output_bytes": 1851
+        },
+        {
+          "version": "after",
+          "workload": "profile-api",
+          "status": "passed",
+          "closed": true,
+          "wall_ms": 22182.01,
+          "output_bytes": 1762
+        },
+        {
+          "version": "after",
+          "workload": "profile-web",
+          "status": "passed",
+          "closed": true,
+          "wall_ms": 69653.889,
+          "output_bytes": 2235
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Single local samples, not statistical performance claims; bytes are not model tokens.",
+    "Workload setup and dependency assembly are excluded; each paired sample measures plan, status, fresh verify and close.",
+    "The Web sample was retained after verifying unchanged execution-chain source hashes; later structure-cache and registry checks are covered by the main Harness task."
+  ]
+}

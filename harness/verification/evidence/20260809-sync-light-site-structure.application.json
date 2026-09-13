@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "task_id": "20260809-sync-light-site-structure",
+  "created_at": "2026-08-09T20:58:29.7289161+08:00",
+  "status": "passed",
+  "checks": [
+    {
+      "name": "theme-structure-red-green-unit",
+      "command": "npx vitest run tests/unit/theme-structure.test.ts",
+      "status": "passed",
+      "tests": 3,
+      "details": [
+        "Before implementation, the shared shape-token and theme-qualified public-layout assertions failed",
+        "After implementation, shared shape tokens, public selector guardrails, and all Vue dark structural utility pairs passed"
+      ]
+    },
+    {
+      "name": "theme-structure-red-green-e2e",
+      "command": "npm run test:e2e -- theme-structure.spec.ts",
+      "status": "passed",
+      "tests": 2,
+      "details": [
+        "Before implementation, light desktop home grid, first article, profile rail, and shape tokens differed from dark",
+        "After implementation, desktop home and article-list structural properties matched across themes",
+        "Eight representative public and admin routes remained overflow-free at 390px in light and dark"
+      ]
+    },
+    {
+      "name": "web-unit-tests",
+      "command": "npm run test",
+      "status": "passed",
+      "tests": 67,
+      "details": [
+        "18 Vitest files passed"
+      ]
+    },
+    {
+      "name": "web-typecheck",
+      "command": "npm run typecheck",
+      "status": "passed"
+    },
+    {
+      "name": "web-production-build",
+      "command": "npm run build",
+      "status": "passed",
+      "details": [
+        "Nuxt client and Nitro server production output completed successfully"
+      ]
+    },
+    {
+      "name": "combined-adjacent-theme-e2e",
+      "command": "npm run test:e2e -- theme-structure.spec.ts search-theme.spec.ts theme-typography.spec.ts public-experience.spec.ts",
+      "status": "failed",
+      "details": [
+        "All seven structure, search, and public navigation scenarios passed in the combined run",
+        "The desktop typography width assertion was order-sensitive in the combined run because it sampled before the webfont settled"
+      ]
+    },
+    {
+      "name": "isolated-theme-typography-e2e",
+      "command": "npm run test:e2e -- theme-typography.spec.ts",
+      "status": "passed",
+      "tests": 2,
+      "details": [
+        "Desktop and mobile typography scenarios passed in isolation without product changes"
+      ]
+    },
+    {
+      "name": "site-quality-matrix",
+      "command": "npm run test:quality",
+      "status": "passed",
+      "tests": 6,
+      "details": [
+        "Admin core production pages passed light/dark desktop/mobile visual coverage",
+        "Homepage and ten public page families passed light/dark desktop/mobile visual coverage",
+        "Public, admin, and incubator scans reported no automated WCAG A or AA violations",
+        "No horizontal overflow was reported by the matrix"
+      ]
+    },
+    {
+      "name": "lighthouse-homepage",
+      "command": "npm run test:quality",
+      "status": "passed",
+      "scores": {
+        "performance": 98,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      }
+    },
+    {
+      "name": "browser-structure-audit",
+      "status": "passed",
+      "details": [
+        "Light and dark home used the same 9/3 grid, two-row profile rail, first-article placement, and 4/8px shape scale",
+        "Light article lists rendered an opaque semantic surface with complete visible borders and 4px radius",
+        "Desktop document scroll width equaled client width"
+      ]
+    }
+  ],
+  "notes": [
+    "Light and dark retain separate semantic colors and shadow opacity; only layout, shape scale, and elevation geometry were synchronized.",
+    "Development E2E logs still expose pre-existing public-profile AsyncData option and SiteHeader theme-icon hydration warnings; the production quality matrix passed.",
+    "Build plugin-timing, large-chunk, and dependency export warnings were non-blocking and pre-existing.",
+    "Unrelated profile, API, contracts, signal, font, search, and navigation working-tree changes were preserved.",
+    "The verified spec remains active because deterministic close requires the original active spec to exist in Git history."
+  ]
+}

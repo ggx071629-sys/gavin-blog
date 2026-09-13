@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260911-assistant-about-source",
+  "created_at": "2026-09-10T17:30:27.277466+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "6ae408f292d36c4a1e0e4d6968062805d29793d7ca444ea46354218210ad9c22"
+}

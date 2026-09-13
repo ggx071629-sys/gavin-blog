@@ -1,0 +1,462 @@
+{
+  "schema_version": 2,
+  "task_id": "20260829-public-qa-web-delivery",
+  "created_at": "2026-08-28T21:13:38.425988+00:00",
+  "command": "python -m tools.harness verify 20260829-public-qa-web-delivery",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5",
+    "AC-6",
+    "AC-7",
+    "AC-8",
+    "AC-9",
+    "AC-10",
+    "AC-11",
+    "AC-12",
+    "AC-13",
+    "AC-14"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "web-quality",
+        "e2e",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "status": "passed",
+      "gates": [
+        "api-lint",
+        "api-tests",
+        "web-quality",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-6",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-7",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "web-quality",
+        "e2e",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-8",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "web-quality",
+        "e2e",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-9",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "web-quality",
+        "e2e",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-10",
+      "status": "passed",
+      "gates": [
+        "api-lint",
+        "api-tests",
+        "web-quality",
+        "e2e",
+        "harness-integrity",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-11",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-12",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-13",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e",
+        "release"
+      ]
+    },
+    {
+      "id": "AC-14",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "release"
+      ]
+    }
+  ],
+  "verification_profile": "release",
+  "fingerprints": {
+    "source_tree": "de2521098513be384112c44b7fc10720497fba74",
+    "active_spec_sha256": "e57033f2d18324c4c61a7a764eae85fb9c479dfb4618d9d4d51508d3879dc687",
+    "verification_contract_sha256": "f53d54052a55ca923768f56e319dac22a5b1891f77cf4dbd18337f5624e0ba16",
+    "gate_config_sha256": "c16d86c22303cbe983243f99580997ca517ae9cabe23fd0c24cab2c8f6e5608c",
+    "documentation_contract_sha256": "52dbdb28d8fd8e600885c558408204f6329a6edb846c369b4c4ea9065decef25",
+    "documentation_targets_sha256": "03e3ce9a435d5c16872ef63f564891c8452d2b7c8ba8fb3e37970ac0f50e7196"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "本任务把默认关闭的匿名问答后端首次接入公开 Web 消费面，并新增短会话恢复、同源 SSE、客户端隐私、无障碍浮层和双开关责任，必须同步项目、Web/API/Contracts、产品、架构、发布准备及持久决策文档。",
+    "targets": [
+      "README.md",
+      "apps/web/README.md",
+      "apps/api/README.md",
+      "packages/contracts/README.md",
+      "harness/docs/product/brief.md",
+      "harness/docs/architecture/boundaries.md",
+      "harness/docs/operations/release-readiness.md",
+      "harness/docs/decisions/20260829-public-qa-web-delivery.md"
+    ],
+    "baseline_commit": "3df6a9933be812d3ac9b5e5ffe6e3b61590b6f61",
+    "target_blobs": {
+      "README.md": "1ca39f936c452055dba54e890ceed99687964091",
+      "apps/web/README.md": "4d46d02a7ac253b08b1d1f7211aee64a62941fff",
+      "apps/api/README.md": "55b854d4123705225fc601c99f4c37bf9dcbc344",
+      "packages/contracts/README.md": "9d22fafea9e5ab9bf342e5238d7491571db163ff",
+      "harness/docs/product/brief.md": "d13d818be585ff940372c99b9e1ab8b38a876985",
+      "harness/docs/architecture/boundaries.md": "f56827b590128a5d972f36e145366f05b07b8a9a",
+      "harness/docs/operations/release-readiness.md": "11310c68506d5266da9705f11feb5324cfb21afa",
+      "harness/docs/decisions/20260829-public-qa-web-delivery.md": "1646b1643ba4be377f323a57f6f943df6c3bd140"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "a156943c71bbb4d56408b2b691a066df32f9b874",
+    "cleanup_status": "passed",
+    "reused_paths": 3
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 6 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.635
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "92 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 104.362
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 59.761
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.548
+    },
+    {
+      "name": "links",
+      "details": [
+        "404 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1550.486
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "185 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 46.881
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.144
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 68.785
+    },
+    {
+      "name": "api-lint",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-k3bwhybw\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m ruff check .",
+      "status": "passed",
+      "duration_ms": 221.754,
+      "covers": [
+        "AC-5",
+        "AC-10"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-k3bwhybw\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m pytest",
+      "status": "passed",
+      "duration_ms": 83938.028,
+      "covers": [
+        "AC-4",
+        "AC-5",
+        "AC-7",
+        "AC-8",
+        "AC-9",
+        "AC-10",
+        "AC-11",
+        "AC-12",
+        "AC-14"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 185,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "D:\\Tool\\nodejs\\npm.CMD run quality:web",
+      "status": "passed",
+      "duration_ms": 267338.518,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6",
+        "AC-7",
+        "AC-8",
+        "AC-9",
+        "AC-10",
+        "AC-13"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 148,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "D:\\Tool\\nodejs\\npm.CMD run test:e2e",
+      "status": "passed",
+      "duration_ms": 168437.945,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-6",
+        "AC-7",
+        "AC-8",
+        "AC-9",
+        "AC-10",
+        "AC-13"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 52,
+          "failed": 0,
+          "skipped": 1
+        }
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-k3bwhybw\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m tools.harness verify",
+      "status": "passed",
+      "duration_ms": 3616.515,
+      "covers": [
+        "AC-10"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "release",
+      "kind": "product",
+      "command": "D:\\Tool\\nodejs\\npm.CMD run quality:release",
+      "status": "passed",
+      "duration_ms": 540150.456,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6",
+        "AC-7",
+        "AC-8",
+        "AC-9",
+        "AC-10",
+        "AC-11",
+        "AC-12",
+        "AC-13",
+        "AC-14"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 513,
+          "failed": 0,
+          "skipped": 1
+        },
+        "subsumption": {
+          "contract_sha256": "f6cec6c9aaccc6fb8be22267b0bd735d5f14421e47cd46116194808c4af50591",
+          "verified": [
+            {
+              "gate": "api-lint",
+              "stage": "api-lint"
+            },
+            {
+              "gate": "api-tests",
+              "stage": "api-tests"
+            },
+            {
+              "gate": "harness-tests",
+              "stage": "harness-tests"
+            },
+            {
+              "gate": "web-quality",
+              "stage": "web-quality"
+            },
+            {
+              "gate": "e2e",
+              "stage": "core-e2e"
+            },
+            {
+              "gate": "harness-integrity",
+              "stage": "harness-integrity"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1313.306,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ]
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 15,
+      "passed": 15,
+      "failed": 0
+    },
+    "duration_ms": 1066860.124,
+    "failures": [],
+    "test_counts": {
+      "passed": 898,
+      "failed": 0,
+      "skipped": 2
+    }
+  },
+  "source_commit": "a156943c71bbb4d56408b2b691a066df32f9b874"
+}

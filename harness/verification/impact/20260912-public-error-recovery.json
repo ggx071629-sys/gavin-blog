@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "task_id": "20260912-public-error-recovery",
+  "changes": [
+    {
+      "path": "apps/web/composables/useApiFailure.ts",
+      "owner": "M06.transport",
+      "reason": "客户端初次 setup 失败标记为 fatal，使 Nuxt 根组件渲染既有错误页；服务端保持原有 4xx/5xx 抛出语义。",
+      "cases": [
+        "M06-PUBLIC-ERROR-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M02.editing",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "该消费者渲染目标页面并复用本次修正的共享失败呈现；修正只让客户端初次失败与服务端既有错误页一致，未改变它使用的函数签名、成功数据、路由或认证契约。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "共享失败呈现由本任务 M06-PUBLIC-ERROR-01 与 M01-PUBLIC-ERROR-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M11.web",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/error.vue",
+      "owner": "M01.navigation",
+      "reason": "错误页站内入口先清除错误状态再导航，避免错误页无条件覆盖后续页面。",
+      "cases": [
+        "M01-PUBLIC-ERROR-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "该消费者消费站点壳层；错误页自身入口修正不改变其布局、路由或数据契约。",
+          "cases": []
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "该消费者消费站点壳层；错误页自身入口修正不改变其布局、路由或数据契约。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "该消费者消费站点壳层；错误页自身入口修正不改变其布局、路由或数据契约。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "该消费者消费站点壳层；错误页自身入口修正不改变其布局、路由或数据契约。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "该消费者消费站点壳层；错误页自身入口修正不改变其布局、路由或数据契约。",
+          "cases": []
+        },
+        {
+          "unit": "M11.web",
+          "affected": false,
+          "reason": "该消费者消费站点壳层；错误页自身入口修正不改变其布局、路由或数据契约。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "该消费者消费站点壳层；错误页自身入口修正不改变其布局、路由或数据契约。",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "该消费者消费站点壳层；错误页自身入口修正不改变其布局、路由或数据契约。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "该消费者消费站点壳层；错误页自身入口修正不改变其布局、路由或数据契约。",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "该消费者消费站点壳层；错误页自身入口修正不改变其布局、路由或数据契约。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/public-experience.spec.ts",
+      "owner": "M01.navigation",
+      "reason": "新增客户端失败恢复、错误页入口与搜索关键词保持的精确回归。",
+      "cases": [
+        "M01-PUBLIC-ERROR-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "该单元依赖站点壳层；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "该单元依赖站点壳层；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "该单元依赖站点壳层；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "该单元依赖站点壳层；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "该单元依赖站点壳层；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M11.web",
+          "affected": false,
+          "reason": "该单元依赖站点壳层；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "该单元依赖站点壳层；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "该单元依赖站点壳层；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "该单元依赖站点壳层；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "该单元依赖站点壳层；只新增测试，不改变运行时代码。",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}

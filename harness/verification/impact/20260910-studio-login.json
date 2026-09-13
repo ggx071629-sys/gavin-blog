@@ -1,0 +1,352 @@
+{
+  "schema_version": 1,
+  "task_id": "20260910-studio-login",
+  "changes": [
+    {
+      "path": "apps/web/pages/admin/login.vue",
+      "owner": "M06.auth_web",
+      "reason": "Align login with selected centered design while preserving authentication and exact existing failure flows.",
+      "cases": [
+        "M06-STUDIO-LOGIN-01",
+        "M06-STUDIO-LOGIN-ERROR-01",
+        "M07-STUDIO-THEME-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/assets/css/studio.css",
+      "owner": "M07.studio_theme",
+      "reason": "Align login with selected centered design while preserving authentication and exact existing failure flows.",
+      "cases": [
+        "M06-STUDIO-LOGIN-01",
+        "M06-STUDIO-LOGIN-ERROR-01",
+        "M07-STUDIO-THEME-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": true,
+          "reason": "New CSS rules require .admin-login-shell and reach the real login consumer.",
+          "cases": [
+            "M06-STUDIO-LOGIN-01",
+            "M06-STUDIO-LOGIN-ERROR-01",
+            "M07-STUDIO-THEME-01"
+          ]
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/public/studio/README.md",
+      "owner": "M07.studio_theme",
+      "reason": "Ordinary resource documentation records centered login and preserved authentication; no executable contract or generated metadata changes.",
+      "cases": [
+        "M06-STUDIO-LOGIN-01",
+        "M06-STUDIO-LOGIN-ERROR-01",
+        "M07-STUDIO-THEME-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+      "owner": "M07.theme",
+      "reason": "Align login with selected centered design while preserving authentication and exact existing failure flows.",
+      "cases": [
+        "M06-STUDIO-LOGIN-01",
+        "M06-STUDIO-LOGIN-ERROR-01",
+        "M07-STUDIO-THEME-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Align login with selected centered design while preserving authentication and exact existing failure flows.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Existing harness-integrity verifies declarative case registration; no runner changes."
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Align login with selected centered design while preserving authentication and exact existing failure flows.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only login template/scoped layout or its test assertions changed; shared selectors, navigation helpers, component exports, API and runner behavior are unchanged.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Existing harness-integrity verifies declarative case registration; no runner changes."
+    }
+  ]
+}

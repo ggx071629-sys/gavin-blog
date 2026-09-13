@@ -1,0 +1,1146 @@
+{
+  "schema_version": 2,
+  "task_id": "20260908-chat-revalidation-recovery",
+  "created_at": "2026-09-08T16:05:54.496245+00:00",
+  "command": "python -m tools.harness verify 20260908-chat-revalidation-recovery",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "harness-integrity",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "harness-integrity",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "harness-integrity",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "harness-integrity",
+        "api-tests"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "aa03d6c55d78bcc7eb0c1da61d2a5a3724f4a8b9",
+    "active_spec_sha256": "b6bd4ed06c64bacd9439b3746020ea3f959cc96d4beaf257e5ce1e898db27c5f",
+    "verification_contract_sha256": "78bcbb2daec2e0aca8ef9ca6be48c46f4e01f579a4221a3463866e4209353bb5",
+    "gate_config_sha256": "a3fae41ee3b8674ace0996f87d84417ae300d25e389768d1262a82282269cb05",
+    "documentation_contract_sha256": "30d5cd10c39507c9b780a3ad8f19515d9799be74fc3345efff177294b238873d",
+    "documentation_targets_sha256": "9cb6979fdb611dd3239da6e5491f9fdcb04514e7e2ed8e1fe6cd6805a1bc212f",
+    "module_contract_sha256": "c563924ccece427d1379bf07c9d1dbd6f855ae810e8d358adae6398082d73647"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "说明兼容性触发、旧证据离线转换、累计授权及失败恢复命令",
+    "targets": [
+      "apps/api/README.md",
+      "harness/docs/operations/local-real-qa.md"
+    ],
+    "baseline_commit": "95e31943741456a387f962d752c60b35d5828a49",
+    "target_blobs": {
+      "apps/api/README.md": "efad453a6b5a60e262dc6d4d43805594f97c67d9",
+      "harness/docs/operations/local-real-qa.md": "97c9732946eefc27c579dae6774636edd2838f61"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "137c75c9f46801aee7a9e19204d679ad3d71c805",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260908-chat-revalidation-recovery.json",
+      "sha256": "2116f58f9f3a7de84e3e1070b1db006eca51478f7453650e7ae21b19b49f796f",
+      "selected_cases": [
+        "M09-READINESS-AGE-01",
+        "M09-READINESS-HINT-01",
+        "M09-READINESS-INVALID-01",
+        "M09-REVALIDATION-BUDGET-01",
+        "M09-REVALIDATION-CLI-01",
+        "M09-REVALIDATION-COMPAT-01",
+        "M09-REVALIDATION-RECOVERY-01"
+      ],
+      "selected_refs": 35,
+      "excluded_cases": 212
+    },
+    "receipt": {
+      "run_id": "0c15d920af67703b22d230649e9224cd",
+      "identity": "7ec1b8a01bc43719626f77f8a9bd3a59920be3d47d38951e4696fb64a8344bd1",
+      "plan": [
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 2656.913,
+      "plan_inputs": 840.233,
+      "execute_cleanup_and_input_recheck": 14527.093
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "c563924ccece427d1379bf07c9d1dbd6f855ae810e8d358adae6398082d73647",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "harness-integrity",
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-REVALIDATION-COMPAT-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "费用变化仅本地校验/重签；兼容性漂移拒绝，v1转换与新日预算授权保留原事实时间。",
+            "expectations": [
+              {
+                "id": "M09-REVALIDATION-COMPAT-01-ALLOW",
+                "surface": "response",
+                "statement": "费用变化仅本地校验/重签；兼容性漂移拒绝，v1转换与新日预算授权保留原事实时间。"
+              },
+              {
+                "id": "M09-REVALIDATION-COMPAT-01-DENY",
+                "surface": "forbidden",
+                "statement": "不得因价格或日预算变化自动调用模型，不得用费用重绑绕过凭据变化。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_compatibility_is_independent_of_cost",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-COMPAT-01-ALLOW",
+                  "M09-REVALIDATION-COMPAT-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_legacy_conversion_preserves_evidence",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-COMPAT-01-ALLOW",
+                  "M09-REVALIDATION-COMPAT-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_daily_budget_reauthorization_is_offline",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-COMPAT-01-ALLOW",
+                  "M09-REVALIDATION-COMPAT-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_changed_costs_resign_runtime_receipt_without_probe",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-COMPAT-01-ALLOW",
+                  "M09-REVALIDATION-COMPAT-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-READINESS-AGE-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "24小时及十年旧成功证据可签发、复核和重启，原费用保持；lifespan仍验证本机依赖。",
+            "expectations": [
+              {
+                "id": "M09-READINESS-AGE-01-ALLOW",
+                "surface": "response",
+                "statement": "24小时及十年旧成功证据可签发、复核和重启，原费用保持；lifespan仍验证本机依赖。"
+              },
+              {
+                "id": "M09-READINESS-AGE-01-DENY",
+                "surface": "forbidden",
+                "statement": "不得因年龄拒绝、增加Chat调用或重置费用。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_age_does_not_expire_or_spend[86400]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-AGE-01-ALLOW",
+                  "M09-READINESS-AGE-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_age_does_not_expire_or_spend[86401]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-AGE-01-ALLOW",
+                  "M09-READINESS-AGE-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_age_does_not_expire_or_spend[315360000]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-AGE-01-ALLOW",
+                  "M09-READINESS-AGE-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_old_probe_lifespan_preserves_dependency_gates[ready]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-AGE-01-ALLOW",
+                  "M09-READINESS-AGE-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-READINESS-INVALID-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "无效证据、未来时间、配置漂移和生产使用本机证据被拒绝；E5或generation失败不能启用。",
+            "expectations": [
+              {
+                "id": "M09-READINESS-INVALID-01-ALLOW",
+                "surface": "response",
+                "statement": "无效证据、未来时间、配置漂移和生产使用本机证据被拒绝；E5或generation失败不能启用。"
+              },
+              {
+                "id": "M09-READINESS-INVALID-01-DENY",
+                "surface": "forbidden",
+                "statement": "不得接受失败或不匹配证据，不得绕过生产资格或依赖门禁。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[missing]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[null]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[signature]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[failed]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[future]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[naive]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[schema]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[price]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[budget]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[production]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_old_probe_lifespan_preserves_dependency_gates[embedding]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_old_probe_lifespan_preserves_dependency_gates[generation]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_real_development_boundary_and_signed_probe",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_real_development_receipt_and_budget_persist",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_cannot_be_production_qualification",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-INVALID-01-ALLOW",
+                  "M09-READINESS-INVALID-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "harness-integrity",
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-REVALIDATION-BUDGET-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "同一路径保留旧账本原文及费用，授权按累计额度扣减，重放ID与额度耗尽拒绝。",
+            "expectations": [
+              {
+                "id": "M09-REVALIDATION-BUDGET-01-ALLOW",
+                "surface": "response",
+                "statement": "同一路径保留旧账本原文及费用，授权按累计额度扣减，重放ID与额度耗尽拒绝。"
+              },
+              {
+                "id": "M09-REVALIDATION-BUDGET-01-DENY",
+                "surface": "forbidden",
+                "statement": "禁止新ID重置费用/次数或耗尽后调用模型；生产资格保持。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_cumulative_authorization_preserves_history_and_replay",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-BUDGET-01-ALLOW",
+                  "M09-REVALIDATION-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_cost_exhaustion_lock_and_tamper_fail_closed",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-BUDGET-01-ALLOW",
+                  "M09-REVALIDATION-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_reuses_budget_and_rejects_drift",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-BUDGET-01-ALLOW",
+                  "M09-REVALIDATION-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_probe_records_allowlisted_real_provider_facts_and_bounded_cost",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-BUDGET-01-ALLOW",
+                  "M09-REVALIDATION-BUDGET-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "harness-integrity",
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-REVALIDATION-RECOVERY-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "三类失败需静止确认后追加恢复记录，原事实和保守费用保留；lock冲突和篡改拒绝。",
+            "expectations": [
+              {
+                "id": "M09-REVALIDATION-RECOVERY-01-ALLOW",
+                "surface": "response",
+                "statement": "三类失败需静止确认后追加恢复记录，原事实和保守费用保留；lock冲突和篡改拒绝。"
+              },
+              {
+                "id": "M09-REVALIDATION-RECOVERY-01-DENY",
+                "surface": "forbidden",
+                "statement": "恢复不能退费或清零次数，不能与活动探测并发，也不能产生隐式调用。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_recovery_preserves_failed_facts_and_remaining_budget[sending]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-RECOVERY-01-ALLOW",
+                  "M09-REVALIDATION-RECOVERY-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_recovery_preserves_failed_facts_and_remaining_budget[unknown]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-RECOVERY-01-ALLOW",
+                  "M09-REVALIDATION-RECOVERY-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_recovery_preserves_failed_facts_and_remaining_budget[measured_fail]",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-RECOVERY-01-ALLOW",
+                  "M09-REVALIDATION-RECOVERY-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_cost_exhaustion_lock_and_tamper_fail_closed",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-RECOVERY-01-ALLOW",
+                  "M09-REVALIDATION-RECOVERY-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "harness-integrity",
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-REVALIDATION-CLI-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "原CLI离线status/authorize与恢复参数拒绝均无模型调用；启动入口选择新证据保留原文件。",
+            "expectations": [
+              {
+                "id": "M09-REVALIDATION-CLI-01-ALLOW",
+                "surface": "response",
+                "statement": "原CLI离线status/authorize与恢复参数拒绝均无模型调用；启动入口选择新证据保留原文件。"
+              },
+              {
+                "id": "M09-REVALIDATION-CLI-01-DENY",
+                "surface": "forbidden",
+                "statement": "禁止本地操作混用生产入口或默认触发付费探测。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_cli_offline_operations_never_probe",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-CLI-01-ALLOW",
+                  "M09-REVALIDATION-CLI-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_launcher.py",
+                "name": "test_selected_probe_path_preserves_original",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-REVALIDATION-CLI-01-ALLOW",
+                  "M09-REVALIDATION-CLI-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-READINESS-HINT-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "可信提示显示最后验证时间且年龄只提示；无效配置不从旧时间误诊，失败只输出一次。",
+            "expectations": [
+              {
+                "id": "M09-READINESS-HINT-01-ALLOW",
+                "surface": "response",
+                "statement": "可信提示显示最后验证时间且年龄只提示；无效配置不从旧时间误诊，失败只输出一次。"
+              },
+              {
+                "id": "M09-READINESS-HINT-01-DENY",
+                "surface": "forbidden",
+                "statement": "不得泄露凭据、要求单纯过旧付费复验或重复打印同一失败。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_probe_notice_uses_only_validated_time",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-HINT-01-ALLOW",
+                  "M09-READINESS-HINT-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_launcher.py",
+                "name": "test_expired_probe_does_not_misdiagnose_validation_failure",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-HINT-01-ALLOW",
+                  "M09-READINESS-HINT-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_launcher.py",
+                "name": "test_start_prints_terminal_failure_once",
+                "kind": "pytest",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-READINESS-HINT-01-ALLOW",
+                  "M09-READINESS-HINT-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.372,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "126 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 163.55,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 67.604,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.748,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "912 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1890.716,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "243 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 77.225,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 219 cases, 439 expectations, 815 exact test references; contract sha256 c563924ccece"
+      ],
+      "status": "passed",
+      "duration_ms": 358.716,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.075,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.129,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 79.936,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "duration_ms": 1516.874,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "0c15d920af67703b22d230649e9224cd",
+        "attempt_id": "52d75f0e0c6713e3456b380917f5f00a"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260908-chat-revalidation-recovery --gate api-tests",
+      "status": "passed",
+      "duration_ms": 11184.805,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 6018,
+        "selection_counts": {
+          "collected": 35,
+          "executed": 35
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_age_does_not_expire_or_spend[86400]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_age_does_not_expire_or_spend[86401]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_age_does_not_expire_or_spend[315360000]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_old_probe_lifespan_preserves_dependency_gates[ready]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_probe_notice_uses_only_validated_time"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_launcher.py",
+                "name": "test_expired_probe_does_not_misdiagnose_validation_failure"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_launcher.py",
+                "name": "test_start_prints_terminal_failure_once"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[missing]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[null]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[signature]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[failed]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[future]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[naive]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[schema]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[price]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[budget]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_local_probe_invalid_evidence_stays_rejected[production]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_old_probe_lifespan_preserves_dependency_gates[embedding]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_old_probe_lifespan_preserves_dependency_gates[generation]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_real_development_boundary_and_signed_probe"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_real_development.py",
+                "name": "test_real_development_receipt_and_budget_persist"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_cannot_be_production_qualification"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_cumulative_authorization_preserves_history_and_replay"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_cost_exhaustion_lock_and_tamper_fail_closed"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_reuses_budget_and_rejects_drift"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_probe_records_allowlisted_real_provider_facts_and_bounded_cost"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_cli_offline_operations_never_probe"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_launcher.py",
+                "name": "test_selected_probe_path_preserves_original"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_compatibility_is_independent_of_cost"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_legacy_conversion_preserves_evidence"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_daily_budget_reauthorization_is_offline"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_changed_costs_resign_runtime_receipt_without_probe"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_recovery_preserves_failed_facts_and_remaining_budget[sending]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_recovery_preserves_failed_facts_and_remaining_budget[unknown]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_probe_recovery.py",
+                "name": "test_recovery_preserves_failed_facts_and_remaining_budget[measured_fail]"
+              }
+            ],
+            "duration_ms": 10815.584,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\0c15d920af67703b22d230649e9224cd\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "0c15d920af67703b22d230649e9224cd",
+        "attempt_id": "a1d743c1ec0048984cb3b63aa7f46c54"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1432.515,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 16788.265,
+    "failures": []
+  },
+  "source_commit": "137c75c9f46801aee7a9e19204d679ad3d71c805"
+}

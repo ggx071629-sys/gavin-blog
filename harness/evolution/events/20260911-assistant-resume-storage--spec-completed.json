@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260911-assistant-resume-storage",
+  "created_at": "2026-09-10T18:04:57.360997+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "14cb012956e1989c26e32e3854667513423fad04157c1594fd0b3373c9bf6432"
+}

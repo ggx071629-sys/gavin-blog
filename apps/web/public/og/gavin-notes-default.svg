@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Gavin / Notes on Building</title>
+  <desc id="description">Independent Engineering Journal</desc>
+  <rect width="1200" height="630" fill="#f8f9fa"/>
+  <path d="M0 0h18v630H0z" fill="#0969f5"/>
+  <path d="M72 74h1056M72 556h1056" stroke="#d7dae0" stroke-width="2"/>
+  <path d="M866 114h262v262H866z" fill="#f0eff8" stroke="#cfd2da" stroke-width="2"/>
+  <path d="M902 150h190v14H902zm0 42h124v14H902zm0 106h190v2H902zm0 34h148v14H902z" fill="#0969f5" opacity=".92"/>
+  <text x="74" y="130" fill="#075bc9" font-family="'Courier New', monospace" font-size="22" font-weight="700" letter-spacing="5">INDEPENDENT ENGINEERING JOURNAL</text>
+  <text x="70" y="270" fill="#17191d" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="800" letter-spacing="-4">GAVIN / NOTES</text>
+  <text x="70" y="365" fill="#17191d" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="800" letter-spacing="-4">ON BUILDING</text>
+  <text x="74" y="462" fill="#555b66" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="500">Engineering practice · incident notes · project retrospectives</text>
+  <text x="74" y="594" fill="#555b66" font-family="'Courier New', monospace" font-size="18" font-weight="700" letter-spacing="3">GAVIN / 2026</text>
+  <circle cx="1127" cy="590" r="7" fill="#0969f5"/>
+</svg>

@@ -1,0 +1,256 @@
+{
+  "record_type": "real-existing-index-repair-and-acceptance",
+  "task_id": "20260911-index-integrity",
+  "created_at": "2026-09-11T12:57:19.039825+00:00",
+  "implementation_commit": "1934eef60a82d95bc25daa3205ebfe98f82f5753",
+  "status": "passed",
+  "content_database": "apps/api/data/e5/content-verified.db",
+  "generation": 14,
+  "before": {
+    "canonical_chunks": 25,
+    "expected_chunks": 25,
+    "expected_sources": 5,
+    "fts_rows": 9,
+    "generation_id": 14,
+    "status": "failed",
+    "vector_points": 25
+  },
+  "before_defects": {
+    "fts_missing": 16,
+    "canonical": 0,
+    "vector": 0
+  },
+  "repair": {
+    "command": "python -m app.assistant_index.maintenance repair-fts --generation 14 --backup <new local backup>",
+    "inserted_or_corrected_ids": 16,
+    "content_backup_sha256": "4e69fa1c040e35517c4a377f0fac44e54aad667b84412644e3f71e2e071cd63a",
+    "changed_tables": [
+      "assistant_chunk_fts",
+      "assistant_chunk_fts_content",
+      "assistant_chunk_fts_data",
+      "assistant_chunk_fts_docsize",
+      "assistant_chunk_fts_idx"
+    ],
+    "repeat_changed_ids": 0,
+    "runtime_unchanged": true,
+    "other_generation_fts_unchanged": true,
+    "all_qdrant_collections_unchanged": 11,
+    "generation_switches": 0,
+    "embedding_calls": 0,
+    "chat_calls": 0
+  },
+  "after": {
+    "canonical_chunks": 25,
+    "expected_chunks": 25,
+    "expected_sources": 5,
+    "fts_rows": 25,
+    "generation_id": 14,
+    "issues": [],
+    "status": "passed",
+    "vector_points": 25
+  },
+  "live": {
+    "entrypoint": "scripts/local_launcher.py start --no-browser",
+    "web_api_proxy": [
+      {
+        "path": "/api/health",
+        "api": 200
+      },
+      {
+        "path": "/api/v1/articles",
+        "api": 200,
+        "web_proxy": 200,
+        "equal": true
+      },
+      {
+        "path": "/api/v1/profile",
+        "api": 200,
+        "web_proxy": 200,
+        "equal": true
+      },
+      {
+        "path": "/api/v1/about-page",
+        "api": 200,
+        "web_proxy": 200,
+        "equal": true
+      },
+      {
+        "path": "/api/v1/projects",
+        "api": 200,
+        "web_proxy": 200,
+        "equal": true
+      },
+      {
+        "path": "/api/v1/books",
+        "api": 200,
+        "web_proxy": 200,
+        "equal": true
+      },
+      {
+        "path": "/api/v1/assistant/availability",
+        "api": 200,
+        "web_proxy": 200,
+        "equal": true
+      }
+    ],
+    "availability": true,
+    "worker": {
+      "heartbeat_advances": true,
+      "first": "2026-09-11T12:54:33.512770+00:00",
+      "second": "2026-09-11T12:54:36.571901+00:00",
+      "fence": 17
+    },
+    "e5": {
+      "status": "passed",
+      "model": "intfloat/multilingual-e5-small",
+      "dimensions": 384
+    },
+    "qdrant": {
+      "authenticated": true,
+      "collections_count": 11,
+      "active_collection": "e5_verified_14",
+      "points": 25,
+      "status": "green"
+    },
+    "startup_integrity": {
+      "generation_id": 14,
+      "expected_sources": 5,
+      "expected_chunks": 25,
+      "canonical_chunks": 25,
+      "fts_rows": 25,
+      "vector_points": 25,
+      "issues": [],
+      "status": "passed"
+    },
+    "queries": [
+      {
+        "question": "Gavin 的简历中有哪些项目和技术经历？",
+        "status": "ok",
+        "hits": 5,
+        "fts_hits": 0,
+        "dense_hits": 5
+      },
+      {
+        "question": "nginx",
+        "status": "ok",
+        "hits": 5,
+        "fts_hits": 1,
+        "dense_hits": 5
+      },
+      {
+        "question": "codex",
+        "status": "ok",
+        "hits": 5,
+        "fts_hits": 2,
+        "dense_hits": 5
+      },
+      {
+        "question": "Gavin 的编程技能是什么？",
+        "status": "ok",
+        "hits": 5,
+        "fts_hits": 0,
+        "dense_hits": 5
+      }
+    ],
+    "citations": [
+      {
+        "count": 5,
+        "current_generation": 14,
+        "restored": true
+      },
+      {
+        "count": 5,
+        "current_generation": 14,
+        "restored": true
+      },
+      {
+        "count": 5,
+        "current_generation": 14,
+        "restored": true
+      },
+      {
+        "count": 5,
+        "current_generation": 14,
+        "restored": true
+      }
+    ],
+    "resume": {
+      "status": "ready",
+      "stored_state": "indexing",
+      "http": 200,
+      "bytes": 261840,
+      "sha256_matches_current": true
+    },
+    "gsap": {
+      "spec": "apps/web/tests/e2e-assistant/orb-motion.spec.ts",
+      "api_mock": false,
+      "passed": 1,
+      "failed": 0,
+      "duration_ms": 13212.952000000001
+    },
+    "chat_requests": 0
+  },
+  "post_service": {
+    "content_changed_tables": [
+      "assistant_daily_metrics",
+      "assistant_index_worker_state"
+    ],
+    "runtime_changed_tables": [
+      "assistant_cleanup_state",
+      "assistant_operational_gate"
+    ],
+    "fts_unchanged_since_repair": true,
+    "all_vectors_unchanged": true,
+    "owned_services_stopped": true,
+    "ports_released": [
+      3101,
+      8101,
+      8091,
+      8092,
+      8093
+    ]
+  },
+  "boundaries": [
+    "Completeness is for current eligible public sources and active generation, not semantic recall for every question.",
+    "Historical generation 15 remains ready_to_switch and old task failures remain unchanged; no retry/finalize or new rebuild.",
+    "No paid Chat or production deployment qualification; local E5 was used only for startup/query checks after FTS repair."
+  ],
+  "local_artifacts": [
+    {
+      "path": ".run/index-integrity/audit-before.json",
+      "sha256": "63e492ff42f1dcb866b1900d2dd2b8b49087bf774f7f361677dd5ce904e928da"
+    },
+    {
+      "path": ".run/index-integrity/repair.json",
+      "sha256": "24f3e5e201d1f79c3a5c11de95318c7405fb499a237aa46407cf15a4a9930b57"
+    },
+    {
+      "path": ".run/index-integrity/repair-repeat.json",
+      "sha256": "83db757ac1fd085229c64f33f05918d483299ab0a28a3b6c083c16fb1b110c0a"
+    },
+    {
+      "path": ".run/index-integrity/audit-final.json",
+      "sha256": "648c8b1ce1d33db5c894bc8317cec898bc19e744f865f4dabe8de3e371c8a2a4"
+    },
+    {
+      "path": ".run/index-integrity/before.json",
+      "sha256": "d82e4c47d7dc82ca10bb7b4f4763b7995821db4381fceb6ff3de88ef5f5cc8f5"
+    },
+    {
+      "path": ".run/index-integrity/after-repair.json",
+      "sha256": "db961d501689a59ecc9f4f2018a49c39dd8b958e28b73feec5f0a7290db48ba3"
+    },
+    {
+      "path": ".run/index-integrity/after-services.json",
+      "sha256": "d1d770858ec42a91c38eaafb30e6b678e8f7b013f4bdc1b5790c4480a075bf76"
+    },
+    {
+      "path": ".run/index-integrity/services.json",
+      "sha256": "73391745077042f8ae26543470b37f0b9c7f3872b55a01b53234d85d15d14220"
+    },
+    {
+      "path": ".run/index-integrity/browser-result.json",
+      "sha256": "53a18f56f7c731945e2a3d36394a3f206e41aa6f760fc2fb01ff93b373363621"
+    }
+  ]
+}

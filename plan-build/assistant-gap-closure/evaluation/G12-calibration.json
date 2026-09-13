@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "task": "Q3-02",
+  "status": "passed_bounded_offline_calibration",
+  "source_commit": "353d1c5",
+  "raw_report_local_path": "apps/api/data/g12-budget-calibration.json",
+  "raw_report_sha256": "ead281a63e47558a79fc94993dbdc96651dc4e8f56c7ef9ad1af2a6b094ec64c",
+  "tokenizer_source": "https://cdn.deepseek.com/api-docs/deepseek_v4_tokenizer.zip",
+  "tokenizer_zip_sha256": "e7310d1dafe0a86d8a5629fe78a7c763760f651db9b8682718a1781dcd6fe495",
+  "tokenizer_sha256": "89085f12ef79460ac5f66d1119325ddfc694b4ab209d80bbd81d35f081dc9614",
+  "template_config_sha256": "841f8cf146e3f0ad1082594a31f68ecf7608c20467ef355081333d85bbaeb1cb",
+  "official_reference": "https://api-docs.deepseek.com/quick_start/token_usage/",
+  "raw_model_sources_sha256": {
+    "data/qa-g07-20260912T115818.json": "266161842c3783389994197cc46499aa336b85cf2b551e69bbd53d2e37ff840e",
+    "data/qa-g07-20260912T120250.json": "fe63b5d362be4ddc375793d478f6902289dae952d69865b960e47ec29eae2e40",
+    "data/qa-g07-20260912T120913.json": "a410beb16118535dc3f0f7302d3361bd861b0ed4856efca0fc62be084759a0be"
+  },
+  "scope": {
+    "retained_actual_responses": 24,
+    "benign_controls": 6,
+    "attack_samples": 18,
+    "new_model_calls": 0,
+    "nonempty_responses": 18,
+    "empty_pure_attack_responses": 6
+  },
+  "measurements": {
+    "admission_estimated_tokens_range": [
+      7297,
+      7493
+    ],
+    "provider_input_tokens_range": [
+      1305,
+      1351
+    ],
+    "admission_to_provider_ratio_range": [
+      5.43662,
+      5.603659
+    ],
+    "official_template_minus_provider_input_tokens_range": [
+      -25,
+      -25
+    ],
+    "output_token_exact_matches": 24,
+    "output_tokens_range": [
+      5,
+      172
+    ],
+    "all_finish_reason_stop": true,
+    "minimum_examples": [
+      {
+        "language": "zh",
+        "resume_available": null,
+        "minimum_example_input": 7193,
+        "output_reserved": 512,
+        "fits_current_8000": true
+      },
+      {
+        "language": "zh",
+        "resume_available": false,
+        "minimum_example_input": 7606,
+        "output_reserved": 512,
+        "fits_current_8000": true
+      },
+      {
+        "language": "en",
+        "resume_available": null,
+        "minimum_example_input": 7344,
+        "output_reserved": 512,
+        "fits_current_8000": true
+      },
+      {
+        "language": "en",
+        "resume_available": false,
+        "minimum_example_input": 7757,
+        "output_reserved": 512,
+        "fits_current_8000": true
+      }
+    ],
+    "two_chat_attempt_reserve_micro_cny": 57216
+  },
+  "verification": {
+    "cases": 4,
+    "exact_refs": 9,
+    "checks": 13,
+    "all_passed": true,
+    "evidence": "harness/verification/evidence/20260912-assistant-budget-calibration.json"
+  },
+  "decision": "Keep byte-based conservative admission and 8000 input / 512 output limits; do not use the observed 25-token delta as a universal correction.",
+  "limitations": [
+    "Provider response proves model alias only; concrete model version and server message template remain unproven.",
+    "Per-component tokenizer counts are not additive; exact UTF-8 bytes and whole-message counts are reported separately.",
+    "Minimum inputs apply only to the four SMTP examples; they are not a universal minimum or proof against long-answer truncation.",
+    "Calibration output and official tokenizer JSON stay local; no raw prompts, answers, API keys or heavy artifacts committed."
+  ],
+  "authorization_status": {
+    "calls_used": 78,
+    "max_calls": 100,
+    "micro_cny_used": 335376,
+    "max_micro_cny": 2000000,
+    "unresolved": []
+  }
+}

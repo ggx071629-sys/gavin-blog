@@ -1,0 +1,352 @@
+{
+  "schema_version": 1,
+  "scope": "Studio UI phases 1-6 closeout; prior results referenced, no full regression rerun",
+  "formal_evidence": [
+    {
+      "task_id": "20260910-studio-coverage",
+      "evidence": "harness/verification/evidence/20260910-studio-coverage.json",
+      "archive": "harness/specs/archive/20260910-studio-coverage.md",
+      "event": "harness/evolution/events/20260910-studio-coverage--spec-completed.json",
+      "evidence_sha256": "83776727c4b07dd1d556cd479f2afb2922b40a219b93c4761f0ad18c4ef39324",
+      "checks": {
+        "total": 13,
+        "passed": 13,
+        "failed": 0
+      },
+      "source_commit": "2c54658c83d507b4e3308e57adf20d31357705b8"
+    },
+    {
+      "task_id": "20260910-studio-responsive",
+      "evidence": "harness/verification/evidence/20260910-studio-responsive.json",
+      "archive": "harness/specs/archive/20260910-studio-responsive.md",
+      "event": "harness/evolution/events/20260910-studio-responsive--spec-completed.json",
+      "evidence_sha256": "b42dec4092be60e53aa48226ac3e9e1a762d75289c7cc9a67926aed940ef7f72",
+      "checks": {
+        "total": 13,
+        "passed": 13,
+        "failed": 0
+      },
+      "source_commit": "ffa0742b45e9727becde5b13bcf76acfbe397d1a"
+    },
+    {
+      "task_id": "20260910-studio-regression-guards",
+      "evidence": "harness/verification/evidence/20260910-studio-regression-guards.json",
+      "archive": "harness/specs/archive/20260910-studio-regression-guards.md",
+      "event": "harness/evolution/events/20260910-studio-regression-guards--spec-completed.json",
+      "evidence_sha256": "8822a6fdfbe3348c9142bcd87438ad49ec9d031696d7d8c66f5dc5723f0d7126",
+      "checks": {
+        "total": 13,
+        "passed": 13,
+        "failed": 0
+      },
+      "source_commit": "1d6fa8690513f6ba4ae2707c7c2167eef556a74e"
+    },
+    {
+      "task_id": "20260910-studio-final-operations",
+      "evidence": "harness/verification/evidence/20260910-studio-final-operations.json",
+      "archive": "harness/specs/archive/20260910-studio-final-operations.md",
+      "event": "harness/evolution/events/20260910-studio-final-operations--spec-completed.json",
+      "evidence_sha256": "2e3b453e9501411d6ec2e3c691b43aa6016f1b0ced7e67e2cf1770fc3946ce84",
+      "checks": {
+        "total": 14,
+        "passed": 14,
+        "failed": 0
+      },
+      "source_commit": "91673900dd990046e50048f47631b6648c168d6b"
+    },
+    {
+      "task_id": "20260910-studio-final-flows",
+      "evidence": "harness/verification/evidence/20260910-studio-final-flows.json",
+      "archive": "harness/specs/archive/20260910-studio-final-flows.md",
+      "event": "harness/evolution/events/20260910-studio-final-flows--spec-completed.json",
+      "evidence_sha256": "525cc911dda2bc9d3f101030c7ad04d9186c96ea8d4f02785d03b615762437c3",
+      "checks": {
+        "total": 15,
+        "passed": 15,
+        "failed": 0
+      },
+      "source_commit": "96375291ee99ed823e29a121b11dfef07c22b8c2"
+    },
+    {
+      "task_id": "20260910-studio-api-static",
+      "evidence": "harness/verification/evidence/20260910-studio-api-static.json",
+      "archive": "harness/specs/archive/20260910-studio-api-static.md",
+      "event": "harness/evolution/events/20260910-studio-api-static--spec-completed.json",
+      "evidence_sha256": "48e4f7e00e215c6c394afd40c4ab687e5e0eb04f5daeb9382534541015695f84",
+      "checks": {
+        "total": 13,
+        "passed": 13,
+        "failed": 0
+      },
+      "source_commit": "84d6a5301053e27a7a24b61d60fdb75188ec297f"
+    },
+    {
+      "task_id": "20260910-studio-suite-management",
+      "evidence": "harness/verification/evidence/20260910-studio-suite-management.json",
+      "archive": "harness/specs/archive/20260910-studio-suite-management.md",
+      "event": "harness/evolution/events/20260910-studio-suite-management--spec-completed.json",
+      "evidence_sha256": "1144e7626c38fcc397efa4f6acad4827b09f609d875876ab9e36dc5509013be3",
+      "checks": {
+        "total": 13,
+        "passed": 13,
+        "failed": 0
+      },
+      "source_commit": "bfa6504af1932ed18487914a71c643157debdd25"
+    },
+    {
+      "task_id": "20260910-studio-suite-compat",
+      "evidence": "harness/verification/evidence/20260910-studio-suite-compat.json",
+      "archive": "harness/specs/archive/20260910-studio-suite-compat.md",
+      "event": "harness/evolution/events/20260910-studio-suite-compat--spec-completed.json",
+      "evidence_sha256": "2279409bc2dd45ad73882a215cdd3ccb81b279417e292fb68c3d9ef7f82bafba",
+      "checks": {
+        "total": 13,
+        "passed": 13,
+        "failed": 0
+      },
+      "source_commit": "612cd519e379cad45fffaa59d6e20929672d5337"
+    },
+    {
+      "task_id": "20260910-studio-suite-state",
+      "evidence": "harness/verification/evidence/20260910-studio-suite-state.json",
+      "archive": "harness/specs/archive/20260910-studio-suite-state.md",
+      "event": "harness/evolution/events/20260910-studio-suite-state--spec-completed.json",
+      "evidence_sha256": "7e882078e5eef0dc2376818c2f6c09391e3ee6518c6a77e4a26c1240fed8f0fc",
+      "checks": {
+        "total": 14,
+        "passed": 14,
+        "failed": 0
+      },
+      "source_commit": "f3dedf1421e8f7b58f256bd13b34b66d27878ff2"
+    }
+  ],
+  "local_historical_logs": [
+    {
+      "path": ".run/p6-all-production.log",
+      "sha256": "4cf6b393c9f84493e9f9b991c7781015ce217c4b3c38e1eca055e727f81fc47c",
+      "observed_result": {
+        "passed": 95,
+        "failed": 10,
+        "skipped": 1
+      }
+    },
+    {
+      "path": ".run/p6-state-production.log",
+      "sha256": "e7f2387f2c86add51e560c333bcc5f84fc1569b7ec13c1f50a17a0a90f6b763d",
+      "observed_result": {
+        "passed": 9,
+        "failed": 2
+      }
+    },
+    {
+      "path": ".run/p6-state-retry.log",
+      "sha256": "d999ebd92fba768f1887b4ee23e0a8ef53b6df3ec4a9ff7821c40fc1d6cff929",
+      "observed_result": {
+        "passed": 1,
+        "failed": 1
+      }
+    },
+    {
+      "path": ".run/p6-search-final.log",
+      "sha256": "8adca2e2ae66dbaedd5ea48ce3ef8b0f4ecd1b8af66b225213983a03a7695f2f",
+      "observed_result": {
+        "passed": 1,
+        "failed": 0
+      }
+    },
+    {
+      "path": ".run/p6-assistant-root.log",
+      "sha256": "e030d1ae0e582ba3b626cc26355266577b81771a35da618ea25267fc1084dbea",
+      "observed_result": {
+        "passed": 12
+      }
+    },
+    {
+      "path": ".run/p6-api-tests.log",
+      "sha256": "31c99171c3df1cbc1df8262f2cf7f9f0ca25b8444c9835b0e7a16724df737350",
+      "observed_result": {
+        "passed": 358
+      }
+    },
+    {
+      "path": ".run/p6-web-unit.log",
+      "sha256": "a26d56cbab84165f180aae9f7803ce552d5f5a8d02a26ca23b0477d6afd588ec",
+      "observed_result": {
+        "passed": 157
+      }
+    },
+    {
+      "path": ".run/p6-harness-clean.log",
+      "sha256": "c2ac670b9e7379523c9a02e4a1c0dba1648d1a9eb4787401b8eb6703a663890f",
+      "observed_result": {
+        "passed": 245
+      }
+    }
+  ],
+  "core_e2e": {
+    "executable_scenarios": 105,
+    "result": "passed across multiple rounds",
+    "single_run_all_green": false,
+    "optional_skipped": 1
+  },
+  "prior_failed_evidence": {
+    "commit": "85bf527",
+    "path": "harness/verification/evidence/20260910-studio-suite-state.json"
+  },
+  "phase_task_counts": [
+    5,
+    4,
+    5,
+    7,
+    8,
+    4
+  ],
+  "task_total": 33,
+  "documentation_impact": [
+    {
+      "path": "plan-build/studio-ui/STUDIO-UI-PHASE-1.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary delivery status, archive or compact evidence; no executable contract or product behavior changes.",
+      "no_test_reason": "Validate links, structure, history and artifact hashes; reference existing product evidence."
+    },
+    {
+      "path": "plan-build/studio-ui/STUDIO-UI-PHASE-2.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary delivery status, archive or compact evidence; no executable contract or product behavior changes.",
+      "no_test_reason": "Validate links, structure, history and artifact hashes; reference existing product evidence."
+    },
+    {
+      "path": "plan-build/studio-ui/STUDIO-UI-PHASE-3.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary delivery status, archive or compact evidence; no executable contract or product behavior changes.",
+      "no_test_reason": "Validate links, structure, history and artifact hashes; reference existing product evidence."
+    },
+    {
+      "path": "plan-build/studio-ui/STUDIO-UI-PHASE-4.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary delivery status, archive or compact evidence; no executable contract or product behavior changes.",
+      "no_test_reason": "Validate links, structure, history and artifact hashes; reference existing product evidence."
+    },
+    {
+      "path": "plan-build/studio-ui/STUDIO-UI-PHASE-5.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary delivery status, archive or compact evidence; no executable contract or product behavior changes.",
+      "no_test_reason": "Validate links, structure, history and artifact hashes; reference existing product evidence."
+    },
+    {
+      "path": "plan-build/studio-ui/STUDIO-UI-PHASE-6.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary delivery status, archive or compact evidence; no executable contract or product behavior changes.",
+      "no_test_reason": "Validate links, structure, history and artifact hashes; reference existing product evidence."
+    },
+    {
+      "path": "plan-build/studio-ui/STUDIO-UI-PLAN.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary delivery status, archive or compact evidence; no executable contract or product behavior changes.",
+      "no_test_reason": "Validate links, structure, history and artifact hashes; reference existing product evidence."
+    },
+    {
+      "path": "apps/web/public/studio/README.md",
+      "owner": "M07.studio_theme",
+      "reason": "Ordinary delivery status, archive or compact evidence; no executable contract or product behavior changes.",
+      "no_test_reason": "Validate links, structure, history and artifact hashes; reference existing product evidence."
+    },
+    {
+      "path": "plan-build/studio-ui/completed/studio-ui-verification/U6-03.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary delivery status, archive or compact evidence; no executable contract or product behavior changes.",
+      "no_test_reason": "Validate links, structure, history and artifact hashes; reference existing product evidence."
+    },
+    {
+      "path": "plan-build/studio-ui/completed/studio-ui-verification/U6-04.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary delivery status, archive or compact evidence; no executable contract or product behavior changes.",
+      "no_test_reason": "Validate links, structure, history and artifact hashes; reference existing product evidence."
+    },
+    {
+      "path": "plan-build/studio-ui/completed/studio-ui-verification/U6-evidence.json",
+      "owner": "M08.documentation",
+      "reason": "Ordinary delivery status, archive or compact evidence; no executable contract or product behavior changes.",
+      "no_test_reason": "Validate links, structure, history and artifact hashes; reference existing product evidence."
+    }
+  ],
+  "closeout_checks": {
+    "status": "passed",
+    "scope": "dedicated validation workspace with final documentation candidate; no product tests started",
+    "checks": [
+      {
+        "name": "gate-subsumption",
+        "status": "passed",
+        "details": [
+          "1 subsumption contracts bind 7 registered child gates"
+        ]
+      },
+      {
+        "name": "history-integrity",
+        "status": "passed",
+        "details": [
+          "169 deterministic closes retain archive, evidence, event, and active-spec history"
+        ]
+      },
+      {
+        "name": "indexes",
+        "status": "passed",
+        "details": [
+          "9 generated indexes are current"
+        ]
+      },
+      {
+        "name": "l0",
+        "status": "passed",
+        "details": [
+          "AGENTS.md is the unique L0 and stays within 60-80 lines"
+        ]
+      },
+      {
+        "name": "links",
+        "status": "passed",
+        "details": [
+          "836 local Markdown links resolve without durable active-spec references"
+        ]
+      },
+      {
+        "name": "metadata",
+        "status": "passed",
+        "details": [
+          "287 routed Markdown documents have valid metadata"
+        ]
+      },
+      {
+        "name": "module-coverage",
+        "status": "passed",
+        "details": [
+          "11 modules, 271 cases, 543 expectations, 932 exact test references; contract sha256 4a094d4f43be"
+        ]
+      },
+      {
+        "name": "qualification-manifests",
+        "status": "passed",
+        "details": [
+          "configured qualification manifests have valid historical bindings"
+        ]
+      },
+      {
+        "name": "structure",
+        "status": "passed",
+        "details": [
+          "28 required paths exist"
+        ]
+      },
+      {
+        "name": "supply-chain",
+        "status": "passed",
+        "details": [
+          "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+        ]
+      }
+    ],
+    "completed_task_archives": 33,
+    "formal_digest_bindings": 9,
+    "user_files_unchanged": 10
+  }
+}

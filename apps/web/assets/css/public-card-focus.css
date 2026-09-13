@@ -1,0 +1,87 @@
+/* Explicit card opt-in; admin routes never receive the document scope. */
+html[data-public-card-focus='true'] [data-focus-card] {
+  position: relative;
+  isolation: isolate;
+  /* Supersede legacy lift/shadow effects, including scoped page styles. */
+  transform: none !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+/* Alert cards retain their semantic background and border colors. */
+html[data-public-card-focus='true'] [data-focus-card]:not(.assistant-notice) {
+  background: var(--ee-surface) !important;
+  border-color: var(--ee-line) !important;
+}
+
+html[data-public-card-focus='true'] [data-focus-card]::after {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  border: 0;
+  transform: none;
+  z-index: 20;
+  border-radius: inherit;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--ee-primary) 5%, transparent);
+  box-shadow: inset 0 0 0 1px var(--ee-primary);
+  opacity: 0;
+}
+
+/* Fine-pointer feedback retargets from its current opacity on rapid changes. */
+@media (hover: hover) and (pointer: fine) {
+  html[data-public-card-focus='true'] [data-focus-card]::after {
+    transition: opacity var(--ee-motion-fast) ease;
+  }
+  html[data-public-card-focus='true'] [data-focus-card]:hover:not(:has([data-focus-card]:hover))::after {
+    opacity: 1;
+  }
+}
+
+/* Reuse the atlas spotlight, clipped by the card overlay's rounded background. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html[data-public-card-focus='true'] [data-focus-card][data-focus-glow]:not(:focus-visible):not(:has(:focus-visible))::after {
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--ee-primary) 12%, transparent), transparent 70%);
+    background-size: 160px 160px;
+    background-position: calc(var(--focus-pointer-x) - 80px) calc(var(--focus-pointer-y) - 80px);
+    background-repeat: no-repeat;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+/* Keyboard feedback is immediate; touch uses press, with no sticky hover. */
+html[data-public-card-focus='true'] [data-focus-card]:is(:focus-visible, :has(:focus-visible), :active, [data-focus-pressed]):not(:has([data-focus-card]:is(:focus-visible, :has(:focus-visible), :active, [data-focus-pressed])))::after {
+  opacity: 1;
+  transition: none;
+}
+
+/* The atlas remains a linked group rather than independent selections. */
+html[data-public-card-focus='true'] .knowledge-path[data-active='true'] [data-focus-card]::after,
+html[data-public-card-focus='true'] .assistant-source-row.is-selected::after {
+  opacity: 1;
+}
+html[data-public-card-focus='true'] .knowledge-path:has(:focus-visible) [data-focus-card]::after {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  html[data-public-card-focus='true'] [data-focus-card]::after {
+    transition: none;
+    transition-duration: 0s !important;
+  }
+}
+
+@media (forced-colors: active) {
+  html[data-public-card-focus='true'] [data-focus-card][data-focus-glow]::after {
+    background-image: none !important;
+  }
+  html[data-public-card-focus='true'] [data-focus-card]::after {
+    background: transparent;
+    box-shadow: none;
+    outline: 1px solid Highlight;
+    outline-offset: -2px;
+  }
+}

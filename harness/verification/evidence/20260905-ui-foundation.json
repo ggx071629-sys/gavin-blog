@@ -1,0 +1,543 @@
+{
+  "schema_version": 2,
+  "task_id": "20260905-ui-foundation",
+  "created_at": "2026-09-05T11:55:29.987120+00:00",
+  "command": "python -m tools.harness verify 20260905-ui-foundation",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "harness-tests",
+        "harness-integrity",
+        "web-quality",
+        "e2e"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "1a8fe29b9bfc60d8ea444b567249bb9817f8e101",
+    "active_spec_sha256": "c0ef30371ffa32d773b7a5272e7d256faa9b895acf19f7883570817055666445",
+    "verification_contract_sha256": "8c2ceb11d5883691565c2d8a6a9c8293d37b84d132784e38fa46766bc8233f0c",
+    "gate_config_sha256": "7f9aa18d8a290824e50ebb695b5641f89e2503e811e6d0118338ff65b9c8ee47",
+    "documentation_contract_sha256": "9e80026d93d205e411809462bead9c80dbd3d99beea0d7e1f18ab39176fb3afe",
+    "documentation_targets_sha256": "1af20512b3d8e0f55a77efad5ef9b8515b6a52704adb4a1655ca1b05dc4298d6",
+    "module_contract_sha256": "8869e09afa3434bda0aef26807a8386e62c488abda34a936bf538a1dfb5f185b"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录真实共用组件、尺度与外壳边界，区分本轮阶段和既有产品阶段。",
+    "targets": [
+      "apps/web/README.md"
+    ],
+    "baseline_commit": "3e6e71d7c69b22124d8fb986ce9837d9ef641d81",
+    "target_blobs": {
+      "apps/web/README.md": "a4bb3bc3101da07a8f972b1e6100ee1658e867ff"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "580da358d6c6b46930c4ceb9ccc5b87d08e125e7",
+    "cleanup_status": "passed",
+    "reused_paths": 3
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "8869e09afa3434bda0aef26807a8386e62c488abda34a936bf538a1dfb5f185b",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "web-quality",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M01-P1-04",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "共用外壳保持主题色、主题持久化、44px 控件、页尾入口；移动导航后焦点到正文，当前路径点击还焦点。",
+            "expectations": [
+              {
+                "id": "M01-P1-04-E01",
+                "surface": "user_visible",
+                "statement": "共用外壳保持主题色、主题持久化、44px 控件、页尾入口；移动导航后焦点到正文，当前路径点击还焦点。"
+              },
+              {
+                "id": "M01-P1-04-E02",
+                "surface": "forbidden",
+                "statement": "代表宽度不得横滚，不得恢复全屏点阵或在导航后残留 inert。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+                "kind": "playwright",
+                "name": "shared public foundations preserve themes, routes and keyboard navigation",
+                "gate": "e2e",
+                "covers": [
+                  "M01-P1-04-E01",
+                  "M01-P1-04-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "web-quality",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M01-P1-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "移动公共导航作为单一模态对话框管理焦点、背景和断点切换。",
+            "expectations": [
+              {
+                "id": "M01-P1-01-E01",
+                "surface": "user_visible",
+                "statement": "移动菜单打开时可见为 aria-modal 对话框，背景 inert、页面滚动锁定且焦点在菜单内循环。"
+              },
+              {
+                "id": "M01-P1-01-E02",
+                "surface": "forbidden",
+                "statement": "关闭菜单或切换到 1280px 桌面导航后，不得残留 inert、滚动锁或隐藏的活动对话框。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/public-experience.spec.ts",
+                "kind": "playwright",
+                "name": "mobile overlay dialog traps focus, locks background, and clears at 1280",
+                "gate": "e2e",
+                "covers": [
+                  "M01-P1-01-E01",
+                  "M01-P1-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M01-P1-02",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "公开站点壳层在桌面与移动端使用同一栏目编号顺序，并在受支持窄屏保持无页面级横向溢出。",
+            "expectations": [
+              {
+                "id": "M01-P1-02-E01",
+                "surface": "user_visible",
+                "statement": "桌面与移动导航按文章、项目、读书、归档、关于的同一编号顺序呈现；移动端额外保留搜索且写作台保持独立低优先级入口。"
+              },
+              {
+                "id": "M01-P1-02-E02",
+                "surface": "forbidden",
+                "statement": "首页在 320、360、375、390、768、1024、1280 与 1440px 不得出现页面级横向溢出，移动菜单不得交换项目与读书编号。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/public-experience.spec.ts",
+                "kind": "playwright",
+                "name": "mobile menu switches from a full-screen route index to the tablet drawer at 640",
+                "gate": "e2e",
+                "covers": [
+                  "M01-P1-02-E01"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/public-experience.spec.ts",
+                "kind": "playwright",
+                "name": "public chrome keeps one navigation sequence and prevents narrow overflow",
+                "gate": "e2e",
+                "covers": [
+                  "M01-P1-02-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M01-P1-04",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "共用外壳保持主题色、主题持久化、44px 控件、页尾入口；移动导航后焦点到正文，当前路径点击还焦点。",
+            "expectations": [
+              {
+                "id": "M01-P1-04-E01",
+                "surface": "user_visible",
+                "statement": "共用外壳保持主题色、主题持久化、44px 控件、页尾入口；移动导航后焦点到正文，当前路径点击还焦点。"
+              },
+              {
+                "id": "M01-P1-04-E02",
+                "surface": "forbidden",
+                "statement": "代表宽度不得横滚，不得恢复全屏点阵或在导航后残留 inert。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+                "kind": "playwright",
+                "name": "shared public foundations preserve themes, routes and keyboard navigation",
+                "gate": "e2e",
+                "covers": [
+                  "M01-P1-04-E01",
+                  "M01-P1-04-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "harness-tests",
+          "harness-integrity",
+          "web-quality",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M02-P1-02",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "登录后后台在浅深主题与短视口可达原有导航，当前项、主题按钮与手机焦点恢复有效。",
+            "expectations": [
+              {
+                "id": "M02-P1-02-E01",
+                "surface": "user_visible",
+                "statement": "登录后后台在浅深主题与短视口可达原有导航，当前项、主题按钮与手机焦点恢复有效。"
+              },
+              {
+                "id": "M02-P1-02-E02",
+                "surface": "forbidden",
+                "statement": "短视口不得裁掉末尾导航，跨桌面断点不得残留对话框、inert 或滚动锁。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+                "kind": "playwright",
+                "name": "shared admin foundations keep all destinations reachable in short viewports",
+                "gate": "e2e",
+                "covers": [
+                  "M02-P1-02-E01",
+                  "M02-P1-02-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-LINKS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "本地 Markdown 查询参数只影响浏览状态，不被当成文件名。",
+            "expectations": [
+              {
+                "id": "M08-LINKS-01-E01",
+                "surface": "response",
+                "statement": "存在的文件带查询参数与片段链接检查通过。"
+              },
+              {
+                "id": "M08-LINKS-01-E02",
+                "surface": "forbidden",
+                "statement": "不存在文件和 durable 指向 active spec 的链接，即使带查询参数也不得通过。"
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "harness/verification/tests/test_links.py",
+                "kind": "pytest",
+                "name": "test_local_query_links_resolve_files_and_keep_missing_and_durable_checks",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-LINKS-01-E01",
+                  "M08-LINKS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.662
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "103 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 191.106
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 56.324
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.537
+    },
+    {
+      "name": "links",
+      "details": [
+        "726 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 3842.461
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "206 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 50.132
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "10 modules, 37 cases, 74 expectations, 47 exact test references; contract sha256 8869e09afa34"
+      ],
+      "status": "passed",
+      "duration_ms": 18387.563
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 2.96
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.005
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 77.475
+    },
+    {
+      "name": "harness-tests",
+      "kind": "product",
+      "command": "{api_python} -m pytest harness/verification/tests",
+      "status": "passed",
+      "duration_ms": 41526.96,
+      "covers": [
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 178,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{api_python} -m tools.harness verify",
+      "status": "passed",
+      "duration_ms": 20780.595,
+      "covers": [
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "npm run quality:web",
+      "status": "passed",
+      "duration_ms": 266083.487,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 166,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "npm run test:e2e",
+      "status": "passed",
+      "duration_ms": 176225.032,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 55,
+          "failed": 0,
+          "skipped": 1
+        }
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1008.724,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 15,
+      "passed": 15,
+      "failed": 0
+    },
+    "duration_ms": 528246.023,
+    "failures": [],
+    "test_counts": {
+      "passed": 399,
+      "failed": 0,
+      "skipped": 1
+    }
+  },
+  "source_commit": "580da358d6c6b46930c4ceb9ccc5b87d08e125e7"
+}

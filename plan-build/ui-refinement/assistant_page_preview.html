@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>问答助手 UI 视觉重塑提案 · Gavin Studio AI Assistant</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --canvas: #f4f6fa;
+      --surface: #ffffff;
+      --surface-low: #f8fafc;
+      --surface-elevated: #ffffff;
+      --surface-border: #e2e8f0;
+      --ink: #07090e;
+      --ink-muted: #3a4256;
+      --ink-faint: #6c7895;
+      --line: #d2d9e6;
+      --line-strong: #a8b6cc;
+      --line-soft: #e5eaf2;
+      --primary: #004cee;
+      --primary-bright: #1a62ff;
+      --primary-glow: rgba(0, 76, 238, 0.12);
+      --badge-bg: #e2e8f5;
+      --card-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(246, 248, 253, 0.92) 100%);
+      --blueprint-grid: rgba(0, 76, 238, 0.04);
+      --code-bg: #f1f4f9;
+      --warning-bg: #fffbeb;
+      --warning-border: #fef08a;
+      --warning-ink: #854d0e;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+      --danger-ink: #991b1b;
+      --panel-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(0, 76, 238, 0.08);
+    }
+    .dark {
+      --canvas: #06070a;
+      --surface: #0e1118;
+      --surface-low: #0a0d13;
+      --surface-elevated: #141822;
+      --surface-border: #1e2638;
+      --ink: #f4f6fc;
+      --ink-muted: #9aa5be;
+      --ink-faint: #59657f;
+      --line: #1c2232;
+      --line-strong: #2a334a;
+      --line-soft: #161b28;
+      --primary: #2d6eff;
+      --primary-bright: #5289ff;
+      --primary-glow: rgba(45, 110, 255, 0.22);
+      --badge-bg: #141a27;
+      --card-gradient: linear-gradient(180deg, rgba(17, 21, 30, 0.85) 0%, rgba(12, 15, 22, 0.98) 100%);
+      --blueprint-grid: rgba(45, 110, 255, 0.05);
+      --code-bg: #090c12;
+      --warning-bg: #1c1912;
+      --warning-border: #382c14;
+      --warning-ink: #fef08a;
+      --danger-bg: #1c1214;
+      --danger-border: #3d1b1f;
+      --danger-ink: #fca5a5;
+      --panel-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(45, 110, 255, 0.15), 0 0 40px -10px rgba(45, 110, 255, 0.12);
+    }
+
+    body {
+      background-color: var(--canvas);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', 'Noto Sans SC', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      background-image: 
+        linear-gradient(to right, var(--blueprint-grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--blueprint-grid) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+    .font-heading {
+      font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* 脉冲指示灯动画 */
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.85); }
+    }
+    .pulse-dot {
+      animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes radar-sweep {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .radar-beam {
+      animation: radar-sweep 4s linear infinite;
+    }
+
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .typing-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 16px;
+      background: var(--primary);
+      margin-left: 4px;
+      vertical-align: -2px;
+      animation: cursor-blink 1s infinite;
+    }
+
+    /* 科技感装饰角标标线 */
+    .crosshair-corner {
+      position: relative;
+    }
+    .crosshair-corner::before, .crosshair-corner::after {
+      content: '+';
+      position: absolute;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--primary);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    .crosshair-corner::before { top: -8px; left: -8px; }
+    .crosshair-corner::after { bottom: -8px; right: -8px; }
+
+    /* 平滑滚动与滚动条 */
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: var(--line-strong);
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+  </style>
+</head>
+<body class="min-h-screen selection:bg-blue-600 selection:text-white">
+
+  <!-- ========================================================
+       TOP GLOBAL CONTROL BAR (原型调试工具条)
+       ======================================================== -->
+  <header class="sticky top-0 z-50 border-b border-[var(--line)] bg-[var(--canvas)]/85 backdrop-blur-md px-4 sm:px-6 py-3 transition-colors">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3 font-mono text-xs">
+        <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-500/15 text-[var(--primary)] font-semibold border border-blue-500/30">
+          <span class="w-2 h-2 rounded-full bg-[var(--primary)] pulse-dot"></span>
+          AI.ASSISTANT // REDESIGN PROTO
+        </span>
+        <span class="hidden md:inline text-[var(--ink-faint)]">STRICT LOCAL RAG &bull; ZERO FABRICATION</span>
+      </div>
+
+      <!-- 交互模式快速切换 -->
+      <div class="flex items-center gap-2 overflow-x-auto py-1">
+        <div class="flex items-center rounded-lg border border-[var(--line)] bg-[var(--surface)] p-1 text-xs font-mono">
+          <button id="viewFloating" onclick="switchView('floating')" class="view-btn px-3 py-1 rounded font-medium bg-[var(--primary)] text-white transition-all">
+            悬浮面板模式
+          </button>
+          <button id="viewMobile" onclick="switchView('mobile')" class="view-btn px-3 py-1 rounded font-medium text-[var(--ink-muted)] hover:text-[var(--ink)] transition-all">
+            移动端抽屉
+          </button>
+          <button id="viewFull" onclick="switchView('full')" class="view-btn px-3 py-1 rounded font-medium text-[var(--ink-muted)] hover:text-[var(--ink)] transition-all">
+            全屏科研工作台
+          </button>
+        </div>
+
+        <button id="themeToggle" type="button" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[var(--line)] bg-[var(--surface)] text-xs font-mono font-medium text-[var(--ink)] hover:border-[var(--primary)] transition-all shadow-sm">
+          <span id="themeIcon">☀️</span>
+          <span id="themeText">浅色模式</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       DESIGN CONCEPT BANNER (设计哲学与重构核心价值)
+       ======================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-6">
+    <div class="p-6 sm:p-8 rounded-2xl border border-[var(--line)] bg-[var(--card-gradient)] relative overflow-hidden shadow-sm">
+      <div class="absolute -right-6 -bottom-10 font-heading font-black text-9xl tracking-tighter opacity-[0.03] dark:opacity-[0.05] pointer-events-none select-none text-[var(--ink)]">
+        GAVIN.AI
+      </div>
+      
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--line-soft)] pb-4 mb-5">
+        <div class="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[var(--primary)] font-bold">
+          <span class="px-2 py-0.5 rounded bg-[var(--primary)]/10 border border-[var(--primary)]/30">PROPOSAL</span>
+          <span>// 问答助手视觉系统 2.0 升级方案</span>
+        </div>
+        <div class="font-mono text-xs text-[var(--ink-faint)]">
+          CODEBASE SAFETY: READ-ONLY &bull; ZERO RISK TRIGGER
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 space-y-3">
+          <h1 class="text-2xl sm:text-3xl font-heading font-black text-[var(--ink)] tracking-tight">
+            从“通用浮窗聊天框”升级为<br class="hidden sm:inline">
+            <span class="text-[var(--primary)] underline decoration-[var(--primary)]/30 decoration-wavy">沉浸式工程检索与严谨溯源工作台</span>
+          </h1>
+          <p class="text-sm sm:text-base text-[var(--ink-muted)] leading-relaxed">
+            告别传统千篇一律的白底小气泡。融入 Gavin Studio 标志性的<strong>工业蓝图、自托管等宽字阶、四阶段推理流水线指示器与深链交互式文献卡片</strong>，让每一次问答都如同一场经过严谨同行评审的学术级知识检索。
+          </p>
+        </div>
+
+        <div class="flex flex-col justify-center space-y-2 border-t lg:border-t-0 lg:border-l border-[var(--line)] pt-4 lg:pt-0 lg:pl-6 text-xs font-mono">
+          <div class="flex items-center justify-between text-[var(--ink-muted)]">
+            <span>核心原则:</span>
+            <span class="font-bold text-[var(--ink)]">零幻觉 · 本地公开事实约束</span>
+          </div>
+          <div class="flex items-center justify-between text-[var(--ink-muted)]">
+            <span>引用形态:</span>
+            <span class="font-bold text-[var(--primary)]">高对比交互标牌 [01] 带悬浮预览</span>
+          </div>
+          <div class="flex items-center justify-between text-[var(--ink-muted)]">
+            <span>动效哲学:</span>
+            <span class="font-bold text-emerald-500">180ms 机械折叠展开 &bull; 微脉冲</span>
+          </div>
+          <div class="flex items-center justify-between text-[var(--ink-muted)]">
+            <span>适配形态:</span>
+            <span class="font-bold text-[var(--ink)]">480px 悬浮窗 / 390px 抽屉 / 全屏工作台</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 状态演示快捷控制器 -->
+      <div class="mt-6 pt-5 border-t border-[var(--line-soft)] flex flex-wrap items-center gap-3">
+        <span class="font-mono text-xs text-[var(--ink-faint)] uppercase tracking-wider font-semibold">
+          体验不同助手状态:
+        </span>
+        <button onclick="setAssistantState('welcome')" class="state-btn px-3 py-1.5 rounded-lg border text-xs font-mono font-medium transition-all bg-[var(--primary)]/15 border-[var(--primary)] text-[var(--primary)]" data-state="welcome">
+          01 // 初始欢迎态
+        </button>
+        <button onclick="setAssistantState('thinking')" class="state-btn px-3 py-1.5 rounded-lg border text-xs font-mono font-medium transition-all border-[var(--line)] bg-[var(--surface)] text-[var(--ink-muted)] hover:border-[var(--primary)]" data-state="thinking">
+          02 // 思考推理流水线
+        </button>
+        <button onclick="setAssistantState('answered')" class="state-btn px-3 py-1.5 rounded-lg border text-xs font-mono font-medium transition-all border-[var(--line)] bg-[var(--surface)] text-[var(--ink-muted)] hover:border-[var(--primary)]" data-state="answered">
+          03 // 深度回答与引用高亮
+        </button>
+        <button onclick="setAssistantState('fallback')" class="state-btn px-3 py-1.5 rounded-lg border text-xs font-mono font-medium transition-all border-[var(--line)] bg-[var(--surface)] text-[var(--ink-muted)] hover:border-[var(--primary)]" data-state="fallback">
+          04 // 证据边界与检索退避
+        </button>
+        <button onclick="setAssistantState('policy')" class="state-btn px-3 py-1.5 rounded-lg border text-xs font-mono font-medium transition-all border-[var(--line)] bg-[var(--surface)] text-[var(--ink-muted)] hover:border-[var(--primary)]" data-state="policy">
+          05 // 数据合规与清理确认
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       MAIN CANVAS AREA: INTERACTIVE PREVIEW
+       ======================================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-12">
+
+    <!-- 容器 A: 悬浮窗模式 (默认展示) -->
+    <div id="container-floating" class="view-container relative min-h-[820px] rounded-2xl border border-[var(--line)] bg-[var(--canvas)] p-4 sm:p-8 overflow-hidden">
+      <!-- 博客背景示意墙（让用户感受悬浮窗在真实文章页面上的交互表现） -->
+      <div class="max-w-3xl mx-auto opacity-35 dark:opacity-25 pointer-events-none select-none space-y-6">
+        <div class="h-6 w-32 bg-[var(--line-strong)] rounded"></div>
+        <div class="h-10 w-3/4 bg-[var(--ink)] rounded"></div>
+        <div class="space-y-3 pt-4">
+          <div class="h-4 w-full bg-[var(--line-strong)] rounded"></div>
+          <div class="h-4 w-5/6 bg-[var(--line-strong)] rounded"></div>
+          <div class="h-4 w-4/5 bg-[var(--line-strong)] rounded"></div>
+        </div>
+        <div class="p-6 rounded-xl border border-[var(--line)] bg-[var(--surface)] space-y-3">
+          <div class="h-5 w-40 bg-[var(--primary)]/40 rounded"></div>
+          <div class="h-4 w-full bg-[var(--line-strong)] rounded"></div>
+          <div class="h-4 w-2/3 bg-[var(--line-strong)] rounded"></div>
+        </div>
+        <div class="space-y-3">
+          <div class="h-4 w-full bg-[var(--line-strong)] rounded"></div>
+          <div class="h-4 w-11/12 bg-[var(--line-strong)] rounded"></div>
+          <div class="h-4 w-3/4 bg-[var(--line-strong)] rounded"></div>
+        </div>
+      </div>
+
+      <!-- 悬浮窗实体 (480px 极客工业风格) -->
+      <div class="absolute bottom-6 right-4 sm:right-8 w-[calc(100vw-32px)] sm:w-[480px] h-[720px] max-h-[calc(100vh-140px)] rounded-2xl border border-[var(--line-strong)] bg-[var(--surface)] flex flex-col overflow-hidden shadow-[var(--panel-shadow)] transition-all duration-300 z-30">
+        
+        <!-- 面板头部 Header -->
+        <div class="flex-none px-5 py-4 border-b border-[var(--line-soft)] bg-[var(--surface-low)] flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-[var(--primary)] text-white flex items-center justify-center font-mono font-black text-sm shadow-md shadow-[var(--primary)]/25 relative overflow-hidden">
+              <span class="z-10">G</span>
+              <div class="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent"></div>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h2 class="font-heading font-bold text-base text-[var(--ink)] tracking-tight">问 Gavin</h2>
+                <span class="px-1.5 py-0.5 rounded text-[10px] font-mono font-semibold bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/20">
+                  RAG V2.4
+                </span>
+              </div>
+              <p class="text-[11px] font-mono text-[var(--ink-faint)] leading-tight">
+                AI 助手 · 仅限本站公开沉淀
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1">
+            <button onclick="toggleExpandState()" title="展开/收起辅助信息" class="w-8 h-8 rounded-lg hover:bg-[var(--line-soft)] text-[var(--ink-faint)] hover:text-[var(--ink)] flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+            </button>
+            <button onclick="simulateClose()" title="最小化/关闭" class="w-8 h-8 rounded-lg hover:bg-[var(--line-soft)] text-[var(--ink-faint)] hover:text-[var(--ink)] flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 内部可滚动对话区域 -->
+        <div id="chatLog" class="flex-1 overflow-y-auto custom-scroll p-5 space-y-6">
+
+          <!-- 状态 1: 初始欢迎态 (Welcome) -->
+          <div id="state-welcome" class="assistant-content-state space-y-6">
+            <div class="p-5 rounded-xl border border-[var(--line-soft)] bg-[var(--card-gradient)] relative overflow-hidden">
+              <div class="flex items-center gap-2 font-mono text-[11px] font-bold text-[var(--primary)] uppercase tracking-wider mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--primary)]"></span>
+                <span>DIRECT CORPUS GROUNDING</span>
+              </div>
+              <h3 class="font-heading font-extrabold text-xl text-[var(--ink)] leading-snug">
+                读到这里，<br>还有什么想了解？
+              </h3>
+              <p class="mt-2 text-xs text-[var(--ink-muted)] leading-relaxed">
+                我会从本站已发布的 100+ 篇工程架构、AI 落地实录与读书笔记中寻找严格依据，并附带原文坐标。
+              </p>
+            </div>
+
+            <!-- 快捷提问卡片 -->
+            <div class="space-y-2">
+              <div class="font-mono text-[11px] text-[var(--ink-faint)] uppercase tracking-wider font-semibold px-1">
+                // SUGGESTED EXPLORATIONS (快捷启发)
+              </div>
+              
+              <button onclick="simulateAsk('博客系统从架构设计到落地的核心思考是什么？')" class="w-full text-left p-3.5 rounded-xl border border-[var(--line-soft)] bg-[var(--surface-low)] hover:border-[var(--primary)] hover:bg-[var(--surface)] transition-all group flex items-start justify-between gap-3">
+                <div class="space-y-1">
+                  <div class="font-mono text-[10px] text-[var(--primary)] font-semibold">01 / ARCHITECTURE</div>
+                  <div class="text-xs font-medium text-[var(--ink)] group-hover:text-[var(--primary)] transition-colors">
+                    博客系统从架构设计到落地的核心思考是什么？
+                  </div>
+                </div>
+                <span class="text-[var(--primary)] text-sm font-mono group-hover:translate-x-1 transition-transform">&rarr;</span>
+              </button>
+
+              <button onclick="simulateAsk('在实际工程中，你是如何管理 Agent 的上下文与状态的？')" class="w-full text-left p-3.5 rounded-xl border border-[var(--line-soft)] bg-[var(--surface-low)] hover:border-[var(--primary)] hover:bg-[var(--surface)] transition-all group flex items-start justify-between gap-3">
+                <div class="space-y-1">
+                  <div class="font-mono text-[10px] text-[var(--primary)] font-semibold">02 / AGENTIC WORKFLOW</div>
+                  <div class="text-xs font-medium text-[var(--ink)] group-hover:text-[var(--primary)] transition-colors">
+                    在实际工程中，你是如何管理 Agent 的上下文与状态的？
+                  </div>
+                </div>
+                <span class="text-[var(--primary)] text-sm font-mono group-hover:translate-x-1 transition-transform">&rarr;</span>
+              </button>
+
+              <button onclick="simulateAsk('Gavin 最推崇的技术书籍与软件工程原则是哪些？')" class="w-full text-left p-3.5 rounded-xl border border-[var(--line-soft)] bg-[var(--surface-low)] hover:border-[var(--primary)] hover:bg-[var(--surface)] transition-all group flex items-start justify-between gap-3">
+                <div class="space-y-1">
+                  <div class="font-mono text-[10px] text-[var(--primary)] font-semibold">03 / BOOKS & PHILOSOPHY</div>
+                  <div class="text-xs font-medium text-[var(--ink)] group-hover:text-[var(--primary)] transition-colors">
+                    Gavin 最推崇的技术书籍与软件工程原则是哪些？
+                  </div>
+                </div>
+                <span class="text-[var(--primary)] text-sm font-mono group-hover:translate-x-1 transition-transform">&rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 状态 2: 思考推理流水线 (Thinking) -->
+          <div id="state-thinking" class="assistant-content-state space-y-5 hidden">
+            <!-- 用户提问泡泡 -->
+            <div class="flex flex-col items-end gap-1.5">
+              <span class="font-mono text-[10px] text-[var(--ink-faint)]">YOU // 23:28:14</span>
+              <div class="max-w-[88%] p-3.5 rounded-2xl rounded-tr-none bg-[var(--primary)] text-white text-xs sm:text-sm font-medium leading-relaxed shadow-sm">
+                请比较一下你在文章中提到的几种 Agent 记忆与状态机方案的区别？
+              </div>
+            </div>
+
+            <!-- AI 思考与推理流水线 -->
+            <div class="p-4 rounded-xl border border-[var(--line)] bg-[var(--surface-low)] space-y-3">
+              <div class="flex items-center justify-between border-b border-[var(--line-soft)] pb-2.5">
+                <div class="flex items-center gap-2">
+                  <div class="w-2 h-2 rounded-full bg-[var(--primary)] pulse-dot"></div>
+                  <span class="font-mono text-xs font-bold text-[var(--ink)]">THINKING PROCESS</span>
+                </div>
+                <span class="font-mono text-[11px] text-[var(--primary)]">STAGE 03 / 04</span>
+              </div>
+
+              <!-- 四阶段流水线 -->
+              <div class="space-y-2 font-mono text-[11px]">
+                <div class="flex items-center gap-2.5 text-emerald-500 font-medium">
+                  <span>✓</span>
+                  <span>[01] 意图解析: 提取对比要素 (记忆架构, 状态持久化)</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-emerald-500 font-medium">
+                  <span>✓</span>
+                  <span>[02] 向量检索: 匹配 3 篇相关归档与 1 篇工程规格</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-[var(--primary)] font-bold">
+                  <span class="animate-spin">◐</span>
+                  <span>[03] 语义权重重排与证据切片去噪 (98.2% 确信度)...</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-[var(--ink-faint)] opacity-60">
+                  <span>○</span>
+                  <span>[04] 严谨引用标注与结构化文本组织</span>
+                </div>
+              </div>
+
+              <!-- 动态吐字预览 -->
+              <div class="mt-3 pt-3 border-t border-[var(--line-soft)] text-xs text-[var(--ink-muted)] leading-relaxed font-mono">
+                正在生成正文: "在架构落地中，我主要把记忆解耦为短时会话状态与长时事实快照..."<span class="typing-cursor"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 状态 3: 完整回答与深度溯源 (Answered - 核心高保真) -->
+          <div id="state-answered" class="assistant-content-state space-y-6 hidden">
+            <!-- 用户提问 -->
+            <div class="flex flex-col items-end gap-1.5">
+              <span class="font-mono text-[10px] text-[var(--ink-faint)]">YOU // 23:15:02</span>
+              <div class="max-w-[88%] p-3.5 rounded-2xl rounded-tr-none bg-[var(--primary)] text-white text-xs sm:text-sm font-medium leading-relaxed shadow-sm">
+                博客系统从架构设计到落地的核心思考是什么？
+              </div>
+            </div>
+
+            <!-- AI 回答主体 -->
+            <div class="space-y-4">
+              <div class="flex items-center gap-2 font-mono text-[11px] text-[var(--ink-faint)]">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span class="font-bold text-[var(--ink)]">GAVIN AI</span>
+                <span>&bull;</span>
+                <span class="text-emerald-500 font-semibold">VERIFIED WITH 2 SOURCES</span>
+              </div>
+
+              <div class="text-xs sm:text-sm text-[var(--ink)] leading-relaxed space-y-3 font-normal">
+                <p>
+                  根据本站工程沉淀，核心原则可归纳为<strong>“消除过度设计、数据合同严守、与确定性优先”</strong>：
+                </p>
+
+                <div class="p-3.5 rounded-xl border border-[var(--line-soft)] bg-[var(--surface-low)] space-y-2">
+                  <div class="flex items-start gap-2">
+                    <span class="font-mono text-[var(--primary)] font-black text-sm">01</span>
+                    <p class="text-xs leading-relaxed">
+                      <strong>双重安全边界与轻量级存储：</strong>
+                      避免过早引入复杂微服务。采用静态快照与本地高确定性数据库，确保无冷启动开销与零单点故障
+                      <button onclick="highlightSource('src-1')" class="inline-flex items-center px-1.5 py-0.5 rounded font-mono text-[11px] font-bold bg-[var(--primary)]/15 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all ml-1 cursor-pointer">
+                        [01]
+                      </button>。
+                    </p>
+                  </div>
+
+                  <div class="flex items-start gap-2 pt-2 border-t border-[var(--line-soft)]">
+                    <span class="font-mono text-[var(--primary)] font-black text-sm">02</span>
+                    <p class="text-xs leading-relaxed">
+                      <strong>全站设计与工程规范对齐：</strong>
+                      所有公开页面遵循 896px / 宽屏网格对齐与双主题无损切换规范，严禁凭空发明无来源的视觉元素
+                      <button onclick="highlightSource('src-2')" class="inline-flex items-center px-1.5 py-0.5 rounded font-mono text-[11px] font-bold bg-[var(--primary)]/15 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all ml-1 cursor-pointer">
+                        [02]
+                      </button>。
+                    </p>
+                  </div>
+                </div>
+
+                <p>
+                  在具体实现上，问答模块严格遵循“只读本站已录入事实”铁律，任何未在知识库中找到证据的问题都会被明确拒答或降级指引。
+                </p>
+              </div>
+
+              <!-- 深度溯源卡片区 (Evidence Grounding Cards) -->
+              <div class="space-y-2.5 pt-2">
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-[11px] text-[var(--ink-faint)] uppercase tracking-wider font-semibold">
+                    // REFERENCE SOURCES (参考来源 · 2 项)
+                  </span>
+                  <span class="font-mono text-[10px] text-emerald-500 font-medium">100% REPRODUCIBLE</span>
+                </div>
+
+                <!-- 来源卡片 01 -->
+                <div id="src-1" class="source-card p-3.5 rounded-xl border border-[var(--line)] bg-[var(--surface-low)] hover:border-[var(--primary)] transition-all space-y-2">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <span class="px-2 py-0.5 rounded bg-[var(--primary)] text-white font-mono text-[10px] font-bold">
+                        01
+                      </span>
+                      <span class="font-mono text-[11px] text-[var(--primary)] font-semibold">
+                        /articles/2026/08/blog-architecture-blueprint
+                      </span>
+                    </div>
+                    <span class="font-mono text-[10px] text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 font-bold">
+                      98.4% 匹配
+                    </span>
+                  </div>
+                  <div class="font-heading font-bold text-xs text-[var(--ink)]">
+                    个人博客重构实录：从过度工程化回归纯粹系统
+                  </div>
+                  <p class="text-[11px] text-[var(--ink-muted)] line-clamp-2 italic bg-[var(--canvas)] p-2 rounded border border-[var(--line-soft)] font-mono">
+                    “...设计系统的第一步不是搭脚手架，而是确立什么是不可逾越的硬约束。我把状态持久化收敛在极简契约下...”
+                  </p>
+                </div>
+
+                <!-- 来源卡片 02 -->
+                <div id="src-2" class="source-card p-3.5 rounded-xl border border-[var(--line)] bg-[var(--surface-low)] hover:border-[var(--primary)] transition-all space-y-2">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <span class="px-2 py-0.5 rounded bg-[var(--primary)] text-white font-mono text-[10px] font-bold">
+                        02
+                      </span>
+                      <span class="font-mono text-[11px] text-[var(--primary)] font-semibold">
+                        /projects/site-engineering-v2
+                      </span>
+                    </div>
+                    <span class="font-mono text-[10px] text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 font-bold">
+                      95.1% 匹配
+                    </span>
+                  </div>
+                  <div class="font-heading font-bold text-xs text-[var(--ink)]">
+                    UI 工程蓝图规范与前端设计系统实现
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 状态 4: 证据边界与检索退避 (Fallback) -->
+          <div id="state-fallback" class="assistant-content-state space-y-5 hidden">
+            <div class="flex flex-col items-end gap-1.5">
+              <span class="font-mono text-[10px] text-[var(--ink-faint)]">YOU // 23:20:11</span>
+              <div class="max-w-[88%] p-3.5 rounded-2xl rounded-tr-none bg-[var(--primary)] text-white text-xs sm:text-sm font-medium leading-relaxed shadow-sm">
+                Gavin 怎么看待最近最新的某开源大模型架构参数变化？
+              </div>
+            </div>
+
+            <!-- 极客警告与退避卡片 -->
+            <div class="p-4 rounded-xl border border-[var(--warning-border)] bg-[var(--warning-bg)] text-[var(--warning-ink)] space-y-3">
+              <div class="flex items-center gap-2 font-mono text-xs font-bold">
+                <span class="w-4 h-4 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px]">!</span>
+                <span>INSUFFICIENT EVIDENCE // 证据不足提示</span>
+              </div>
+              <p class="text-xs leading-relaxed">
+                本站已收录的公开文章与项目中，<strong>尚未提及该特定模型的参数更新细节</strong>。本问答助手坚守“零编造（Zero Hallucination）”原则，不进行无根据的站外臆测。
+              </p>
+              <div class="pt-2 border-t border-[var(--warning-border)] flex flex-wrap gap-2">
+                <a href="#search" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--surface)] text-[var(--ink)] border border-[var(--line)] text-xs font-mono font-medium hover:border-[var(--primary)] transition-all">
+                  <span>🔍</span> 尝试全站全文搜索
+                </a>
+                <button onclick="simulateAsk('站内有哪些关于 LLM 架构的相关文章？')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--surface)] text-[var(--ink)] border border-[var(--line)] text-xs font-mono font-medium hover:border-[var(--primary)] transition-all">
+                  检索相关主题 &rarr;
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 状态 5: 数据合规与清理确认 (Policy & Clear) -->
+          <div id="state-policy" class="assistant-content-state space-y-5 hidden">
+            <!-- 隐私透明度告示框 -->
+            <div class="p-4 rounded-xl border border-[var(--line-strong)] bg-[var(--surface-low)] space-y-3">
+              <div class="flex items-center justify-between border-b border-[var(--line-soft)] pb-2">
+                <span class="font-mono text-xs font-bold text-[var(--primary)]">// DATA BOUNDARY POLICY</span>
+                <span class="font-mono text-[10px] text-[var(--ink-faint)]">RFC-6749 COMPLIANT</span>
+              </div>
+              <ul class="text-xs text-[var(--ink-muted)] space-y-2 list-disc list-inside leading-relaxed">
+                <li>问答完全基于已公开发布的本站内容切片，不访问私有未发布数据。</li>
+                <li>会话仅暂存于您本机的短会话内存中，关闭面板或刷新后自动销毁。</li>
+                <li>严禁输入任何涉及密码、API 密钥或私密联系方式等敏感凭据。</li>
+              </ul>
+            </div>
+
+            <!-- 清理确认对话框原型 -->
+            <div class="p-4 rounded-xl border border-[var(--danger-border)] bg-[var(--danger-bg)] text-[var(--danger-ink)] space-y-3">
+              <div class="flex items-center gap-2 font-mono text-xs font-bold">
+                <span class="w-4 h-4 rounded-full bg-red-500 text-white flex items-center justify-center text-[10px]">✕</span>
+                <span>CLEAR ACTIVE SESSION? // 清除本站短会话</span>
+              </div>
+              <p class="text-xs leading-relaxed opacity-90">
+                确定要清除当前对话记录吗？所有已加载的引用和当前轮次上下文将被永久释放。
+              </p>
+              <div class="flex items-center justify-end gap-2 pt-2">
+                <button onclick="setAssistantState('answered')" class="px-3 py-1.5 rounded-lg border border-[var(--line)] bg-[var(--surface)] text-xs font-mono font-medium text-[var(--ink)] hover:bg-[var(--line-soft)] transition-colors">
+                  取消
+                </button>
+                <button onclick="setAssistantState('welcome')" class="px-3 py-1.5 rounded-lg bg-red-600 text-white text-xs font-mono font-bold hover:bg-red-700 transition-colors shadow-sm">
+                  确认立即清除
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 底部输入框 Composer -->
+        <div class="flex-none p-4 border-t border-[var(--line-soft)] bg-[var(--surface-low)] space-y-2.5">
+          <!-- 辅助操作条 -->
+          <div class="flex items-center justify-between text-[11px] font-mono text-[var(--ink-faint)]">
+            <button onclick="setAssistantState('policy')" class="hover:text-[var(--primary)] transition-colors flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10" stroke-width="2"/><path stroke-width="2" d="M12 16v-4m0-4h.01"/></svg>
+              <span>数据与范围说明</span>
+            </button>
+            <div class="flex items-center gap-3">
+              <button onclick="setAssistantState('policy')" class="hover:text-red-500 transition-colors">
+                清除会话
+              </button>
+              <span>·</span>
+              <span id="charCounter" class="text-[var(--ink-muted)] font-semibold">0 / 500</span>
+            </div>
+          </div>
+
+          <!-- 输入框本体 -->
+          <div class="relative rounded-xl border border-[var(--line)] bg-[var(--surface)] focus-within:border-[var(--primary)] focus-within:ring-2 focus-within:ring-[var(--primary)]/15 transition-all">
+            <textarea id="promptInput" rows="2" placeholder="问有关 Gavin Studio 的架构、文章或项目..." class="w-full bg-transparent px-3.5 pt-2.5 pb-10 text-xs sm:text-sm text-[var(--ink)] placeholder-[var(--ink-faint)] resize-none focus:outline-none custom-scroll"></textarea>
+            
+            <div class="absolute bottom-2 right-2 flex items-center gap-2">
+              <span class="hidden sm:inline font-mono text-[10px] text-[var(--ink-faint)]">
+                ⌘ + Enter
+              </span>
+              <button onclick="handleManualSend()" class="w-7 h-7 rounded-lg bg-[var(--primary)] text-white hover:bg-[var(--primary-bright)] flex items-center justify-center transition-colors shadow-sm shadow-[var(--primary)]/30">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 右下角悬浮唤醒胶囊 (Launcher Capsule) -->
+      <button id="floatingLauncher" onclick="toggleFloatingVisibility()" class="fixed bottom-6 right-6 sm:right-8 z-40 inline-flex items-center gap-2.5 px-4 py-3 rounded-full border border-[var(--line-strong)] bg-[var(--surface)] text-[var(--ink)] shadow-2xl hover:border-[var(--primary)] hover:scale-105 transition-all group">
+        <span class="w-2.5 h-2.5 rounded-full bg-[var(--primary)] pulse-dot"></span>
+        <span class="font-heading font-bold text-xs tracking-tight">问 Gavin</span>
+        <span class="hidden sm:inline px-1.5 py-0.5 rounded text-[10px] font-mono bg-[var(--line-soft)] text-[var(--ink-faint)] group-hover:text-[var(--primary)]">
+          ⌘K
+        </span>
+      </button>
+    </div>
+
+    <!-- 容器 B: 移动端抽屉模式 (模拟 390px 视口) -->
+    <div id="container-mobile" class="view-container hidden min-h-[750px] flex items-center justify-center p-4">
+      <div class="w-[390px] h-[720px] rounded-[44px] border-4 border-[var(--line-strong)] bg-black p-3 shadow-2xl relative overflow-hidden">
+        <!-- 灵动岛/刘海 -->
+        <div class="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-40 flex items-center justify-end px-2">
+          <div class="w-2 h-2 rounded-full bg-blue-500/80"></div>
+        </div>
+
+        <!-- 屏幕内部内容 -->
+        <div class="w-full h-full rounded-[34px] bg-[var(--surface)] flex flex-col overflow-hidden text-[var(--ink)]">
+          <!-- 移动端抽屉拉手与顶栏 -->
+          <div class="pt-5 pb-3 px-5 border-b border-[var(--line-soft)] bg-[var(--surface-low)] flex flex-col items-center">
+            <div class="w-10 h-1 rounded-full bg-[var(--line-strong)] mb-3"></div>
+            <div class="w-full flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-[var(--primary)] text-white flex items-center justify-center font-mono font-bold text-xs">G</span>
+                <span class="font-heading font-bold text-sm">问 Gavin</span>
+              </div>
+              <button onclick="switchView('floating')" class="text-xs font-mono text-[var(--ink-faint)] hover:text-[var(--ink)]">关闭</button>
+            </div>
+          </div>
+
+          <!-- 抽屉内容区 -->
+          <div class="flex-1 overflow-y-auto p-4 space-y-4 custom-scroll text-xs">
+            <div class="p-4 rounded-xl border border-[var(--line-soft)] bg-[var(--card-gradient)]">
+              <div class="font-mono text-[10px] text-[var(--primary)] font-bold mb-1">STRICT CORPUS RAG</div>
+              <div class="font-heading font-bold text-base">随时追问本站工程细节</div>
+              <p class="text-[11px] text-[var(--ink-muted)] mt-1">基于 100% 公开可查切片提供带标引文献的确定性解答。</p>
+            </div>
+
+            <!-- 示例问题 -->
+            <div class="space-y-2">
+              <div class="p-3 rounded-lg border border-[var(--line)] bg-[var(--surface-low)]">
+                <div class="font-mono text-[10px] text-[var(--primary)]">ARCHITECTURE</div>
+                <div class="font-medium text-xs mt-0.5">博客系统的核心设计约束是什么？</div>
+              </div>
+              <div class="p-3 rounded-lg border border-[var(--line)] bg-[var(--surface-low)]">
+                <div class="font-mono text-[10px] text-[var(--primary)]">AGENTIC WORKFLOW</div>
+                <div class="font-medium text-xs mt-0.5">如何保证多 Agent 编排的高效收敛？</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 移动端输入底栏 -->
+          <div class="p-3 border-t border-[var(--line-soft)] bg-[var(--surface-low)]">
+            <div class="flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1.5">
+              <input type="text" placeholder="输入问题..." class="flex-1 bg-transparent text-xs focus:outline-none text-[var(--ink)]">
+              <button class="w-6 h-6 rounded-full bg-[var(--primary)] text-white flex items-center justify-center text-xs">↑</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 容器 C: 全屏科研工作台模式 (Command Center / Dedicated Deep RAG Page) -->
+    <div id="container-full" class="view-container hidden min-h-[800px] rounded-2xl border border-[var(--line)] bg-[var(--surface)] overflow-hidden shadow-xl">
+      <!-- 工作台顶栏 -->
+      <div class="px-6 py-4 border-b border-[var(--line)] bg-[var(--surface-low)] flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-8 h-8 rounded-lg bg-[var(--primary)] text-white font-mono font-black flex items-center justify-center text-sm">
+            G
+          </div>
+          <div>
+            <div class="font-heading font-extrabold text-base flex items-center gap-2">
+              GAVIN ENGINEERING RESEARCH WORKSPACE
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-bold">
+                GROUNDING: 100%
+              </span>
+            </div>
+            <div class="text-xs font-mono text-[var(--ink-faint)]">
+              SESSION ID: #RAG-2026-0907-EXP &bull; LOCAL VECTOR INDEX: ACTIVE
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 font-mono text-xs">
+          <span class="text-[var(--ink-faint)]">LATENCY: 42ms</span>
+          <span class="text-[var(--line-strong)]">/</span>
+          <span class="text-[var(--ink-faint)]">CHUNKS LOADED: 418</span>
+        </div>
+      </div>
+
+      <!-- 工作台双栏布局 (左侧深度会话，右侧关联图谱与事实文献索引) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[700px]">
+        <!-- 左侧 8 栏: 核心问答流 -->
+        <div class="lg:col-span-8 border-b lg:border-b-0 lg:border-r border-[var(--line)] p-6 sm:p-8 flex flex-col justify-between space-y-6">
+          <div class="space-y-6 overflow-y-auto max-h-[580px] custom-scroll pr-3">
+            <div class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-[var(--line-strong)] flex items-center justify-center font-mono text-xs font-bold text-[var(--ink)]">
+                U
+              </div>
+              <div class="space-y-1">
+                <span class="font-mono text-xs text-[var(--ink-faint)]">VISITOR // QUESTION</span>
+                <p class="text-base font-semibold text-[var(--ink)]">
+                  在你的博客系统重构中，为什么坚决放弃庞大的微服务和外部云依赖？
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 pt-4 border-t border-[var(--line-soft)]">
+              <div class="w-8 h-8 rounded-lg bg-[var(--primary)] text-white flex items-center justify-center font-mono text-xs font-bold">
+                G
+              </div>
+              <div class="space-y-4 flex-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-xs text-[var(--primary)] font-bold">// GAVIN AI DEDUCTION</span>
+                  <span class="font-mono text-xs text-emerald-500 font-semibold">EVIDENCE CONFIDENCE: 99.1%</span>
+                </div>
+                
+                <div class="text-sm text-[var(--ink)] leading-relaxed space-y-3 font-normal">
+                  <p>
+                    主要权衡来自长期维护成本与不可控依赖。在文章《个人博客重构实录》与《系统工程演进指南》中，明确记录了三项核心决策依据：
+                  </p>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                    <div class="p-3 rounded-lg border border-[var(--line-soft)] bg-[var(--surface-low)]">
+                      <div class="font-mono text-[10px] text-[var(--primary)] font-bold">DECISION A</div>
+                      <div class="font-heading font-bold text-xs mt-1">本地快照一致性</div>
+                      <p class="text-[11px] text-[var(--ink-muted)] mt-1">杜绝网络分区导致的发布脏状态。</p>
+                    </div>
+                    <div class="p-3 rounded-lg border border-[var(--line-soft)] bg-[var(--surface-low)]">
+                      <div class="font-mono text-[10px] text-[var(--primary)] font-bold">DECISION B</div>
+                      <div class="font-heading font-bold text-xs mt-1">全站静态化可溯源</div>
+                      <p class="text-[11px] text-[var(--ink-muted)] mt-1">单条 Git Commit 即为完整版本快照。</p>
+                    </div>
+                    <div class="p-3 rounded-lg border border-[var(--line-soft)] bg-[var(--surface-low)]">
+                      <div class="font-mono text-[10px] text-[var(--primary)] font-bold">DECISION C</div>
+                      <div class="font-heading font-bold text-xs mt-1">零黑盒调试</div>
+                      <p class="text-[11px] text-[var(--ink-muted)] mt-1">任何问答与搜索均可本地脱机复验。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 全屏输入框 -->
+          <div class="pt-4 border-t border-[var(--line-soft)]">
+            <div class="flex items-center gap-3 p-3 rounded-xl border border-[var(--line)] bg-[var(--surface-low)] focus-within:border-[var(--primary)] transition-all">
+              <input type="text" placeholder="继续向知识库深入提问..." class="flex-1 bg-transparent text-sm text-[var(--ink)] focus:outline-none">
+              <button class="px-4 py-2 rounded-lg bg-[var(--primary)] text-white font-mono text-xs font-bold hover:bg-[var(--primary-bright)] transition-colors">
+                SEND ↵
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧 4 栏: 动态知识图谱与引用证据面板 -->
+        <div class="lg:col-span-4 p-6 bg-[var(--surface-low)] space-y-6">
+          <div class="flex items-center justify-between border-b border-[var(--line)] pb-3">
+            <span class="font-mono text-xs font-bold text-[var(--ink)]">// ACTIVE GROUNDING GRAPH</span>
+            <span class="font-mono text-[10px] text-[var(--primary)]">3 ARTICLES LINKED</span>
+          </div>
+
+          <!-- 命中的原文段落引用卡片 -->
+          <div class="space-y-3">
+            <div class="p-4 rounded-xl border border-[var(--line)] bg-[var(--surface)] space-y-2">
+              <div class="flex items-center justify-between text-[11px] font-mono">
+                <span class="text-[var(--primary)] font-bold">[CHUNKS 12-14]</span>
+                <span class="text-emerald-500">SCORE: 0.94</span>
+              </div>
+              <div class="font-heading font-bold text-xs text-[var(--ink)]">
+                架构设计核心法则：状态机与防御性设计
+              </div>
+              <p class="text-xs text-[var(--ink-muted)] leading-relaxed italic bg-[var(--canvas)] p-2.5 rounded border border-[var(--line-soft)]">
+                “凡是能在构建期计算的，绝不拖延至运行时；凡是能用确定性算法解决的，绝不交给大模型碰运气。”
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-[var(--line)] bg-[var(--surface)] space-y-2">
+              <div class="flex items-center justify-between text-[11px] font-mono">
+                <span class="text-[var(--primary)] font-bold">[CHUNKS 45-47]</span>
+                <span class="text-emerald-500">SCORE: 0.91</span>
+              </div>
+              <div class="font-heading font-bold text-xs text-[var(--ink)]">
+                Nuxt 3 与自托管架构的高性能实践
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================================
+       FOOTER / SPECS OVERVIEW
+       ======================================================== -->
+  <footer class="max-w-7xl mx-auto px-4 sm:px-6 py-16 border-t border-[var(--line)] mt-20 text-center font-mono text-xs text-[var(--ink-faint)] space-y-3">
+    <div class="flex items-center justify-center gap-4">
+      <span>GAVIN STUDIO UI DESIGN SUITE</span>
+      <span>&bull;</span>
+      <span>VISUAL ARTIFACT V2.0</span>
+      <span>&bull;</span>
+      <span>CODEBASE UNCHANGED</span>
+    </div>
+    <p>DESIGN PREVIEW ONLY &bull; NO RUNTIME MODIFICATIONS APPLIED YET</p>
+  </footer>
+
+  <!-- ========================================================
+       INTERACTIVE SCRIPTS
+       ======================================================== -->
+  <script>
+    // 1. 主题切换 (深色/浅色)
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+    let isDark = true;
+
+    themeToggleBtn.addEventListener('click', () => {
+      isDark = !isDark;
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        themeIcon.textContent = '☀️';
+        themeText.textContent = '浅色模式';
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeIcon.textContent = '🌙';
+        themeText.textContent = '深色模式';
+      }
+    });
+
+    // 2. 布局视图切换 (悬浮窗 / 移动端 / 全屏工作台)
+    function switchView(viewName) {
+      document.querySelectorAll('.view-container').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.view-btn').forEach(btn => {
+        btn.classList.remove('bg-[var(--primary)]', 'text-white');
+        btn.classList.add('text-[var(--ink-muted)]');
+      });
+
+      if (viewName === 'floating') {
+        document.getElementById('container-floating').classList.remove('hidden');
+        document.getElementById('viewFloating').classList.add('bg-[var(--primary)]', 'text-white');
+        document.getElementById('viewFloating').classList.remove('text-[var(--ink-muted)]');
+      } else if (viewName === 'mobile') {
+        document.getElementById('container-mobile').classList.remove('hidden');
+        document.getElementById('viewMobile').classList.add('bg-[var(--primary)]', 'text-white');
+        document.getElementById('viewMobile').classList.remove('text-[var(--ink-muted)]');
+      } else if (viewName === 'full') {
+        document.getElementById('container-full').classList.remove('hidden');
+        document.getElementById('viewFull').classList.add('bg-[var(--primary)]', 'text-white');
+        document.getElementById('viewFull').classList.remove('text-[var(--ink-muted)]');
+      }
+    }
+
+    // 3. 助手状态切换 (欢迎 / 思考中 / 已回答 / 证据不足 / 合规说明)
+    function setAssistantState(stateName) {
+      document.querySelectorAll('.assistant-content-state').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.state-btn').forEach(btn => {
+        btn.classList.remove('bg-[var(--primary)]/15', 'border-[var(--primary)]', 'text-[var(--primary)]');
+        btn.classList.add('border-[var(--line)]', 'bg-[var(--surface)]', 'text-[var(--ink-muted)]');
+      });
+
+      const targetEl = document.getElementById('state-' + stateName);
+      if (targetEl) {
+        targetEl.classList.remove('hidden');
+      }
+
+      const activeBtn = document.querySelector(`.state-btn[data-state="${stateName}"]`);
+      if (activeBtn) {
+        activeBtn.classList.remove('border-[var(--line)]', 'bg-[var(--surface)]', 'text-[var(--ink-muted)]');
+        activeBtn.classList.add('bg-[var(--primary)]/15', 'border-[var(--primary)]', 'text-[var(--primary)]');
+      }
+
+      const chatLog = document.getElementById('chatLog');
+      if (chatLog) {
+        chatLog.scrollTop = 0;
+      }
+    }
+
+    // 4. 模拟提问与状态联动
+    function simulateAsk(questionText) {
+      const input = document.getElementById('promptInput');
+      if (input) {
+        input.value = questionText;
+        updateCharCounter();
+      }
+      setAssistantState('thinking');
+      setTimeout(() => {
+        setAssistantState('answered');
+      }, 1200);
+    }
+
+    function handleManualSend() {
+      const input = document.getElementById('promptInput');
+      if (input && input.value.trim()) {
+        simulateAsk(input.value.trim());
+      }
+    }
+
+    // 5. 字符计数器
+    const promptInput = document.getElementById('promptInput');
+    const charCounter = document.getElementById('charCounter');
+    function updateCharCounter() {
+      if (promptInput && charCounter) {
+        charCounter.textContent = `${promptInput.value.length} / 500`;
+      }
+    }
+    if (promptInput) {
+      promptInput.addEventListener('input', updateCharCounter);
+      promptInput.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+          handleManualSend();
+        }
+      });
+    }
+
+    // 6. 来源高亮与滚动联动
+    function highlightSource(srcId) {
+      const card = document.getElementById(srcId);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        card.classList.add('ring-2', 'ring-[var(--primary)]', 'bg-[var(--primary)]/10');
+        setTimeout(() => {
+          card.classList.remove('ring-2', 'ring-[var(--primary)]', 'bg-[var(--primary)]/10');
+        }, 1600);
+      }
+    }
+
+    // 7. 悬浮窗显示/隐藏交互
+    let isFloatingOpen = true;
+    function toggleFloatingVisibility() {
+      const floatingBox = document.querySelector('#container-floating > div:nth-child(2)');
+      isFloatingOpen = !isFloatingOpen;
+      if (floatingBox) {
+        if (isFloatingOpen) {
+          floatingBox.style.transform = 'translateY(0)';
+          floatingBox.style.opacity = '1';
+          floatingBox.style.pointerEvents = 'auto';
+        } else {
+          floatingBox.style.transform = 'translateY(24px) scale(0.95)';
+          floatingBox.style.opacity = '0';
+          floatingBox.style.pointerEvents = 'none';
+        }
+      }
+    }
+    function simulateClose() {
+      toggleFloatingVisibility();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1978 @@
+{
+  "schema_version": 1,
+  "task_id": "20260906-harness-impact-completion",
+  "changes": [
+    {
+      "path": "harness/docs/decisions/20260905-verification-resume.md",
+      "owner": "M08.workflow_contracts",
+      "reason": "Document the changed executable plan, preparation and same-process close contract; validate related impact and lifecycle consumers.",
+      "cases": [
+        "M08-DOCS-01",
+        "M08-IMPACT-GRAPH-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        },
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/evolution/proposals/20260905-harness-resume--workflow-friction_confirmed.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve accepted proposal history and record current implementation/acceptance; metadata and links are the only direct effect.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/tools/impact.py",
+      "owner": "M08.impact",
+      "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+      "cases": [
+        "M08-IMPACT-MAPPING-01",
+        "M08-IMPACT-GRAPH-01",
+        "M08-IMPACT-SELECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/impact_acceptance.py",
+      "owner": "M08.acceptance",
+      "reason": "Opt-in controlled real-module driver must reject incomplete measurements and use existing module sources/tests.",
+      "cases": [
+        "M08-IMPACT-BENCHMARK-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/tools/impact_registry.py",
+      "owner": "M08.impact",
+      "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+      "cases": [
+        "M08-IMPACT-MAPPING-01",
+        "M08-IMPACT-GRAPH-01",
+        "M08-IMPACT-SELECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/module_verification.py",
+      "owner": "M08.module_verification",
+      "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+      "cases": [
+        "M08-IMPACT-SELECTION-02"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/product_verification.py",
+      "owner": "M08.product_verification",
+      "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+      "cases": [
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-GRAPH-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/selected_tests.py",
+      "owner": "M08.selected_tests",
+      "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+      "cases": [
+        "M08-IMPACT-RUNNERS-01",
+        "M08-IMPACT-PREREQUISITES-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        },
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/test_collection.py",
+      "owner": "M08.test_collection",
+      "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+      "cases": [
+        "M08-COLLECTOR-01",
+        "M08-IMPACT-RUNNERS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/verification_inputs.py",
+      "owner": "M08.verification_resume",
+      "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-PREREQUISITES-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        },
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/verification_resume.py",
+      "owner": "M08.verification_resume",
+      "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-PREREQUISITES-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        },
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/README.md",
+      "owner": "M08.workflow_contracts",
+      "reason": "Document the changed executable plan, preparation and same-process close contract; validate related impact and lifecycle consumers.",
+      "cases": [
+        "M08-DOCS-01",
+        "M08-IMPACT-GRAPH-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        },
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/checks/links.py",
+      "owner": "M08.links",
+      "reason": "Prune dependency and local diagnostic directories before traversal; keep missing and unstable project links fail-closed.",
+      "cases": [
+        "M08-LINKS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+      "cases": [
+        "M08-IMPACT-SELECTION-02"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.py",
+      "owner": "M08.module_verification",
+      "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+      "cases": [
+        "M08-IMPACT-SELECTION-02"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+      "cases": [
+        "M08-IMPACT-MAPPING-01",
+        "M08-IMPACT-GRAPH-01",
+        "M08-IMPACT-SELECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_impact_acceptance.py",
+      "owner": "M08.acceptance",
+      "reason": "Opt-in controlled real-module driver must reject incomplete measurements and use existing module sources/tests.",
+      "cases": [
+        "M08-IMPACT-BENCHMARK-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/tests/test_impact_cli.py",
+      "owner": "M08.impact",
+      "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+      "cases": [
+        "M08-IMPACT-MAPPING-01",
+        "M08-IMPACT-GRAPH-01",
+        "M08-IMPACT-SELECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_impact_graph.py",
+      "owner": "M08.impact",
+      "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+      "cases": [
+        "M08-IMPACT-MAPPING-01",
+        "M08-IMPACT-GRAPH-01",
+        "M08-IMPACT-SELECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_impact_registry.py",
+      "owner": "M08.impact",
+      "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+      "cases": [
+        "M08-IMPACT-MAPPING-01",
+        "M08-IMPACT-GRAPH-01",
+        "M08-IMPACT-SELECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_links.py",
+      "owner": "M08.links",
+      "reason": "Prune dependency and local diagnostic directories before traversal; keep missing and unstable project links fail-closed.",
+      "cases": [
+        "M08-LINKS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/tests/test_module_coverage.py",
+      "owner": "M08.module_verification",
+      "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+      "cases": [
+        "M08-IMPACT-SELECTION-02"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_selected_prerequisites.py",
+      "owner": "M08.selected_tests",
+      "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+      "cases": [
+        "M08-IMPACT-RUNNERS-01",
+        "M08-IMPACT-PREREQUISITES-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        },
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_selected_runners.py",
+      "owner": "M08.selected_tests",
+      "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+      "cases": [
+        "M08-IMPACT-RUNNERS-01",
+        "M08-IMPACT-PREREQUISITES-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        },
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/workflows/verify.md",
+      "owner": "M08.workflow_contracts",
+      "reason": "Document the changed executable plan, preparation and same-process close contract; validate related impact and lifecycle consumers.",
+      "cases": [
+        "M08-DOCS-01",
+        "M08-IMPACT-GRAPH-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": true,
+          "reason": "Ownership inventory, explicit documentation and transitive consumer decisions change plan validation; graph/gap/CLI assertions apply.",
+          "cases": [
+            "M08-IMPACT-MAPPING-01",
+            "M08-IMPACT-GRAPH-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": true,
+          "reason": "Close consumes the changed impact/input identity; real CLI receipt, isolation and rollback contracts remain required.",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-SELECTION-01"
+          ]
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Expanded exact cases and owned-source audit change the module structure contract, without collecting product suites.",
+          "cases": [
+            "M08-IMPACT-SELECTION-02"
+          ]
+        },
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Worktree creation/linking API and cleanup result shape are unchanged; new browser data ownership is tested inside selected runner.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "Spec-lint must allow future cases while actual execution still requires complete impact; selected gate evidence stays enforceable.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-GRAPH-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "Exact Vitest argument order and per-run Playwright data ownership affect restricted collection, execution and cleanup.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": true,
+          "reason": "Default installed-input probes are removed and same-process close is enforced; attempts and receipts must remain valid.",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-PREREQUISITES-01"
+          ]
+        },
+        {
+          "unit": "M08.metadata",
+          "affected": false,
+          "reason": "Front matter parsing and lifecycle state schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "The task state/result schema is unchanged; read-only plan/status behavior is exercised by the selected real CLI cases.",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "Risk-path policy and archive/evidence digest schema are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.configuration",
+          "affected": false,
+          "reason": "Config loading, structural discovery and schema of registered gates are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.test_collection",
+          "affected": true,
+          "reason": "Vitest optional JSON output must never consume the positional source selector; collector contract assertions apply.",
+          "cases": [
+            "M08-COLLECTOR-01",
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        }
+      ]
+    }
+  ]
+}

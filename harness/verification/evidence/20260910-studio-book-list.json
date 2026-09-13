@@ -1,0 +1,461 @@
+{
+  "schema_version": 2,
+  "task_id": "20260910-studio-book-list",
+  "created_at": "2026-09-10T08:32:05.465786+00:00",
+  "command": "python -m tools.harness verify 20260910-studio-book-list",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "860be07bff1927d57211f2e4ff3d136e6df25b53",
+    "active_spec_sha256": "5ab13602517c5b74695728953d66094f6a74ea42166f63bcb3daba896b6cfa5c",
+    "verification_contract_sha256": "0df6c8c10c9b912e3d128a940989bb8c83fc6df3e47e68607c77a575677a9197",
+    "gate_config_sha256": "8a11215dbf2c0c7fb5d1a599fc33216c228c1e79b25e847ca0dbc62ee6b3b56f",
+    "documentation_contract_sha256": "b594758e2448eae875db44b1808fd971a3deacc660f4806b3161321606ac3f34",
+    "documentation_targets_sha256": "06daf4746604540b0c8419e83858b2a9dd2fca77bd5a48a499f0a63da6693a67",
+    "module_contract_sha256": "aa65e1ed0ff346a73ac32917f050c270720b23d907ef1f69f2b74f404f7c394a"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录读书元信息与查询入口。",
+    "targets": [
+      "apps/web/public/studio/README.md"
+    ],
+    "baseline_commit": "ff31b91ca74f4176b85776241e77196783190afb",
+    "target_blobs": {
+      "apps/web/public/studio/README.md": "ba24e24ce4ef03c09a97e8c6576b2b1d4b340b42"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "26f063597a1ee88b178f320c9033fabb9885eecd",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260910-studio-book-list.json",
+      "sha256": "912baf54a8a54b71c4390631e840aab9c50bc3b0830dcabee5a9b9e523bf5dd1",
+      "selected_cases": [
+        "M04-STUDIO-BOOKS-01"
+      ],
+      "selected_refs": 1,
+      "excluded_cases": 241
+    },
+    "receipt": {
+      "run_id": "a3a8bb915957d6fa2f8d9a4d674f62bf",
+      "identity": "d2cf11071ffb9a8348361a6fab3fd89f4a3fdfc2018bf45ea74362678ea631a6",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1346.59,
+      "plan_inputs": 830.33,
+      "execute_cleanup_and_input_recheck": 35220.129
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "aa65e1ed0ff346a73ac32917f050c270720b23d907ef1f69f2b74f404f7c394a",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M04-STUDIO-BOOKS-01",
+            "module_id": "M04",
+            "module_name": "项目与读书笔记",
+            "priority": "P1",
+            "scenario": "读书列表完整作者查询、真实阅读元信息与失败恢复；双主题窄屏可访问。",
+            "expectations": [
+              {
+                "id": "M04-STUDIO-BOOKS-01-E01",
+                "surface": "user_visible",
+                "statement": "读书列表完整作者查询、真实阅读元信息与失败恢复；双主题窄屏可访问。"
+              },
+              {
+                "id": "M04-STUDIO-BOOKS-01-E02",
+                "surface": "forbidden",
+                "statement": "不得出现文章专属版本历史、删除失败不得移除内容，双主题不得横溢或 axe 违规。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-lists.spec.ts",
+                "kind": "playwright",
+                "name": "books",
+                "gate": "e2e",
+                "covers": [
+                  "M04-STUDIO-BOOKS-01-E01",
+                  "M04-STUDIO-BOOKS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M04-STUDIO-BOOKS-01",
+            "module_id": "M04",
+            "module_name": "项目与读书笔记",
+            "priority": "P1",
+            "scenario": "读书列表完整作者查询、真实阅读元信息与失败恢复；双主题窄屏可访问。",
+            "expectations": [
+              {
+                "id": "M04-STUDIO-BOOKS-01-E01",
+                "surface": "user_visible",
+                "statement": "读书列表完整作者查询、真实阅读元信息与失败恢复；双主题窄屏可访问。"
+              },
+              {
+                "id": "M04-STUDIO-BOOKS-01-E02",
+                "surface": "forbidden",
+                "statement": "不得出现文章专属版本历史、删除失败不得移除内容，双主题不得横溢或 axe 违规。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-lists.spec.ts",
+                "kind": "playwright",
+                "name": "books",
+                "gate": "e2e",
+                "covers": [
+                  "M04-STUDIO-BOOKS-01-E01",
+                  "M04-STUDIO-BOOKS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.859,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "142 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 293.972,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 109.196,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.777,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "724 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 372.86,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "261 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 82.069,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 242 cases, 485 expectations, 870 exact test references; contract sha256 aa65e1ed0ff3"
+      ],
+      "status": "passed",
+      "duration_ms": 390.496,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 2.898,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.474,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 77.641,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 1538.862,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "a3a8bb915957d6fa2f8d9a4d674f62bf",
+        "attempt_id": "ed27c6ba1b0327bf52f063bce729e997"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-book-list --gate e2e",
+      "status": "passed",
+      "duration_ms": 32179.321,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1590,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-lists.spec.ts",
+                "name": "books"
+              }
+            ],
+            "duration_ms": 2768.801,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-lists.spec.ts",
+                "name": "books"
+              }
+            ],
+            "duration_ms": 1429.633
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-lists.spec.ts",
+                "name": "books",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "books"
+                ]
+              }
+            ],
+            "duration_ms": 1340.476,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-lists.spec.ts",
+                "name": "books",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "books"
+                ]
+              }
+            ],
+            "duration_ms": 26258.999,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\4aac216400e9bf94415eb78dc59a10188cff6d4a59c1b666b0c2a06fd4681aeb\\artifacts\\a3a8bb915957d6fa2f8d9a4d674f62bf\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "a3a8bb915957d6fa2f8d9a4d674f62bf",
+        "attempt_id": "b32196c2a418db2e836eeecac0ed23b2"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1271.989,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 36333.414,
+    "failures": []
+  },
+  "source_commit": "26f063597a1ee88b178f320c9033fabb9885eecd"
+}

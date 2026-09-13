@@ -1,0 +1,356 @@
+{
+  "schema_version": 2,
+  "task_id": "20260911-assistant-about-sync",
+  "created_at": "2026-09-10T17:11:15.280819+00:00",
+  "command": "python -m tools.harness verify 20260911-assistant-about-sync",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "1e6cd5ea29f4f2689f662d17011509ec7363ca4d",
+    "active_spec_sha256": "328a000b02d1909aafba7f009a8b5059a97fabe287440f6eed6d73d69734d40e",
+    "verification_contract_sha256": "54be97859c48b7b9f7a48b00310aca80c8ef517b0d813aefc22d3dc7ffc3f05a",
+    "gate_config_sha256": "cca947b8f0a5629fcea3995ae18bdaf8cce4960f056cd122cb05531eb5f44558",
+    "documentation_contract_sha256": "6208c59dfd48449150e31737b3b084bb4bc9114ae8af438028a6510fcc226eba",
+    "documentation_targets_sha256": "4227387850b22dc22b0a455dcf7342aacd79da4b0b2245622c93dc5d154da5ce",
+    "module_contract_sha256": "80427d14c98c29f8bc30a828e6b812524ea476dcce553e69d790686ca5d4fec0"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "说明关于页事务同步、旧版失效和管理来源枚举。",
+    "targets": [
+      "apps/api/README.md",
+      "packages/contracts/README.md"
+    ],
+    "baseline_commit": "6982ac12ec8aa451c88abe1fccc4c95b8ad91d91",
+    "target_blobs": {
+      "apps/api/README.md": "ecb88bdf77051f7046175666550e7f4e058d4432",
+      "packages/contracts/README.md": "91aa59ab2dad65c7a6055321f84e5f70ac12a7a6"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "faca35176fd1b4a86f7e7b8411740463602f641e",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260911-assistant-about-sync.json",
+      "sha256": "1113f97dd21543775afd2a4bdbcb79996eaa44300f6db870609f67647d9b2906",
+      "selected_cases": [
+        "M11-ASSISTANT-SYNC-01"
+      ],
+      "selected_refs": 2,
+      "excluded_cases": 282
+    },
+    "receipt": {
+      "run_id": "e2362a5163e4ae16cea81836294a1bc7",
+      "identity": "6efe6aed2981a53a7142c7375849a5f53c80bec58ffd1cc1d72ced7bdd86af3d",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1436.741,
+      "plan_inputs": 1079.537,
+      "execute_cleanup_and_input_recheck": 10262.288
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "80427d14c98c29f8bc30a828e6b812524ea476dcce553e69d790686ca5d4fec0",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M11-ASSISTANT-SYNC-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P1",
+            "scenario": "关于页主动发布/回滚原子排队并立即改变来源版本资格。",
+            "expectations": [
+              {
+                "id": "M11-ASSISTANT-SYNC-01-E01",
+                "surface": "response",
+                "statement": "发布回滚合并最新about任务，管理schema和OpenAPI接受about。"
+              },
+              {
+                "id": "M11-ASSISTANT-SYNC-01-E02",
+                "surface": "forbidden",
+                "statement": "草稿不排队；入队失败无修订泄漏；旧来源fence拒绝。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_about_sync.py",
+                "kind": "pytest",
+                "name": "test_about_publish_rollback_outbox_and_source_fence",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-ASSISTANT-SYNC-01-E01",
+                  "M11-ASSISTANT-SYNC-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_about_sync.py",
+                "kind": "pytest",
+                "name": "test_about_failed_enqueue_rolls_back_publish_transaction",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-ASSISTANT-SYNC-01-E01",
+                  "M11-ASSISTANT-SYNC-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.16,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "171 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 244.964,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 79.088,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.595,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "896 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 393.789,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "293 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 96.513,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 283 cases, 567 expectations, 963 exact test references; contract sha256 80427d14c98c"
+      ],
+      "status": "passed",
+      "duration_ms": 511.391,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 2.995,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.137,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 91.584,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1"
+      ],
+      "duration_ms": 1915.097,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "e2362a5163e4ae16cea81836294a1bc7",
+        "attempt_id": "cb8cdc8867151d06b7b91d540c5f176d"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-assistant-about-sync --gate api-tests",
+      "status": "passed",
+      "duration_ms": 6212.371,
+      "covers": [
+        "AC-1"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 539,
+        "selection_counts": {
+          "collected": 2,
+          "executed": 2
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_sync.py",
+                "name": "test_about_publish_rollback_outbox_and_source_fence"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_sync.py",
+                "name": "test_about_failed_enqueue_rolls_back_publish_transaction"
+              }
+            ],
+            "duration_ms": 5834.086,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\46cfcc2183ce96dd38b1dab98370a972b7ae9c0040dbe9cd731aacc997bb65cf\\artifacts\\e2362a5163e4ae16cea81836294a1bc7\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "e2362a5163e4ae16cea81836294a1bc7",
+        "attempt_id": "aedf6b1d553ceb6aa544d832635a66f4"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1841.727,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 11403.411,
+    "failures": []
+  },
+  "source_commit": "faca35176fd1b4a86f7e7b8411740463602f641e"
+}

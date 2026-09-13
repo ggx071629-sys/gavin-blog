@@ -1,0 +1,1758 @@
+{
+  "schema_version": 2,
+  "task_id": "20260910-assistant-management",
+  "created_at": "2026-09-10T00:34:03.517634+00:00",
+  "command": "python -m tools.harness verify 20260910-assistant-management",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5",
+    "AC-6"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "status": "passed",
+      "gates": [
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-6",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e",
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "stack",
+  "fingerprints": {
+    "source_tree": "1ede7b53911ec1d1e8c7c0c9c2e7879a3a054cc1",
+    "active_spec_sha256": "fa7eaf8edf312e19dfd8a62afbec3027785461de0b9e43eb13169480c8f03e97",
+    "verification_contract_sha256": "03bceccb10a829d09e1a0f962c3fc1ea5fcbe59b98feace535bf73ef71759c03",
+    "gate_config_sha256": "fcb483db9843db5b241c25376a449f407dd548042ccda2e3c123daabe783e729",
+    "documentation_contract_sha256": "554da274569f89ff7d458168f4394e123e9b3eac8d3ef899176b66a987c6a1d8",
+    "documentation_targets_sha256": "5f6d7e6dec2e1ebd6f392d5b1c70aea9bcfd3197a80b74a558593713343ab4da",
+    "module_contract_sha256": "c55e7032470061a70cecd940f937470c3c6a65ec503d7adc549e5c7d50b1717c"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录管理试问、统一预算与公开入口控制的新契约及运维边界",
+    "targets": [
+      "harness/docs/product/assistant-management-design.md",
+      "apps/api/README.md",
+      "packages/contracts/README.md"
+    ],
+    "baseline_commit": "e73aae17d9cfd2c79897251cf5c19d3f491944d9",
+    "target_blobs": {
+      "harness/docs/product/assistant-management-design.md": "d0d485854f8e7cacc04d6332318403a8ee92293b",
+      "apps/api/README.md": "64336946e92cec4daca2af0495e7e89f9ba13706",
+      "packages/contracts/README.md": "92f76bd767a2514cb853eddf62586ce49b1bf93a"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "d35501227425a8c508d84c4ba3d04cf0e48666d4",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260910-assistant-management.json",
+      "sha256": "b811d304a114279a983a9ba72dbbaf527479948a248972b778201031f7725dbd",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M10-ADMIN-TRIAL-01",
+        "M10-MANAGEMENT-UI-01",
+        "M10-PUBLIC-AVAILABILITY-01",
+        "M10-SYNC-PRIORITY-01",
+        "M10-TOTAL-BUDGET-01"
+      ],
+      "selected_refs": 26,
+      "excluded_cases": 223
+    },
+    "receipt": {
+      "run_id": "558313713d0306889a717074c80e8b48",
+      "identity": "b92f46d2502e168fe588008db3f4b8e0a45fd26dac7b669a19acba3ef270244f",
+      "plan": [
+        {
+          "gate": "web-quality",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1184.728,
+      "plan_inputs": 1121.403,
+      "execute_cleanup_and_input_recheck": 257707.503
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "c55e7032470061a70cecd940f937470c3c6a65ec503d7adc549e5c7d50b1717c",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "web-quality",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M10-MANAGEMENT-UI-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "Real overview, trial, maintenance, budget dialog and responsive themes use API facts; stale data is visible and citations stay collapsed.",
+            "expectations": [
+              {
+                "id": "M10-MANAGEMENT-UI-01-ALLOW",
+                "surface": "response",
+                "statement": "Real overview, trial, maintenance, budget dialog and responsive themes use API facts; stale data is visible and citations stay collapsed."
+              },
+              {
+                "id": "M10-MANAGEMENT-UI-01-DENY",
+                "surface": "forbidden",
+                "statement": "No anonymous access to admin trials, overspending from duplicate reservations, stale open status, invented fees or unvalidated citation paths."
+              }
+            ],
+            "required_gates": [
+              "e2e",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "covers": [
+                  "M10-MANAGEMENT-UI-01-ALLOW",
+                  "M10-MANAGEMENT-UI-01-DENY"
+                ],
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant",
+                "gate": "e2e",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "covers": [
+                  "M10-MANAGEMENT-UI-01-ALLOW",
+                  "M10-MANAGEMENT-UI-01-DENY"
+                ],
+                "title_path": [
+                  "ops assistant"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "uses exact decimal micro currency and rejects ambiguous values",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-MANAGEMENT-UI-01-ALLOW",
+                  "M10-MANAGEMENT-UI-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "closes trial citations over safe public sources and bounded excerpts",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-MANAGEMENT-UI-01-ALLOW",
+                  "M10-MANAGEMENT-UI-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "keeps polling visibility-bound and renders errors as text",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-MANAGEMENT-UI-01-ALLOW",
+                  "M10-MANAGEMENT-UI-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "web-quality",
+          "e2e",
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M10-PUBLIC-AVAILABILITY-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "Public switch fences admission and a passive no-store projection hides the entry; stale or budget-blocked state is not shown as available.",
+            "expectations": [
+              {
+                "id": "M10-PUBLIC-AVAILABILITY-01-ALLOW",
+                "surface": "response",
+                "statement": "Public switch fences admission and a passive no-store projection hides the entry; stale or budget-blocked state is not shown as available."
+              },
+              {
+                "id": "M10-PUBLIC-AVAILABILITY-01-DENY",
+                "surface": "forbidden",
+                "statement": "No anonymous access to admin trials, overspending from duplicate reservations, stale open status, invented fees or unvalidated citation paths."
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "e2e",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_sync_is_bounded_and_public_availability_is_passive",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-PUBLIC-AVAILABILITY-01-ALLOW",
+                  "M10-PUBLIC-AVAILABILITY-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "name": "test_safety_disable_beats_stale_version_and_blocks_new_sessions",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-PUBLIC-AVAILABILITY-01-ALLOW",
+                  "M10-PUBLIC-AVAILABILITY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "never reports stale or budget blocked service as open",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-PUBLIC-AVAILABILITY-01-ALLOW",
+                  "M10-PUBLIC-AVAILABILITY-01-DENY"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+                "name": "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "covers": [
+                  "M10-PUBLIC-AVAILABILITY-01-ALLOW",
+                  "M10-PUBLIC-AVAILABILITY-01-DENY"
+                ],
+                "title_path": [
+                  "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+                "name": "admin kill switch is explicit and prevents a later anonymous admission",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "covers": [
+                  "M10-PUBLIC-AVAILABILITY-01-ALLOW",
+                  "M10-PUBLIC-AVAILABILITY-01-DENY"
+                ],
+                "title_path": [
+                  "admin kill switch is explicit and prevents a later anonymous admission"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              },
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "e2e",
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M10-ADMIN-TRIAL-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "Authenticated CSRF-bound admin trial remains usable with public off; shared execution fences, expiry, deletion and global stop prevent late delivery.",
+            "expectations": [
+              {
+                "id": "M10-ADMIN-TRIAL-01-ALLOW",
+                "surface": "response",
+                "statement": "Authenticated CSRF-bound admin trial remains usable with public off; shared execution fences, expiry, deletion and global stop prevent late delivery."
+              },
+              {
+                "id": "M10-ADMIN-TRIAL-01-DENY",
+                "surface": "forbidden",
+                "statement": "No anonymous access to admin trials, overspending from duplicate reservations, stale open status, invented fees or unvalidated citation paths."
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ],
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_admin_trial_closed_public_isolated_authenticated_and_emergency_stopped",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_late_provider_completion_after_delete_has_no_body_checkpoint_or_delivery",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_normal_mutation_permit_requires_exact_lease_scope_keys",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_expiry_serialization.py",
+                "name": "test_expiry_waits_for_saver_and_fences_old_identity",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_online.py",
+                "name": "test_question_happy_path_and_idempotent_replay",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "name": "test_rebuild_request_is_durable_and_finalize_leaves_gate_disabled",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              },
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M10-TOTAL-BUDGET-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "Shared atomic reservations serialize competing scopes; versioned edits, deployment caps, exact settlement and restored-day lock preserve spending authority.",
+            "expectations": [
+              {
+                "id": "M10-TOTAL-BUDGET-01-ALLOW",
+                "surface": "response",
+                "statement": "Shared atomic reservations serialize competing scopes; versioned edits, deployment caps, exact settlement and restored-day lock preserve spending authority."
+              },
+              {
+                "id": "M10-TOTAL-BUDGET-01-DENY",
+                "surface": "forbidden",
+                "statement": "No anonymous access to admin trials, overspending from duplicate reservations, stale open status, invented fees or unvalidated citation paths."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_atomic_shared_budget_question_priority_and_monotonic_settlement",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-TOTAL-BUDGET-01-ALLOW",
+                  "M10-TOTAL-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_budget_edit_conflict_zero_and_deployment_ceiling",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-TOTAL-BUDGET-01-ALLOW",
+                  "M10-TOTAL-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_backup_restore.py",
+                "name": "test_restore_uses_fresh_paths_migrates_checks_fts_and_locks_online_budget",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-TOTAL-BUDGET-01-ALLOW",
+                  "M10-TOTAL-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_online.py",
+                "name": "test_content_migration_adds_index_ledger",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-TOTAL-BUDGET-01-ALLOW",
+                  "M10-TOTAL-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_preconditions_and_allowlisted_result",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-TOTAL-BUDGET-01-ALLOW",
+                  "M10-TOTAL-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_reuses_budget_and_rejects_drift",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-TOTAL-BUDGET-01-ALLOW",
+                  "M10-TOTAL-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_backup_restore.py",
+                "name": "test_restore_previous_schema_creates_shared_budget_and_keeps_restore_lock",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-TOTAL-BUDGET-01-ALLOW",
+                  "M10-TOTAL-BUDGET-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-5",
+        "selected_gates": [
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M10-SYNC-PRIORITY-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "Index batches defer for question headroom while deletion and withdrawal remain independent of paid budget; task views identify current public revisions.",
+            "expectations": [
+              {
+                "id": "M10-SYNC-PRIORITY-01-ALLOW",
+                "surface": "response",
+                "statement": "Index batches defer for question headroom while deletion and withdrawal remain independent of paid budget; task views identify current public revisions."
+              },
+              {
+                "id": "M10-SYNC-PRIORITY-01-DENY",
+                "surface": "forbidden",
+                "statement": "No anonymous access to admin trials, overspending from duplicate reservations, stale open status, invented fees or unvalidated citation paths."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_index_budget_defers_paid_batch_but_deletion_still_completes",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-PRIORITY-01-ALLOW",
+                  "M10-SYNC-PRIORITY-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_sync_is_bounded_and_public_availability_is_passive",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-PRIORITY-01-ALLOW",
+                  "M10-SYNC-PRIORITY-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_outbox_records_lifecycle_in_the_same_transaction",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-PRIORITY-01-ALLOW",
+                  "M10-SYNC-PRIORITY-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_worker_rebuild_retriever_and_staleness",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-PRIORITY-01-ALLOW",
+                  "M10-SYNC-PRIORITY-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-6",
+        "selected_gates": [
+          "web-quality",
+          "e2e",
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-MANAGEMENT-UI-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "Real overview, trial, maintenance, budget dialog and responsive themes use API facts; stale data is visible and citations stay collapsed.",
+            "expectations": [
+              {
+                "id": "M10-MANAGEMENT-UI-01-ALLOW",
+                "surface": "response",
+                "statement": "Real overview, trial, maintenance, budget dialog and responsive themes use API facts; stale data is visible and citations stay collapsed."
+              },
+              {
+                "id": "M10-MANAGEMENT-UI-01-DENY",
+                "surface": "forbidden",
+                "statement": "No anonymous access to admin trials, overspending from duplicate reservations, stale open status, invented fees or unvalidated citation paths."
+              }
+            ],
+            "required_gates": [
+              "e2e",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "covers": [
+                  "M10-MANAGEMENT-UI-01-ALLOW",
+                  "M10-MANAGEMENT-UI-01-DENY"
+                ],
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant",
+                "gate": "e2e",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "covers": [
+                  "M10-MANAGEMENT-UI-01-ALLOW",
+                  "M10-MANAGEMENT-UI-01-DENY"
+                ],
+                "title_path": [
+                  "ops assistant"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "uses exact decimal micro currency and rejects ambiguous values",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-MANAGEMENT-UI-01-ALLOW",
+                  "M10-MANAGEMENT-UI-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "closes trial citations over safe public sources and bounded excerpts",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-MANAGEMENT-UI-01-ALLOW",
+                  "M10-MANAGEMENT-UI-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "keeps polling visibility-bound and renders errors as text",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-MANAGEMENT-UI-01-ALLOW",
+                  "M10-MANAGEMENT-UI-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M10-ADMIN-TRIAL-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "Authenticated CSRF-bound admin trial remains usable with public off; shared execution fences, expiry, deletion and global stop prevent late delivery.",
+            "expectations": [
+              {
+                "id": "M10-ADMIN-TRIAL-01-ALLOW",
+                "surface": "response",
+                "statement": "Authenticated CSRF-bound admin trial remains usable with public off; shared execution fences, expiry, deletion and global stop prevent late delivery."
+              },
+              {
+                "id": "M10-ADMIN-TRIAL-01-DENY",
+                "surface": "forbidden",
+                "statement": "No anonymous access to admin trials, overspending from duplicate reservations, stale open status, invented fees or unvalidated citation paths."
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ],
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_admin_trial_closed_public_isolated_authenticated_and_emergency_stopped",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_late_provider_completion_after_delete_has_no_body_checkpoint_or_delivery",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_normal_mutation_permit_requires_exact_lease_scope_keys",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_expiry_serialization.py",
+                "name": "test_expiry_waits_for_saver_and_fences_old_identity",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_online.py",
+                "name": "test_question_happy_path_and_idempotent_replay",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "name": "test_rebuild_request_is_durable_and_finalize_leaves_gate_disabled",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-ADMIN-TRIAL-01-ALLOW",
+                  "M10-ADMIN-TRIAL-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              },
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.297,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "131 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 174.654,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 76.219,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.522,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "629 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 334.557,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "250 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 85.981,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 229 cases, 459 expectations, 852 exact test references; contract sha256 c55e70324700"
+      ],
+      "status": "passed",
+      "duration_ms": 405.74,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 4.807,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.603,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 85.223,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-6"
+      ],
+      "duration_ms": 1795.505,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "558313713d0306889a717074c80e8b48",
+        "attempt_id": "bb7d9948078c8447653503cc753e90a8"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-assistant-management --gate web-quality",
+      "status": "passed",
+      "duration_ms": 13545.225,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-6"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 3902,
+        "selection_counts": {
+          "collected": 4,
+          "executed": 4
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "uses exact decimal micro currency and rejects ambiguous values"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "closes trial citations over safe public sources and bounded excerpts"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "keeps polling visibility-bound and renders errors as text"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "never reports stale or budget blocked service as open"
+              }
+            ],
+            "duration_ms": 3537.373,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "1d8d7e8e1e3f796a1435e5f9e23ccf49ee0972c2a31f570b2db61cdbe3246ea0",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "uses exact decimal micro currency and rejects ambiguous values"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "closes trial citations over safe public sources and bounded excerpts"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "never reports stale or budget blocked service as open"
+              }
+            ],
+            "duration_ms": 2394.451
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "keeps polling visibility-bound and renders errors as text"
+              }
+            ],
+            "duration_ms": 2340.025
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "uses exact decimal micro currency and rejects ambiguous values",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant management contracts",
+                  "uses exact decimal micro currency and rejects ambiguous values"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "closes trial citations over safe public sources and bounded excerpts",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant management contracts",
+                  "closes trial citations over safe public sources and bounded excerpts"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "never reports stale or budget blocked service as open",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant management contracts",
+                  "never reports stale or budget blocked service as open"
+                ]
+              }
+            ],
+            "duration_ms": 2446.826,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "keeps polling visibility-bound and renders errors as text",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant admin contract",
+                  "keeps polling visibility-bound and renders errors as text"
+                ]
+              }
+            ],
+            "duration_ms": 2387.335,
+            "batch_id": "batch-0002"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\faea3c4e53ef2640ac1f4e5350cc731af24cdc12e4aebbdbfa36fba46a77a7b5\\artifacts\\558313713d0306889a717074c80e8b48\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "558313713d0306889a717074c80e8b48",
+        "attempt_id": "8f536666c947d4357b9fd2890ddf644b"
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-assistant-management --gate e2e",
+      "status": "passed",
+      "duration_ms": 212968.534,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-6"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 7423,
+        "selection_counts": {
+          "collected": 4,
+          "executed": 4
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "reused-in-worktree",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops assistant"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+                "name": "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+                "name": "admin kill switch is explicit and prevents a later anonymous admission",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "admin kill switch is explicit and prevents a later anonymous admission"
+                ]
+              }
+            ],
+            "duration_ms": 5.18,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "1d8d7e8e1e3f796a1435e5f9e23ccf49ee0972c2a31f570b2db61cdbe3246ea0",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              }
+            ],
+            "duration_ms": 1618.302
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops assistant"
+                ]
+              }
+            ],
+            "duration_ms": 1636.62
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+                "name": "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+                "name": "admin kill switch is explicit and prevents a later anonymous admission",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "admin kill switch is explicit and prevents a later anonymous admission"
+                ]
+              }
+            ],
+            "duration_ms": 1776.896
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              }
+            ],
+            "duration_ms": 1481.085,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              }
+            ],
+            "duration_ms": 56703.012,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops assistant"
+                ]
+              }
+            ],
+            "duration_ms": 1458.429,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops assistant"
+                ]
+              }
+            ],
+            "duration_ms": 29109.083,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+                "name": "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay"
+                ]
+              }
+            ],
+            "duration_ms": 1466.928,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+                "name": "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "enabled assistant preserves active work, fences DELETE, and owns the responsive overlay"
+                ]
+              }
+            ],
+            "duration_ms": 61764.469,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+                "name": "admin kill switch is explicit and prevents a later anonymous admission",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "admin kill switch is explicit and prevents a later anonymous admission"
+                ]
+              }
+            ],
+            "duration_ms": 1593.105,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+                "name": "admin kill switch is explicit and prevents a later anonymous admission",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "admin kill switch is explicit and prevents a later anonymous admission"
+                ]
+              }
+            ],
+            "duration_ms": 53874.301,
+            "batch_id": "batch-0004"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\faea3c4e53ef2640ac1f4e5350cc731af24cdc12e4aebbdbfa36fba46a77a7b5\\artifacts\\558313713d0306889a717074c80e8b48\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "558313713d0306889a717074c80e8b48",
+        "attempt_id": "c3d1ff1afab591400b0b4367ccdf1b36"
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-assistant-management --gate api-tests",
+      "status": "passed",
+      "duration_ms": 26481.575,
+      "covers": [
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 3260,
+        "selection_counts": {
+          "collected": 18,
+          "executed": 18
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_admin_trial_closed_public_isolated_authenticated_and_emergency_stopped"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_late_provider_completion_after_delete_has_no_body_checkpoint_or_delivery"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+                "name": "test_normal_mutation_permit_requires_exact_lease_scope_keys"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_expiry_serialization.py",
+                "name": "test_expiry_waits_for_saver_and_fences_old_identity"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_online.py",
+                "name": "test_question_happy_path_and_idempotent_replay"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "name": "test_rebuild_request_is_durable_and_finalize_leaves_gate_disabled"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_sync_is_bounded_and_public_availability_is_passive"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "name": "test_safety_disable_beats_stale_version_and_blocks_new_sessions"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_index_budget_defers_paid_batch_but_deletion_still_completes"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_outbox_records_lifecycle_in_the_same_transaction"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_worker_rebuild_retriever_and_staleness"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_atomic_shared_budget_question_priority_and_monotonic_settlement"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_budget_edit_conflict_zero_and_deployment_ceiling"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_backup_restore.py",
+                "name": "test_restore_uses_fresh_paths_migrates_checks_fts_and_locks_online_budget"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_online.py",
+                "name": "test_content_migration_adds_index_ledger"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_preconditions_and_allowlisted_result"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_reuses_budget_and_rejects_drift"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_backup_restore.py",
+                "name": "test_restore_previous_schema_creates_shared_budget_and_keeps_restore_lock"
+              }
+            ],
+            "duration_ms": 26036.521,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\faea3c4e53ef2640ac1f4e5350cc731af24cdc12e4aebbdbfa36fba46a77a7b5\\artifacts\\558313713d0306889a717074c80e8b48\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "558313713d0306889a717074c80e8b48",
+        "attempt_id": "4e5eb978518504d6e116ba62e326f58d"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2586.15,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 15,
+      "passed": 15,
+      "failed": 0
+    },
+    "duration_ms": 258558.592,
+    "failures": []
+  },
+  "source_commit": "d35501227425a8c508d84c4ba3d04cf0e48666d4"
+}

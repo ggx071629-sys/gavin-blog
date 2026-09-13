@@ -1,0 +1,516 @@
+{
+  "schema_version": 1,
+  "task_id": "20260906-ui-delivery",
+  "changes": [
+    {
+      "path": "apps/web/components/WritingWorkspace.vue",
+      "owner": "M02.editing",
+      "reason": "修复预览 aria-controls 悬空目标并保持内部按需渲染；记录并回归完整发布候选。",
+      "cases": [
+        "M02-DESK-LAYOUT-01",
+        "M07-UNIT-SITE-QUALITY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "三类新建和编辑复用受控预览容器，覆盖初始与切换状态，未改变保存或发布协议。",
+          "cases": [
+            "M02-DESK-LAYOUT-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "三类新建和编辑复用受控预览容器，覆盖初始与切换状态，未改变保存或发布协议。",
+          "cases": [
+            "M02-DESK-LAYOUT-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+      "owner": "M02.editing",
+      "reason": "修复预览 aria-controls 悬空目标并保持内部按需渲染；记录并回归完整发布候选。",
+      "cases": [
+        "M02-DESK-LAYOUT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "登记第七阶段文档及已有生产矩阵覆盖，不修改执行政策。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "仅补充回归断言或登记文档/既有 case；不改变消费者运行时、解析格式和验证选择算法。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "ui-fix/PHASE-7.md",
+      "owner": "M08.documentation",
+      "reason": "登记第七阶段文档及已有生产矩阵覆盖，不修改执行政策。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/e2e/article-loop.spec.ts",
+      "owner": "M02.editing",
+      "reason": "修正已迁入设计的过时测试断言和共享隔离数据假设；保留真实业务检查，新增语法色对比度与目标恢复公开可读验证。",
+      "cases": [
+        "M02-UNIT-ARTICLE-LOOP-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/codeblock-theme.spec.ts",
+      "owner": "M01.reading",
+      "reason": "修正已迁入设计的过时测试断言和共享隔离数据假设；保留真实业务检查，新增语法色对比度与目标恢复公开可读验证。",
+      "cases": [
+        "M01-UNIT-CODEBLOCK-THEME-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/public-experience.spec.ts",
+      "owner": "M01.navigation",
+      "reason": "修正已迁入设计的过时测试断言和共享隔离数据假设；保留真实业务检查，新增语法色对比度与目标恢复公开可读验证。",
+      "cases": [
+        "M01-UNIT-PUBLIC-EXPERIENCE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "修正已迁入设计的过时测试断言和共享隔离数据假设；保留真实业务检查，新增语法色对比度与目标恢复公开可读验证。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "仅更新该单元的测试或精确名称登记，未修改其被消费的组件、函数、配置或合同格式。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+      "owner": "M07.theme",
+      "reason": "用已迁入的介绍与栏目双列、集成名片、下方条目替代旧首页网格定位；仍逐项比较双主题几何。",
+      "cases": [
+        "M07-UNIT-THEME-STRUCTURE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "仅更新当前首页布局的测试定位和几何断言，未修改全局 CSS 或组件。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/config.toml",
+      "owner": "M08.configuration",
+      "reason": "完整发布门禁实际在助手组之前接近 900 秒，预算增至 1200 秒；不减少测试或降低阈值。",
+      "cases": [
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.acceptance",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        },
+        {
+          "unit": "M08.assurance",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        },
+        {
+          "unit": "M08.change_enforcement",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        },
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        },
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": true,
+          "reason": "release runner 实际消费监督超时，验证超时终止合同保持。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        },
+        {
+          "unit": "M08.task_reporting",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        },
+        {
+          "unit": "M08.telemetry",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "仅调整 release 的允许耗时，不改变命令、依赖、profile、结果 schema、复用策略或此消费者的算法；新预算随现有指纹机制记录。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e-assistant/assistant.spec.ts",
+      "owner": "M09.assistant_web",
+      "reason": "更新后台标题与访客不可用提示的精确测试定位，验证真实停用、输入禁用及零提问请求。",
+      "cases": [
+        "M09-UNIT-ASSISTANT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "仅更新后台标题的测试定位，不修改组件、代理身份、开关或准入行为。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "仅更新后台标题的测试定位，不修改组件、代理身份、开关或准入行为。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "仅更新后台标题的测试定位，不修改组件、代理身份、开关或准入行为。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+      "owner": "M09.assistant_web",
+      "reason": "平滑滚动是异步行为，使用条件轮询等待滚动位置变化，保留未读不抢位置及最新回复可见断言。",
+      "cases": [
+        "M09-UI-INTERACTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "仅更新后台标题的测试定位，不修改组件、代理身份、开关或准入行为。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "仅更新后台标题的测试定位，不修改组件、代理身份、开关或准入行为。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "仅更新后台标题的测试定位，不修改组件、代理身份、开关或准入行为。",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}

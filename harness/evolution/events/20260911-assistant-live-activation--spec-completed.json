@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260911-assistant-live-activation",
+  "created_at": "2026-09-11T01:54:16.766007+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "f17fb433ad30a667a757e716c47bf11e3378ec2aaf16a1e02668e3ab3ee1b6bb"
+}

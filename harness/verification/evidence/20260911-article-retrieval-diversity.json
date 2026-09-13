@@ -1,0 +1,600 @@
+{
+  "schema_version": 2,
+  "task_id": "20260911-article-retrieval-diversity",
+  "created_at": "2026-09-11T04:46:29.731675+00:00",
+  "command": "python -m tools.harness verify 20260911-article-retrieval-diversity",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "web-quality",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "620bb3eb287e9566abcff7c9762bd01d9548179a",
+    "active_spec_sha256": "ccb724aa7158551d379d3f22fefab554ea6bd792401b86437da77ebd7820467f",
+    "verification_contract_sha256": "e3daba1043dc28bb6069ace4fa8e72eaef9884d85d50e23158a173e103518201",
+    "gate_config_sha256": "d56502d38cd012975bddd93be4a3d9f06cdad12fed469fb6ad8544a2787a823e",
+    "documentation_contract_sha256": "c7a4ba60224dbb88593cbaf7b51752c01455d223a0e04fc35c9c86cfe28464a6",
+    "documentation_targets_sha256": "ef330b82bf0ccd8c0d4770111589e7a2a51b9603c9d96dab0041f81e6e9081da",
+    "module_contract_sha256": "4ab9c491ad62c46f084037d73b3b8937f3592322f2d5f50d07edb421978834ac"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录候选来源覆盖和面向用户的标题引用规则。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "34637d11e3977ee2a9fd7968d619fff506913844",
+    "target_blobs": {
+      "apps/api/README.md": "5d93def030fa45e23d3e309f6625140dfff4db44"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "98667ffc473c0ad4650a5805b05607719f01c522",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260911-article-retrieval-diversity.json",
+      "sha256": "2ec3c98f26ec6be03655ca1a8d136477b481039c3d2dd9540fc9de1ea9591ea7",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M09-SOURCE-TITLE-01",
+        "M09-SOURCE-TITLE-02",
+        "M10-SOURCE-DIVERSITY-01"
+      ],
+      "selected_refs": 4,
+      "excluded_cases": 309
+    },
+    "receipt": {
+      "run_id": "d0c084c535e75c44b4cd956dcdf1a104",
+      "identity": "d7ffc940adc8196ef7a3680a337a9658d77d424f0e82fedb842847cc300722ff",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "web-quality",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1699.467,
+      "plan_inputs": 1210.543,
+      "execute_cleanup_and_input_recheck": 24948.546
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "4ab9c491ad62c46f084037d73b3b8937f3592322f2d5f50d07edb421978834ac",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-SOURCE-DIVERSITY-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "扩大可配置候选池与证据组装范围，优先覆盖不同来源，保持模型预算和可见性校验。",
+            "expectations": [
+              {
+                "id": "M10-SOURCE-DIVERSITY-01-ALLOW",
+                "surface": "response",
+                "statement": "不同公开来源优先获取候选位置；删除来源仍被拒绝。"
+              },
+              {
+                "id": "M10-SOURCE-DIVERSITY-01-DENY",
+                "surface": "forbidden",
+                "statement": "不得遗漏已选来源、返回删除资料或展示裸来源路径。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_source_diversity.py",
+                "name": "test_retrieval_spreads_limit_across_live_sources",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SOURCE-DIVERSITY-01-ALLOW",
+                  "M10-SOURCE-DIVERSITY-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_source_diversity.py",
+                "name": "test_candidate_pool_defaults_are_configurable_without_raising_model_budget",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SOURCE-DIVERSITY-01-ALLOW",
+                  "M10-SOURCE-DIVERSITY-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "web-quality",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-SOURCE-TITLE-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "提示只提供来源标题别名，不提供路径；证据仍保留跳转目标。",
+            "expectations": [
+              {
+                "id": "M09-SOURCE-TITLE-01-ALLOW",
+                "surface": "response",
+                "statement": "提示只提供来源标题别名，不提供路径；证据仍保留跳转目标。"
+              },
+              {
+                "id": "M09-SOURCE-TITLE-01-DENY",
+                "surface": "forbidden",
+                "statement": "不得遗漏已选来源、返回删除资料或展示裸来源路径。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_source_diversity.py",
+                "name": "test_prompt_uses_titles_without_source_paths",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-SOURCE-TITLE-01-ALLOW",
+                  "M09-SOURCE-TITLE-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-SOURCE-TITLE-02",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "来源卡片显示标题，不显示路径，保留原跳转事件。",
+            "expectations": [
+              {
+                "id": "M09-SOURCE-TITLE-02-ALLOW",
+                "surface": "response",
+                "statement": "来源卡片显示标题，不显示路径，保留原跳转事件。"
+              },
+              {
+                "id": "M09-SOURCE-TITLE-02-DENY",
+                "surface": "forbidden",
+                "statement": "不得遗漏已选来源、返回删除资料或展示裸来源路径。"
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant-source-title.test.ts",
+                "name": "shows source titles while retaining navigation targets without path labels",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-SOURCE-TITLE-02-ALLOW",
+                  "M09-SOURCE-TITLE-02-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 7.954,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "187 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 260.45,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 93.44,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 2.24,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "1017 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 541.518,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "309 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 112.027,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 313 cases, 627 expectations, 1024 exact test references; contract sha256 4ab9c491ad62"
+      ],
+      "status": "passed",
+      "duration_ms": 568.234,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 6.302,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 11.422,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 92.667,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 2286.633,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "d0c084c535e75c44b4cd956dcdf1a104",
+        "attempt_id": "a6c6b2b8b9fa8274223437c69ae2711e"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-article-retrieval-diversity --gate api-tests",
+      "status": "passed",
+      "duration_ms": 8683.063,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 724,
+        "selection_counts": {
+          "collected": 3,
+          "executed": 3
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_source_diversity.py",
+                "name": "test_prompt_uses_titles_without_source_paths"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_source_diversity.py",
+                "name": "test_retrieval_spreads_limit_across_live_sources"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_source_diversity.py",
+                "name": "test_candidate_pool_defaults_are_configurable_without_raising_model_budget"
+              }
+            ],
+            "duration_ms": 8204.454,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\2758b4a5fbb115c973499559dd6ecae6fbd472779daade4858e885c5146df555\\artifacts\\d0c084c535e75c44b4cd956dcdf1a104\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "d0c084c535e75c44b4cd956dcdf1a104",
+        "attempt_id": "420a16b2c55e5beb2bf1672581a6fa49"
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-article-retrieval-diversity --gate web-quality",
+      "status": "passed",
+      "duration_ms": 11177.081,
+      "covers": [
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1569,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-source-title.test.ts",
+                "name": "shows source titles while retaining navigation targets without path labels"
+              }
+            ],
+            "duration_ms": 5772.668,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-source-title.test.ts",
+                "name": "shows source titles while retaining navigation targets without path labels"
+              }
+            ],
+            "duration_ms": 2407.417
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-source-title.test.ts",
+                "name": "shows source titles while retaining navigation targets without path labels",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant source titles",
+                  "shows source titles while retaining navigation targets without path labels"
+                ]
+              }
+            ],
+            "duration_ms": 2516.145,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\2758b4a5fbb115c973499559dd6ecae6fbd472779daade4858e885c5146df555\\artifacts\\d0c084c535e75c44b4cd956dcdf1a104\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "d0c084c535e75c44b4cd956dcdf1a104",
+        "attempt_id": "3f52b7a57e9e4eeec911847a7ae2e781"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2482.846,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 26325.877,
+    "failures": []
+  },
+  "source_commit": "98667ffc473c0ad4650a5805b05607719f01c522"
+}

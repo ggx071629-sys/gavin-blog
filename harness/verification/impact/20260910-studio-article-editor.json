@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "task_id": "20260910-studio-article-editor",
+  "changes": [
+    {
+      "path": "apps/web/components/ArticleEditor.vue",
+      "owner": "M02.editing",
+      "reason": "文章新建编辑分区、校验保存后确认发布、取消保留草稿和工作副本隔离。",
+      "cases": [
+        "M02-STUDIO-ARTICLE-EDITOR-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/StudioPublishConfirmation.vue",
+      "owner": "M02.editing",
+      "reason": "文章新建编辑分区、校验保存后确认发布、取消保留草稿和工作副本隔离。",
+      "cases": [
+        "M02-STUDIO-ARTICLE-EDITOR-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/admin/articles/new.vue",
+      "owner": "M02.editing",
+      "reason": "文章新建编辑分区、校验保存后确认发布、取消保留草稿和工作副本隔离。",
+      "cases": [
+        "M02-STUDIO-ARTICLE-EDITOR-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/assets/css/writing-desk.css",
+      "owner": "M02.editing",
+      "reason": "文章新建编辑分区、校验保存后确认发布、取消保留草稿和工作副本隔离。",
+      "cases": [
+        "M02-STUDIO-ARTICLE-EDITOR-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+      "owner": "M02.editing",
+      "reason": "文章新建编辑分区、校验保存后确认发布、取消保留草稿和工作副本隔离。",
+      "cases": [
+        "M02-STUDIO-ARTICLE-EDITOR-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/article-loop.spec.ts",
+      "owner": "M02.editing",
+      "reason": "文章新建编辑分区、校验保存后确认发布、取消保留草稿和工作副本隔离。",
+      "cases": [
+        "M02-STUDIO-ARTICLE-EDITOR-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+      "owner": "M02.editing",
+      "reason": "文章新建编辑分区、校验保存后确认发布、取消保留草稿和工作副本隔离。",
+      "cases": [
+        "M02-STUDIO-ARTICLE-EDITOR-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Page-specific presentation and test changes leave shared save queues, API and consumer contracts unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/public/studio/README.md",
+      "owner": "M07.studio_theme",
+      "reason": "Ordinary visual documentation or declarative exact-case registration.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Structural integrity checks ordinary documentation and declarative registration."
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Ordinary visual documentation or declarative exact-case registration.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Structural integrity checks ordinary documentation and declarative registration."
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Ordinary visual documentation or declarative exact-case registration.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Ordinary documentation/declarative registration only; no executable consumer changes.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Structural integrity checks ordinary documentation and declarative registration."
+    }
+  ]
+}

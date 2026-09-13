@@ -1,0 +1,1317 @@
+{
+  "schema_version": 1,
+  "task_id": "20260911-assistant-grounding",
+  "changes": [
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/api/app/assistant/output.py",
+      "owner": "M09.runtime",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M09-EVIDENCE-BUDGET-01",
+        "M09-EVIDENCE-BUDGET-02",
+        "M09-ANSWER-PATHS-01",
+        "M09-ANSWER-PATHS-02",
+        "M09-ANSWER-PATHS-03",
+        "M09-GROUNDING-01",
+        "M09-GROUNDING-02",
+        "M09-GROUNDING-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No CLI, launch configuration or provisioning changes; test output shape remains private.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No schema or content persistence changes; runtime attempt cleanup is owned and tested in M09.runtime.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No route, settings or lifecycle wiring changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Public SSE schema remains unchanged; shared output and restore equivalence are tested without frontend changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02",
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Embedding/index APIs, projection and source eligibility are unchanged; only the chat answer schema changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "No qualification receipt or provider identity contract changes; missing evidence is handled by output validation, not qualification probing.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Admin transport retains existing fields including excerpts; internal supports are excluded at the shared server boundary.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Capacity measurement configuration and budgets are unchanged; no performance claims are made.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/prompt.py",
+      "owner": "M09.runtime",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M09-EVIDENCE-BUDGET-01",
+        "M09-EVIDENCE-BUDGET-02",
+        "M09-ANSWER-PATHS-01",
+        "M09-ANSWER-PATHS-02",
+        "M09-ANSWER-PATHS-03",
+        "M09-GROUNDING-01",
+        "M09-GROUNDING-02",
+        "M09-GROUNDING-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No CLI, launch configuration or provisioning changes; test output shape remains private.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No schema or content persistence changes; runtime attempt cleanup is owned and tested in M09.runtime.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No route, settings or lifecycle wiring changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Public SSE schema remains unchanged; shared output and restore equivalence are tested without frontend changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02",
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Embedding/index APIs, projection and source eligibility are unchanged; only the chat answer schema changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "No qualification receipt or provider identity contract changes; missing evidence is handled by output validation, not qualification probing.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Admin transport retains existing fields including excerpts; internal supports are excluded at the shared server boundary.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Capacity measurement configuration and budgets are unchanged; no performance claims are made.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/providers.py",
+      "owner": "M09.providers",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M09-GROUNDING-02",
+        "M09-GROUNDING-03",
+        "M09-GROUNDING-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-01",
+            "M09-GROUNDING-02",
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Embedding/index APIs, projection and source eligibility are unchanged; only the chat answer schema changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "No qualification receipt or provider identity contract changes; missing evidence is handled by output validation, not qualification probing.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No CLI, launch configuration or provisioning changes; test output shape remains private.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No schema or content persistence changes; runtime attempt cleanup is owned and tested in M09.runtime.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No route, settings or lifecycle wiring changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Public SSE schema remains unchanged; shared output and restore equivalence are tested without frontend changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Admin transport retains existing fields including excerpts; internal supports are excluded at the shared server boundary.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Capacity measurement configuration and budgets are unchanged; no performance claims are made.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/store.py",
+      "owner": "M09.runtime",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M09-EVIDENCE-BUDGET-01",
+        "M09-EVIDENCE-BUDGET-02",
+        "M09-ANSWER-PATHS-01",
+        "M09-ANSWER-PATHS-02",
+        "M09-ANSWER-PATHS-03",
+        "M09-GROUNDING-01",
+        "M09-GROUNDING-02",
+        "M09-GROUNDING-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No CLI, launch configuration or provisioning changes; test output shape remains private.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No schema or content persistence changes; runtime attempt cleanup is owned and tested in M09.runtime.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No route, settings or lifecycle wiring changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Public SSE schema remains unchanged; shared output and restore equivalence are tested without frontend changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02",
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Embedding/index APIs, projection and source eligibility are unchanged; only the chat answer schema changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "No qualification receipt or provider identity contract changes; missing evidence is handled by output validation, not qualification probing.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Admin transport retains existing fields including excerpts; internal supports are excluded at the shared server boundary.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Capacity measurement configuration and budgets are unchanged; no performance claims are made.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_about_facts.py",
+      "owner": "M09.runtime",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M09-EVIDENCE-BUDGET-01",
+        "M09-EVIDENCE-BUDGET-02",
+        "M09-ANSWER-PATHS-01",
+        "M09-ANSWER-PATHS-02",
+        "M09-ANSWER-PATHS-03",
+        "M09-GROUNDING-01",
+        "M09-GROUNDING-02",
+        "M09-GROUNDING-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No CLI, launch configuration or provisioning changes; test output shape remains private.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No schema or content persistence changes; runtime attempt cleanup is owned and tested in M09.runtime.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No route, settings or lifecycle wiring changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Public SSE schema remains unchanged; shared output and restore equivalence are tested without frontend changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02",
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Embedding/index APIs, projection and source eligibility are unchanged; only the chat answer schema changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "No qualification receipt or provider identity contract changes; missing evidence is handled by output validation, not qualification probing.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Admin transport retains existing fields including excerpts; internal supports are excluded at the shared server boundary.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Capacity measurement configuration and budgets are unchanged; no performance claims are made.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_answer_paths.py",
+      "owner": "M09.runtime",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M09-EVIDENCE-BUDGET-01",
+        "M09-EVIDENCE-BUDGET-02",
+        "M09-ANSWER-PATHS-01",
+        "M09-ANSWER-PATHS-02",
+        "M09-ANSWER-PATHS-03",
+        "M09-GROUNDING-01",
+        "M09-GROUNDING-02",
+        "M09-GROUNDING-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No CLI, launch configuration or provisioning changes; test output shape remains private.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No schema or content persistence changes; runtime attempt cleanup is owned and tested in M09.runtime.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No route, settings or lifecycle wiring changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Public SSE schema remains unchanged; shared output and restore equivalence are tested without frontend changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02",
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Embedding/index APIs, projection and source eligibility are unchanged; only the chat answer schema changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "No qualification receipt or provider identity contract changes; missing evidence is handled by output validation, not qualification probing.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Admin transport retains existing fields including excerpts; internal supports are excluded at the shared server boundary.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Capacity measurement configuration and budgets are unchanged; no performance claims are made.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_deepseek.py",
+      "owner": "M09.providers",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M09-GROUNDING-02",
+        "M09-GROUNDING-03",
+        "M09-GROUNDING-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-01",
+            "M09-GROUNDING-02",
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Embedding/index APIs, projection and source eligibility are unchanged; only the chat answer schema changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "No qualification receipt or provider identity contract changes; missing evidence is handled by output validation, not qualification probing.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No CLI, launch configuration or provisioning changes; test output shape remains private.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No schema or content persistence changes; runtime attempt cleanup is owned and tested in M09.runtime.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No route, settings or lifecycle wiring changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Public SSE schema remains unchanged; shared output and restore equivalence are tested without frontend changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Admin transport retains existing fields including excerpts; internal supports are excluded at the shared server boundary.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Capacity measurement configuration and budgets are unchanged; no performance claims are made.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_development.py",
+      "owner": "M09.development",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M09-GROUNDING-02"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No CLI, launch configuration or provisioning changes; test output shape remains private.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No route, settings or lifecycle wiring changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_evidence_budget.py",
+      "owner": "M09.runtime",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M09-EVIDENCE-BUDGET-01",
+        "M09-EVIDENCE-BUDGET-02",
+        "M09-ANSWER-PATHS-01",
+        "M09-ANSWER-PATHS-02",
+        "M09-ANSWER-PATHS-03",
+        "M09-GROUNDING-01",
+        "M09-GROUNDING-02",
+        "M09-GROUNDING-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No CLI, launch configuration or provisioning changes; test output shape remains private.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No schema or content persistence changes; runtime attempt cleanup is owned and tested in M09.runtime.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No route, settings or lifecycle wiring changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Public SSE schema remains unchanged; shared output and restore equivalence are tested without frontend changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02",
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Embedding/index APIs, projection and source eligibility are unchanged; only the chat answer schema changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "No qualification receipt or provider identity contract changes; missing evidence is handled by output validation, not qualification probing.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Admin transport retains existing fields including excerpts; internal supports are excluded at the shared server boundary.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Capacity measurement configuration and budgets are unchanged; no performance claims are made.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_management.py",
+      "owner": "M10.operations",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M09-GROUNDING-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No route, settings or lifecycle wiring changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-01",
+            "M09-GROUNDING-02",
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Admin transport retains existing fields including excerpts; internal supports are excluded at the shared server boundary.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Capacity measurement configuration and budgets are unchanged; no performance claims are made.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No CLI, launch configuration or provisioning changes; test output shape remains private.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No schema or content persistence changes; runtime attempt cleanup is owned and tested in M09.runtime.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Public SSE schema remains unchanged; shared output and restore equivalence are tested without frontend changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02",
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Embedding/index APIs, projection and source eligibility are unchanged; only the chat answer schema changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "No qualification receipt or provider identity contract changes; missing evidence is handled by output validation, not qualification probing.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_online_matrix.py",
+      "owner": "M09.runtime",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M09-EVIDENCE-BUDGET-01",
+        "M09-EVIDENCE-BUDGET-02",
+        "M09-ANSWER-PATHS-01",
+        "M09-ANSWER-PATHS-02",
+        "M09-ANSWER-PATHS-03",
+        "M09-GROUNDING-01",
+        "M09-GROUNDING-02",
+        "M09-GROUNDING-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No CLI, launch configuration or provisioning changes; test output shape remains private.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No schema or content persistence changes; runtime attempt cleanup is owned and tested in M09.runtime.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No route, settings or lifecycle wiring changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Public SSE schema remains unchanged; shared output and restore equivalence are tested without frontend changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02",
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Embedding/index APIs, projection and source eligibility are unchanged; only the chat answer schema changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "No qualification receipt or provider identity contract changes; missing evidence is handled by output validation, not qualification probing.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Admin transport retains existing fields including excerpts; internal supports are excluded at the shared server boundary.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Capacity measurement configuration and budgets are unchanged; no performance claims are made.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_resume_citations.py",
+      "owner": "M09.runtime",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M09-EVIDENCE-BUDGET-01",
+        "M09-EVIDENCE-BUDGET-02",
+        "M09-ANSWER-PATHS-01",
+        "M09-ANSWER-PATHS-02",
+        "M09-ANSWER-PATHS-03",
+        "M09-GROUNDING-01",
+        "M09-GROUNDING-02",
+        "M09-GROUNDING-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No CLI, launch configuration or provisioning changes; test output shape remains private.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No schema or content persistence changes; runtime attempt cleanup is owned and tested in M09.runtime.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No route, settings or lifecycle wiring changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Public SSE schema remains unchanged; shared output and restore equivalence are tested without frontend changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-02",
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Embedding/index APIs, projection and source eligibility are unchanged; only the chat answer schema changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes the changed per-block support schema or shared terminal result; selected grounding checks cover this boundary.",
+          "cases": [
+            "M09-GROUNDING-03"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "No qualification receipt or provider identity contract changes; missing evidence is handled by output validation, not qualification probing.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Admin transport retains existing fields including excerpts; internal supports are excluded at the shared server boundary.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Capacity measurement configuration and budgets are unchanged; no performance claims are made.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_source_integration.py",
+      "owner": "M09.source_integration",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M09-GROUNDING-03"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/docs/decisions/20260911-assistant-grounding.md",
+      "owner": "M08.documentation",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/20260911-assistant-grounding.json",
+      "owner": "M08.impact",
+      "reason": "Implement and test the private per-block grounding contract; documents describe its limits and add valid stable links; registrations do not alter runner behavior.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Registration/documentation only; no executable schema, runner API or structural consumer behavior changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "plan-build/assistant-safety/DESIGN.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/PHASE-1-BASELINE.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/PHASE-2-GROUNDING.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/PHASE-3-DEFENSE.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/PHASE-4-EVALUATION.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/PLAN.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-1-baseline/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-1-baseline/S1-01.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-1-baseline/S1-02.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-1-baseline/S1-03.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-1-baseline/S1-04.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-2-grounding/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-2-grounding/S2-01.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-2-grounding/S2-02.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-2-grounding/S2-03.md",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-3-defense/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-safety/completed/phase-4-evaluation/.gitkeep",
+      "owner": "M08.documentation",
+      "reason": "Preserve the authorized staged safety plan, baseline replay and completed task contracts; Markdown links remain within the existing repository and no executable product contract is changed by this status record.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    }
+  ]
+}

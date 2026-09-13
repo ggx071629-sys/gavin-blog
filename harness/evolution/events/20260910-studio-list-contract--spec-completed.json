@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260910-studio-list-contract",
+  "created_at": "2026-09-10T08:13:29.885200+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "202c816a2221e7b6012f77e7e5c5b1c48f17f67e30754197f3d0ba3d6ebaa487"
+}

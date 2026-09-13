@@ -1,0 +1,1068 @@
+{
+  "schema_version": 2,
+  "task_id": "20260910-studio-suite-state",
+  "created_at": "2026-09-10T14:55:58.314781+00:00",
+  "command": "python -m tools.harness verify 20260910-studio-suite-state",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "harness-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "633532fd8a7b9c744d6800afaafbdf71572b636b",
+    "active_spec_sha256": "96f382524574383dacc6d72766ccd5da0693e71394f27754734aa5c81f1a369e",
+    "verification_contract_sha256": "27222b4e1d915e039d0dcc54c51b798186b7257a2b387842574985003a20c3e0",
+    "gate_config_sha256": "81841b825ad06484cbe539f387254f9394d13d84e2b4da96c047b982b1de5603",
+    "documentation_contract_sha256": "27eab266d2cdfb84f3ff3ad121c06b84cc822e6ed2c990a6c9fa7d65d6f683d2",
+    "documentation_targets_sha256": "755fb5cc4039841d440ef4c241ce2ebbf5d29112d0992b0c07219f26caf118d5",
+    "module_contract_sha256": "4a094d4f43bec830fc57191b7186b95c20e8b8f506cd1c41eeb8591cdf58ddab"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "说明共享媒体数据、显式空态与稳定几何的联跑边界。",
+    "targets": [
+      "apps/web/public/studio/README.md"
+    ],
+    "baseline_commit": "150e1f33501370ffc5d2d0ffaac5091c30ca6848",
+    "target_blobs": {
+      "apps/web/public/studio/README.md": "4e50b30bd71e70d75c152bc88458996320170596"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "f3dedf1421e8f7b58f256bd13b34b66d27878ff2",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260910-studio-suite-state.json",
+      "sha256": "59ad0bf0462a4dd92cb97f3450eaf9e3bfa9437045b06a1cac8c4e2efdf91a4a",
+      "selected_cases": [
+        "M07-STUDIO-SUITE-STATE-01",
+        "M08-ARTIFACT-PATHS-01"
+      ],
+      "selected_refs": 10,
+      "excluded_cases": 269
+    },
+    "receipt": {
+      "run_id": "5a3fa829d488fccc4554a92102ef211e",
+      "identity": "72703c576ac1a451b83beaac1884f1d34196e4256978483ecedab0a803638741",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1263.714,
+      "plan_inputs": 998.01,
+      "execute_cleanup_and_input_recheck": 273841.377
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "4a094d4f43bec830fc57191b7186b95c20e8b8f506cd1c41eeb8591cdf58ddab",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M07-STUDIO-SUITE-STATE-01",
+            "module_id": "M07",
+            "module_name": "内容发现输出",
+            "priority": "P1",
+            "scenario": "全套共享数据、动态几何与现行结构的联跑回归。",
+            "expectations": [
+              {
+                "id": "M07-STUDIO-SUITE-STATE-01-E01",
+                "surface": "user_visible",
+                "statement": "媒体分页、恢复、助手状态和响应式导航结构保持正确。"
+              },
+              {
+                "id": "M07-STUDIO-SUITE-STATE-01-E02",
+                "surface": "forbidden",
+                "statement": "不得因共享样例、动画中间帧或旧选择器制造错误结果。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "kind": "playwright",
+                "name": "ops content",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-SUITE-STATE-01-E01",
+                  "M07-STUDIO-SUITE-STATE-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "kind": "playwright",
+                "name": "ops assistant",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-SUITE-STATE-01-E01",
+                  "M07-STUDIO-SUITE-STATE-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "kind": "playwright",
+                "name": "md",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-SUITE-STATE-01-E01",
+                  "M07-STUDIO-SUITE-STATE-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "kind": "playwright",
+                "name": "pointer spotlight follows public cards and clears across input and route changes",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-SUITE-STATE-01-E01",
+                  "M07-STUDIO-SUITE-STATE-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/search-theme.spec.ts",
+                "kind": "playwright",
+                "name": "1024 keeps desktop search content with mobile chrome, 1280 uses desktop nav",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-SUITE-STATE-01-E01",
+                  "M07-STUDIO-SUITE-STATE-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/studio-operations.spec.ts",
+                "kind": "playwright",
+                "name": "o2",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-SUITE-STATE-01-E01",
+                  "M07-STUDIO-SUITE-STATE-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "kind": "playwright",
+                "name": "desktop homepage and article list share the dark canonical structure",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-SUITE-STATE-01-E01",
+                  "M07-STUDIO-SUITE-STATE-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "kind": "playwright",
+                "name": "mobile article list stacks card content with date, title and reading time",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-SUITE-STATE-01-E01",
+                  "M07-STUDIO-SUITE-STATE-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+                "kind": "playwright",
+                "name": "shared admin foundations keep all destinations reachable in short viewports",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-SUITE-STATE-01-E01",
+                  "M07-STUDIO-SUITE-STATE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "harness-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M08-ARTIFACT-PATHS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Windows 长路径诊断导出及保留清理兼容性。",
+            "expectations": [
+              {
+                "id": "M08-ARTIFACT-PATHS-01-E01",
+                "surface": "state",
+                "statement": "超过 260 字符路径的报告完整保留，按原规则过期清理。"
+              },
+              {
+                "id": "M08-ARTIFACT-PATHS-01-E02",
+                "surface": "forbidden",
+                "statement": "不得放宽容量上限或吞掉复制失败，不删除原始产物。"
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "kind": "pytest",
+                "name": "test_diagnostic_long_paths_preserve_bytes_limits_errors_and_pruning",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-ARTIFACT-PATHS-01-E01",
+                  "M08-ARTIFACT-PATHS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.14,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "168 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 251.344,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 74.1,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.527,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "827 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 355.26,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "287 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 83.261,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 271 cases, 543 expectations, 932 exact test references; contract sha256 4a094d4f43be"
+      ],
+      "status": "passed",
+      "duration_ms": 404.735,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.097,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.344,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 76.207,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 1586.017,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "5a3fa829d488fccc4554a92102ef211e",
+        "attempt_id": "8c19dc796e910a072ecac09a253aa1ec"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-suite-state --gate e2e",
+      "status": "passed",
+      "duration_ms": 269593.751,
+      "covers": [
+        "AC-1"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 12293,
+        "selection_counts": {
+          "collected": 9,
+          "executed": 9
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops content"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "md"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "pointer spotlight follows public cards and clears across input and route changes"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/search-theme.spec.ts",
+                "name": "1024 keeps desktop search content with mobile chrome, 1280 uses desktop nav"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-operations.spec.ts",
+                "name": "o2"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "name": "desktop homepage and article list share the dark canonical structure"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "name": "mobile article list stacks card content with date, title and reading time"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+                "name": "shared admin foundations keep all destinations reachable in short viewports"
+              }
+            ],
+            "duration_ms": 2632.343,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops content"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "md"
+              }
+            ],
+            "duration_ms": 1398.072
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "pointer spotlight follows public cards and clears across input and route changes"
+              }
+            ],
+            "duration_ms": 1305.517
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/search-theme.spec.ts",
+                "name": "1024 keeps desktop search content with mobile chrome, 1280 uses desktop nav"
+              }
+            ],
+            "duration_ms": 1282.768
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-operations.spec.ts",
+                "name": "o2"
+              }
+            ],
+            "duration_ms": 1308.441
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "name": "desktop homepage and article list share the dark canonical structure"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "name": "mobile article list stacks card content with date, title and reading time"
+              }
+            ],
+            "duration_ms": 1351.973
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+                "name": "shared admin foundations keep all destinations reachable in short viewports"
+              }
+            ],
+            "duration_ms": 1284.423
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops content",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops content"
+                ]
+              }
+            ],
+            "duration_ms": 1319.904,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops content",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops content"
+                ]
+              }
+            ],
+            "duration_ms": 24317.564,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops assistant"
+                ]
+              }
+            ],
+            "duration_ms": 1243.074,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops assistant"
+                ]
+              }
+            ],
+            "duration_ms": 21553.608,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "md",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "md"
+                ]
+              }
+            ],
+            "duration_ms": 1210.42,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "md",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "md"
+                ]
+              }
+            ],
+            "duration_ms": 37321.256,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "pointer spotlight follows public cards and clears across input and route changes",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "pointer spotlight follows public cards and clears across input and route changes"
+                ]
+              }
+            ],
+            "duration_ms": 1202.806,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "pointer spotlight follows public cards and clears across input and route changes",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "pointer spotlight follows public cards and clears across input and route changes"
+                ]
+              }
+            ],
+            "duration_ms": 51237.329,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/search-theme.spec.ts",
+                "name": "1024 keeps desktop search content with mobile chrome, 1280 uses desktop nav",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "1024 keeps desktop search content with mobile chrome, 1280 uses desktop nav"
+                ]
+              }
+            ],
+            "duration_ms": 1178.941,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/search-theme.spec.ts",
+                "name": "1024 keeps desktop search content with mobile chrome, 1280 uses desktop nav",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "1024 keeps desktop search content with mobile chrome, 1280 uses desktop nav"
+                ]
+              }
+            ],
+            "duration_ms": 20085.453,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-operations.spec.ts",
+                "name": "o2",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "o2"
+                ]
+              }
+            ],
+            "duration_ms": 1249.876,
+            "batch_id": "batch-0006"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-operations.spec.ts",
+                "name": "o2",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "o2"
+                ]
+              }
+            ],
+            "duration_ms": 24660.794,
+            "batch_id": "batch-0006"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "name": "desktop homepage and article list share the dark canonical structure",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "desktop homepage and article list share the dark canonical structure"
+                ]
+              }
+            ],
+            "duration_ms": 1265.974,
+            "batch_id": "batch-0007"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "name": "desktop homepage and article list share the dark canonical structure",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "desktop homepage and article list share the dark canonical structure"
+                ]
+              }
+            ],
+            "duration_ms": 24106.976,
+            "batch_id": "batch-0007"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "name": "mobile article list stacks card content with date, title and reading time",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "mobile article list stacks card content with date, title and reading time"
+                ]
+              }
+            ],
+            "duration_ms": 1271.94,
+            "batch_id": "batch-0008"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "name": "mobile article list stacks card content with date, title and reading time",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "mobile article list stacks card content with date, title and reading time"
+                ]
+              }
+            ],
+            "duration_ms": 22055.042,
+            "batch_id": "batch-0008"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+                "name": "shared admin foundations keep all destinations reachable in short viewports",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "shared admin foundations keep all destinations reachable in short viewports"
+                ]
+              }
+            ],
+            "duration_ms": 1190.179,
+            "batch_id": "batch-0009"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/ui-foundation.spec.ts",
+                "name": "shared admin foundations keep all destinations reachable in short viewports",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "shared admin foundations keep all destinations reachable in short viewports"
+                ]
+              }
+            ],
+            "duration_ms": 22153.939,
+            "batch_id": "batch-0009"
+          }
+        ],
+        "log": "D:\\p6t\\gavin-harness-runs\\4aac216400e9bf94415eb78dc59a10188cff6d4a59c1b666b0c2a06fd4681aeb\\artifacts\\5a3fa829d488fccc4554a92102ef211e\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "5a3fa829d488fccc4554a92102ef211e",
+        "attempt_id": "9dea8189155d55d9fe7e970226ab46e8"
+      }
+    },
+    {
+      "name": "harness-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-suite-state --gate harness-tests",
+      "status": "passed",
+      "duration_ms": 956.748,
+      "covers": [
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 405,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_diagnostic_long_paths_preserve_bytes_limits_errors_and_pruning"
+              }
+            ],
+            "duration_ms": 552.509,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "D:\\p6t\\gavin-harness-runs\\4aac216400e9bf94415eb78dc59a10188cff6d4a59c1b666b0c2a06fd4681aeb\\artifacts\\5a3fa829d488fccc4554a92102ef211e\\harness-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "5a3fa829d488fccc4554a92102ef211e",
+        "attempt_id": "faac4b56257fc958c826eb4026893da8"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1294.163,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 274691.694,
+    "failures": []
+  },
+  "source_commit": "f3dedf1421e8f7b58f256bd13b34b66d27878ff2"
+}

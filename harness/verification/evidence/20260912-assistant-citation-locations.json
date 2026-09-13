@@ -1,0 +1,702 @@
+{
+  "schema_version": 2,
+  "task_id": "20260912-assistant-citation-locations",
+  "created_at": "2026-09-12T14:51:18.916422+00:00",
+  "command": "python -m tools.harness verify 20260912-assistant-citation-locations",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "stack",
+  "fingerprints": {
+    "source_tree": "67eccf90c0bed2030137c5af23b11a1f050acafd",
+    "active_spec_sha256": "f8dc56babf47f13ae9dc5b1c04b9f5e4eed41b9bf966bb5cfef2f5b1381f5b0d",
+    "verification_contract_sha256": "e63a263b3d0d95c9f092609c1a76223683b72f264dd45170d10650dd9fe8d8cf",
+    "gate_config_sha256": "a52e7d0036e2d5d52bd00cff640b72a4f0a63d21d40bfa1986b982c95d91ca54",
+    "documentation_contract_sha256": "46c89c0660b36e39bdd96ea1d275c93ca316607d3282c1cd5fe3e9c4ff765dd3",
+    "documentation_targets_sha256": "fdb6aa539c6598813cb8ab55760181c4c919449deee2a58743440b54271db062",
+    "module_contract_sha256": "5a922842c8836c2cad41283b78d986459db4108da7389f0ef64d06c6cc491c02"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "说明公开 About 与问答来源定位的可核查范围。",
+    "targets": [
+      "apps/web/README.md"
+    ],
+    "baseline_commit": "7ebbb302e318e6b197ec127c67c31762ed19022c",
+    "target_blobs": {
+      "apps/web/README.md": "f89b2a313bcec6418c9ffb9960c9f424cd9613a1"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "8a856980b5fbae0fedd15f510e8a2fed45c89e18",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260912-assistant-citation-locations.json",
+      "sha256": "2d1ee7b61da3901d74b03530205057c4ae43c1391671b83ce22262bebe7b728d",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M09-ABOUT-RETRIEVAL-01",
+        "M09-ABOUT-VISIBLE-01",
+        "M09-CITATION-LOCATIONS-01"
+      ],
+      "selected_refs": 3,
+      "excluded_cases": 366
+    },
+    "receipt": {
+      "run_id": "73670c4d3948fe16a8f00fb1346ab0c4",
+      "identity": "970ac9ff402a4527e8e0b2a0b88bfe03bd4cf8c29515bfb05b4dde1f3e2fa1e1",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 3423.867,
+      "plan_inputs": 877.521,
+      "execute_cleanup_and_input_recheck": 102665.388
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "5a922842c8836c2cad41283b78d986459db4108da7389f0ef64d06c6cc491c02",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M09-ABOUT-VISIBLE-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Published statement/topics are visible as text; drafts remain private.",
+            "expectations": [
+              {
+                "id": "M09-ABOUT-VISIBLE-01-ALLOW",
+                "surface": "user_visible",
+                "statement": "Published statement/topics are visible as text; drafts remain private."
+              },
+              {
+                "id": "M09-ABOUT-VISIBLE-01-DENY",
+                "surface": "forbidden",
+                "statement": "Unpublished fields or unsafe paths are not shown as public evidence; text cannot execute HTML."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor keeps drafts private until explicit publish",
+                "gate": "e2e",
+                "covers": [
+                  "M09-ABOUT-VISIBLE-01-ALLOW",
+                  "M09-ABOUT-VISIBLE-01-DENY"
+                ],
+                "project": "chromium",
+                "config": "playwright.config.ts",
+                "title_path": [
+                  "about editor keeps drafts private until explicit publish"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-CITATION-LOCATIONS-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Each citation shows its own heading/page/fallback, restores and returns keyboard focus.",
+            "expectations": [
+              {
+                "id": "M09-CITATION-LOCATIONS-01-ALLOW",
+                "surface": "user_visible",
+                "statement": "Each citation shows its own heading/page/fallback, restores and returns keyboard focus."
+              },
+              {
+                "id": "M09-CITATION-LOCATIONS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Unpublished fields or unsafe paths are not shown as public evidence; text cannot execute HTML."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "each citation retains its own safe location and keyboard return after restore",
+                "gate": "e2e",
+                "covers": [
+                  "M09-CITATION-LOCATIONS-01-ALLOW",
+                  "M09-CITATION-LOCATIONS-01-DENY"
+                ],
+                "project": "chromium",
+                "config": "playwright.assistant.config.ts",
+                "title_path": [
+                  "each citation retains its own safe location and keyboard return after restore"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-ABOUT-RETRIEVAL-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "about首次重建后混合召回并限制证据，更新后旧证据立即失效。",
+            "expectations": [
+              {
+                "id": "M09-ABOUT-RETRIEVAL-01-E01",
+                "surface": "response",
+                "statement": "主动about有FTS和dense切片，新版本同步后可召回；其他有效profile仍可回答。"
+              },
+              {
+                "id": "M09-ABOUT-RETRIEVAL-01-E02",
+                "surface": "forbidden",
+                "statement": "seed不入重建，超预算片段不注入，旧about描述符在新版等待期间不可恢复。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_about_retrieval.py",
+                "kind": "pytest",
+                "name": "test_about_rebuild_hybrid_budget_and_stale_evidence",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-ABOUT-RETRIEVAL-01-E01",
+                  "M09-ABOUT-RETRIEVAL-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.299,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "223 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 252.547,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 85.928,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.513,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "2127 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 2351.474,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "350 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 101.546,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 370 cases, 750 expectations, 1175 exact test references; contract sha256 5a922842c883"
+      ],
+      "status": "passed",
+      "duration_ms": 534.452,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.32,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.561,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 78.582,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-3"
+      ],
+      "duration_ms": 2589.315,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "73670c4d3948fe16a8f00fb1346ab0c4",
+        "attempt_id": "2afa526e62db81e6c25a82bfa077ebed"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-citation-locations --gate e2e",
+      "status": "passed",
+      "duration_ms": 90101.398,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 4107,
+        "selection_counts": {
+          "collected": 2,
+          "executed": 2
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor keeps drafts private until explicit publish",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about editor keeps drafts private until explicit publish"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "each citation retains its own safe location and keyboard return after restore",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "each citation retains its own safe location and keyboard return after restore"
+                ]
+              }
+            ],
+            "duration_ms": 3148.527,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor keeps drafts private until explicit publish",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about editor keeps drafts private until explicit publish"
+                ]
+              }
+            ],
+            "duration_ms": 1434.868
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "each citation retains its own safe location and keyboard return after restore",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "each citation retains its own safe location and keyboard return after restore"
+                ]
+              }
+            ],
+            "duration_ms": 1386.746
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor keeps drafts private until explicit publish",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about editor keeps drafts private until explicit publish"
+                ]
+              }
+            ],
+            "duration_ms": 1291.165,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor keeps drafts private until explicit publish",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about editor keeps drafts private until explicit publish"
+                ]
+              }
+            ],
+            "duration_ms": 31081.075,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "each citation retains its own safe location and keyboard return after restore",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "each citation retains its own safe location and keyboard return after restore"
+                ]
+              }
+            ],
+            "duration_ms": 1294.139,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "each citation retains its own safe location and keyboard return after restore",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "each citation retains its own safe location and keyboard return after restore"
+                ]
+              }
+            ],
+            "duration_ms": 50036.349,
+            "batch_id": "batch-0002"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\73670c4d3948fe16a8f00fb1346ab0c4\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "73670c4d3948fe16a8f00fb1346ab0c4",
+        "attempt_id": "c2c80f650ab76c26699b821149b481b4"
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-citation-locations --gate api-tests",
+      "status": "passed",
+      "duration_ms": 6195.959,
+      "covers": [
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 380,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_retrieval.py",
+                "name": "test_about_rebuild_hybrid_budget_and_stale_evidence"
+              }
+            ],
+            "duration_ms": 5760.325,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\73670c4d3948fe16a8f00fb1346ab0c4\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "73670c4d3948fe16a8f00fb1346ab0c4",
+        "attempt_id": "55915e6c51868b540ddd33ce1f501c58"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2980.405,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 105288.299,
+    "failures": []
+  },
+  "source_commit": "8a856980b5fbae0fedd15f510e8a2fed45c89e18"
+}

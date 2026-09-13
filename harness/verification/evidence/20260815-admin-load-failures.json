@@ -1,0 +1,227 @@
+{
+  "schema_version": 2,
+  "task_id": "20260815-admin-load-failures",
+  "created_at": "2026-08-15T16:32:19.868780+00:00",
+  "command": "python -m tools.harness verify 20260815-admin-load-failures",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "api-lint",
+        "api-tests"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "087d008c984342dc366626ab9146127c9907feac",
+    "active_spec_sha256": "424969837ef3822a410054d3983afe00348d0b8c111ec3b9f475df738c381faa",
+    "verification_contract_sha256": "a1d717e134cbb4e1657d199cf0db741db7cc804f9efcb5f970b136eab72ad15b",
+    "gate_config_sha256": "4a60cc52fa0b98d1b3f03f7f156308141578b157ac5f4e4d99178e6d647c337e",
+    "documentation_contract_sha256": "a4c0dd4e4f22dc34a327afb2eb5e73691aa7f8899b36b72d8b6b75a73cb354e6",
+    "documentation_targets_sha256": "5fe8087abfbde780f367f29927dfc9a53c50fecde84da2f479091522bd351fab"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "后台失败分类从列表页扩展到孵化与编辑加载，需要同步 Web 边界说明。",
+    "targets": [
+      "apps/web/README.md"
+    ],
+    "baseline_commit": "1fd9c10fefe9b062edc4fd89ce3c23278136823a",
+    "target_blobs": {
+      "apps/web/README.md": "035ce2f3b41db647afc3748a07f7f045235dabdd"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "d69c77bc4449d2d39b4398842f01e7c52c13e1e4",
+    "cleanup_status": "passed",
+    "reused_paths": 3
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 6 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 6.574
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "77 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 103.041
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 46.776
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.462
+    },
+    {
+      "name": "links",
+      "details": [
+        "356 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1386.62
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "165 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 46.255
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 7.955
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 53.417
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "D:\\Tool\\nodejs\\npm.CMD run quality:web",
+      "status": "passed",
+      "duration_ms": 272086.82,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 156,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "api-lint",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-o1w1w7co\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m ruff check .",
+      "status": "passed",
+      "duration_ms": 200.169,
+      "covers": [
+        "AC-5"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-o1w1w7co\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m pytest",
+      "status": "passed",
+      "duration_ms": 165172.837,
+      "covers": [
+        "AC-5"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 302,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1249.531,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ]
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    "duration_ms": 440360.457,
+    "failures": [],
+    "test_counts": {
+      "passed": 458,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "source_commit": "d69c77bc4449d2d39b4398842f01e7c52c13e1e4"
+}

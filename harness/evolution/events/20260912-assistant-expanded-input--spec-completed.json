@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260912-assistant-expanded-input",
+  "created_at": "2026-09-12T15:53:39.678945+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "bffd662d9e26f7249317cd4660af8dfc760d7a1f5c96051d1930a577f6bdb258"
+}

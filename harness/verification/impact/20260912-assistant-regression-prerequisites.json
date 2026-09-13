@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "task_id": "20260912-assistant-regression-prerequisites",
+  "changes": [
+    {
+      "path": "apps/api/tests/test_assistant_runtime_integrity.py",
+      "owner": "M09.runtime",
+      "reason": "Raises the test-only input budget above the fixed prompt overhead and asserts the provider was started, so the late-completion and lease-scope races run instead of being pre-empted by budget rejection. Product runtime behavior is unchanged.",
+      "cases": [
+        "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Test configuration only; no API tooling contract or endpoint changes."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No persistence schema or store behavior changes."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Runtime settings defaults are untouched; the override is local to the two tests."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No SSE, proxy or browser-facing contract changes."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "No development enablement or qualification path changes."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Provider adapters and transport contracts are unchanged; only the test budget is raised."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Indexing and retrieval code is not modified."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Admin operations and budget ledger behavior are unchanged."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Provider qualification entries are untouched by this test-only change."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_backup_restore.py",
+      "owner": "M10.qualification",
+      "reason": "Builds the previous schema with Alembic instead of dropping tables from the current schema, asserts the revision and missing tables before snapshotting, and asserts the snapshot records that revision, so the real upgrade path is exercised. Restore behavior itself is unchanged.",
+      "cases": [
+        "M10-UNIT-ASSISTANT-LEGACY-SCHEMA-RESTORE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No API tooling contract changes; the test helper gains a revision argument."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Qualification manifests and trust configuration are unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Qualification runner inputs and profiles are unchanged."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Assistant runtime behavior is untouched; the shared budget table set is only observed."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Index and retrieval surfaces are not involved in the restore test."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Development enablement paths are unchanged."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "task_id": "20260912-markdown-line-endings",
+  "changes": [
+    {
+      "path": "apps/api/app/routes/admin_content.py",
+      "owner": "M05.portability",
+      "reason": "解析前把 CRLF/CR 统一为 LF，再做 front matter 与正文解析，使换行不影响导入结果。",
+      "cases": [
+        "M05-CRLF-IMPORT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M05.content_web",
+          "affected": true,
+          "reason": "该消费者通过内容工具驱动同一导入解析；本次只在解析前统一换行，未改变其请求体、成功返回、批次上限、front matter 校验或仅创建草稿的语义。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "换行兼容由本任务 M05-CRLF-IMPORT-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "该消费者通过内容工具驱动同一导入解析；本次只在解析前统一换行，未改变其请求体、成功返回、批次上限、front matter 校验或仅创建草稿的语义。本单元未单独选测试。",
+          "cases": [],
+          "no_test_reason": "换行兼容由本任务 M05-CRLF-IMPORT-01 覆盖；该消费者未单独复验，作为范围限制记录在归档中。"
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_refresh",
+          "affected": false,
+          "reason": "该单元依赖已复核的受影响消费者；本次修正未改变其导出契约、数据边界或路由。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_content_portability.py",
+      "owner": "M05.portability",
+      "reason": "新增 LF/CRLF 对照与 CRLF 校验保留回归，并确认 ZIP 导出与重复 slug 语义。",
+      "cases": [
+        "M05-CRLF-IMPORT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "该消费者消费内容导入契约；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "该消费者消费内容导入契约；只新增测试，不改变运行时代码。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+      "owner": "M05.operations_layout",
+      "reason": "新增真实浏览器 CRLF 导入断言，验证草稿创建与公开隔离。",
+      "cases": [],
+      "no_test_reason": "该路径只是新增 e2e 断言，其行为归属与用例由 M05.portability 的 M05-CRLF-IMPORT-01 覆盖。",
+      "dependencies": [
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "该消费者消费内容工具页面；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "该消费者消费内容工具页面；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "该消费者消费内容工具页面；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "该消费者消费内容工具页面；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "该消费者消费内容工具页面；只新增测试，不改变运行时代码。",
+          "cases": []
+        },
+        {
+          "unit": "M11.web",
+          "affected": false,
+          "reason": "该消费者消费内容工具页面；只新增测试，不改变运行时代码。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "记录导入解析前统一换行，使 Windows 与 Unix 换行文件得到一致结果。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260911-assistant-about-sync",
+  "created_at": "2026-09-10T17:11:17.376719+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "f744f26c3501248357c836665c049567868a1f2168434aff9c1a33788b189dab"
+}

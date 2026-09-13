@@ -1,0 +1,765 @@
+{
+  "schema_version": 2,
+  "task_id": "20260912-assistant-answer-language",
+  "created_at": "2026-09-12T12:02:17.863049+00:00",
+  "command": "python -m tools.harness verify 20260912-assistant-answer-language",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "8afee38aa5d8868f9d1f762be2b2a5dab9f62153",
+    "active_spec_sha256": "ff4a6aa1baa44605d2a1870a594db7cdd0a2c51629d53c16e49ffdb48af4b977",
+    "verification_contract_sha256": "5358a14dbf8376bb815f925583d044d7a52066f35fb6a4ada3ef9ed55a7272d7",
+    "gate_config_sha256": "d257b8bfba7ab77fff429b16f69447fc3b8250b2a61c3221b08a11f9fdd4ffff",
+    "documentation_contract_sha256": "90a32d7f4fdf9c1e042d7d56404ca5dc92348fe64dbaf4bc82cef3ce72fa9d60",
+    "documentation_targets_sha256": "0406fa8cc75312698a73fc6b94d653204ebba3fd78ac3a6f79fd8dc8f08bbf3a",
+    "module_contract_sha256": "6475527695db056dc07ba4053185db16ac1e3f6a74bce5322a4c9a1a4b4cbe21"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录有限英文问句识别、引用原文语言与教程方式转述边界。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "2aa24de683284955ceb8117e120b2ce6fdf5b26d",
+    "target_blobs": {
+      "apps/api/README.md": "611e553cf76d12496c05c18fa073cfcdae5cf5dd"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "383d0067980e3ecf0305f77f011821d434787958",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260912-assistant-answer-language.json",
+      "sha256": "cad19216f2e09007db4da186e58a947a1b464ace6d6e11356e772a6ba4b89fe7",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M09-CLAIM-CONTEXT-01",
+        "M09-DEFENSE-01",
+        "M09-DISCUSSION-CONTEXT-01",
+        "M09-G07-PREPARE-01",
+        "M09-G07-REPLAY-01",
+        "M09-G07-RUNNER-01",
+        "M09-QUANTITY-BINDING-01"
+      ],
+      "selected_refs": 12,
+      "excluded_cases": 345
+    },
+    "receipt": {
+      "run_id": "46ff7f361edae99ac20ea01b42cdf35b",
+      "identity": "b273288d57cc1b9898fcdea40cfc54ca850d512169219e5ed8355f4a7f3631de",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 3781.813,
+      "plan_inputs": 990.279,
+      "execute_cleanup_and_input_recheck": 15545.037
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "6475527695db056dc07ba4053185db16ac1e3f6a74bce5322a4c9a1a4b4cbe21",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-G07-PREPARE-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "All 24 revised prompts fit the reviewed budget; six controls have supported content and pass rules.",
+            "expectations": [
+              {
+                "id": "M09-G07-PREPARE-01-ALLOW",
+                "surface": "response",
+                "statement": "All 24 revised prompts fit the reviewed budget; six controls have supported content and pass rules."
+              },
+              {
+                "id": "M09-G07-PREPARE-01-DENY",
+                "surface": "forbidden",
+                "statement": "Empty blocks remain failures; offline preparation cannot open a provider connection."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_g07_repair.py",
+                "name": "test_empty_answers_remain_failure_and_fixture_is_answerable",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G07-PREPARE-01-ALLOW",
+                  "M09-G07-PREPARE-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-DEFENSE-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P0",
+            "scenario": "Sectioned policy preserves the existing fact, partial answer and format contracts; ordinary history remains contextual.",
+            "expectations": [
+              {
+                "id": "M09-DEFENSE-01-E01",
+                "surface": "response",
+                "statement": "Sectioned policy preserves the existing fact, partial answer and format contracts; ordinary history remains contextual."
+              },
+              {
+                "id": "M09-DEFENSE-01-E02",
+                "surface": "forbidden",
+                "statement": "Explicit instructions from old history cannot enter the generation prompt or grant authority."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_online_matrix.py",
+                "kind": "pytest",
+                "name": "test_security_prompt_sections_and_untrusted_history",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-DEFENSE-01-E01",
+                  "M09-DEFENSE-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "kind": "pytest",
+                "name": "test_prompt_drops_oldest_complete_pairs_before_dispatch",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-DEFENSE-01-E01",
+                  "M09-DEFENSE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-G07-REPLAY-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Recorded supported tutorial paraphrases and finite English mail relation retain citations.",
+            "expectations": [
+              {
+                "id": "M09-G07-REPLAY-01-ALLOW",
+                "surface": "response",
+                "statement": "Recorded supported tutorial paraphrases and finite English mail relation retain citations."
+              },
+              {
+                "id": "M09-G07-REPLAY-01-DENY",
+                "surface": "forbidden",
+                "statement": "Changed protocol, subject, negation, qualification, retraction or title cannot pass."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_g07_repair.py",
+                "name": "test_recorded_tutorial_paraphrases_and_paired_boundaries",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G07-REPLAY-01-ALLOW",
+                  "M09-G07-REPLAY-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-CLAIM-CONTEXT-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Ordinary statements preserve subject, negation, time and scope; supported equivalents remain usable.",
+            "expectations": [
+              {
+                "id": "M09-CLAIM-CONTEXT-01-E01",
+                "surface": "response",
+                "statement": "Ordinary statements preserve subject, negation, time and scope; supported equivalents remain usable."
+              },
+              {
+                "id": "M09-CLAIM-CONTEXT-01-E02",
+                "surface": "forbidden",
+                "statement": "Invented facts, reversed qualifiers and changed subjects never pass."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_claim_context.py",
+                "name": "test_ordinary_claims_preserve_subject_negation_time_and_scope",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-CLAIM-CONTEXT-01-E01",
+                  "M09-CLAIM-CONTEXT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-QUANTITY-BINDING-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Normalize quantities in place while preserving subject/property/time and bounds.",
+            "expectations": [
+              {
+                "id": "M09-QUANTITY-BINDING-01-E01",
+                "surface": "response",
+                "statement": "Chinese and Arabic counts, precise time units, ranges and finite percentages remain equivalent in the same statement."
+              },
+              {
+                "id": "M09-QUANTITY-BINDING-01-E02",
+                "surface": "forbidden",
+                "statement": "Swapped subjects, changed bounds/time/denominator, calendar guesses and rounded large-value mismatches are rejected."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_quantity_binding.py",
+                "name": "test_quantities_preserve_binding_and_allow_exact_conversions",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-QUANTITY-BINDING-01-E01",
+                  "M09-QUANTITY-BINDING-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-DISCUSSION-CONTEXT-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Complete technical discussion clauses and explicit placeholder assignments pass.",
+            "expectations": [
+              {
+                "id": "M09-DISCUSSION-CONTEXT-01-ALLOW",
+                "surface": "response",
+                "statement": "Complete technical discussion clauses and explicit placeholder assignments pass."
+              },
+              {
+                "id": "M09-DISCUSSION-CONTEXT-01-DENY",
+                "surface": "forbidden",
+                "statement": "Mixed execution, obfuscation, hidden-instruction extraction and actual/extended credentials stay blocked."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_discussion_context.py",
+                "name": "test_discussion_and_placeholders_preserve_execution_and_secret_guards",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-DISCUSSION-CONTEXT-01-ALLOW",
+                  "M09-DISCUSSION-CONTEXT-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-G07-RUNNER-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Bounded evaluation retains authorization, failure diagnostics and continuation identity.",
+            "expectations": [
+              {
+                "id": "M09-G07-RUNNER-01-ALLOW",
+                "surface": "response",
+                "statement": "Known deliveries retain separate rows for review; continuation skips the attempted prefix."
+              },
+              {
+                "id": "M09-G07-RUNNER-01-DENY",
+                "surface": "forbidden",
+                "statement": "No unauthorized call, silent identity mismatch, retry after unknown failure or discarded charge."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_g07_runner.py",
+                "name": "RunnerChecks::test_unauthorized_stops_before_reservation_or_call",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G07-RUNNER-01-ALLOW",
+                  "M09-G07-RUNNER-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_g07_runner.py",
+                "name": "RunnerChecks::test_known_delivery_preserves_all_cases_and_requires_review",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G07-RUNNER-01-ALLOW",
+                  "M09-G07-RUNNER-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_g07_runner.py",
+                "name": "RunnerChecks::test_unknown_delivery_settles_conservatively_and_stops",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G07-RUNNER-01-ALLOW",
+                  "M09-G07-RUNNER-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_g07_runner.py",
+                "name": "RunnerChecks::test_model_mismatch_is_retained_without_retry_or_relaxing_identity",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G07-RUNNER-01-ALLOW",
+                  "M09-G07-RUNNER-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_g07_runner.py",
+                "name": "RunnerChecks::test_continuation_does_not_repeat_prior_attempt",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-G07-RUNNER-01-ALLOW",
+                  "M09-G07-RUNNER-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 5.711,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "214 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 272.111,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 87.499,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.756,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "2079 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 2588.06,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "339 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 112.246,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 353 cases, 716 expectations, 1137 exact test references; contract sha256 6475527695db"
+      ],
+      "status": "passed",
+      "duration_ms": 600.472,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 4.726,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.155,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 98.137,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-2"
+      ],
+      "duration_ms": 2938.963,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "46ff7f361edae99ac20ea01b42cdf35b",
+        "attempt_id": "a1b11be83f0fb89690b21ce6ee50b09d"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-answer-language --gate api-tests",
+      "status": "passed",
+      "duration_ms": 9261.504,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 2310,
+        "selection_counts": {
+          "collected": 12,
+          "executed": 12
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_claim_context.py",
+                "name": "test_ordinary_claims_preserve_subject_negation_time_and_scope"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_online_matrix.py",
+                "name": "test_security_prompt_sections_and_untrusted_history"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "name": "test_prompt_drops_oldest_complete_pairs_before_dispatch"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_discussion_context.py",
+                "name": "test_discussion_and_placeholders_preserve_execution_and_secret_guards"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_g07_repair.py",
+                "name": "test_empty_answers_remain_failure_and_fixture_is_answerable"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_g07_repair.py",
+                "name": "test_recorded_tutorial_paraphrases_and_paired_boundaries"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_g07_runner.py",
+                "name": "RunnerChecks::test_unauthorized_stops_before_reservation_or_call"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_g07_runner.py",
+                "name": "RunnerChecks::test_known_delivery_preserves_all_cases_and_requires_review"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_g07_runner.py",
+                "name": "RunnerChecks::test_unknown_delivery_settles_conservatively_and_stops"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_g07_runner.py",
+                "name": "RunnerChecks::test_model_mismatch_is_retained_without_retry_or_relaxing_identity"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_g07_runner.py",
+                "name": "RunnerChecks::test_continuation_does_not_repeat_prior_attempt"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_quantity_binding.py",
+                "name": "test_quantities_preserve_binding_and_allow_exact_conversions"
+              }
+            ],
+            "duration_ms": 8750.086,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\46ff7f361edae99ac20ea01b42cdf35b\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "46ff7f361edae99ac20ea01b42cdf35b",
+        "attempt_id": "f02bed950d60594da879cfcbf0e7ea81"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2645.777,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 18625.117,
+    "failures": []
+  },
+  "source_commit": "383d0067980e3ecf0305f77f011821d434787958"
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260913-assistant-answer-instructions",
+  "created_at": "2026-09-12T16:12:50.796204+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "cfc446d635f247b3e431884b6436e220240956d5b25b3cb1177d127e446cc414"
+}

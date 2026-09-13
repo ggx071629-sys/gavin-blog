@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260910-studio-book-list",
+  "created_at": "2026-09-10T08:32:07.166516+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "04b7c5b54250c7a628b55bab7e408f92c110f8a5beab469edf3c020a7bc26f7d"
+}

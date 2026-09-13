@@ -1,0 +1,382 @@
+{
+  "schema_version": 1,
+  "task_id": "20260910-studio-regression-guards",
+  "changes": [
+    {
+      "path": "apps/web/tests/unit/failure-state-contract.test.ts",
+      "owner": "M06.transport",
+      "reason": "修复过时源码断言，移除无用局部变量；实际运行时守卫和产品行为不变。",
+      "cases": [
+        "M06-STUDIO-FAILURE-GUARDS-01",
+        "M10-STUDIO-HOST-GUARD-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/unit/typography.test.ts",
+      "owner": "M07.theme",
+      "reason": "修复过时源码断言，移除无用局部变量；实际运行时守卫和产品行为不变。",
+      "cases": [
+        "M07-UNIT-TYPOGRAPHY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/AssistantHost.vue",
+      "owner": "M09.assistant_web",
+      "reason": "修复过时源码断言，移除无用局部变量；实际运行时守卫和产品行为不变。",
+      "cases": [
+        "M10-STUDIO-HOST-GUARD-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/public/studio/README.md",
+      "owner": "M07.studio_theme",
+      "reason": "普通验收说明/声明式登记。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "普通说明和登记由结构检查覆盖。"
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "普通验收说明/声明式登记。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "普通说明和登记由结构检查覆盖。"
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "普通验收说明/声明式登记。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "没有更改产品导出、props、请求或共享守卫；测试修正与死变量移除不影响此消费者。",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "普通说明和登记由结构检查覆盖。"
+    }
+  ]
+}

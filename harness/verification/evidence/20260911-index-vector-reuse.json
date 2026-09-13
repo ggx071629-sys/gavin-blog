@@ -1,0 +1,512 @@
+{
+  "schema_version": 2,
+  "task_id": "20260911-index-vector-reuse",
+  "created_at": "2026-09-11T08:17:08.228524+00:00",
+  "command": "python -m tools.harness verify 20260911-index-vector-reuse",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "cbdf966175f406243c8ef558770984c692b17963",
+    "active_spec_sha256": "7a46ebdeee87471ae9f947d506e7305b3954b2e5220c38f8cbdb62eb0355fa57",
+    "verification_contract_sha256": "a2f0953da1c13dc3a6639aed06257e401f1cf39d0d856b29f14503078a126bd7",
+    "gate_config_sha256": "8121fc29cb4e609221b89d83974a1daa8ba26f96390eb01b0c5c1a691fa54be4",
+    "documentation_contract_sha256": "836c18e2b49c35a2d753dffb9dc59a113187d8700b959f74985865189225b98c",
+    "documentation_targets_sha256": "cb549fe12d4f2b62946465716de3fa88f1a555513639daf56342946bed561ffd",
+    "module_contract_sha256": "2beddbe3a4ea066f31075864bbb701ff1ec52bbc82fd690813935ec44aad3d6d"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录向量复用条件与需要介入错误的终止规则。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "30534b8860b00b355e7fe086976b7620977505a6",
+    "target_blobs": {
+      "apps/api/README.md": "bb8d69dd5db8105066ee5c5726c58c57a8672220"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "6a49c77a99684e4b8c3279f581daa0d40d146a98",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260911-index-vector-reuse.json",
+      "sha256": "fd71a5b241ee7bfb941de07169ac5aed911fb77b8613dfa31819183236621f78",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M10-VECTOR-REUSE-01",
+        "M10-VECTOR-REUSE-02"
+      ],
+      "selected_refs": 6,
+      "excluded_cases": 312
+    },
+    "receipt": {
+      "run_id": "d2a4baa72a17aef13976b281c372419a",
+      "identity": "36edb0e53ddda75245ac3ebe31c50325707a1fef7efa856bc01530ca142d6944",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1563.962,
+      "plan_inputs": 1207.152,
+      "execute_cleanup_and_input_recheck": 12929.595
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "2beddbe3a4ea066f31075864bbb701ff1ec52bbc82fd690813935ec44aad3d6d",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-VECTOR-REUSE-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "同正文新版本复用正确向量，正文、模型身份、维度和payload不匹配不得复用。",
+            "expectations": [
+              {
+                "id": "M10-VECTOR-REUSE-01-ALLOW",
+                "surface": "response",
+                "statement": "同正文新版本复用正确向量，正文、模型身份、维度和payload不匹配不得复用。"
+              },
+              {
+                "id": "M10-VECTOR-REUSE-01-DENY",
+                "surface": "forbidden",
+                "statement": "不得重复调用未知请求、复用错误向量或持续重试不可重试错误。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_index_vector_reuse.py",
+                "name": "test_same_text_new_revision_reuses_vectors_without_provider_call",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-VECTOR-REUSE-01-ALLOW",
+                  "M10-VECTOR-REUSE-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_index_vector_reuse.py",
+                "name": "test_changed_text_requires_new_embedding",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-VECTOR-REUSE-01-ALLOW",
+                  "M10-VECTOR-REUSE-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_index_vector_reuse.py",
+                "name": "test_reuse_rejects_mismatched_payload_and_dimension",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-VECTOR-REUSE-01-ALLOW",
+                  "M10-VECTOR-REUSE-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_index_vector_reuse.py",
+                "name": "test_model_identity_mismatch_does_not_reuse",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-VECTOR-REUSE-01-ALLOW",
+                  "M10-VECTOR-REUSE-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-VECTOR-REUSE-02",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "需要介入的嵌入错误立即终止并明确诊断，临时错误仍重试。",
+            "expectations": [
+              {
+                "id": "M10-VECTOR-REUSE-02-ALLOW",
+                "surface": "response",
+                "statement": "需要介入的嵌入错误立即终止并明确诊断，临时错误仍重试。"
+              },
+              {
+                "id": "M10-VECTOR-REUSE-02-DENY",
+                "surface": "forbidden",
+                "statement": "不得重复调用未知请求、复用错误向量或持续重试不可重试错误。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_index_vector_reuse.py",
+                "name": "test_unavailable_success_and_unknown_stop_without_retry",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-VECTOR-REUSE-02-ALLOW",
+                  "M10-VECTOR-REUSE-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_index_vector_reuse.py",
+                "name": "test_transient_store_error_still_retries",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-VECTOR-REUSE-02-ALLOW",
+                  "M10-VECTOR-REUSE-02-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 7.868,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "188 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 267.757,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 81.694,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 2.128,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "1019 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 472.376,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "310 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 111.374,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 315 cases, 631 expectations, 1030 exact test references; contract sha256 2beddbe3a4ea"
+      ],
+      "status": "passed",
+      "duration_ms": 507.809,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 15.687,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.893,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 83.388,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 2061.894,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "d2a4baa72a17aef13976b281c372419a",
+        "attempt_id": "e597fd646734ce9d0efea67c4beb0dee"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-index-vector-reuse --gate api-tests",
+      "status": "passed",
+      "duration_ms": 8455.248,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1145,
+        "selection_counts": {
+          "collected": 6,
+          "executed": 6
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_index_vector_reuse.py",
+                "name": "test_same_text_new_revision_reuses_vectors_without_provider_call"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_index_vector_reuse.py",
+                "name": "test_changed_text_requires_new_embedding"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_index_vector_reuse.py",
+                "name": "test_reuse_rejects_mismatched_payload_and_dimension"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_index_vector_reuse.py",
+                "name": "test_model_identity_mismatch_does_not_reuse"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_index_vector_reuse.py",
+                "name": "test_unavailable_success_and_unknown_stop_without_retry"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_index_vector_reuse.py",
+                "name": "test_transient_store_error_still_retries"
+              }
+            ],
+            "duration_ms": 8055.579,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\9723b7923dfc3c0eb366fae6fdad766ae7f581840c50f23eee138a3f80df3ee1\\artifacts\\d2a4baa72a17aef13976b281c372419a\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "d2a4baa72a17aef13976b281c372419a",
+        "attempt_id": "a74f7cf636d5e8e545c6448191d9f6e0"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2131.014,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 14208.13,
+    "failures": []
+  },
+  "source_commit": "6a49c77a99684e4b8c3279f581daa0d40d146a98"
+}

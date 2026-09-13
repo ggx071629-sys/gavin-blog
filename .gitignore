@@ -1,0 +1,36 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+node_modules/
+.nuxt/
+.output/
+coverage/
+playwright-report/
+test-results/
+*.log
+.env
+.env.*
+!.env.example
+apps/api/data/
+apps/web/data/
+apps/web/127.0.0.1/
+
+# Local audit captures and personal image workspace.
+.run/
+my_image/
+
+# Raw telemetry is local-only.
+harness/telemetry/local/*
+!harness/telemetry/local/.gitkeep
+
+# Heavy verification artifacts are local-only; compact manifests remain tracked.
+harness/verification/evidence/artifacts/*
+!harness/verification/evidence/artifacts/.gitkeep
+
+# Pre-incubation snapshot fork (d442d63); keep ignored unless explicitly changed.
+my_blog_fork/
+
+# Local HTML prototype mockups (dark/light); not part of the shipped apps.
+/web_prototype/

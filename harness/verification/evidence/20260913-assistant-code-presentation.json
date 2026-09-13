@@ -1,0 +1,695 @@
+{
+  "schema_version": 2,
+  "task_id": "20260913-assistant-code-presentation",
+  "created_at": "2026-09-12T16:30:47.727489+00:00",
+  "command": "python -m tools.harness verify 20260913-assistant-code-presentation",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "16ddd912b7e42055fdb1336bfe089d6ea0d21a66",
+    "active_spec_sha256": "7104be661f3bac53de270b95f468449e959578fee746bc76c28267f308021b1a",
+    "verification_contract_sha256": "214242857586df83bf3d7d33579d456bf63bf71b7d21785a001993bb11ccbb62",
+    "gate_config_sha256": "390fe73e7675df4a15c46fdcd1fee350ce2315d567bf195c6112949d7453e22b",
+    "documentation_contract_sha256": "402386ae3ec40244bc072d99a11d5f9787a6fbbc91bd7ee3794ef6792dfec2d3",
+    "documentation_targets_sha256": "48b231eb93ad50384f97665d4307e4dd93db3f0b33feacf4c6b7f4f25dbaedb7",
+    "module_contract_sha256": "d740e464d688549132c55cf29a0ed87dedb8d1b59e4ed34db2dfae2c333989c7"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "区分命令格式等价和未经证明的改写，记录实际质量限制。",
+    "targets": [
+      "plan-build/assistant-gap-closure/evaluation/Q5-EVALUATION.md"
+    ],
+    "baseline_commit": "4bcf1773c9b45a8fef44936ddbc947d20b95b751",
+    "target_blobs": {
+      "plan-build/assistant-gap-closure/evaluation/Q5-EVALUATION.md": "9e8afa3f3c01d7f6166c6ded6c6d8033a546844d"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "459c3cc7f33f064f3e17e48356ce656bfddbaaf8",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260913-assistant-code-presentation.json",
+      "sha256": "52e21e5f2f75f8c21c000e2eb3c538e1bf1b237719fb6c8a0fb314f76b0e0d30",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M09-CODE-PRESENTATION-01",
+        "M09-CONTEXT-CROSS-01",
+        "M09-GROUNDING-01",
+        "M09-GROUNDING-02"
+      ],
+      "selected_refs": 13,
+      "excluded_cases": 381
+    },
+    "receipt": {
+      "run_id": "d2c1ea54e6413f4dec24009a80549227",
+      "identity": "bd2e0f9cda70e7adbaaf24ebf415cd8e798269da62a72ce2c88d743ebd365400",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 3496.626,
+      "plan_inputs": 900.093,
+      "execute_cleanup_and_input_recheck": 18466.139
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "d740e464d688549132c55cf29a0ed87dedb8d1b59e4ed34db2dfae2c333989c7",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-CODE-PRESENTATION-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Single-line code wrappers may differ only when complete factual context and literal code remain identical.",
+            "expectations": [
+              {
+                "id": "M09-CODE-PRESENTATION-01-ALLOW",
+                "surface": "response",
+                "statement": "Equivalent complete command contexts pass with exact current quotes."
+              },
+              {
+                "id": "M09-CODE-PRESENTATION-01-DENY",
+                "surface": "forbidden",
+                "statement": "Modified commands, qualifiers, retractions, raw quotes, or unsupported multiline code do not pass presentation equivalence."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_code_presentation.py",
+                "name": "test_complete_single_line_code_presentation_preserves_all_facts",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-CODE-PRESENTATION-01-ALLOW",
+                  "M09-CODE-PRESENTATION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_code_presentation.py",
+                "name": "test_code_presentation_cannot_repair_quotes_or_drop_retractions",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-CODE-PRESENTATION-01-ALLOW",
+                  "M09-CODE-PRESENTATION-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-GROUNDING-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P0",
+            "scenario": "Block-local evidence preserves supported synthesis and attributed personal facts.",
+            "expectations": [
+              {
+                "id": "M09-GROUNDING-01-E01",
+                "surface": "response",
+                "statement": "Block-local evidence preserves supported synthesis and attributed personal facts."
+              },
+              {
+                "id": "M09-GROUNDING-01-E02",
+                "surface": "forbidden",
+                "statement": "Unrelated awards, cross-block support, numeric/subject/negation/time mismatches cannot pass the representative checks."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_online_matrix.py",
+                "kind": "pytest",
+                "name": "test_security_grounding_block_support_and_claims",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-GROUNDING-01-E01",
+                  "M09-GROUNDING-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_about_facts.py",
+                "kind": "pytest",
+                "name": "test_about_self_report_prompt_and_bound_citations",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-GROUNDING-01-E01",
+                  "M09-GROUNDING-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_citations.py",
+                "kind": "pytest",
+                "name": "test_resume_self_report_conflict_and_unaliased_operational_notice",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-GROUNDING-01-E01",
+                  "M09-GROUNDING-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-GROUNDING-02",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P0",
+            "scenario": "Both model protocols carry bounded original support quotes with exact alias binding under the existing input budget.",
+            "expectations": [
+              {
+                "id": "M09-GROUNDING-02-E01",
+                "surface": "response",
+                "statement": "Both model protocols carry bounded original support quotes with exact alias binding under the existing input budget."
+              },
+              {
+                "id": "M09-GROUNDING-02-E02",
+                "surface": "forbidden",
+                "statement": "Missing, forged or misbound support cannot bypass validation; development merging cannot drop a source alias."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_online_matrix.py",
+                "kind": "pytest",
+                "name": "test_security_grounding_missing_forged_and_misbound_support",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-GROUNDING-02-E01",
+                  "M09-GROUNDING-02-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "kind": "pytest",
+                "name": "test_deepseek_transport_and_production_boundary",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-GROUNDING-02-E01",
+                  "M09-GROUNDING-02-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "kind": "pytest",
+                "name": "test_deepseek_strict_validation_metadata_and_citations",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-GROUNDING-02-E01",
+                  "M09-GROUNDING-02-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "kind": "pytest",
+                "name": "test_deepseek_prompt_budget_covers_actual_schema_message",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-GROUNDING-02-E01",
+                  "M09-GROUNDING-02-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_development.py",
+                "kind": "pytest",
+                "name": "test_local_development_groups_chunks_from_the_same_source",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-GROUNDING-02-E01",
+                  "M09-GROUNDING-02-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-CONTEXT-CROSS-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Cross-source claims preserve conflict and current version/citation safety.",
+            "expectations": [
+              {
+                "id": "M09-CONTEXT-CROSS-01-ALLOW",
+                "surface": "response",
+                "statement": "Cross-source claims preserve conflict and current version/citation safety."
+              },
+              {
+                "id": "M09-CONTEXT-CROSS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Revoked sources, unsupported conflict resolution or old question/answer facts cannot be delivered or persisted in checkpoints."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_resume_citations.py",
+                "name": "test_resume_self_report_conflict_and_unaliased_operational_notice",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-CONTEXT-CROSS-01-ALLOW",
+                  "M09-CONTEXT-CROSS-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_resume_citations.py",
+                "name": "test_resume_graph_rechecks_before_provider_and_after_generation",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-CONTEXT-CROSS-01-ALLOW",
+                  "M09-CONTEXT-CROSS-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_about_retrieval.py",
+                "name": "test_about_rebuild_hybrid_budget_and_stale_evidence",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-CONTEXT-CROSS-01-ALLOW",
+                  "M09-CONTEXT-CROSS-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_claim_context.py",
+                "name": "test_retractions_and_explicit_same_subject_conflicts",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-CONTEXT-CROSS-01-ALLOW",
+                  "M09-CONTEXT-CROSS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.631,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "232 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 286.291,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 89.115,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.567,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "2171 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 2358.342,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "359 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 104.145,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 386 cases, 782 expectations, 1212 exact test references; contract sha256 d740e464d688"
+      ],
+      "status": "passed",
+      "duration_ms": 554.855,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.145,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.706,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 84.015,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-2"
+      ],
+      "duration_ms": 2676.123,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "d2c1ea54e6413f4dec24009a80549227",
+        "attempt_id": "b97cd2678b7d042f049fb3e22647cb66"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260913-assistant-code-presentation --gate api-tests",
+      "status": "passed",
+      "duration_ms": 12569.166,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 2385,
+        "selection_counts": {
+          "collected": 13,
+          "executed": 13
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_code_presentation.py",
+                "name": "test_complete_single_line_code_presentation_preserves_all_facts"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_code_presentation.py",
+                "name": "test_code_presentation_cannot_repair_quotes_or_drop_retractions"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_citations.py",
+                "name": "test_resume_self_report_conflict_and_unaliased_operational_notice"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_citations.py",
+                "name": "test_resume_graph_rechecks_before_provider_and_after_generation"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_retrieval.py",
+                "name": "test_about_rebuild_hybrid_budget_and_stale_evidence"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_claim_context.py",
+                "name": "test_retractions_and_explicit_same_subject_conflicts"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_online_matrix.py",
+                "name": "test_security_grounding_block_support_and_claims"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_facts.py",
+                "name": "test_about_self_report_prompt_and_bound_citations"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_online_matrix.py",
+                "name": "test_security_grounding_missing_forged_and_misbound_support"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_transport_and_production_boundary"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_strict_validation_metadata_and_citations"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_prompt_budget_covers_actual_schema_message"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_development.py",
+                "name": "test_local_development_groups_chunks_from_the_same_source"
+              }
+            ],
+            "duration_ms": 12138.18,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\d2c1ea54e6413f4dec24009a80549227\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "d2c1ea54e6413f4dec24009a80549227",
+        "attempt_id": "a819b49a57a12fedf96b3905430f90ca"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2428.162,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 21167.263,
+    "failures": []
+  },
+  "source_commit": "459c3cc7f33f064f3e17e48356ce656bfddbaaf8"
+}

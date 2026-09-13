@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "task_id": "20260811-incubator-batch-lifecycle",
+  "created_at": "2026-08-12T02:23:03.920806+00:00",
+  "command": "python -m tools.harness close 20260811-incubator-batch-lifecycle",
+  "status": "passed",
+  "checks": [
+    {
+      "name": "indexes",
+      "status": "passed",
+      "duration_ms": 40.098,
+      "details": [
+        "8 generated indexes are current"
+      ]
+    },
+    {
+      "name": "l0",
+      "status": "passed",
+      "duration_ms": 0.528,
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ]
+    },
+    {
+      "name": "links",
+      "status": "passed",
+      "duration_ms": 3029.398,
+      "details": [
+        "268 local Markdown links resolve without durable active-spec references"
+      ]
+    },
+    {
+      "name": "metadata",
+      "status": "passed",
+      "duration_ms": 35.194,
+      "details": [
+        "132 routed Markdown documents have valid metadata"
+      ]
+    },
+    {
+      "name": "structure",
+      "status": "passed",
+      "duration_ms": 9.843,
+      "details": [
+        "28 required paths exist"
+      ]
+    }
+  ],
+  "artifact_hashes": {
+    "AGENTS.md": "77c5d9906ad160395d0155b88bd56839e2ebc8db736451d7ba004e9dfec8b543",
+    "harness/config.toml": "2d8def30c330537d0aae237140334900b05c692f6db8b1cbf278b114779138f7",
+    "harness/docs/INDEX.md": "dd1e0a503fde83e98a250c9e3b7bebccd82162c43c488f42860e7c3e9279ccfe",
+    "harness/evolution/INDEX.md": "a5235a996d43abdd98b88fdd9aaa9b46260567f260fd8b2e8724fe9bf53a256f",
+    "harness/INDEX.md": "98783b59f3447dca9c1287441e95069c896c4785230a8ecfc461d48e842d020d",
+    "harness/specs/INDEX.md": "67b42eefbc31a7f0fc217c367f64ec760855c7aaa81075782394c9cfc3ea3ad2",
+    "harness/telemetry/INDEX.md": "8d68bc55bb803915cd0039ae68133fb36a8188968fddab24cab1ee9f8beb6575",
+    "harness/verification/INDEX.md": "3fd54a4a2cc9bce27a32abfcf410e93ebeebac5166379e3b4f854373b0929615",
+    "harness/verification/vdd/INDEX.md": "cc65a5bc4b412e9f861da4805542e8e9b32f3f55a9f2c9dcff2a056605504efc",
+    "harness/workflows/INDEX.md": "d459625e76828cdb5c68bdcd5499eefe5ca175545ee2a0607e42d9c997124a64"
+  },
+  "source_commit": "78aa8fb1351d7cbec5106d79bb2d435acae8a322"
+}

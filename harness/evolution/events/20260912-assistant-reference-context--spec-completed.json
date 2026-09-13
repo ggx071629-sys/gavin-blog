@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260912-assistant-reference-context",
+  "created_at": "2026-09-12T15:03:25.352330+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "4dc7b7103035513e1a3bc86dbd345a58b24dfa23e6c4a02c7a777ee5232b19d6"
+}

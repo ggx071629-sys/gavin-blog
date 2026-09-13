@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "task_id": "20260913-assistant-code-presentation",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/output.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-CODE-PRESENTATION-01",
+        "M09-GROUNDING-01",
+        "M09-CONTEXT-CROSS-01"
+      ],
+      "reason": "Bounded whole-context code presentation comparison and literal preservation guard; exact quotes and existing fact validation retained.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Check current provider answer/support structures against the changed output validation.",
+          "cases": [
+            "M09-GROUNDING-02"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_code_presentation.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-CODE-PRESENTATION-01",
+        "M09-GROUNDING-01",
+        "M09-CONTEXT-CROSS-01"
+      ],
+      "reason": "Bounded whole-context code presentation comparison and literal preservation guard; exact quotes and existing fact validation retained.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Check current provider answer/support structures against the changed output validation.",
+          "cases": [
+            "M09-GROUNDING-02"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "No transport, public API, persistence, indexing, budget accounting or runner behavior change."
+        }
+      ]
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/Q5-EVALUATION.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Register bounded evidence-role checks and document Q5 repair scope; no verification algorithm change.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Register bounded evidence-role checks and document Q5 repair scope; no verification algorithm change.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Register bounded evidence-role checks and document Q5 repair scope; no verification algorithm change.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        }
+      ]
+    }
+  ]
+}

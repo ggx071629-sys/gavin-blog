@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260909-public-card-glow",
+  "created_at": "2026-09-08T16:24:22.606104+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "9761355f2b08c040401b3a84481e6561c4719dad166b1669c905b918098e3b98"
+}

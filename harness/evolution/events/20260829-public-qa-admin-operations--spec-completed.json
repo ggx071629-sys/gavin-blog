@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "event_type": "spec.completed",
+  "task_id": "20260829-public-qa-admin-operations",
+  "created_at": "2026-08-29T18:04:38.110024+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false
+}

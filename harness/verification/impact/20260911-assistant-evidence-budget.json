@@ -1,0 +1,290 @@
+{
+  "schema_version": 1,
+  "task_id": "20260911-assistant-evidence-budget",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/prompt.py",
+      "owner": "M09.runtime",
+      "reason": "实现并验证输入预算内完整证据选择；文档与合同登记不改变文档链接结构或执行协议。",
+      "cases": [
+        "M09-EVIDENCE-BUDGET-01",
+        "M09-EVIDENCE-BUDGET-02"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/graph.py",
+      "owner": "M09.runtime",
+      "reason": "实现并验证输入预算内完整证据选择；文档与合同登记不改变文档链接结构或执行协议。",
+      "cases": [
+        "M09-EVIDENCE-BUDGET-01",
+        "M09-EVIDENCE-BUDGET-02"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_evidence_budget.py",
+      "owner": "M09.runtime",
+      "reason": "实现并验证输入预算内完整证据选择；文档与合同登记不改变文档链接结构或执行协议。",
+      "cases": [
+        "M09-EVIDENCE-BUDGET-01",
+        "M09-EVIDENCE-BUDGET-02"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "实现并验证输入预算内完整证据选择；文档与合同登记不改变文档链接结构或执行协议。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "实现并验证输入预算内完整证据选择；文档与合同登记不改变文档链接结构或执行协议。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "实现并验证输入预算内完整证据选择；文档与合同登记不改变文档链接结构或执行协议。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "仅调整图内提示词证据选取及校验集合，函数调用签名、最终响应结构、预算、模型/检索适配器和此消费者的启停/认证/执行协议不变。",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}

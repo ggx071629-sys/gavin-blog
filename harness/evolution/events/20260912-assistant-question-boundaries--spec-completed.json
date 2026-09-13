@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260912-assistant-question-boundaries",
+  "created_at": "2026-09-12T15:09:08.879583+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "8daff69894c6612eb35885e9313974cb800fa09fbd890990ee3c3245506abbe2"
+}

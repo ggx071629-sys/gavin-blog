@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "20260801-core-integrity-hardening",
+  "created_at": "2026-08-01T19:52:29+08:00",
+  "status": "passed",
+  "checks": [
+    {
+      "name": "api-ruff",
+      "command": ".venv/Scripts/python -m ruff check --no-cache app tests migrations scripts",
+      "status": "passed"
+    },
+    {
+      "name": "api-pytest",
+      "command": ".venv/Scripts/python -m pytest -p no:cacheprovider",
+      "status": "passed",
+      "tests": 23
+    },
+    {
+      "name": "web-vitest",
+      "command": "npm --workspace @gavin/web run test -- --run",
+      "status": "passed",
+      "tests": 14
+    },
+    {
+      "name": "web-typecheck",
+      "command": "npx vue-tsc --noEmit -p .nuxt/tsconfig.json",
+      "status": "passed"
+    },
+    {
+      "name": "web-build",
+      "command": "npm run build:web",
+      "status": "passed"
+    },
+    {
+      "name": "openapi-contract",
+      "command": "in-memory app.openapi() comparison",
+      "status": "passed",
+      "paths": 34
+    },
+    {
+      "name": "harness-verify",
+      "command": "python -m tools.harness verify",
+      "status": "passed"
+    }
+  ],
+  "notes": [
+    "Playwright was not run because its current reuseExistingServer configuration can target an existing development API and mutate the development database.",
+    "Pytest reports the existing Starlette TestClient httpx deprecation warning.",
+    "Nuxt build reports non-blocking dependency deprecations and chunks larger than 500 kB.",
+    "Spec remains in active because the project has no Git HEAD and deterministic close requires history."
+  ]
+}

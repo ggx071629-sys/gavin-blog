@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260911-assistant-resume-download",
+  "created_at": "2026-09-10T17:38:57.901447+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "47c209387c71d3234f2c6beb6e7cb4df91deb45828dd5950616740e318dcaf9e"
+}

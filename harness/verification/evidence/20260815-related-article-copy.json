@@ -1,0 +1,205 @@
+{
+  "schema_version": 2,
+  "task_id": "20260815-related-article-copy",
+  "created_at": "2026-08-15T16:24:44.420210+00:00",
+  "command": "python -m tools.harness verify 20260815-related-article-copy",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "api-lint",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "web-quality"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "087d008c984342dc366626ab9146127c9907feac",
+    "active_spec_sha256": "09c6477c9e9e98547fd11f30a824142320134416f765ae4df4e6b9739aae4355",
+    "verification_contract_sha256": "b51a80524b900f22636e7310059b7bfebb39163641e9b376939ce97615616e9e",
+    "gate_config_sha256": "4a60cc52fa0b98d1b3f03f7f156308141578b157ac5f4e4d99178e6d647c337e",
+    "documentation_contract_sha256": "0b6bc44c77885628e713243d8b062799bbe34acf981c05a1db605cac430fbc61",
+    "documentation_targets_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+  },
+  "documentation": {
+    "impact": "none",
+    "reason": "只替换读者可见文案，不改变阅读页块顺序、公开契约或 Web 边界中的 chrome 描述。",
+    "targets": [],
+    "baseline_commit": null,
+    "target_blobs": {}
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "d69c77bc4449d2d39b4398842f01e7c52c13e1e4",
+    "cleanup_status": "passed",
+    "reused_paths": 3
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 6 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 3.832
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "77 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 113.506
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 52.356
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.49
+    },
+    {
+      "name": "links",
+      "details": [
+        "356 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1350.809
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "165 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 44.412
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 7.739
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 42.847
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "D:\\Tool\\nodejs\\npm.CMD run quality:web",
+      "status": "passed",
+      "duration_ms": 276189.274,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 156,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "api-lint",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-4zw32_p9\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m ruff check .",
+      "status": "passed",
+      "duration_ms": 258.904,
+      "covers": [
+        "AC-1"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-4zw32_p9\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m pytest",
+      "status": "passed",
+      "duration_ms": 171470.898,
+      "covers": [
+        "AC-1"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 302,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1310.433,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ]
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    "duration_ms": 450845.5,
+    "failures": [],
+    "test_counts": {
+      "passed": 458,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "source_commit": "d69c77bc4449d2d39b4398842f01e7c52c13e1e4"
+}

@@ -1,0 +1,29 @@
+{
+  "name": "gavin-blog",
+  "private": true,
+  "workspaces": [
+    "apps/web",
+    "packages/contracts"
+  ],
+  "scripts": {
+    "dev:web": "npm --workspace @gavin/web run dev",
+    "dev:assistant": "node scripts/run-assistant-dev.mjs",
+    "dev:assistant:real": "node scripts/run-assistant-dev.mjs --real",
+    "dev:assistant:retrieval": "node scripts/run-real-retrieval.mjs",
+    "build:web": "npm --workspace @gavin/web run build",
+    "test:web": "npm --workspace @gavin/web run test",
+    "test:e2e": "npm --workspace @gavin/web run test:e2e",
+    "quality:web": "npm --workspace @gavin/web run typecheck && npm --workspace @gavin/web run lint && npm --workspace @gavin/web run test && npm --workspace @gavin/web run build && npm --workspace @gavin/web run test:quality && npm --workspace @gavin/web run test:failure-states",
+    "quality:release": "node scripts/run-release-check.mjs",
+    "contracts": "npm --workspace @gavin/contracts run generate"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.62.3",
+    "@rollup/rollup-win32-x64-msvc": "4.62.3",
+    "lightningcss-linux-x64-gnu": "1.33.0",
+    "lightningcss-win32-x64-msvc": "1.33.0"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0"
+  }
+}

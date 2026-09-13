@@ -1,0 +1,175 @@
+/* Studio colors inherit the public theme on product roots, including teleports. */
+:is(.admin-core-shell, .admin-login-shell, .admin-modal-backdrop) {
+  --studio-canvas: var(--ee-canvas);
+  --studio-sidebar: var(--ee-surface-low);
+  --studio-selected: var(--ee-surface-high);
+  --studio-low: var(--ee-surface-low);
+  --studio-ink: var(--ee-ink);
+  --studio-muted: var(--ee-ink-muted);
+  --studio-faint: var(--ee-ink-faint);
+  --studio-line: var(--ee-line);
+  --studio-divider: var(--ee-line-soft);
+  --studio-primary: var(--ee-primary);
+  --studio-primary-hover: var(--ee-primary-strong);
+  --studio-on-primary: var(--ee-primary-contrast);
+  --studio-font: Inter, "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --ee-heading: var(--studio-font);
+  --ee-radius: 7px;
+  --ee-radius-soft: 8px;
+  font-family: var(--studio-font);
+  color: var(--studio-ink);
+}
+:is(.admin-core-shell, .admin-login-shell, .admin-modal-backdrop) :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--studio-font);
+}
+.studio-icon {
+  display: inline-block;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  background: currentColor;
+  mask: var(--studio-icon) center / contain no-repeat;
+  vertical-align: middle;
+}
+
+/* U1-03: reference shell. The navigation region scrolls on short viewports. */
+.admin-core-shell { --admin-sidebar-width: 254px; --studio-nav-ink: var(--ee-accent-text); --studio-nav-muted: var(--studio-faint); }
+.admin-sidebar {
+  width: var(--admin-sidebar-width);
+  border: 0;
+  background: var(--studio-sidebar);
+}
+.admin-sidebar-brand { padding: 21px 25px 0; min-height: 91px; border: 0; flex: none; }
+.admin-sidebar-brand a { align-items: flex-start; }
+.admin-sidebar-brand strong { font-size: 26px; font-weight: 700; letter-spacing: -.02em; line-height: 1.4; }
+.admin-sidebar-brand small { margin: 0; font-family: var(--studio-font); font-size: 18px; line-height: 1.5; letter-spacing: 0; color: var(--studio-muted); font-weight: 400; }
+.admin-core-nav { padding: 22px 10px 0; }
+.admin-nav-group h2 { margin: 0; padding: 0 15px 10px; font-family: var(--studio-font); font-size: 15px; font-weight: 400; letter-spacing: 0; line-height: 24px; color: var(--studio-nav-muted); }
+.admin-nav-group + .admin-nav-group { margin-top: 31px; padding-top: 0; border: 0; }
+.admin-nav-link { min-height: 52px; padding: 10px 16px; gap: 19px; border: 0; border-radius: 8px; font-size: 18px; line-height: 1.5; font-weight: 400; }
+.admin-nav-link .studio-icon { width: 25px; height: 25px; }
+.admin-nav-link-active { background: var(--studio-selected); color: var(--studio-nav-ink); font-weight: 500; }
+.admin-nav-link-active:hover { background: var(--studio-selected); color: var(--studio-nav-ink); }
+.admin-sidebar-tools, .admin-drawer-tools { display: flex; flex-direction: column; gap: 0; margin: 20px 17px 18px; padding: 14px 0 0; border-color: var(--studio-divider); }
+.admin-utility-link, .studio-theme-toggle { display: flex; align-items: center; justify-content: flex-start; gap: 19px; min-height: 48px; padding: 0 11px; border: 0; border-radius: 7px; background: transparent; color: var(--studio-muted); font-size: 17px; font-weight: 400; cursor: pointer; text-align: left; }
+.admin-utility-link:hover, .studio-theme-toggle:hover { color: var(--studio-nav-ink, var(--studio-primary-hover)); background: var(--studio-selected); }
+.studio-theme-toggle-compact { width: 44px; height: 44px; min-height: 44px; padding: 10px; justify-content: center; }
+.studio-theme-sun, .dark .studio-theme-moon { display: none; }
+.dark .studio-theme-sun { display: inline-block; }
+.studio-theme-toggle:focus-visible { outline: 2px solid var(--studio-primary); outline-offset: 3px; }
+.admin-logout { min-height: 44px; padding-left: 54px; font-size: 15px; color: var(--ee-danger-ink); }
+.admin-mobile-header { display: flex; padding: 8px 22px; background: var(--studio-sidebar); backdrop-filter: none; border-color: var(--studio-divider); }
+.admin-mobile-brand { font-size: 18px; }
+.admin-menu-button, .admin-icon-button { border: 0; background: transparent; }
+.admin-mobile-drawer { width: min(340px, 100vw); max-width: 100%; background: var(--studio-sidebar); border-color: var(--studio-divider); }
+.admin-drawer-heading { padding-inline: 22px; border-color: var(--studio-divider); }
+.admin-drawer-heading p { font-size: 18px; }
+.admin-main { margin: 0; width: 100%; max-width: none; padding: 25px 22px 52px; min-height: calc(100dvh - 64px); }
+.admin-core-shell .admin-page-header { align-items: flex-start; border: 0; padding-bottom: 24px; gap: 19px; }
+.admin-core-shell .admin-page-header .admin-page-kicker { display: none; }
+.admin-core-shell .admin-page-header .admin-page-title { margin: 0; font-size: 29px; line-height: 1.35; letter-spacing: -.035em; }
+.admin-core-shell .admin-page-description { margin-top: 9px; font-size: 15px; line-height: 1.8; }
+@media (min-width: 761px) {
+  .admin-sidebar { display: flex; flex-direction: column; }
+  .admin-mobile-header, .admin-drawer-backdrop { display: none; }
+  .admin-main { margin-left: var(--admin-sidebar-width); width: calc(100% - var(--admin-sidebar-width)); padding: 32px 36px 72px; min-height: 100dvh; }
+  .admin-core-shell .admin-page-header { align-items: center; padding-bottom: 27px; min-height: 102px; }
+  .admin-core-shell .admin-page-header .admin-page-title { font-size: 36px; }
+}
+@media (min-width: 761px) and (max-width: 1300px) {
+  .admin-core-shell { --admin-sidebar-width: 230px; }
+  .admin-sidebar-brand { padding-inline: 22px; }
+  .admin-sidebar-brand strong { font-size: 24px; }
+  .admin-nav-link { font-size: 17px; gap: 15px; }
+  .admin-main { padding-inline: 30px; }
+  .admin-core-shell .admin-page-header { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 760px) {
+  .admin-nav-link { min-height: 48px; font-size: 17px; }
+  .admin-nav-group + .admin-nav-group { margin-top: 18px; padding-top: 0; }
+  .admin-nav-group h2 { font-size: 14px; padding-bottom: 6px; }
+  .admin-drawer-tools { margin-top: 12px; }
+}
+@media (min-width: 1600px) { .admin-main { padding-inline: 48px; } }
+@media (max-width: 360px) { .admin-main { padding-inline: 18px; } }
+
+/* U1-04: controls share dimensions while retaining their business semantics. */
+:is(.admin-core-shell, .admin-login-shell, .admin-modal-backdrop) :is(.button-primary, .button-secondary, .admin-danger-button) {
+  min-height: 48px;
+  padding: 11px 22px;
+  border-radius: 7px;
+  font-family: var(--studio-font);
+  font-size: 16px;
+  line-height: 1.5;
+}
+:is(.admin-core-shell, .admin-login-shell, .admin-modal-backdrop) .button-primary { box-shadow: 0 1px 2px color-mix(in srgb, var(--studio-primary) 7%, transparent); }
+:is(.admin-core-shell, .admin-login-shell, .admin-modal-backdrop) .button-secondary { background: var(--ee-surface); color: var(--studio-muted); border-color: var(--studio-line); }
+:is(.admin-core-shell, .admin-login-shell, .admin-modal-backdrop) :is(.button-primary, .button-secondary, .admin-danger-button):disabled { cursor: not-allowed; opacity: .55; }
+:is(.admin-core-shell, .admin-login-shell, .admin-modal-backdrop) :is(.field, .admin-field) { gap: 10px; font-size: 15px; font-weight: 400; line-height: 1.6; }
+:is(.admin-core-shell, .admin-login-shell, .admin-modal-backdrop) :is(.field, .admin-field) :is(input:not(.sr-only):not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--studio-line);
+  border-radius: 7px;
+  padding: 11px 14px;
+  background: var(--ee-surface);
+  color: var(--studio-ink);
+  font-size: 16px;
+  line-height: 1.6;
+}
+:is(.admin-core-shell, .admin-login-shell, .admin-modal-backdrop) :is(.field, .admin-field) :is(input:not(.sr-only):not([type="checkbox"]):not([type="radio"]), select) { min-height: 48px; }
+:is(.admin-core-shell, .admin-login-shell, .admin-modal-backdrop) :is(.field, .admin-field) :is(input, select, textarea):focus {
+  border-color: var(--studio-primary);
+  outline: 2px solid color-mix(in srgb, var(--studio-primary) 28%, transparent);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+:is(.admin-core-shell, .admin-login-shell, .admin-modal-backdrop) :is(.field, .admin-field) [aria-invalid="true"] { border-color: var(--ee-danger-ink); }
+.admin-login-shell .admin-login-field { min-height: 0; padding: 0; border: 0; background: transparent; }
+.admin-login-shell .admin-login-field:focus-within { box-shadow: none; }
+.admin-core-shell :is(input[type="checkbox"], input[type="radio"]) { accent-color: var(--studio-primary); }
+.admin-core-shell :is(.writing-mode-bar, .writing-mobile-tabs), .admin-core-shell nav.am-tabs { gap: 18px; border-color: var(--studio-divider); }
+.admin-core-shell :is(.writing-mode-bar, .writing-mobile-tabs) button, .admin-core-shell nav.am-tabs a {
+  min-height: 60px; padding: 17px 16px 15px; border-bottom: 4px solid transparent; color: var(--studio-muted); font-size: 18px;
+}
+.admin-core-shell :is(.writing-mode-bar, .writing-mobile-tabs) button[aria-pressed="true"], .admin-core-shell nav.am-tabs a[aria-current="page"] { border-bottom-color: var(--studio-primary); color: var(--studio-primary); }
+.admin-core-shell .admin-list { border: 0; border-top: 1px solid var(--studio-divider); border-radius: 0; background: transparent; }
+.admin-core-shell .admin-list-row { padding: 26px 0; border-color: var(--studio-divider); }
+.admin-core-shell .admin-list-title { font-size: 19px; line-height: 1.6; }
+.admin-core-shell :is(.admin-status, .admin-attention-badge) {
+  gap: 8px; min-height: 28px; padding: 0; border: 0; background: transparent; font-family: var(--studio-font); font-size: 13px; font-weight: 400;
+}
+.admin-core-shell :is(.admin-status, .admin-attention-badge)::before { content: ''; flex: none; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.admin-core-shell .admin-status[data-status="published"] { color: var(--ee-success-ink); background: transparent; }
+.admin-core-shell .admin-attention-badge { color: var(--ee-warning-ink); }
+.admin-core-shell :is(.admin-feedback, .admin-form-error) { border-radius: 0 5px 5px 0; font-size: 15px; line-height: 1.8; }
+.admin-modal-backdrop .admin-modal { border-radius: 8px; padding: 28px; }
+.admin-modal-backdrop .admin-panel-title { font-size: 22px; line-height: 1.5; }
+@media (max-width: 760px) {
+  :is(.admin-core-shell, .admin-login-shell, .admin-modal-backdrop) :is(.button-primary, .button-secondary, .admin-danger-button) { min-height: 44px; padding: 10px 16px; font-size: 14px; }
+  .admin-core-shell :is(.writing-mode-bar, .writing-mobile-tabs), .admin-core-shell nav.am-tabs { gap: 12px; }
+  .admin-core-shell :is(.writing-mode-bar, .writing-mobile-tabs) button, .admin-core-shell nav.am-tabs a { min-height: 54px; padding: 14px 11px 12px; font-size: 16px; }
+  .admin-core-shell .admin-list-row { padding-block: 24px; }
+  .admin-core-shell .admin-list-title { font-size: 17px; }
+  .admin-modal-backdrop .admin-modal { padding: 22px; }
+}
+
+/* U1-05: the login form is a quiet, centered single column. */
+.admin-login-shell { display: block; min-height: 100dvh; }
+.admin-login-shell .admin-login-form-stage { display: block; padding: calc(10vh + 32px) 22px 64px; }
+.admin-login-shell .admin-login-card { max-width: 430px; margin-inline: auto; }
+.admin-login-shell .studio-login-label { margin: 0; color: var(--studio-muted); font-size: 16px; line-height: 28px; }
+.admin-login-shell .admin-page-title { margin: 28px 0 12px; font-size: 36px; line-height: 1.35; letter-spacing: -.035em; }
+.admin-login-shell .admin-page-description { margin: 0 0 28px; font-size: 16px; line-height: 28px; }
+.admin-login-shell .admin-login-form { display: grid; gap: 22px; }
+.admin-login-shell :is(input, button, a) { transition-property: border-color, box-shadow, outline-color, transform, opacity; }
+.admin-login-shell .admin-login-submit { margin-top: 10px; min-height: 48px; }
+.admin-login-shell .studio-login-private { margin: 22px 0 0; color: var(--studio-muted); font-size: 16px; line-height: 28px; }
+.admin-login-shell .admin-login-back { position: static; margin-top: 22px; color: var(--studio-primary); font-size: 16px; font-weight: 400; }
+.admin-login-shell .admin-login-theme { top: 20px; right: 22px; }
+@media (max-width: 760px) {
+  .admin-login-shell .admin-login-form-stage { padding-top: calc(6vh + 25px); padding-bottom: 44px; }
+  .admin-login-shell .admin-page-title { font-size: 29px; }
+  .admin-login-shell .admin-login-theme { top: 12px; right: 12px; }
+}
+@media (max-width: 360px) { .admin-login-shell .admin-login-form-stage { padding-inline: 18px; } }

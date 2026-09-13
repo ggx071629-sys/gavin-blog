@@ -1,0 +1,611 @@
+{
+  "schema_version": 2,
+  "task_id": "20260912-about-draft-preserve",
+  "created_at": "2026-09-12T04:50:29.967697+00:00",
+  "command": "python -m tools.harness verify 20260912-about-draft-preserve",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "008d46d65ca52ce4c2b186f4ddc40c9ceac65e45",
+    "active_spec_sha256": "d5fef4bf424955b3369d88c7a0282d54822c03c73b356423fd1e5686d94ae479",
+    "verification_contract_sha256": "72c9194c906bf3f55cc667d3d85c3e36d4b10e7a7828e9b6aa7ecd6d3abaf0d7",
+    "gate_config_sha256": "771cdb37ad727b1041d2dfbae081d02bc945038426d2b20d95be8eedee71d881",
+    "documentation_contract_sha256": "c099b4014d7d7fbe75b14be86254fa7cc492f94b3090bbef1ab578f6c1b7cfee",
+    "documentation_targets_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "module_contract_sha256": "31e66f536f006d8f5328c820ac3782845aadd79963c867fd2896db4f56fd9617"
+  },
+  "documentation": {
+    "impact": "none",
+    "reason": "只修复关于页编辑器内部草稿状态缺陷并新增回归，未改变关于页字段契约或公开内容，README 无需同步。",
+    "targets": [],
+    "baseline_commit": null,
+    "target_blobs": {}
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "c9ae20a409c60d33df5d813ca12ab8998a74aa75",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260912-about-draft-preserve.json",
+      "sha256": "f08a5c8c440aa776d27454a433f9c8d2e3603f4ecf90c5d8a5523293ae76ab09",
+      "selected_cases": [
+        "M11-ABOUT-DRAFT-01"
+      ],
+      "selected_refs": 3,
+      "excluded_cases": 336
+    },
+    "receipt": {
+      "run_id": "0617d181294f4e6a284c3ed496e77740",
+      "identity": "27719231583f99ce90ebd87f74672f6d1f2acb631f3271497b8b4981771604be",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 3515.992,
+      "plan_inputs": 935.799,
+      "execute_cleanup_and_input_recheck": 138810.865
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "31e66f536f006d8f5328c820ac3782845aadd79963c867fd2896db4f56fd9617",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M11-ABOUT-DRAFT-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P1",
+            "scenario": "关于页自动保存回声保留尚未提交的标签草稿，且临时输入跟随对应领域。",
+            "expectations": [
+              {
+                "id": "M11-ABOUT-DRAFT-01-E01",
+                "surface": "user_visible",
+                "statement": "无关字段保存完成后未提交的标签输入仍保留并可继续提交。"
+              },
+              {
+                "id": "M11-ABOUT-DRAFT-01-E02",
+                "surface": "state",
+                "statement": "领域增删排序与十项上限、草稿预览与发布隔离保持通过。"
+              },
+              {
+                "id": "M11-ABOUT-DRAFT-01-E03",
+                "surface": "forbidden",
+                "statement": "不得在自动保存回声后清空尚未提交的输入，也不得把临时草稿写入已提交内容。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about autosave keeps an unsubmitted tag draft until it is added",
+                "gate": "e2e",
+                "covers": [
+                  "M11-ABOUT-DRAFT-01-E01",
+                  "M11-ABOUT-DRAFT-01-E03"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about tag drafts follow their capability across reorder and removal",
+                "gate": "e2e",
+                "covers": [
+                  "M11-ABOUT-DRAFT-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about editor supports ten cards per section and re-enables add after removal",
+                "gate": "e2e",
+                "covers": [
+                  "M11-ABOUT-DRAFT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M11-ABOUT-DRAFT-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P1",
+            "scenario": "关于页自动保存回声保留尚未提交的标签草稿，且临时输入跟随对应领域。",
+            "expectations": [
+              {
+                "id": "M11-ABOUT-DRAFT-01-E01",
+                "surface": "user_visible",
+                "statement": "无关字段保存完成后未提交的标签输入仍保留并可继续提交。"
+              },
+              {
+                "id": "M11-ABOUT-DRAFT-01-E02",
+                "surface": "state",
+                "statement": "领域增删排序与十项上限、草稿预览与发布隔离保持通过。"
+              },
+              {
+                "id": "M11-ABOUT-DRAFT-01-E03",
+                "surface": "forbidden",
+                "statement": "不得在自动保存回声后清空尚未提交的输入，也不得把临时草稿写入已提交内容。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about autosave keeps an unsubmitted tag draft until it is added",
+                "gate": "e2e",
+                "covers": [
+                  "M11-ABOUT-DRAFT-01-E01",
+                  "M11-ABOUT-DRAFT-01-E03"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about tag drafts follow their capability across reorder and removal",
+                "gate": "e2e",
+                "covers": [
+                  "M11-ABOUT-DRAFT-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "kind": "playwright",
+                "name": "about editor supports ten cards per section and re-enables add after removal",
+                "gate": "e2e",
+                "covers": [
+                  "M11-ABOUT-DRAFT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.466,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "198 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 261.196,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 91.305,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.666,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "1965 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 2394.537,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "324 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 102.108,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 337 cases, 683 expectations, 1112 exact test references; contract sha256 31e66f536f00"
+      ],
+      "status": "passed",
+      "duration_ms": 564.54,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.474,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.264,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 82.704,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 2639.68,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "0617d181294f4e6a284c3ed496e77740",
+        "attempt_id": "294be49aed6fbd6ef22c408c4240ceb1"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-about-draft-preserve --gate e2e",
+      "status": "passed",
+      "duration_ms": 133102.354,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 4675,
+        "selection_counts": {
+          "collected": 3,
+          "executed": 3
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about autosave keeps an unsubmitted tag draft until it is added"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about tag drafts follow their capability across reorder and removal"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor supports ten cards per section and re-enables add after removal"
+              }
+            ],
+            "duration_ms": 3345.354,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about autosave keeps an unsubmitted tag draft until it is added"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about tag drafts follow their capability across reorder and removal"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor supports ten cards per section and re-enables add after removal"
+              }
+            ],
+            "duration_ms": 1579.88
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about autosave keeps an unsubmitted tag draft until it is added",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about autosave keeps an unsubmitted tag draft until it is added"
+                ]
+              }
+            ],
+            "duration_ms": 1394.925,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about autosave keeps an unsubmitted tag draft until it is added",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about autosave keeps an unsubmitted tag draft until it is added"
+                ]
+              }
+            ],
+            "duration_ms": 28514.313,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about tag drafts follow their capability across reorder and removal",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about tag drafts follow their capability across reorder and removal"
+                ]
+              }
+            ],
+            "duration_ms": 1399.355,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about tag drafts follow their capability across reorder and removal",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about tag drafts follow their capability across reorder and removal"
+                ]
+              }
+            ],
+            "duration_ms": 27992.349,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor supports ten cards per section and re-enables add after removal",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about editor supports ten cards per section and re-enables add after removal"
+                ]
+              }
+            ],
+            "duration_ms": 1382.151,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/about-admin.spec.ts",
+                "name": "about editor supports ten cards per section and re-enables add after removal",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about editor supports ten cards per section and re-enables add after removal"
+                ]
+              }
+            ],
+            "duration_ms": 67050.266,
+            "batch_id": "batch-0003"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\0617d181294f4e6a284c3ed496e77740\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "0617d181294f4e6a284c3ed496e77740",
+        "attempt_id": "102672cd2a162446e1b1ba1960f6270c"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2488.168,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 141743.462,
+    "failures": []
+  },
+  "source_commit": "c9ae20a409c60d33df5d813ca12ab8998a74aa75"
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260912-assistant-tutorial-wrappers",
+  "created_at": "2026-09-12T12:08:11.607767+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "f833145c3b9a2e975474449b0425a1239f8dab62ac4270e3af9edab31fbfb761"
+}

@@ -1,0 +1,141 @@
+{
+  "schema_version": 2,
+  "task_id": "20260812-verification-reporting-operations",
+  "created_at": "2026-08-12T03:54:20.964001+00:00",
+  "command": "python -m tools.harness verify 20260812-verification-reporting-operations",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5",
+    "AC-6",
+    "AC-7",
+    "AC-8"
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "05ee870649aef8f4a51c1c5cc62e0ac4260bf075",
+    "active_spec_sha256": "c40efe00640c1f2f1de77e572839de8af3bfcef2eb3cc000f34b1762eb7eb37a",
+    "verification_contract_sha256": "4e6173a52c8fb2c6c5c0a27e19a167aa915a152955dc453ca21eff04de71415e",
+    "gate_config_sha256": "b1b1641e21977d3252794840da0da3ebf3705522c1d13ecca6e61e39ba316608"
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "c95a778e1bc084d515017cfe20b93c0876ad8602",
+    "cleanup_status": "passed",
+    "reused_paths": 2
+  },
+  "checks": [
+    {
+      "name": "indexes",
+      "details": [
+        "8 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 42.127
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.529
+    },
+    {
+      "name": "links",
+      "details": [
+        "280 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 2792.16
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "136 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 36.262
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.864
+    },
+    {
+      "name": "harness-tests",
+      "kind": "product",
+      "command": "D:\\Tool\\Python\\Python311\\python.exe -m pytest harness/verification/tests",
+      "status": "passed",
+      "duration_ms": 811.439,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6",
+        "AC-7"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 42,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "D:\\Tool\\Python\\Python311\\python.exe -m tools.harness verify",
+      "status": "passed",
+      "duration_ms": 4108.965,
+      "covers": [
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-7",
+        "AC-8"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 944.574,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ]
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 8,
+      "passed": 8,
+      "failed": 0
+    },
+    "duration_ms": 8745.92,
+    "failures": [],
+    "test_counts": {
+      "passed": 42,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "source_commit": "c95a778e1bc084d515017cfe20b93c0876ad8602"
+}

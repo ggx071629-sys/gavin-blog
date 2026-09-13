@@ -1,0 +1,577 @@
+{
+  "schema_version": 2,
+  "task_id": "20260911-assistant-evidence-budget",
+  "created_at": "2026-09-11T03:42:32.786293+00:00",
+  "command": "python -m tools.harness verify 20260911-assistant-evidence-budget",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "71dac6a006b649604a829ad52bdcc00eeb9850c8",
+    "active_spec_sha256": "1c1fb9979a90f788241248262c78049d9c6a33ccd39e2d3436307569a2eef6c7",
+    "verification_contract_sha256": "f090da140c948822fbccca7dacb9a9241dde15938b9419c412c4327687286c3d",
+    "gate_config_sha256": "5fccf1c0379d12b26c5cd0b81fb327724ddde78bd182f0d949fc77c0de2036b1",
+    "documentation_contract_sha256": "f5855caf95f660818790540298f3b5324741fd7113e8d04ce2fe481f0ba3ee5e",
+    "documentation_targets_sha256": "219fab3c21ea896c7ed40389a50cf9566441f74026d4fe0bc750b57593561d8b",
+    "module_contract_sha256": "516c0ed6cfd50cffb1110608d8f6732664f2bb9ed5daf067170a0f59ffd6599f"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录证据输入预算、完整切片选择与引用校验边界。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "7b9fca9e15b2240956cb5fafcc0a015105870af2",
+    "target_blobs": {
+      "apps/api/README.md": "469cb64b0f67f30d7e7af51e63bbc5184c711c6a"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "a37afbfaa381a2453688884ff0f9b1b8dfead784",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260911-assistant-evidence-budget.json",
+      "sha256": "7eea9686a35078e219025e22b6e0eb05af8fd5772dc1292a7c109f65059a4c90",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M09-EVIDENCE-BUDGET-01",
+        "M09-EVIDENCE-BUDGET-02"
+      ],
+      "selected_refs": 5,
+      "excluded_cases": 304
+    },
+    "receipt": {
+      "run_id": "4a9b797888ca9a11b6503bcf180dd626",
+      "identity": "d865206e7f1fdd28a8dc5e36af1471836a8ad3b3adb4c3a220308e1b498301a5",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1616.018,
+      "plan_inputs": 1099.131,
+      "execute_cleanup_and_input_recheck": 14596.271
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "516c0ed6cfd50cffb1110608d8f6732664f2bb9ed5daf067170a0f59ffd6599f",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-EVIDENCE-BUDGET-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "在现有输入限制内选取完整去重证据，兼顾来源且保留足够时的排序和历史。",
+            "expectations": [
+              {
+                "id": "M09-EVIDENCE-BUDGET-01-ALLOW",
+                "surface": "response",
+                "statement": "在现有输入限制内选取完整去重证据，兼顾来源且保留足够时的排序和历史。"
+              },
+              {
+                "id": "M09-EVIDENCE-BUDGET-01-DENY",
+                "surface": "forbidden",
+                "statement": "不得截断正文、修改原证据、超出输入/输出预留或因大项阻断可容纳的小项。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_evidence_budget_preserves_whole_ranked_diverse_sources",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-BUDGET-01-ALLOW",
+                  "M09-EVIDENCE-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_evidence_budget_skips_oversized_chunk_and_honors_context_reserve",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-BUDGET-01-ALLOW",
+                  "M09-EVIDENCE-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_evidence_budget_keeps_order_when_everything_fits",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-BUDGET-01-ALLOW",
+                  "M09-EVIDENCE-BUDGET-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-EVIDENCE-BUDGET-02",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "超限候选经打包后可进入模拟Chat，引用仅能来自实际发送切片。",
+            "expectations": [
+              {
+                "id": "M09-EVIDENCE-BUDGET-02-ALLOW",
+                "surface": "response",
+                "statement": "超限候选经打包后可进入模拟Chat，引用仅能来自实际发送切片。"
+              },
+              {
+                "id": "M09-EVIDENCE-BUDGET-02-DENY",
+                "surface": "forbidden",
+                "statement": "不得采纳未发送的c99别名或因候选总长度直接拒绝可回答问题。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_packed_evidence_reaches_chat_and_rejects_omitted_citations[c1]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-BUDGET-02-ALLOW",
+                  "M09-EVIDENCE-BUDGET-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_packed_evidence_reaches_chat_and_rejects_omitted_citations[c99]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-BUDGET-02-ALLOW",
+                  "M09-EVIDENCE-BUDGET-02-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-EVIDENCE-BUDGET-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "在现有输入限制内选取完整去重证据，兼顾来源且保留足够时的排序和历史。",
+            "expectations": [
+              {
+                "id": "M09-EVIDENCE-BUDGET-01-ALLOW",
+                "surface": "response",
+                "statement": "在现有输入限制内选取完整去重证据，兼顾来源且保留足够时的排序和历史。"
+              },
+              {
+                "id": "M09-EVIDENCE-BUDGET-01-DENY",
+                "surface": "forbidden",
+                "statement": "不得截断正文、修改原证据、超出输入/输出预留或因大项阻断可容纳的小项。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_evidence_budget_preserves_whole_ranked_diverse_sources",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-BUDGET-01-ALLOW",
+                  "M09-EVIDENCE-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_evidence_budget_skips_oversized_chunk_and_honors_context_reserve",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-BUDGET-01-ALLOW",
+                  "M09-EVIDENCE-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_evidence_budget_keeps_order_when_everything_fits",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-BUDGET-01-ALLOW",
+                  "M09-EVIDENCE-BUDGET-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 8.847,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "184 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 292.447,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 84.657,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 2.23,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "1011 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 484.005,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "306 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 97.044,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 307 cases, 615 expectations, 1002 exact test references; contract sha256 516c0ed6cfd5"
+      ],
+      "status": "passed",
+      "duration_ms": 527.482,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 5.001,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 25.208,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 85.19,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "duration_ms": 2289.474,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "4a9b797888ca9a11b6503bcf180dd626",
+        "attempt_id": "849342d94496fb443d088a34043452af"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-assistant-evidence-budget --gate api-tests",
+      "status": "passed",
+      "duration_ms": 9875.854,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1097,
+        "selection_counts": {
+          "collected": 5,
+          "executed": 5
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_evidence_budget_preserves_whole_ranked_diverse_sources"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_evidence_budget_skips_oversized_chunk_and_honors_context_reserve"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_evidence_budget_keeps_order_when_everything_fits"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_packed_evidence_reaches_chat_and_rejects_omitted_citations[c1]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_budget.py",
+                "name": "test_packed_evidence_reaches_chat_and_rejects_omitted_citations[c99]"
+              }
+            ],
+            "duration_ms": 9451.059,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\a90702124da1513104bdf385288e0aa752d78a6e3c1c7be561bfecdba8b54aff\\artifacts\\4a9b797888ca9a11b6503bcf180dd626\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "4a9b797888ca9a11b6503bcf180dd626",
+        "attempt_id": "1e7aaebe379a7ecadcae1c4b918a83eb"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2151.733,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 15929.172,
+    "failures": []
+  },
+  "source_commit": "a37afbfaa381a2453688884ff0f9b1b8dfead784"
+}

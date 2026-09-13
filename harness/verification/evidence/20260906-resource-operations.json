@@ -1,0 +1,1554 @@
+{
+  "schema_version": 2,
+  "task_id": "20260906-resource-operations",
+  "created_at": "2026-09-05T20:51:55.612617+00:00",
+  "command": "python -m tools.harness verify 20260906-resource-operations",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "web-quality",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "status": "passed",
+      "gates": [
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "fc6c51e06e1069eef78ff113feeafa791598e3ed",
+    "active_spec_sha256": "2c3e67032e70776659992e0cb52bad85f9335d740d0e6a713dfc36b3b5c669a4",
+    "verification_contract_sha256": "d5b4485f92e98c61a100f0927bb859e9b4ee753a4ba292795830c245a668492f",
+    "gate_config_sha256": "8e249a67b41e34e1ff87cc42092013fde75bc609a6580aac08e82578415cfe20",
+    "documentation_contract_sha256": "7214b06dd4f115ec74992b8b888f350553cb9e374915eccc18ebd0d88fad7937",
+    "documentation_targets_sha256": "69dd8d96401a599ae9fe1fec6afb9692c343ca451270df06e93f520e7b5cd5a1",
+    "module_contract_sha256": "b2a06e1c5e0102cbefd9eb9dbb681b50f4eee9628bb3514b7ccf875f03c6d2a1"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录五个运营页、资源复用、失败恢复和助手独立准入的实现与验收边界。",
+    "targets": [
+      "apps/web/README.md",
+      "ui-fix/PHASE-5.md"
+    ],
+    "baseline_commit": "4e12fbdfd3c104ec38b2fc258c926cf239623ebb",
+    "target_blobs": {
+      "apps/web/README.md": "b1f6cbecb7102ad71166cb7b1a95c897b5056236",
+      "ui-fix/PHASE-5.md": "b1838431d998b4945d26d0be3ea74803618025d8"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "ce6c27e8156bd8c4e163ff5c8c580847bd472495",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260906-resource-operations.json",
+      "sha256": "f6544dd1a68f187d91acf7a2b582b82b6aa7822d1732025d077135074ce21ebd",
+      "selected_cases": [
+        "M02-DESK-RESOURCES-01",
+        "M03-OPS-TAXONOMY-01",
+        "M05-OPS-CONTENT-01",
+        "M05-OPS-LAYOUT-01",
+        "M05-OPS-MEDIA-01",
+        "M06-OPS-PROFILE-01",
+        "M07-P1-01",
+        "M08-DOCS-01",
+        "M10-OPS-RUNTIME-01",
+        "M10-OPS-UI-01",
+        "M10-UNIT-ASSISTANT-ADMIN-01"
+      ],
+      "selected_refs": 14,
+      "excluded_cases": 159
+    },
+    "receipt": {
+      "run_id": "7e77d811e281aa1ccc8c3b07640f50ca",
+      "identity": "4b43d3f5d07614b6114cd30dcf8869247c76a571d5f462ee8be5eb3ecd9324b8",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "web-quality",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1210.123,
+      "plan_inputs": 1033.7,
+      "execute_cleanup_and_input_recheck": 263297.296
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "b2a06e1c5e0102cbefd9eb9dbb681b50f4eee9628bb3514b7ccf875f03c6d2a1",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "web-quality"
+        ],
+        "cases": [
+          {
+            "id": "M05-OPS-LAYOUT-01",
+            "module_id": "M05",
+            "module_name": "媒体与内容可移植性",
+            "priority": "P1",
+            "scenario": "五个运营页在双主题及320至1440宽度和短视口使用真实隔离资源。",
+            "expectations": [
+              {
+                "id": "M05-OPS-LAYOUT-01-E01",
+                "surface": "user_visible",
+                "statement": "布局和实际缩略图完整，自动无障碍检查通过并保留截图。"
+              },
+              {
+                "id": "M05-OPS-LAYOUT-01-E02",
+                "surface": "forbidden",
+                "statement": "长内容不得产生页面横滚，未知状态不得伪装健康。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops layout",
+                "gate": "e2e",
+                "covers": [
+                  "M05-OPS-LAYOUT-01-E01",
+                  "M05-OPS-LAYOUT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M07-P1-01",
+            "module_id": "M07",
+            "module_name": "内容发现输出",
+            "priority": "P1",
+            "scenario": "本地 production-build preview 首页满足四项桌面 Lighthouse 发布阈值。",
+            "expectations": [
+              {
+                "id": "M07-P1-01-E01",
+                "surface": "user_visible",
+                "statement": "本地 production-build preview 的 Performance、Accessibility、Best Practices 与 SEO 四项 Lighthouse 分数均达到 90。"
+              },
+              {
+                "id": "M07-P1-01-E02",
+                "surface": "forbidden",
+                "statement": "任一受控 Lighthouse 类别低于 90 时不得通过 Web 质量门禁。"
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "kind": "playwright",
+                "name": "local production-build preview homepage meets all Lighthouse 90 thresholds",
+                "gate": "web-quality",
+                "covers": [
+                  "M07-P1-01-E01",
+                  "M07-P1-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M06-OPS-PROFILE-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "名片保存失败重试并公开读取。",
+            "expectations": [
+              {
+                "id": "M06-OPS-PROFILE-01-E01",
+                "surface": "user_visible",
+                "statement": "保存失败保留输入，重试后首页与关于显示新名称。"
+              },
+              {
+                "id": "M06-OPS-PROFILE-01-E02",
+                "surface": "forbidden",
+                "statement": "失败不能报告保存成功或丢失输入。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops profile",
+                "gate": "e2e",
+                "covers": [
+                  "M06-OPS-PROFILE-01-E01",
+                  "M06-OPS-PROFILE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M03-OPS-TAXONOMY-01",
+            "module_id": "M03",
+            "module_name": "栏目、标签与全站搜索",
+            "priority": "P1",
+            "scenario": "栏目创建编辑、关联文章发布、禁止删除使用中栏目。",
+            "expectations": [
+              {
+                "id": "M03-OPS-TAXONOMY-01-E01",
+                "surface": "user_visible",
+                "statement": "手机键盘编辑聚焦名称，改名显示到公开栏目。"
+              },
+              {
+                "id": "M03-OPS-TAXONOMY-01-E02",
+                "surface": "forbidden",
+                "statement": "仍被使用的栏目不能删除，失败保留条目。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops taxonomy",
+                "gate": "e2e",
+                "covers": [
+                  "M03-OPS-TAXONOMY-01-E01",
+                  "M03-OPS-TAXONOMY-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M05-OPS-MEDIA-01",
+            "module_id": "M05",
+            "module_name": "媒体与内容可移植性",
+            "priority": "P1",
+            "scenario": "真实媒体上传、复制失败、移除恢复失败重试、外链与编辑器复用。",
+            "expectations": [
+              {
+                "id": "M05-OPS-MEDIA-01-E01",
+                "surface": "user_visible",
+                "statement": "媒体预览存在，剪贴板失败提供手动复制；三类编辑器可复用引用。"
+              },
+              {
+                "id": "M05-OPS-MEDIA-01-E02",
+                "surface": "forbidden",
+                "statement": "失败不得报告成功或消失资源；移除可恢复，引用不丢失。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops media",
+                "gate": "e2e",
+                "covers": [
+                  "M05-OPS-MEDIA-01-E01",
+                  "M05-OPS-MEDIA-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M02-DESK-RESOURCES-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "writing desk media and incomplete references remain explicit through publication",
+            "expectations": [
+              {
+                "id": "M02-DESK-RESOURCES-01-E01",
+                "surface": "user_visible",
+                "statement": "New article uploads a real isolated image; Alt validation returns to Markdown; incomplete references declare their unsaved status and focus settings; completing a project reference persists and publishes its real link and image."
+              },
+              {
+                "id": "M02-DESK-RESOURCES-01-E02",
+                "surface": "forbidden",
+                "statement": "Missing Alt cannot publish; incomplete references cannot be silently lost on navigation or described as saved."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk media and incomplete references remain explicit through publication",
+                "gate": "e2e",
+                "covers": [
+                  "M02-DESK-RESOURCES-01-E01",
+                  "M02-DESK-RESOURCES-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M05-OPS-CONTENT-01",
+            "module_id": "M05",
+            "module_name": "媒体与内容可移植性",
+            "priority": "P1",
+            "scenario": "真实导出、导入草稿编辑和回收站恢复永久删除，并注入失败。",
+            "expectations": [
+              {
+                "id": "M05-OPS-CONTENT-01-E01",
+                "surface": "user_visible",
+                "statement": "导出下载ZIP，导入有编辑链接，恢复与删除成功更新列表。"
+              },
+              {
+                "id": "M05-OPS-CONTENT-01-E02",
+                "surface": "forbidden",
+                "statement": "导入不公开，失败不清除回收站条目，不报告成功。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops content",
+                "gate": "e2e",
+                "covers": [
+                  "M05-OPS-CONTENT-01-E01",
+                  "M05-OPS-CONTENT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "e2e",
+          "web-quality",
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M10-OPS-UI-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "默认关闭环境中的运营事实、刷新失败恢复、被拒启用及重建命令。",
+            "expectations": [
+              {
+                "id": "M10-OPS-UI-01-E01",
+                "surface": "user_visible",
+                "statement": "四个独立状态和手机费用标签可读，失败保留过期快照与原因。"
+              },
+              {
+                "id": "M10-OPS-UI-01-E02",
+                "surface": "forbidden",
+                "statement": "未知不得显示为零，资格不足不能接受新问答。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant",
+                "gate": "e2e",
+                "covers": [
+                  "M10-OPS-UI-01-E01",
+                  "M10-OPS-UI-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M10-UNIT-ASSISTANT-ADMIN-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "M10.operations_web: assistant-admin scenarios at the existing module boundary.",
+            "expectations": [
+              {
+                "id": "M10-UNIT-ASSISTANT-ADMIN-01-E01",
+                "surface": "response",
+                "statement": "strictly accepts the complete passive snapshot shape; keeps polling visibility-bound and renders errors as text"
+              },
+              {
+                "id": "M10-UNIT-ASSISTANT-ADMIN-01-E02",
+                "surface": "forbidden",
+                "statement": "rejects malformed task results and identifies terminal operations"
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "strictly accepts the complete passive snapshot shape",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-UNIT-ASSISTANT-ADMIN-01-E01",
+                  "M10-UNIT-ASSISTANT-ADMIN-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "rejects malformed task results and identifies terminal operations",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-UNIT-ASSISTANT-ADMIN-01-E01",
+                  "M10-UNIT-ASSISTANT-ADMIN-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "keeps polling visibility-bound and renders errors as text",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-UNIT-ASSISTANT-ADMIN-01-E01",
+                  "M10-UNIT-ASSISTANT-ADMIN-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M10-OPS-RUNTIME-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "隔离运行时实际停用、重建切换和费用结算边界。",
+            "expectations": [
+              {
+                "id": "M10-OPS-RUNTIME-01-E01",
+                "surface": "response",
+                "statement": "停用优先，重建命令持久化，finalize 后仍须显式启用，账本精确计入结算与预留。"
+              },
+              {
+                "id": "M10-OPS-RUNTIME-01-E02",
+                "surface": "forbidden",
+                "statement": "过期版本不能妨碍紧急停用，切换不能自动开放问答，预留费用不能漏计。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "name": "test_safety_disable_beats_stale_version_and_blocks_new_sessions",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-OPS-RUNTIME-01-E01",
+                  "M10-OPS-RUNTIME-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "name": "test_rebuild_request_is_durable_and_finalize_leaves_gate_disabled",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-OPS-RUNTIME-01-E01",
+                  "M10-OPS-RUNTIME-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "name": "test_runtime_ledgers_count_settled_plus_reserved_exactly_and_serialize",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-OPS-RUNTIME-01-E01",
+                  "M10-OPS-RUNTIME-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-5",
+        "selected_gates": [
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.254,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "110 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 214.962,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 81.361,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.81,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "743 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 401.777,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "218 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 62.371,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "10 modules, 170 cases, 340 expectations, 659 exact test references; contract sha256 b2a06e1c5e01"
+      ],
+      "status": "passed",
+      "duration_ms": 343.851,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.223,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.8,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 85.92,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-5"
+      ],
+      "duration_ms": 1174.085,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "7e77d811e281aa1ccc8c3b07640f50ca",
+        "attempt_id": "273830eeded4a01a1546749a1ae96e3c"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260906-resource-operations --gate e2e",
+      "status": "passed",
+      "duration_ms": 188375.279,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 8253,
+        "selection_counts": {
+          "collected": 7,
+          "executed": 7
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk media and incomplete references remain explicit through publication"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops taxonomy"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops content"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops layout"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops media"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops profile"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant"
+              }
+            ],
+            "duration_ms": 2769.504,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "81cf8927ce1655c3381b8444e4b42379ef65d7e7c1856a514ce77a83e6744f40",
+              "apps/web/nuxt.config.ts": "1d8d7e8e1e3f796a1435e5f9e23ccf49ee0972c2a31f570b2db61cdbe3246ea0",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk media and incomplete references remain explicit through publication"
+              }
+            ],
+            "duration_ms": 1430.859
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops taxonomy"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops content"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops layout"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops media"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops profile"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant"
+              }
+            ],
+            "duration_ms": 1417.032
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk media and incomplete references remain explicit through publication",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "writing desk media and incomplete references remain explicit through publication"
+                ]
+              }
+            ],
+            "duration_ms": 1286.412,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk media and incomplete references remain explicit through publication",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "writing desk media and incomplete references remain explicit through publication"
+                ]
+              }
+            ],
+            "duration_ms": 23901.221,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops taxonomy",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops taxonomy"
+                ]
+              }
+            ],
+            "duration_ms": 1322.782,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops taxonomy",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops taxonomy"
+                ]
+              }
+            ],
+            "duration_ms": 21435.389,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops content",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops content"
+                ]
+              }
+            ],
+            "duration_ms": 1287.849,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops content",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops content"
+                ]
+              }
+            ],
+            "duration_ms": 22729.778,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops layout",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops layout"
+                ]
+              }
+            ],
+            "duration_ms": 1293.695,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops layout",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops layout"
+                ]
+              }
+            ],
+            "duration_ms": 36962.259,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops media",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops media"
+                ]
+              }
+            ],
+            "duration_ms": 1309.606,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops media",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops media"
+                ]
+              }
+            ],
+            "duration_ms": 24105.908,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops profile",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops profile"
+                ]
+              }
+            ],
+            "duration_ms": 1348.801,
+            "batch_id": "batch-0006"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops profile",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops profile"
+                ]
+              }
+            ],
+            "duration_ms": 22804.541,
+            "batch_id": "batch-0006"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops assistant"
+                ]
+              }
+            ],
+            "duration_ms": 1388.093,
+            "batch_id": "batch-0007"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+                "name": "ops assistant",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "ops assistant"
+                ]
+              }
+            ],
+            "duration_ms": 21208.468,
+            "batch_id": "batch-0007"
+          }
+        ],
+        "log": "D:\\tmp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\7e77d811e281aa1ccc8c3b07640f50ca\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "7e77d811e281aa1ccc8c3b07640f50ca",
+        "attempt_id": "e90b014e1b4453185f2995c7355d4ec0"
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260906-resource-operations --gate web-quality",
+      "status": "passed",
+      "duration_ms": 64077.522,
+      "covers": [
+        "AC-1",
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 5011,
+        "selection_counts": {
+          "collected": 4,
+          "executed": 4
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "reused-in-worktree",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "local production-build preview homepage meets all Lighthouse 90 thresholds"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "strictly accepts the complete passive snapshot shape"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "rejects malformed task results and identifies terminal operations"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "keeps polling visibility-bound and renders errors as text"
+              }
+            ],
+            "duration_ms": 5.091,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "81cf8927ce1655c3381b8444e4b42379ef65d7e7c1856a514ce77a83e6744f40",
+              "apps/web/nuxt.config.ts": "1d8d7e8e1e3f796a1435e5f9e23ccf49ee0972c2a31f570b2db61cdbe3246ea0",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "local production-build preview homepage meets all Lighthouse 90 thresholds"
+              }
+            ],
+            "duration_ms": 32973.879,
+            "prerequisite": "quality-build",
+            "input_sha256": {
+              "package-lock.json": "81cf8927ce1655c3381b8444e4b42379ef65d7e7c1856a514ce77a83e6744f40",
+              "apps/web/nuxt.config.ts": "1d8d7e8e1e3f796a1435e5f9e23ccf49ee0972c2a31f570b2db61cdbe3246ea0"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "local production-build preview homepage meets all Lighthouse 90 thresholds"
+              }
+            ],
+            "duration_ms": 2371.156
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "strictly accepts the complete passive snapshot shape"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "rejects malformed task results and identifies terminal operations"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "keeps polling visibility-bound and renders errors as text"
+              }
+            ],
+            "duration_ms": 2150.44
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "local production-build preview homepage meets all Lighthouse 90 thresholds",
+                "config": "playwright.quality.config.ts",
+                "project": "quality-chromium",
+                "title_path": [
+                  "lighthouse",
+                  "local production-build preview homepage meets all Lighthouse 90 thresholds"
+                ]
+              }
+            ],
+            "duration_ms": 2194.112,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "local production-build preview homepage meets all Lighthouse 90 thresholds",
+                "config": "playwright.quality.config.ts",
+                "project": "quality-chromium",
+                "title_path": [
+                  "lighthouse",
+                  "local production-build preview homepage meets all Lighthouse 90 thresholds"
+                ]
+              }
+            ],
+            "duration_ms": 21847.106,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "strictly accepts the complete passive snapshot shape",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant admin contract",
+                  "strictly accepts the complete passive snapshot shape"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "rejects malformed task results and identifies terminal operations",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant admin contract",
+                  "rejects malformed task results and identifies terminal operations"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-admin.test.ts",
+                "name": "keeps polling visibility-bound and renders errors as text",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant admin contract",
+                  "keeps polling visibility-bound and renders errors as text"
+                ]
+              }
+            ],
+            "duration_ms": 2161.499,
+            "batch_id": "batch-0002"
+          }
+        ],
+        "log": "D:\\tmp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\7e77d811e281aa1ccc8c3b07640f50ca\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "7e77d811e281aa1ccc8c3b07640f50ca",
+        "attempt_id": "0adf2530f533b72bfe3ab5d3d4ffb2f9"
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260906-resource-operations --gate api-tests",
+      "status": "passed",
+      "duration_ms": 8187.546,
+      "covers": [
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 723,
+        "selection_counts": {
+          "collected": 3,
+          "executed": 3
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "name": "test_safety_disable_beats_stale_version_and_blocks_new_sessions"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "name": "test_rebuild_request_is_durable_and_finalize_leaves_gate_disabled"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "name": "test_runtime_ledgers_count_settled_plus_reserved_exactly_and_serialize"
+              }
+            ],
+            "duration_ms": 7805.739,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "D:\\tmp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\7e77d811e281aa1ccc8c3b07640f50ca\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "7e77d811e281aa1ccc8c3b07640f50ca",
+        "attempt_id": "0d35944c5a07ad8d5b0c507937a0be4d"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1180.358,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 15,
+      "passed": 15,
+      "failed": 0
+    },
+    "duration_ms": 264202.119,
+    "failures": []
+  },
+  "source_commit": "ce6c27e8156bd8c4e163ff5c8c580847bd472495"
+}

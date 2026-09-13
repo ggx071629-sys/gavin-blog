@@ -1,0 +1,639 @@
+{
+  "schema_version": 1,
+  "task_id": "20260908-chat-readiness-age",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant_qualification/provider_probe.py",
+      "owner": "M10.qualification",
+      "reason": "仅local artifact validator与可信提示改变；production validator和真实探测执行未改。",
+      "cases": [
+        "M09-READINESS-AGE-01",
+        "M09-READINESS-INVALID-01",
+        "M09-READINESS-HINT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "run_assistant_dev显式真实启动输出可信时间，不增加网络调用。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01",
+            "M09-READINESS-HINT-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "production profile校验无修改，本机证据拒绝生产由边界测试覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "production测量与runner未修改，本机validator未被生产入口调用。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "local write_receipt消费validator；runtime verify_receipt不变，测试覆盖持续验证和持久费用。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引结构与worker无修改；本机E5/generation门禁继续由lifespan回归覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "本机build/lifespan共享validator，快捷启动与npm提示消费新年龄语义。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01",
+            "M09-READINESS-HINT-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型和数据库接口无变化；仅测试临时runtime账本保留。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings/create_app默认配置结构未改；显式development wrapper已由开发case验证。",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "容量采样脚本不消费artifact年龄或提示，未改变进程配置。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "HTTP/SSE契约及浏览器行为未改，年龄检查在API启动之前。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Chat传输与输出适配无修改；测试替身计数确认无额外调用。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理gate接口未改；显式本机启动沿用原启停调用。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/scripts/run_assistant_dev.py",
+      "owner": "M06.api_tooling",
+      "reason": "run_assistant_dev显式真实启动输出可信时间，不增加网络调用。",
+      "cases": [
+        "M09-READINESS-AGE-01",
+        "M09-READINESS-INVALID-01",
+        "M09-READINESS-HINT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型和数据库接口无变化；仅测试临时runtime账本保留。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings/create_app默认配置结构未改；显式development wrapper已由开发case验证。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "local write_receipt消费validator；runtime verify_receipt不变，测试覆盖持续验证和持久费用。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引结构与worker无修改；本机E5/generation门禁继续由lifespan回归覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "容量采样脚本不消费artifact年龄或提示，未改变进程配置。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "HTTP/SSE契约及浏览器行为未改，年龄检查在API启动之前。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "本机build/lifespan共享validator，快捷启动与npm提示消费新年龄语义。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01",
+            "M09-READINESS-HINT-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Chat传输与输出适配无修改；测试替身计数确认无额外调用。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理gate接口未改；显式本机启动沿用原启停调用。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "仅local artifact validator与可信提示改变；production validator和真实探测执行未改。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01",
+            "M09-READINESS-HINT-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "production profile校验无修改，本机证据拒绝生产由边界测试覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "production测量与runner未修改，本机validator未被生产入口调用。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_real_development.py",
+      "owner": "M09.development",
+      "reason": "本机build/lifespan共享validator，快捷启动与npm提示消费新年龄语义。",
+      "cases": [
+        "M09-READINESS-AGE-01",
+        "M09-READINESS-INVALID-01",
+        "M09-READINESS-HINT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "run_assistant_dev显式真实启动输出可信时间，不增加网络调用。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01",
+            "M09-READINESS-HINT-01"
+          ]
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings/create_app默认配置结构未改；显式development wrapper已由开发case验证。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型和数据库接口无变化；仅测试临时runtime账本保留。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "local write_receipt消费validator；runtime verify_receipt不变，测试覆盖持续验证和持久费用。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引结构与worker无修改；本机E5/generation门禁继续由lifespan回归覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "容量采样脚本不消费artifact年龄或提示，未改变进程配置。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "HTTP/SSE契约及浏览器行为未改，年龄检查在API启动之前。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Chat传输与输出适配无修改；测试替身计数确认无额外调用。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理gate接口未改；显式本机启动沿用原启停调用。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "仅local artifact validator与可信提示改变；production validator和真实探测执行未改。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01",
+            "M09-READINESS-HINT-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "production profile校验无修改，本机证据拒绝生产由边界测试覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "production测量与runner未修改，本机validator未被生产入口调用。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_local_launcher.py",
+      "owner": "M09.development",
+      "reason": "本机build/lifespan共享validator，快捷启动与npm提示消费新年龄语义。",
+      "cases": [
+        "M09-READINESS-AGE-01",
+        "M09-READINESS-INVALID-01",
+        "M09-READINESS-HINT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "run_assistant_dev显式真实启动输出可信时间，不增加网络调用。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01",
+            "M09-READINESS-HINT-01"
+          ]
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings/create_app默认配置结构未改；显式development wrapper已由开发case验证。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型和数据库接口无变化；仅测试临时runtime账本保留。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "local write_receipt消费validator；runtime verify_receipt不变，测试覆盖持续验证和持久费用。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引结构与worker无修改；本机E5/generation门禁继续由lifespan回归覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "容量采样脚本不消费artifact年龄或提示，未改变进程配置。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "HTTP/SSE契约及浏览器行为未改，年龄检查在API启动之前。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Chat传输与输出适配无修改；测试替身计数确认无额外调用。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理gate接口未改；显式本机启动沿用原启停调用。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "仅local artifact validator与可信提示改变；production validator和真实探测执行未改。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01",
+            "M09-READINESS-HINT-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "production profile校验无修改，本机证据拒绝生产由边界测试覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "production测量与runner未修改，本机validator未被生产入口调用。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "scripts/local_launcher.py",
+      "owner": "M09.development",
+      "reason": "本机build/lifespan共享validator，快捷启动与npm提示消费新年龄语义。",
+      "cases": [
+        "M09-READINESS-AGE-01",
+        "M09-READINESS-INVALID-01",
+        "M09-READINESS-HINT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "run_assistant_dev显式真实启动输出可信时间，不增加网络调用。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01",
+            "M09-READINESS-HINT-01"
+          ]
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Settings/create_app默认配置结构未改；显式development wrapper已由开发case验证。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "内容数据模型和数据库接口无变化；仅测试临时runtime账本保留。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "local write_receipt消费validator；runtime verify_receipt不变，测试覆盖持续验证和持久费用。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "索引结构与worker无修改；本机E5/generation门禁继续由lifespan回归覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "容量采样脚本不消费artifact年龄或提示，未改变进程配置。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "HTTP/SSE契约及浏览器行为未改，年龄检查在API启动之前。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Chat传输与输出适配无修改；测试替身计数确认无额外调用。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "管理gate接口未改；显式本机启动沿用原启停调用。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "仅local artifact validator与可信提示改变；production validator和真实探测执行未改。",
+          "cases": [
+            "M09-READINESS-AGE-01",
+            "M09-READINESS-INVALID-01",
+            "M09-READINESS-HINT-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "production profile校验无修改，本机证据拒绝生产由边界测试覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "production测量与runner未修改，本机validator未被生产入口调用。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "owner": "M08.documentation",
+      "reason": "普通操作文档同步年龄提示；不修改可执行合同和元数据结构，链接/metadata检查覆盖。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通文档或本任务声明数据；由Harness结构、归属与精确引用检查验证，不更改执行实现。"
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "普通操作文档同步年龄提示；不修改可执行合同和元数据结构，链接/metadata检查覆盖。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通文档或本任务声明数据；由Harness结构、归属与精确引用检查验证，不更改执行实现。"
+    },
+    {
+      "path": "harness/docs/operations/local-real-qa.md",
+      "owner": "M08.documentation",
+      "reason": "普通操作文档同步年龄提示；不修改可执行合同和元数据结构，链接/metadata检查覆盖。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通文档或本任务声明数据；由Harness结构、归属与精确引用检查验证，不更改执行实现。"
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "普通操作文档同步年龄提示；不修改可执行合同和元数据结构，链接/metadata检查覆盖。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "只增加本任务case归属数据，未改选择算法或执行合同；结构校验覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "仅登记真实pytest引用，runner/白名单gate语义未改，结构及实际精确收集覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "只登记case，不改隔离或执行协议，固定HEAD检查及精确runner覆盖。",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "普通文档或本任务声明数据；由Harness结构、归属与精确引用检查验证，不更改执行实现。"
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "只增加本任务case归属数据，未改选择算法或执行合同；结构校验覆盖。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "本次仅登记当前任务的case与归属，控制面算法和执行协议未改变；结构验证覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "本次仅登记当前任务的case与归属，控制面算法和执行协议未改变；结构验证覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "本次仅登记当前任务的case与归属，控制面算法和执行协议未改变；结构验证覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "仅登记真实pytest引用，runner/白名单gate语义未改，结构及实际精确收集覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "本次仅登记当前任务的case与归属，控制面算法和执行协议未改变；结构验证覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "本次仅登记当前任务的case与归属，控制面算法和执行协议未改变；结构验证覆盖。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "只登记case，不改隔离或执行协议，固定HEAD检查及精确runner覆盖。",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "普通文档或本任务声明数据；由Harness结构、归属与精确引用检查验证，不更改执行实现。"
+    },
+    {
+      "path": "CHAT-READINESS-DESIGN.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
+    },
+    {
+      "path": "CHAT-READINESS-PHASE-1.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
+    },
+    {
+      "path": "CHAT-READINESS-PHASE-2.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
+    },
+    {
+      "path": "CHAT-READINESS-PLAN.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
+    },
+    {
+      "path": "completed/local-startup/L1.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
+    },
+    {
+      "path": "completed/local-startup/L2.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
+    },
+    {
+      "path": "completed/local-startup/L3.md",
+      "owner": "M08.documentation",
+      "reason": "用户提供的阶段计划及当前阶段进展归档入库；阶段2与设计原文保留，不修改产品或Harness执行合同。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "普通计划/过程文档，结构及链接由Harness完整性检查覆盖。"
+    }
+  ]
+}

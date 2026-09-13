@@ -1,0 +1,144 @@
+{
+  "record_type": "supplemental-local-startup-verification",
+  "task_id": "20260911-code-cleanup",
+  "created_at": "2026-09-11T11:48:21.879330+00:00",
+  "source_commit": "501cda272b615d413e6e68264a36b0ba0de604fe",
+  "scope": "C4-03 real service connectivity, current public-source reads, GSAP browser behavior and data preservation; no Chat/production/full retrieval-quality claim",
+  "status": "passed_with_existing_retrieval_limitations",
+  "entrypoint": "apps/api/.venv/Scripts/python.exe scripts/local_launcher.py start --no-browser",
+  "content_database": "apps/api/data/e5/content-verified.db",
+  "runtime_database": "apps/api/data/assistant-local-real/assistant_runtime.db",
+  "schema_unchanged": {
+    "content": [
+      [
+        "20260911_0030"
+      ]
+    ],
+    "runtime": [
+      [
+        "20260906_rt0004"
+      ]
+    ]
+  },
+  "services": {
+    "web": 3101,
+    "api": 8101,
+    "worker_heartbeat_advances": true,
+    "e5": {
+      "status": "passed",
+      "model": "intfloat/multilingual-e5-small",
+      "dimensions": 384
+    },
+    "qdrant": {
+      "authenticated": true,
+      "collections_count": 11,
+      "active_collection": "e5_verified_14",
+      "points": 25,
+      "status": "green"
+    },
+    "availability": true,
+    "proxy_matches_api": true
+  },
+  "sources": {
+    "published_articles": 3,
+    "profile": 1,
+    "resume": 1,
+    "current_chunks": 25,
+    "resume_chunks": 5,
+    "active_generation": 14
+  },
+  "retrieval": {
+    "provider": "real local E5 and existing Qdrant",
+    "queries": 4,
+    "limit_per_query": 5,
+    "current_version_validated": true,
+    "dense_hits_all_queries": true,
+    "fts_hits_codex": 1,
+    "fts_hits_nginx": 0
+  },
+  "resume": {
+    "status": "ready",
+    "stored_state": "indexing",
+    "http": 200,
+    "bytes": 261840,
+    "sha256_matches_current": true
+  },
+  "gsap": {
+    "existing_spec": "apps/web/tests/e2e-assistant/orb-motion.spec.ts",
+    "real_web_no_api_mock": true,
+    "passed": 1,
+    "duration_ms": 13133.061,
+    "covers": [
+      "live transforms",
+      "scroll",
+      "focus pause",
+      "pause preference",
+      "document visibility",
+      "navigation cleanup twice",
+      "reduced motion",
+      "320/390/640/1280 viewport",
+      "light/dark accessibility",
+      "no eager assistant requests",
+      "no page errors or relevant console warnings"
+    ]
+  },
+  "preservation": {
+    "content_changed_tables": [
+      "assistant_daily_metrics",
+      "assistant_index_worker_state"
+    ],
+    "runtime_changed_tables": [
+      "assistant_cleanup_state",
+      "assistant_operational_gate"
+    ],
+    "all_other_table_row_hashes_unchanged": true,
+    "rebuild_requests": 0,
+    "generation_switches": 0,
+    "chat_requests": 0,
+    "backup_directory": ".run/cleanup/real-c4",
+    "owned_services_stopped": true,
+    "ports_released": [
+      3101,
+      8101,
+      8091,
+      8092,
+      8093
+    ]
+  },
+  "existing_limitations": [
+    {
+      "id": "L-C4-01",
+      "fact": "Active generation 14 has 25 canonical chunks and vectors but 9 FTS rows; the pre-start snapshot is identical. nginx does not match active FTS; dense retrieval succeeds.",
+      "disposition": "Preserve existing indexes per user instruction; excluded from no-behavior-change cleanup fixes; requires separate index consistency investigation."
+    },
+    {
+      "id": "L-C4-02",
+      "fact": "Generation 15 remains staging/ready_to_switch. Historical tasks 5 and 6 remain failed; current article versions have active chunks.",
+      "disposition": "No retry, deletion, rebuild or finalize."
+    }
+  ],
+  "check_attempt_notes": [
+    "Local supplemental script initially used /about instead of /about-page and chunk.body instead of page_content; corrected checker only.",
+    "Initial raw resume-state assertion was incorrect: production status_view derives ready from the current usable version; raw indexing unchanged.",
+    "Additional nginx FTS assertion exposed the pre-existing FTS coverage gap, retained as L-C4-01 rather than marked passed."
+  ],
+  "local_artifacts": [
+    {
+      "path": ".run/cleanup/real-c4/before.json",
+      "sha256": "3b8c7af210244ed6867e83f2c25791a8e74bfe5b929db51a068ebe3ffe368046"
+    },
+    {
+      "path": ".run/cleanup/real-c4/after.json",
+      "sha256": "5341392bb787bd6ba81f851bf575a4b6a07a7634a5308e32852297fb9d286868"
+    },
+    {
+      "path": ".run/cleanup/real-c4/services.json",
+      "sha256": "b67469134fcc93491b3ea46bb0ee69eea47c8482ae644af179041577abb9209b"
+    },
+    {
+      "path": ".run/cleanup/real-c4/browser-result.json",
+      "sha256": "f20348663b93465b9f4ebb3389ca437d7327760d44b87f5b3f8a6d5a052a4c64"
+    }
+  ],
+  "formal_evidence": "harness/verification/evidence/20260911-code-cleanup.json"
+}
