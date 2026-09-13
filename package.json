@@ -7,14 +7,7 @@
   ],
   "scripts": {
     "dev:web": "npm --workspace @gavin/web run dev",
-    "dev:assistant": "node scripts/run-assistant-dev.mjs",
-    "dev:assistant:real": "node scripts/run-assistant-dev.mjs --real",
-    "dev:assistant:retrieval": "node scripts/run-real-retrieval.mjs",
     "build:web": "npm --workspace @gavin/web run build",
-    "test:web": "npm --workspace @gavin/web run test",
-    "test:e2e": "npm --workspace @gavin/web run test:e2e",
-    "quality:web": "npm --workspace @gavin/web run typecheck && npm --workspace @gavin/web run lint && npm --workspace @gavin/web run test && npm --workspace @gavin/web run build && npm --workspace @gavin/web run test:quality && npm --workspace @gavin/web run test:failure-states",
-    "quality:release": "node scripts/run-release-check.mjs",
     "contracts": "npm --workspace @gavin/contracts run generate"
   },
   "optionalDependencies": {

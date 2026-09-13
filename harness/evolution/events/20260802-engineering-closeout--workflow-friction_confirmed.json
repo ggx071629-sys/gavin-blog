@@ -1,9 +1,0 @@
-{
-  "schema_version": 1,
-  "event_type": "workflow.friction_confirmed",
-  "task_id": "20260802-engineering-closeout",
-  "created_at": "2026-08-01T16:45:10.580515+00:00",
-  "source": "manual",
-  "reason": "Closing verified specs failed because durable README links targeted short-lived active spec files; lifecycle-safe references need an executable guard.",
-  "may_modify_agents_md": false
-}

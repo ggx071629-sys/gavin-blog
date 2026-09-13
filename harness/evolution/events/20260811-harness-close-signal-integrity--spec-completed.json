@@ -1,9 +1,0 @@
-{
-  "schema_version": 1,
-  "event_type": "spec.completed",
-  "task_id": "20260811-harness-close-signal-integrity",
-  "created_at": "2026-08-11T11:42:57.663144+00:00",
-  "source": "lifecycle",
-  "reason": "The active spec passed verification and was deterministically compressed.",
-  "may_modify_agents_md": false
-}
