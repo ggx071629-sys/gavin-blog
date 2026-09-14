@@ -123,7 +123,8 @@ def bind_article_tool_model(chat):
 
 
 def execute_article_tool(
-    db: Session, selection: ArticleToolSelection, now: datetime, question: str
+    db: Session, selection: ArticleToolSelection, now: datetime, question: str,
+    *, include_excerpts: bool = False,
 ) -> ValidatedAnswer:
     if selection.arguments is None:
         raise ValueError("no article tool selected")
@@ -135,7 +136,10 @@ def execute_article_tool(
         raise ValueError("tool arguments do not match the question")
 
     def run(order: Order, limit: int, window: Window | None) -> ValidatedAnswer:
-        return query_recent_articles(db, RecentArticleRequest(order, limit, window), now)
+        return query_recent_articles(
+            db, RecentArticleRequest(order, limit, window), now,
+            include_excerpts=include_excerpts,
+        )
 
     tool = StructuredTool.from_function(
         run,

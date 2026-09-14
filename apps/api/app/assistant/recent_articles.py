@@ -117,6 +117,7 @@ def query_recent_articles(
     db: Session,
     request: RecentArticleRequest,
     now: datetime,
+    *, include_excerpts: bool = False,
 ) -> ValidatedAnswer:
     now = now.replace(tzinfo=UTC) if now.tzinfo is None else now.astimezone(UTC)
     # Match public_articles.public_response: a first revision uses the original
@@ -182,6 +183,10 @@ def query_recent_articles(
         # Dates are catalog metadata, not headings in the article body.
         source = {"n": number, "title": row.title, "heading_path": "", "path": path}
         sources.append(source)
-        citations.append({**source, "alias": f"article_{row.id}_r{row.revision_id}"})
+        citation = {**source, "alias": f"article_{row.id}_r{row.revision_id}"}
+        if include_excerpts:
+            # Catalog evidence is metadata, never an invented article excerpt.
+            citation["excerpt"] = f"{row.title} — {location}（北京时间）"[:1200]
+        citations.append(citation)
         lines.append(f"{_plain_title(row.title)} — {location}[{number}]")
     return ValidatedAnswer("\n\n".join(lines), citations, sources)

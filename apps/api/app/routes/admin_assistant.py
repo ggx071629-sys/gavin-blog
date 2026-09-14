@@ -87,6 +87,10 @@ def read_trial(
     for turn in result["turns"]:
         # Public reader feedback is not part of the existing admin trial contract.
         turn.pop("feedback", None)
+        # Older catalog answers did not persist excerpts. Preserve their links
+        # without inventing historical evidence or rewriting the stored answer.
+        for citation in turn.get("citations") or []:
+            citation.setdefault("excerpt", "")
         rows = online.control.read(
             lambda conn, turn_id=turn["turn_id"]: conn.execute(
                 "SELECT status, settled_micro FROM assistant_attempts WHERE turn_id = ?", (turn_id,)

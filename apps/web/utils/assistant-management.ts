@@ -59,7 +59,8 @@ export interface TrialCitation { n: string, title: string, path: string, excerpt
 export function trialCitations(answer: string, citations: unknown, sources: unknown): TrialCitation[] {
   if (!Array.isArray(citations)) throw new Error('回答依据格式无效')
   const normalized = citations.map((item: Record<string, unknown>) => {
-    const { excerpt, ...citation } = item
+    // Legacy catalog responses have no stored excerpt; do not fabricate one.
+    const { excerpt = '', ...citation } = item
     if (typeof excerpt !== 'string' || excerpt.length > 1200) throw new Error('回答依据格式无效')
     return { excerpt, citation }
   })

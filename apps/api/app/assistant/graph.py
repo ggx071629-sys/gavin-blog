@@ -690,6 +690,7 @@ async def _terminal(
                 with online.content_session() as db:
                     catalog = execute_article_tool(
                         db, article_selection, online.now(), state['question'],
+                        include_excerpts=identity.session_id.startswith("admin_"),
                     )
                 message = answer = catalog.text
                 citations, sources = catalog.citations, catalog.sources
