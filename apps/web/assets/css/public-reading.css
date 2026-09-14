@@ -794,8 +794,7 @@
 .blueprint-wrapper .site-header {background:color-mix(in srgb,var(--ee-canvas) 94%,transparent);border-color:var(--ee-line);}
 .blueprint-wrapper .site-header-bar {min-height:88px;gap:24px;}
 .site-brand {flex-shrink:0;gap:12px;}
-.site-brand-mark {position:relative;display:grid;place-items:center;width:42px;height:44px;border-radius:5px 5px 12px 5px;background:var(--ee-primary);color:var(--ee-primary-contrast);font:700 italic 38px/.9 var(--ee-heading);transform:rotate(-7deg);}
-.site-brand-mark > span {position:absolute;right:3px;top:3px;font:600 14px/1 var(--ee-mono);}
+.site-brand-mark {display:block;flex-shrink:0;width:44px;height:44px;object-fit:contain;border-radius:10px;background:#fff;}
 .site-brand-wordmark {display:grid;gap:4px;}
 .site-brand-name {font:700 27px/1 var(--ee-heading);letter-spacing:-.065em;}
 .site-brand-name > span {color:var(--ee-primary);}
@@ -834,7 +833,7 @@
 @media(max-width:1279px) {
   .blueprint-wrapper .site-header-bar {min-height:72px;gap:12px;}
   .site-brand-name {font-size:24px;}
-  .site-brand-mark {width:36px;height:38px;font-size:32px;}
+  .site-brand-mark {width:40px;height:40px;}
 }
 @media(max-width:639px) {
   .blueprint-wrapper .site-header-bar {padding-inline:16px;gap:8px;}
@@ -842,7 +841,7 @@
   .site-brand-name {font-size:22px;}
   .site-brand-caption {display:none;}
   .site-mobile-tools {gap:2px;}
-  .site-brand-mark {width:30px;height:34px;font-size:29px;}
+  .site-brand-mark {width:36px;height:36px;border-radius:8px;}
 }
 @media(prefers-reduced-motion:reduce) {
   .blueprint-wrapper .site-primary-navigation .site-nav-action {transition:none;}

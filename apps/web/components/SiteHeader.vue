@@ -2,7 +2,7 @@
   <header class="site-header sticky top-0 z-40 border-b backdrop-blur-xl">
     <div ref="headerBar" class="page-shell site-header-bar flex items-center justify-between gap-5">
       <NuxtLink to="/" class="site-brand flex min-w-0 items-center gap-2.5" aria-label="Gavin 首页">
-        <span class="site-brand-mark" aria-hidden="true">g<span>↗</span></span>
+        <img class="site-brand-mark" src="/brand/gavin-bird.svg" width="44" height="44" alt="" aria-hidden="true">
         <span class="site-brand-wordmark"><span class="site-brand-name">GAVIN<span aria-hidden="true">.</span></span><span class="site-brand-caption">NOTES ON BUILDING</span></span>
       </NuxtLink>
 

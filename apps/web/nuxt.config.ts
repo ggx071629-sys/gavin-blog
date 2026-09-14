@@ -158,6 +158,10 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'zh-CN' },
       title: '技术与思考',
       titleTemplate: '%s · Gavin',
+      link: [
+        { rel: 'icon', type: 'image/jpeg', href: '/brand/gavin-bird.jpg' },
+        { rel: 'icon', type: 'image/svg+xml', sizes: 'any', href: '/brand/gavin-bird.svg' },
+      ],
       meta: [
         {
           name: 'description',
