@@ -394,10 +394,10 @@
 .article-hero-tags a { display: inline-flex; align-items: center; min-height: 44px; padding: 4px 10px; border: 1px solid var(--ee-line); border-radius: 4px; background: var(--ee-surface-low); color: var(--ee-ink-muted); font: 500 14px/1.5 var(--ee-mono); }
 .article-hero-tags a:hover { color: var(--ee-primary-strong); border-color: var(--ee-primary); }
 .article-reading .article-hero-toolbar { margin-top: 12px; }
-.article-reading .reading-layout { gap: 32px; margin-top: 48px; }
-.article-reading .reading-toc { padding: 16px; border: 1px solid var(--ee-line); border-radius: 12px; background: var(--ee-surface); }
-.article-reading .content-toc-kicker { padding-bottom: 8px; border-bottom: 1px solid var(--ee-line); color: var(--ee-primary-strong); }
-.article-reading .reading-toc .content-toc-link { font-size: 14px; }
+:is(.article-reading, .project-detail) .reading-layout { gap: 32px; margin-top: 48px; }
+:is(.article-reading, .project-detail) .reading-toc { padding: 16px; border: 1px solid var(--ee-line); border-radius: 12px; background: var(--ee-surface); }
+:is(.article-reading, .project-detail) .content-toc-kicker { padding-bottom: 8px; border-bottom: 1px solid var(--ee-line); color: var(--ee-primary-strong); }
+:is(.article-reading, .project-detail) .reading-toc .content-toc-link { font-size: 14px; }
 .article-reading .prose-gavin { font-size: 16px; line-height: 1.75; color: var(--ee-ink-muted); }
 .article-reading .prose-gavin > p:first-of-type { font-size: 16px; line-height: 1.75; }
 .article-reading .prose-gavin h2 { padding-bottom: 8px; border-bottom: 1px solid var(--ee-line); font-size: 24px; font-weight: 900; color: var(--ee-ink); }
@@ -408,16 +408,16 @@
 .article-reading .article-code { --hljs-text: inherit; --hljs-keyword: inherit; --hljs-title: inherit; --hljs-number: inherit; --hljs-string: inherit; --hljs-comment: inherit; --hljs-built-in: inherit; --hljs-name: inherit; }
 :root:not(.dark) .article-reading .article-code { --hljs-built-in: #994000; }
 @media (min-width: 1101px) {
-  .article-reading .reading-layout { grid-template-columns: minmax(0, 740px) minmax(0, 1fr); }
-  .article-reading .reading-layout--plain { grid-template-columns: minmax(0, 740px); }
+  :is(.article-reading, .project-detail) .reading-layout { grid-template-columns: minmax(0, 740px) minmax(0, 1fr); }
+  :is(.article-reading, .project-detail) .reading-layout--plain { grid-template-columns: minmax(0, 740px); }
 }
 @media (max-width: 1100px) {
-  .article-reading .reading-layout { gap: 24px; }
-  .article-reading .reading-toc { padding: 0; }
+  :is(.article-reading, .project-detail) .reading-layout { gap: 24px; }
+  :is(.article-reading, .project-detail) .reading-toc { padding: 0; }
 }
 @media (max-width: 639px) {
   .article-reading .article-hero-summary { font-size: 16px; }
-  .article-reading .reading-layout { margin-top: 32px; }
+  :is(.article-reading, .project-detail) .reading-layout { margin-top: 32px; }
   .articles-index .article-list-row { flex-direction: column; align-items: stretch; }
 }
 .projects-index .projects-lead, .books-index .books-current { display: flex; flex-direction: column; align-items: stretch; gap: 20px; padding: 32px; border-radius: 16px; }

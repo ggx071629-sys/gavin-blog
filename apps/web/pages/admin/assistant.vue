@@ -51,7 +51,7 @@
         <section v-if="panel === 'maintenance'" class="am-maintenance" aria-labelledby="maintenance-heading">
         <h2 id="maintenance-heading" tabindex="-1">高级维护</h2><p>刷新只读取已有运行事实，不发起付费探测。</p>
         <div class="am-maintenance-row"><div><h3>运行资格</h3><p>切换索引后，先校验当前索引并签发资格，再恢复试问与对外开放。校验不产生模型调用费用。</p><p v-if="!management?.trial_stopped || isOpen" class="am-hint">请先停止全部问答，再执行校验。</p></div><button class="button-secondary" :disabled="mutating || stale || !management?.trial_stopped || isOpen || !snapshot.manifest.generation_id || !!snapshot.availability.switch_pending_operation_id" @click="renewReadiness">{{ renewingReadiness ? '正在校验…' : '校验并签发资格' }}</button></div>
-        <div class="am-maintenance-row"><div><h3>后台试问</h3><p>{{ management?.trial_stopped ? '全部问答已被停止。运行条件验证通过后，可单独恢复后台试问。' : '普通对外关闭不影响试问；资格与维护保护仍然生效。' }}</p></div><button v-if="management?.trial_stopped" class="button-secondary" :disabled="mutating || stale || snapshot.readiness.status !== 'healthy'" @click="resumeTrial">恢复后台试问</button><NuxtLink v-else class="am-link" :to="viewLink('test')">前往试问</NuxtLink></div>
+        <div class="am-maintenance-row"><div><h3>后台试问</h3><p>{{ management?.trial_stopped ? '后台试问已暂停。运行条件验证通过后，可单独恢复；向访客开放时也会同步恢复。' : '普通对外关闭不影响试问；资格与维护保护仍然生效。' }}</p></div><button v-if="management?.trial_stopped" class="button-secondary" :disabled="mutating || stale || snapshot.readiness.status !== 'healthy'" @click="resumeTrial">恢复后台试问</button><NuxtLink v-else class="am-link" :to="viewLink('test')">前往试问</NuxtLink></div>
         <div class="am-maintenance-row"><div><h3>索引维护</h3><p>重建使用今日总预算，旧索引继续提供回答。切换后全部问答暂停，需要重新验证运行资格。</p><p v-if="snapshot.operation" class="assistant-operation">当前操作：{{ operationLabel(snapshot.operation.status) }}</p></div><div class="am-row-actions"><button class="button-secondary" :disabled="mutating || nonterminalOperation" @click="confirmRebuild">重建公开知识索引</button><button v-if="snapshot.operation?.status === 'ready_to_switch'" class="button-primary" :disabled="mutating" @click="confirmFinalize">切换到新索引</button></div></div>
         <div class="am-maintenance-row"><div><h3>紧急停止全部问答</h3><p>同时撤销访客和管理员执行，已发送的调用仍可能产生费用。</p></div><button class="am-danger" :disabled="mutating" @click="confirmEmergency">紧急停止全部问答</button></div>
         <h3 class="am-diagnostics-title">运行诊断</h3><div v-for="fact in facts" :key="fact.label" class="am-diagnostic"><strong>{{ fact.label }}</strong><span>{{ assistantFactLabel[fact.fact.status] }}{{ fact.fact.stale ? '（观察已过期）' : '' }}</span><code>{{ fact.fact.reason_code }}</code></div>
@@ -128,7 +128,7 @@ const renewReadiness = async () => {
   try {
     await mutate(() => apiFetch('/admin/assistant/readiness/renew', {
       method: 'POST', body: { expected_generation_id: current.manifest.generation_id, expected_version: current.availability.version },
-    }), '运行资格已通过校验，可分别恢复后台试问和对外开放。')
+    }), '运行资格已通过校验。向访客开放时会同步恢复后台试问，也可只恢复后台试问。')
   }
   finally { renewingReadiness.value = false }
 }
@@ -139,10 +139,10 @@ let action: () => Promise<unknown> = async () => {}
 const confirmAction = (title: string, body: string, callback: () => Promise<unknown>, danger = false) => { confirmation.value = { title, body, danger }; action = callback; confirmOpen.value = true }
 const confirmAvailability = () => {
   const enabled = !isOpen.value
-  confirmAction(enabled ? '向访客开放' : '关闭对外问答', enabled ? '开放后访客可以提问，费用计入今日预算。' : '关闭后拒绝访客新问题并隐藏入口；已发送调用可能仍产生费用，后台试问不受影响。', () => apiFetch('/admin/assistant/availability', { method: 'PATCH', body: { enabled, expected_version: snapshot.value!.availability.version } }))
+  confirmAction(enabled ? '向访客开放' : '关闭对外问答', enabled ? '开放后访客可以提问，同时恢复后台试问；问答费用计入今日预算。' : '关闭后拒绝访客新问题并隐藏入口；已发送调用可能仍产生费用，后台试问不受影响。', () => apiFetch('/admin/assistant/availability', { method: 'PATCH', body: { enabled, expected_version: snapshot.value!.availability.version } }))
 }
 const confirmRebuild = () => confirmAction('重建公开知识索引', '重建将使用今日总预算。新索引准备完成后，需要手动切换并重新验证资格。', () => apiFetch('/admin/assistant/index/rebuilds', { method: 'POST', body: {}, headers: { 'Idempotency-Key': key('rebuild') } }))
-const confirmFinalize = () => { const operation = snapshot.value?.operation; if (operation) confirmAction('切换到新索引', '切换会暂停全部问答。重新验证运行资格后，需分别恢复试问和对外开放。', () => apiFetch(`/admin/assistant/index/rebuilds/${operation.operation_id}/finalize`, { method: 'POST', body: { expected_version: operation.version }, headers: { 'Idempotency-Key': key('finalize') } })) }
+const confirmFinalize = () => { const operation = snapshot.value?.operation; if (operation) confirmAction('切换到新索引', '切换会暂停全部问答。重新验证运行资格后，可只恢复后台试问；向访客开放时会同步恢复试问。', () => apiFetch(`/admin/assistant/index/rebuilds/${operation.operation_id}/finalize`, { method: 'POST', body: { expected_version: operation.version }, headers: { 'Idempotency-Key': key('finalize') } })) }
 const confirmEmergency = () => confirmAction('紧急停止全部问答', '访客与管理员执行将同时撤销。已发送调用仍可能结算费用。', () => apiFetch('/admin/assistant/emergency-stop', { method: 'POST' }), true)
 const runConfirmed = async () => { if (await mutate(action, `${confirmation.value.title}：操作已完成。`)) confirmOpen.value = false }
 const budgetOpen = ref(false)

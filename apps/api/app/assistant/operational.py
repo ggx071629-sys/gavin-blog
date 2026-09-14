@@ -183,6 +183,14 @@ def enable_gate(conn, *, online, expected_version: int, now: datetime) -> dict[s
     )
     if cur.rowcount != 1:
         raise ApiException(409, "availability_version_conflict", "Availability version is stale.")
+    # Explicitly reopening a qualified assistant also restores the admin trial
+    # paused by an index switch. Keep the new admin epoch so old runs stay fenced.
+    # Both scopes commit together; a failed validation leaves both stopped.
+    from .admin_scope import validate_admin_binding
+
+    validate_admin_binding(
+        conn, settings=online.settings, generation=generation, now=now, resume=True,
+    )
     return gate_row(conn) or fail_closed_snapshot()
 
 

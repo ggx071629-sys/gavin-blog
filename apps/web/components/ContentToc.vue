@@ -1,6 +1,6 @@
 <template>
   <nav v-if="headings.length" class="content-toc" aria-label="文章目录">
-    <div data-focus-card class="content-toc-desktop">
+    <div ref="desktopToc" data-focus-card class="content-toc-desktop">
       <p class="content-toc-kicker">本页目录</p>
       <ol class="content-toc-list">
         <li v-for="heading in headings" :key="heading.slug" :class="{ 'content-toc-child': heading.level === 3 }">
@@ -54,6 +54,23 @@ const props = withDefaults(defineProps<{
 
 const activeSlug = ref(props.headings[0]?.slug || '')
 const progress = ref(0)
+const desktopToc = ref<HTMLElement | null>(null)
+
+const revealActiveHeading = () => {
+  const toc = desktopToc.value
+  const rail = toc?.closest<HTMLElement>('.reading-toc')
+  const active = toc?.querySelector<HTMLElement>('[data-active="true"]')
+  if (!toc?.getClientRects().length || !rail || !active || rail.scrollHeight <= rail.clientHeight) return
+
+  const railTop = rail.getBoundingClientRect().top + rail.clientTop
+  const top = railTop + 12
+  const bottom = railTop + rail.clientHeight - 12
+  const item = active.getBoundingClientRect()
+  if (item.top < top) rail.scrollTop += item.top - top
+  else if (item.bottom > bottom) rail.scrollTop += item.bottom - bottom
+}
+
+watch(activeSlug, revealActiveHeading, { flush: 'post' })
 
 const activeIndex = computed(() => {
   const index = props.headings.findIndex(heading => heading.slug === activeSlug.value)
@@ -103,13 +120,19 @@ const updateFromScroll = () => {
 
 onMounted(() => {
   updateFromScroll()
+  void nextTick(revealActiveHeading)
   window.addEventListener('scroll', updateFromScroll, { passive: true })
-  window.addEventListener('resize', updateFromScroll)
+  window.addEventListener('resize', updateFromResize)
 })
+
+const updateFromResize = () => {
+  updateFromScroll()
+  void nextTick(revealActiveHeading)
+}
 
 onUnmounted(() => {
   window.removeEventListener('scroll', updateFromScroll)
-  window.removeEventListener('resize', updateFromScroll)
+  window.removeEventListener('resize', updateFromResize)
 })
 
 watch(() => props.headings.map(heading => heading.slug).join('|'), () => {
