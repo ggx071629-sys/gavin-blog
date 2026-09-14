@@ -9,6 +9,13 @@ from langgraph.config import get_stream_writer
 from langgraph.graph import END, START, StateGraph
 
 from ..assistant_resume.storage import usable_version
+from .article_tools import (
+    ArticleToolSelection,
+    bind_article_tool_model,
+    execute_article_tool,
+    tool_prompt,
+    wants_article_tool,
+)
 from .constants import (
     ATTEMPT_SENDING,
     ATTEMPT_SUCCEEDED,
@@ -64,6 +71,7 @@ class AssistantState(TypedDict, total=False):
     current_path: str | None
     reference_source: dict[str, Any] | None
     reference_invalid: bool
+    article_tool: bool
     fencing_token: str
     fencing_epoch: int
     operational_epoch: int
@@ -98,6 +106,8 @@ def build_graph(online: Any):
                 result.code or CODE_PROMPT_BLOCKED,
                 result.message,
             )
+        if wants_article_tool(state['question']):
+            return {'article_tool': True, 'generation_count': 0, 'evidence': []}
         if code := scope_code(state['question']):
             message = ('召回片段不能证明全站完整清单或总数，请限定具体来源或范围。'
                        if code == 'completeness_unverified'
@@ -185,39 +195,44 @@ def build_graph(online: Any):
         if gate is not None:
             await asyncio.to_thread(gate.wait, 15)
 
-        db = online.content_session()
-        try:
-            reference = state.get('reference_source')
-            if reference and not reference_is_current(db, reference):
-                return await _terminal(
-                    online, state, TERMINAL_REFUSAL, 'clarification_required',
-                    '原指代来源已失效，请明确当前公开来源。',
-                )
-            evidence = hydrate_descriptors(db, list(state.get("evidence") or []))
-            resume_available = usable_version(db) is not None
-        finally:
-            db.close()
-        if len(evidence) != len(state.get("evidence") or []):
-            return await _terminal(
-                online,
-                state,
-                TERMINAL_REFUSAL,
-                CODE_INSUFFICIENT_EVIDENCE,
-                INSUFFICIENT_EVIDENCE_MESSAGE,
+        if state.get('article_tool'):
+            messages = tool_prompt(
+                state['question'], retry_reason=state.get('retry_reason'),
+                max_input=int(online.settings.assistant_chat_max_input_tokens),
+                max_output=int(online.settings.assistant_chat_max_output_tokens),
+                context_window=int(online.settings.assistant_chat_context_window_tokens),
             )
-        prompt = build_prompt(
-            question=state["question"],
-            evidence=evidence,
-            history=[],
-            reference_title=(state.get('reference_source') or {}).get('title'),
-            provider=online.chat,
-            max_input_tokens=int(online.settings.assistant_chat_max_input_tokens),
-            max_output_tokens=int(online.settings.assistant_chat_max_output_tokens),
-            context_window_tokens=int(online.settings.assistant_chat_context_window_tokens),
-            resume_available=resume_available,
-            retry_reason=state.get("retry_reason"),
-        )
-        if prompt is None:
+            selected_evidence = []
+        else:
+            db = online.content_session()
+            try:
+                reference = state.get('reference_source')
+                if reference and not reference_is_current(db, reference):
+                    return await _terminal(
+                        online, state, TERMINAL_REFUSAL, 'clarification_required',
+                        '原指代来源已失效，请明确当前公开来源。',
+                    )
+                evidence = hydrate_descriptors(db, list(state.get("evidence") or []))
+                resume_available = usable_version(db) is not None
+            finally:
+                db.close()
+            if len(evidence) != len(state.get("evidence") or []):
+                return await _terminal(
+                    online, state, TERMINAL_REFUSAL, CODE_INSUFFICIENT_EVIDENCE,
+                    INSUFFICIENT_EVIDENCE_MESSAGE,
+                )
+            prompt = build_prompt(
+                question=state["question"], evidence=evidence, history=[],
+                reference_title=(state.get('reference_source') or {}).get('title'),
+                provider=online.chat,
+                max_input_tokens=int(online.settings.assistant_chat_max_input_tokens),
+                max_output_tokens=int(online.settings.assistant_chat_max_output_tokens),
+                context_window_tokens=int(online.settings.assistant_chat_context_window_tokens),
+                resume_available=resume_available, retry_reason=state.get("retry_reason"),
+            )
+            messages = prompt.messages if prompt is not None else None
+            selected_evidence = [item.descriptor() for item in prompt.evidence] if prompt else []
+        if messages is None:
             return await _terminal(
                 online,
                 state,
@@ -226,8 +241,6 @@ def build_graph(online: Any):
                 "Retrieved evidence and question exceed the configured model input budget; "
                 "no further model request was sent.",
             )
-        messages = prompt.messages
-        selected_evidence = [item.descriptor() for item in prompt.evidence]
         if existing["status"] == ATTEMPT_SUCCEEDED and existing.get("parsed_json"):
             return {
                 "parsed": True,
@@ -282,7 +295,8 @@ def build_graph(online: Any):
             )
         call_started = time.perf_counter()
         try:
-            bound = bind_answer_model(online.chat)
+            bound = (bind_article_tool_model(online.chat) if state.get('article_tool')
+                     else bind_answer_model(online.chat))
             result = await bound.ainvoke(messages)
             if result is None or (
                 isinstance(result, dict)
@@ -383,6 +397,21 @@ def build_graph(online: Any):
             )
         import json
 
+        if state.get('article_tool'):
+            selection = ArticleToolSelection.model_validate_json(attempt['parsed_json'])
+            if selection.arguments is None and attempt.get('finish_reason') == 'stop':
+                return await _terminal(
+                    online, state, TERMINAL_REFUSAL, 'clarification_required',
+                    '可以查询最近发布或更新的公开文章（最多10篇），以及今天、本周、最近7天。'
+                    '请明确查询方式；当前工具不支持按主题筛选、任意日期范围或内容分析。',
+                )
+            if attempt.get('finish_reason') != 'tool_calls':
+                return await _terminal(
+                    online, state, TERMINAL_ERROR, 'output_invalid', GENERIC_ERROR_MESSAGE,
+                )
+            return await _terminal(
+                online, state, TERMINAL_ANSWER, 'answered', '', article_selection=selection,
+            )
         parsed = ModelAnswer.model_validate(json.loads(attempt["parsed_json"]))
         db = online.content_session()
         try:
@@ -462,7 +491,9 @@ def build_graph(online: Any):
         )
 
     def after_guard(state: AssistantState) -> str:
-        return END if state.get("terminal") else "construct_query"
+        if state.get('terminal'):
+            return END
+        return 'generate' if state.get('article_tool') else 'construct_query'
 
     def after_evidence(state: AssistantState) -> str:
         return END if state.get("terminal") else "generate"
@@ -516,7 +547,8 @@ def build_graph(online: Any):
     graph.add_node("validate", observed("validating", validate_node))
     graph.add_edge(START, "residual_guard")
     graph.add_conditional_edges(
-        "residual_guard", after_guard, {"construct_query": "construct_query", END: END}
+        "residual_guard", after_guard,
+        {"construct_query": "construct_query", "generate": "generate", END: END}
     )
     graph.add_edge("construct_query", "retrieve")
     graph.add_edge("retrieve", "evidence_gate")
@@ -641,6 +673,7 @@ async def _terminal(
     history: bool = False,
     descriptors: list[dict[str, Any]] | None = None,
     resume_notice: str | None = None,
+    article_selection: ArticleToolSelection | None = None,
 ) -> dict[str, Any]:
     if state.get("e5_query_overlong") and event_name in {TERMINAL_ANSWER, TERMINAL_REFUSAL}:
         notice = "问题较长，本次仅使用关键词检索公开资料。\n\n"
@@ -650,6 +683,20 @@ async def _terminal(
             code = "answered_lexical"
     identity = _identity(state)
     async with online.serialization.hold(identity.session_id):
+        if article_selection is not None:
+            # Read current public revisions at publication time, inside the
+            # existing session fence; no catalog snapshot enters checkpoints.
+            try:
+                with online.content_session() as db:
+                    catalog = execute_article_tool(
+                        db, article_selection, online.now(), state['question'],
+                    )
+                message = answer = catalog.text
+                citations, sources = catalog.citations, catalog.sources
+                history = True
+            except ValueError:
+                event_name, code = TERMINAL_ERROR, 'output_rejected'
+                message = GENERIC_ERROR_MESSAGE
         if descriptors is not None:
             db = online.content_session()
             try:
