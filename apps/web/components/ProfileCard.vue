@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <p v-if="profile.bio && variant !== 'intro'" class="sys-panel-bio">
+      <p v-if="profile.bio" class="sys-panel-bio">
         {{ profile.bio }}
       </p>
 
