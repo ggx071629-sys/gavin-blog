@@ -34,6 +34,22 @@ EN = re.compile(
     r"(?P<noun>articles?|posts?)(?: on (?:this|the) (?:site|blog))?",
     re.I,
 )
+CATALOG_ZH = re.compile(
+    rf'(?:请问|请)?(?:帮我)?(?:列出|看看|告诉我)?'
+    rf'(?:gavin|本站|站内|博客|你|作者|博主)?(?:都)?'
+    rf'(?:已)?(?:发布|发表|写|更新)(?:了|过)?(?:的)?'
+    rf'(?:有哪些|有什么|哪些|什么|哪几篇|几篇|有啥)?'
+    rf'(?:(?P<count>{COUNT})篇)?文章(?:有哪些|有什么|列表)?(?:呢|吗)?', re.I,
+)
+CATALOG_LIST = re.compile(
+    r'(?:请)?(?:列出|看看|告诉我)?(?:gavin|本站|站内|博客|你|作者|博主)?'
+    r'(?:的)?(?:文章(?:有哪些|有什么|列表|目录|清单)|(?:有哪些|有什么)文章)(?:呢|吗)?', re.I,
+)
+CATALOG_EN = re.compile(
+    r'(?:(?:what|which) (?:articles|posts) (?:has gavin|have you|has the author) '
+    r'(?:published|written)|(?:list|show)(?: me)? (?:gavin\x27s|your|the blog\x27s|the site\x27s) '
+    r'(?:articles|posts))', re.I,
+)
 
 
 @dataclass(frozen=True)
@@ -69,9 +85,24 @@ def _count(value: str | None, default: int) -> int:
     }[value]
 
 
+def catalog_shape(question: str) -> bool:
+    text = question.strip().rstrip('？?。.!！').strip()
+    return bool(CATALOG_ZH.fullmatch(re.sub(r'\s+', '', text))
+                or CATALOG_LIST.fullmatch(re.sub(r'\s+', '', text))
+                or CATALOG_EN.fullmatch(' '.join(text.split())))
+
+
 def parse_recent_articles(question: str) -> RecentArticleRequest | None:
     """Full matches only: never silently discard a topic, date or second task."""
     text = question.strip().rstrip("？?。.!！").strip()
+    compact = re.sub(r'\s+', '', text)
+    catalog = CATALOG_ZH.fullmatch(compact)
+    if catalog or CATALOG_LIST.fullmatch(compact) or CATALOG_EN.fullmatch(' '.join(text.split())):
+        count = _count(catalog['count'], 5) if catalog else 5
+        catalog_order: Order = 'updated' if '更新' in text else 'published'
+        return RecentArticleRequest(catalog_order, count) if count <= 10 else None
+    # Gavin is the site's author, not an arbitrary third-party name or filter.
+    text = re.sub(r'^(?:gavin|博主)', '作者', text, flags=re.I)
     zh = ZH.fullmatch(re.sub(r"\s+", "", text))
     if zh:
         limit = _count(zh["count"], 1 if zh["tail"] in ("是哪篇", "是哪一篇") else 5)

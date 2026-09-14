@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any
 
 from sqlalchemy.orm import Session
@@ -10,6 +10,12 @@ from ..assistant_index.retriever import RetrievalResult, retrieve
 from ..assistant_index.runtime import AssistantIndexRuntime
 from ..models import ArticleRevision, AssistantChunk, AssistantIndexGeneration
 from .preflight import scan_evidence
+from .question_intent import (
+    PERSONAL_SOURCES,
+    asks_personal_skills,
+    diverse_skill_evidence,
+    personal_priority,
+)
 
 
 @dataclass(frozen=True)
@@ -87,6 +93,7 @@ def hydrate_evidence(
     skip_dense: bool = False,
     current_path: str | None = None,
     max_chars: int,
+    question: str | None = None,
 ) -> HydratedRetrieval:
     result: RetrievalResult = retrieve(
         db,
@@ -109,8 +116,25 @@ def hydrate_evidence(
     isolated: list[str] = []
     evidence: list[Evidence] = []
     parts: dict[tuple[str, int, str], tuple[str, str]] = {}
-    used = 0
     ranked = list(result.candidates)
+    personal_question = asks_personal_skills(question or query)
+    if personal_question:
+        from ..assistant_index.retriever import RetrievalCandidate
+
+        # Directly include bounded personal sources from the active generation.
+        # They still pass the same live projection, version and injection checks below.
+        personal = db.query(AssistantChunk).filter(
+            AssistantChunk.generation_id == pointer_generation,
+            AssistantChunk.source_type.in_(PERSONAL_SOURCES),
+        ).order_by(AssistantChunk.ordinal, AssistantChunk.chunk_id).limit(64).all()
+        personal.sort(key=lambda c: personal_priority(
+            c.source_type, c.heading_path, c.page_content,
+        ))
+        seen = {c.chunk_id for c in personal}
+        ranked = [RetrievalCandidate(c.chunk_id, i + 1, ('personal',), 0.0)
+                  for i, c in enumerate(personal)] + [
+                      candidate for candidate in ranked if candidate.chunk_id not in seen
+                  ]
     if current_path:
         ranked.sort(
             key=lambda item: (0 if _path_matches(db, item.chunk_id, current_path) else 1, item.rank)
@@ -134,13 +158,9 @@ def hydrate_evidence(
         )):
             isolated.append(chunk.chunk_id)
             continue
-        remaining = max_chars - used
-        if remaining <= 0:
-            break
-        body = chunk.page_content if len(chunk.page_content) <= remaining else ""
+        body = chunk.page_content
         if not body:
             continue
-        used += len(body)
         key = (current.source_type, current.source_id, current.source_version)
         if key not in parts:
             parts[key] = _article_parts(db, current)
@@ -160,14 +180,23 @@ def hydrate_evidence(
                 content_role=_content_role(body, parts[key]),
             )
         )
-        if len(evidence) >= limit:
+    if personal_question:
+        evidence = diverse_skill_evidence(evidence, lambda item: item.source_type)
+    selected: list[Evidence] = []
+    used = 0
+    for item in evidence:
+        if len(item.body) > max_chars - used:
+            continue
+        selected.append(replace(item, alias=f'c{len(selected) + 1}'))
+        used += len(item.body)
+        if len(selected) >= limit:
             break
     degraded = result.degraded or skip_dense
     return HydratedRetrieval(
         result.status if not degraded else "degraded",
         degraded,
         generation.id if generation is not None else pointer_generation,
-        evidence,
+        selected,
         tuple(isolated),
         len(ranked),
     )

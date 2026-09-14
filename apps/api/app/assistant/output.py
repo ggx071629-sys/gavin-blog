@@ -6,6 +6,8 @@ from dataclasses import dataclass
 from .hydrate import Evidence
 from .providers import ModelAnswer
 from .quantities import canonical_quantities, invalid_quantity
+from .question_intent import PERSONAL_SOURCES, SKILLS, asks_personal_skills
+from .quote_refs import SOURCE_LABELS, SOURCE_LABELS_EN
 
 HTML_RE = re.compile(r"</?[a-zA-Z][^>]*>|<!--|<!DOCTYPE|<\?", re.I)
 IMAGE_RE = re.compile(r"!\[[^\]]*\]\([^)]+\)")
@@ -526,7 +528,23 @@ def _conflicts_supported(text: str, cited: list[str], evidence: list[Evidence]) 
     return True
 
 
-def _question_support(question: str, text: str, evidence: list[Evidence]) -> str | None:
+def _skill_support(text: str, cited: list[Evidence]) -> bool:
+    # A source heading can establish the topic of an unfamiliar technology.
+    return bool(any(SKILLS.search(item.heading_path) for item in cited)
+                or SKILLS.search(text) or re.search(
+                    r'掌握|使用|熟悉|具备|开发|编程|自动化|检索|测试|工程|理解|了解|学习|'
+                    r'语言|后端|前端|数据库|数据处理|'
+                    r'\b(?:develop\w*|automat\w*|uses?|knows?|implement\w*|retriev\w*)\b',
+                    text, re.I,
+                ))
+
+
+def _question_support(
+    question: str, text: str, evidence: list[Evidence], *, cited: list[Evidence] | None = None,
+) -> str | None:
+    if asks_personal_skills(question):
+        if not _skill_support(text, cited or evidence):
+            return 'relevance'
     notices = UNDOCUMENTED_RE.findall(text)
     factual_text = UNDOCUMENTED_RE.sub("", text)
     # An explicit configuration field cannot be answered with a different row
@@ -599,6 +617,10 @@ def validate_model_answer(
         text = block.text.strip()
         if not text:
             return "structure"
+        if text.endswith((':', '：')):
+            return 'incomplete'
+        if asks_personal_skills(question) and re.fullmatch(r'#{1,6}\s+[^\n]+', text):
+            return 'incomplete'
         if invalid_quantity(text):
             return "grounding"
         if _unsafe_structure(text):
@@ -638,13 +660,33 @@ def validate_model_answer(
             (aliases[s.citation_id], _support_context(aliases[s.citation_id].body, s.quote))
             for s in block.supports
         ]
-        if not _claims_supported(text, contexts):
+        claim_text = text
+        if asks_personal_skills(question):
+            kinds = {item.source_type for item, _ in contexts}
+            for labels_by_kind in (SOURCE_LABELS, SOURCE_LABELS_EN):
+                labels = {labels_by_kind.get(kind, '') for kind in kinds}
+                if len(labels) == 1 and (label := next(iter(labels))) and text.startswith(label):
+                    claim_text = text[len(label):]
+                    break
+            if claim_text == text and kinds - PERSONAL_SOURCES:
+                # A technical excerpt may supplement a skill overview, but it
+                # must not silently become a statement about the person's skills.
+                return 'relevance'
+            if any(item.content_role == 'metadata' for item, _ in contexts):
+                return 'relevance'
+            if re.fullmatch(r'#{1,6}\s+[^\n]+', claim_text.strip()):
+                return 'incomplete'
+            if kinds - PERSONAL_SOURCES and not _skill_support(
+                claim_text, [item for item, _ in contexts],
+            ):
+                return 'relevance'
+        if not _claims_supported(claim_text, contexts):
             return "grounding"
         if not _conflicts_supported(text, block.citation_ids, evidence):
             return "grounding"
     if not cited:
         return "citation"
-    if problem := _question_support(question, "\n".join(texts), evidence):
+    if problem := _question_support(question, "\n".join(texts), evidence, cited=cited):
         return problem
     rendered: list[str] = []
     citation_payload: list[dict[str, str]] = []

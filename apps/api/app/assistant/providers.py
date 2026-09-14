@@ -28,7 +28,7 @@ from .constants import (
     TEST_CHAT_MODEL,
     TEST_CHAT_MODEL_VERSION,
 )
-from .quote_refs import render_quote, resolve_quotes
+from .quote_refs import SOURCE_LABELS, SOURCE_LABELS_EN, render_quote, resolve_quotes
 
 
 class AnswerSupport(BaseModel):
@@ -129,6 +129,13 @@ class LocalDeepSeekChatOpenAI(ChatOpenAI):
 
     _evaluation_guard: Any = PrivateAttr(default=None)
 
+    def assistant_envelope_token_count(self, text: str) -> int:
+        if self.model_name != 'deepseek-flash':
+            raise ValueError('no pinned tokenizer for this model')
+        from .deepseek_tokenizer import token_ids
+
+        return len(token_ids(text))
+
     def _get_request_payload(self, input_: Any, *, stop=None, **kwargs: Any) -> dict:
         payload = super()._get_request_payload(input_, stop=stop, **kwargs)
         # ChatOpenAI normalizes max_tokens to max_completion_tokens internally.
@@ -167,7 +174,9 @@ def bind_answer_model(chat: BaseChatModel) -> Any:
         return [SystemMessage(content='\n\n'.join(policies)),
                 *(m for m in converted if not isinstance(m, SystemMessage))]
 
-    def validate(result: dict[str, Any], quotes: dict, english_command: bool) -> dict[str, Any]:
+    def validate(
+        result: dict[str, Any], quotes: dict, english_command: bool, labels: dict[str, str],
+    ) -> dict[str, Any]:
         raw = result.get("raw")
         try:
             # Re-parse the complete original content. LangChain's JSON parser can
@@ -219,6 +228,12 @@ def bind_answer_model(chat: BaseChatModel) -> Any:
                         if not support['quote'].startswith('@q:'):
                             raise ValueError('invalid quote reference') from None
                 parsed = resolve_quotes(ModelAnswer.model_validate(data), quotes)
+            for block in parsed.blocks:
+                source_labels = {labels.get(getattr(quotes, 'source_types', {}).get(cid, ''), '')
+                                 for cid in block.citation_ids}
+                if len(source_labels) == 1 and (label := next(iter(source_labels))):
+                    if not block.text.startswith(label):
+                        block.text = label + block.text
         except ValueError:
             return {"raw": raw, "parsed": None, "parsing_error": "invalid_answer_schema"}
         return {"raw": raw, "parsed": parsed, "parsing_error": None}
@@ -228,11 +243,15 @@ def bind_answer_model(chat: BaseChatModel) -> Any:
 
     def call(messages):
         return validate(wire.invoke(messages), getattr(messages, 'quotes', {}),
-                        getattr(messages, 'single_command', False))
+                        getattr(messages, 'single_command', False),
+                        (SOURCE_LABELS_EN if getattr(messages, 'answer_in_english', False)
+                         else SOURCE_LABELS) if getattr(messages, 'personal_skills', False) else {})
 
     async def acall(messages):
         return validate(await wire.ainvoke(messages), getattr(messages, 'quotes', {}),
-                        getattr(messages, 'single_command', False))
+                        getattr(messages, 'single_command', False),
+                        (SOURCE_LABELS_EN if getattr(messages, 'answer_in_english', False)
+                         else SOURCE_LABELS) if getattr(messages, 'personal_skills', False) else {})
 
     chain = RunnableLambda(call, afunc=acall)
     return chat._evaluation_guard.wrap(chain, chat) if chat._evaluation_guard else chain

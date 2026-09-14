@@ -1,7 +1,7 @@
 """Pinned, offline-only text tokenization for DeepSeek-V4.1-Flash.
 
 This counts text, not the provider's complete message template or billing usage.
-The prompt builder retains its conservative UTF-8 envelope bound.
+The prompt builder adds protocol headroom and falls back to a UTF-8 bound if unavailable.
 """
 from __future__ import annotations
 

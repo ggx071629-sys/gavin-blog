@@ -19,7 +19,7 @@ export function mapAssistantCode(code: string): AssistantNotice {
     case 'out_of_scope':
       return { kind: 'info', title: '超出回答范围', body: SCOPE }
     case 'insufficient_evidence':
-      return { kind: 'info', title: '证据不足', body: '本站已收录的公开内容不足以回答这个问题。' }
+      return { kind: 'info', title: '证据不足', body: '当前找到的公开资料还不能支持可靠回答。可以补充具体技术、项目或文章名称，帮助助手定位相关证据。' }
     case 'provider_result_unknown':
       return { kind: 'alert', title: '回答状态未确认', body: '服务未能确认上次回答是否完成。检查结果只读取已有回答，不会重新发送问题。', action: 'refresh' }
     case 'output_invalid':

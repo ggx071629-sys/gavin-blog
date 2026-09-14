@@ -46,6 +46,7 @@ from .output import validate_model_answer
 from .preflight import preflight_question
 from .prompt import build_prompt
 from .providers import LocalDeepSeekChatOpenAI, ModelAnswer, bind_answer_model
+from .question_intent import retrieval_question
 from .question_scope import preferred_page, scope_code
 from .reference_context import needs_reference, reference_is_current, resolve_reference
 from .store import (
@@ -89,6 +90,7 @@ class AssistantState(TypedDict, total=False):
     retry_reason: str | None
     candidate_count: int
     isolated_count: int
+    retrieval_recovery: bool
     terminal: dict[str, Any] | None
 
 
@@ -135,7 +137,12 @@ def build_graph(online: Any):
         # Sessions and synchronous clients remain entirely inside the worker.
         # Copy graph state: the worker returns descriptors, never mutates checkpoint state.
         worker_state = cast(AssistantState, dict(state))
-        return await online.retrieval_io.run(lambda: _retrieve_sync(online, worker_state))
+        if state.get('retrieval_recovery'):
+            # A second evidence pass uses local lexical/source retrieval only.
+            # Never resend a metered embedding or an unknown provider request.
+            worker_state['dense_skipped'] = True
+        result = await online.retrieval_io.run(lambda: _retrieve_sync(online, worker_state))
+        return {**result, 'retrieval_recovery': False}
 
     async def evidence_gate(state: AssistantState) -> dict[str, Any]:
         if state.get("terminal"):
@@ -437,6 +444,12 @@ def build_graph(online: Any):
             and finish == "stop"
         ):
             _diagnostic(online, state, "validating", "model_abstained")
+            if int(state.get('generation_count') or 0) < 2:
+                online.control.immediate(lambda conn: conn.execute(
+                    'UPDATE assistant_attempts SET parsed_json = NULL WHERE id = ?',
+                    (provider_attempt_id,),
+                ))
+                return {'parsed': None, 'retry_reason': 'relevance', 'retrieval_recovery': True}
             return await _terminal(
                 online,
                 state,
@@ -502,6 +515,8 @@ def build_graph(online: Any):
         if state.get("terminal"):
             return END
         if state.get("parsed") is None and int(state.get("generation_count") or 0) < 2:
+            if state.get('retrieval_recovery'):
+                return 'retrieve'
             return "generate"
         return END
 
@@ -554,7 +569,9 @@ def build_graph(online: Any):
     graph.add_edge("retrieve", "evidence_gate")
     graph.add_conditional_edges("evidence_gate", after_evidence, {"generate": "generate", END: END})
     graph.add_edge("generate", "validate")
-    graph.add_conditional_edges("validate", after_validate, {"generate": "generate", END: END})
+    graph.add_conditional_edges(
+        'validate', after_validate, {'generate': 'generate', 'retrieve': 'retrieve', END: END},
+    )
     return graph.compile(checkpointer=online.saver)
 
 
@@ -833,13 +850,14 @@ def _retrieve_sync(online, state: AssistantState) -> dict[str, Any]:
             if not reference_is_current(db, reference):
                 return {'reference_invalid': True, 'evidence': []}
     history_questions = [reference['title'] + ' ' + reference['public_path']] if reference else []
-    retrieval_query = _retrieval_query(state["question"], history_questions)
+    current_query = retrieval_question(state['question'])
+    retrieval_query = _retrieval_query(current_query, history_questions)
     vector = None
     skip = bool(state.get("dense_skipped"))
     overlong = False
     prepare = getattr(online.embeddings, "prepare_retrieval_query", None)
     if prepare is not None:
-        retrieval_query, overlong = prepare(state["question"], history_questions)
+        retrieval_query, overlong = prepare(current_query, history_questions)
         skip = skip or overlong
     query_attempt_id = state.get("query_attempt_id")
     if query_attempt_id and not skip:
@@ -873,10 +891,32 @@ def _retrieve_sync(online, state: AssistantState) -> dict[str, Any]:
             skip_dense=skip,
             current_path=preferred_page(state['question'], state.get('current_path'), reference),
             max_chars=online.settings.assistant_evidence_max_chars,
+            question=state['question'],
         )
+        recovered = list(hydrated.evidence)
+        if state.get('retrieval_recovery'):
+            # Preserve still-current dense hits from the first pass when adding
+            # lexical results; recovery must not lose their only useful source.
+            previous = hydrate_descriptors(db, list(state.get('evidence') or []))
+            seen = {item.chunk_id for item in previous}
+            recovered = [*previous, *(item for item in recovered if item.chunk_id not in seen)]
+            bounded = []
+            used = 0
+            for item in recovered:
+                if used + len(item.body) > online.settings.assistant_evidence_max_chars:
+                    continue
+                bounded.append(item)
+                used += len(item.body)
+                if len(bounded) >= online.settings.assistant_retrieve_limit:
+                    break
+            recovered = bounded
+            # Reassign aliases after merging to prevent cross-source c1 collisions.
+            from dataclasses import replace
+
+            recovered = [replace(item, alias=f'c{i + 1}') for i, item in enumerate(recovered)]
     finally:
         db.close()
-    evidence = [item.descriptor() for item in hydrated.evidence]
+    evidence = [item.descriptor() for item in recovered]
     if query_attempt_id:
         online.control.immediate(
             lambda conn: conn.execute(

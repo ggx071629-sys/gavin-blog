@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import timedelta, timezone
 
 POLICY_VERSION = "assistant-online-v2"
-ESTIMATOR_VERSION = "assistant-token-estimator-v2"
+ESTIMATOR_VERSION = "assistant-token-estimator-v3"
 PREFLIGHT_VERSION = "assistant-preflight-v1"
 SCHEMA_VERSION = "assistant-runtime-control-v4"
 BEIJING_TZ = timezone(timedelta(hours=8), name="Asia/Shanghai")
@@ -63,7 +63,7 @@ UNAVAILABLE_MESSAGE = "Public assistant is unavailable"
 GENERIC_REFUSAL_MESSAGE = "I can only discuss this site's published content and public profile."
 GENERIC_ERROR_MESSAGE = "The assistant could not complete this answer."
 INSUFFICIENT_EVIDENCE_MESSAGE = (
-    "Published evidence on this site is not sufficient to answer that question."
+    "The retrieved public evidence does not yet support a reliable answer to this question."
 )
 
 SAVER_TABLES = frozenset({"checkpoints", "writes"})

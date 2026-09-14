@@ -11,12 +11,25 @@ class QuoteMessages(list):
         self.quotes = quotes
         self.answer_in_english = False
         self.single_command = False
+        self.personal_skills = False
 
 
 class QuoteMap(dict):
     def __init__(self):
         super().__init__()
         self.projects = {}
+        self.source_types = {}
+
+
+SOURCE_LABELS = {
+    'profile': '个人资料自述：\n', 'about': '个人资料自述：\n', 'resume': '个人资料自述：\n',
+    'article': '文章内容：\n', 'project': '项目资料：\n',
+}
+SOURCE_LABELS_EN = {
+    'profile': 'Personal self-report:\n', 'about': 'Personal self-report:\n',
+    'resume': 'Personal self-report:\n', 'article': 'Article content:\n',
+    'project': 'Project records:\n',
+}
 
 
 def source_quotes(body: str, source_type: str = '') -> list[str]:
@@ -71,6 +84,8 @@ def source_quotes(body: str, source_type: str = '') -> list[str]:
             ) and '｜' not in lines[index]):
                 index += 1
         quote = ''.join(lines[start:index]).rstrip('\r\n')
+        if quote.rstrip().endswith((':', '：')):
+            continue  # An introduction to a following list is not a complete fact.
         if 0 < len(quote) <= 1200 and quote not in spans:
             spans.append(quote)
     return spans
@@ -82,6 +97,7 @@ def quote_index(evidence, question: str = ''):
     fields = re.findall(r'(?<![A-Za-z0-9_])[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)+', question)
     fields = [field for field in fields if any(field in item.body for item in evidence)]
     for item in evidence:
+        quotes.source_types[item.alias] = item.source_type
         for index, quote in enumerate(source_quotes(item.body, item.source_type)):
             if quote.strip().startswith('|') and fields and not any(re.search(
                 r'(?<![A-Za-z0-9_])' + re.escape(field) + r'(?![A-Za-z0-9_])', quote,
