@@ -1,0 +1,404 @@
+{
+  "schema_version": 2,
+  "task_id": "20261018-session-clock-consistency",
+  "created_at": "2026-10-18T08:11:31.164325+00:00",
+  "command": "python -m tools.harness verify 20261018-session-clock-consistency",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "f1339db584202e2defd3ffab33f8c23863721d77",
+    "active_spec_sha256": "5ec1ddb8007842b16ec01e73465a390257b921d8255c6188c7f60a7b9ac7924f",
+    "verification_contract_sha256": "d0aa64681edcfbe150486be6da5e8d1e109bd0ba6bbfaa0c3f9c1d6e7d9f25f2",
+    "gate_config_sha256": "3aa8d819e41fc216a7444a71c3cba0a549e3e6e81b51289742bdb6e2ac94bf85",
+    "documentation_contract_sha256": "4c4d7bc7d973a9fe24e2e5338a09e7c89ada84470cc7269af0c8eca9c0937f1f",
+    "documentation_targets_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "module_contract_sha256": "e00ff0b10a7127d83bb89f1a8fae468917f91747021ce24edbeafe80976a696d"
+  },
+  "documentation": {
+    "impact": "none",
+    "reason": "修复既有 UTC-aware 时间语义和会话列表时间不变量；响应字段、允许的 ISO 表示、认证与撤销规则、TTL、存储迁移和运维步骤均不改变。现行 UTC 决策及 API README 已说明 Z 与 UTC 偏移表示合法，无新增永久接口或操作合同。",
+    "targets": [],
+    "baseline_commit": null,
+    "target_blobs": {}
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "a5c983aa145f8af30f071dc9868a93f64a0a7406",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20261018-session-clock-consistency.json",
+      "sha256": "bd17049aaec4e368a1cee779fad04f3264924d6fd5ad03b4c958ffac784d5fc8",
+      "selected_cases": [
+        "M06-ACCOUNT-SESSION-01",
+        "M08-DOCS-01"
+      ],
+      "selected_refs": 2,
+      "excluded_cases": 403
+    },
+    "receipt": {
+      "run_id": "d1906fd57ea27576145f221447fe660d",
+      "identity": "dac28af62a00df1930e75cc0f8b06c25df0dcd30a4e062674dd4a1c57429b757",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 2422.588,
+      "plan_inputs": 829.921,
+      "execute_cleanup_and_input_recheck": 12111.064
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "e00ff0b10a7127d83bb89f1a8fae468917f91747021ce24edbeafe80976a696d",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M06-ACCOUNT-SESSION-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P0",
+            "scenario": "列表时间与当前标记、单个及其他撤销准确",
+            "expectations": [
+              {
+                "id": "M06-ACCOUNT-SESSION-01-E01",
+                "surface": "response",
+                "statement": "列表时间与当前标记、单个及其他撤销准确"
+              },
+              {
+                "id": "M06-ACCOUNT-SESSION-01-E02",
+                "surface": "forbidden",
+                "statement": "旧密码并发登录不得留下重置后的有效会话"
+              },
+              {
+                "id": "M06-ACCOUNT-SESSION-01-E03",
+                "surface": "response",
+                "statement": "A new login session initializes created_at and last_seen_at from one UTC-aware instant; later activity remains chronologically at or after creation when API times are parsed as aware datetimes."
+              },
+              {
+                "id": "M06-ACCOUNT-SESSION-01-E04",
+                "surface": "forbidden",
+                "statement": "An incrementing clock cannot create an initially reversed session; valid whole-second and fractional ISO timestamps cannot be judged by text order, while genuinely reversed or timezone-naive timestamps still fail the check."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_account_management.py",
+                "kind": "pytest",
+                "name": "test_session_list_activity_and_revoke_scopes",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-ACCOUNT-SESSION-01-E01",
+                  "M06-ACCOUNT-SESSION-01-E02",
+                  "M06-ACCOUNT-SESSION-01-E03",
+                  "M06-ACCOUNT-SESSION-01-E04"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_account_management.py",
+                "kind": "pytest",
+                "name": "test_concurrent_old_login_cannot_leave_session_after_reset",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-ACCOUNT-SESSION-01-E01",
+                  "M06-ACCOUNT-SESSION-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 5.177,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "240 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 305.762,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 110.282,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 1.036,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "1874 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1017.937,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "377 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 166.475,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 405 cases, 824 expectations, 1278 exact test references; contract sha256 e00ff0b10a71"
+      ],
+      "status": "passed",
+      "duration_ms": 716.666,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.873,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 11.502,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 80.65,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1"
+      ],
+      "duration_ms": 2719.553,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "d1906fd57ea27576145f221447fe660d",
+        "attempt_id": "0031d635e4a6543d0fc0dfeebee79b0c"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20261018-session-clock-consistency --gate api-tests",
+      "status": "passed",
+      "duration_ms": 6539.094,
+      "covers": [
+        "AC-1"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 530,
+        "selection_counts": {
+          "collected": 2,
+          "executed": 2
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_account_management.py",
+                "name": "test_session_list_activity_and_revoke_scopes"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_account_management.py",
+                "name": "test_concurrent_old_login_cannot_leave_session_after_reset"
+              }
+            ],
+            "duration_ms": 6125.397,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\f75029f1783812afe561a1083d0772cc624dbb4a13095ccd26aa5f3ef3fd2ba3\\artifacts\\d1906fd57ea27576145f221447fe660d\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "d1906fd57ea27576145f221447fe660d",
+        "attempt_id": "e96beba69f7944262d87a479b044b50e"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2494.362,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 14172.369,
+    "failures": []
+  },
+  "source_commit": "a5c983aa145f8af30f071dc9868a93f64a0a7406"
+}
