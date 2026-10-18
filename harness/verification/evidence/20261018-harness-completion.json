@@ -1,0 +1,3917 @@
+{
+  "schema_version": 2,
+  "task_id": "20261018-harness-completion",
+  "created_at": "2026-10-18T07:55:59.865303+00:00",
+  "command": "python -m tools.harness verify 20261018-harness-completion",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "harness-integrity",
+        "harness-tests"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "harness-tests",
+        "api-tests",
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "f55d7a2dfb89e8dc0331f00976783a429e1a9f49",
+    "active_spec_sha256": "45532e348d032dbdc2170104b7898c84ea5cd6c73c2a50a08200e82703cb360c",
+    "verification_contract_sha256": "c13c1a12f20530344e2d477db80ef86da2a6ac436f7c3bbf5017e35146be15c6",
+    "gate_config_sha256": "9150dfc14985e54a4f26c5cdddd9c34a9049f21b49d00bc909056b5c9dda27ce",
+    "documentation_contract_sha256": "129b8efb4a77346ee9cfe56a91858363593536f3657621af8355e8ebe04211db",
+    "documentation_targets_sha256": "9ebc1b3fc53b045b5de4a2c251fab7870c9d38ba9bb5ec1ea9559c5a6f015937",
+    "module_contract_sha256": "734574731fe6b6c7fb50631eb89cdeca4842be25b3a876cfc1aa710cf9600748"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "说明远端检出所需的文档、测试、CI依赖及结构验证和发布候选验证各自的范围，记录可复现入口与真实结果。",
+    "targets": [
+      "README.md",
+      "harness/docs/operations/release-readiness.md"
+    ],
+    "baseline_commit": "e5b396efbdaecf5dbd947a0c9235e899dfd0b226",
+    "target_blobs": {
+      "README.md": "bc8f89e4266a31d82c249e5950c8a6d327f55c7a",
+      "harness/docs/operations/release-readiness.md": "ba3796780f231ba9b67d17ba1b11e6d9bfacc811"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "ccf0b1c8ffaed04ce10e984b1034824951751fc1",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20261018-harness-completion.json",
+      "sha256": "4c53ba2dc4912e86c0352f7dc2b6bb4706a9b21327ce69891eb3affabcf41dae",
+      "selected_cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-PUBLIC-STATES-01",
+        "M02-DESK-LAYOUT-01",
+        "M02-STUDIO-SHELL-01",
+        "M06-RESUME-DOWNLOAD-01",
+        "M06-RESUME-DOWNLOAD-LIMITS-01",
+        "M06-RESUME-PARSE-01",
+        "M06-RESUME-PARSE-LIMITS-01",
+        "M06-RESUME-REFRESH-WORKER-01",
+        "M06-RESUME-STORAGE-01",
+        "M06-STUDIO-LOGIN-01",
+        "M07-STUDIO-COVERAGE-01",
+        "M07-STUDIO-PRODUCTION-01",
+        "M07-STUDIO-RESPONSIVE-01",
+        "M08-BROWSER-CONFIG-01",
+        "M08-DOCS-01",
+        "M08-GIT-UTF8-01",
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-MAPPING-01",
+        "M08-IMPACT-PREREQUISITES-01",
+        "M08-IMPACT-RUNNERS-01",
+        "M08-UNIT-CI-01",
+        "M08-UNIT-DEV-PROCESS-01",
+        "M08-UNIT-SUPPLY-CHAIN-01",
+        "M08-WINDOWS-PATHS-01",
+        "M09-LIVE-WORKER-01",
+        "M09-RESUME-CITATION-UI-01",
+        "M10-E5-LOCAL-01",
+        "M10-STUDIO-STATES-01",
+        "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01",
+        "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01"
+      ],
+      "selected_refs": 91,
+      "excluded_cases": 374
+    },
+    "receipt": {
+      "run_id": "e42703c1efc40c2632fc88204dc7f2bb",
+      "identity": "4cd3a2bfbc78acc7afe0edbdd19c60167b240862e55857bee8f16121fc4423b8",
+      "plan": [
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "web-quality",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 2477.525,
+      "plan_inputs": 1489.78,
+      "execute_cleanup_and_input_recheck": 838479.588
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "734574731fe6b6c7fb50631eb89cdeca4842be25b3a876cfc1aa710cf9600748",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "harness-integrity",
+          "harness-tests"
+        ],
+        "cases": [
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-IMPACT-MAPPING-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Current source inventory resolves to one owned unit and registered cases.",
+            "expectations": [
+              {
+                "id": "M08-IMPACT-MAPPING-01-E01",
+                "surface": "response",
+                "statement": "Every governed source has unique existing ownership."
+              },
+              {
+                "id": "M08-IMPACT-MAPPING-01-E02",
+                "surface": "forbidden",
+                "statement": "New unregistered sources cannot silently inherit a whole-application gate."
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact_registry.py",
+                "name": "test_current_governed_sources_have_unique_existing_ownership_and_cases",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-MAPPING-01-E01",
+                  "M08-IMPACT-MAPPING-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact_registry.py",
+                "name": "test_new_unknown_source_fails_without_expanding_test_scope",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-MAPPING-01-E01",
+                  "M08-IMPACT-MAPPING-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact_registry.py",
+                "name": "test_structure_resolves_repeated_paths_once_but_rechecks_next_invocation",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-MAPPING-01-E01",
+                  "M08-IMPACT-MAPPING-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "harness-tests",
+          "api-tests",
+          "web-quality",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M08-UNIT-CI-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "The release workflow binds triggers, history and reproducible dependencies.",
+            "expectations": [
+              {
+                "id": "M08-UNIT-CI-01-E01",
+                "surface": "response",
+                "statement": "Bounded triggers, pinned actions and sanitized telemetry persist."
+              },
+              {
+                "id": "M08-UNIT-CI-01-E02",
+                "surface": "forbidden",
+                "statement": "Unbounded CI execution or raw telemetry persistence is forbidden."
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_release_workflow_has_bounded_triggers_permissions_and_history",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-CI-01-E01",
+                  "M08-UNIT-CI-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_release_workflow_pins_actions_and_reconstructs_dependencies",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-CI-01-E01",
+                  "M08-UNIT-CI-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_release_workflow_persists_only_sanitized_telemetry",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-CI-01-E01",
+                  "M08-UNIT-CI-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_release_workflow_enforces_trusted_change_coverage_refs",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-CI-01-E01",
+                  "M08-UNIT-CI-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_ci_and_local_workspace_paths_are_governed",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-CI-01-E01",
+                  "M08-UNIT-CI-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_openapi_export_forces_lf_for_cross_platform_byte_comparison",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-CI-01-E01",
+                  "M08-UNIT-CI-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_native_optional_dependencies_are_locked_for_ci_and_windows",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-CI-01-E01",
+                  "M08-UNIT-CI-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_playwright_hydration_readiness_is_shared_bounded_and_not_retried",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-CI-01-E01",
+                  "M08-UNIT-CI-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-UNIT-SUPPLY-CHAIN-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "CI and lockfile supply-chain inputs are checked structurally.",
+            "expectations": [
+              {
+                "id": "M08-UNIT-SUPPLY-CHAIN-01-E01",
+                "surface": "response",
+                "statement": "Immutable actions, least privilege and locked installers are accepted."
+              },
+              {
+                "id": "M08-UNIT-SUPPLY-CHAIN-01-E02",
+                "surface": "forbidden",
+                "statement": "Mutable actions, write permissions and unlocked installers are rejected."
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_supply_chain.py",
+                "name": "test_safe_supply_chain_baseline_passes",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-SUPPLY-CHAIN-01-E01",
+                  "M08-UNIT-SUPPLY-CHAIN-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_supply_chain.py",
+                "name": "test_mutable_action_write_permission_and_dangerous_trigger_fail",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-SUPPLY-CHAIN-01-E01",
+                  "M08-UNIT-SUPPLY-CHAIN-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_supply_chain.py",
+                "name": "test_unlocked_installers_fail",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-SUPPLY-CHAIN-01-E01",
+                  "M08-UNIT-SUPPLY-CHAIN-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_supply_chain.py",
+                "name": "test_missing_or_untrusted_lockfiles_fail",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-SUPPLY-CHAIN-01-E01",
+                  "M08-UNIT-SUPPLY-CHAIN-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_supply_chain.py",
+                "name": "test_httpx_is_a_runtime_dependency_not_a_dev_only_dependency",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-SUPPLY-CHAIN-01-E01",
+                  "M08-UNIT-SUPPLY-CHAIN-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-IMPACT-RUNNERS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Canonical exact runners collect and execute the same restricted test identities.",
+            "expectations": [
+              {
+                "id": "M08-IMPACT-RUNNERS-01-E01",
+                "surface": "response",
+                "statement": "Pytest, Vitest and Playwright selectors retain exact identity and selected counts."
+              },
+              {
+                "id": "M08-IMPACT-RUNNERS-01-E02",
+                "surface": "forbidden",
+                "statement": "Collection never writes source files or accepts skipped, duplicate or unselected identities."
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_vitest_collection_keeps_optional_json_output_after_all_selectors",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-RUNNERS-01-E01",
+                  "M08-IMPACT-RUNNERS-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_selected_javascript_collection_rejects_missing_duplicate_and_disabled",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-RUNNERS-01-E01",
+                  "M08-IMPACT-RUNNERS-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_javascript_file_and_name_selectors_do_not_form_cross_products",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-RUNNERS-01-E01",
+                  "M08-IMPACT-RUNNERS-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_playwright_binds_selected_file_config_project_without_suite_wrapper",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-RUNNERS-01-E01",
+                  "M08-IMPACT-RUNNERS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-IMPACT-PREREQUISITES-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Selected runners prepare only the prerequisites their selected tests need.",
+            "expectations": [
+              {
+                "id": "M08-IMPACT-PREREQUISITES-01-E01",
+                "surface": "response",
+                "statement": "Missing build artifacts are rebuilt for selected previews and E2E data stays inside isolation."
+              },
+              {
+                "id": "M08-IMPACT-PREREQUISITES-01-E02",
+                "surface": "forbidden",
+                "statement": "Failed prerequisites cannot launch dependent tests and default execution cannot scan installed distributions."
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_prerequisites.py",
+                "name": "test_failed_preview_build_prevents_selected_browser_execution",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-PREREQUISITES-01-E01",
+                  "M08-IMPACT-PREREQUISITES-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_prerequisites.py",
+                "name": "test_missing_preview_artifact_rebuilds_only_for_selected_quality_config",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-PREREQUISITES-01-E01",
+                  "M08-IMPACT-PREREQUISITES-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_prerequisites.py",
+                "name": "test_selected_browser_runtime_is_cleaned_without_building_other_configs",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-PREREQUISITES-01-E01",
+                  "M08-IMPACT-PREREQUISITES-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_prerequisites.py",
+                "name": "test_default_same_process_input_identity_never_reads_installed_distributions",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-PREREQUISITES-01-E01",
+                  "M08-IMPACT-PREREQUISITES-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_prerequisites.py",
+                "name": "test_reuse_dependency_probe_failure_has_bounded_diagnostic",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-PREREQUISITES-01-E01",
+                  "M08-IMPACT-PREREQUISITES-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_prerequisites.py",
+                "name": "test_same_process_resolution_rechecks_head_source_and_runtime_without_replanning",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-PREREQUISITES-01-E01",
+                  "M08-IMPACT-PREREQUISITES-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-IMPACT-EXECUTION-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P0",
+            "scenario": "Exercise execution contracts in test_verification_resume.py",
+            "expectations": [
+              {
+                "id": "M08-IMPACT-EXECUTION-01-ALLOW",
+                "surface": "state",
+                "statement": "The execution regression suite accepts supported inputs and records valid outcomes."
+              },
+              {
+                "id": "M08-IMPACT-EXECUTION-01-DENY",
+                "surface": "forbidden",
+                "statement": "The execution regression suite rejects unsupported or inconsistent inputs without false success."
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_preflight_failure_starts_zero_product_gates",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_resume_only_failed_and_unrun_gates_and_preserves_failure",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_latest_failure_blocks_older_success_and_fresh_executes_all",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_release_always_requires_execution",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_authenticated_evidence_rejects_tampering_missing_key_and_input_drift",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_cleanup_failure_and_interrupt_invalidate_attempts_and_lock_is_exclusive",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_close_consumes_attestation_without_gates_or_collectors",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_crashed_running_attempt_is_recovered_without_fallback",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_dependency_content_and_controlled_environment_identity",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_close_recovery_restores_complete_asset_set",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_port_conflict_is_reported_before_execution_without_killing",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_bundle_skips_explicit_child_only_after_authentic_stage_proof",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_failure_logs_and_bounded_artifacts_are_retained",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_close_rolls_back_if_inputs_change_during_post_checks[head]",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_close_rolls_back_if_inputs_change_during_post_checks[evidence]",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_close_asset_checks_never_load_collector",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_workspace_link_outputs_do_not_change_installed_dependency_identity",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_invalidation_reasons_compare_canonical_mapping_values",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-EXECUTION-01-ALLOW",
+                  "M08-IMPACT-EXECUTION-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-UNIT-DEV-PROCESS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "The development process supervisor shuts down its owned process tree.",
+            "expectations": [
+              {
+                "id": "M08-UNIT-DEV-PROCESS-01-E01",
+                "surface": "response",
+                "statement": "The parent and its descendant stop on shutdown."
+              },
+              {
+                "id": "M08-UNIT-DEV-PROCESS-01-E02",
+                "surface": "forbidden",
+                "statement": "Owned descendants must not remain running after shutdown."
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_assistant_dev_process.py",
+                "name": "test_assistant_shutdown_stops_parent_and_descendant",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-UNIT-DEV-PROCESS-01-E01",
+                  "M08-UNIT-DEV-PROCESS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-WINDOWS-PATHS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Nuxt generated tsconfig and ESLint module imports remain usable across Windows drive paths.",
+            "expectations": [
+              {
+                "id": "M08-WINDOWS-PATHS-01-E01",
+                "surface": "state",
+                "statement": "Broken ./D:/ tsconfig paths normalize and generated ESLint Windows imports become encoded file URLs; repeated normalization is idempotent."
+              },
+              {
+                "id": "M08-WINDOWS-PATHS-01-E02",
+                "surface": "forbidden",
+                "statement": "Relative imports, existing file URLs and ordinary data strings cannot be rewritten as module paths."
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_windows_generated_paths.py",
+                "name": "test_windows_generated_paths_preserve_urls_and_encode_eslint_imports",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-WINDOWS-PATHS-01-E01",
+                  "M08-WINDOWS-PATHS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-LIVE-WORKER-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Managed worker reads real .env.e5, validates settings, runs against its database and closes resources on stop; existing launcher reuse and owner-stop behavior hold.",
+            "expectations": [
+              {
+                "id": "M09-LIVE-WORKER-01-E01",
+                "surface": "response",
+                "statement": "Managed worker reads real .env.e5, validates settings, runs against its database and closes resources on stop; existing launcher reuse and owner-stop behavior hold."
+              },
+              {
+                "id": "M09-LIVE-WORKER-01-E02",
+                "surface": "forbidden",
+                "statement": "Disabled worker cannot open the database; duplicate ready managers and unowned process termination are forbidden."
+              },
+              {
+                "id": "M09-LIVE-WORKER-01-E03",
+                "surface": "state",
+                "statement": "A launcher invokes the manager spawn exactly once with the hidden Windows and new-process-group flags in both the early-exit and reported-failure paths, including when tests run on another platform."
+              },
+              {
+                "id": "M09-LIVE-WORKER-01-E04",
+                "surface": "forbidden",
+                "statement": "An early manager exit cannot wait through the full startup timeout, and a reported terminal failure cannot be printed more than once."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_local_launcher.py",
+                "kind": "pytest",
+                "name": "test_managed_worker_uses_real_config_and_cleans_resources",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LIVE-WORKER-01-E01",
+                  "M09-LIVE-WORKER-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_launcher.py",
+                "kind": "pytest",
+                "name": "test_ready_instance_is_reused",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LIVE-WORKER-01-E01",
+                  "M09-LIVE-WORKER-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_launcher.py",
+                "kind": "pytest",
+                "name": "test_stop_without_owner_explains_last_failure",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LIVE-WORKER-01-E01",
+                  "M09-LIVE-WORKER-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_local_launcher.py",
+                "name": "test_manager_early_exit_does_not_wait_four_minutes",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LIVE-WORKER-01-E03",
+                  "M09-LIVE-WORKER-01-E04"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_local_launcher.py",
+                "name": "test_start_prints_terminal_failure_once",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LIVE-WORKER-01-E03",
+                  "M09-LIVE-WORKER-01-E04"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M10-E5-LOCAL-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "真实检索入口和既有Worker切换",
+            "expectations": [
+              {
+                "id": "M10-E5-LOCAL-01-E01",
+                "surface": "response",
+                "statement": "开发配置、重建检索与引用版本过滤可观测"
+              },
+              {
+                "id": "M10-E5-LOCAL-01-E02",
+                "surface": "forbidden",
+                "statement": "真实入口不能启用Chat/gate，失效内容不能返回"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_local_e5.py",
+                "kind": "pytest",
+                "name": "test_local_mode_configuration_rejects_online_and_identity_drift",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-LOCAL-01-E01",
+                  "M10-E5-LOCAL-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_index.py",
+                "kind": "pytest",
+                "name": "test_worker_rebuild_retriever_and_staleness",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-LOCAL-01-E01",
+                  "M10-E5-LOCAL-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_index.py",
+                "kind": "pytest",
+                "name": "test_retriever_degrades_without_dense_and_is_not_ready_without_fts",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-LOCAL-01-E01",
+                  "M10-E5-LOCAL-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "kind": "pytest",
+                "name": "test_rebuild_request_is_durable_and_finalize_leaves_gate_disabled",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-LOCAL-01-E01",
+                  "M10-E5-LOCAL-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_local_e5.py",
+                "kind": "pytest",
+                "name": "test_repeated_rebuild_reuses_ready_staging",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-E5-LOCAL-01-E01",
+                  "M10-E5-LOCAL-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-DOWNLOAD-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P0",
+            "scenario": "仅可信域逐跳校验后固定公网IP，保留TLS原主机校验。",
+            "expectations": [
+              {
+                "id": "M06-RESUME-DOWNLOAD-01-E01",
+                "surface": "response",
+                "statement": "可信PDF可取得完整字节/hash，TLS固定原主机并连接已校验地址。"
+              },
+              {
+                "id": "M06-RESUME-DOWNLOAD-01-E02",
+                "surface": "forbidden",
+                "statement": "非法域/私网、超限/超时被拒绝，URL秘密不进入命令行，代理和应用密钥不传入子进程。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "kind": "pytest",
+                "name": "test_trusted_download_pins_each_redirect_and_preserves_tls_hostname",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-DOWNLOAD-01-E01",
+                  "M06-RESUME-DOWNLOAD-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "kind": "pytest",
+                "name": "test_untrusted_targets_and_mixed_dns_are_rejected_without_connecting",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-DOWNLOAD-01-E01",
+                  "M06-RESUME-DOWNLOAD-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-DOWNLOAD-LIMITS-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P0",
+            "scenario": "PDF类型/字节/跳转及子进程总截止生效，环境与错误不泄密。",
+            "expectations": [
+              {
+                "id": "M06-RESUME-DOWNLOAD-LIMITS-01-E01",
+                "surface": "response",
+                "statement": "可信PDF可取得完整字节/hash，TLS固定原主机并连接已校验地址。"
+              },
+              {
+                "id": "M06-RESUME-DOWNLOAD-LIMITS-01-E02",
+                "surface": "forbidden",
+                "statement": "非法域/私网、超限/超时被拒绝，URL秘密不进入命令行，代理和应用密钥不传入子进程。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "kind": "pytest",
+                "name": "test_download_file_redirect_and_retry_limits",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-DOWNLOAD-LIMITS-01-E01",
+                  "M06-RESUME-DOWNLOAD-LIMITS-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "kind": "pytest",
+                "name": "test_download_child_environment_hash_and_real_deadline",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-DOWNLOAD-LIMITS-01-E01",
+                  "M06-RESUME-DOWNLOAD-LIMITS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-PARSE-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Text PDF extraction preserves pages and rejects unsupported content.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-PARSE-01-E01",
+                "surface": "response",
+                "statement": "Text PDF extraction preserves pages and rejects unsupported content."
+              },
+              {
+                "id": "M06-RESUME-PARSE-01-E02",
+                "surface": "forbidden",
+                "statement": "Unsupported or unbounded parsing must never yield usable evidence."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_parse.py",
+                "kind": "pytest",
+                "name": "test_pdf_text_pages_and_unsupported_files",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-PARSE-01-E01",
+                  "M06-RESUME-PARSE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-PARSE-LIMITS-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Real child process enforces resource and IO boundaries and is reaped on deadline.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-PARSE-LIMITS-01-E01",
+                "surface": "response",
+                "statement": "Real child process enforces resource and IO boundaries and is reaped on deadline."
+              },
+              {
+                "id": "M06-RESUME-PARSE-LIMITS-01-E02",
+                "surface": "forbidden",
+                "statement": "Unsupported or unbounded parsing must never yield usable evidence."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_parse.py",
+                "kind": "pytest",
+                "name": "test_parser_memory_and_io_are_enforced_in_real_process",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-PARSE-LIMITS-01-E01",
+                  "M06-RESUME-PARSE-LIMITS-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_parse.py",
+                "kind": "pytest",
+                "name": "test_parser_deadline_and_unavailable_boundary",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-PARSE-LIMITS-01-E01",
+                  "M06-RESUME-PARSE-LIMITS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-STORAGE-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Bounded content cache, migration, same-hash reuse and binding revocation.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-STORAGE-01-E01",
+                "surface": "response",
+                "statement": "Bounded content cache, migration, same-hash reuse and binding revocation."
+              },
+              {
+                "id": "M06-RESUME-STORAGE-01-E02",
+                "surface": "forbidden",
+                "statement": "Revoked, failed or superseded resume versions must never be usable or overwrite a current version."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_storage.py",
+                "kind": "pytest",
+                "name": "test_resume_cache_reuse_binding_revocation_and_migration",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-STORAGE-01-E01",
+                  "M06-RESUME-STORAGE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-RESUME-REFRESH-WORKER-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Worker imports outside write locks, drops replaced work, reuses unchanged PDFs and has no timer.",
+            "expectations": [
+              {
+                "id": "M06-RESUME-REFRESH-WORKER-01-E01",
+                "surface": "response",
+                "statement": "Worker imports outside write locks, drops replaced work, reuses unchanged PDFs and has no timer."
+              },
+              {
+                "id": "M06-RESUME-REFRESH-WORKER-01-E02",
+                "surface": "forbidden",
+                "statement": "GET cannot trigger import, late work cannot revive old content, and attempts cannot continue indefinitely."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_worker_import_manual_reuse_no_timer_and_replacement_during_download",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-WORKER-01-E01",
+                  "M06-RESUME-REFRESH-WORKER-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "kind": "pytest",
+                "name": "test_resume_worker_bootstraps_existing_url_and_parse_failure_keeps_evidence_paused",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-WORKER-01-E01",
+                  "M06-RESUME-REFRESH-WORKER-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_index.py",
+                "kind": "pytest",
+                "name": "test_worker_rebuild_retriever_and_staleness",
+                "gate": "api-tests",
+                "covers": [
+                  "M06-RESUME-REFRESH-WORKER-01-E01",
+                  "M06-RESUME-REFRESH-WORKER-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "M10.qualification: assistant_qualification_profile scenarios at the existing module boundary.",
+            "expectations": [
+              {
+                "id": "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01-E01",
+                "surface": "response",
+                "statement": "profile is strict canonical and zero call; profile digest changes for relevant drift"
+              },
+              {
+                "id": "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01-E02",
+                "surface": "forbidden",
+                "statement": "profile rejects unknown fields and secret values; profile rejects missing required soak or invalidation case"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_qualification_profile.py",
+                "name": "test_profile_is_strict_canonical_and_zero_call",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01-E01",
+                  "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_qualification_profile.py",
+                "name": "test_profile_rejects_unknown_fields_and_secret_values",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01-E01",
+                  "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_qualification_profile.py",
+                "name": "test_profile_rejects_missing_required_soak_or_invalidation_case",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01-E01",
+                  "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_qualification_profile.py",
+                "name": "test_profile_digest_changes_for_relevant_drift",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01-E01",
+                  "M10-UNIT-ASSISTANT-QUALIFICATION-PROFILE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "M10.index: Chinese and English natural questions reach the lexical branch of hybrid retrieval.",
+            "expectations": [
+              {
+                "id": "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E01",
+                "surface": "response",
+                "statement": "a Chinese substring, a Chinese natural question, an English natural question, a code identifier and an exact term recall their documents through the precise, relaxed, then legacy match order, and a generation indexed before the lexical projection keeps its previous recall"
+              },
+              {
+                "id": "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E02",
+                "surface": "forbidden",
+                "statement": "an unrelated question must not be recalled, and an un-rebuilt generation must not be reported as already answering Chinese substring questions"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_lexical_projection_recalls_chinese_substrings_and_natural_questions",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E01",
+                  "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_legacy_fts_rows_stay_queryable_until_the_index_is_rebuilt",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E01",
+                  "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_retriever_recalls_a_chinese_substring_from_the_real_index",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-UNIT-ASSISTANT-LEXICAL-RECALL-01-E01"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M07-STUDIO-PRODUCTION-01",
+            "module_id": "M07",
+            "module_name": "内容发现输出",
+            "priority": "P1",
+            "scenario": "生产构建保持单列登录、当前页面标题、键盘导航、触控和 WCAG A/AA。",
+            "expectations": [
+              {
+                "id": "M07-STUDIO-PRODUCTION-01-E01",
+                "surface": "user_visible",
+                "statement": "生产构建保持单列登录、当前页面标题、键盘导航、触控和 WCAG A/AA。"
+              },
+              {
+                "id": "M07-STUDIO-PRODUCTION-01-E02",
+                "surface": "forbidden",
+                "statement": "不允许横向溢出、自动无障碍违规、错误页面或失效操作。"
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "kind": "playwright",
+                "name": "q1",
+                "gate": "web-quality",
+                "covers": [
+                  "M07-STUDIO-PRODUCTION-01-E01",
+                  "M07-STUDIO-PRODUCTION-01-E02"
+                ]
+              },
+              {
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "kind": "playwright",
+                "name": "q2",
+                "gate": "web-quality",
+                "covers": [
+                  "M07-STUDIO-PRODUCTION-01-E01",
+                  "M07-STUDIO-PRODUCTION-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-BROWSER-CONFIG-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Playwright configurations preserve isolated server inputs and validate alternate browser ports.",
+            "expectations": [
+              {
+                "id": "M08-BROWSER-CONFIG-01-E01",
+                "surface": "state",
+                "statement": "Development, failure and assistant browser servers retain explicit build directories, trusted loopback settings and per-run roots; a valid alternate Web port remains usable."
+              },
+              {
+                "id": "M08-BROWSER-CONFIG-01-E02",
+                "surface": "forbidden",
+                "statement": "Ambient server reuse, trusted arbitrary forwarded IPs, invalid ports and API/Web port collisions cannot silently pass the configuration boundary."
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/playwright-config.test.ts",
+                "name": "keeps isolated worktree servers independent from local state",
+                "gate": "web-quality",
+                "covers": [
+                  "M08-BROWSER-CONFIG-01-E01",
+                  "M08-BROWSER-CONFIG-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/playwright-config.test.ts",
+                "name": "accepts an alternate Web port and rejects invalid or conflicting values",
+                "gate": "web-quality",
+                "covers": [
+                  "M08-BROWSER-CONFIG-01-E01",
+                  "M08-BROWSER-CONFIG-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-GIT-UTF8-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Git paths and source drift remain readable under a non-UTF-8 Windows locale.",
+            "expectations": [
+              {
+                "id": "M08-GIT-UTF8-01-E01",
+                "surface": "state",
+                "statement": "A real Git repository with Chinese paths yields exact UTF-8 NUL-separated changed paths, source drift entries and its current commit hash under a cp936 locale."
+              },
+              {
+                "id": "M08-GIT-UTF8-01-E02",
+                "surface": "forbidden",
+                "statement": "The host default encoding cannot corrupt path identities or turn successful Git output into a missing stdout value."
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_product_verification.py",
+                "name": "test_git_text_boundaries_decode_chinese_paths_as_utf8_under_gbk_locale",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-GIT-UTF8-01-E01",
+                  "M08-GIT-UTF8-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M01-CARD-FOCUS-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "Public card families share theme-colored feedback and atlas path linkage.",
+            "expectations": [
+              {
+                "id": "M01-CARD-FOCUS-01-ALLOW",
+                "surface": "user_visible",
+                "statement": "Public card families share theme-colored feedback and atlas path linkage."
+              },
+              {
+                "id": "M01-CARD-FOCUS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Hover must not move cards, block links, or light the enclosing atlas."
+              },
+              {
+                "id": "M01-CARD-FOCUS-01-ASSISTANT",
+                "surface": "user_visible",
+                "statement": "Teleported assistant welcome and source cards support focus feedback and source navigation."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "kind": "playwright",
+                "name": "public cards share stable themed feedback across all page families",
+                "gate": "e2e",
+                "covers": [
+                  "M01-CARD-FOCUS-01-ALLOW",
+                  "M01-CARD-FOCUS-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "kind": "playwright",
+                "name": "teleported assistant cards share public focus feedback",
+                "gate": "e2e",
+                "covers": [
+                  "M01-CARD-FOCUS-01-ASSISTANT"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M01-PUBLIC-STATES-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "phase three list loading and empty states remain distinct",
+            "expectations": [
+              {
+                "id": "M01-PUBLIC-STATES-01-E01",
+                "surface": "user_visible",
+                "statement": "Successful empty lists stay browsable; pending list changes expose aria-busy and loading status; SSR preserves 404/500/503 and taxonomy-only degradation."
+              },
+              {
+                "id": "M01-PUBLIC-STATES-01-E02",
+                "surface": "forbidden",
+                "statement": "Pending content and service failures cannot masquerade as a successful empty 200 list."
+              }
+            ],
+            "required_gates": [
+              "e2e",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/public-reading.spec.ts",
+                "name": "phase three list loading and empty states remain distinct",
+                "gate": "e2e",
+                "covers": [
+                  "M01-PUBLIC-STATES-01-E01",
+                  "M01-PUBLIC-STATES-01-E02"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "public SSR preserves upstream failures instead of rendering empty 200 pages",
+                "gate": "web-quality",
+                "covers": [
+                  "M01-PUBLIC-STATES-01-E01",
+                  "M01-PUBLIC-STATES-01-E02"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "successful empty data stays 200 while details distinguish 404 and 500",
+                "gate": "web-quality",
+                "covers": [
+                  "M01-PUBLIC-STATES-01-E01",
+                  "M01-PUBLIC-STATES-01-E02"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "articles list stays 200 when taxonomy fails",
+                "gate": "web-quality",
+                "covers": [
+                  "M01-PUBLIC-STATES-01-E01",
+                  "M01-PUBLIC-STATES-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M07-STUDIO-COVERAGE-01",
+            "module_id": "M07",
+            "module_name": "内容发现输出",
+            "priority": "P1",
+            "scenario": "核对二十个真实写作台入口与同主题视觉基线",
+            "expectations": [
+              {
+                "id": "M07-STUDIO-COVERAGE-01-E01",
+                "surface": "user_visible",
+                "statement": "核对二十个真实写作台入口与同主题视觉基线"
+              },
+              {
+                "id": "M07-STUDIO-COVERAGE-01-E02",
+                "surface": "forbidden",
+                "statement": "不允许遗漏入口、错误页面或混入公开页面主题。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "kind": "playwright",
+                "name": "c",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-COVERAGE-01-E01",
+                  "M07-STUDIO-COVERAGE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M07-STUDIO-RESPONSIVE-01",
+            "module_id": "M07",
+            "module_name": "内容发现输出",
+            "priority": "P1",
+            "scenario": "二十页双主题响应式与键盘失败状态验收",
+            "expectations": [
+              {
+                "id": "M07-STUDIO-RESPONSIVE-01-E01",
+                "surface": "user_visible",
+                "statement": "二十页双主题六视口可读且主内容 WCAG A/AA 扫描通过。"
+              },
+              {
+                "id": "M07-STUDIO-RESPONSIVE-01-E02",
+                "surface": "forbidden",
+                "statement": "不允许横向溢出、标题丢失、浏览器异常或主内容无障碍违规。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "kind": "playwright",
+                "name": "r",
+                "gate": "e2e",
+                "covers": [
+                  "M07-STUDIO-RESPONSIVE-01-E01",
+                  "M07-STUDIO-RESPONSIVE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M02-STUDIO-SHELL-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "Reference desktop and mobile shell preserves navigation, theme, focus, logout and local icons.",
+            "expectations": [
+              {
+                "id": "M02-STUDIO-SHELL-01-E01",
+                "surface": "user_visible",
+                "statement": "Responsive sidebar dimensions, ten local navigation icons including account security, active paths and both theme colors match the selected shell; controls remain reachable at short heights."
+              },
+              {
+                "id": "M02-STUDIO-SHELL-01-E02",
+                "surface": "forbidden",
+                "statement": "No horizontal overflow, missing icon, axe violation, trapped background or residual scroll lock after Escape, route or breakpoint close; failed logout remains visible and real retry succeeds."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/studio-shell.spec.ts",
+                "name": "shell",
+                "gate": "e2e",
+                "covers": [
+                  "M02-STUDIO-SHELL-01-E01",
+                  "M02-STUDIO-SHELL-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M10-STUDIO-STATES-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "Interrupted trial and long synchronization lists preserve real pending/error and pagination semantics.",
+            "expectations": [
+              {
+                "id": "M10-STUDIO-STATES-01-ALLOW",
+                "surface": "response",
+                "statement": "Stop retains pending/cost notice; successful restore clears old error; long themed dialog remains usable with server pagination parameters."
+              },
+              {
+                "id": "M10-STUDIO-STATES-01-DENY",
+                "surface": "forbidden",
+                "statement": "No duplicate pending submissions, false clearing on failure, stale recovery error after success, or horizontal overflow."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/studio-states.spec.ts",
+                "name": "states",
+                "gate": "e2e",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "states"
+                ],
+                "covers": [
+                  "M10-STUDIO-STATES-01-ALLOW",
+                  "M10-STUDIO-STATES-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-STUDIO-LOGIN-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Centered studio login remains accessible and authenticates a real safe return path.",
+            "expectations": [
+              {
+                "id": "M06-STUDIO-LOGIN-01-E01",
+                "surface": "user_visible",
+                "statement": "Both themes share a centered 430px desktop form with safe 320/390/768px margins, heading and return link; Enter submits real credentials to the requested admin route."
+              },
+              {
+                "id": "M06-STUDIO-LOGIN-01-E02",
+                "surface": "forbidden",
+                "statement": "No obsolete two-column panel, horizontal overflow, axe violation or browser hydration warning."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "name": "login",
+                "gate": "e2e",
+                "covers": [
+                  "M06-STUDIO-LOGIN-01-E01",
+                  "M06-STUDIO-LOGIN-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M02-DESK-LAYOUT-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "writing desk twelve surfaces preserve themes mobile panels and accessible actions",
+            "expectations": [
+              {
+                "id": "M02-DESK-LAYOUT-01-E01",
+                "surface": "user_visible",
+                "statement": "Twelve isolated login, list, creation, editor, preview and history surfaces preserve theme tokens, fit 320–1440px and 480px short viewports, switch mobile sections and Markdown/preview by keyboard, with zero axe violations."
+              },
+              {
+                "id": "M02-DESK-LAYOUT-01-E02",
+                "surface": "forbidden",
+                "statement": "No horizontal overflow, inaccessible hidden settings, duplicate visible editor/preview, browser page errors or warnings."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "desk layout",
+                "gate": "e2e",
+                "covers": [
+                  "M02-DESK-LAYOUT-01-E01",
+                  "M02-DESK-LAYOUT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-RESUME-CITATION-UI-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Public/admin citations download identical PDF fixture bytes through the real Web proxy and API; unsafe paths are rejected and About navigation still works.",
+            "expectations": [
+              {
+                "id": "M09-RESUME-CITATION-UI-01-E01",
+                "surface": "response",
+                "statement": "Public/admin PDF citations download exact fixture bytes through strict paths; unsafe paths are rejected and About navigation still works."
+              },
+              {
+                "id": "M09-RESUME-CITATION-UI-01-E02",
+                "surface": "forbidden",
+                "statement": "Unavailable versions, forged aliases and arbitrary URLs must not become downloadable/current evidence; status is not a factual source."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "kind": "playwright",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths",
+                "gate": "e2e",
+                "covers": [
+                  "M09-RESUME-CITATION-UI-01-E01",
+                  "M09-RESUME-CITATION-UI-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.841,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "239 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 303.194,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 115.745,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 1.305,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "1872 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1064.762,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "376 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 170.277,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 405 cases, 822 expectations, 1278 exact test references; contract sha256 734574731fe6"
+      ],
+      "status": "passed",
+      "duration_ms": 719.469,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.88,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 11.53,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 79.522,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-3"
+      ],
+      "duration_ms": 2973.782,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "e42703c1efc40c2632fc88204dc7f2bb",
+        "attempt_id": "81e0a3dd2534131389ef667489c3b54d"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "harness-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20261018-harness-completion --gate harness-tests",
+      "status": "passed",
+      "duration_ms": 5027.402,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 8753,
+        "selection_counts": {
+          "collected": 47,
+          "executed": 47
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_product_verification.py",
+                "name": "test_git_text_boundaries_decode_chinese_paths_as_utf8_under_gbk_locale"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_preflight_failure_starts_zero_product_gates"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_resume_only_failed_and_unrun_gates_and_preserves_failure"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_latest_failure_blocks_older_success_and_fresh_executes_all"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_release_always_requires_execution"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_authenticated_evidence_rejects_tampering_missing_key_and_input_drift"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_cleanup_failure_and_interrupt_invalidate_attempts_and_lock_is_exclusive"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_close_consumes_attestation_without_gates_or_collectors"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_crashed_running_attempt_is_recovered_without_fallback"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_dependency_content_and_controlled_environment_identity"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_close_recovery_restores_complete_asset_set"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_port_conflict_is_reported_before_execution_without_killing"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_bundle_skips_explicit_child_only_after_authentic_stage_proof"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_failure_logs_and_bounded_artifacts_are_retained"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_close_rolls_back_if_inputs_change_during_post_checks[head]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_close_rolls_back_if_inputs_change_during_post_checks[evidence]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_close_asset_checks_never_load_collector"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_workspace_link_outputs_do_not_change_installed_dependency_identity"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_verification_resume.py",
+                "name": "test_invalidation_reasons_compare_canonical_mapping_values"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact_registry.py",
+                "name": "test_current_governed_sources_have_unique_existing_ownership_and_cases"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact_registry.py",
+                "name": "test_new_unknown_source_fails_without_expanding_test_scope"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact_registry.py",
+                "name": "test_structure_resolves_repeated_paths_once_but_rechecks_next_invocation"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_prerequisites.py",
+                "name": "test_failed_preview_build_prevents_selected_browser_execution"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_prerequisites.py",
+                "name": "test_missing_preview_artifact_rebuilds_only_for_selected_quality_config"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_prerequisites.py",
+                "name": "test_selected_browser_runtime_is_cleaned_without_building_other_configs"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_prerequisites.py",
+                "name": "test_default_same_process_input_identity_never_reads_installed_distributions"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_prerequisites.py",
+                "name": "test_reuse_dependency_probe_failure_has_bounded_diagnostic"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_prerequisites.py",
+                "name": "test_same_process_resolution_rechecks_head_source_and_runtime_without_replanning"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_vitest_collection_keeps_optional_json_output_after_all_selectors"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_selected_javascript_collection_rejects_missing_duplicate_and_disabled"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_javascript_file_and_name_selectors_do_not_form_cross_products"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_playwright_binds_selected_file_config_project_without_suite_wrapper"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_release_workflow_has_bounded_triggers_permissions_and_history"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_release_workflow_pins_actions_and_reconstructs_dependencies"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_release_workflow_persists_only_sanitized_telemetry"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_release_workflow_enforces_trusted_change_coverage_refs"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_ci_and_local_workspace_paths_are_governed"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_openapi_export_forces_lf_for_cross_platform_byte_comparison"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_native_optional_dependencies_are_locked_for_ci_and_windows"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_github_ci.py",
+                "name": "test_playwright_hydration_readiness_is_shared_bounded_and_not_retried"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_assistant_dev_process.py",
+                "name": "test_assistant_shutdown_stops_parent_and_descendant"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_supply_chain.py",
+                "name": "test_safe_supply_chain_baseline_passes"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_supply_chain.py",
+                "name": "test_mutable_action_write_permission_and_dangerous_trigger_fail"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_supply_chain.py",
+                "name": "test_unlocked_installers_fail"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_supply_chain.py",
+                "name": "test_missing_or_untrusted_lockfiles_fail"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_supply_chain.py",
+                "name": "test_httpx_is_a_runtime_dependency_not_a_dev_only_dependency"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_windows_generated_paths.py",
+                "name": "test_windows_generated_paths_preserve_urls_and_encode_eslint_imports"
+              }
+            ],
+            "duration_ms": 4373.649,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\f75029f1783812afe561a1083d0772cc624dbb4a13095ccd26aa5f3ef3fd2ba3\\artifacts\\e42703c1efc40c2632fc88204dc7f2bb\\harness-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "e42703c1efc40c2632fc88204dc7f2bb",
+        "attempt_id": "0826fdbb9ba03ec422a498c47fd1e540"
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20261018-harness-completion --gate api-tests",
+      "status": "passed",
+      "duration_ms": 23428.37,
+      "covers": [
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 4626,
+        "selection_counts": {
+          "collected": 27,
+          "executed": 27
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "name": "test_trusted_download_pins_each_redirect_and_preserves_tls_hostname"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "name": "test_untrusted_targets_and_mixed_dns_are_rejected_without_connecting"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "name": "test_download_file_redirect_and_retry_limits"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_download.py",
+                "name": "test_download_child_environment_hash_and_real_deadline"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_parse.py",
+                "name": "test_pdf_text_pages_and_unsupported_files"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_parse.py",
+                "name": "test_parser_memory_and_io_are_enforced_in_real_process"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_parse.py",
+                "name": "test_parser_deadline_and_unavailable_boundary"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "name": "test_resume_worker_import_manual_reuse_no_timer_and_replacement_during_download"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_refresh.py",
+                "name": "test_resume_worker_bootstraps_existing_url_and_parse_failure_keeps_evidence_paused"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_worker_rebuild_retriever_and_staleness"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_resume_storage.py",
+                "name": "test_resume_cache_reuse_binding_revocation_and_migration"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_launcher.py",
+                "name": "test_managed_worker_uses_real_config_and_cleans_resources"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_launcher.py",
+                "name": "test_ready_instance_is_reused"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_launcher.py",
+                "name": "test_stop_without_owner_explains_last_failure"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_launcher.py",
+                "name": "test_manager_early_exit_does_not_wait_four_minutes"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_launcher.py",
+                "name": "test_start_prints_terminal_failure_once"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_e5.py",
+                "name": "test_local_mode_configuration_rejects_online_and_identity_drift"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_retriever_degrades_without_dense_and_is_not_ready_without_fts"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_admin.py",
+                "name": "test_rebuild_request_is_durable_and_finalize_leaves_gate_disabled"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_local_e5.py",
+                "name": "test_repeated_rebuild_reuses_ready_staging"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_lexical_projection_recalls_chinese_substrings_and_natural_questions"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_legacy_fts_rows_stay_queryable_until_the_index_is_rebuilt"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_index.py",
+                "name": "test_retriever_recalls_a_chinese_substring_from_the_real_index"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_qualification_profile.py",
+                "name": "test_profile_is_strict_canonical_and_zero_call"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_qualification_profile.py",
+                "name": "test_profile_rejects_unknown_fields_and_secret_values"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_qualification_profile.py",
+                "name": "test_profile_rejects_missing_required_soak_or_invalidation_case"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_qualification_profile.py",
+                "name": "test_profile_digest_changes_for_relevant_drift"
+              }
+            ],
+            "duration_ms": 22790.004,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\f75029f1783812afe561a1083d0772cc624dbb4a13095ccd26aa5f3ef3fd2ba3\\artifacts\\e42703c1efc40c2632fc88204dc7f2bb\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "e42703c1efc40c2632fc88204dc7f2bb",
+        "attempt_id": "e1ddf7cdcb4185889feded66cb7a45cb"
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20261018-harness-completion --gate web-quality",
+      "status": "passed",
+      "duration_ms": 291055.212,
+      "covers": [
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 9295,
+        "selection_counts": {
+          "collected": 7,
+          "executed": 7
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "public SSR preserves upstream failures instead of rendering empty 200 pages"
+              },
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "successful empty data stays 200 while details distinguish 404 and 500"
+              },
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "articles list stays 200 when taxonomy fails"
+              },
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "q1"
+              },
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "q2"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/playwright-config.test.ts",
+                "name": "keeps isolated worktree servers independent from local state"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/playwright-config.test.ts",
+                "name": "accepts an alternate Web port and rejects invalid or conflicting values"
+              }
+            ],
+            "duration_ms": 3209.366,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
+              "apps/web/nuxt.config.ts": "768aee028dbe94b130f22ebc0da256630c924561d27cf2b462818da1fbb49e88",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "q1"
+              },
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "q2"
+              }
+            ],
+            "duration_ms": 38185.484,
+            "prerequisite": "quality-build",
+            "input_sha256": {
+              "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
+              "apps/web/nuxt.config.ts": "768aee028dbe94b130f22ebc0da256630c924561d27cf2b462818da1fbb49e88"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "public SSR preserves upstream failures instead of rendering empty 200 pages"
+              },
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "successful empty data stays 200 while details distinguish 404 and 500"
+              },
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "articles list stays 200 when taxonomy fails"
+              }
+            ],
+            "duration_ms": 1427.355
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "q1"
+              },
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "q2"
+              }
+            ],
+            "duration_ms": 2439.227
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/playwright-config.test.ts",
+                "name": "keeps isolated worktree servers independent from local state"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/playwright-config.test.ts",
+                "name": "accepts an alternate Web port and rejects invalid or conflicting values"
+              }
+            ],
+            "duration_ms": 2325.959
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "public SSR preserves upstream failures instead of rendering empty 200 pages",
+                "config": "playwright.failure.config.ts",
+                "project": "",
+                "title_path": [
+                  "public SSR preserves upstream failures instead of rendering empty 200 pages"
+                ]
+              }
+            ],
+            "duration_ms": 1204.437,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "public SSR preserves upstream failures instead of rendering empty 200 pages",
+                "config": "playwright.failure.config.ts",
+                "project": "",
+                "title_path": [
+                  "public SSR preserves upstream failures instead of rendering empty 200 pages"
+                ]
+              }
+            ],
+            "duration_ms": 14358.177,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "successful empty data stays 200 while details distinguish 404 and 500",
+                "config": "playwright.failure.config.ts",
+                "project": "",
+                "title_path": [
+                  "successful empty data stays 200 while details distinguish 404 and 500"
+                ]
+              }
+            ],
+            "duration_ms": 1213.658,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "successful empty data stays 200 while details distinguish 404 and 500",
+                "config": "playwright.failure.config.ts",
+                "project": "",
+                "title_path": [
+                  "successful empty data stays 200 while details distinguish 404 and 500"
+                ]
+              }
+            ],
+            "duration_ms": 13813.401,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "articles list stays 200 when taxonomy fails",
+                "config": "playwright.failure.config.ts",
+                "project": "",
+                "title_path": [
+                  "articles list stays 200 when taxonomy fails"
+                ]
+              }
+            ],
+            "duration_ms": 1279.666,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "articles list stays 200 when taxonomy fails",
+                "config": "playwright.failure.config.ts",
+                "project": "",
+                "title_path": [
+                  "articles list stays 200 when taxonomy fails"
+                ]
+              }
+            ],
+            "duration_ms": 13836.367,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "q1",
+                "config": "playwright.quality.config.ts",
+                "project": "quality-chromium",
+                "title_path": [
+                  "q1"
+                ]
+              }
+            ],
+            "duration_ms": 2117.62,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "q1",
+                "config": "playwright.quality.config.ts",
+                "project": "quality-chromium",
+                "title_path": [
+                  "q1"
+                ]
+              }
+            ],
+            "duration_ms": 170393.573,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "q2",
+                "config": "playwright.quality.config.ts",
+                "project": "quality-chromium",
+                "title_path": [
+                  "q2"
+                ]
+              }
+            ],
+            "duration_ms": 2091.879,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "web-quality",
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "name": "q2",
+                "config": "playwright.quality.config.ts",
+                "project": "quality-chromium",
+                "title_path": [
+                  "q2"
+                ]
+              }
+            ],
+            "duration_ms": 20391.805,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/playwright-config.test.ts",
+                "name": "keeps isolated worktree servers independent from local state",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "playwright dev servers",
+                  "keeps isolated worktree servers independent from local state"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/playwright-config.test.ts",
+                "name": "accepts an alternate Web port and rejects invalid or conflicting values",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "playwright dev servers",
+                  "accepts an alternate Web port and rejects invalid or conflicting values"
+                ]
+              }
+            ],
+            "duration_ms": 2136.966,
+            "batch_id": "batch-0006"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\f75029f1783812afe561a1083d0772cc624dbb4a13095ccd26aa5f3ef3fd2ba3\\artifacts\\e42703c1efc40c2632fc88204dc7f2bb\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "e42703c1efc40c2632fc88204dc7f2bb",
+        "attempt_id": "7e8a7b154ea042be054f5e83f437f7d4"
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20261018-harness-completion --gate e2e",
+      "status": "passed",
+      "duration_ms": 511637.186,
+      "covers": [
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 13376,
+        "selection_counts": {
+          "collected": 10,
+          "executed": 10
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "reused-in-worktree",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "public cards share stable themed feedback across all page families"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "teleported assistant cards share public focus feedback"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-reading.spec.ts",
+                "name": "phase three list loading and empty states remain distinct"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "desk layout"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-shell.spec.ts",
+                "name": "shell"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "name": "login"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "name": "c"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "name": "r"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-states.spec.ts",
+                "name": "states",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "states"
+                ]
+              }
+            ],
+            "duration_ms": 4.546,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
+              "apps/web/nuxt.config.ts": "768aee028dbe94b130f22ebc0da256630c924561d27cf2b462818da1fbb49e88",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "public cards share stable themed feedback across all page families"
+              }
+            ],
+            "duration_ms": 1355.228
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "teleported assistant cards share public focus feedback"
+              }
+            ],
+            "duration_ms": 1399.266
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-reading.spec.ts",
+                "name": "phase three list loading and empty states remain distinct"
+              }
+            ],
+            "duration_ms": 1355.537
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "desk layout"
+              }
+            ],
+            "duration_ms": 1372.505
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-shell.spec.ts",
+                "name": "shell"
+              }
+            ],
+            "duration_ms": 1341.995
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "name": "login"
+              }
+            ],
+            "duration_ms": 1366.11
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "name": "c"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "name": "r"
+              }
+            ],
+            "duration_ms": 1355.368
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths"
+              }
+            ],
+            "duration_ms": 1298.484
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-states.spec.ts",
+                "name": "states",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "states"
+                ]
+              }
+            ],
+            "duration_ms": 1346.477
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "public cards share stable themed feedback across all page families",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "public cards share stable themed feedback across all page families"
+                ]
+              }
+            ],
+            "duration_ms": 1211.253,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "public cards share stable themed feedback across all page families",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "public cards share stable themed feedback across all page families"
+                ]
+              }
+            ],
+            "duration_ms": 89503.566,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "teleported assistant cards share public focus feedback",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "teleported assistant cards share public focus feedback"
+                ]
+              }
+            ],
+            "duration_ms": 1493.441,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "teleported assistant cards share public focus feedback",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "teleported assistant cards share public focus feedback"
+                ]
+              }
+            ],
+            "duration_ms": 58397.087,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-reading.spec.ts",
+                "name": "phase three list loading and empty states remain distinct",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "phase three list loading and empty states remain distinct"
+                ]
+              }
+            ],
+            "duration_ms": 1420.98,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-reading.spec.ts",
+                "name": "phase three list loading and empty states remain distinct",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "phase three list loading and empty states remain distinct"
+                ]
+              }
+            ],
+            "duration_ms": 31731.153,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "desk layout",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "desk layout"
+                ]
+              }
+            ],
+            "duration_ms": 1748.476,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "desk layout",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "desk layout"
+                ]
+              }
+            ],
+            "duration_ms": 52827.801,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-shell.spec.ts",
+                "name": "shell",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "shell"
+                ]
+              }
+            ],
+            "duration_ms": 1275.797,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-shell.spec.ts",
+                "name": "shell",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "shell"
+                ]
+              }
+            ],
+            "duration_ms": 30733.789,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "name": "login",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "login"
+                ]
+              }
+            ],
+            "duration_ms": 1318.06,
+            "batch_id": "batch-0006"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/theme-structure.spec.ts",
+                "name": "login",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "login"
+                ]
+              }
+            ],
+            "duration_ms": 31232.009,
+            "batch_id": "batch-0006"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "name": "c",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "c"
+                ]
+              }
+            ],
+            "duration_ms": 1259.692,
+            "batch_id": "batch-0007"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "name": "c",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "c"
+                ]
+              }
+            ],
+            "duration_ms": 39692.8,
+            "batch_id": "batch-0007"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "name": "r",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "r"
+                ]
+              }
+            ],
+            "duration_ms": 1269.587,
+            "batch_id": "batch-0008"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-coverage.spec.ts",
+                "name": "r",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "r"
+                ]
+              }
+            ],
+            "duration_ms": 66641.973,
+            "batch_id": "batch-0008"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "versioned resume citations download exact files in public and admin answers and reject unsafe paths"
+                ]
+              }
+            ],
+            "duration_ms": 1211.285,
+            "batch_id": "batch-0009"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/resume-citations.spec.ts",
+                "name": "versioned resume citations download exact files in public and admin answers and reject unsafe paths",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "versioned resume citations download exact files in public and admin answers and reject unsafe paths"
+                ]
+              }
+            ],
+            "duration_ms": 50010.712,
+            "batch_id": "batch-0009"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-states.spec.ts",
+                "name": "states",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "states"
+                ]
+              }
+            ],
+            "duration_ms": 1311.776,
+            "batch_id": "batch-0010"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-states.spec.ts",
+                "name": "states",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "states"
+                ]
+              }
+            ],
+            "duration_ms": 34439.1,
+            "batch_id": "batch-0010"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\f75029f1783812afe561a1083d0772cc624dbb4a13095ccd26aa5f3ef3fd2ba3\\artifacts\\e42703c1efc40c2632fc88204dc7f2bb\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "e42703c1efc40c2632fc88204dc7f2bb",
+        "attempt_id": "e0f7037513e5970dc622015adecf8872"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 3981.165,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 16,
+      "passed": 16,
+      "failed": 0
+    },
+    "duration_ms": 840577.642,
+    "failures": []
+  },
+  "source_commit": "ccf0b1c8ffaed04ce10e984b1034824951751fc1"
+}

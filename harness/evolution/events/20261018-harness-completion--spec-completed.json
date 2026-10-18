@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20261018-harness-completion",
+  "created_at": "2026-10-18T07:56:03.401317+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "776bd59c4174c6ec84deb902ed91f769414ac73c018232035f5080542b47f440"
+}
