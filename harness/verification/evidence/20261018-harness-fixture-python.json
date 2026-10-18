@@ -1,0 +1,836 @@
+{
+  "schema_version": 2,
+  "task_id": "20261018-harness-fixture-python",
+  "created_at": "2026-10-18T08:30:34.533676+00:00",
+  "command": "python -m tools.harness verify 20261018-harness-fixture-python",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "harness-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "harness-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "edf635ed6e73dd85303d522d7076ecf4498656e4",
+    "active_spec_sha256": "5d40e485d4f5d178145960d10bd416abc9d43361ec3ae1cf44d8780a1eab939b",
+    "verification_contract_sha256": "699a74a1627fe15bf5b59f1f5640344962785e6ff27c30a46b001d6dd43413ec",
+    "gate_config_sha256": "82a15322d21fd1010141640a1d17c25b4e36a83489423493be0630b7421708a4",
+    "documentation_contract_sha256": "4a6b5717d4ea637a2b2032fdb5e3d4f676bacc7587b0d8c8b42d499530de5eb0",
+    "documentation_targets_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "module_contract_sha256": "801457a2d6d6b320650248ba5fc584a0a467accde56e6aac7f3098ef251d304d"
+  },
+  "documentation": {
+    "impact": "none",
+    "reason": "恢复既有内部环境定位合同：API 检查使用配置的虚拟环境，临时测试 fixture 使用调用者已锁定依赖。无业务/API、CLI 参数、安装要求或运维步骤变化；不新增永久环境合同或文档目标。",
+    "targets": [],
+    "baseline_commit": null,
+    "target_blobs": {}
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "f34479930ed1be067dcd8e800137f2deeb9b258c",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20261018-harness-fixture-python.json",
+      "sha256": "a0711ed8046eb8c4a607c87ec98836c5f5e5ec9ec1d1b22a18f66f5e88187271",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M08-IMPACT-RUNNERS-01",
+        "M08-IMPACT-SELECTION-01",
+        "M08-SNAPSHOT-01"
+      ],
+      "selected_refs": 24,
+      "excluded_cases": 401
+    },
+    "receipt": {
+      "run_id": "d69b90a1400605e2e7128da29f48621d",
+      "identity": "7d234d2cde28b1b4e411a23bc603f85660338da700eba0e46004b3fe7030385d",
+      "plan": [
+        {
+          "gate": "harness-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 2438.457,
+      "plan_inputs": 740.876,
+      "execute_cleanup_and_input_recheck": 60747.921
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "801457a2d6d6b320650248ba5fc584a0a467accde56e6aac7f3098ef251d304d",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "harness-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M08-IMPACT-SELECTION-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P0",
+            "scenario": "Exercise selection contracts in test_impact.py",
+            "expectations": [
+              {
+                "id": "M08-IMPACT-SELECTION-01-ALLOW",
+                "surface": "state",
+                "statement": "The selection regression suite accepts supported inputs and records valid outcomes."
+              },
+              {
+                "id": "M08-IMPACT-SELECTION-01-DENY",
+                "surface": "forbidden",
+                "statement": "The selection regression suite rejects unsupported or inconsistent inputs without false success."
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_exact_impact_and_exclusions_do_not_follow_dependency_edges",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_shared_contract_propagates_only_with_reviewed_case_reason",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_unknown_path_and_incomplete_dependency_analysis_block",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_global_structure_never_calls_collectors",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_runner_uses_exact_selectors_without_suite_scripts",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_real_pytest_selection_skips_unaffected_and_rejects_skipped_test",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_docs_snapshot_has_zero_dependency_scans_or_product_tools",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_default_scope_is_fresh_even_with_matching_success",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_cli_all_reuse_and_close_have_complete_isolation",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_cli_same_process_fresh_close_and_tamper_rejection",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_cli_partial_reuse_preserves_failed_attempt",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_cli_cleanup_and_interrupt_cannot_close",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_docs_close_has_no_test_collection_or_dependencies",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_close_source_race_rolls_back_and_concurrent_cli_is_rejected",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_plan_status_and_close_cannot_start_gates_or_collectors",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-SELECTION-01-ALLOW",
+                  "M08-IMPACT-SELECTION-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-SNAPSHOT-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Committed snapshot checks precede dependency linkage and all product execution.",
+            "expectations": [
+              {
+                "id": "M08-SNAPSHOT-01-ALLOW",
+                "surface": "response",
+                "statement": "Committed snapshot checks precede dependency linkage and all product execution."
+              },
+              {
+                "id": "M08-SNAPSHOT-01-DENY",
+                "surface": "forbidden",
+                "statement": "No false passing result, broadened selection, overwritten evidence or lost preceding artifact is accepted."
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_execution_protocol.py",
+                "name": "test_snapshot_failure_stops_before_dependency_links_and_product_calls",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-SNAPSHOT-01-ALLOW",
+                  "M08-SNAPSHOT-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_execution_protocol.py",
+                "name": "test_snapshot_checks_missing_link_without_collecting",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-SNAPSHOT-01-ALLOW",
+                  "M08-SNAPSHOT-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_execution_protocol.py",
+                "name": "test_real_git_snapshot_cannot_borrow_workspace_only_link_target",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-SNAPSHOT-01-ALLOW",
+                  "M08-SNAPSHOT-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "harness-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M08-IMPACT-RUNNERS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Canonical exact runners collect and execute the same restricted test identities.",
+            "expectations": [
+              {
+                "id": "M08-IMPACT-RUNNERS-01-E01",
+                "surface": "response",
+                "statement": "Pytest, Vitest and Playwright selectors retain exact identity and selected counts."
+              },
+              {
+                "id": "M08-IMPACT-RUNNERS-01-E02",
+                "surface": "forbidden",
+                "statement": "Collection never writes source files or accepts skipped, duplicate or unselected identities."
+              },
+              {
+                "id": "M08-IMPACT-RUNNERS-01-E03",
+                "surface": "response",
+                "statement": "Pytest collection and selected commands preserve the configured API virtual-environment interpreter invocation path instead of resolving its executable symlink to the base interpreter."
+              },
+              {
+                "id": "M08-IMPACT-RUNNERS-01-E04",
+                "surface": "forbidden",
+                "statement": "A missing API virtual-environment interpreter fails closed without falling back to a global Python executable."
+              }
+            ],
+            "required_gates": [
+              "harness-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_vitest_collection_keeps_optional_json_output_after_all_selectors",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-RUNNERS-01-E01",
+                  "M08-IMPACT-RUNNERS-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_selected_javascript_collection_rejects_missing_duplicate_and_disabled",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-RUNNERS-01-E01",
+                  "M08-IMPACT-RUNNERS-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_javascript_file_and_name_selectors_do_not_form_cross_products",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-RUNNERS-01-E01",
+                  "M08-IMPACT-RUNNERS-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_playwright_binds_selected_file_config_project_without_suite_wrapper",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-RUNNERS-01-E01",
+                  "M08-IMPACT-RUNNERS-01-E02"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_pytest_command_preserves_virtual_environment_interpreter_path",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-RUNNERS-01-E03"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_pytest_command_rejects_missing_virtual_environment_interpreter",
+                "gate": "harness-tests",
+                "covers": [
+                  "M08-IMPACT-RUNNERS-01-E04"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-tests",
+                "satisfied_by": "harness-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 5.061,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "241 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 309.663,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 110.368,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.969,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "1876 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1025.453,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "378 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 168.139,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 405 cases, 826 expectations, 1280 exact test references; contract sha256 801457a2d6d6"
+      ],
+      "status": "passed",
+      "duration_ms": 721.484,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.812,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 11.724,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 78.757,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 2744.882,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "d69b90a1400605e2e7128da29f48621d",
+        "attempt_id": "b6612d70f8fd83210176dd1c06325676"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "harness-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20261018-harness-fixture-python --gate harness-tests",
+      "status": "passed",
+      "duration_ms": 55160.498,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 4453,
+        "selection_counts": {
+          "collected": 24,
+          "executed": 24
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_vitest_collection_keeps_optional_json_output_after_all_selectors"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_selected_javascript_collection_rejects_missing_duplicate_and_disabled"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_javascript_file_and_name_selectors_do_not_form_cross_products"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_playwright_binds_selected_file_config_project_without_suite_wrapper"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_pytest_command_preserves_virtual_environment_interpreter_path"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_selected_runners.py",
+                "name": "test_pytest_command_rejects_missing_virtual_environment_interpreter"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_exact_impact_and_exclusions_do_not_follow_dependency_edges"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_shared_contract_propagates_only_with_reviewed_case_reason"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_unknown_path_and_incomplete_dependency_analysis_block"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_global_structure_never_calls_collectors"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_runner_uses_exact_selectors_without_suite_scripts"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_real_pytest_selection_skips_unaffected_and_rejects_skipped_test"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_docs_snapshot_has_zero_dependency_scans_or_product_tools"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact.py",
+                "name": "test_default_scope_is_fresh_even_with_matching_success"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_cli_all_reuse_and_close_have_complete_isolation"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_cli_same_process_fresh_close_and_tamper_rejection"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_cli_partial_reuse_preserves_failed_attempt"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_cli_cleanup_and_interrupt_cannot_close"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_docs_close_has_no_test_collection_or_dependencies"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_close_source_race_rolls_back_and_concurrent_cli_is_rejected"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_impact_cli.py",
+                "name": "test_real_plan_status_and_close_cannot_start_gates_or_collectors"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_execution_protocol.py",
+                "name": "test_snapshot_failure_stops_before_dependency_links_and_product_calls"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_execution_protocol.py",
+                "name": "test_snapshot_checks_missing_link_without_collecting"
+              },
+              {
+                "kind": "pytest",
+                "gate": "harness-tests",
+                "path": "harness/verification/tests/test_execution_protocol.py",
+                "name": "test_real_git_snapshot_cannot_borrow_workspace_only_link_target"
+              }
+            ],
+            "duration_ms": 54745.284,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\f75029f1783812afe561a1083d0772cc624dbb4a13095ccd26aa5f3ef3fd2ba3\\artifacts\\d69b90a1400605e2e7128da29f48621d\\harness-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "d69b90a1400605e2e7128da29f48621d",
+        "attempt_id": "96ebca1822e2bbc617483155e6e15c45"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2560.853,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 62901.663,
+    "failures": []
+  },
+  "source_commit": "f34479930ed1be067dcd8e800137f2deeb9b258c"
+}

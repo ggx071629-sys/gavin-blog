@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **14 active**, **0 frozen**.
+Open specifications: **13 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -24,7 +24,6 @@ Open specifications: **14 active**, **0 frozen**.
 | spec-20260914-assistant-recent-articles | active | L1 | 为问答补充基于公开修订的文章时间查询 | task:20260914-assistant-recent-articles | — | [active/20260914-assistant-recent-articles.md](active/20260914-assistant-recent-articles.md) |
 | spec-20260914-deepseek-tokenizer | active | L1 | 固定官方 V4.1 分词器并部署离线 Chat 长度计数 | task:20260914-deepseek-tokenizer | — | [active/20260914-deepseek-tokenizer.md](active/20260914-deepseek-tokenizer.md) |
 | spec-20260914-index-readiness | active | L1 | 后台校验切换后的索引并续签既有运行资格 | task:20260914-index-readiness | — | [active/20260914-index-readiness.md](active/20260914-index-readiness.md) |
-| spec-20261018-harness-fixture-python | active | L1 | 修复隔离 CLI fixture 依赖继承及虚拟环境解释器路径 | task:20261018-harness-fixture-python | — | [active/20261018-harness-fixture-python.md](active/20261018-harness-fixture-python.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |
@@ -265,4 +264,5 @@ Open specifications: **14 active**, **0 frozen**.
 | archive-20260913-assistant-restart-recovery | compressed | L2 | 保留本机问答启停选择并在恢复试问时验证新索引资格 | task:20260913-assistant-restart-recovery | — | [archive/20260913-assistant-restart-recovery.md](archive/20260913-assistant-restart-recovery.md) |
 | archive-20260913-assistant-sync-attention | compressed | L2 | 依据当前公开内容收录事实排除已覆盖的历史同步失败提醒 | task:20260913-assistant-sync-attention | — | [archive/20260913-assistant-sync-attention.md](archive/20260913-assistant-sync-attention.md) |
 | archive-20261018-harness-completion | compressed | L2 | 补齐远端 Harness 引用的文档、业务测试和质量门禁工作流 | task:20261018-harness-completion | — | [archive/20261018-harness-completion.md](archive/20261018-harness-completion.md) |
+| archive-20261018-harness-fixture-python | compressed | L2 | 修复隔离 CLI fixture 依赖继承及虚拟环境解释器路径 | task:20261018-harness-fixture-python | — | [archive/20261018-harness-fixture-python.md](archive/20261018-harness-fixture-python.md) |
 | archive-20261018-session-clock-consistency | compressed | L2 | 修复登录会话初始时间一致性并按真实时间校验列表顺序 | task:20261018-session-clock-consistency | — | [archive/20261018-session-clock-consistency.md](archive/20261018-session-clock-consistency.md) |
