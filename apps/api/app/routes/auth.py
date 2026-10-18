@@ -75,10 +75,13 @@ def login(
         db.delete(old_session)
     session_token = token()
     csrf = token()
+    session_started_at = utc_now()
     db.add(
         AdminSession(
             token_hash=token_hash(session_token),
             csrf_hash=token_hash(csrf),
+            created_at=session_started_at,
+            last_seen_at=session_started_at,
             expires_at=expires_at(settings),
         )
     )

@@ -1,14 +1,15 @@
 from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor
-from datetime import timedelta
+from datetime import UTC, datetime, timedelta
+from itertools import count
 
 import pytest
 from argon2 import PasswordHasher
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
-from app import account
+from app import account, time_utils
 from app.models import AccountAttempt, AccountChallenge, AdminCredential
 from app.security import AdminPassword, begin_auth_write
 from app.time_utils import utc_now
@@ -146,8 +147,21 @@ def test_anonymous_recovery_revokes_sessions_and_rejects_reuse(client):
         )
 
 
-def test_session_list_activity_and_revoke_scopes(client):
+def test_session_list_activity_and_revoke_scopes(client, monkeypatch):
+    # Exercise actual SQLAlchemy defaults and both JSON timestamp precisions.
+    anchor = datetime(2026, 1, 1, tzinfo=UTC)
+    ticks = count(1)
+    advance = False
+
+    class MicrosecondClock(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            value = anchor + timedelta(microseconds=next(ticks) if advance else 0)
+            return value.replace(tzinfo=None) if tz is None else value.astimezone(tz)
+
+    monkeypatch.setattr(time_utils, "datetime", MicrosecondClock)
     login(client)
+    advance = True
     headers = {"X-CSRF-Token": client.cookies.get("gavin_csrf")}
     with TestClient(client.app) as other:
         login(other)
@@ -155,10 +169,26 @@ def test_session_list_activity_and_revoke_scopes(client):
         assert listed.status_code == 200
         rows = listed.json()["items"]
         assert len(rows) == 2 and sum(r["is_current"] for r in rows) == 1
-        assert all(r["last_seen_at"] >= r["created_at"] for r in rows)
+        timestamps = {
+            row["id"]: tuple(
+                datetime.fromisoformat(row[field].replace("Z", "+00:00"))
+                for field in ("created_at", "last_seen_at")
+            )
+            for row in rows
+        }
+        assert all(
+            value.tzinfo is not None and value.utcoffset() == timedelta(0)
+            for pair in timestamps.values()
+            for value in pair
+        )
+        assert all(seen >= created for created, seen in timestamps.values()), timestamps
         assert "token_hash" not in listed.text and "csrf" not in listed.text
         current_id = next(r["id"] for r in rows if r["is_current"])
         other_id = next(r["id"] for r in rows if not r["is_current"])
+        current_created, current_seen = timestamps[current_id]
+        assert current_created.microsecond == 0 and current_seen.microsecond > 0
+        other_created, other_seen = timestamps[other_id]
+        assert other_seen == other_created
         assert client.delete(f"/api/v1/auth/sessions/{other_id}").status_code == 403
         assert (
             client.delete(f"/api/v1/auth/sessions/{other_id}", headers=headers).status_code == 204

@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "task_id": "20261018-session-clock-consistency",
+  "changes": [
+    {
+      "path": "apps/api/app/routes/auth.py",
+      "owner": "M06.auth",
+      "reason": "Read one UTC-aware session_started_at and explicitly initialize both created_at and last_seen_at from it. Preserve the independent expires_at(settings) call, credentials, cookies, CSRF, rate limits and revocation behavior.",
+      "cases": [
+        "M06-ACCOUNT-SESSION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Only successful login session metadata initialization changes; article routes and their require_admin/CSRF dependencies, response bodies and authorization rules are untouched.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Publication authorization consumes unchanged require_admin/CSRF dependencies; publication transactions and session expiry checks are untouched.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Search handlers and shared dependency signatures are unchanged; the new creation-time assignments do not change search access or results.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Taxonomy handlers consume unchanged authentication/CSRF dependencies; no taxonomy request or response contract changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Project/book handlers and their authentication/CSRF dependencies are untouched; session tokens, validity and expiry rules remain the same.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Media routes consume unchanged authorization/CSRF checks; media storage and response contracts do not change.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Import/export authorization and data handling remain unchanged; no portability consumer uses initial activity timestamps for access decisions.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Login still returns the same SessionResponse and cookies; login form, navigation, credentials, error and logout semantics do not change.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Profile routes and their shared authentication dependencies are untouched; no profile shape or authorization decision changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Application router registration, Settings and security factories are untouched; the original expires_at(settings) call is preserved.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Authenticated Web transport retains the same cookies, response shape and CSRF rules; no transport uses the initial activity timestamp as a credential.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Assistant admin routes retain the same require_admin/CSRF and expiry checks; no operations runtime or capability state changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": true,
+          "reason": "The account session-list endpoint projects created_at and last_seen_at from new login records. Its exact existing case validates controlled-clock initialization, aware chronological ordering, current-session identity and revocation/concurrent-reset safety.",
+          "cases": [
+            "M06-ACCOUNT-SESSION-01"
+          ]
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "AccountSessions.vue formats both unchanged ISO fields with new Date(value).toLocaleString(), without text ordering. Existing schema, labels, revocation actions and valid ISO forms remain unchanged; corrected API metadata is covered at its owner.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_account_management.py",
+      "owner": "M06.account",
+      "reason": "Strengthen the existing API scenario with a frozen whole-second first login and a 1-microsecond advancing real clock for the second login; require non-current initial equality and strict aware chronological comparison while preserving every original secrecy, CSRF and revocation assertion.",
+      "cases": [
+        "M06-ACCOUNT-SESSION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Only this isolated regression fixture and assertions change; application registration, settings and startup are untouched.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The existing API metadata contract is exercised more strictly; no Web implementation, response fields or permitted ISO representations change.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Extend the existing session case with explicit observable initial-time and aware-ordering expectations, bound only to the existing exact API regression. Keep the case identity, priority, gates and all previous expectations/references.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only existing-case expectation content and its covers binding expand; the JSON schema, case identities, test selectors, graph and execution algorithms are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only existing-case expectation content and its covers binding expand; the JSON schema, case identities, test selectors, graph and execution algorithms are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only existing-case expectation content and its covers binding expand; the JSON schema, case identities, test selectors, graph and execution algorithms are unchanged.",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}

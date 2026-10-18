@@ -4,7 +4,7 @@
 
 Read this index first. Load only entries whose `load_when` matches the task.
 
-Open specifications: **13 active**, **0 frozen**.
+Open specifications: **14 active**, **0 frozen**.
 
 | ID | Status | Level | Summary | Load when | Author | Path |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -24,6 +24,7 @@ Open specifications: **13 active**, **0 frozen**.
 | spec-20260914-assistant-recent-articles | active | L1 | 为问答补充基于公开修订的文章时间查询 | task:20260914-assistant-recent-articles | — | [active/20260914-assistant-recent-articles.md](active/20260914-assistant-recent-articles.md) |
 | spec-20260914-deepseek-tokenizer | active | L1 | 固定官方 V4.1 分词器并部署离线 Chat 长度计数 | task:20260914-deepseek-tokenizer | — | [active/20260914-deepseek-tokenizer.md](active/20260914-deepseek-tokenizer.md) |
 | spec-20260914-index-readiness | active | L1 | 后台校验切换后的索引并续签既有运行资格 | task:20260914-index-readiness | — | [active/20260914-index-readiness.md](active/20260914-index-readiness.md) |
+| spec-20261018-session-clock-consistency | active | L1 | 修复登录会话初始时间一致性并按真实时间校验列表顺序 | task:20261018-session-clock-consistency | — | [active/20261018-session-clock-consistency.md](active/20261018-session-clock-consistency.md) |
 | archive-20260731-core-article-loop | compressed | L2 | 完成单管理员从草稿写作、自动保存、预览、发布到公开阅读的核心文章闭环 | task:20260731-core-article-loop | Gavin | [archive/20260731-core-article-loop.md](archive/20260731-core-article-loop.md) |
 | archive-20260731-harness-bootstrap | compressed | L2 | 建立 Gavin 博客项目的可运行、可验证 Harness 控制面 | task:20260731-harness-bootstrap | Gavin | [archive/20260731-harness-bootstrap.md](archive/20260731-harness-bootstrap.md) |
 | archive-20260801-bounded-pagination | compressed | L2 | 为高增长内容列表建立有界查询、稳定排序和完整消费者分批读取 | task:20260801-bounded-pagination | — | [archive/20260801-bounded-pagination.md](archive/20260801-bounded-pagination.md) |

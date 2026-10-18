@@ -5921,6 +5921,16 @@
               "id": "M06-ACCOUNT-SESSION-01-E02",
               "surface": "forbidden",
               "statement": "旧密码并发登录不得留下重置后的有效会话"
+            },
+            {
+              "id": "M06-ACCOUNT-SESSION-01-E03",
+              "surface": "response",
+              "statement": "A new login session initializes created_at and last_seen_at from one UTC-aware instant; later activity remains chronologically at or after creation when API times are parsed as aware datetimes."
+            },
+            {
+              "id": "M06-ACCOUNT-SESSION-01-E04",
+              "surface": "forbidden",
+              "statement": "An incrementing clock cannot create an initially reversed session; valid whole-second and fractional ISO timestamps cannot be judged by text order, while genuinely reversed or timezone-naive timestamps still fail the check."
             }
           ],
           "required_gates": [
@@ -5934,7 +5944,9 @@
               "gate": "api-tests",
               "covers": [
                 "M06-ACCOUNT-SESSION-01-E01",
-                "M06-ACCOUNT-SESSION-01-E02"
+                "M06-ACCOUNT-SESSION-01-E02",
+                "M06-ACCOUNT-SESSION-01-E03",
+                "M06-ACCOUNT-SESSION-01-E04"
               ]
             },
             {

@@ -32,7 +32,7 @@ state_history:
 
 ## Verification cases
 
-- AC-1 => M06-ACCOUNT-SESSION-01
+- AC-1 => M06-ACCOUNT-SESSION-01, M08-DOCS-01
 
 ## Gates
 
