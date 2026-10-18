@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import os
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -96,3 +98,44 @@ def test_playwright_binds_selected_file_config_project_without_suite_wrapper(tmp
     assert command[command.index("--config") + 1] == "playwright.config.ts"
     assert command[command.index("--project") + 1] == "chromium"
     assert "--retries=0" in command and "run-playwright-e2e.mjs" not in command
+
+
+def test_pytest_command_preserves_virtual_environment_interpreter_path(tmp_path, monkeypatch):
+    relative = "apps/api/.venv/Scripts/python.exe" if os.name == "nt" else "apps/api/.venv/bin/python"
+    interpreter = tmp_path / relative
+    interpreter.parent.mkdir(parents=True)
+    interpreter.write_text("fixture venv interpreter")
+    base_interpreter = tmp_path / "base-python"
+    base_interpreter.write_text("fixture base interpreter")
+    resolve = Path.resolve
+
+    def follow_interpreter_link(path, strict=False):
+        if path == interpreter:
+            return base_interpreter
+        return resolve(path, strict=strict)
+
+    # Model a POSIX venv executable symlink without requiring Windows symlink privileges.
+    monkeypatch.setattr(Path, "resolve", follow_interpreter_link)
+    ref = {
+        "kind": "pytest",
+        "gate": "api-tests",
+        "path": "apps/api/tests/test_example.py",
+        "name": "test_selected",
+    }
+
+    command, cwd = runner.command_for([ref], tmp_path)
+
+    assert command[0] == str(interpreter)
+    assert cwd == tmp_path / "apps/api"
+
+
+def test_pytest_command_rejects_missing_virtual_environment_interpreter(tmp_path):
+    ref = {
+        "kind": "pytest",
+        "gate": "api-tests",
+        "path": "apps/api/tests/test_example.py",
+        "name": "test_selected",
+    }
+
+    with pytest.raises(tc.TestCollectionError, match="API virtual environment Python is missing"):
+        runner.command_for([ref], tmp_path)

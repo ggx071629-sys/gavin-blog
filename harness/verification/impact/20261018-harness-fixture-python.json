@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "task_id": "20261018-harness-fixture-python",
+  "changes": [
+    {
+      "path": "harness/verification/tests/test_impact_cli.py",
+      "owner": "M08.impact",
+      "reason": "Build an independent temporary API virtual environment, then expose only the calling test environment site-package directories through an ordinary non-executable .pth. Repair dependency discovery without network installation, base-global fallback or relaxed dependency fingerprints; retain all seven real CLI scenarios.",
+      "cases": [
+        "M08-IMPACT-SELECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only a disposable integration-test fixture changes. Production worktree creation, dependency linkage, isolation and cleanup code are untouched and remain exercised by the selected real CLI scenarios.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only the temporary test environment is repaired; production close/freeze/resume transactions, source checks and authenticated receipt rules are unchanged and the existing CLI close scenarios remain selected.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "The fixture supplies the same installed pytest distribution through a normal directory-only .pth file. Module schema, exact reference validation and collection policy are untouched.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Gate construction, dependency fingerprinting and evidence acceptance are unchanged. The real CLI tests continue exercising them with an independent fixture environment containing the caller dependencies.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "No runner implementation or selector contract changes in this fixture file; the existing CLI scenarios still execute exact selected identities without broadening their scope.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Reuse input hashing, dependency fingerprints and receipt acceptance are unchanged; selected CLI reuse/tamper/failure scenarios retain all existing assertions.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": true,
+          "reason": "test_real_git_snapshot_cannot_borrow_workspace_only_link_target imports fixture_repository from this changed file. Select its existing snapshot case to preserve the pre-dependency, pre-product committed-snapshot boundary with the repaired shared environment.",
+          "cases": [
+            "M08-SNAPSHOT-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/test_collection.py",
+      "owner": "M08.test_collection",
+      "reason": "Use absolute() instead of resolve() for the configured API Python path so a POSIX venv executable symlink retains its virtual-environment invocation semantics. Keep the existing is_file() failure-closed check and all collection interfaces unchanged.",
+      "cases": [
+        "M08-IMPACT-RUNNERS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.module_verification",
+          "affected": true,
+          "reason": "Runtime module collection consumes collect_test_index, which uses the repaired _api_python helper. The selected exact runner regression and real CLI scenarios exercise the interpreter boundary; the structural case validates the updated reference contract without broadening the test scope.",
+          "cases": [
+            "M08-DOCS-01"
+          ]
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": true,
+          "reason": "selected_tests.command_for calls the changed _api_python helper directly. The exact existing runner case gains deterministic invocation-path and missing-environment regressions while retaining its previous selector assertions.",
+          "cases": [
+            "M08-IMPACT-RUNNERS-01"
+          ]
+        },
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Impact planning consumes module schema and case indexes, which are unchanged. Retaining an interpreter invocation path affects runtime collection, not ownership decisions, dependency traversal or case selection.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Gate orchestration consumes unchanged module validation interfaces; the actual pytest command/collection boundary is covered by the selected runner and real CLI cases. No receipt, gate or close policy changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Snapshot preflight, exact identity and prerequisite contracts do not call _api_python; no protocol source or selector identity changes. The independent shared-fixture snapshot scenario is selected for its own changed input.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "verification_inputs imports the unchanged selected_tests.playwright_config helper for browser port reservations. The changed API interpreter helper is not part of that consumer interface or receipt/fingerprint schema.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_selected_runners.py",
+      "owner": "M08.selected_tests",
+      "reason": "Add deterministic executable-symlink path semantics and missing-API-environment regressions to the existing exact runner suite; preserve all previous file/name selection, disabled/duplicate rejection and browser-config assertions.",
+      "cases": [
+        "M08-IMPACT-RUNNERS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only deterministic runner regressions are added; production verification_inputs consumes the unchanged playwright_config helper for port reservation. Receipt hashing, reuse and port policy are untouched.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only runner tests change. execution_contracts consumes the unchanged playwright_config helper; snapshot preflight, prerequisites, diagnostics and identity algorithms remain the same.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Bind the two new interpreter-boundary regressions to explicit expectations in the existing M08-IMPACT-RUNNERS-01 case. Preserve all earlier expectations/references, case identity, priority and gate; validate the executable contract structurally.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "The existing runner case gains two exact pytest references and explicit invocation-path expectations. Contract schema, case identity, priority, gate, graph and planning algorithms remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only declarative expectations and references expand within the existing runner case; gate orchestration, receipt verification, fingerprinting and close algorithms are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "No protocol or exact-identity schema changes; the existing runner case keeps its gate and selectors, and adds only the two deterministic interpreter-boundary regressions.",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}

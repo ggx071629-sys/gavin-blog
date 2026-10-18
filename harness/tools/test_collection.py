@@ -143,7 +143,7 @@ def _api_python(project_root: Path) -> Path:
         if os.name == "nt"
         else Path("apps/api/.venv/bin/python")
     )
-    executable = (project_root / relative).resolve()
+    executable = (project_root / relative).absolute()
     if not executable.is_file():
         raise TestCollectionError("API virtual environment Python is missing")
     return executable

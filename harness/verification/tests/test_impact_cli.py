@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import shutil
+import site
 import subprocess
 import sys
 import venv
@@ -80,7 +81,24 @@ def {function}(*args, **kwargs):
     config.write_text(
         config.read_text().replace("reuse = false", f"reuse = {str(reuse).lower()}")
     )
-    venv.EnvBuilder(system_site_packages=True).create(root / "apps/api/.venv")
+    environment = root / "apps/api/.venv"
+    venv.EnvBuilder(system_site_packages=False).create(environment)
+    fixture_site = next(environment.rglob("site-packages"), None)
+    assert fixture_site is not None and fixture_site.is_dir()
+    caller_sites = sorted(
+        {
+            Path(path).resolve()
+            for path in site.getsitepackages()
+            if Path(path).name == "site-packages" and Path(path).is_dir()
+        },
+        key=str,
+    )
+    assert caller_sites, "the running test environment must provide site-packages"
+    # Plain paths expose this test process's dependencies without global fallback
+    # or executable .pth hooks; the fixture still fingerprints the real inputs.
+    (fixture_site / "harness-test-environment.pth").write_text(
+        "\n".join(str(path) for path in caller_sites) + "\n", encoding="utf-8"
+    )
     (root / ".gitignore").write_text(
         ".venv/\n__pycache__/\n.pytest_cache/\nharness/telemetry/local/\n"
     )

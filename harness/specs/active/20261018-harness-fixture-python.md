@@ -34,7 +34,7 @@ state_history:
 ## Verification cases
 
 - AC-1 => M08-IMPACT-SELECTION-01, M08-SNAPSHOT-01
-- AC-2 => M08-IMPACT-RUNNERS-01
+- AC-2 => M08-IMPACT-RUNNERS-01, M08-DOCS-01
 
 ## Gates
 

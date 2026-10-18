@@ -9881,6 +9881,16 @@
               "id": "M08-IMPACT-RUNNERS-01-E02",
               "surface": "forbidden",
               "statement": "Collection never writes source files or accepts skipped, duplicate or unselected identities."
+            },
+            {
+              "id": "M08-IMPACT-RUNNERS-01-E03",
+              "surface": "response",
+              "statement": "Pytest collection and selected commands preserve the configured API virtual-environment interpreter invocation path instead of resolving its executable symlink to the base interpreter."
+            },
+            {
+              "id": "M08-IMPACT-RUNNERS-01-E04",
+              "surface": "forbidden",
+              "statement": "A missing API virtual-environment interpreter fails closed without falling back to a global Python executable."
             }
           ],
           "required_gates": [
@@ -9925,6 +9935,24 @@
               "covers": [
                 "M08-IMPACT-RUNNERS-01-E01",
                 "M08-IMPACT-RUNNERS-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_selected_runners.py",
+              "name": "test_pytest_command_preserves_virtual_environment_interpreter_path",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-IMPACT-RUNNERS-01-E03"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_selected_runners.py",
+              "name": "test_pytest_command_rejects_missing_virtual_environment_interpreter",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-IMPACT-RUNNERS-01-E04"
               ]
             }
           ]
