@@ -1,0 +1,288 @@
+{
+  "schema_version": 2,
+  "task_id": "20260814-verification-cost-rightsize",
+  "created_at": "2026-08-14T12:22:10.620821+00:00",
+  "command": "python -m tools.harness verify 20260814-verification-cost-rightsize",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5",
+    "AC-6",
+    "AC-7"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "harness-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "harness-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "harness-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "harness-tests"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "status": "passed",
+      "gates": [
+        "harness-tests"
+      ]
+    },
+    {
+      "id": "AC-6",
+      "status": "passed",
+      "gates": [
+        "harness-tests"
+      ]
+    },
+    {
+      "id": "AC-7",
+      "status": "passed",
+      "gates": [
+        "harness-integrity",
+        "release"
+      ]
+    }
+  ],
+  "verification_profile": "release",
+  "fingerprints": {
+    "source_tree": "cc5cbd8a7de6a08ff981bb444b66ba0ee55bb5a1",
+    "active_spec_sha256": "6b3fd81ace425e298047c0387c2b272726607cf6a6d58e6d8cfb7c59268d5d43",
+    "verification_contract_sha256": "526278c46eefa1b9246ababb2aec3f7f8e2a1f133d401e17ee6770993794aba0",
+    "gate_config_sha256": "6b8e68d1ce2074cf4e7d3d9fb5fb556217cd629019abc126e6856bf3bce2468e",
+    "documentation_contract_sha256": "b5565f4370d0e34ce4755b6c2b4b2890805e155ed20c1df8c9ad623c04d4ae70",
+    "documentation_targets_sha256": "24d92bce4d1277b8e4b7ef66bff9f26879ca5e892c1b5a04b66673432b85f106"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "风险路由分档、包门禁映射规则和失败现场 Evolution 提示会改变长期验证合同与日常 specify/verify 流程",
+    "targets": [
+      "harness/docs/decisions/20260814-verification-cost-rightsize.md",
+      "harness/specs/_sdd/README.md",
+      "harness/specs/_sdd/template.md",
+      "harness/verification/README.md",
+      "harness/workflows/specify.md",
+      "harness/workflows/verify.md"
+    ],
+    "baseline_commit": "4fca9c95b8573224b137b2b7880617bf2d274a29",
+    "target_blobs": {
+      "harness/docs/decisions/20260814-verification-cost-rightsize.md": "4ed073b6bba9a02159fac0562e1b67a71f71e184",
+      "harness/specs/_sdd/README.md": "aa31492a8a8f4e4e91e4687fe374289601913f39",
+      "harness/specs/_sdd/template.md": "d34dd35898bbf16e5eb40d8fd4c2345f1ea1d330",
+      "harness/verification/README.md": "202856fb4c5d90b79c3feca83694b01280536dd1",
+      "harness/workflows/specify.md": "0c3fffb9e45aa0fc94ad7c5a13efd0924f8ce195",
+      "harness/workflows/verify.md": "d4f81d1ddb79ccc4735dbc521d7dff17525422d8"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "983c0c54864085e23db1437274f9a6deeb5ad1bb",
+    "cleanup_status": "passed",
+    "reused_paths": 3
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 6 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 6.636
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "73 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 166.391
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 81.398
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 2.328
+    },
+    {
+      "name": "links",
+      "details": [
+        "340 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 5572.856
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "157 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 77.874
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 16.129
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 85.986
+    },
+    {
+      "name": "harness-tests",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-2u5dv07m\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m pytest harness/verification/tests",
+      "status": "passed",
+      "duration_ms": 17942.678,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 125,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-2u5dv07m\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m tools.harness verify",
+      "status": "passed",
+      "duration_ms": 3443.124,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-7"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "release",
+      "kind": "product",
+      "command": "D:\\Tool\\nodejs\\npm.CMD run quality:release",
+      "status": "passed",
+      "duration_ms": 711889.991,
+      "covers": [
+        "AC-7"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 561,
+          "failed": 0,
+          "skipped": 0
+        },
+        "subsumption": {
+          "contract_sha256": "f6cec6c9aaccc6fb8be22267b0bd735d5f14421e47cd46116194808c4af50591",
+          "verified": [
+            {
+              "gate": "api-lint",
+              "stage": "api-lint"
+            },
+            {
+              "gate": "api-tests",
+              "stage": "api-tests"
+            },
+            {
+              "gate": "harness-tests",
+              "stage": "harness-tests"
+            },
+            {
+              "gate": "web-quality",
+              "stage": "web-quality"
+            },
+            {
+              "gate": "e2e",
+              "stage": "core-e2e"
+            },
+            {
+              "gate": "harness-integrity",
+              "stage": "harness-integrity"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1750.362,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ]
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    "duration_ms": 741035.753,
+    "failures": [],
+    "test_counts": {
+      "passed": 686,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "source_commit": "983c0c54864085e23db1437274f9a6deeb5ad1bb"
+}

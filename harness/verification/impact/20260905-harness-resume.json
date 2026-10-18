@@ -1,0 +1,1059 @@
+{
+  "schema_version": 1,
+  "task_id": "20260905-harness-resume",
+  "changes": [
+    {
+      "path": "harness/config.toml",
+      "owner": "M08.selection",
+      "reason": "M08.selection 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.execution",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.execution 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-EXECUTION-03",
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/close_transaction.py",
+      "owner": "M08.closure",
+      "reason": "M08.closure 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-CLOSURE-01",
+        "M08-IMPACT-CLOSURE-02",
+        "M08-IMPACT-CLOSURE-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.closure 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/config.py",
+      "owner": "M08.selection",
+      "reason": "M08.selection 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.execution",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.execution 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-EXECUTION-03",
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/empty-global.npmrc",
+      "owner": "M08.execution",
+      "reason": "M08.execution 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        },
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/empty-user.npmrc",
+      "owner": "M08.execution",
+      "reason": "M08.execution 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        },
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/events.py",
+      "owner": "M08.closure",
+      "reason": "M08.closure 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-CLOSURE-01",
+        "M08-IMPACT-CLOSURE-02",
+        "M08-IMPACT-CLOSURE-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.closure 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/harness.py",
+      "owner": "M08.closure",
+      "reason": "M08.closure 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-CLOSURE-01",
+        "M08-IMPACT-CLOSURE-02",
+        "M08-IMPACT-CLOSURE-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.closure 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/impact.py",
+      "owner": "M08.selection",
+      "reason": "M08.selection 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.execution",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.execution 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-EXECUTION-03",
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/isolated_verification.py",
+      "owner": "M08.execution",
+      "reason": "M08.execution 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        },
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/module_verification.py",
+      "owner": "M08.selection",
+      "reason": "M08.selection 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.execution",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.execution 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-EXECUTION-03",
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/product_verification.py",
+      "owner": "M08.execution",
+      "reason": "M08.execution 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        },
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/result_reporting.py",
+      "owner": "M08.reporting",
+      "reason": "M08.reporting 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-REPORTING-01",
+        "M08-IMPACT-REPORTING-02"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/tools/run_artifacts.py",
+      "owner": "M08.execution",
+      "reason": "M08.execution 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        },
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/run_store.py",
+      "owner": "M08.execution",
+      "reason": "M08.execution 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        },
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/selected_tests.py",
+      "owner": "M08.selection",
+      "reason": "M08.selection 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.execution",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.execution 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-EXECUTION-03",
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/summarizer.py",
+      "owner": "M08.closure",
+      "reason": "M08.closure 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-CLOSURE-01",
+        "M08-IMPACT-CLOSURE-02",
+        "M08-IMPACT-CLOSURE-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.closure 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/task_reporting.py",
+      "owner": "M08.reporting",
+      "reason": "M08.reporting 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-REPORTING-01",
+        "M08-IMPACT-REPORTING-02"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/tools/test_collection.py",
+      "owner": "M08.selection",
+      "reason": "M08.selection 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.execution",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.execution 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-EXECUTION-03",
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/validator.py",
+      "owner": "M08.closure",
+      "reason": "M08.closure 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-CLOSURE-01",
+        "M08-IMPACT-CLOSURE-02",
+        "M08-IMPACT-CLOSURE-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.closure 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/verification_config.py",
+      "owner": "M08.selection",
+      "reason": "M08.selection 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.execution",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.execution 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-EXECUTION-03",
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/verification_inputs.py",
+      "owner": "M08.execution",
+      "reason": "M08.execution 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        },
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/tools/verification_resume.py",
+      "owner": "M08.execution",
+      "reason": "M08.execution 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        },
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.selection",
+      "reason": "M08.selection 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.execution",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.execution 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-EXECUTION-03",
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.py",
+      "owner": "M08.selection",
+      "reason": "M08.selection 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.execution",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.execution 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-EXECUTION-03",
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_assistant_dev_process.py",
+      "owner": "M08.execution",
+      "reason": "M08.execution 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        },
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_documentation_impact.py",
+      "owner": "M08.closure",
+      "reason": "M08.closure 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-CLOSURE-01",
+        "M08-IMPACT-CLOSURE-02",
+        "M08-IMPACT-CLOSURE-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.closure 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_gate_supervision.py",
+      "owner": "M08.execution",
+      "reason": "M08.execution 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        },
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_history_integrity.py",
+      "owner": "M08.closure",
+      "reason": "M08.closure 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-CLOSURE-01",
+        "M08-IMPACT-CLOSURE-02",
+        "M08-IMPACT-CLOSURE-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.closure 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_impact.py",
+      "owner": "M08.selection",
+      "reason": "M08.selection 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.execution",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.execution 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-EXECUTION-03",
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_isolated_verification.py",
+      "owner": "M08.execution",
+      "reason": "M08.execution 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        },
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_lifecycle.py",
+      "owner": "M08.closure",
+      "reason": "M08.closure 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-CLOSURE-01",
+        "M08-IMPACT-CLOSURE-02",
+        "M08-IMPACT-CLOSURE-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.closure 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_module_coverage.py",
+      "owner": "M08.selection",
+      "reason": "M08.selection 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.execution",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.execution 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-EXECUTION-03",
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_product_verification.py",
+      "owner": "M08.execution",
+      "reason": "M08.execution 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        },
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_required_checks.py",
+      "owner": "M08.selection",
+      "reason": "M08.selection 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.execution",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.execution 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-EXECUTION-03",
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_result_reporting.py",
+      "owner": "M08.reporting",
+      "reason": "M08.reporting 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-REPORTING-01",
+        "M08-IMPACT-REPORTING-02"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/tests/test_task_reporting.py",
+      "owner": "M08.reporting",
+      "reason": "M08.reporting 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-REPORTING-01",
+        "M08-IMPACT-REPORTING-02"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/tests/test_verification_resume.py",
+      "owner": "M08.execution",
+      "reason": "M08.execution 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-EXECUTION-01",
+        "M08-IMPACT-EXECUTION-02",
+        "M08-IMPACT-EXECUTION-03",
+        "M08-IMPACT-EXECUTION-04"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        },
+        {
+          "unit": "M08.reporting",
+          "affected": true,
+          "reason": "M08.execution 改变选择、执行或凭据传递，M08.reporting 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-REPORTING-01",
+            "M08-IMPACT-REPORTING-02"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/tests/test_impact_cli.py",
+      "owner": "M08.selection",
+      "reason": "M08.selection 的实现或直接验证合同发生变化，检查该单元的边界与失败路径。",
+      "cases": [
+        "M08-IMPACT-SELECTION-01",
+        "M08-IMPACT-SELECTION-02",
+        "M08-IMPACT-SELECTION-03"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.execution",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.execution 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-EXECUTION-01",
+            "M08-IMPACT-EXECUTION-02",
+            "M08-IMPACT-EXECUTION-03",
+            "M08-IMPACT-EXECUTION-04"
+          ]
+        },
+        {
+          "unit": "M08.closure",
+          "affected": true,
+          "reason": "M08.selection 改变选择、执行或凭据传递，M08.closure 消费这一合同。",
+          "cases": [
+            "M08-IMPACT-CLOSURE-01",
+            "M08-IMPACT-CLOSURE-02",
+            "M08-IMPACT-CLOSURE-03"
+          ]
+        }
+      ]
+    }
+  ]
+}

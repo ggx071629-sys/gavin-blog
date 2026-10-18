@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260906-local-capacity-plan",
+  "created_at": "2026-09-06T10:13:02.956424+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "64de603ff8ca5b176ba646c25821f51078a50c245e0c1d8a34e4c69a01a4d786"
+}

@@ -1,0 +1,1402 @@
+{
+  "schema_version": 2,
+  "task_id": "20260910-studio-writing-acceptance",
+  "created_at": "2026-09-10T09:45:32.154903+00:00",
+  "command": "python -m tools.harness verify 20260910-studio-writing-acceptance",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "web-quality",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "web-quality",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "web-quality",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "8cd25f3c5963b63d8d249ff2b26b188ac305a020",
+    "active_spec_sha256": "5b9d5bf0793f8acbbc12a90e3907f208d1090330974ef1527aa5a7bde8a1377b",
+    "verification_contract_sha256": "b4a7827fc2a04bed2671e9138820fb32aa90e5b434927ccc0cb5770b6fc52b36",
+    "gate_config_sha256": "b3bbff589fcff9e9ffacd945960f68b4770c25c0dd6169bf336a2130aa072d4a",
+    "documentation_contract_sha256": "18c9d754ae9af8e98851c6b87dd2aa74e9b4cefa32164a698f4231e4117d28ea",
+    "documentation_targets_sha256": "493c8dc024ba3eb01c3fe05b05b59a5fd4c455fd766b90b1473b6c98719eef07",
+    "module_contract_sha256": "04f908cd7bd9fc0ade1c5b7f5a35808a0a57f60a853515b1811dcd28a87b3e21"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录本任务页面的设计实现及实际行为边界。",
+    "targets": [
+      "apps/web/public/studio/README.md"
+    ],
+    "baseline_commit": "0300c6262f846bfe01d1e47281ead73ae3ef9ce7",
+    "target_blobs": {
+      "apps/web/public/studio/README.md": "adfb77987189b453506f5e2511fbb7f9dcd5e8df"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "e701994ed99bf678de7f44376796374eb745d4c3",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260910-studio-writing-acceptance.json",
+      "sha256": "2d14545e3828d0c6b13f4221496210daab38a950f46fea807e2527275e1473fe",
+      "selected_cases": [
+        "M02-DESK-RESOURCES-01",
+        "M02-DESK-SAFETY-01",
+        "M02-STUDIO-ARTICLE-EDITOR-01",
+        "M02-STUDIO-PREVIEW-01",
+        "M02-STUDIO-REVISIONS-01",
+        "M02-STUDIO-WORKSPACE-01",
+        "M02-UNIT-ARTICLE-LOOP-01",
+        "M02-UNIT-EDITOR-SAVE-CONTRACT-01",
+        "M03-STUDIO-BOOK-EDITOR-01",
+        "M04-STUDIO-PROJECT-EDITOR-01"
+      ],
+      "selected_refs": 11,
+      "excluded_cases": 240
+    },
+    "receipt": {
+      "run_id": "ece7000f0b1bd91d8290e181fe5729f2",
+      "identity": "7fbd21c94b7b22d461cdbd3e8b47ef9e6cfac27f4a45cb699723e81519836198",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "web-quality",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1255.73,
+      "plan_inputs": 803.688,
+      "execute_cleanup_and_input_recheck": 373058.443
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "04f908cd7bd9fc0ade1c5b7f5a35808a0a57f60a853515b1811dcd28a87b3e21",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "web-quality",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M02-DESK-SAFETY-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "writing desk saves retries blocks conflicts and reveals hidden invalid fields",
+            "expectations": [
+              {
+                "id": "M02-DESK-SAFETY-01-E01",
+                "surface": "user_visible",
+                "statement": "Real three-type mobile creation reveals missing Slug, saves and publishes; working updates remain private; failed saves retain input, retry and publish exact latest text; real concurrent updates produce conflicts; new drafts and dirty edits warn before loss."
+              },
+              {
+                "id": "M02-DESK-SAFETY-01-E02",
+                "surface": "forbidden",
+                "statement": "Failed or conflicting saves cannot navigate away or issue publish; unpublished working content never appears publicly; publish failure must not navigate or discard text."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk saves retries blocks conflicts and reveals hidden invalid fields",
+                "gate": "e2e",
+                "covers": [
+                  "M02-DESK-SAFETY-01-E01",
+                  "M02-DESK-SAFETY-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M02-DESK-RESOURCES-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "writing desk media and incomplete references remain explicit through publication",
+            "expectations": [
+              {
+                "id": "M02-DESK-RESOURCES-01-E01",
+                "surface": "user_visible",
+                "statement": "New article uploads a real isolated image; Alt validation returns to Markdown; incomplete references declare their unsaved status and focus settings; completing a project reference persists and publishes its real link and image."
+              },
+              {
+                "id": "M02-DESK-RESOURCES-01-E02",
+                "surface": "forbidden",
+                "statement": "Missing Alt cannot publish; incomplete references cannot be silently lost on navigation or described as saved."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk media and incomplete references remain explicit through publication",
+                "gate": "e2e",
+                "covers": [
+                  "M02-DESK-RESOURCES-01-E01",
+                  "M02-DESK-RESOURCES-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M02-UNIT-ARTICLE-LOOP-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "M02.editing: article-loop scenarios at the existing module boundary.",
+            "expectations": [
+              {
+                "id": "M02-UNIT-ARTICLE-LOOP-01-E01",
+                "surface": "response",
+                "statement": "content publishing loop"
+              },
+              {
+                "id": "M02-UNIT-ARTICLE-LOOP-01-E02",
+                "surface": "forbidden",
+                "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/article-loop.spec.ts",
+                "name": "loop",
+                "gate": "e2e",
+                "covers": [
+                  "M02-UNIT-ARTICLE-LOOP-01-E01",
+                  "M02-UNIT-ARTICLE-LOOP-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "web-quality",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M02-STUDIO-WORKSPACE-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "六个写作入口的工作面、手机上下排列、真实工具栏与预览保持可操作。",
+            "expectations": [
+              {
+                "id": "M02-STUDIO-WORKSPACE-01-E01",
+                "surface": "user_visible",
+                "statement": "六个写作入口的工作面、手机上下排列、真实工具栏与预览保持可操作。"
+              },
+              {
+                "id": "M02-STUDIO-WORKSPACE-01-E02",
+                "surface": "forbidden",
+                "statement": "不得替换真实媒体和保存队列，不得产生横溢、axe 违规或页面错误。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "kind": "playwright",
+                "name": "workspace",
+                "gate": "e2e",
+                "covers": [
+                  "M02-STUDIO-WORKSPACE-01-E01",
+                  "M02-STUDIO-WORKSPACE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M02-STUDIO-ARTICLE-EDITOR-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "文章新建编辑分区、校验保存后确认发布、取消保留草稿和工作副本隔离。",
+            "expectations": [
+              {
+                "id": "M02-STUDIO-ARTICLE-EDITOR-01-E01",
+                "surface": "user_visible",
+                "statement": "文章新建编辑分区、校验保存后确认发布、取消保留草稿和工作副本隔离。"
+              },
+              {
+                "id": "M02-STUDIO-ARTICLE-EDITOR-01-E02",
+                "surface": "forbidden",
+                "statement": "取消或仅自动保存不得改变公开版本，发布不得跳过保存屏障或使用旧版本。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "kind": "playwright",
+                "name": "article",
+                "gate": "e2e",
+                "covers": [
+                  "M02-STUDIO-ARTICLE-EDITOR-01-E01",
+                  "M02-STUDIO-ARTICLE-EDITOR-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M03-STUDIO-BOOK-EDITOR-01",
+            "module_id": "M03",
+            "module_name": "栏目、标签与全站搜索",
+            "priority": "P1",
+            "scenario": "读书书名与作者阅读封面设置分区，保存后确认发布和页内预览。",
+            "expectations": [
+              {
+                "id": "M03-STUDIO-BOOK-EDITOR-01-E01",
+                "surface": "user_visible",
+                "statement": "读书书名与作者阅读封面设置分区，保存后确认发布和页内预览。"
+              },
+              {
+                "id": "M03-STUDIO-BOOK-EDITOR-01-E02",
+                "surface": "forbidden",
+                "statement": "取消或仅自动保存不得改变公开版本，发布不得跳过保存屏障或使用旧版本。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "kind": "playwright",
+                "name": "book",
+                "gate": "e2e",
+                "covers": [
+                  "M03-STUDIO-BOOK-EDITOR-01-E01",
+                  "M03-STUDIO-BOOK-EDITOR-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M04-STUDIO-PROJECT-EDITOR-01",
+            "module_id": "M04",
+            "module_name": "项目与读书笔记",
+            "priority": "P1",
+            "scenario": "项目链接与关联文章分区、保存后确认发布、页内预览和公开副本隔离。",
+            "expectations": [
+              {
+                "id": "M04-STUDIO-PROJECT-EDITOR-01-E01",
+                "surface": "user_visible",
+                "statement": "项目链接与关联文章分区、保存后确认发布、页内预览和公开副本隔离。"
+              },
+              {
+                "id": "M04-STUDIO-PROJECT-EDITOR-01-E02",
+                "surface": "forbidden",
+                "statement": "取消或仅自动保存不得改变公开版本，发布不得跳过保存屏障或使用旧版本。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "kind": "playwright",
+                "name": "project",
+                "gate": "e2e",
+                "covers": [
+                  "M04-STUDIO-PROJECT-EDITOR-01-E01",
+                  "M04-STUDIO-PROJECT-EDITOR-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M02-STUDIO-PREVIEW-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "Studio 草稿预览标记、真实正文与代码复制、返回编辑及公开快照隔离。",
+            "expectations": [
+              {
+                "id": "M02-STUDIO-PREVIEW-01-E01",
+                "surface": "user_visible",
+                "statement": "Studio 草稿预览标记、真实正文与代码复制、返回编辑及公开快照隔离。"
+              },
+              {
+                "id": "M02-STUDIO-PREVIEW-01-E02",
+                "surface": "forbidden",
+                "statement": "取消或仅自动保存不得改变公开版本，发布不得跳过保存屏障或使用旧版本。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "kind": "playwright",
+                "name": "preview",
+                "gate": "e2e",
+                "covers": [
+                  "M02-STUDIO-PREVIEW-01-E01",
+                  "M02-STUDIO-PREVIEW-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M02-STUDIO-REVISIONS-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "版本页开放列表、当前与选中快照区分、加载错误恢复、真实比较与响应式读取。",
+            "expectations": [
+              {
+                "id": "M02-STUDIO-REVISIONS-01-E01",
+                "surface": "user_visible",
+                "statement": "版本页开放列表、当前与选中快照区分、加载错误恢复、真实比较与响应式读取。"
+              },
+              {
+                "id": "M02-STUDIO-REVISIONS-01-E02",
+                "surface": "forbidden",
+                "statement": "取消或仅自动保存不得改变公开版本，发布不得跳过保存屏障或使用旧版本。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "kind": "playwright",
+                "name": "revisions",
+                "gate": "e2e",
+                "covers": [
+                  "M02-STUDIO-REVISIONS-01-E01",
+                  "M02-STUDIO-REVISIONS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "e2e",
+          "web-quality",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M02-UNIT-EDITOR-SAVE-CONTRACT-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "M02.editing: editor-save-contract scenarios at the existing module boundary.",
+            "expectations": [
+              {
+                "id": "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E01",
+                "surface": "response",
+                "statement": "disables published slugs and sends article publish versions; surfaces trash errors and published preview honestly"
+              },
+              {
+                "id": "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E02",
+                "surface": "forbidden",
+                "statement": "The selected assertions must not produce a different result or mutate input beyond their declared expectations."
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/editor-save-contract.test.ts",
+                "name": "disables published slugs and sends article publish versions",
+                "gate": "web-quality",
+                "covers": [
+                  "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E01",
+                  "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/editor-save-contract.test.ts",
+                "name": "surfaces trash errors and published preview honestly",
+                "gate": "web-quality",
+                "covers": [
+                  "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E01",
+                  "M02-UNIT-EDITOR-SAVE-CONTRACT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.07,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "151 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 192.969,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 73.282,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.557,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "766 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 358.103,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "270 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 86.342,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 250 cases, 501 expectations, 878 exact test references; contract sha256 04f908cd7bd9"
+      ],
+      "status": "passed",
+      "duration_ms": 447.25,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.154,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.911,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 78.208,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "duration_ms": 1551.49,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "ece7000f0b1bd91d8290e181fe5729f2",
+        "attempt_id": "9da16bc5e47eaa5fbddb8dc0b14a42b9"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-writing-acceptance --gate e2e",
+      "status": "passed",
+      "duration_ms": 365066.421,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 10677,
+        "selection_counts": {
+          "collected": 9,
+          "executed": 9
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk media and incomplete references remain explicit through publication"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk saves retries blocks conflicts and reveals hidden invalid fields"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "article"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "preview"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "revisions"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "workspace"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/article-loop.spec.ts",
+                "name": "loop"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "book"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "project"
+              }
+            ],
+            "duration_ms": 2787.373,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk media and incomplete references remain explicit through publication"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk saves retries blocks conflicts and reveals hidden invalid fields"
+              }
+            ],
+            "duration_ms": 1463.607
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "article"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "preview"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "revisions"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "workspace"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "book"
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "project"
+              }
+            ],
+            "duration_ms": 1568.77
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/article-loop.spec.ts",
+                "name": "loop"
+              }
+            ],
+            "duration_ms": 1420.456
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk media and incomplete references remain explicit through publication",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "writing desk media and incomplete references remain explicit through publication"
+                ]
+              }
+            ],
+            "duration_ms": 1275.406,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk media and incomplete references remain explicit through publication",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "writing desk media and incomplete references remain explicit through publication"
+                ]
+              }
+            ],
+            "duration_ms": 32540.321,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk saves retries blocks conflicts and reveals hidden invalid fields",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "writing desk saves retries blocks conflicts and reveals hidden invalid fields"
+                ]
+              }
+            ],
+            "duration_ms": 1291.538,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/writing-desk.spec.ts",
+                "name": "writing desk saves retries blocks conflicts and reveals hidden invalid fields",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "writing desk saves retries blocks conflicts and reveals hidden invalid fields"
+                ]
+              }
+            ],
+            "duration_ms": 60433.278,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "article",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "article"
+                ]
+              }
+            ],
+            "duration_ms": 1295.273,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "article",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "article"
+                ]
+              }
+            ],
+            "duration_ms": 34156.477,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "preview",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "preview"
+                ]
+              }
+            ],
+            "duration_ms": 1319.144,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "preview",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "preview"
+                ]
+              }
+            ],
+            "duration_ms": 28368.628,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "revisions",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "revisions"
+                ]
+              }
+            ],
+            "duration_ms": 1276.245,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "revisions",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "revisions"
+                ]
+              }
+            ],
+            "duration_ms": 29172.098,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "workspace",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "workspace"
+                ]
+              }
+            ],
+            "duration_ms": 1389.06,
+            "batch_id": "batch-0006"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "workspace",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "workspace"
+                ]
+              }
+            ],
+            "duration_ms": 55772.351,
+            "batch_id": "batch-0006"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "book",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "book"
+                ]
+              }
+            ],
+            "duration_ms": 1268.38,
+            "batch_id": "batch-0007"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "book",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "book"
+                ]
+              }
+            ],
+            "duration_ms": 32816.479,
+            "batch_id": "batch-0007"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "project",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "project"
+                ]
+              }
+            ],
+            "duration_ms": 1306.675,
+            "batch_id": "batch-0008"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "project",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "project"
+                ]
+              }
+            ],
+            "duration_ms": 34156.35,
+            "batch_id": "batch-0008"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/article-loop.spec.ts",
+                "name": "loop",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "loop"
+                ]
+              }
+            ],
+            "duration_ms": 1217.154,
+            "batch_id": "batch-0009"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/article-loop.spec.ts",
+                "name": "loop",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "loop"
+                ]
+              }
+            ],
+            "duration_ms": 38412.15,
+            "batch_id": "batch-0009"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\4aac216400e9bf94415eb78dc59a10188cff6d4a59c1b666b0c2a06fd4681aeb\\artifacts\\ece7000f0b1bd91d8290e181fe5729f2\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "ece7000f0b1bd91d8290e181fe5729f2",
+        "attempt_id": "d473c5f9d57b50a17ecd71789eb84d95"
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-writing-acceptance --gate web-quality",
+      "status": "passed",
+      "duration_ms": 4600.986,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 2165,
+        "selection_counts": {
+          "collected": 2,
+          "executed": 2
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "reused-in-worktree",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/editor-save-contract.test.ts",
+                "name": "disables published slugs and sends article publish versions"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/editor-save-contract.test.ts",
+                "name": "surfaces trash errors and published preview honestly"
+              }
+            ],
+            "duration_ms": 4.492,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/editor-save-contract.test.ts",
+                "name": "disables published slugs and sends article publish versions"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/editor-save-contract.test.ts",
+                "name": "surfaces trash errors and published preview honestly"
+              }
+            ],
+            "duration_ms": 2146.964
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/editor-save-contract.test.ts",
+                "name": "disables published slugs and sends article publish versions",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "editor save safety contract",
+                  "disables published slugs and sends article publish versions"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/editor-save-contract.test.ts",
+                "name": "surfaces trash errors and published preview honestly",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "editor save safety contract",
+                  "surfaces trash errors and published preview honestly"
+                ]
+              }
+            ],
+            "duration_ms": 2038.277,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\4aac216400e9bf94415eb78dc59a10188cff6d4a59c1b666b0c2a06fd4681aeb\\artifacts\\ece7000f0b1bd91d8290e181fe5729f2\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "ece7000f0b1bd91d8290e181fe5729f2",
+        "attempt_id": "7c55df30fa3676e3a05cdcc03b2c7a4c"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1477.383,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 373949.126,
+    "failures": []
+  },
+  "source_commit": "e701994ed99bf678de7f44376796374eb745d4c3"
+}

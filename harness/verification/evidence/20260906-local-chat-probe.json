@@ -1,0 +1,570 @@
+{
+  "schema_version": 2,
+  "task_id": "20260906-local-chat-probe",
+  "created_at": "2026-09-06T11:46:59.025817+00:00",
+  "command": "python -m tools.harness verify 20260906-local-chat-probe",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "f624eb18525ba210678c228aa7307ba74fe8f78e",
+    "active_spec_sha256": "ac4312d4a6bc31e84992bdef22726f18445b9d8a31e8887fe9a34ee6d9fe1e70",
+    "verification_contract_sha256": "af1c924c3e44d976f33940afbe90a24c615f03f675f040924a26f35900ae00cc",
+    "gate_config_sha256": "1fcc6c2d847ad51075bae7a07bcfa55ee78e4369618c4c88a48d93034ff81b0a",
+    "documentation_contract_sha256": "bcb27adf1d5f7d3d62090b524ef1be7eded9eb80d4bbf66313d69b1ed33e04f4",
+    "documentation_targets_sha256": "abdeee213ade137461e32baac7fb77bacd38c449aff2f67caec9b697755b0350",
+    "module_contract_sha256": "f7e2e6908f6e83ed942bf3687eac46c7cdda169d494187d2c6d08e20da070eaf"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录显式本机探测命令、既有预算复用及与生产资格隔离。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "c44614248837c6bf509d32e0b17405384fd70e56",
+    "target_blobs": {
+      "apps/api/README.md": "a1585280af3b8580159fed3bf61f6e3204f5d47d"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "7240dbc0b26120eb699bd083717e17293fd9a4f1",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260906-local-chat-probe.json",
+      "sha256": "b2ac82bbf8ef3257ee10f3844de6c537e94fe3803d845100f1067e04bea9b1c3",
+      "selected_cases": [
+        "M10-LOCAL-CHAT-BUDGET-01",
+        "M10-LOCAL-CHAT-ISOLATION-01",
+        "M10-LOCAL-CHAT-PROBE-01"
+      ],
+      "selected_refs": 9,
+      "excluded_cases": 190
+    },
+    "receipt": {
+      "run_id": "95338590a7ed0cae905e1195f5318977",
+      "identity": "c903eceaf7fd01e45cc1aa0bec9ff8985ce8ef02f6caefeb8a2ca345c309d73d",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1174.002,
+      "plan_inputs": 1082.278,
+      "execute_cleanup_and_input_recheck": 11269.082
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "f7e2e6908f6e83ed942bf3687eac46c7cdda169d494187d2c6d08e20da070eaf",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-LOCAL-CHAT-PROBE-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "显式本机探测验证配置、模型和脱敏结果。",
+            "expectations": [
+              {
+                "id": "M10-LOCAL-CHAT-PROBE-01-ALLOW",
+                "surface": "response",
+                "statement": "有效开发配置使用真实传输并记录应用schema、用量与身份来源。"
+              },
+              {
+                "id": "M10-LOCAL-CHAT-PROBE-01-DENY",
+                "surface": "forbidden",
+                "statement": "生产、在线开启、缺配置或输入不适配时不得发送请求。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "kind": "pytest",
+                "name": "test_local_chat_probe_preconditions_and_allowlisted_result",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-LOCAL-CHAT-PROBE-01-ALLOW",
+                  "M10-LOCAL-CHAT-PROBE-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-LOCAL-CHAT-BUDGET-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "连续本机探测复用现有预算锁与结算。",
+            "expectations": [
+              {
+                "id": "M10-LOCAL-CHAT-BUDGET-01-ALLOW",
+                "surface": "response",
+                "statement": "成功按usage结算，未知usage按预留结算。"
+              },
+              {
+                "id": "M10-LOCAL-CHAT-BUDGET-01-DENY",
+                "surface": "forbidden",
+                "statement": "超额度、配置漂移或未完成/失败尝试不得再次发送。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "kind": "pytest",
+                "name": "test_local_chat_probe_reuses_budget_and_rejects_drift",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-LOCAL-CHAT-BUDGET-01-ALLOW",
+                  "M10-LOCAL-CHAT-BUDGET-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-LOCAL-CHAT-ISOLATION-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "本机artifact与原生产探测合同并存。",
+            "expectations": [
+              {
+                "id": "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                "surface": "response",
+                "statement": "原生产profile、用量、身份与多批次费用合同继续通过。"
+              },
+              {
+                "id": "M10-LOCAL-CHAT-ISOLATION-01-DENY",
+                "surface": "forbidden",
+                "statement": "本机artifact不得冒充生产资格，schema内容不匹配不得通过。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "kind": "pytest",
+                "name": "test_local_chat_probe_cannot_be_production_qualification",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                  "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "kind": "pytest",
+                "name": "test_probe_requires_explicit_selection_and_exact_profile_digest",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                  "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "kind": "pytest",
+                "name": "test_real_embedding_adapter_enforces_approved_batch_cap",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                  "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "kind": "pytest",
+                "name": "test_probe_records_allowlisted_real_provider_facts_and_bounded_cost",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                  "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "kind": "pytest",
+                "name": "test_missing_usage_is_measured_fail_and_conservatively_settled",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                  "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "kind": "pytest",
+                "name": "test_cost_envelope_blocks_before_network_call",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                  "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "kind": "pytest",
+                "name": "test_embedding_probe_counts_provider_batches_in_call_envelope",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-LOCAL-CHAT-ISOLATION-01-ALLOW",
+                  "M10-LOCAL-CHAT-ISOLATION-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 5.472,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "118 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 239.973,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 75.731,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.672,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "511 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 272.092,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "229 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 69.204,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "10 modules, 193 cases, 386 expectations, 723 exact test references; contract sha256 f7e2e6908f6e"
+      ],
+      "status": "passed",
+      "duration_ms": 414.802,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.168,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.877,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 79.75,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "duration_ms": 1637.477,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "95338590a7ed0cae905e1195f5318977",
+        "attempt_id": "447c824a34996a473d6a12ee28219ce6"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260906-local-chat-probe --gate api-tests",
+      "status": "passed",
+      "duration_ms": 7758.249,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1816,
+        "selection_counts": {
+          "collected": 9,
+          "executed": 9
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_reuses_budget_and_rejects_drift"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_cannot_be_production_qualification"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_probe_requires_explicit_selection_and_exact_profile_digest"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_real_embedding_adapter_enforces_approved_batch_cap"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_probe_records_allowlisted_real_provider_facts_and_bounded_cost"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_missing_usage_is_measured_fail_and_conservatively_settled"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_cost_envelope_blocks_before_network_call"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_embedding_probe_counts_provider_batches_in_call_envelope"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_provider_qualification.py",
+                "name": "test_local_chat_probe_preconditions_and_allowlisted_result"
+              }
+            ],
+            "duration_ms": 7325.468,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\8d61f136e297c5f98334f04f593bdd9df4cd67785290ae0a9bbf6dbb81b945a2\\artifacts\\95338590a7ed0cae905e1195f5318977\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "95338590a7ed0cae905e1195f5318977",
+        "attempt_id": "596f9e801b225a14d24957f37d92b22b"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1575.241,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 12141.708,
+    "failures": []
+  },
+  "source_commit": "7240dbc0b26120eb699bd083717e17293fd9a4f1"
+}

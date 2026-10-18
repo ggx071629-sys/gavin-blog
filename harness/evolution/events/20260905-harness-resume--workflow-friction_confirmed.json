@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "event_type": "workflow.friction_confirmed",
+  "task_id": "20260905-harness-resume",
+  "created_at": "2026-09-05T14:00:11.691199+00:00",
+  "source": "manual",
+  "reason": "Gavin 在本次实施中重新确认：Harness 的缺陷不仅是重复全量验证，还包括小改动触发过大的测试与收集范围，消耗过多 token 和推进时间。真实同 HEAD 复用仍耗时约 116 秒；全复用后的 close 因隔离检查记录兼容问题被拒绝。需要以按影响验证和端到端成本重订方案。",
+  "may_modify_agents_md": false
+}

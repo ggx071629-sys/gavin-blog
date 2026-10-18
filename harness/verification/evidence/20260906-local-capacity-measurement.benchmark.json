@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-06T10:33:37.690175+00:00",
+  "scope": "local-Windows-capacity-estimate-no-Chat",
+  "model": "intfloat/multilingual-e5-small",
+  "model_version": "614241f622f53c4eeff9890bdc4f31cfecc418b3:e5-fp32-mean-l2-v1",
+  "pipeline": "assistant-e5-token384-overlap64-v1",
+  "corpus": {
+    "documents": 41,
+    "article_repetitions": 24,
+    "corpus_sha256": "bc860a6a7593567ac63d875956ed1233d5a00ea77119372a74df4d778bb275dc",
+    "source_dataset_sha256": "1e9b70059c06ad8bba7df110258ee710ad6404c2c76ec3ff753c2b938a6cd997",
+    "generations": [
+      {
+        "id": 1,
+        "collection": "e5_capacity_3d82319af254dab6850c_1",
+        "status": "previous",
+        "chunks": 1001
+      },
+      {
+        "id": 2,
+        "collection": "e5_capacity_3d82319af254dab6850c_2",
+        "status": "active",
+        "chunks": 1001
+      }
+    ]
+  },
+  "collector": "Windows CIM/Get-Process, nominal 1 second, descendant process trees",
+  "cold_start_scope": "process start, filesystem caches not flushed",
+  "load": "closed-loop single query, nominal 1 request/s plus SSR and article list",
+  "code_sha256": {
+    "capacity.py": "d75a51a49d4bd08cdafc7feb3eefa0c32ebe5020b3e8bb4c3f58b2fb3774b742",
+    "capacity_roles.py": "1b2d123b94f03b72d4bc8003bf9f16a91042f9d19517229709c5564e01929849",
+    "capacity_metrics.py": "c4c4d147a6573b70b895e1db7e5058426155f9ccf515835a4fed364fc6895363",
+    "sample-capacity.ps1": "32a3f5f387f5ecfcae572a3b017902069fc1065abfd822e5fd2d4bc64f4310f0"
+  },
+  "cleanup_complete": true,
+  "run_valid": true,
+  "failure_type": null,
+  "chat_called": false,
+  "production_qualified": false,
+  "limitations": [
+    "Windows-specific measurements; not cloud-vCPU performance",
+    "short controlled synthetic load; no endurance or large-corpus proof",
+    "system paging includes unrelated background processes",
+    "API retrieval benchmark adapter; online Chat/session/checkpoint path not measured",
+    "working sets/shared pages/OS cache can overlap in conservative memory estimate",
+    "disk uses logical bytes; hardlinked model counted as one deployable artifact set"
+  ],
+  "hardware": {
+    "total_memory_bytes": 14877257728,
+    "os": "Microsoft Windows 11 专业版",
+    "cpu": [
+      {
+        "Name": "AMD Ryzen 7 5800H with Radeon Graphics         ",
+        "NumberOfCores": 8,
+        "NumberOfLogicalProcessors": 16
+      }
+    ]
+  },
+  "disk_bytes": {
+    "model_artifacts": 493292829,
+    "api_venv": 267690498,
+    "inference_venv": 3526177636,
+    "nuxt_output": 15915397,
+    "node_executable": 92534088,
+    "qdrant_executable": 84692480,
+    "content_db": 3477504,
+    "content_wal": 4387832,
+    "runtime_db": 237568,
+    "qdrant_generations": 1984556408,
+    "qdrant_snapshot": 992737856,
+    "content_snapshot": 3588096,
+    "media": 0,
+    "api_python_runtime": 222982678,
+    "inference_python_runtime": 64938548,
+    "run_logs": 109432
+  },
+  "startup": {
+    "services_ready_seconds": 13.59299999999348,
+    "first_index_ready_seconds": 78.23400000005495,
+    "overlap_window_until_ready_seconds": 59.85999999998603
+  },
+  "restricted_affinity_mask": 3,
+  "restricted_logical_processors": 2,
+  "web_entry_sha256": "942881a7ba3e0a18eb51015b948ef8a7d11281446b1e832d6785fc4cd0788f27",
+  "queries_sha256": "25a3685e7f52e50891f727c01365fbd86099b99e1f8c17839d399827ca2e16b8",
+  "resources": {
+    "phases": {
+      "cold": {
+        "samples": 13,
+        "observed_interval_seconds": 12.029000043869019,
+        "sample_interval_p95_seconds": 1.0959999561309814,
+        "working_set_peak_bytes": 1496154112,
+        "private_peak_bytes": 3794583552,
+        "core_equivalent_mean": 1.306789248454096,
+        "core_equivalent_p95": 2.028023203257308,
+        "core_equivalent_peak": 2.028023203257308,
+        "available_memory_min_bytes": 3131441152,
+        "system_committed_peak_bytes": 24894459904,
+        "system_cpu_p95_percent": 40.0,
+        "system_pages_in_p95": 9637,
+        "system_pages_out_p95": 0,
+        "collector_p95_seconds": 1.2329426,
+        "background_working_set_sum_peak_bytes": 8543064064,
+        "background_private_sum_peak_bytes": 16858943488
+      },
+      "near_limit": {
+        "samples": 15,
+        "observed_interval_seconds": 15.18500018119812,
+        "sample_interval_p95_seconds": 1.070000171661377,
+        "working_set_peak_bytes": 2168737792,
+        "private_peak_bytes": 4845322240,
+        "core_equivalent_mean": 0.32055920988267506,
+        "core_equivalent_p95": 0.49649524744947865,
+        "core_equivalent_peak": 0.49649524744947865,
+        "available_memory_min_bytes": 2564591616,
+        "system_committed_peak_bytes": 25978257408,
+        "system_cpu_p95_percent": 30.0,
+        "system_pages_in_p95": 29927,
+        "system_pages_out_p95": 0,
+        "collector_p95_seconds": 0.9299573,
+        "background_working_set_sum_peak_bytes": 8467529728,
+        "background_private_sum_peak_bytes": 16831774720
+      },
+      "rebuild": {
+        "samples": 59,
+        "observed_interval_seconds": 59.69599986076355,
+        "sample_interval_p95_seconds": 1.0729999542236328,
+        "working_set_peak_bytes": 2281857024,
+        "private_peak_bytes": 4884480000,
+        "core_equivalent_mean": 1.063611725089693,
+        "core_equivalent_p95": 1.1888588771472695,
+        "core_equivalent_peak": 1.2956564513054183,
+        "available_memory_min_bytes": 2419314688,
+        "system_committed_peak_bytes": 26102382592,
+        "system_cpu_p95_percent": 35.0,
+        "system_pages_in_p95": 1874,
+        "system_pages_out_p95": 0,
+        "collector_p95_seconds": 0.9699206,
+        "background_working_set_sum_peak_bytes": 8630874112,
+        "background_private_sum_peak_bytes": 16908713984
+      },
+      "restricted": {
+        "samples": 30,
+        "observed_interval_seconds": 30.35599994659424,
+        "sample_interval_p95_seconds": 1.0499999523162842,
+        "working_set_peak_bytes": 2215186432,
+        "private_peak_bytes": 4887818240,
+        "core_equivalent_mean": 0.1271794963239791,
+        "core_equivalent_p95": 0.18011525166440653,
+        "core_equivalent_peak": 0.1856435661093416,
+        "available_memory_min_bytes": 3280949248,
+        "system_committed_peak_bytes": 26115457024,
+        "system_cpu_p95_percent": 25.0,
+        "system_pages_in_p95": 287,
+        "system_pages_out_p95": 0,
+        "collector_p95_seconds": 0.8813053,
+        "background_working_set_sum_peak_bytes": 7810777088,
+        "background_private_sum_peak_bytes": 16912760832
+      },
+      "steady": {
+        "samples": 25,
+        "observed_interval_seconds": 30.179999828338623,
+        "sample_interval_p95_seconds": 1.065999984741211,
+        "working_set_peak_bytes": 2148446208,
+        "private_peak_bytes": 4809625600,
+        "core_equivalent_mean": 0.17754807633724468,
+        "core_equivalent_p95": 0.5757420686777286,
+        "core_equivalent_peak": 0.8782200463659876,
+        "available_memory_min_bytes": 2611826688,
+        "system_committed_peak_bytes": 25929809920,
+        "system_cpu_p95_percent": 15.0,
+        "system_pages_in_p95": 280,
+        "system_pages_out_p95": 0,
+        "collector_p95_seconds": 0.9050532,
+        "background_working_set_sum_peak_bytes": 8432029696,
+        "background_private_sum_peak_bytes": 16815996928
+      }
+    },
+    "role_peaks": {
+      "qdrant": {
+        "working_set": 159657984,
+        "private_bytes": 35299328
+      },
+      "model": {
+        "working_set": 1044983808,
+        "private_bytes": 2801168384
+      },
+      "api": {
+        "working_set": 496508928,
+        "private_bytes": 980680704
+      },
+      "web": {
+        "working_set": 158269440,
+        "private_bytes": 132702208
+      },
+      "worker": {
+        "working_set": 472629248,
+        "private_bytes": 972898304
+      }
+    },
+    "working_set_peak_sum_bytes": 2332049408,
+    "private_peak_sum_bytes": 4922748928,
+    "service_envelope_bytes": 4922748928,
+    "headroom_bytes": 1476824679,
+    "assumed_os_cache_mib_range": [
+      768,
+      1536
+    ],
+    "estimated_memory_gib_range": [
+      7,
+      8
+    ],
+    "busy_p95_core_equivalent": 1.1888588771472695,
+    "assumed_cpu_utilization_target": 0.6,
+    "same_cpu_logical_core_budget": 2,
+    "production_qualified": false
+  },
+  "latency": {
+    "steady": {
+      "queries": 30,
+      "errors": 0,
+      "tokens_min": 33,
+      "tokens_max": 53,
+      "embedding_p95_seconds": 0.05221340002026409,
+      "retrieval_p95_seconds": 0.09868950000964105,
+      "web_pair_p95_seconds": 0.07900000002700835,
+      "rebuild_overlapping_queries": 0,
+      "queue_waiting_max": 0
+    },
+    "near_limit": {
+      "queries": 10,
+      "errors": 0,
+      "tokens_min": 505,
+      "tokens_max": 505,
+      "embedding_p95_seconds": 0.3978833999717608,
+      "retrieval_p95_seconds": 0.4414715999737382,
+      "web_pair_p95_seconds": 0.07800000009592623,
+      "rebuild_overlapping_queries": 0,
+      "queue_waiting_max": 0
+    },
+    "rebuild": {
+      "queries": 45,
+      "errors": 0,
+      "tokens_min": 33,
+      "tokens_max": 53,
+      "embedding_p95_seconds": 0.10421979997772723,
+      "retrieval_p95_seconds": 0.14131740003358573,
+      "web_pair_p95_seconds": 0.09299999999348074,
+      "rebuild_overlapping_queries": 45,
+      "queue_waiting_max": 1
+    },
+    "restricted": {
+      "queries": 30,
+      "errors": 0,
+      "tokens_min": 33,
+      "tokens_max": 53,
+      "embedding_p95_seconds": 0.0473610000917688,
+      "retrieval_p95_seconds": 0.05855890002567321,
+      "web_pair_p95_seconds": 0.0779999999795109,
+      "rebuild_overlapping_queries": 0,
+      "queue_waiting_max": 0
+    }
+  },
+  "queue_sampling_valid": true,
+  "local_embedding_latency_target_met": true,
+  "disk_estimate": {
+    "measured_logical_bytes": 7757318850,
+    "initial_gib_with_30_percent_and_2gib_log_allowance": 12,
+    "excludes": "future content/media growth and retention beyond two generations and one snapshot"
+  },
+  "source_summary_sha256": "28560342951ede2a4bb99ad40b5ff29cb71475978644a839438d8a0d8b715caa",
+  "source_samples_sha256": "51156fb7aae381552aee374fdc9a326d7c81d0b24b4dcc58374b4e6b3cb2d14a",
+  "sampling_audit": {
+    "samples": 221,
+    "max_interval_seconds": 6.108000040054321,
+    "intervals_over_two_seconds": 1,
+    "collector_max_seconds": 5.9511531,
+    "global_working_set_peak_bytes": 2281857024,
+    "global_private_peak_bytes": 4887818240,
+    "global_available_min_bytes": 2419314688,
+    "system_pages_out_max": 1416,
+    "note": "Post-run audit of raw samples; occasional CIM stalls limit instantaneous peak coverage."
+  }
+}

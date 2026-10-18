@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260910-studio-workspace",
+  "created_at": "2026-09-10T08:49:27.293980+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "1f68d098aa62ae5ab7d9dc8cc33cd586d4835ddabe3d8a3d2e574d39fbd4b73d"
+}

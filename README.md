@@ -1,3 +1,12 @@
+---
+id: project-readme
+level: L1
+summary: Gavin 个人技术博客的公开介绍与当前建设状态
+load_when:
+  - public-project-overview
+author: Gavin
+---
+
 # Gavin Blog
 
 Business source for the Gavin blog and question-answering assistant.
@@ -15,3 +24,14 @@ Dependency manifests and lockfiles are committed. Installed dependencies, model 
 Run `npm ci` and `npm run build:web` from the repository root to build the frontend. Python dependencies are managed separately with uv in the API and E5 environment directories.
 
 Ubuntu 22.04 / x86_64 container configuration is provided in [compose.yaml](compose.yaml), with the complete assistant in [compose.assistant.yaml](compose.assistant.yaml). See [deployment instructions](deploy/README.md) for internal E5 TLS, target profile, empty database initialization, model preparation and explicit assistant activation. Production-mode retrieval and real DeepSeek answers were verified in isolated Docker containers; the target server still needs its own configuration and validation. Local data and secrets are excluded from the image build context.
+
+## Harness
+
+Agent 协作入口见 [AGENTS.md](AGENTS.md)，任务路由见 [Harness Index](harness/INDEX.md)。
+确定性 CLI 使用 Python 3.11+ 标准库；从 `harness/` 执行 `python -m tools.harness verify` 检查完整性。
+
+本次补入 Harness 控制面、产品边界文档和静态发布门禁合同；产品发布脚本、CI、完整业务测试及历史 `plan-build/` 参考资料尚未同步。
+因此完整 `verify` 的链接、模块归属及供应链检查仍会报告这些缺口，不能将历史 evidence 当作当前远端的产品验证结果。
+
+为保留归档前的原始 active spec，Git 历史仅从原本地仓库筛选 `harness/` 和 `AGENTS.md` 后接入；筛选后的提交 SHA 会变化。
+历史 evidence 内的 source commit 和指纹保持原样，仍表示原始本地验证来源。

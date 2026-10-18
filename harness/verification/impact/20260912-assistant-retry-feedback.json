@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "task_id": "20260912-assistant-retry-feedback",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/graph.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-RETRY-FEEDBACK-01",
+        "M09-RETRY-FAILURE-01"
+      ],
+      "reason": "Q3-03 bounded correction and failure classification; documentation is descriptive, no executable contract.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public string error codes are rendered by existing parser and notice mapping; selected frontend cases cover the consumer.",
+          "cases": [
+            "M09-UI-BOUNDARY-01",
+            "M09-INPUT-ERROR-02"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Layout embeds the same assistant component; error notice copy changes no navigation props, polling or availability contract."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Reviewed consumer retains the same string-code transport and component interface; only notice copy changes, with no request, navigation or serialization contract change."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Reviewed consumer retains the same string-code transport and component interface; only notice copy changes, with no request, navigation or serialization contract change."
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer retains the same string-code transport and component interface; only notice copy changes, with no request, navigation or serialization contract change."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/prompt.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-RETRY-FEEDBACK-01"
+      ],
+      "reason": "Q3-03 bounded correction and failure classification; documentation is descriptive, no executable contract.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public string error codes are rendered by existing parser and notice mapping; selected frontend cases cover the consumer.",
+          "cases": [
+            "M09-UI-BOUNDARY-01",
+            "M09-INPUT-ERROR-02"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Layout embeds the same assistant component; error notice copy changes no navigation props, polling or availability contract."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Reviewed consumer retains the same string-code transport and component interface; only notice copy changes, with no request, navigation or serialization contract change."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Reviewed consumer retains the same string-code transport and component interface; only notice copy changes, with no request, navigation or serialization contract change."
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer retains the same string-code transport and component interface; only notice copy changes, with no request, navigation or serialization contract change."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_retry_feedback.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-RETRY-FEEDBACK-01",
+        "M09-RETRY-FAILURE-01"
+      ],
+      "reason": "Q3-03 bounded correction and failure classification; documentation is descriptive, no executable contract.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/utils/assistant/errors.ts",
+      "owner": "M09.assistant_web",
+      "cases": [
+        "M09-UI-BOUNDARY-01",
+        "M09-INPUT-ERROR-02"
+      ],
+      "reason": "Q3-03 bounded correction and failure classification; documentation is descriptive, no executable contract.",
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/unit/assistant.test.ts",
+      "owner": "M09.assistant_web",
+      "cases": [
+        "M09-UI-BOUNDARY-01",
+        "M09-INPUT-ERROR-02"
+      ],
+      "reason": "Q3-03 bounded correction and failure classification; documentation is descriptive, no executable contract.",
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed imports: no signature, schema, storage, configuration, provider transport or first-attempt prompt change consumed here; retry feedback is optional and local to graph validation."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Q3-03 bounded correction and failure classification; documentation is descriptive, no executable contract.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Register exact retry tests and existing frontend notice semantics under unchanged contract schema; no verifier algorithm or acceptance threshold change.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Register exact retry tests and existing frontend notice semantics under unchanged contract schema; no verifier algorithm or acceptance threshold change.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed executable contract consumer: existing schema, selection and execution protocol unchanged; new case declarations are structurally checked and exercised by this task."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260912-assistant-local-model-alias",
+  "created_at": "2026-09-12T11:24:46.950400+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "998737d8e9381ac43e819f4341cd9bfb4f1eb397701ff7bc93c92c36df2fddfc"
+}

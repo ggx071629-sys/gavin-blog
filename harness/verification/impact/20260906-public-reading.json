@@ -1,0 +1,1289 @@
+{
+  "schema_version": 1,
+  "task_id": "20260906-public-reading",
+  "changes": [
+    {
+      "path": "apps/web/nuxt.config.ts",
+      "owner": "M08.web_tooling",
+      "reason": "Register/document the public reading scope and exact observable verification; no validator or runner implementation changes.",
+      "cases": [
+        "M01-PUBLIC-SURFACES-01",
+        "M07-P1-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "PublicPageHero and the error page consume the public surface styles; shared header/menu/theme behavior is unchanged.",
+          "cases": [
+            "M01-PUBLIC-SURFACES-01",
+            "M01-PUBLIC-STATES-01",
+            "M01-UNIT-PUBLIC-UI-POLISH-01"
+          ]
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "The public title, prose, code and single responsive TOC consume the new layout; selected reading, source and Mermaid checks cover it.",
+          "cases": [
+            "M01-PUBLIC-READING-01",
+            "M04-PUBLIC-DETAILS-01",
+            "M01-PUBLIC-SURFACES-01",
+            "M01-PUBLIC-STATES-01",
+            "M01-UNIT-ARTICLE-READING-01",
+            "M01-UNIT-KNOWLEDGE-LINKS-01",
+            "M01-UNIT-MARKDOWN-MERMAID-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": true,
+          "reason": "Search shares a 900px input/results axis with descriptive scope labels; query generation, pagination and pending/result semantics are covered.",
+          "cases": [
+            "M03-UNIT-SEARCH-STATES-01",
+            "M03-UNIT-SEARCH-THEME-01"
+          ]
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public book index/detail consume the new layout; real cover and missing cover, rating, status, search and published snapshots are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-BOOKS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public project index/detail consume the new layout and copyable code; existing publish snapshots, related links and index pagination are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-PROJECTS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public article/archive/about roots consume the new typography and list styles; selection, year grouping and real profile fields remain covered.",
+          "cases": [
+            "M01-UNIT-ARTICLES-INDEX-01",
+            "M01-UNIT-ARCHIVE-INDEX-01",
+            "M01-UNIT-ABOUT-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/assets/css/public-reading.css",
+      "owner": "M07.theme",
+      "reason": "Register/document the public reading scope and exact observable verification; no validator or runner implementation changes.",
+      "cases": [
+        "M01-PUBLIC-SURFACES-01",
+        "M01-PUBLIC-READING-01",
+        "M04-PUBLIC-DETAILS-01",
+        "M07-P1-01",
+        "M07-P0-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "PublicPageHero and the error page consume the public surface styles; shared header/menu/theme behavior is unchanged.",
+          "cases": [
+            "M01-PUBLIC-SURFACES-01",
+            "M01-PUBLIC-STATES-01",
+            "M01-UNIT-PUBLIC-UI-POLISH-01"
+          ]
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "The public title, prose, code and single responsive TOC consume the new layout; selected reading, source and Mermaid checks cover it.",
+          "cases": [
+            "M01-PUBLIC-READING-01",
+            "M04-PUBLIC-DETAILS-01",
+            "M01-PUBLIC-SURFACES-01",
+            "M01-PUBLIC-STATES-01",
+            "M01-UNIT-ARTICLE-READING-01",
+            "M01-UNIT-KNOWLEDGE-LINKS-01",
+            "M01-UNIT-MARKDOWN-MERMAID-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": true,
+          "reason": "Search shares a 900px input/results axis with descriptive scope labels; query generation, pagination and pending/result semantics are covered.",
+          "cases": [
+            "M03-UNIT-SEARCH-STATES-01",
+            "M03-UNIT-SEARCH-THEME-01"
+          ]
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public book index/detail consume the new layout; real cover and missing cover, rating, status, search and published snapshots are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-BOOKS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public project index/detail consume the new layout and copyable code; existing publish snapshots, related links and index pagination are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-PROJECTS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public article/archive/about roots consume the new typography and list styles; selection, year grouping and real profile fields remain covered.",
+          "cases": [
+            "M01-UNIT-ARTICLES-INDEX-01",
+            "M01-UNIT-ARCHIVE-INDEX-01",
+            "M01-UNIT-ABOUT-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/ReadingLayout.vue",
+      "owner": "M01.reading",
+      "reason": "The public title, prose, code and single responsive TOC consume the new layout; selected reading, source and Mermaid checks cover it.",
+      "cases": [
+        "M01-PUBLIC-READING-01",
+        "M04-PUBLIC-DETAILS-01",
+        "M01-PUBLIC-SURFACES-01",
+        "M01-PUBLIC-STATES-01",
+        "M01-UNIT-ARTICLE-READING-01",
+        "M01-UNIT-KNOWLEDGE-LINKS-01",
+        "M01-UNIT-MARKDOWN-MERMAID-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public book index/detail consume the new layout; real cover and missing cover, rating, status, search and published snapshots are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-BOOKS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public project index/detail consume the new layout and copyable code; existing publish snapshots, related links and index pagination are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-PROJECTS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/ContentToc.vue",
+      "owner": "M01.reading",
+      "reason": "The public title, prose, code and single responsive TOC consume the new layout; selected reading, source and Mermaid checks cover it.",
+      "cases": [
+        "M01-PUBLIC-READING-01",
+        "M04-PUBLIC-DETAILS-01",
+        "M01-PUBLIC-SURFACES-01",
+        "M01-PUBLIC-STATES-01",
+        "M01-UNIT-ARTICLE-READING-01",
+        "M01-UNIT-KNOWLEDGE-LINKS-01",
+        "M01-UNIT-MARKDOWN-MERMAID-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public book index/detail consume the new layout; real cover and missing cover, rating, status, search and published snapshots are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-BOOKS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public project index/detail consume the new layout and copyable code; existing publish snapshots, related links and index pagination are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-PROJECTS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/MarkdownArticle.vue",
+      "owner": "M01.reading",
+      "reason": "The public title, prose, code and single responsive TOC consume the new layout; selected reading, source and Mermaid checks cover it.",
+      "cases": [
+        "M01-PUBLIC-READING-01",
+        "M04-PUBLIC-DETAILS-01",
+        "M01-PUBLIC-SURFACES-01",
+        "M01-PUBLIC-STATES-01",
+        "M01-UNIT-ARTICLE-READING-01",
+        "M01-UNIT-KNOWLEDGE-LINKS-01",
+        "M01-UNIT-MARKDOWN-MERMAID-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public book index/detail consume the new layout; real cover and missing cover, rating, status, search and published snapshots are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-BOOKS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public project index/detail consume the new layout and copyable code; existing publish snapshots, related links and index pagination are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-PROJECTS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/PublicPageHero.vue",
+      "owner": "M01.navigation",
+      "reason": "PublicPageHero and the error page consume the public surface styles; shared header/menu/theme behavior is unchanged.",
+      "cases": [
+        "M01-PUBLIC-SURFACES-01",
+        "M01-PUBLIC-STATES-01",
+        "M01-UNIT-PUBLIC-UI-POLISH-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public article/archive/about roots consume the new typography and list styles; selection, year grouping and real profile fields remain covered.",
+          "cases": [
+            "M01-UNIT-ARTICLES-INDEX-01",
+            "M01-UNIT-ARCHIVE-INDEX-01",
+            "M01-UNIT-ABOUT-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public book index/detail consume the new layout; real cover and missing cover, rating, status, search and published snapshots are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-BOOKS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public project index/detail consume the new layout and copyable code; existing publish snapshots, related links and index pagination are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-PROJECTS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/error.vue",
+      "owner": "M01.navigation",
+      "reason": "PublicPageHero and the error page consume the public surface styles; shared header/menu/theme behavior is unchanged.",
+      "cases": [
+        "M01-PUBLIC-SURFACES-01",
+        "M01-PUBLIC-STATES-01",
+        "M01-UNIT-PUBLIC-UI-POLISH-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public article/archive/about roots consume the new typography and list styles; selection, year grouping and real profile fields remain covered.",
+          "cases": [
+            "M01-UNIT-ARTICLES-INDEX-01",
+            "M01-UNIT-ARCHIVE-INDEX-01",
+            "M01-UNIT-ABOUT-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public book index/detail consume the new layout; real cover and missing cover, rating, status, search and published snapshots are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-BOOKS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public project index/detail consume the new layout and copyable code; existing publish snapshots, related links and index pagination are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-PROJECTS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/about.vue",
+      "owner": "M01.indexes",
+      "reason": "Public article/archive/about roots consume the new typography and list styles; selection, year grouping and real profile fields remain covered.",
+      "cases": [
+        "M01-UNIT-ARTICLES-INDEX-01",
+        "M01-UNIT-ARCHIVE-INDEX-01",
+        "M01-UNIT-ABOUT-INDEX-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/archive.vue",
+      "owner": "M01.indexes",
+      "reason": "Public article/archive/about roots consume the new typography and list styles; selection, year grouping and real profile fields remain covered.",
+      "cases": [
+        "M01-UNIT-ARTICLES-INDEX-01",
+        "M01-UNIT-ARCHIVE-INDEX-01",
+        "M01-UNIT-ABOUT-INDEX-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/articles/index.vue",
+      "owner": "M01.indexes",
+      "reason": "Public article/archive/about roots consume the new typography and list styles; selection, year grouping and real profile fields remain covered.",
+      "cases": [
+        "M01-UNIT-ARTICLES-INDEX-01",
+        "M01-UNIT-ARCHIVE-INDEX-01",
+        "M01-UNIT-ABOUT-INDEX-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/projects/index.vue",
+      "owner": "M04.projects_web",
+      "reason": "Public project index/detail consume the new layout and copyable code; existing publish snapshots, related links and index pagination are covered.",
+      "cases": [
+        "M04-PUBLIC-DETAILS-01",
+        "M04-UNIT-PROJECTS-INDEX-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/pages/projects/[slug].vue",
+      "owner": "M04.projects_web",
+      "reason": "Public project index/detail consume the new layout and copyable code; existing publish snapshots, related links and index pagination are covered.",
+      "cases": [
+        "M04-PUBLIC-DETAILS-01",
+        "M04-UNIT-PROJECTS-INDEX-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/pages/books/index.vue",
+      "owner": "M04.books_web",
+      "reason": "Public book index/detail consume the new layout; real cover and missing cover, rating, status, search and published snapshots are covered.",
+      "cases": [
+        "M04-PUBLIC-DETAILS-01",
+        "M04-UNIT-BOOKS-INDEX-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/pages/books/[year]/[month]/[slug].vue",
+      "owner": "M04.books_web",
+      "reason": "Public book index/detail consume the new layout; real cover and missing cover, rating, status, search and published snapshots are covered.",
+      "cases": [
+        "M04-PUBLIC-DETAILS-01",
+        "M04-UNIT-BOOKS-INDEX-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/pages/notes/[year]/[month]/[slug].vue",
+      "owner": "M01.reading",
+      "reason": "The public title, prose, code and single responsive TOC consume the new layout; selected reading, source and Mermaid checks cover it.",
+      "cases": [
+        "M01-PUBLIC-READING-01",
+        "M04-PUBLIC-DETAILS-01",
+        "M01-PUBLIC-SURFACES-01",
+        "M01-PUBLIC-STATES-01",
+        "M01-UNIT-ARTICLE-READING-01",
+        "M01-UNIT-KNOWLEDGE-LINKS-01",
+        "M01-UNIT-MARKDOWN-MERMAID-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public book index/detail consume the new layout; real cover and missing cover, rating, status, search and published snapshots are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-BOOKS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public project index/detail consume the new layout and copyable code; existing publish snapshots, related links and index pagination are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-PROJECTS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/search.vue",
+      "owner": "M03.search_web",
+      "reason": "Search shares a 900px input/results axis with descriptive scope labels; query generation, pagination and pending/result semantics are covered.",
+      "cases": [
+        "M03-UNIT-SEARCH-STATES-01",
+        "M03-UNIT-SEARCH-THEME-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/e2e/public-reading.spec.ts",
+      "owner": "M01.reading",
+      "reason": "The public title, prose, code and single responsive TOC consume the new layout; selected reading, source and Mermaid checks cover it.",
+      "cases": [
+        "M01-PUBLIC-READING-01",
+        "M04-PUBLIC-DETAILS-01",
+        "M01-PUBLIC-SURFACES-01",
+        "M01-PUBLIC-STATES-01",
+        "M01-UNIT-ARTICLE-READING-01",
+        "M01-UNIT-KNOWLEDGE-LINKS-01",
+        "M01-UNIT-MARKDOWN-MERMAID-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public book index/detail consume the new layout; real cover and missing cover, rating, status, search and published snapshots are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-BOOKS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public project index/detail consume the new layout and copyable code; existing publish snapshots, related links and index pagination are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-PROJECTS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/article-reading.spec.ts",
+      "owner": "M01.reading",
+      "reason": "The public title, prose, code and single responsive TOC consume the new layout; selected reading, source and Mermaid checks cover it.",
+      "cases": [
+        "M01-PUBLIC-READING-01",
+        "M04-PUBLIC-DETAILS-01",
+        "M01-PUBLIC-SURFACES-01",
+        "M01-PUBLIC-STATES-01",
+        "M01-UNIT-ARTICLE-READING-01",
+        "M01-UNIT-KNOWLEDGE-LINKS-01",
+        "M01-UNIT-MARKDOWN-MERMAID-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public book index/detail consume the new layout; real cover and missing cover, rating, status, search and published snapshots are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-BOOKS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public project index/detail consume the new layout and copyable code; existing publish snapshots, related links and index pagination are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-PROJECTS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/about-index.spec.ts",
+      "owner": "M01.indexes",
+      "reason": "Public article/archive/about roots consume the new typography and list styles; selection, year grouping and real profile fields remain covered.",
+      "cases": [
+        "M01-UNIT-ARTICLES-INDEX-01",
+        "M01-UNIT-ARCHIVE-INDEX-01",
+        "M01-UNIT-ABOUT-INDEX-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/search-theme.spec.ts",
+      "owner": "M03.search_web",
+      "reason": "Search shares a 900px input/results axis with descriptive scope labels; query generation, pagination and pending/result semantics are covered.",
+      "cases": [
+        "M03-UNIT-SEARCH-STATES-01",
+        "M03-UNIT-SEARCH-THEME-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/unit/public-ui-polish.test.ts",
+      "owner": "M01.navigation",
+      "reason": "PublicPageHero and the error page consume the public surface styles; shared header/menu/theme behavior is unchanged.",
+      "cases": [
+        "M01-PUBLIC-SURFACES-01",
+        "M01-PUBLIC-STATES-01",
+        "M01-UNIT-PUBLIC-UI-POLISH-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public article/archive/about roots consume the new typography and list styles; selection, year grouping and real profile fields remain covered.",
+          "cases": [
+            "M01-UNIT-ARTICLES-INDEX-01",
+            "M01-UNIT-ARCHIVE-INDEX-01",
+            "M01-UNIT-ABOUT-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public book index/detail consume the new layout; real cover and missing cover, rating, status, search and published snapshots are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-BOOKS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public project index/detail consume the new layout and copyable code; existing publish snapshots, related links and index pagination are covered.",
+          "cases": [
+            "M04-PUBLIC-DETAILS-01",
+            "M04-UNIT-PROJECTS-INDEX-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/README.md",
+      "owner": "M08.documentation",
+      "reason": "Register/document the public reading scope and exact observable verification; no validator or runner implementation changes.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "ui-fix/PHASE-3.md",
+      "owner": "M08.documentation",
+      "reason": "Register/document the public reading scope and exact observable verification; no validator or runner implementation changes.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Register/document the public reading scope and exact observable verification; no validator or runner implementation changes.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Additive registry entries preserve the validator schema and runner protocol; structural gates validate the declarations.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Additive registry entries preserve the validator schema and runner protocol; structural gates validate the declarations.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Register/document the public reading scope and exact observable verification; no validator or runner implementation changes.",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Additive registry entries preserve the validator schema and runner protocol; structural gates validate the declarations.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Additive registry entries preserve the validator schema and runner protocol; structural gates validate the declarations.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Additive registry entries preserve the validator schema and runner protocol; structural gates validate the declarations.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Additive registry entries preserve the validator schema and runner protocol; structural gates validate the declarations.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Additive registry entries preserve the validator schema and runner protocol; structural gates validate the declarations.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Additive registry entries preserve the validator schema and runner protocol; structural gates validate the declarations.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/articles-index.spec.ts",
+      "owner": "M01.indexes",
+      "reason": "Retain the article-index isolation regression against the current phase-two home featured card, verifying its published title instead of a removed markup class. No home product code changes.",
+      "cases": [
+        "M01-UNIT-ARTICLES-INDEX-01",
+        "M01-UNIT-ARCHIVE-INDEX-01",
+        "M01-UNIT-ABOUT-INDEX-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/archive-index.spec.ts",
+      "owner": "M01.indexes",
+      "reason": "Make the existing empty-archive assertion independent of earlier published fixtures in the isolated task database; explicitly assert HTTP 200. No product API or archive behavior changes.",
+      "cases": [
+        "M01-UNIT-ARTICLES-INDEX-01",
+        "M01-UNIT-ARCHIVE-INDEX-01",
+        "M01-UNIT-ABOUT-INDEX-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Only public roots/opt-in reading markup change. The utilities, default Markdown editor rendering, global tokens, API, header and overlay contract consumed here remain unchanged.",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}

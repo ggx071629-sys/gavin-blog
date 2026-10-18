@@ -1,0 +1,284 @@
+{
+  "schema_version": 2,
+  "task_id": "20260815-article-detail-hifi",
+  "created_at": "2026-08-15T08:26:27.425729+00:00",
+  "command": "python -m tools.harness verify 20260815-article-detail-hifi",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5",
+    "AC-6",
+    "AC-7",
+    "AC-8"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-6",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-7",
+      "status": "passed",
+      "gates": [
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-8",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "api-lint",
+        "api-tests"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "0d7aa95533cb6f63df0449f20721d79f445984a2",
+    "active_spec_sha256": "c978f9184c78301b23cff11f8308599658459029db84e7e6e6d63b8c669e5a57",
+    "verification_contract_sha256": "96662b47edc86d01676683cc0f4425c893f42fae60e598c7703d9fbea6cde2ce",
+    "gate_config_sha256": "08d2665a2d1b920ea00c9ef42ddb4c5192242f3e5f9d0e1678921c7716237398",
+    "documentation_contract_sha256": "e49da7ed9389b8af104fe7869e537c2bfcc05a5d2d61ca372640d9dcaf3f1b5a",
+    "documentation_targets_sha256": "9cc2809350a8b123d351faf60364b75bb8e01f0e3af299ed2d6c5202f18ee410"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "公开文章阅读页的 Hero、目录、代码块和相关推荐 chrome 改变，需要同步 Web 边界说明。",
+    "targets": [
+      "apps/web/README.md"
+    ],
+    "baseline_commit": "0197064e0944de1f2793155f0e3f497d5a74bc5e",
+    "target_blobs": {
+      "apps/web/README.md": "21214e7f544e8153c1c52e7e3104489dec0ad435"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "ff8ad9910335f20be8fb84fbbc008295d8c449c1",
+    "cleanup_status": "passed",
+    "reused_paths": 3
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 6 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 8.02
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "74 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 124.914
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 66.424
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.848
+    },
+    {
+      "name": "links",
+      "details": [
+        "346 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 3121.103
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "161 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 68.5
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 12.566
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 64.208
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "D:\\Tool\\nodejs\\npm.CMD run quality:web",
+      "status": "passed",
+      "duration_ms": 313086.063,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6",
+        "AC-7"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 141,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "D:\\Tool\\nodejs\\npm.CMD run test:e2e",
+      "status": "passed",
+      "duration_ms": 256998.154,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6",
+        "AC-8"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 28,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "api-lint",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-8vgj7zd6\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m ruff check .",
+      "status": "passed",
+      "duration_ms": 330.305,
+      "covers": [
+        "AC-8"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-8vgj7zd6\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m pytest",
+      "status": "passed",
+      "duration_ms": 214691.087,
+      "covers": [
+        "AC-8"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 301,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1736.737,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ]
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 790308.929,
+    "failures": [],
+    "test_counts": {
+      "passed": 470,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "source_commit": "ff8ad9910335f20be8fb84fbbc008295d8c449c1"
+}

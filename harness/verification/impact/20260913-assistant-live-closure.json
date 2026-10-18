@@ -1,0 +1,1645 @@
+{
+  "schema_version": 1,
+  "task_id": "20260913-assistant-live-closure",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/providers.py",
+      "owner": "M09.providers",
+      "cases": [
+        "M09-LIVE-LEDGER-01",
+        "M09-DEEPSEEK-TRANSPORT-01"
+      ],
+      "reason": "Local-only signed accounting and complete table context/answer formatting; retain original raw quote checks and unsafe counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-FACT-ALIGNMENT-01",
+            "M09-FACT-ALIGNMENT-02",
+            "M09-CURRENT-PROMPT-01",
+            "M09-GROUNDING-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-CURRENT-BUDGET-01",
+            "M10-LOCAL-CHAT-PROBE-01"
+          ]
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/output.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-FACT-ALIGNMENT-01",
+        "M09-FACT-ALIGNMENT-02",
+        "M09-CURRENT-PROMPT-01",
+        "M09-GROUNDING-01"
+      ],
+      "reason": "Local-only signed accounting and complete table context/answer formatting; retain original raw quote checks and unsafe counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-DEEPSEEK-TRANSPORT-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-CURRENT-BUDGET-01",
+            "M10-LOCAL-CHAT-PROBE-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/prompt.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-FACT-ALIGNMENT-01",
+        "M09-FACT-ALIGNMENT-02",
+        "M09-CURRENT-PROMPT-01",
+        "M09-GROUNDING-01"
+      ],
+      "reason": "Local-only signed accounting and complete table context/answer formatting; retain original raw quote checks and unsafe counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-DEEPSEEK-TRANSPORT-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-CURRENT-BUDGET-01",
+            "M10-LOCAL-CHAT-PROBE-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant_qualification/provider_probe.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-LIVE-LEDGER-01",
+        "M09-CURRENT-BUDGET-01",
+        "M10-LOCAL-CHAT-PROBE-01"
+      ],
+      "reason": "Local-only signed accounting and complete table context/answer formatting; retain original raw quote checks and unsafe counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-FACT-ALIGNMENT-01",
+            "M09-FACT-ALIGNMENT-02",
+            "M09-CURRENT-PROMPT-01",
+            "M09-GROUNDING-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-DEEPSEEK-TRANSPORT-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant_qualification/evaluation_guard.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-LIVE-LEDGER-01",
+        "M09-CURRENT-BUDGET-01",
+        "M10-LOCAL-CHAT-PROBE-01"
+      ],
+      "reason": "Local-only signed accounting and complete table context/answer formatting; retain original raw quote checks and unsafe counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-FACT-ALIGNMENT-01",
+            "M09-FACT-ALIGNMENT-02",
+            "M09-CURRENT-PROMPT-01",
+            "M09-GROUNDING-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-DEEPSEEK-TRANSPORT-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/scripts/run_assistant_dev.py",
+      "owner": "M06.api_tooling",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01"
+      ],
+      "reason": "Local-only signed accounting and complete table context/answer formatting; retain original raw quote checks and unsafe counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-FACT-ALIGNMENT-01",
+            "M09-FACT-ALIGNMENT-02",
+            "M09-CURRENT-PROMPT-01",
+            "M09-GROUNDING-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-DEEPSEEK-TRANSPORT-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-CURRENT-BUDGET-01",
+            "M10-LOCAL-CHAT-PROBE-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "scripts/local_launcher.py",
+      "owner": "M09.development",
+      "cases": [
+        "M09-LOCAL-REAL-BOUNDARY-01"
+      ],
+      "reason": "Local-only signed accounting and complete table context/answer formatting; retain original raw quote checks and unsafe counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-FACT-ALIGNMENT-01",
+            "M09-FACT-ALIGNMENT-02",
+            "M09-CURRENT-PROMPT-01",
+            "M09-GROUNDING-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-DEEPSEEK-TRANSPORT-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-CURRENT-BUDGET-01",
+            "M10-LOCAL-CHAT-PROBE-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_live_ledger.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-LIVE-LEDGER-01",
+        "M09-CURRENT-BUDGET-01",
+        "M10-LOCAL-CHAT-PROBE-01"
+      ],
+      "reason": "Local-only signed accounting and complete table context/answer formatting; retain original raw quote checks and unsafe counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-FACT-ALIGNMENT-01",
+            "M09-FACT-ALIGNMENT-02",
+            "M09-CURRENT-PROMPT-01",
+            "M09-GROUNDING-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-DEEPSEEK-TRANSPORT-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_fact_alignment.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-FACT-ALIGNMENT-01",
+        "M09-FACT-ALIGNMENT-02",
+        "M09-CURRENT-PROMPT-01",
+        "M09-GROUNDING-01"
+      ],
+      "reason": "Local-only signed accounting and complete table context/answer formatting; retain original raw quote checks and unsafe counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-DEEPSEEK-TRANSPORT-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-CURRENT-BUDGET-01",
+            "M10-LOCAL-CHAT-PROBE-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/quote_refs.py",
+      "owner": "M09.providers",
+      "cases": [
+        "M09-LIVE-LEDGER-01",
+        "M09-DEEPSEEK-TRANSPORT-01"
+      ],
+      "reason": "Local-only signed accounting and complete table context/answer formatting; retain original raw quote checks and unsafe counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-FACT-ALIGNMENT-01",
+            "M09-FACT-ALIGNMENT-02",
+            "M09-CURRENT-PROMPT-01",
+            "M09-GROUNDING-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-CURRENT-BUDGET-01",
+            "M10-LOCAL-CHAT-PROBE-01"
+          ]
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_quote_refs.py",
+      "owner": "M09.providers",
+      "cases": [
+        "M09-LIVE-LEDGER-01",
+        "M09-DEEPSEEK-TRANSPORT-01"
+      ],
+      "reason": "Local-only signed accounting and complete table context/answer formatting; retain original raw quote checks and unsafe counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-FACT-ALIGNMENT-01",
+            "M09-FACT-ALIGNMENT-02",
+            "M09-CURRENT-PROMPT-01",
+            "M09-GROUNDING-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-CURRENT-BUDGET-01",
+            "M10-LOCAL-CHAT-PROBE-01"
+          ]
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_current_quality.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-LIVE-LEDGER-01",
+        "M09-CURRENT-BUDGET-01",
+        "M10-LOCAL-CHAT-PROBE-01"
+      ],
+      "reason": "Local-only signed accounting and complete table context/answer formatting; retain original raw quote checks and unsafe counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-FACT-ALIGNMENT-01",
+            "M09-FACT-ALIGNMENT-02",
+            "M09-CURRENT-PROMPT-01",
+            "M09-GROUNDING-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-DEEPSEEK-TRANSPORT-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/run_current_quality.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-LIVE-LEDGER-01",
+        "M09-CURRENT-BUDGET-01",
+        "M10-LOCAL-CHAT-PROBE-01"
+      ],
+      "reason": "Local-only signed accounting and complete table context/answer formatting; retain original raw quote checks and unsafe counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-FACT-ALIGNMENT-01",
+            "M09-FACT-ALIGNMENT-02",
+            "M09-CURRENT-PROMPT-01",
+            "M09-GROUNDING-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-DEEPSEEK-TRANSPORT-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Register bounded evidence-role checks and document Q5 repair scope; no verification algorithm change.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Registration of selected cases and source ownership only; existing verifier algorithms and contracts remain unchanged."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Registration of selected cases and source ownership only; existing verifier algorithms and contracts remain unchanged."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Registration of selected cases and source ownership only; existing verifier algorithms and contracts remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Register bounded evidence-role checks and document Q5 repair scope; no verification algorithm change.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Registration of selected cases and source ownership only; existing verifier algorithms and contracts remain unchanged."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Registration of selected cases and source ownership only; existing verifier algorithms and contracts remain unchanged."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Registration of selected cases and source ownership only; existing verifier algorithms and contracts remain unchanged."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Registration of selected cases and source ownership only; existing verifier algorithms and contracts remain unchanged."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Registration of selected cases and source ownership only; existing verifier algorithms and contracts remain unchanged."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Registration of selected cases and source ownership only; existing verifier algorithms and contracts remain unchanged."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Registration of selected cases and source ownership only; existing verifier algorithms and contracts remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/PLAN.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Compact actual results, historical failure preservation and bounded scope documentation; no executable interface or consumer change.",
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/DESIGN.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Compact actual results, historical failure preservation and bounded scope documentation; no executable interface or consumer change.",
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/PHASE-5-QUALITY-EVALUATION.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Compact actual results, historical failure preservation and bounded scope documentation; no executable interface or consumer change.",
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/Q5-EVALUATION.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Compact actual results, historical failure preservation and bounded scope documentation; no executable interface or consumer change.",
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/Q5-RESULTS.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Compact actual results, historical failure preservation and bounded scope documentation; no executable interface or consumer change.",
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/Q5-MANUAL-REVIEW.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Compact actual results, historical failure preservation and bounded scope documentation; no executable interface or consumer change.",
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/Q5-results.json",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Compact actual results, historical failure preservation and bounded scope documentation; no executable interface or consumer change.",
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/Q5-live-results.json",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Compact actual results, historical failure preservation and bounded scope documentation; no executable interface or consumer change.",
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/completed/phase-5-quality-evaluation/Q5-02.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Compact actual results, historical failure preservation and bounded scope documentation; no executable interface or consumer change.",
+      "dependencies": []
+    },
+    {
+      "path": "apps/api/tests/test_assistant_g07_repair.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-FACT-ALIGNMENT-01",
+        "M09-FACT-ALIGNMENT-02",
+        "M09-CURRENT-PROMPT-01",
+        "M09-GROUNDING-01"
+      ],
+      "reason": "Update literal prompt expectations to the equivalent compact policy; preserve all behavioral assertions and counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-DEEPSEEK-TRANSPORT-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-CURRENT-BUDGET-01",
+            "M10-LOCAL-CHAT-PROBE-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_about_facts.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-FACT-ALIGNMENT-01",
+        "M09-FACT-ALIGNMENT-02",
+        "M09-CURRENT-PROMPT-01",
+        "M09-GROUNDING-01"
+      ],
+      "reason": "Update literal prompt expectations to the equivalent compact policy; preserve all behavioral assertions and counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-DEEPSEEK-TRANSPORT-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-CURRENT-BUDGET-01",
+            "M10-LOCAL-CHAT-PROBE-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_resume_citations.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-FACT-ALIGNMENT-01",
+        "M09-FACT-ALIGNMENT-02",
+        "M09-CURRENT-PROMPT-01",
+        "M09-GROUNDING-01"
+      ],
+      "reason": "Update literal prompt expectations to the equivalent compact policy; preserve all behavioral assertions and counterexamples.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M09.development",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LOCAL-REAL-BOUNDARY-01"
+          ]
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-DEEPSEEK-TRANSPORT-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Local adapter, prompt validation and signed development startup consume the changed behavior.",
+          "cases": [
+            "M09-LIVE-LEDGER-01",
+            "M09-CURRENT-BUDGET-01",
+            "M10-LOCAL-CHAT-PROBE-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "No change to this consumer: public transport/schema, storage, embeddings, index content, production qualification and operational budget rules remain unchanged."
+        }
+      ]
+    }
+  ]
+}

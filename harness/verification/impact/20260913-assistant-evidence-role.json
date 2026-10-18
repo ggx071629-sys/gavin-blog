@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "task_id": "20260913-assistant-evidence-role",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/hydrate.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-EVIDENCE-ROLE-01",
+        "M09-CONTEXT-CROSS-01",
+        "M09-CURRENT-PROMPT-01"
+      ],
+      "reason": "Derive internal evidence roles from current published article fields, retaining original chunks, descriptors and validation.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Consumer builds/estimates the changed actual prompt; verify source safety, budget admission and no-dispatch accounting.",
+          "cases": [
+            "M09-CURRENT-BUDGET-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/prompt.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-EVIDENCE-ROLE-01",
+        "M09-CONTEXT-CROSS-01",
+        "M09-CURRENT-PROMPT-01"
+      ],
+      "reason": "Derive internal evidence roles from current published article fields, retaining original chunks, descriptors and validation.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Consumer builds/estimates the changed actual prompt; verify source safety, budget admission and no-dispatch accounting.",
+          "cases": [
+            "M09-CURRENT-BUDGET-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_evidence_role.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-EVIDENCE-ROLE-01",
+        "M09-CONTEXT-CROSS-01",
+        "M09-CURRENT-PROMPT-01"
+      ],
+      "reason": "Derive internal evidence roles from current published article fields, retaining original chunks, descriptors and validation.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": true,
+          "reason": "Consumer builds/estimates the changed actual prompt; verify source safety, budget admission and no-dispatch accounting.",
+          "cases": [
+            "M09-CURRENT-BUDGET-01"
+          ]
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Reviewed consumers: internal optional role only; no public schema, persistence, transport, index data, readiness or test runner algorithm changes."
+        }
+      ]
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/Q5-EVALUATION.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Register bounded evidence-role checks and document Q5 repair scope; no verification algorithm change.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Register bounded evidence-role checks and document Q5 repair scope; no verification algorithm change.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Register bounded evidence-role checks and document Q5 repair scope; no verification algorithm change.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed imports: only trusted prose/schema illustration changes; no provider transport, public response schema, persistence, indexing, readiness or verification algorithm change."
+        }
+      ]
+    }
+  ]
+}

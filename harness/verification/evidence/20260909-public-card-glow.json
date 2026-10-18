@@ -1,0 +1,461 @@
+{
+  "schema_version": 2,
+  "task_id": "20260909-public-card-glow",
+  "created_at": "2026-09-08T16:24:19.554216+00:00",
+  "command": "python -m tools.harness verify 20260909-public-card-glow",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "4bf8a053ffebb74e39d5d6b0f185e97edffda1d2",
+    "active_spec_sha256": "ea0b6fe3361c7b92545e4e3ad150b0243db3561be4759ee7c9b59ed33e42ed1a",
+    "verification_contract_sha256": "9d5a6183379841dec26013ed0272ef1804fba467181ac101b2110ef73046bca5",
+    "gate_config_sha256": "ae07d5b670282c49e74dae7673fec34f7850f7ff95086c51152a477f335ffe0a",
+    "documentation_contract_sha256": "53fbed7dcf6231c35a5dd35b484801fcf6f8e7703228e2fe506a37107e85e148",
+    "documentation_targets_sha256": "517be92644000087e563bda94ec0e3dc1c0d959a9858d44936eddd8d667cd66d",
+    "module_contract_sha256": "325a107169ceff62b01a50c76698e25846f1909367cdd9d33566ddada30c9587"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录用户确认的鼠标跟随光晕参数及首页图谱保留边界。",
+    "targets": [
+      "harness/docs/product/interaction-references.md"
+    ],
+    "baseline_commit": "1f2bbaf41604981eb34bb09d04760e1324e00f8f",
+    "target_blobs": {
+      "harness/docs/product/interaction-references.md": "3733b162dd25544269299935929c865269bd3317"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "6d7cabb918028927434f1d4dd590b3061d5d3048",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260909-public-card-glow.json",
+      "sha256": "1d34e926b5b033ae7fcf99229b0c8579b60a93f4d27b38fd90f27d5939ea8104",
+      "selected_cases": [
+        "M01-CARD-GLOW-01"
+      ],
+      "selected_refs": 1,
+      "excluded_cases": 219
+    },
+    "receipt": {
+      "run_id": "b28cfd2a3793c88bda5fc8de39cfe6f1",
+      "identity": "4e600ecc4f73134f45696d23dc6f0273b5cab5402c20af77a66f634fe4639838",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 2728.572,
+      "plan_inputs": 787.501,
+      "execute_cleanup_and_input_recheck": 70013.603
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "325a107169ceff62b01a50c76698e25846f1909367cdd9d33566ddada30c9587",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M01-CARD-GLOW-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "Pointer spotlight follows themed public cards and preserves atlas and writing desk boundaries.",
+            "expectations": [
+              {
+                "id": "M01-CARD-GLOW-01-ALLOW",
+                "surface": "user_visible",
+                "statement": "A rounded 160px theme spotlight follows distinct pointer positions across public page families and preserves original atlas glow."
+              },
+              {
+                "id": "M01-CARD-GLOW-01-DENY",
+                "surface": "forbidden",
+                "statement": "No card movement, nested duplicate glow, pointer interception, or residual glow after leaving, keyboard input, reduced motion, touch and admin navigation."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "kind": "playwright",
+                "name": "pointer spotlight follows public cards and clears across input and route changes",
+                "gate": "e2e",
+                "covers": [
+                  "M01-CARD-GLOW-01-ALLOW",
+                  "M01-CARD-GLOW-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M01-CARD-GLOW-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "Pointer spotlight follows themed public cards and preserves atlas and writing desk boundaries.",
+            "expectations": [
+              {
+                "id": "M01-CARD-GLOW-01-ALLOW",
+                "surface": "user_visible",
+                "statement": "A rounded 160px theme spotlight follows distinct pointer positions across public page families and preserves original atlas glow."
+              },
+              {
+                "id": "M01-CARD-GLOW-01-DENY",
+                "surface": "forbidden",
+                "statement": "No card movement, nested duplicate glow, pointer interception, or residual glow after leaving, keyboard input, reduced motion, touch and admin navigation."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "kind": "playwright",
+                "name": "pointer spotlight follows public cards and clears across input and route changes",
+                "gate": "e2e",
+                "covers": [
+                  "M01-CARD-GLOW-01-ALLOW",
+                  "M01-CARD-GLOW-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.858,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "127 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 229.986,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 88.756,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 1.183,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "917 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1862.791,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "244 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 75.662,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 220 cases, 441 expectations, 816 exact test references; contract sha256 325a107169ce"
+      ],
+      "status": "passed",
+      "duration_ms": 367.045,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.922,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.261,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 82.473,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 1514.532,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "b28cfd2a3793c88bda5fc8de39cfe6f1",
+        "attempt_id": "7d82ba37bf986087c2c2ee6877108e1e"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260909-public-card-glow --gate e2e",
+      "status": "passed",
+      "duration_ms": 66524.592,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 2060,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "pointer spotlight follows public cards and clears across input and route changes"
+              }
+            ],
+            "duration_ms": 4102.077,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "81cf8927ce1655c3381b8444e4b42379ef65d7e7c1856a514ce77a83e6744f40",
+              "apps/web/nuxt.config.ts": "1d8d7e8e1e3f796a1435e5f9e23ccf49ee0972c2a31f570b2db61cdbe3246ea0",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "pointer spotlight follows public cards and clears across input and route changes"
+              }
+            ],
+            "duration_ms": 1450.664
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "pointer spotlight follows public cards and clears across input and route changes",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "pointer spotlight follows public cards and clears across input and route changes"
+                ]
+              }
+            ],
+            "duration_ms": 1261.596,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+                "name": "pointer spotlight follows public cards and clears across input and route changes",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "pointer spotlight follows public cards and clears across input and route changes"
+                ]
+              }
+            ],
+            "duration_ms": 59294.066,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\b28cfd2a3793c88bda5fc8de39cfe6f1\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "b28cfd2a3793c88bda5fc8de39cfe6f1",
+        "attempt_id": "e1e438d5f63749d1c64ca19653fecf53"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1558.932,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 72323.993,
+    "failures": []
+  },
+  "source_commit": "6d7cabb918028927434f1d4dd590b3061d5d3048"
+}

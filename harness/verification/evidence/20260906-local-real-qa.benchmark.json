@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "scope": "local-development-real-e5-deepseek-qa",
+  "status": "completed-with-explicit-limitations",
+  "production_qualified": false,
+  "model": "deepseek-v4-flash",
+  "model_version_reference": "DeepSeek-V4-Flash-0731 / official declaration only",
+  "corpus": {
+    "published_articles": 3,
+    "generation": 14
+  },
+  "budget": {
+    "approved_test_micro_cny": 1000000,
+    "chat_daily_micro_cny": 2000000,
+    "probe_micro_cny": 1548,
+    "chat_settled_micro_cny": 93402,
+    "chat_reserved_micro_cny": 0,
+    "total_conservative_micro_cny": 94950,
+    "unknown_network_attempt_micro_cny": 28608,
+    "submitted_question_requests": 14,
+    "admitted_turns": 12
+  },
+  "real_cases": [
+    {
+      "run": "answers.json",
+      "case": "english_to_chinese",
+      "http_status": 200,
+      "code": "answered",
+      "seconds": 1.099,
+      "paths": [
+        "/notes/2026/08/ssl"
+      ]
+    },
+    {
+      "run": "answers.json",
+      "case": "missing_evidence",
+      "http_status": 200,
+      "code": "provider_result_unknown",
+      "seconds": 1.529,
+      "paths": []
+    },
+    {
+      "run": "answers.json",
+      "case": "concurrent_codex",
+      "http_status": 429,
+      "code": null,
+      "seconds": 0.053,
+      "paths": []
+    },
+    {
+      "run": "answers.json",
+      "case": "concurrent_ssl",
+      "http_status": 200,
+      "code": "answered",
+      "seconds": 1.275,
+      "paths": [
+        "/notes/2026/08/ssl"
+      ]
+    },
+    {
+      "run": "answers2.json",
+      "case": "missing_evidence",
+      "http_status": 200,
+      "code": "insufficient_evidence",
+      "seconds": 1.038,
+      "paths": []
+    },
+    {
+      "run": "answers2.json",
+      "case": "concurrent_codex",
+      "http_status": 500,
+      "code": null,
+      "seconds": 0.057,
+      "paths": []
+    },
+    {
+      "run": "answers2.json",
+      "case": "concurrent_ssl",
+      "http_status": 200,
+      "code": "answered",
+      "seconds": 1.228,
+      "paths": [
+        "/notes/2026/08/ssl"
+      ]
+    },
+    {
+      "run": "answers-final.json",
+      "case": "concurrent_ssl",
+      "http_status": 200,
+      "code": "answered",
+      "seconds": 1.546,
+      "paths": [
+        "/notes/2026/08/ssl"
+      ]
+    },
+    {
+      "run": "answers-final.json",
+      "case": "concurrent_codex",
+      "http_status": 200,
+      "code": "insufficient_evidence",
+      "seconds": 3.738,
+      "paths": []
+    }
+  ],
+  "browser_checks": [
+    "Chinese SSL answer matches public Certbot command",
+    "English follow-up uses Chinese SSL renewal evidence",
+    "Multiple chunk markers close to one article and marker 2 focuses its source after reload"
+  ],
+  "observed_failures_and_repairs": [
+    "sandbox connect denied: preserve maximum charge; clear local circuit after nonbillable connectivity proof",
+    "multi-chunk source closure incorrectly rejected in Web: retain all citations and map source by path/title",
+    "complete empty blocks incorrectly retried as unknown: local adapter now emits insufficient_evidence without retry",
+    "lease UNIQUE(scope,key) caused second admission 500: migrate to owner-scoped key",
+    "implicit async saver transaction blocked synchronous control before providers: autocommit plus concurrent graph/delete regression"
+  ],
+  "final_concurrency": {
+    "requests": 2,
+    "http_statuses": [
+      200,
+      200
+    ],
+    "terminal_codes": [
+      "answered",
+      "insufficient_evidence"
+    ],
+    "seconds": [
+      1.546,
+      3.738
+    ],
+    "not_all_questions_answered": true
+  },
+  "cleanup": {
+    "synthetic_delete_http_status": 204,
+    "active_leases": 0,
+    "checkpoints": 0,
+    "writes": 0,
+    "ledger_preserved": true
+  },
+  "resources": {
+    "sample_count": 71,
+    "duration_seconds": 70.719,
+    "interval_p95_seconds": 1.055999994277954,
+    "interval_max_seconds": 1.1029999256134033,
+    "role_peaks": {
+      "api": {
+        "working_set": 556802048,
+        "private_bytes": 1042235392
+      },
+      "model": {
+        "working_set": 130146304,
+        "private_bytes": 2786758656
+      },
+      "qdrant": {
+        "working_set": 271028224,
+        "private_bytes": 61755392
+      },
+      "web": {
+        "working_set": 2163335168,
+        "private_bytes": 2348888064
+      }
+    },
+    "api_core_equivalent_mean": 0.012121174564072032,
+    "api_core_equivalent_p95": 0.03013500653984269,
+    "api_core_equivalent_peak": 0.5198140521847375,
+    "collector": "apps/api/scripts/sample-capacity.ps1",
+    "raw_sha256": "9595b946cab0f0360b80fb83cfa2482d1bcd57f5821723902be13ccfc9d5f741"
+  },
+  "capacity_revision": {
+    "baseline": "20260906-local-capacity-measurement.benchmark.json",
+    "api_increment_bound_bytes": 61554688,
+    "service_envelope_bytes": 4984303616,
+    "headroom_bytes": 1495291085,
+    "assumed_os_cache_mib_range": [
+      768,
+      1536
+    ],
+    "estimated_memory_gib_range": [
+      7,
+      8
+    ],
+    "cpu_recommended_same_class_logical_cores": 3,
+    "disk_estimate_gib": 12
+  },
+  "limitations": [
+    "3 published articles; synthetic smoke questions, not a new broad quality benchmark",
+    "DeepSeek/Codex configuration question refused; positive coverage not demonstrated for that article",
+    "faults for E5/Qdrant/HTTP error variants use injected contract tests; no claim of live vendor 429/500",
+    "Web dev server and four sampled roles only; full deployment estimate reuses stage D five-role baseline",
+    "CPU mean/p95 includes idle intervals; peak used conservatively with stage D CPU and may double count",
+    "No long soak, Linux VM, 2-core/4-GB acceptance, public HTTPS or production profile qualification",
+    "Unknown request price is upper-bound accounting, not vendor invoice; no raw answers/secrets committed"
+  ]
+}

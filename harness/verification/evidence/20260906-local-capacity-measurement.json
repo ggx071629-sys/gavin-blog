@@ -1,0 +1,478 @@
+{
+  "schema_version": 2,
+  "task_id": "20260906-local-capacity-measurement",
+  "created_at": "2026-09-06T10:40:19.944778+00:00",
+  "command": "python -m tools.harness verify 20260906-local-capacity-measurement",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "5b886db3e0c8f38a339c6b94bce9c3eb5d8c394f",
+    "active_spec_sha256": "fa851100f816e29c651de81e8d08715bd5610002d200877f0e89f47a77e013bd",
+    "verification_contract_sha256": "d8635ed5a1f3d2dacf925b970f1eb82316ec6faeb1b73770e6e4a24828f70559",
+    "gate_config_sha256": "66579f249fea970a8a62c9b5345f45881bb4067e2c01977144961a74bfd1e8d7",
+    "documentation_contract_sha256": "cc5279fab070aff97104a2b8bb4e0c815d60940980737bac155705b5dd36b42d",
+    "documentation_targets_sha256": "47a0e0466c90cd879a45206b4e3a75bff3789e5fb0a6a664a6b11aa4d188639e",
+    "module_contract_sha256": "269921e7b2d5b5827f3877a43962febc4ab9d4d445778075932e25ad62095356"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "新增可复现本机资源测量入口、口径及真实容量结果。",
+    "targets": [
+      "apps/api/README.md",
+      "build-qa.md",
+      "harness/docs/operations/e5-retrieval-evaluation.md"
+    ],
+    "baseline_commit": "9ef69d111aca2440d55afb0c53e5105fd44dfc11",
+    "target_blobs": {
+      "apps/api/README.md": "1d4ccb34a03440688f24f7dfc4ee02122ba57e7a",
+      "build-qa.md": "05927f62d38d309cdb8b5755afea8794eef17385",
+      "harness/docs/operations/e5-retrieval-evaluation.md": "9be16a7e43169cce118be642207f78a38bcaaa14"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "3097fe7fd8ec72c889f7230f7c42fdc4f9b1fd78",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260906-local-capacity-measurement.json",
+      "sha256": "66fa5bbe29ae3fb721353b194576a5baa5aa1de84b2e3a9433119d88b4e6005d",
+      "selected_cases": [
+        "M10-CAPACITY-ISOLATION-01",
+        "M10-CAPACITY-METRICS-01",
+        "M10-CAPACITY-REPORT-01"
+      ],
+      "selected_refs": 3,
+      "excluded_cases": 184
+    },
+    "receipt": {
+      "run_id": "8c1f261ef76889828596e12a80477a2e",
+      "identity": "ee28a0b093d7f08ca9b1ef1310a080baea8e9de48fd783431366c70f28b1412a",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 2316.544,
+      "plan_inputs": 1110.072,
+      "execute_cleanup_and_input_recheck": 8904.242
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "269921e7b2d5b5827f3877a43962febc4ab9d4d445778075932e25ad62095356",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-CAPACITY-METRICS-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "进程资源统计和容量余量",
+            "expectations": [
+              {
+                "id": "M10-CAPACITY-METRICS-01-E01",
+                "surface": "response",
+                "statement": "按时间差和进程身份计算，输出完整场景与保守估算"
+              },
+              {
+                "id": "M10-CAPACITY-METRICS-01-E02",
+                "surface": "forbidden",
+                "statement": "缺失场景/角色、PID重复或计数回退不能生成有效统计"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_capacity.py",
+                "kind": "pytest",
+                "name": "test_capacity_metrics_require_complete_samples_and_bound_estimates",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-CAPACITY-METRICS-01-E01",
+                  "M10-CAPACITY-METRICS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-CAPACITY-ISOLATION-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "独立本机测量边界",
+            "expectations": [
+              {
+                "id": "M10-CAPACITY-ISOLATION-01-E01",
+                "surface": "response",
+                "statement": "显式GET只读测量入口鉴权，独立配置和空闲端口"
+              },
+              {
+                "id": "M10-CAPACITY-ISOLATION-01-E02",
+                "surface": "forbidden",
+                "statement": "原应用不得出现测量路由，错误配置和占用端口拒绝"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_capacity.py",
+                "kind": "pytest",
+                "name": "test_capacity_isolation_ports_configuration_and_explicit_api",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-CAPACITY-ISOLATION-01-E01",
+                  "M10-CAPACITY-ISOLATION-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-CAPACITY-REPORT-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P1",
+            "scenario": "容量运行资格与失败",
+            "expectations": [
+              {
+                "id": "M10-CAPACITY-REPORT-01-E01",
+                "surface": "response",
+                "statement": "完整查询负载、真实重叠和进程清理完成后才认可运行"
+              },
+              {
+                "id": "M10-CAPACITY-REPORT-01-E02",
+                "surface": "forbidden",
+                "statement": "错误、缺负载、无重叠或清理失败不能认定有效"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_capacity.py",
+                "kind": "pytest",
+                "name": "test_capacity_report_rejects_errors_missing_load_and_cleanup_failures",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-CAPACITY-REPORT-01-E01",
+                  "M10-CAPACITY-REPORT-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.088,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "116 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 178.637,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 60.463,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.503,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "812 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1601.74,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "226 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 55.082,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "10 modules, 187 cases, 374 expectations, 707 exact test references; contract sha256 269921e7b2d5"
+      ],
+      "status": "passed",
+      "duration_ms": 325.251,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.036,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.198,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 77.083,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "duration_ms": 1381.977,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "8c1f261ef76889828596e12a80477a2e",
+        "attempt_id": "6fd15a4bd511e9e743db15a77959dd6e"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260906-local-capacity-measurement --gate api-tests",
+      "status": "passed",
+      "duration_ms": 5765.206,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 699,
+        "selection_counts": {
+          "collected": 3,
+          "executed": 3
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_capacity.py",
+                "name": "test_capacity_isolation_ports_configuration_and_explicit_api"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_capacity.py",
+                "name": "test_capacity_metrics_require_complete_samples_and_bound_estimates"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_capacity.py",
+                "name": "test_capacity_report_rejects_errors_missing_load_and_cleanup_failures"
+              }
+            ],
+            "duration_ms": 5393.712,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\8c1f261ef76889828596e12a80477a2e\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "8c1f261ef76889828596e12a80477a2e",
+        "attempt_id": "d47fb202b9413e1bf47f47a26461a8c3"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1458.775,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 10920.039,
+    "failures": []
+  },
+  "source_commit": "3097fe7fd8ec72c889f7230f7c42fdc4f9b1fd78"
+}

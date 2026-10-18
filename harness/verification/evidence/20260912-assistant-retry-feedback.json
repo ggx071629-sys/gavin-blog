@@ -1,0 +1,1270 @@
+{
+  "schema_version": 2,
+  "task_id": "20260912-assistant-retry-feedback",
+  "created_at": "2026-09-12T13:22:17.493055+00:00",
+  "command": "python -m tools.harness verify 20260912-assistant-retry-feedback",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "102a7a759770d5a6818200c01fa0eff7a0c10fd5",
+    "active_spec_sha256": "e69847c615826b292fabdc9498e98ac9c3ae20998a9880966a23ce2f37b271d1",
+    "verification_contract_sha256": "a08178a47f356c7394deb8eaba79ab54a54cdd05a5c33f87e3adf1dffba61370",
+    "gate_config_sha256": "39c8c7742a9f994fc2c15e552db6ed4b033c07246103b3f5f97209114276dcf5",
+    "documentation_contract_sha256": "fc8bebbe72c9253651e8052e6b6b94df56a768c89b5e1f5bad450ae7b8b0f2b2",
+    "documentation_targets_sha256": "efe581b30aa21518afa3937668095b5cce7c85f720e8dd515720bddbfabeedc7",
+    "module_contract_sha256": "8545e9ece0e2cc5b27245b23da7945461c6edbfe66d3d5b0d47b716e99ed8867"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "明确重试反馈、失败原因及费用与隐私边界。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "e7a7a449c63da38c31515ab9cf76ce9aa9ed02d8",
+    "target_blobs": {
+      "apps/api/README.md": "9e712af110e57fc54278413b336024fb05ac02c9"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "975337038d9212c28c88554827b0b3ecb0e3f164",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260912-assistant-retry-feedback.json",
+      "sha256": "bb28add433591691c1065a686389c19a4bcdf0dcdd6fd7d91f780f281f6aa686",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M09-INPUT-ERROR-02",
+        "M09-RETRY-FAILURE-01",
+        "M09-RETRY-FEEDBACK-01",
+        "M09-UI-BOUNDARY-01"
+      ],
+      "selected_refs": 23,
+      "excluded_cases": 356
+    },
+    "receipt": {
+      "run_id": "5e28852b55772a26951a2f179bb6d0aa",
+      "identity": "83a2bef2e29dc190a3f3f49645f754422fec16b18f63db2412e649277a858fd9",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "web-quality",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 5936.677,
+      "plan_inputs": 1374.884,
+      "execute_cleanup_and_input_recheck": 46265.293
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "8545e9ece0e2cc5b27245b23da7945461c6edbfe66d3d5b0d47b716e99ed8867",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests"
+        ],
+        "cases": [
+          {
+            "id": "M09-RETRY-FEEDBACK-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Malformed output receives fixed correction, then valid answer; retries are budgeted and replayed without calls.",
+            "expectations": [
+              {
+                "id": "M09-RETRY-FEEDBACK-01-ALLOW",
+                "surface": "response",
+                "statement": "Malformed output receives fixed correction, then valid answer; retries are budgeted and replayed without calls."
+              },
+              {
+                "id": "M09-RETRY-FEEDBACK-01-DENY",
+                "surface": "forbidden",
+                "statement": "Failed body or arbitrary reasons cannot enter feedback; no third call or reserve expansion."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_retry_feedback.py",
+                "name": "test_retry_feedback_is_bounded_and_budgeted",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-RETRY-FEEDBACK-01-ALLOW",
+                  "M09-RETRY-FEEDBACK-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "web-quality"
+        ],
+        "cases": [
+          {
+            "id": "M09-RETRY-FAILURE-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "Received format/support failure and provider unknown have distinct codes and safe diagnostics.",
+            "expectations": [
+              {
+                "id": "M09-RETRY-FAILURE-01-ALLOW",
+                "surface": "response",
+                "statement": "Received format/support failure and provider unknown have distinct codes and safe diagnostics."
+              },
+              {
+                "id": "M09-RETRY-FAILURE-01-DENY",
+                "surface": "forbidden",
+                "statement": "Unknown provider result cannot trigger another call or publish invalid output."
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_retry_feedback.py",
+                "name": "test_failure_classes_preserve_attempt_bound[format]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-RETRY-FAILURE-01-ALLOW",
+                  "M09-RETRY-FAILURE-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_retry_feedback.py",
+                "name": "test_failure_classes_preserve_attempt_bound[unsupported]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-RETRY-FAILURE-01-ALLOW",
+                  "M09-RETRY-FAILURE-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_retry_feedback.py",
+                "name": "test_failure_classes_preserve_attempt_bound[unknown]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-RETRY-FAILURE-01-ALLOW",
+                  "M09-RETRY-FAILURE-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-UI-BOUNDARY-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P0",
+            "scenario": "保留公开助手输入、SSE、引用、路径、恢复和删除代际校验。",
+            "expectations": [
+              {
+                "id": "M09-UI-BOUNDARY-01-ALLOW",
+                "surface": "response",
+                "statement": "合法 SSE 与已校验引用、期限和字数按原合同消费。"
+              },
+              {
+                "id": "M09-UI-BOUNDARY-01-DENY",
+                "surface": "forbidden",
+                "statement": "不接受跨源路径、错误引用、内部字段、乱序事件或旧代际完成。"
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "is strict true only",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "accepts only same-origin relative /api/v1",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "requires the exact final endpoint without redirects, suffixes, queries, or hashes",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "matches launcher paths without query or hash",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "accepts only navigable source paths",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "parses events across arbitrary chunk and CRLF boundaries",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "rejects fatal UTF-8, unknown fields, and internal idempotent",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "enforces the 16-event logical-turn cap across reconnects",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "rejects rewind ids, missing terminal EOF, and data after terminal",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "keeps the Host reconnect path on one parser instance",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "splits each [n] marker once without duplicating the preceding text",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes markers only to matching citations and allowlisted sources",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "aborts every old request and rejects a delayed completion after DELETE generation advances",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "uses a controlled 3-second poll clock, bounded Retry-After, and one 180-second horizon",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes hydrated answers before allowing source paths into Vue state",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "keeps raw fields out of restorable form controls and wires lifecycle invalidation",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "maps machine codes and Retry-After bounds",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW",
+                  "M09-UI-BOUNDARY-01-DENY"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "counts unicode code points and initializes empty memory",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-UI-BOUNDARY-01-ALLOW"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-INPUT-ERROR-02",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "输入超限说明停止后续调用，未确认状态保留只读检查操作。",
+            "expectations": [
+              {
+                "id": "M09-INPUT-ERROR-02-ALLOW",
+                "surface": "response",
+                "statement": "输入超限说明停止后续调用，未确认状态保留只读检查操作。"
+              },
+              {
+                "id": "M09-INPUT-ERROR-02-DENY",
+                "surface": "forbidden",
+                "statement": "不得建议原样重发输入超限或移除未知调用的检查保护。"
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "distinguishes input budget rejection from an unconfirmed answer",
+                "gate": "web-quality",
+                "covers": [
+                  "M09-INPUT-ERROR-02-ALLOW",
+                  "M09-INPUT-ERROR-02-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 8.741,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "219 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 607.254,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 156.439,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 1.159,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "2100 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 3917.579,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "344 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 145.209,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 361 cases, 732 expectations, 1162 exact test references; contract sha256 8545e9ece0e2"
+      ],
+      "status": "passed",
+      "duration_ms": 933.942,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 5.364,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 15.015,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 141.48,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-3"
+      ],
+      "duration_ms": 4073.552,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "5e28852b55772a26951a2f179bb6d0aa",
+        "attempt_id": "4e9e1bddc021a0280662a267fd819f0d"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-retry-feedback --gate api-tests",
+      "status": "passed",
+      "duration_ms": 20510.251,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 867,
+        "selection_counts": {
+          "collected": 4,
+          "executed": 4
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_retry_feedback.py",
+                "name": "test_failure_classes_preserve_attempt_bound[format]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_retry_feedback.py",
+                "name": "test_failure_classes_preserve_attempt_bound[unsupported]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_retry_feedback.py",
+                "name": "test_failure_classes_preserve_attempt_bound[unknown]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_retry_feedback.py",
+                "name": "test_retry_feedback_is_bounded_and_budgeted"
+              }
+            ],
+            "duration_ms": 19788.462,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\5e28852b55772a26951a2f179bb6d0aa\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "5e28852b55772a26951a2f179bb6d0aa",
+        "attempt_id": "b91125e4ac724c49b6b493aa9250ee89"
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-assistant-retry-feedback --gate web-quality",
+      "status": "passed",
+      "duration_ms": 16266.309,
+      "covers": [
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 13036,
+        "selection_counts": {
+          "collected": 19,
+          "executed": 19
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "distinguishes input budget rejection from an unconfirmed answer"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "is strict true only"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "accepts only same-origin relative /api/v1"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "requires the exact final endpoint without redirects, suffixes, queries, or hashes"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "matches launcher paths without query or hash"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "accepts only navigable source paths"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "parses events across arbitrary chunk and CRLF boundaries"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "rejects fatal UTF-8, unknown fields, and internal idempotent"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "enforces the 16-event logical-turn cap across reconnects"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "rejects rewind ids, missing terminal EOF, and data after terminal"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "keeps the Host reconnect path on one parser instance"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "splits each [n] marker once without duplicating the preceding text"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes markers only to matching citations and allowlisted sources"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "aborts every old request and rejects a delayed completion after DELETE generation advances"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "uses a controlled 3-second poll clock, bounded Retry-After, and one 180-second horizon"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes hydrated answers before allowing source paths into Vue state"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "keeps raw fields out of restorable form controls and wires lifecycle invalidation"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "maps machine codes and Retry-After bounds"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "counts unicode code points and initializes empty memory"
+              }
+            ],
+            "duration_ms": 7401.984,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "distinguishes input budget rejection from an unconfirmed answer"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "is strict true only"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "accepts only same-origin relative /api/v1"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "requires the exact final endpoint without redirects, suffixes, queries, or hashes"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "matches launcher paths without query or hash"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "accepts only navigable source paths"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "parses events across arbitrary chunk and CRLF boundaries"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "rejects fatal UTF-8, unknown fields, and internal idempotent"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "enforces the 16-event logical-turn cap across reconnects"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "rejects rewind ids, missing terminal EOF, and data after terminal"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "keeps the Host reconnect path on one parser instance"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "splits each [n] marker once without duplicating the preceding text"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes markers only to matching citations and allowlisted sources"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "aborts every old request and rejects a delayed completion after DELETE generation advances"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "uses a controlled 3-second poll clock, bounded Retry-After, and one 180-second horizon"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes hydrated answers before allowing source paths into Vue state"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "keeps raw fields out of restorable form controls and wires lifecycle invalidation"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "maps machine codes and Retry-After bounds"
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "counts unicode code points and initializes empty memory"
+              }
+            ],
+            "duration_ms": 4381.568
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "distinguishes input budget rejection from an unconfirmed answer",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant errors and persistence",
+                  "distinguishes input budget rejection from an unconfirmed answer"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "is strict true only",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant UI flag",
+                  "is strict true only"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "accepts only same-origin relative /api/v1",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant origin",
+                  "accepts only same-origin relative /api/v1"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "requires the exact final endpoint without redirects, suffixes, queries, or hashes",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant origin",
+                  "requires the exact final endpoint without redirects, suffixes, queries, or hashes"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "matches launcher paths without query or hash",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant allowlist",
+                  "matches launcher paths without query or hash"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "accepts only navigable source paths",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant allowlist",
+                  "accepts only navigable source paths"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "parses events across arbitrary chunk and CRLF boundaries",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant SSE parser",
+                  "parses events across arbitrary chunk and CRLF boundaries"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "rejects fatal UTF-8, unknown fields, and internal idempotent",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant SSE parser",
+                  "rejects fatal UTF-8, unknown fields, and internal idempotent"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "enforces the 16-event logical-turn cap across reconnects",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant SSE parser",
+                  "enforces the 16-event logical-turn cap across reconnects"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "rejects rewind ids, missing terminal EOF, and data after terminal",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant SSE parser",
+                  "rejects rewind ids, missing terminal EOF, and data after terminal"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "keeps the Host reconnect path on one parser instance",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant SSE parser",
+                  "keeps the Host reconnect path on one parser instance"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "splits each [n] marker once without duplicating the preceding text",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant citations",
+                  "splits each [n] marker once without duplicating the preceding text"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes markers only to matching citations and allowlisted sources",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant citations",
+                  "closes markers only to matching citations and allowlisted sources"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "aborts every old request and rejects a delayed completion after DELETE generation advances",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant document controller barriers",
+                  "aborts every old request and rejects a delayed completion after DELETE generation advances"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "uses a controlled 3-second poll clock, bounded Retry-After, and one 180-second horizon",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant document controller barriers",
+                  "uses a controlled 3-second poll clock, bounded Retry-After, and one 180-second horizon"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "closes hydrated answers before allowing source paths into Vue state",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant document controller barriers",
+                  "closes hydrated answers before allowing source paths into Vue state"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "keeps raw fields out of restorable form controls and wires lifecycle invalidation",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant document controller barriers",
+                  "keeps raw fields out of restorable form controls and wires lifecycle invalidation"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "maps machine codes and Retry-After bounds",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant errors and persistence",
+                  "maps machine codes and Retry-After bounds"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant.test.ts",
+                "name": "counts unicode code points and initializes empty memory",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant errors and persistence",
+                  "counts unicode code points and initializes empty memory"
+                ]
+              }
+            ],
+            "duration_ms": 3788.441,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\5e28852b55772a26951a2f179bb6d0aa\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "5e28852b55772a26951a2f179bb6d0aa",
+        "attempt_id": "b54d05083da6a3a3f46f7723bff7509d"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 4179.435,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 50961.729,
+    "failures": []
+  },
+  "source_commit": "975337038d9212c28c88554827b0b3ecb0e3f164"
+}

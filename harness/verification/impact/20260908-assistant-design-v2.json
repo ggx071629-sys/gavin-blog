@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "task_id": "20260908-assistant-design-v2",
+  "changes": [
+    {
+      "path": "apps/web/components/AssistantPanel.vue",
+      "owner": "M09.assistant_web",
+      "reason": "仅还原助手展示结构、局部样式及记录；数据和交互合同不变。",
+      "cases": [
+        "M09-UI-LAYOUT-01",
+        "M09-UI-INTERACTION-01",
+        "M09-UI-STATES-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "本次仅助手内部视觉；未改导航、flag、代理、公开页面或文档可执行合同。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "本次仅助手内部视觉；未改导航、flag、代理、公开页面或文档可执行合同。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "本次仅助手内部视觉；未改导航、flag、代理、公开页面或文档可执行合同。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/AssistantHost.vue",
+      "owner": "M09.assistant_web",
+      "reason": "仅还原助手展示结构、局部样式及记录；数据和交互合同不变。",
+      "cases": [
+        "M09-UI-LAYOUT-01",
+        "M09-UI-INTERACTION-01",
+        "M09-UI-STATES-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "本次仅助手内部视觉；未改导航、flag、代理、公开页面或文档可执行合同。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "本次仅助手内部视觉；未改导航、flag、代理、公开页面或文档可执行合同。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "本次仅助手内部视觉；未改导航、flag、代理、公开页面或文档可执行合同。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/assets/css/assistant.css",
+      "owner": "M09.assistant_web",
+      "reason": "仅还原助手展示结构、局部样式及记录；数据和交互合同不变。",
+      "cases": [
+        "M09-UI-LAYOUT-01",
+        "M09-UI-INTERACTION-01",
+        "M09-UI-STATES-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "本次仅助手内部视觉；未改导航、flag、代理、公开页面或文档可执行合同。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "本次仅助手内部视觉；未改导航、flag、代理、公开页面或文档可执行合同。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "本次仅助手内部视觉；未改导航、flag、代理、公开页面或文档可执行合同。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/README.md",
+      "owner": "M08.documentation",
+      "reason": "仅还原助手展示结构、局部样式及记录；数据和交互合同不变。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "仅增加设计来源与展示范围说明，不改变命令、结构、链接目标或可执行合同。"
+    }
+  ]
+}

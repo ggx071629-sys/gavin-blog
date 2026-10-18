@@ -1,0 +1,903 @@
+{
+  "schema_version": 2,
+  "task_id": "20260906-home-atlas",
+  "created_at": "2026-09-05T17:54:10.405581+00:00",
+  "command": "python -m tools.harness verify 20260906-home-atlas",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "e2e"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "status": "passed",
+      "gates": [
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "48a51a37c9bb06ec9ccf9e4c48f2f9794bbd6cd6",
+    "active_spec_sha256": "5e7aaf21489579567c7b53778c58f996d88c322cb6ba2d9eac653a2655aa12e5",
+    "verification_contract_sha256": "5098460cbbcd2103a7ad5df43fcbc3361d50fd97f8539f03ae004661e0109af5",
+    "gate_config_sha256": "b7f50879871411f4ac893f203bcff8fcdfe90a9a6bbc4d11106195e73a063bf1",
+    "documentation_contract_sha256": "803d7cc6f555efc60a0bb5cf4b03460af9dce81c4496502a5d818de41d0c01ea",
+    "documentation_targets_sha256": "0de521f6ae37dbc1a941a83292affb853a904a55d2097a43857f27e3e95a1487",
+    "module_contract_sha256": "ce6d5a455556e1b2db889f092ebd9fd15e9aeeae2cef9d2c08c1eb093bdb169e"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录首页公开取数、降级、交互和阶段验收边界。",
+    "targets": [
+      "apps/web/README.md",
+      "ui-fix/PHASE-2.md"
+    ],
+    "baseline_commit": "584a1129cf9e24dcbc93b38c2e648d3f7cd4ddb4",
+    "target_blobs": {
+      "apps/web/README.md": "778b7a02a46ca718344ad82fb7228aec7f8daba0",
+      "ui-fix/PHASE-2.md": "172578b63c146b36b63c156219bfa266dcd6c67b"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "cf8b26c59d11bac1bdb88b7a3fc5d2e5de055a7a",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260906-home-atlas.json",
+      "sha256": "9cca1a8e53a685e5babbf28287ebd49dac0d876f029bd6b778d7f14d6ed4cdce",
+      "selected_cases": [
+        "M01-HOME-DATA-01",
+        "M01-HOME-INTERACTION-01",
+        "M01-HOME-LIVE-01",
+        "M01-HOME-STATES-01",
+        "M01-HOME-VISUAL-01",
+        "M06-PROFILE-CARD-01",
+        "M06-PROFILE-HOME-01",
+        "M07-P1-01",
+        "M08-DOCS-01"
+      ],
+      "selected_refs": 15,
+      "excluded_cases": 140
+    },
+    "receipt": {
+      "run_id": "321ee1796075dbb8d1a2620e6cc3417b",
+      "identity": "781ca5051a959a690dce059384e9beed701d1d984ed905bd3073dfeff8c74b7a",
+      "plan": [
+        {
+          "gate": "web-quality",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1136.424,
+      "plan_inputs": 1202.407,
+      "execute_cleanup_and_input_recheck": 200589.921
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "ce6d5a455556e1b2db889f092ebd9fd15e9aeeae2cef9d2c08c1eb093bdb169e",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "web-quality",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M01-HOME-DATA-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "Load bounded home data from existing public APIs.",
+            "expectations": [
+              {
+                "id": "M01-HOME-DATA-01-E01",
+                "surface": "user_visible",
+                "statement": "At most three category queries follow stable id ordering; preserve site-wide total and public paths; reuse the recent request without categories."
+              },
+              {
+                "id": "M01-HOME-DATA-01-E02",
+                "surface": "forbidden",
+                "statement": "Do not serialize full bodies, request an uncategorized filter, or convert primary/aborted failures into an empty success."
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/home.test.ts",
+                "name": "bounds category requests by stable id and strips full bodies from the page payload",
+                "gate": "web-quality",
+                "covers": [
+                  "M01-HOME-DATA-01-E01",
+                  "M01-HOME-DATA-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/home.test.ts",
+                "name": "reuses recent articles when there are no current categories and keeps the site total",
+                "gate": "web-quality",
+                "covers": [
+                  "M01-HOME-DATA-01-E01",
+                  "M01-HOME-DATA-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/home.test.ts",
+                "name": "distinguishes empty content, taxonomy failure and individual topic failure",
+                "gate": "web-quality",
+                "covers": [
+                  "M01-HOME-DATA-01-E01",
+                  "M01-HOME-DATA-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/home.test.ts",
+                "name": "propagates primary article and aborted request failures instead of inventing an empty success",
+                "gate": "web-quality",
+                "covers": [
+                  "M01-HOME-DATA-01-E01",
+                  "M01-HOME-DATA-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M01-HOME-LIVE-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "Publish isolated articles and inspect the real homepage and reading navigation.",
+            "expectations": [
+              {
+                "id": "M01-HOME-LIVE-01-E01",
+                "surface": "user_visible",
+                "statement": "Stable selected categories match taxonomy and latest article API; real paths open their article; measure bounded requests and response sizes."
+              },
+              {
+                "id": "M01-HOME-LIVE-01-E02",
+                "surface": "forbidden",
+                "statement": "Unpublished working-copy titles and full-body sentinels never enter homepage HTML; hydration must not refetch API data."
+              }
+            ],
+            "required_gates": [
+              "e2e",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/home-atlas.spec.ts",
+                "name": "homepage reads published categories and latest snapshots with bounded requests",
+                "gate": "e2e",
+                "covers": [
+                  "M01-HOME-LIVE-01-E01",
+                  "M01-HOME-LIVE-01-E02"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/quality/home-atlas.spec.ts",
+                "name": "production homepage records real payloads, first paint and dual theme composition",
+                "gate": "web-quality",
+                "covers": [
+                  "M01-HOME-LIVE-01-E01",
+                  "M01-HOME-LIVE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M01-HOME-INTERACTION-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "Explore a stable bounded topic atlas by pointer and keyboard.",
+            "expectations": [
+              {
+                "id": "M01-HOME-INTERACTION-01-E01",
+                "surface": "user_visible",
+                "statement": "Focus and hover highlight direct branches; Enter/Space persist selection, reset clears it; real category and article destinations remain present."
+              },
+              {
+                "id": "M01-HOME-INTERACTION-01-E02",
+                "surface": "forbidden",
+                "statement": "No fourth branch, incorrect summed total, duplicate request or lingering selection after reset."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/home-atlas.spec.ts",
+                "name": "homepage atlas supports stable selection, hover, keyboard reset and real destinations",
+                "gate": "e2e",
+                "covers": [
+                  "M01-HOME-INTERACTION-01-E01",
+                  "M01-HOME-INTERACTION-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "web-quality",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M01-HOME-STATES-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "Navigate through loading, empty, missing taxonomy and per-topic failures.",
+            "expectations": [
+              {
+                "id": "M01-HOME-STATES-01-E01",
+                "surface": "user_visible",
+                "statement": "Loading is visible; empty and uncategorized content have honest fallbacks; per-topic error and empty results differ and retry recovers. Main upstream failures retain HTTP errors."
+              },
+              {
+                "id": "M01-HOME-STATES-01-E02",
+                "surface": "forbidden",
+                "statement": "Do not show empty success while loading or on upstream failure; missing taxonomy cannot claim zero articles."
+              }
+            ],
+            "required_gates": [
+              "e2e",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/home-atlas.spec.ts",
+                "name": "homepage distinguishes loading, empty, uncategorized and partial failures with retry",
+                "gate": "e2e",
+                "covers": [
+                  "M01-HOME-STATES-01-E01",
+                  "M01-HOME-STATES-01-E02"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/failure/failure-state.spec.ts",
+                "name": "public SSR preserves upstream failures instead of rendering empty 200 pages",
+                "gate": "web-quality",
+                "covers": [
+                  "M01-HOME-STATES-01-E01",
+                  "M01-HOME-STATES-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "web-quality",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M01-HOME-VISUAL-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "Read long content on both themes at desktop, mobile and short viewports.",
+            "expectations": [
+              {
+                "id": "M01-HOME-VISUAL-01-E01",
+                "surface": "user_visible",
+                "statement": "320-1440px remains within the viewport with three topics and compact rows, visible controls, reduced motion and accessible production screenshots."
+              },
+              {
+                "id": "M01-HOME-VISUAL-01-E02",
+                "surface": "forbidden",
+                "statement": "No horizontal overflow, automated WCAG violation, fake live state or missing-summary placeholder; no runtime diagnostics or hydration API replay."
+              }
+            ],
+            "required_gates": [
+              "e2e",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/home-atlas.spec.ts",
+                "name": "homepage atlas adapts long content to both themes and narrow short viewports",
+                "gate": "e2e",
+                "covers": [
+                  "M01-HOME-VISUAL-01-E01",
+                  "M01-HOME-VISUAL-01-E02"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/quality/home-atlas.spec.ts",
+                "name": "production homepage records real payloads, first paint and dual theme composition",
+                "gate": "web-quality",
+                "covers": [
+                  "M01-HOME-VISUAL-01-E01",
+                  "M01-HOME-VISUAL-01-E02"
+                ]
+              },
+              {
+                "kind": "vitest",
+                "path": "apps/web/tests/unit/typography.test.ts",
+                "name": "keeps homepage empty-state copy in the shipped template",
+                "gate": "web-quality",
+                "covers": [
+                  "M01-HOME-VISUAL-01-E01",
+                  "M01-HOME-VISUAL-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-PROFILE-CARD-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Homepage renders an unconfigured profile without exposing absent contact information.",
+            "expectations": [
+              {
+                "id": "M06-PROFILE-CARD-01-E01",
+                "surface": "response",
+                "statement": "The visible profile heading is Gavin."
+              },
+              {
+                "id": "M06-PROFILE-CARD-01-E02",
+                "surface": "forbidden",
+                "statement": "Absent GitHub, website, email and resume links must not render."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/profile.spec.ts",
+                "name": "homepage shows the default profile card before configuration",
+                "gate": "e2e",
+                "covers": [
+                  "M06-PROFILE-CARD-01-E01",
+                  "M06-PROFILE-CARD-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M06-PROFILE-HOME-01",
+            "module_id": "M06",
+            "module_name": "认证与个人资料",
+            "priority": "P1",
+            "scenario": "Edit contact details through the existing admin profile and view the homepage intro variant.",
+            "expectations": [
+              {
+                "id": "M06-PROFILE-HOME-01-E01",
+                "surface": "user_visible",
+                "statement": "Saved skills, profile links, safe new-window attributes and email clipboard announcement are retained."
+              },
+              {
+                "id": "M06-PROFILE-HOME-01-E02",
+                "surface": "forbidden",
+                "statement": "Hidden city/email never render; the homepage variant must not break the admin form or contact actions."
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/profile.spec.ts",
+                "name": "admin edits the profile and visitors see the updated card",
+                "gate": "e2e",
+                "covers": [
+                  "M06-PROFILE-HOME-01-E01",
+                  "M06-PROFILE-HOME-01-E02"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/profile.spec.ts",
+                "name": "hidden city and email never appear on the public card",
+                "gate": "e2e",
+                "covers": [
+                  "M06-PROFILE-HOME-01-E01",
+                  "M06-PROFILE-HOME-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M07-P1-01",
+            "module_id": "M07",
+            "module_name": "内容发现输出",
+            "priority": "P1",
+            "scenario": "本地 production-build preview 首页满足四项桌面 Lighthouse 发布阈值。",
+            "expectations": [
+              {
+                "id": "M07-P1-01-E01",
+                "surface": "user_visible",
+                "statement": "本地 production-build preview 的 Performance、Accessibility、Best Practices 与 SEO 四项 Lighthouse 分数均达到 90。"
+              },
+              {
+                "id": "M07-P1-01-E02",
+                "surface": "forbidden",
+                "statement": "任一受控 Lighthouse 类别低于 90 时不得通过 Web 质量门禁。"
+              }
+            ],
+            "required_gates": [
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/quality/site-quality.spec.ts",
+                "kind": "playwright",
+                "name": "local production-build preview homepage meets all Lighthouse 90 thresholds",
+                "gate": "web-quality",
+                "covers": [
+                  "M07-P1-01-E01",
+                  "M07-P1-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M01-HOME-LIVE-01",
+            "module_id": "M01",
+            "module_name": "公开阅读与导航",
+            "priority": "P1",
+            "scenario": "Publish isolated articles and inspect the real homepage and reading navigation.",
+            "expectations": [
+              {
+                "id": "M01-HOME-LIVE-01-E01",
+                "surface": "user_visible",
+                "statement": "Stable selected categories match taxonomy and latest article API; real paths open their article; measure bounded requests and response sizes."
+              },
+              {
+                "id": "M01-HOME-LIVE-01-E02",
+                "surface": "forbidden",
+                "statement": "Unpublished working-copy titles and full-body sentinels never enter homepage HTML; hydration must not refetch API data."
+              }
+            ],
+            "required_gates": [
+              "e2e",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e/home-atlas.spec.ts",
+                "name": "homepage reads published categories and latest snapshots with bounded requests",
+                "gate": "e2e",
+                "covers": [
+                  "M01-HOME-LIVE-01-E01",
+                  "M01-HOME-LIVE-01-E02"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/quality/home-atlas.spec.ts",
+                "name": "production homepage records real payloads, first paint and dual theme composition",
+                "gate": "web-quality",
+                "covers": [
+                  "M01-HOME-LIVE-01-E01",
+                  "M01-HOME-LIVE-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-5",
+        "selected_gates": [
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.928
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "106 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 170.152
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 73.635
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.707
+    },
+    {
+      "name": "links",
+      "details": [
+        "689 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 394.143
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "212 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 57.437
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "10 modules, 149 cases, 298 expectations, 621 exact test references; contract sha256 ce6d5a455556"
+      ],
+      "status": "passed",
+      "duration_ms": 329.617
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.081
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.978
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 90.493
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260906-home-atlas --gate web-quality",
+      "status": "passed",
+      "duration_ms": 138777.777,
+      "covers": [
+        "AC-1",
+        "AC-3",
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 105092,
+        "test_counts": {
+          "passed": 8,
+          "failed": 0,
+          "skipped": 1
+        },
+        "selection_counts": {
+          "collected": 8,
+          "executed": 8
+        },
+        "log": "D:\\t\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\321ee1796075dbb8d1a2620e6cc3417b\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "321ee1796075dbb8d1a2620e6cc3417b",
+        "attempt_id": "bbad25d29439acc31508503c606adb26"
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260906-home-atlas --gate e2e",
+      "status": "passed",
+      "duration_ms": 59360.906,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1701,
+        "test_counts": {
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0
+        },
+        "selection_counts": {
+          "collected": 7,
+          "executed": 7
+        },
+        "log": "D:\\t\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\321ee1796075dbb8d1a2620e6cc3417b\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "321ee1796075dbb8d1a2620e6cc3417b",
+        "attempt_id": "736cc30c227a863e3e93fcc0839744f4"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "duration_ms": 1085.955,
+      "covers": [
+        "AC-5"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 30,
+        "log": "D:\\t\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\321ee1796075dbb8d1a2620e6cc3417b\\harness-integrity\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "321ee1796075dbb8d1a2620e6cc3417b",
+        "attempt_id": "5bfdc0e30dbb3775791647087cfc9fec"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1094.068,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 201451.877,
+    "failures": [],
+    "test_counts": {
+      "passed": 15,
+      "failed": 0,
+      "skipped": 1
+    }
+  },
+  "source_commit": "cf8b26c59d11bac1bdb88b7a3fc5d2e5de055a7a"
+}

@@ -1,0 +1,461 @@
+{
+  "schema_version": 2,
+  "task_id": "20260910-studio-article-editor",
+  "created_at": "2026-09-10T09:00:45.143700+00:00",
+  "command": "python -m tools.harness verify 20260910-studio-article-editor",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "aabecbcbe16ccac751ce170143a723d4abda4f5f",
+    "active_spec_sha256": "5b67d2f807918dc017e5c3ba7744dd3c460f3b143339911e8aebf6c47fd45474",
+    "verification_contract_sha256": "34eb764b194734f45f11ac34e9736ac3a752ead2091935a7a66da4f3e443b6cf",
+    "gate_config_sha256": "dd655be36da471328159d54045b5505d7f8e05bb088524b5f6c4bb29e54b1ffe",
+    "documentation_contract_sha256": "18c9d754ae9af8e98851c6b87dd2aa74e9b4cefa32164a698f4231e4117d28ea",
+    "documentation_targets_sha256": "d3d93d70a9fa58d8df81aa954a0faf55f0c56f4376b4186d71ff2a6aa866e82d",
+    "module_contract_sha256": "1026847f1e1b6baaf92ef3a4d3ffec1b424cdde77d6662e7065ab2ae6feb3ad5"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录本任务页面的设计实现及实际行为边界。",
+    "targets": [
+      "apps/web/public/studio/README.md"
+    ],
+    "baseline_commit": "4aad6513bf084b6786c54170ebf25021cb8c0a56",
+    "target_blobs": {
+      "apps/web/public/studio/README.md": "75e41f51109d4947640633d26c0c9924237f5828"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "2d3639b81588856e6fff29b8b45030fabb530316",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260910-studio-article-editor.json",
+      "sha256": "e5298bcbe6a69e35eef9b3ae616dc03f74f91171c9defa05d40e61d6af1c2c07",
+      "selected_cases": [
+        "M02-STUDIO-ARTICLE-EDITOR-01"
+      ],
+      "selected_refs": 1,
+      "excluded_cases": 245
+    },
+    "receipt": {
+      "run_id": "0cc936c836ad9930f0b62be76490c6c6",
+      "identity": "eb698e0a53f2c43827f541063c6b85fb203f48ade9efbabc2a1d034a0d565c79",
+      "plan": [
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1330.183,
+      "plan_inputs": 776.521,
+      "execute_cleanup_and_input_recheck": 43138.575
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "1026847f1e1b6baaf92ef3a4d3ffec1b424cdde77d6662e7065ab2ae6feb3ad5",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M02-STUDIO-ARTICLE-EDITOR-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "文章新建编辑分区、校验保存后确认发布、取消保留草稿和工作副本隔离。",
+            "expectations": [
+              {
+                "id": "M02-STUDIO-ARTICLE-EDITOR-01-E01",
+                "surface": "user_visible",
+                "statement": "文章新建编辑分区、校验保存后确认发布、取消保留草稿和工作副本隔离。"
+              },
+              {
+                "id": "M02-STUDIO-ARTICLE-EDITOR-01-E02",
+                "surface": "forbidden",
+                "statement": "取消或仅自动保存不得改变公开版本，发布不得跳过保存屏障或使用旧版本。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "kind": "playwright",
+                "name": "article",
+                "gate": "e2e",
+                "covers": [
+                  "M02-STUDIO-ARTICLE-EDITOR-01-E01",
+                  "M02-STUDIO-ARTICLE-EDITOR-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M02-STUDIO-ARTICLE-EDITOR-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "文章新建编辑分区、校验保存后确认发布、取消保留草稿和工作副本隔离。",
+            "expectations": [
+              {
+                "id": "M02-STUDIO-ARTICLE-EDITOR-01-E01",
+                "surface": "user_visible",
+                "statement": "文章新建编辑分区、校验保存后确认发布、取消保留草稿和工作副本隔离。"
+              },
+              {
+                "id": "M02-STUDIO-ARTICLE-EDITOR-01-E02",
+                "surface": "forbidden",
+                "statement": "取消或仅自动保存不得改变公开版本，发布不得跳过保存屏障或使用旧版本。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "kind": "playwright",
+                "name": "article",
+                "gate": "e2e",
+                "covers": [
+                  "M02-STUDIO-ARTICLE-EDITOR-01-E01",
+                  "M02-STUDIO-ARTICLE-EDITOR-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.673,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "146 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 190.503,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 98.588,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.596,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "741 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 459.396,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "265 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 81.436,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 246 cases, 493 expectations, 874 exact test references; contract sha256 1026847f1e1b"
+      ],
+      "status": "passed",
+      "duration_ms": 401.26,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 2.97,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.832,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 78.934,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 1512.264,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "0cc936c836ad9930f0b62be76490c6c6",
+        "attempt_id": "b5f8bdb6bdffc651794741753e1a3fb7"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260910-studio-article-editor --gate e2e",
+      "status": "passed",
+      "duration_ms": 39529.097,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1610,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "article"
+              }
+            ],
+            "duration_ms": 2785.682,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "article"
+              }
+            ],
+            "duration_ms": 1442.808
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "article",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "article"
+                ]
+              }
+            ],
+            "duration_ms": 1341.929,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/studio-writing.spec.ts",
+                "name": "article",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "article"
+                ]
+              }
+            ],
+            "duration_ms": 33582.649,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "D:\\Project\\my_blog\\.run\\t\\gavin-harness-runs\\4aac216400e9bf94415eb78dc59a10188cff6d4a59c1b666b0c2a06fd4681aeb\\artifacts\\0cc936c836ad9930f0b62be76490c6c6\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "0cc936c836ad9930f0b62be76490c6c6",
+        "attempt_id": "81a6082826346a6c3eea7c35c2546abb"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1658.936,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 44027.485,
+    "failures": []
+  },
+  "source_commit": "2d3639b81588856e6fff29b8b45030fabb530316"
+}

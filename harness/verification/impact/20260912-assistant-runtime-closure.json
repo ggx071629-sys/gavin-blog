@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "task_id": "20260912-assistant-runtime-closure",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/graph.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-RUNTIME-CLOSURE-01",
+        "M09-RETRY-FEEDBACK-01",
+        "M09-RETRY-FAILURE-01",
+        "M09-RETRIEVAL-IO-01",
+        "M09-RETRIEVAL-IO-02",
+        "M09-RETRIEVAL-IO-03",
+        "M10-TOTAL-BUDGET-01",
+        "M09-METERED-LATENCY-01"
+      ],
+      "reason": "Q3-06 validates final runtime concurrency, cancellation, late settlement and budget behavior and rejects unobserved provider results through the existing unknown path.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_runtime_closure.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-RUNTIME-CLOSURE-01"
+      ],
+      "reason": "Q3-06 validates final runtime concurrency, cancellation, late settlement and budget behavior and rejects unobserved provider results through the existing unknown path.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Q3-06 validates final runtime concurrency, cancellation, late settlement and budget behavior and rejects unobserved provider results through the existing unknown path.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Q3-06 validates final runtime concurrency, cancellation, late settlement and budget behavior and rejects unobserved provider results through the existing unknown path.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Q3-06 validates final runtime concurrency, cancellation, late settlement and budget behavior and rejects unobserved provider results through the existing unknown path.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Existing unknown error payload, settlement authority, model schema, public interaction, database schema and verification algorithms are unchanged; only empty provider envelopes now use the established unknown branch. No consumer contract change."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260910-studio-taxonomy",
+  "created_at": "2026-09-10T11:12:26.083156+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "ee66bd8a9af03e8ceec9c316902d400a70a830ce0dfc1bb5d582c2aa1c91cb9e"
+}

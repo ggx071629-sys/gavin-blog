@@ -1,0 +1,1249 @@
+{
+  "schema_version": 1,
+  "task_id": "20260911-assistant-resume-refresh",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant_resume/queue.py",
+      "owner": "M06.resume_refresh",
+      "reason": "Direct tests cover API orchestration, unlocked external work, replacement and finite retries.",
+      "cases": [
+        "M06-RESUME-REFRESH-API-01",
+        "M06-RESUME-REFRESH-WORKER-01",
+        "M06-RESUME-REFRESH-RETRY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.profile",
+          "affected": true,
+          "reason": "Existing save now atomically synchronizes resume binding; auth/CSRF, rollback and original Profile response are tested.",
+          "cases": [
+            "M06-RESUME-REFRESH-API-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "Worker prioritizes due resume requests; existing rebuild/retrieval regression plus new request-to-index tests cover the insertion.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01",
+            "M06-RESUME-REFRESH-RETRY-01"
+          ]
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Only adds empty-default trusted-host setting consumed by resume downloader; other configuration behavior is unchanged.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Only documents the new environment setting; no CLI, dependency or deployment behavior changes.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant_resume/schemas.py",
+      "owner": "M06.resume_refresh",
+      "reason": "Direct tests cover API orchestration, unlocked external work, replacement and finite retries.",
+      "cases": [
+        "M06-RESUME-REFRESH-API-01",
+        "M06-RESUME-REFRESH-WORKER-01",
+        "M06-RESUME-REFRESH-RETRY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.profile",
+          "affected": true,
+          "reason": "Existing save now atomically synchronizes resume binding; auth/CSRF, rollback and original Profile response are tested.",
+          "cases": [
+            "M06-RESUME-REFRESH-API-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "Worker prioritizes due resume requests; existing rebuild/retrieval regression plus new request-to-index tests cover the insertion.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01",
+            "M06-RESUME-REFRESH-RETRY-01"
+          ]
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Only adds empty-default trusted-host setting consumed by resume downloader; other configuration behavior is unchanged.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Only documents the new environment setting; no CLI, dependency or deployment behavior changes.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_resume_refresh.py",
+      "owner": "M06.resume_refresh",
+      "reason": "Direct tests cover API orchestration, unlocked external work, replacement and finite retries.",
+      "cases": [
+        "M06-RESUME-REFRESH-API-01",
+        "M06-RESUME-REFRESH-WORKER-01",
+        "M06-RESUME-REFRESH-RETRY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.profile",
+          "affected": true,
+          "reason": "Existing save now atomically synchronizes resume binding; auth/CSRF, rollback and original Profile response are tested.",
+          "cases": [
+            "M06-RESUME-REFRESH-API-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "Worker prioritizes due resume requests; existing rebuild/retrieval regression plus new request-to-index tests cover the insertion.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01",
+            "M06-RESUME-REFRESH-RETRY-01"
+          ]
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Only adds empty-default trusted-host setting consumed by resume downloader; other configuration behavior is unchanged.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Only documents the new environment setting; no CLI, dependency or deployment behavior changes.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/config.py",
+      "owner": "M06.runtime_config",
+      "reason": "Only adds empty-default trusted-host setting consumed by resume downloader; other configuration behavior is unchanged.",
+      "cases": [
+        "M06-RESUME-REFRESH-WORKER-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Only documents the new environment setting; no CLI, dependency or deployment behavior changes.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01"
+          ]
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "Worker prioritizes due resume requests; existing rebuild/retrieval regression plus new request-to-index tests cover the insertion.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01",
+            "M06-RESUME-REFRESH-RETRY-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_refresh",
+          "affected": true,
+          "reason": "Direct tests cover API orchestration, unlocked external work, replacement and finite retries.",
+          "cases": [
+            "M06-RESUME-REFRESH-API-01",
+            "M06-RESUME-REFRESH-WORKER-01",
+            "M06-RESUME-REFRESH-RETRY-01"
+          ]
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": true,
+          "reason": "Existing save now atomically synchronizes resume binding; auth/CSRF, rollback and original Profile response are tested.",
+          "cases": [
+            "M06-RESUME-REFRESH-API-01"
+          ]
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/routes/admin_profile.py",
+      "owner": "M06.profile",
+      "reason": "Existing save now atomically synchronizes resume binding; auth/CSRF, rollback and original Profile response are tested.",
+      "cases": [
+        "M06-RESUME-REFRESH-API-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Only adds empty-default trusted-host setting consumed by resume downloader; other configuration behavior is unchanged.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "Worker prioritizes due resume requests; existing rebuild/retrieval regression plus new request-to-index tests cover the insertion.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01",
+            "M06-RESUME-REFRESH-RETRY-01"
+          ]
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Only documents the new environment setting; no CLI, dependency or deployment behavior changes.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01"
+          ]
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_refresh",
+          "affected": true,
+          "reason": "Direct tests cover API orchestration, unlocked external work, replacement and finite retries.",
+          "cases": [
+            "M06-RESUME-REFRESH-API-01",
+            "M06-RESUME-REFRESH-WORKER-01",
+            "M06-RESUME-REFRESH-RETRY-01"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant_index/worker.py",
+      "owner": "M10.index",
+      "reason": "Worker prioritizes due resume requests; existing rebuild/retrieval regression plus new request-to-index tests cover the insertion.",
+      "cases": [
+        "M06-RESUME-REFRESH-WORKER-01",
+        "M06-RESUME-REFRESH-RETRY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "Only documents the new environment setting; no CLI, dependency or deployment behavior changes.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01"
+          ]
+        },
+        {
+          "unit": "M06.profile",
+          "affected": true,
+          "reason": "Existing save now atomically synchronizes resume binding; auth/CSRF, rollback and original Profile response are tested.",
+          "cases": [
+            "M06-RESUME-REFRESH-API-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Only adds empty-default trusted-host setting consumed by resume downloader; other configuration behavior is unchanged.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01"
+          ]
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_refresh",
+          "affected": true,
+          "reason": "Direct tests cover API orchestration, unlocked external work, replacement and finite retries.",
+          "cases": [
+            "M06-RESUME-REFRESH-API-01",
+            "M06-RESUME-REFRESH-WORKER-01",
+            "M06-RESUME-REFRESH-RETRY-01"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "apps/api/.env.example",
+      "owner": "M06.api_tooling",
+      "reason": "Only documents the new environment setting; no CLI, dependency or deployment behavior changes.",
+      "cases": [
+        "M06-RESUME-REFRESH-WORKER-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "Only adds empty-default trusted-host setting consumed by resume downloader; other configuration behavior is unchanged.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "Worker prioritizes due resume requests; existing rebuild/retrieval regression plus new request-to-index tests cover the insertion.",
+          "cases": [
+            "M06-RESUME-REFRESH-WORKER-01",
+            "M06-RESUME-REFRESH-RETRY-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_refresh",
+          "affected": true,
+          "reason": "Direct tests cover API orchestration, unlocked external work, replacement and finite retries.",
+          "cases": [
+            "M06-RESUME-REFRESH-API-01",
+            "M06-RESUME-REFRESH-WORKER-01",
+            "M06-RESUME-REFRESH-RETRY-01"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": true,
+          "reason": "Existing save now atomically synchronizes resume binding; auth/CSRF, rollback and original Profile response are tested.",
+          "cases": [
+            "M06-RESUME-REFRESH-API-01"
+          ]
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "packages/contracts/openapi.json",
+      "owner": "M06.shared_contracts",
+      "reason": "Generated additions define the two resume admin operations and status; existing profile shape preserved and snapshot equality tested.",
+      "cases": [
+        "M06-RESUME-REFRESH-API-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.web_types",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "packages/contracts/api-types.d.ts",
+      "owner": "M06.shared_contracts",
+      "reason": "Generated additions define the two resume admin operations and status; existing profile shape preserved and snapshot equality tested.",
+      "cases": [
+        "M06-RESUME-REFRESH-API-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.web_types",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Consumer retains its existing fields/response/provider/index contracts; this adds isolated resume scheduling and new admin endpoints without changing existing consumers.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary documentation or exact-case registration.",
+      "cases": [],
+      "no_test_reason": "Structural checks cover prose and declarative registration; no verifier logic change.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Ordinary documentation or exact-case registration.",
+      "cases": [],
+      "no_test_reason": "Structural checks cover prose and declarative registration; no verifier logic change.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Ordinary documentation or exact-case registration.",
+      "cases": [],
+      "no_test_reason": "Structural checks cover prose and declarative registration; no verifier logic change.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only new case/path records; consumer algorithms unchanged.",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}

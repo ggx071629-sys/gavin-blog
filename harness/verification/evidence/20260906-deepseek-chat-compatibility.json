@@ -1,0 +1,538 @@
+{
+  "schema_version": 2,
+  "task_id": "20260906-deepseek-chat-compatibility",
+  "created_at": "2026-09-06T11:39:57.835694+00:00",
+  "command": "python -m tools.harness verify 20260906-deepseek-chat-compatibility",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "bf04a97ff86ce532634102a3289366cf50423e8b",
+    "active_spec_sha256": "025d1f74f5279ad4f99a22db1c8f423bef56664909627676483087d87e22a552",
+    "verification_contract_sha256": "cd6181ac0ddf99e7135b7f262572cebd91fde6c5639c9507b3c7e6dd2fdb158e",
+    "gate_config_sha256": "4a194fadc5aa90bee259fac8b4a4196f795dbd14016fdac47c9c6aada6b487b8",
+    "documentation_contract_sha256": "7166f235ca92f0a31f33df6a3c6c3906dafc03480efc1ab04b4246e6f6348ddc",
+    "documentation_targets_sha256": "ad5d9fefb13e7c5f00635be94ee2477799f096501d4fc625940b98bc91d628e1",
+    "module_contract_sha256": "e36b97b408c6ecb6103985bb276499bdc57a143bcec72aa6463a77b7502ce799"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "说明本机 DeepSeek 请求协议、应用校验保证及生产资格边界。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "7655769f88a17d4a9d9c3480ff89a974b11cacb1",
+    "target_blobs": {
+      "apps/api/README.md": "b009a6974ec244e7606fcd14adbedb0e40b962c4"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "e714e00a9c2c39c5a38b67bca34083e9f9d3362a",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260906-deepseek-chat-compatibility.json",
+      "sha256": "6e07485ba6d8b0b828b79fb03f16902c7dcea47fb62affd6f9440e355cb34dfe",
+      "selected_cases": [
+        "M09-DEEPSEEK-BUDGET-01",
+        "M09-DEEPSEEK-TRANSPORT-01",
+        "M09-DEEPSEEK-VALIDATION-01"
+      ],
+      "selected_refs": 7,
+      "excluded_cases": 187
+    },
+    "receipt": {
+      "run_id": "8f83eda8fc565a144e0bf8d51120ae8d",
+      "identity": "f44d1880c99b56cddd23da4c53badcd95fd618e2144f1ec9331266ff0d1afb7a",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 978.567,
+      "plan_inputs": 924.285,
+      "execute_cleanup_and_input_recheck": 13175.259
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "e36b97b408c6ecb6103985bb276499bdc57a143bcec72aa6463a77b7502ce799",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-DEEPSEEK-TRANSPORT-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "本机官方DeepSeek请求参数及生产协议隔离",
+            "expectations": [
+              {
+                "id": "M09-DEEPSEEK-TRANSPORT-01-ALLOW",
+                "surface": "response",
+                "statement": "JSON模式使用有界max_tokens、关闭thinking/retry，其他端点保持strict schema"
+              },
+              {
+                "id": "M09-DEEPSEEK-TRANSPORT-01-DENY",
+                "surface": "forbidden",
+                "statement": "生产或相似域名不得静默降级；400/429/500不得自动重试"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "kind": "pytest",
+                "name": "test_deepseek_transport_and_production_boundary",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-DEEPSEEK-TRANSPORT-01-ALLOW",
+                  "M09-DEEPSEEK-TRANSPORT-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-DEEPSEEK-VALIDATION-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "正常、非法、截断及无usage响应进入现有问答链",
+            "expectations": [
+              {
+                "id": "M09-DEEPSEEK-VALIDATION-01-ALLOW",
+                "surface": "response",
+                "statement": "原始usage/model/finish元数据保留，正常结构进入引用校验和原有结算"
+              },
+              {
+                "id": "M09-DEEPSEEK-VALIDATION-01-DENY",
+                "surface": "forbidden",
+                "statement": "非法完整性/schema/引用或截断回答不得发布，usage缺失不得伪装已知"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "kind": "pytest",
+                "name": "test_deepseek_strict_validation_metadata_and_citations",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-DEEPSEEK-VALIDATION-01-ALLOW",
+                  "M09-DEEPSEEK-VALIDATION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "kind": "pytest",
+                "name": "test_deepseek_online_graph_settles_and_rejects_invalid_body[False]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-DEEPSEEK-VALIDATION-01-ALLOW",
+                  "M09-DEEPSEEK-VALIDATION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "kind": "pytest",
+                "name": "test_deepseek_online_graph_settles_and_rejects_invalid_body[True]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-DEEPSEEK-VALIDATION-01-ALLOW",
+                  "M09-DEEPSEEK-VALIDATION-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-DEEPSEEK-BUDGET-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "追加schema指令后评估实际输入与输出余量",
+            "expectations": [
+              {
+                "id": "M09-DEEPSEEK-BUDGET-01-ALLOW",
+                "surface": "response",
+                "statement": "完整schema消息进入输入估算，普通上下文校验及未知用量保守结算保持"
+              },
+              {
+                "id": "M09-DEEPSEEK-BUDGET-01-DENY",
+                "surface": "forbidden",
+                "statement": "超输入窗口不得发送Chat，不能忽略适配增加的消息字节"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "kind": "pytest",
+                "name": "test_deepseek_prompt_budget_covers_actual_schema_message",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-DEEPSEEK-BUDGET-01-ALLOW",
+                  "M09-DEEPSEEK-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "kind": "pytest",
+                "name": "test_unprovable_prompt_fit_never_dispatches_chat_provider",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-DEEPSEEK-BUDGET-01-ALLOW",
+                  "M09-DEEPSEEK-BUDGET-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "kind": "pytest",
+                "name": "test_context_window_validation_and_readiness_bind_all_token_limits",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-DEEPSEEK-BUDGET-01-ALLOW",
+                  "M09-DEEPSEEK-BUDGET-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.832,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "117 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 197.319,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 63.502,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.489,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "508 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 235.251,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "228 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 56.851,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "10 modules, 190 cases, 380 expectations, 714 exact test references; contract sha256 e36b97b408c6"
+      ],
+      "status": "passed",
+      "duration_ms": 327.508,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 2.983,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.799,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 77.595,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "duration_ms": 1430.887,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "8f83eda8fc565a144e0bf8d51120ae8d",
+        "attempt_id": "073fd2d0c872e3e961cba402f3f27980"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260906-deepseek-chat-compatibility --gate api-tests",
+      "status": "passed",
+      "duration_ms": 10112.214,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1411,
+        "selection_counts": {
+          "collected": 7,
+          "executed": 7
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_prompt_budget_covers_actual_schema_message"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "name": "test_unprovable_prompt_fit_never_dispatches_chat_provider"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_runtime_integrity_remediation.py",
+                "name": "test_context_window_validation_and_readiness_bind_all_token_limits"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_transport_and_production_boundary"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_strict_validation_metadata_and_citations"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_online_graph_settles_and_rejects_invalid_body[False]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_deepseek.py",
+                "name": "test_deepseek_online_graph_settles_and_rejects_invalid_body[True]"
+              }
+            ],
+            "duration_ms": 9729.844,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\8d61f136e297c5f98334f04f593bdd9df4cd67785290ae0a9bbf6dbb81b945a2\\artifacts\\8f83eda8fc565a144e0bf8d51120ae8d\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "8f83eda8fc565a144e0bf8d51120ae8d",
+        "attempt_id": "9d1d2ab9dc9d315a9e3b574f5998edbe"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1375.875,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 13894.105,
+    "failures": []
+  },
+  "source_commit": "e714e00a9c2c39c5a38b67bca34083e9f9d3362a"
+}

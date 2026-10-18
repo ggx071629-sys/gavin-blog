@@ -1,0 +1,329 @@
+{
+  "schema_version": 1,
+  "task_id": "20260912-assistant-local-model-alias",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant_qualification/provider_probe.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-LOCAL-MODEL-ALIAS-01",
+        "M09-REVALIDATION-COMPAT-01",
+        "M09-REVALIDATION-BUDGET-01",
+        "M09-REVALIDATION-RECOVERY-01"
+      ],
+      "reason": "Accepts the explicit local alias with operator-declared provenance; existing digests and cumulative ledger protect changed configuration.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_local_model_alias.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-LOCAL-MODEL-ALIAS-01"
+      ],
+      "reason": "Checks both names, rejection, provenance and changed digest without network access.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Documents local alias acceptance, operator-declared version and unchanged qualification boundaries.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Registers one exact local alias contract test under existing qualification ownership; verifier algorithms and dependency graph unchanged.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Only preflight/evidence classification, paired regressions or case documentation changes; this consumer uses unchanged API schema, configuration, provider identity, lifecycle, accounting or verifier interfaces. Selected runtime cases exercise downstream hydration and prompt history."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only preflight/evidence classification, paired regressions or case documentation changes; this consumer uses unchanged API schema, configuration, provider identity, lifecycle, accounting or verifier interfaces. Selected runtime cases exercise downstream hydration and prompt history."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only preflight/evidence classification, paired regressions or case documentation changes; this consumer uses unchanged API schema, configuration, provider identity, lifecycle, accounting or verifier interfaces. Selected runtime cases exercise downstream hydration and prompt history."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Registers one exact local alias contract test under existing qualification ownership; verifier algorithms and dependency graph unchanged.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Only preflight/evidence classification, paired regressions or case documentation changes; this consumer uses unchanged API schema, configuration, provider identity, lifecycle, accounting or verifier interfaces. Selected runtime cases exercise downstream hydration and prompt history."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Only preflight/evidence classification, paired regressions or case documentation changes; this consumer uses unchanged API schema, configuration, provider identity, lifecycle, accounting or verifier interfaces. Selected runtime cases exercise downstream hydration and prompt history."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Only preflight/evidence classification, paired regressions or case documentation changes; this consumer uses unchanged API schema, configuration, provider identity, lifecycle, accounting or verifier interfaces. Selected runtime cases exercise downstream hydration and prompt history."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Only preflight/evidence classification, paired regressions or case documentation changes; this consumer uses unchanged API schema, configuration, provider identity, lifecycle, accounting or verifier interfaces. Selected runtime cases exercise downstream hydration and prompt history."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Only preflight/evidence classification, paired regressions or case documentation changes; this consumer uses unchanged API schema, configuration, provider identity, lifecycle, accounting or verifier interfaces. Selected runtime cases exercise downstream hydration and prompt history."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Only preflight/evidence classification, paired regressions or case documentation changes; this consumer uses unchanged API schema, configuration, provider identity, lifecycle, accounting or verifier interfaces. Selected runtime cases exercise downstream hydration and prompt history."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Only preflight/evidence classification, paired regressions or case documentation changes; this consumer uses unchanged API schema, configuration, provider identity, lifecycle, accounting or verifier interfaces. Selected runtime cases exercise downstream hydration and prompt history."
+        }
+      ]
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/run_injection_challenges.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-G07-RUNNER-01"
+      ],
+      "reason": "Local synthetic evaluation changes expected alias and allows explicit continuation after an attempted case; retains the signed ledger and failure stops.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        }
+      ]
+    },
+    {
+      "path": "plan-build/assistant-gap-closure/evaluation/test_injection_runner.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-G07-RUNNER-01"
+      ],
+      "reason": "Local synthetic evaluation changes expected alias and allows explicit continuation after an attempted case; retains the signed ledger and failure stops.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_g07_runner.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-G07-RUNNER-01"
+      ],
+      "reason": "Exposes the same standalone unittest checks under the registered API test gate without modifying global gate ownership.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_provider_qualification.py",
+      "owner": "M10.qualification",
+      "cases": [
+        "M09-REVALIDATION-COMPAT-01",
+        "M09-REVALIDATION-BUDGET-01"
+      ],
+      "reason": "Updates the local qualification positive response fixture to the current mandatory supports array, preserving all budget and drift assertions.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M08.qualification",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M08.qualification_runner",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Only the explicit local contract name/provenance changes; existing consumer signatures, profile algorithms, receipt/probe mismatch rejection and cumulative accounting are unchanged. Selected alias, compatibility, budget and recovery cases cover the contract boundary."
+        }
+      ]
+    }
+  ]
+}

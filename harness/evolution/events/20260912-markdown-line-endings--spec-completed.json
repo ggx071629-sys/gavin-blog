@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260912-markdown-line-endings",
+  "created_at": "2026-09-12T04:56:40.125672+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "1fcf82995ef2ce07bc08eb7225439f88d9c430c7d735b91cc7d76a12fb4973ee"
+}

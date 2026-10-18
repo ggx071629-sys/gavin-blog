@@ -1,0 +1,273 @@
+{
+  "schema_version": 2,
+  "task_id": "20260816-trash-incubator-residuals",
+  "created_at": "2026-08-16T12:30:45.401207+00:00",
+  "command": "python -m tools.harness verify 20260816-trash-incubator-residuals",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5",
+    "AC-6",
+    "AC-7",
+    "AC-8",
+    "AC-9"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-lint",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "api-lint",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "status": "passed",
+      "gates": [
+        "api-lint",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-6",
+      "status": "passed",
+      "gates": [
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-7",
+      "status": "passed",
+      "gates": [
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-8",
+      "status": "passed",
+      "gates": [
+        "api-lint",
+        "api-tests",
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-9",
+      "status": "passed",
+      "gates": [
+        "api-lint",
+        "web-quality"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "3f386c93ba1dde4abc47e5cf86f70149543a7f14",
+    "active_spec_sha256": "12ceda08f18d66cddf1a442630ebca57232758963c8bb46aba786b4282800a53",
+    "verification_contract_sha256": "28699b2ec81ddf5c06af20d97dca073086104b6735075f2d563a3cb179982467",
+    "gate_config_sha256": "05957761f90497077ba187b8216a76c5c5350e6b7eb1fa750f4ee8090e33f83c",
+    "documentation_contract_sha256": "03484381071338d3166f1c5d7bf0a2196d0c9f806f97aaaa564c1e2530a4f02e",
+    "documentation_targets_sha256": "d250d1cc08408783efb5833e4c73e3b706426f7f06ddc29de78013e016be7712"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "永久删除级联、发布计划确认可恢复、预览横幅与公开计数都是写作台/公开契约。",
+    "targets": [
+      "apps/web/README.md",
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "8ade3290c693a6292544976db0c90a3735b3c5e5",
+    "target_blobs": {
+      "apps/web/README.md": "a08e616122bd51402590eb45363c07a6581a3ac6",
+      "apps/api/README.md": "bbc4d1a7a9baf855f7b0be30d6153e28c9e5b209"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "48401e4a5d8c361f1582d0ed9d24af95b77d321f",
+    "cleanup_status": "passed",
+    "reused_paths": 3
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 6 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.126
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "83 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 133.684
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 57.755
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.591
+    },
+    {
+      "name": "links",
+      "details": [
+        "370 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1601.052
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "172 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 49.696
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 9.728
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 56.627
+    },
+    {
+      "name": "api-lint",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-atnqnvbc\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m ruff check .",
+      "status": "passed",
+      "duration_ms": 290.68,
+      "covers": [
+        "AC-1",
+        "AC-4",
+        "AC-5",
+        "AC-8",
+        "AC-9"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-atnqnvbc\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m pytest",
+      "status": "passed",
+      "duration_ms": 218349.524,
+      "covers": [
+        "AC-1",
+        "AC-4",
+        "AC-5",
+        "AC-8"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 312,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "D:\\Tool\\nodejs\\npm.CMD run quality:web",
+      "status": "passed",
+      "duration_ms": 293798.379,
+      "covers": [
+        "AC-2",
+        "AC-3",
+        "AC-6",
+        "AC-7",
+        "AC-8",
+        "AC-9"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 161,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1497.86,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ]
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    "duration_ms": 515849.702,
+    "failures": [],
+    "test_counts": {
+      "passed": 473,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "source_commit": "48401e4a5d8c361f1582d0ed9d24af95b77d321f"
+}

@@ -1,0 +1,1122 @@
+{
+  "schema_version": 2,
+  "task_id": "20260913-assistant-live-fixes",
+  "created_at": "2026-09-13T09:00:57.472605+00:00",
+  "command": "python -m tools.harness verify 20260913-assistant-live-fixes",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "d65ecd6d279fb73a79ffdff3f4e11bfe5ecde933",
+    "active_spec_sha256": "61986f9a7412131159c2d326f07ac193d6d5633da7f1bfd2cccdbaaf79507d44",
+    "verification_contract_sha256": "7bb6cf01526edafa84038eb4991b3bc5738d2df8b8a7866ac3c502a95dd86d68",
+    "gate_config_sha256": "2f0937a76fb96f7d38d807e821d3a8e4bed1a2fa7b9182dcae5a4ced9b352d78",
+    "documentation_contract_sha256": "b2ed49bf4536d57b970f26a5c68496a5dab4fa668c8fb7b7a1e4fd0c848edec2",
+    "documentation_targets_sha256": "42b3a7bfe61fd46842a021ad638983f7103e86e62940992f5c5033c03d9dc9c7",
+    "module_contract_sha256": "08ec4afb6d8844e4f764e11461e218191bb6abc4dacc0ef1f659bfb84120c363"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "明确内容备份围栏与运行控制边界、清除失败及测试模式说明。",
+    "targets": [
+      "apps/api/README.md",
+      "apps/web/README.md"
+    ],
+    "baseline_commit": "ca06bae8a56bf8ac3627a4f212cedc27e1c9457b",
+    "target_blobs": {
+      "apps/api/README.md": "01f0339e13b5556c1334d47e7429f3d2dda85c60",
+      "apps/web/README.md": "b56862395f7a5117dbd704467de8e654f130b318"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "416ea9c7c5e18b4d55cb10739e4c72e3a1e9e219",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260913-assistant-live-fixes.json",
+      "sha256": "0969d661ff9838fc13d2c5e8b30803cd8accc1f4631979b11dd4f2594a943887",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M09-LIVE-FIXES-01",
+        "M09-LIVE-FIXES-02",
+        "M09-LIVE-FIXES-03",
+        "M09-LIVE-FIXES-04"
+      ],
+      "selected_refs": 12,
+      "excluded_cases": 394
+    },
+    "receipt": {
+      "run_id": "aa8d1934f221071023d814cdaf204e12",
+      "identity": "528f606f8be2a32938839ef28fbb05c90997658560287d6a80a642b4d94679f8",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 8962.046,
+      "plan_inputs": 1780.601,
+      "execute_cleanup_and_input_recheck": 521656.496
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "08ec4afb6d8844e4f764e11461e218191bb6abc4dacc0ef1f659bfb84120c363",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-LIVE-FIXES-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "持有内容围栏时创建运行会话、清除和紧急停止成功。",
+            "expectations": [
+              {
+                "id": "M09-LIVE-FIXES-01-ALLOW",
+                "surface": "response",
+                "statement": "持有内容围栏时创建运行会话、清除和紧急停止成功。"
+              },
+              {
+                "id": "M09-LIVE-FIXES-01-DENY",
+                "surface": "forbidden",
+                "statement": "不得绕过认证或内容写保护，在途撤销后不得发布回答。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_live_fixes.py",
+                "name": "test_runtime_revocation_survives_content_fence[clear-public]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LIVE-FIXES-01-ALLOW",
+                  "M09-LIVE-FIXES-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_live_fixes.py",
+                "name": "test_runtime_revocation_survives_content_fence[clear-admin]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LIVE-FIXES-01-ALLOW",
+                  "M09-LIVE-FIXES-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_live_fixes.py",
+                "name": "test_runtime_revocation_survives_content_fence[stop-public]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LIVE-FIXES-01-ALLOW",
+                  "M09-LIVE-FIXES-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_live_fixes.py",
+                "name": "test_runtime_revocation_survives_content_fence[stop-admin]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LIVE-FIXES-01-ALLOW",
+                  "M09-LIVE-FIXES-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_backup_restore.py",
+                "name": "test_http_mutation_is_rejected_while_backup_fence_is_held",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LIVE-FIXES-01-ALLOW",
+                  "M09-LIVE-FIXES-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-LIVE-FIXES-02",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "删除拒绝保留历史，成功清除及刷新为空，旧响应被隔离。",
+            "expectations": [
+              {
+                "id": "M09-LIVE-FIXES-02-ALLOW",
+                "surface": "response",
+                "statement": "删除拒绝保留历史，成功清除及刷新为空，旧响应被隔离。"
+              },
+              {
+                "id": "M09-LIVE-FIXES-02-DENY",
+                "surface": "forbidden",
+                "statement": "不得将503或网络失败呈现为已清除，不得自动重发问题。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "failed clear preserves visible history until server confirms deletion",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "failed clear preserves visible history until server confirms deletion"
+                ],
+                "covers": [
+                  "M09-LIVE-FIXES-02-ALLOW",
+                  "M09-LIVE-FIXES-02-DENY"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "panel state recovery",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "panel state recovery"
+                ],
+                "covers": [
+                  "M09-LIVE-FIXES-02-ALLOW",
+                  "M09-LIVE-FIXES-02-DENY"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "body-free feedback saves restores retracts and ignores a late result after clear",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "body-free feedback saves restores retracts and ignores a late result after clear"
+                ],
+                "covers": [
+                  "M09-LIVE-FIXES-02-ALLOW",
+                  "M09-LIVE-FIXES-02-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "api-tests",
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-LIVE-FIXES-03",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "干净E2E构建、真实试问和持续测试Worker完成，独立访客无管理员状态。",
+            "expectations": [
+              {
+                "id": "M09-LIVE-FIXES-03-ALLOW",
+                "surface": "response",
+                "statement": "干净E2E构建、真实试问和持续测试Worker完成，独立访客无管理员状态。"
+              },
+              {
+                "id": "M09-LIVE-FIXES-03-DENY",
+                "surface": "forbidden",
+                "statement": "不得用bootstrap替代持续Worker，不得打开真实付费依赖。"
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_live_fixes.py",
+                "name": "test_e2e_worker_keeps_observation_alive",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LIVE-FIXES-03-ALLOW",
+                  "M09-LIVE-FIXES-03-DENY"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ],
+                "covers": [
+                  "M09-LIVE-FIXES-03-ALLOW",
+                  "M09-LIVE-FIXES-03-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              },
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "api-tests",
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-LIVE-FIXES-04",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "readiness漂移显示blocked；费用身份、失败详情、无样本、过期诊断及running分支可观察。",
+            "expectations": [
+              {
+                "id": "M09-LIVE-FIXES-04-ALLOW",
+                "surface": "response",
+                "statement": "readiness漂移显示blocked；费用身份、失败详情、无样本、过期诊断及running分支可观察。"
+              },
+              {
+                "id": "M09-LIVE-FIXES-04-DENY",
+                "surface": "forbidden",
+                "statement": "不得将陈旧开放状态作为可用，不得将未知费用或耗时当零，不得重试未知调用。"
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_live_fixes.py",
+                "name": "test_dashboard_reconciles_reissued_readiness",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-LIVE-FIXES-04-ALLOW",
+                  "M09-LIVE-FIXES-04-DENY"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "path": "apps/web/tests/e2e-assistant/live-gaps.spec.ts",
+                "name": "management renders identity costs current errors stale diagnostics and running state",
+                "gate": "e2e",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management renders identity costs current errors stale diagnostics and running state"
+                ],
+                "covers": [
+                  "M09-LIVE-FIXES-04-ALLOW",
+                  "M09-LIVE-FIXES-04-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              },
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 8.64,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "238 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 743.369,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 197.405,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 1.736,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "2320 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 6413.572,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "366 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 188.96,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 399 cases, 808 expectations, 1260 exact test references; contract sha256 08ec4afb6d88"
+      ],
+      "status": "passed",
+      "duration_ms": 1219.736,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 6.175,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 17.106,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 160.648,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "duration_ms": 5337.177,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "aa8d1934f221071023d814cdaf204e12",
+        "attempt_id": "30c7c9cfd611a95db12dab77941f86d7"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260913-assistant-live-fixes --gate api-tests",
+      "status": "passed",
+      "duration_ms": 28642.569,
+      "covers": [
+        "AC-1",
+        "AC-3",
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1353,
+        "selection_counts": {
+          "collected": 7,
+          "executed": 7
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_live_fixes.py",
+                "name": "test_runtime_revocation_survives_content_fence[clear-public]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_live_fixes.py",
+                "name": "test_runtime_revocation_survives_content_fence[clear-admin]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_live_fixes.py",
+                "name": "test_runtime_revocation_survives_content_fence[stop-public]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_live_fixes.py",
+                "name": "test_runtime_revocation_survives_content_fence[stop-admin]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_backup_restore.py",
+                "name": "test_http_mutation_is_rejected_while_backup_fence_is_held"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_live_fixes.py",
+                "name": "test_e2e_worker_keeps_observation_alive"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_live_fixes.py",
+                "name": "test_dashboard_reconciles_reissued_readiness"
+              }
+            ],
+            "duration_ms": 27820.335,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\aa8d1934f221071023d814cdaf204e12\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "aa8d1934f221071023d814cdaf204e12",
+        "attempt_id": "839a5e72f44e71a71e2130de48ff66e8"
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260913-assistant-live-fixes --gate e2e",
+      "status": "passed",
+      "duration_ms": 479185.284,
+      "covers": [
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 9266,
+        "selection_counts": {
+          "collected": 5,
+          "executed": 5
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "failed clear preserves visible history until server confirms deletion",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "failed clear preserves visible history until server confirms deletion"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "panel state recovery",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "panel state recovery"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "body-free feedback saves restores retracts and ignores a late result after clear",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "body-free feedback saves restores retracts and ignores a late result after clear"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/live-gaps.spec.ts",
+                "name": "management renders identity costs current errors stale diagnostics and running state",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management renders identity costs current errors stale diagnostics and running state"
+                ]
+              }
+            ],
+            "duration_ms": 6611.628,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
+              "apps/web/nuxt.config.ts": "f53aa6a5e885d6975fe915dfb9515326ad167fb7eb521040085422f5f1f3573d",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "failed clear preserves visible history until server confirms deletion",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "failed clear preserves visible history until server confirms deletion"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "panel state recovery",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "panel state recovery"
+                ]
+              },
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "body-free feedback saves restores retracts and ignores a late result after clear",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "body-free feedback saves restores retracts and ignores a late result after clear"
+                ]
+              }
+            ],
+            "duration_ms": 2931.175
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              }
+            ],
+            "duration_ms": 2602.118
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/live-gaps.spec.ts",
+                "name": "management renders identity costs current errors stale diagnostics and running state",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management renders identity costs current errors stale diagnostics and running state"
+                ]
+              }
+            ],
+            "duration_ms": 2327.77
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "failed clear preserves visible history until server confirms deletion",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "failed clear preserves visible history until server confirms deletion"
+                ]
+              }
+            ],
+            "duration_ms": 2504.412,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "failed clear preserves visible history until server confirms deletion",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "failed clear preserves visible history until server confirms deletion"
+                ]
+              }
+            ],
+            "duration_ms": 88369.721,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "panel state recovery",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "panel state recovery"
+                ]
+              }
+            ],
+            "duration_ms": 2834.17,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "panel state recovery",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "panel state recovery"
+                ]
+              }
+            ],
+            "duration_ms": 100130.975,
+            "batch_id": "batch-0002"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "body-free feedback saves restores retracts and ignores a late result after clear",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "body-free feedback saves restores retracts and ignores a late result after clear"
+                ]
+              }
+            ],
+            "duration_ms": 3079.829,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+                "name": "body-free feedback saves restores retracts and ignores a late result after clear",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "body-free feedback saves restores retracts and ignores a late result after clear"
+                ]
+              }
+            ],
+            "duration_ms": 82291.083,
+            "batch_id": "batch-0003"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              }
+            ],
+            "duration_ms": 2429.233,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+                "name": "management real trial budget public switch and responsive maintenance",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management real trial budget public switch and responsive maintenance"
+                ]
+              }
+            ],
+            "duration_ms": 93063.362,
+            "batch_id": "batch-0004"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/live-gaps.spec.ts",
+                "name": "management renders identity costs current errors stale diagnostics and running state",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management renders identity costs current errors stale diagnostics and running state"
+                ]
+              }
+            ],
+            "duration_ms": 2419.368,
+            "batch_id": "batch-0005"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/live-gaps.spec.ts",
+                "name": "management renders identity costs current errors stale diagnostics and running state",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "management renders identity costs current errors stale diagnostics and running state"
+                ]
+              }
+            ],
+            "duration_ms": 86470.66,
+            "batch_id": "batch-0005"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\aa8d1934f221071023d814cdaf204e12\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "aa8d1934f221071023d814cdaf204e12",
+        "attempt_id": "1aadf0f4b191ebaf0a2af34b15abd4f1"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 6615.335,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 528737.712,
+    "failures": []
+  },
+  "source_commit": "416ea9c7c5e18b4d55cb10739e4c72e3a1e9e219"
+}

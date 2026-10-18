@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "task_id": "20260910-studio-suite-management",
+  "changes": [
+    {
+      "path": "apps/web/tests/e2e/about-admin.spec.ts",
+      "owner": "M11.web",
+      "reason": "明确测试前置、发布真实路径、数据增量与有界主题等待；不修改产品行为。",
+      "cases": [
+        "M07-STUDIO-SUITE-MANAGEMENT-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/e2e/profile.spec.ts",
+      "owner": "M06.profile_web",
+      "reason": "明确测试前置、发布真实路径、数据增量与有界主题等待；不修改产品行为。",
+      "cases": [
+        "M07-STUDIO-SUITE-MANAGEMENT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M11.web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/resource-ops.spec.ts",
+      "owner": "M05.operations_layout",
+      "reason": "明确测试前置、发布真实路径、数据增量与有界主题等待；不修改产品行为。",
+      "cases": [
+        "M07-STUDIO-SUITE-MANAGEMENT-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M11.web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/public/studio/README.md",
+      "owner": "M07.studio_theme",
+      "reason": "记录本次真实验收边界或声明式精确映射。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "结构与历史检查验证普通说明和声明式映射。"
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "记录本次真实验收边界或声明式精确映射。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "结构与历史检查验证普通说明和声明式映射。"
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "记录本次真实验收边界或声明式精确映射。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "仅测试夹具/定位或声明式文档，不改变该消费者的产品输入输出。",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "结构与历史检查验证普通说明和声明式映射。"
+    }
+  ]
+}

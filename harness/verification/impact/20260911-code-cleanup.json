@@ -1,0 +1,1695 @@
+{
+  "schema_version": 1,
+  "task_id": "20260911-code-cleanup",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/store.py",
+      "owner": "M09.runtime",
+      "reason": "C2-01/02 按 C1-01 删除无消费者函数或专用类；保留同文件现行运行行为，验证实际运行库、会话及清理路径。",
+      "cases": [
+        "M09-UNIT-ASSISTANT-EXPIRY-SERIALIZATION-01",
+        "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-01",
+        "M09-UNIT-ASSISTANT-ONLINE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "apps/api/app/assistant/store.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.api_tooling 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "apps/api/app/assistant/store.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.persistence 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "apps/api/app/assistant/store.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.runtime_config 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "apps/api/app/assistant/store.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.assistant_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "apps/api/app/assistant/store.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.development 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "apps/api/app/assistant/store.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.providers 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "apps/api/app/assistant/store.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.index 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "apps/api/app/assistant/store.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "apps/api/app/assistant/store.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.qualification 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/readiness.py",
+      "owner": "M09.runtime",
+      "reason": "只删除无调用 _generation_stub；_Gen 有 runtime.py 延迟消费者，已原样保留并通过实际运行库回归。",
+      "cases": [
+        "M09-UNIT-ASSISTANT-ONLINE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "apps/api/app/assistant/readiness.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.api_tooling 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "apps/api/app/assistant/readiness.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.persistence 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "apps/api/app/assistant/readiness.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.runtime_config 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "apps/api/app/assistant/readiness.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.assistant_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "apps/api/app/assistant/readiness.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.development 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "apps/api/app/assistant/readiness.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.providers 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "apps/api/app/assistant/readiness.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.index 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "apps/api/app/assistant/readiness.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "apps/api/app/assistant/readiness.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.qualification 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/hydrate.py",
+      "owner": "M09.runtime",
+      "reason": "C2-01/02 按 C1-01 删除无消费者函数或专用类；保留同文件现行运行行为，验证实际运行库、会话及清理路径。",
+      "cases": [
+        "M09-UNIT-ASSISTANT-ONLINE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "apps/api/app/assistant/hydrate.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.api_tooling 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "apps/api/app/assistant/hydrate.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.persistence 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "apps/api/app/assistant/hydrate.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.runtime_config 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "apps/api/app/assistant/hydrate.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.assistant_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "apps/api/app/assistant/hydrate.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.development 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "apps/api/app/assistant/hydrate.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.providers 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "apps/api/app/assistant/hydrate.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.index 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "apps/api/app/assistant/hydrate.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "apps/api/app/assistant/hydrate.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.qualification 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/money.py",
+      "owner": "M09.runtime",
+      "reason": "C2-01/02 按 C1-01 删除无消费者函数或专用类；保留同文件现行运行行为，验证实际运行库、会话及清理路径。",
+      "cases": [
+        "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "apps/api/app/assistant/money.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.api_tooling 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "apps/api/app/assistant/money.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.persistence 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "apps/api/app/assistant/money.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.runtime_config 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "apps/api/app/assistant/money.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.assistant_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "apps/api/app/assistant/money.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.development 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "apps/api/app/assistant/money.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.providers 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "apps/api/app/assistant/money.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.index 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "apps/api/app/assistant/money.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "apps/api/app/assistant/money.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.qualification 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/pragmas.py",
+      "owner": "M09.runtime",
+      "reason": "C2-01/02 按 C1-01 删除无消费者函数或专用类；保留同文件现行运行行为，验证实际运行库、会话及清理路径。",
+      "cases": [
+        "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "apps/api/app/assistant/pragmas.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.api_tooling 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "apps/api/app/assistant/pragmas.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.persistence 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "apps/api/app/assistant/pragmas.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.runtime_config 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "apps/api/app/assistant/pragmas.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.assistant_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "apps/api/app/assistant/pragmas.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.development 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "apps/api/app/assistant/pragmas.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.providers 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "apps/api/app/assistant/pragmas.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.index 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "apps/api/app/assistant/pragmas.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "apps/api/app/assistant/pragmas.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.qualification 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/routes.py",
+      "owner": "M09.runtime",
+      "reason": "C2-01/02 按 C1-01 删除无消费者函数或专用类；保留同文件现行运行行为，验证实际运行库、会话及清理路径。",
+      "cases": [
+        "M09-UNIT-ASSISTANT-ONLINE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "apps/api/app/assistant/routes.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.api_tooling 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "apps/api/app/assistant/routes.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.persistence 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "apps/api/app/assistant/routes.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.runtime_config 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "apps/api/app/assistant/routes.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.assistant_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "apps/api/app/assistant/routes.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.development 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "apps/api/app/assistant/routes.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.providers 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "apps/api/app/assistant/routes.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.index 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "apps/api/app/assistant/routes.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "apps/api/app/assistant/routes.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.qualification 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/runner.py",
+      "owner": "M09.runtime",
+      "reason": "C2-01/02 按 C1-01 删除无消费者函数或专用类；保留同文件现行运行行为，验证实际运行库、会话及清理路径。",
+      "cases": [
+        "M09-UNIT-ASSISTANT-ONLINE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runner.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.api_tooling 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runner.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.persistence 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runner.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.runtime_config 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runner.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.assistant_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runner.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.development 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runner.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.providers 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runner.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.index 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runner.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runner.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.qualification 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/runtime_schema.py",
+      "owner": "M09.runtime",
+      "reason": "C2-01/02 按 C1-01 删除无消费者函数或专用类；保留同文件现行运行行为，验证实际运行库、会话及清理路径。",
+      "cases": [
+        "M09-UNIT-ASSISTANT-RUNTIME-INTEGRITY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runtime_schema.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.api_tooling 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runtime_schema.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.persistence 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runtime_schema.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.runtime_config 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runtime_schema.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.assistant_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runtime_schema.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.development 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runtime_schema.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.providers 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runtime_schema.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.index 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runtime_schema.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "apps/api/app/assistant/runtime_schema.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.qualification 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant_index/worker.py",
+      "owner": "M10.index",
+      "reason": "C2-03 仅删 _abandon_generation；保留 switch_generation 拒绝旁路切换、现行重建和围栏。",
+      "cases": [
+        "M10-UNIT-ASSISTANT-INDEX-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M01.articles 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M02.publishing 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M03.taxonomy 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M04.projects 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M05.portability 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.api_tooling 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.profile 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.development 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.providers 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M09.runtime 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.e5_evaluation 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M10.capacity 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "apps/api/app/assistant_index/worker.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.resume_storage 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/routes/admin_content.py",
+      "owner": "M05.portability",
+      "reason": "C2-03 仅删未调用 trash_item，验证实际回收站构造和内容迁移边界。",
+      "cases": [
+        "M05-UNIT-CONTENT-PORTABILITY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "apps/api/app/routes/admin_content.py 仅移除已复核的无消费者定义或登记本任务验证资料；M05.content_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "apps/api/app/routes/admin_content.py 仅移除已复核的无消费者定义或登记本任务验证资料；M06.runtime_config 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/utils/assistant/origin.ts",
+      "owner": "M09.assistant_web",
+      "reason": "C3-01/02 删除未使用导出；persistence 保留生产 Host，SSE 只迁测试分片辅助，不动生产解析逻辑。",
+      "cases": [
+        "M09-UI-BOUNDARY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/origin.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.navigation 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/origin.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M06.transport 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/origin.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/origin.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.home 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/utils/assistant/errors.ts",
+      "owner": "M09.assistant_web",
+      "reason": "C3-01/02 删除未使用导出；persistence 保留生产 Host，SSE 只迁测试分片辅助，不动生产解析逻辑。",
+      "cases": [
+        "M09-UI-BOUNDARY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/errors.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.navigation 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/errors.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M06.transport 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/errors.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/errors.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.home 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/utils/assistant/persistence.ts",
+      "owner": "M09.assistant_web",
+      "reason": "C3-01/02 删除未使用导出；persistence 保留生产 Host，SSE 只迁测试分片辅助，不动生产解析逻辑。",
+      "cases": [
+        "M09-UI-BOUNDARY-01",
+        "M09-UI-STATES-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/persistence.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.navigation 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/persistence.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M06.transport 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/persistence.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/persistence.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.home 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/utils/assistant/sse.ts",
+      "owner": "M09.assistant_web",
+      "reason": "C3-01/02 删除未使用导出；persistence 保留生产 Host，SSE 只迁测试分片辅助，不动生产解析逻辑。",
+      "cases": [
+        "M09-UI-BOUNDARY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/sse.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.navigation 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/sse.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M06.transport 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/sse.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "apps/web/utils/assistant/sse.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.home 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/types/api.ts",
+      "owner": "M06.web_types",
+      "reason": "C3-01 删除四个未消费手写类型；生成同名 schema、账号及简历生成消费者不变。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.indexes 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.navigation 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.pagination_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.reading 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M02.editing 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M03.search_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M03.taxonomy_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M04.books_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M04.projects_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M05.content_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M05.media_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M06.auth_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M06.profile_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M06.transport 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M07.discovery 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M09.assistant_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "apps/web/types/api.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.home 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "无运行时逻辑且仓库内无类型消费者；C1-03/C3-05 补充 Web typecheck 校验模块加载与类型解析。"
+    },
+    {
+      "path": "apps/web/utils/article.ts",
+      "owner": "M01.reading",
+      "reason": "C3-02 删除两个仅测试使用的旧路径/查询构造函数，保留现行 slug 与表单校验。",
+      "cases": [
+        "M01-UNIT-ARTICLE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "apps/web/utils/article.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.indexes 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "apps/web/utils/article.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.navigation 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "apps/web/utils/article.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M02.editing 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "apps/web/utils/article.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M03.taxonomy_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "apps/web/utils/article.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M04.books_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "apps/web/utils/article.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M04.projects_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "apps/web/utils/article.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M07.discovery 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/unit/article.test.ts",
+      "owner": "M01.reading",
+      "reason": "C3-02 人工审计后移除两条仅调用被删函数的测试，保留三条 slug/字段校验及准确 covers。",
+      "cases": [
+        "M01-UNIT-ARTICLE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "apps/web/tests/unit/article.test.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.indexes 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "apps/web/tests/unit/article.test.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.navigation 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "apps/web/tests/unit/article.test.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M02.editing 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "apps/web/tests/unit/article.test.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M03.taxonomy_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "apps/web/tests/unit/article.test.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M04.books_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "apps/web/tests/unit/article.test.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M04.projects_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "apps/web/tests/unit/article.test.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M07.discovery 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/unit/assistant.test.ts",
+      "owner": "M09.assistant_web",
+      "reason": "C3-02 人工审计后迁移 helper import、去掉无生产消费者的自证断言并准确命名字数/内存测试；真实 BFCache 保留 panel state recovery。",
+      "cases": [
+        "M09-UI-BOUNDARY-01",
+        "M09-UI-STATES-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "apps/web/tests/unit/assistant.test.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.navigation 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "apps/web/tests/unit/assistant.test.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M06.transport 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "apps/web/tests/unit/assistant.test.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "apps/web/tests/unit/assistant.test.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.home 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/helpers/assistant-sse.ts",
+      "owner": "M09.assistant_web",
+      "reason": "C3-02 splitSseForTest 原样迁移到测试专用辅助，现有 SSE 分片测试继续消费。",
+      "cases": [
+        "M09-UI-BOUNDARY-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "apps/web/tests/helpers/assistant-sse.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.navigation 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "apps/web/tests/helpers/assistant-sse.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M06.transport 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "apps/web/tests/helpers/assistant-sse.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "apps/web/tests/helpers/assistant-sse.ts 仅移除已复核的无消费者定义或登记本任务验证资料；M01.home 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "package.json",
+      "owner": "M08.installation",
+      "reason": "C3-03 仅移除未使用 @gsap/react 及无剩余消费者的 peer 锁记录，保留根/Web gsap 版本和声明；禁止无关升级。",
+      "cases": [
+        "M09-UI-ORB-MOTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.browser_tooling",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.browser_tooling 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.release",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.release 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.web_tooling",
+          "affected": true,
+          "reason": "安装树变化可能影响 Nuxt 中 GSAP 的解析与生产构建，保留既有动效回归。",
+          "cases": [
+            "M09-UI-ORB-MOTION-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M09.development 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M01.navigation 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M01.pagination_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M01.reading 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M02.editing 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M03.search_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M03.taxonomy_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M04.books_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M04.projects_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M05.content_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M05.media_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M06.auth_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M06.profile_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M07.discovery 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "AssistantDiscovery 动态 import orb-motion 是 gsap/ScrollTrigger 的真实消费者，验证动效和发现入口。",
+          "cases": [
+            "M09-UI-ORB-MOTION-01",
+            "M09-UI-DISCOVERY-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M06.transport 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "package.json 仅移除已复核的无消费者定义或登记本任务验证资料；M01.home 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "package-lock.json",
+      "owner": "M08.installation",
+      "reason": "C3-03 仅移除未使用 @gsap/react 及无剩余消费者的 peer 锁记录，保留根/Web gsap 版本和声明；禁止无关升级。",
+      "cases": [
+        "M09-UI-ORB-MOTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.browser_tooling",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.browser_tooling 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.release",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.release 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.web_tooling",
+          "affected": true,
+          "reason": "安装树变化可能影响 Nuxt 中 GSAP 的解析与生产构建，保留既有动效回归。",
+          "cases": [
+            "M09-UI-ORB-MOTION-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M09.development 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M01.navigation 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M01.pagination_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M01.reading 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M02.editing 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M03.search_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M03.taxonomy_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M04.books_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M04.projects_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M05.content_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M05.media_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M06.auth_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M06.profile_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M07.discovery 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "AssistantDiscovery 动态 import orb-motion 是 gsap/ScrollTrigger 的真实消费者，验证动效和发现入口。",
+          "cases": [
+            "M09-UI-ORB-MOTION-01",
+            "M09-UI-DISCOVERY-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M10.operations_web 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M06.transport 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "package-lock.json 仅移除已复核的无消费者定义或登记本任务验证资料；M01.home 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "补充非执行清理文档及未来 SSE helper 的明确归属，不修改 runner、门禁或安装策略。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "harness/verification/impact/ownership.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.isolated_verification 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "harness/verification/impact/ownership.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.lifecycle 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "harness/verification/impact/ownership.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.module_verification 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "harness/verification/impact/ownership.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.product_verification 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "harness/verification/impact/ownership.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.selected_tests 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "harness/verification/impact/ownership.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.verification_resume 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "harness/verification/impact/ownership.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.execution_protocol 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "人工审计通过后同步 M01-UNIT-ARTICLE-01 和 M09-UI-BOUNDARY-01 的精确测试引用与 covers；不修改验证算法或质量门槛。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "harness/verification/checks/module_coverage.contract.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.impact 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "harness/verification/checks/module_coverage.contract.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.product_verification 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "harness/verification/checks/module_coverage.contract.json 仅移除已复核的无消费者定义或登记本任务验证资料；M08.execution_protocol 消费的现行导出、接口、字段、配置和执行协议未改变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "plan-build/code-cleanup/PLAN.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "普通非执行任务说明/审计资料；记录范围、人工审计点和既有精确测试身份，没有产品或执行合同消费者。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/PHASE-1-SCOPE.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "普通非执行任务说明/审计资料；记录范围、人工审计点和既有精确测试身份，没有产品或执行合同消费者。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/PHASE-2-API.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "普通非执行任务说明/审计资料；记录范围、人工审计点和既有精确测试身份，没有产品或执行合同消费者。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/PHASE-3-WEB.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "普通非执行任务说明/审计资料；记录范围、人工审计点和既有精确测试身份，没有产品或执行合同消费者。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/PHASE-4-VERIFY.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "普通非执行任务说明/审计资料；记录范围、人工审计点和既有精确测试身份，没有产品或执行合同消费者。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/review/C1-02-AUDIT.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "普通非执行任务说明/审计资料；记录范围、人工审计点和既有精确测试身份，没有产品或执行合同消费者。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/review/C1-02-case-changes.patch",
+      "owner": "M08.cleanup_documents",
+      "reason": "普通非执行任务说明/审计资料；记录范围、人工审计点和既有精确测试身份，没有产品或执行合同消费者。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/review/C1-02-exact-refs.json",
+      "owner": "M08.cleanup_documents",
+      "reason": "普通非执行任务说明/审计资料；记录范围、人工审计点和既有精确测试身份，没有产品或执行合同消费者。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-1-scope/C1-01.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "保留当前工作区既有 C1-01 复核归档；只记录审查依据，不是产品执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-1-scope/.gitkeep",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-1-scope/C1-02.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-1-scope/C1-03.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-2-api/.gitkeep",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-2-api/C2-01.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-2-api/C2-02.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-2-api/C2-03.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-2-api/C2-04.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-3-web/.gitkeep",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-3-web/C3-01.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-3-web/C3-02.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-3-web/C3-03.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-3-web/C3-04.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-4-verify/.gitkeep",
+      "owner": "M08.cleanup_documents",
+      "reason": "已验证分项的普通阶段记录或归档目录占位，不是产品/执行合同；用结构检查核对链接与登记。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/review/C4-STARTUP.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "非执行启动核对记录，区分临时服务成功与真实服务未验证；无产品/执行合同消费者。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/README.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "C4 收尾的非执行计划入口、历史记录或脱敏紧凑启动证据；只记录真实环境、数据保留和既有 FTS 限制，不改变产品、质量门槛或执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-3-web/C3-05.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "C4 收尾的非执行计划入口、历史记录或脱敏紧凑启动证据；只记录真实环境、数据保留和既有 FTS 限制，不改变产品、质量门槛或执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-4-verify/C4-01.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "C4 收尾的非执行计划入口、历史记录或脱敏紧凑启动证据；只记录真实环境、数据保留和既有 FTS 限制，不改变产品、质量门槛或执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-4-verify/C4-02.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "C4 收尾的非执行计划入口、历史记录或脱敏紧凑启动证据；只记录真实环境、数据保留和既有 FTS 限制，不改变产品、质量门槛或执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/completed/phase-4-verify/C4-03.md",
+      "owner": "M08.cleanup_documents",
+      "reason": "C4 收尾的非执行计划入口、历史记录或脱敏紧凑启动证据；只记录真实环境、数据保留和既有 FTS 限制，不改变产品、质量门槛或执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "plan-build/code-cleanup/review/C4-REAL.json",
+      "owner": "M08.cleanup_documents",
+      "reason": "C4 收尾的非执行计划入口、历史记录或脱敏紧凑启动证据；只记录真实环境、数据保留和既有 FTS 限制，不改变产品、质量门槛或执行合同。",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "dependencies": []
+    }
+  ]
+}

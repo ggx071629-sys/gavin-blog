@@ -1,0 +1,1152 @@
+{
+  "schema_version": 1,
+  "task_id": "20260913-assistant-live-fixes",
+  "changes": [
+    {
+      "path": "apps/api/app/main.py",
+      "owner": "M06.runtime_config",
+      "cases": [
+        "M09-LIVE-FIXES-01"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": [
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03"
+          ]
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-01",
+            "M09-LIVE-FIXES-04"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_refresh",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-02",
+            "M09-LIVE-FIXES-03"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.integrity",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03",
+            "M09-LIVE-FIXES-04"
+          ]
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/admin_operations.py",
+      "owner": "M10.operations",
+      "cases": [
+        "M09-LIVE-FIXES-01",
+        "M09-LIVE-FIXES-04"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03",
+            "M09-LIVE-FIXES-04"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03"
+          ]
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_refresh",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-02",
+            "M09-LIVE-FIXES-03"
+          ]
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.integrity",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/scripts/run_assistant_e2e.py",
+      "owner": "M06.api_tooling",
+      "cases": [
+        "M09-LIVE-FIXES-03"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": [
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-01",
+            "M09-LIVE-FIXES-04"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_refresh",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-02",
+            "M09-LIVE-FIXES-03"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.integrity",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03",
+            "M09-LIVE-FIXES-04"
+          ]
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_live_fixes.py",
+      "owner": "M10.operations",
+      "cases": [
+        "M09-LIVE-FIXES-01",
+        "M09-LIVE-FIXES-04"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03",
+            "M09-LIVE-FIXES-04"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03"
+          ]
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_refresh",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-02",
+            "M09-LIVE-FIXES-03"
+          ]
+        },
+        {
+          "unit": "M06.resume_parse",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.resume_storage",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.integrity",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/AssistantHost.vue",
+      "owner": "M09.assistant_web",
+      "cases": [
+        "M09-LIVE-FIXES-02",
+        "M09-LIVE-FIXES-03"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03",
+            "M09-LIVE-FIXES-04"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/AssistantAdminTrial.vue",
+      "owner": "M10.operations_web",
+      "cases": [
+        "M09-LIVE-FIXES-03",
+        "M09-LIVE-FIXES-04"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/nuxt.config.ts",
+      "owner": "M08.web_tooling",
+      "cases": [
+        "M09-LIVE-FIXES-03"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-02",
+            "M09-LIVE-FIXES-03"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03",
+            "M09-LIVE-FIXES-04"
+          ]
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/playwright.assistant.config.ts",
+      "owner": "M08.browser_tooling",
+      "cases": [
+        "M09-LIVE-FIXES-03"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-02",
+            "M09-LIVE-FIXES-03"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03",
+            "M09-LIVE-FIXES-04"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+      "owner": "M09.assistant_web",
+      "cases": [
+        "M09-LIVE-FIXES-02",
+        "M09-LIVE-FIXES-03"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "消费助手围栏、运行资格、持续Worker或清除状态，采用对应回归。",
+          "cases": [
+            "M09-LIVE-FIXES-03",
+            "M09-LIVE-FIXES-04"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e-assistant/management.spec.ts",
+      "owner": "M10.operations_web",
+      "cases": [
+        "M09-LIVE-FIXES-03",
+        "M09-LIVE-FIXES-04"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/e2e-assistant/live-gaps.spec.ts",
+      "owner": "M10.operations_web",
+      "cases": [
+        "M09-LIVE-FIXES-03",
+        "M09-LIVE-FIXES-04"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": []
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/README.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "修复现场验证的运行控制与界面状态，或登记其精确回归；普通文档仅补充现行行为，不改变链接和执行政策。",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "本次精确接口豁免与测试入口修改不改变该消费者的函数签名、存储结构或执行协议；内容写保护保持，测试登记不改变Harness算法。",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}

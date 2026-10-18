@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "task_id": "20260908-archive-timeline",
+  "changes": [
+    {
+      "path": "apps/web/pages/archive.vue",
+      "owner": "M01.indexes",
+      "reason": "Archive-only presentation and exact browser checks; data utilities and other routes are unchanged.",
+      "cases": [
+        "M01-ARCHIVE-TIMELINE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/archive-index.spec.ts",
+      "owner": "M01.indexes",
+      "reason": "Archive-only presentation and exact browser checks; data utilities and other routes are unchanged.",
+      "cases": [
+        "M01-ARCHIVE-TIMELINE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Register one exact archive case using the existing verification schema; runner behavior is unchanged.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Declarative registration is checked by existing harness integrity checks; no executable harness change."
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Register one exact archive case using the existing verification schema; runner behavior is unchanged.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Consumer does not import archive page scoped styles; shared utility exports and verification runtime contracts are unchanged.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Declarative registration is checked by existing harness integrity checks; no executable harness change."
+    }
+  ]
+}

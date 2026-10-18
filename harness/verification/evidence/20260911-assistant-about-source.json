@@ -1,0 +1,734 @@
+{
+  "schema_version": 2,
+  "task_id": "20260911-assistant-about-source",
+  "created_at": "2026-09-10T17:30:25.086874+00:00",
+  "command": "python -m tools.harness verify 20260911-assistant-about-source",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "e2e",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "38bca3c5c3f76b9345493ba23fd5f886f5ecad46",
+    "active_spec_sha256": "b510d87fb5ee107480abe60409c728dd2728747bca77e32ad0c91190ab1c29f2",
+    "verification_contract_sha256": "931ad99a4744322b5f684e814692fd1d2382bc38afc6f736844e694cbede8b1d",
+    "gate_config_sha256": "0852dbfc9018095bc4dfa9620f33ea4f8b8b38ec128d4ac2672a1e32692fa68e",
+    "documentation_contract_sha256": "329544a64b56af84b43bcfbed092541c58c88ea4d3ebd51606c4dfbc21ab3cf9",
+    "documentation_targets_sha256": "5292b46fdcac17afd14e024fa96dc68fc1df5e1d0a7e4ed0d6760b22b73be2d2",
+    "module_contract_sha256": "efc56e7633745b2114c143debc47eac5cc715f47bbef54f89f00f3046073a789"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "记录新来源的发布资格、索引同步和关于页引用消费边界。",
+    "targets": [
+      "apps/api/README.md",
+      "apps/web/README.md",
+      "packages/contracts/README.md"
+    ],
+    "baseline_commit": "bab867ff8eff1841c42af2b849085f3280b118cc",
+    "target_blobs": {
+      "apps/api/README.md": "a16051cd108eff56edab66e6f6d5ebe3c56893ea",
+      "apps/web/README.md": "69141b0081168083cbc50117bc60e983a4097bc7",
+      "packages/contracts/README.md": "48b04c66cd8d38e2e0aec83925c83ab2fdec2146"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "97cd71d0f5537265a82525f7efd9fb0885e649e2",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260911-assistant-about-source.json",
+      "sha256": "a06417655e1003fb270b56d32e0478e05c1a0006649e9d9132a36f9686aaf130",
+      "selected_cases": [
+        "M09-ABOUT-CITATION-01",
+        "M09-ABOUT-FACTS-01",
+        "M09-ABOUT-RETRIEVAL-01",
+        "M11-ASSISTANT-PROJECTION-01",
+        "M11-ASSISTANT-SYNC-01"
+      ],
+      "selected_refs": 7,
+      "excluded_cases": 281
+    },
+    "receipt": {
+      "run_id": "13e14318ea22d793ef7308375b651eb1",
+      "identity": "a2b3ec6a74adff7f0be8a7e26c2b2b1c7ab917fb39139d629483a704d60940c6",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1448.456,
+      "plan_inputs": 1259.005,
+      "execute_cleanup_and_input_recheck": 70201.823
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "efc56e7633745b2114c143debc47eac5cc715f47bbef54f89f00f3046073a789",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M11-ASSISTANT-PROJECTION-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P1",
+            "scenario": "主动发布的当前关于修订可投影，seed和草稿排除；新迁移保留四类来源数据并扩展about约束。",
+            "expectations": [
+              {
+                "id": "M11-ASSISTANT-PROJECTION-01-E01",
+                "surface": "response",
+                "statement": "发布正文包含结构字段且版本绑定当前主动修订；旧库四类任务及个人资料保持。"
+              },
+              {
+                "id": "M11-ASSISTANT-PROJECTION-01-E02",
+                "surface": "forbidden",
+                "statement": "seed、草稿和无发布指针不可投影；非法来源类型入库失败。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_about_projection.py",
+                "kind": "pytest",
+                "name": "test_about_projection_excludes_seed_and_draft_and_preserves_published_structure",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-ASSISTANT-PROJECTION-01-E01",
+                  "M11-ASSISTANT-PROJECTION-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_about_projection.py",
+                "kind": "pytest",
+                "name": "test_about_migration_preserves_existing_sources_and_qualifies_only_explicit_revisions",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-ASSISTANT-PROJECTION-01-E01",
+                  "M11-ASSISTANT-PROJECTION-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M11-ASSISTANT-SYNC-01",
+            "module_id": "M11",
+            "module_name": "关于页内容编辑与发布",
+            "priority": "P1",
+            "scenario": "关于页主动发布/回滚原子排队并立即改变来源版本资格。",
+            "expectations": [
+              {
+                "id": "M11-ASSISTANT-SYNC-01-E01",
+                "surface": "response",
+                "statement": "发布回滚合并最新about任务，管理schema和OpenAPI接受about。"
+              },
+              {
+                "id": "M11-ASSISTANT-SYNC-01-E02",
+                "surface": "forbidden",
+                "statement": "草稿不排队；入队失败无修订泄漏；旧来源fence拒绝。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_about_sync.py",
+                "kind": "pytest",
+                "name": "test_about_publish_rollback_outbox_and_source_fence",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-ASSISTANT-SYNC-01-E01",
+                  "M11-ASSISTANT-SYNC-01-E02"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_about_sync.py",
+                "kind": "pytest",
+                "name": "test_about_failed_enqueue_rolls_back_publish_transaction",
+                "gate": "api-tests",
+                "covers": [
+                  "M11-ASSISTANT-SYNC-01-E01",
+                  "M11-ASSISTANT-SYNC-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-3",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-ABOUT-RETRIEVAL-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "about首次重建后混合召回并限制证据，更新后旧证据立即失效。",
+            "expectations": [
+              {
+                "id": "M09-ABOUT-RETRIEVAL-01-E01",
+                "surface": "response",
+                "statement": "主动about有FTS和dense切片，新版本同步后可召回；其他有效profile仍可回答。"
+              },
+              {
+                "id": "M09-ABOUT-RETRIEVAL-01-E02",
+                "surface": "forbidden",
+                "statement": "seed不入重建，超预算片段不注入，旧about描述符在新版等待期间不可恢复。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_about_retrieval.py",
+                "kind": "pytest",
+                "name": "test_about_rebuild_hybrid_budget_and_stale_evidence",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-ABOUT-RETRIEVAL-01-E01",
+                  "M09-ABOUT-RETRIEVAL-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-4",
+        "selected_gates": [
+          "api-tests",
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-ABOUT-CITATION-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "关于页引用在公开与管理消费中可点击，明确自述与冲突处理规则。",
+            "expectations": [
+              {
+                "id": "M09-ABOUT-CITATION-01-E01",
+                "surface": "response",
+                "statement": "关于Gavin引用打开/about；规则接受明确自述并要求冲突引用双方。"
+              },
+              {
+                "id": "M09-ABOUT-CITATION-01-E02",
+                "surface": "forbidden",
+                "statement": "任意外链/虚构alias被拒绝；文章主题不得冒充个人能力。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "kind": "playwright",
+                "name": "about citations navigate in public answers and admin trial",
+                "gate": "e2e",
+                "covers": [
+                  "M09-ABOUT-CITATION-01-E01",
+                  "M09-ABOUT-CITATION-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M09-ABOUT-FACTS-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "关于页引用在公开与管理消费中可点击，明确自述与冲突处理规则。",
+            "expectations": [
+              {
+                "id": "M09-ABOUT-FACTS-01-E01",
+                "surface": "response",
+                "statement": "关于Gavin引用打开/about；规则接受明确自述并要求冲突引用双方。"
+              },
+              {
+                "id": "M09-ABOUT-FACTS-01-E02",
+                "surface": "forbidden",
+                "statement": "任意外链/虚构alias被拒绝；文章主题不得冒充个人能力。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_about_facts.py",
+                "kind": "pytest",
+                "name": "test_about_self_report_prompt_and_bound_citations",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-ABOUT-FACTS-01-E01",
+                  "M09-ABOUT-FACTS-01-E02"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.208,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "174 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 217.965,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 74.085,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.703,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "967 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 428.64,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "296 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 93.278,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 286 cases, 573 expectations, 966 exact test references; contract sha256 efc56e763374"
+      ],
+      "status": "passed",
+      "duration_ms": 506.64,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 4.021,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 11.266,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 105.182,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "duration_ms": 2015.413,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "13e14318ea22d793ef7308375b651eb1",
+        "attempt_id": "d1699b2e6d78713161c46c8d001cac7b"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-assistant-about-source --gate api-tests",
+      "status": "passed",
+      "duration_ms": 8739.079,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1252,
+        "selection_counts": {
+          "collected": 6,
+          "executed": 6
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_facts.py",
+                "name": "test_about_self_report_prompt_and_bound_citations"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_retrieval.py",
+                "name": "test_about_rebuild_hybrid_budget_and_stale_evidence"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_projection.py",
+                "name": "test_about_projection_excludes_seed_and_draft_and_preserves_published_structure"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_projection.py",
+                "name": "test_about_migration_preserves_existing_sources_and_qualifies_only_explicit_revisions"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_sync.py",
+                "name": "test_about_publish_rollback_outbox_and_source_fence"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_about_sync.py",
+                "name": "test_about_failed_enqueue_rolls_back_publish_transaction"
+              }
+            ],
+            "duration_ms": 8334.14,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\46cfcc2183ce96dd38b1dab98370a972b7ae9c0040dbe9cd731aacc997bb65cf\\artifacts\\13e14318ea22d793ef7308375b651eb1\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "13e14318ea22d793ef7308375b651eb1",
+        "attempt_id": "15577967209e7bb7fdd0900b385692ae"
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-assistant-about-source --gate e2e",
+      "status": "passed",
+      "duration_ms": 56569.637,
+      "covers": [
+        "AC-4"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1979,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "about citations navigate in public answers and admin trial"
+              }
+            ],
+            "duration_ms": 3121.268,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "133e649fd9d390d97c028a198666aea3a908db8801312850bb741daa0f5eb419",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "about citations navigate in public answers and admin trial"
+              }
+            ],
+            "duration_ms": 1344.85
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "about citations navigate in public answers and admin trial",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about citations navigate in public answers and admin trial"
+                ]
+              }
+            ],
+            "duration_ms": 1255.789,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e-assistant/about-citations.spec.ts",
+                "name": "about citations navigate in public answers and admin trial",
+                "config": "playwright.assistant.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "about citations navigate in public answers and admin trial"
+                ]
+              }
+            ],
+            "duration_ms": 50433.175,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\46cfcc2183ce96dd38b1dab98370a972b7ae9c0040dbe9cd731aacc997bb65cf\\artifacts\\13e14318ea22d793ef7308375b651eb1\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "13e14318ea22d793ef7308375b651eb1",
+        "attempt_id": "14cfcb3db46c22ad499f5db42e9380bf"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2560.288,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 71330.405,
+    "failures": []
+  },
+  "source_commit": "97cd71d0f5537265a82525f7efd9fb0885e649e2"
+}

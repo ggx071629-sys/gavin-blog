@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "event_type": "spec.completed",
+  "task_id": "20260809-soften-light-signal-color",
+  "created_at": "2026-08-09T13:05:29.211681+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false
+}

@@ -1,0 +1,511 @@
+{
+  "schema_version": 1,
+  "task_id": "20260914-assistant-recent-articles",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/recent_articles.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-RECENT-INTENT-01",
+        "M09-RECENT-QUERY-01",
+        "M09-RECENT-SSE-01"
+      ],
+      "reason": "Implement and verify bounded native article tool calls using current public revisions; preserve unrelated existing workspace changes.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Native tool selection changes the runtime/provider interaction; focused SSE and synthetic native HTTP cases exercise it.",
+          "cases": [
+            "M09-RECENT-SSE-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/article_tools.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-RECENT-INTENT-01",
+        "M09-RECENT-QUERY-01",
+        "M09-RECENT-SSE-01"
+      ],
+      "reason": "Implement and verify bounded native article tool calls using current public revisions; preserve unrelated existing workspace changes.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Native tool selection changes the runtime/provider interaction; focused SSE and synthetic native HTTP cases exercise it.",
+          "cases": [
+            "M09-RECENT-SSE-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/graph.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-RECENT-INTENT-01",
+        "M09-RECENT-QUERY-01",
+        "M09-RECENT-SSE-01",
+        "M09-SCOPE-NOTICES-01",
+        "M09-PAGE-PRIORITY-01"
+      ],
+      "reason": "Implement and verify bounded native article tool calls using current public revisions; preserve unrelated existing workspace changes.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Native tool selection changes the runtime/provider interaction; focused SSE and synthetic native HTTP cases exercise it.",
+          "cases": [
+            "M09-RECENT-SSE-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/providers.py",
+      "owner": "M09.providers",
+      "cases": [
+        "M09-RECENT-SSE-01"
+      ],
+      "reason": "Implement and verify bounded native article tool calls using current public revisions; preserve unrelated existing workspace changes.",
+      "dependencies": [
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "Native tool selection changes the runtime/provider interaction; focused SSE and synthetic native HTTP cases exercise it.",
+          "cases": [
+            "M09-RECENT-SSE-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Transitive runtime consumer reviewed: existing public payload, persistence, index and operational contracts are unchanged; this tool changes only bounded article chronology responses."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Transitive runtime consumer reviewed: existing public payload, persistence, index and operational contracts are unchanged; this tool changes only bounded article chronology responses."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Transitive runtime consumer reviewed: existing public payload, persistence, index and operational contracts are unchanged; this tool changes only bounded article chronology responses."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Transitive runtime consumer reviewed: existing public payload, persistence, index and operational contracts are unchanged; this tool changes only bounded article chronology responses."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Transitive runtime consumer reviewed: existing public payload, persistence, index and operational contracts are unchanged; this tool changes only bounded article chronology responses."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Transitive runtime consumer reviewed: existing public payload, persistence, index and operational contracts are unchanged; this tool changes only bounded article chronology responses."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_recent_articles.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-RECENT-INTENT-01",
+        "M09-RECENT-QUERY-01",
+        "M09-RECENT-SSE-01"
+      ],
+      "reason": "Implement and verify bounded native article tool calls using current public revisions; preserve unrelated existing workspace changes.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Native tool selection changes the runtime/provider interaction; focused SSE and synthetic native HTTP cases exercise it.",
+          "cases": [
+            "M09-RECENT-SSE-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_article_tools.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-RECENT-SSE-01"
+      ],
+      "reason": "Implement and verify bounded native article tool calls using current public revisions; preserve unrelated existing workspace changes.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Native tool selection changes the runtime/provider interaction; focused SSE and synthetic native HTTP cases exercise it.",
+          "cases": [
+            "M09-RECENT-SSE-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_question_boundaries.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-SCOPE-NOTICES-01",
+        "M09-PAGE-PRIORITY-01"
+      ],
+      "reason": "Implement and verify bounded native article tool calls using current public revisions; preserve unrelated existing workspace changes.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "Native tool selection changes the runtime/provider interaction; focused SSE and synthetic native HTTP cases exercise it.",
+          "cases": [
+            "M09-RECENT-SSE-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Document the public revision time boundary and register focused cases without changing verification algorithms.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/docs/decisions/20260912-assistant-question-scope.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Document the public revision time boundary and register focused cases without changing verification algorithms.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Document the public revision time boundary and register focused cases without changing verification algorithms.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Document the public revision time boundary and register focused cases without changing verification algorithms.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed existing consumer: signatures, persisted schemas, settings, source projections and HTTP/SSE payload shapes are unchanged; catalog behavior remains inside the runtime with existing admission and terminal boundaries. Registration-only edits do not change verifier algorithms."
+        }
+      ]
+    }
+  ]
+}

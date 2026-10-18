@@ -1,0 +1,708 @@
+{
+  "schema_version": 1,
+  "task_id": "20260911-assistant-about-projection",
+  "changes": [
+    {
+      "path": "apps/api/app/models.py",
+      "owner": "M06.persistence",
+      "reason": "Q2-01 explicit about qualification and source projection.",
+      "cases": [
+        "M11-ASSISTANT-PROJECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M01.links",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "New about eligibility/projection branch consumes this changed model/service and is exercised by the projection/migration case.",
+          "cases": [
+            "M11-ASSISTANT-PROJECTION-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M11.api",
+          "affected": true,
+          "reason": "New about eligibility/projection branch consumes this changed model/service and is exercised by the projection/migration case.",
+          "cases": [
+            "M11-ASSISTANT-PROJECTION-01"
+          ]
+        },
+        {
+          "unit": "M06.account",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.account_fixture",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/about_page_service.py",
+      "owner": "M11.api",
+      "reason": "Q2-01 explicit about qualification and source projection.",
+      "cases": [
+        "M11-ASSISTANT-PROJECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "New about eligibility/projection branch consumes this changed model/service and is exercised by the projection/migration case.",
+          "cases": [
+            "M11-ASSISTANT-PROJECTION-01"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant_index/constants.py",
+      "owner": "M10.index",
+      "reason": "Q2-01 explicit about qualification and source projection.",
+      "cases": [
+        "M11-ASSISTANT-PROJECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant_index/projector.py",
+      "owner": "M10.index",
+      "reason": "Q2-01 explicit about qualification and source projection.",
+      "cases": [
+        "M11-ASSISTANT-PROJECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/migrations/versions/20260911_0029_assistant_about.py",
+      "owner": "M11.api",
+      "reason": "Q2-01 explicit about qualification and source projection.",
+      "cases": [
+        "M11-ASSISTANT-PROJECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "New about eligibility/projection branch consumes this changed model/service and is exercised by the projection/migration case.",
+          "cases": [
+            "M11-ASSISTANT-PROJECTION-01"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_about_projection.py",
+      "owner": "M11.api",
+      "reason": "Q2-01 explicit about qualification and source projection.",
+      "cases": [
+        "M11-ASSISTANT-PROJECTION-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "New about eligibility/projection branch consumes this changed model/service and is exercised by the projection/migration case.",
+          "cases": [
+            "M11-ASSISTANT-PROJECTION-01"
+          ]
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.e5_evaluation",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Existing four-source behavior and public schemas unchanged; about is not yet enqueued or included in iter_public_sources, so this consumer receives no new runtime payload in Q2-01.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "Ordinary documentation or exact-case declarative registration; no executable policy change.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Ordinary documentation or declarative exact-case registration only; structural Harness checks cover the change, without product execution behavior changes."
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Ordinary documentation or exact-case declarative registration; no executable policy change.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Ordinary documentation or declarative exact-case registration only; structural Harness checks cover the change, without product execution behavior changes."
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Ordinary documentation or exact-case declarative registration; no executable policy change.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Declarative registration or ordinary boundary prose only; verification runtime behavior and executable instructions are unchanged.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Ordinary documentation or declarative exact-case registration only; structural Harness checks cover the change, without product execution behavior changes."
+    }
+  ]
+}

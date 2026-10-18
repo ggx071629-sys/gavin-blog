@@ -1,0 +1,1985 @@
+{
+  "schema_version": 1,
+  "task_id": "20260908-public-card-focus",
+  "changes": [
+    {
+      "path": "apps/web/app.vue",
+      "owner": "M01.navigation",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/assets/css/public-card-focus.css",
+      "owner": "M07.theme",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/AboutPublicBody.vue",
+      "owner": "M11.web",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/components/ArticleCard.vue",
+      "owner": "M01.reading",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/AssistantPanel.vue",
+      "owner": "M09.assistant_web",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/BacklinkList.vue",
+      "owner": "M01.reading",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/BookCard.vue",
+      "owner": "M04.books_web",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/components/ContentToc.vue",
+      "owner": "M01.reading",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/HomeAtlas.vue",
+      "owner": "M01.home",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/components/ProfileCard.vue",
+      "owner": "M06.profile_web",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/ProjectCard.vue",
+      "owner": "M04.projects_web",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/composables/usePublicCardFocus.ts",
+      "owner": "M01.navigation",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/error.vue",
+      "owner": "M01.navigation",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/archive.vue",
+      "owner": "M01.indexes",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/books/index.vue",
+      "owner": "M04.books_web",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/pages/index.vue",
+      "owner": "M01.home",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/pages/notes/[year]/[month]/[slug].vue",
+      "owner": "M01.reading",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/projects/[slug].vue",
+      "owner": "M04.projects_web",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/pages/projects/index.vue",
+      "owner": "M04.projects_web",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/pages/search.vue",
+      "owner": "M03.search_web",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+      "owner": "M09.assistant_web",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/e2e/public-card-focus.spec.ts",
+      "owner": "M01.navigation",
+      "reason": "Explicit public card opt-in, scoped overlay, or browser verification.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/docs/product/interaction-references.md",
+      "owner": "M08.documentation",
+      "reason": "Record presentation scope or register exact browser cases without changing Harness execution rules.",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "Documentation and declarative case registration only; existing Harness integrity checks validate structure."
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "Record presentation scope or register exact browser cases without changing Harness execution rules.",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "Documentation and declarative case registration only; existing Harness integrity checks validate structure."
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "Register explicit new presentation files, documentation and browser cases.",
+      "cases": [],
+      "no_test_reason": "Declarative registration only; integrity checks verify this schema.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "No registry schema, runner or lifecycle behavior changed.",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/articles/index.vue",
+      "owner": "M01.indexes",
+      "reason": "Opt in the public filter panel and empty-state card without changing filtering or admin surfaces.",
+      "cases": [
+        "M01-CARD-FOCUS-01",
+        "M01-CARD-INPUT-01",
+        "M01-CARD-SCOPE-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M01.reading",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M01.home",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.admin_shell",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M11.web",
+          "affected": true,
+          "reason": "Public card styling or route scope is consumed here; browser cases exercise public feedback and admin exclusion.",
+          "cases": [
+            "M01-CARD-FOCUS-01",
+            "M01-CARD-INPUT-01",
+            "M01-CARD-SCOPE-01"
+          ]
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M06.transport",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "No exported data, transport, navigation, or control API changed; this consumer is outside the explicit public card presentation changes.",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}

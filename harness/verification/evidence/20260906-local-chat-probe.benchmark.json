@@ -1,0 +1,35 @@
+{
+  "chat": {
+    "application_schema": true,
+    "call_count": 1,
+    "error_type": null,
+    "finish_reason": "stop",
+    "input_tokens": 207,
+    "model": "deepseek-v4-flash",
+    "model_identity_source": "provider-response",
+    "output_tokens": 17,
+    "reserved_micro_cny": 28608,
+    "response_model_match": true,
+    "response_version_match": false,
+    "settled_micro_cny": 774,
+    "status": "pass",
+    "strict_schema": false,
+    "usage_proven": true,
+    "version": "DeepSeek-V4-Flash-0731",
+    "version_identity_source": "versioned-provider-contract"
+  },
+  "completed_at": "2026-09-06T11:44:52.399024+00:00",
+  "content_retained": false,
+  "ledger": {
+    "calls_used": 1,
+    "max_calls": 3,
+    "max_micro_cny": 1000000,
+    "micro_cny_used": 774,
+    "within_envelope": true
+  },
+  "model_version_reference": "https://api-docs.deepseek.com/zh-cn/updates/",
+  "production_qualified": false,
+  "raw_provider_payload_retained": false,
+  "schema_version": 1,
+  "scope": "local-development-chat"
+}

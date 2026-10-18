@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260907-assistant-answerability",
+  "created_at": "2026-09-06T17:04:41.533518+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "b1d23221ea96ae942fb97f929bcda97f6ffd18fb65bc975b9da76f692edffd70"
+}

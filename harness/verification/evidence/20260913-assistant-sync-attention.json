@@ -1,0 +1,696 @@
+{
+  "schema_version": 2,
+  "task_id": "20260913-assistant-sync-attention",
+  "created_at": "2026-09-12T20:05:07.722858+00:00",
+  "command": "python -m tools.harness verify 20260913-assistant-sync-attention",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "web-quality",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "4e7042924f02f6d82a998d4a790428007330499b",
+    "active_spec_sha256": "0ff2e733bebccc30e55eceef89982c23393eda2eb51d76a7710d25183c4c67f3",
+    "verification_contract_sha256": "61140a6cb401907046bc75c089cdecb949030f20348ee8a4fedda062d697040d",
+    "gate_config_sha256": "fe509f4ed96d22c0010ac0c70a77173a631f51288f6ecf3fe203483a19c69f9b",
+    "documentation_contract_sha256": "7b5b401d86a56d2d8a9b7fc5fc7d1ef2b187fa5c8c101f9a73e6a54b710fbfd7",
+    "documentation_targets_sha256": "6b3b24f2f58f1d1126656bbf01201a6d471bb83337480da58e421d028db0767d",
+    "module_contract_sha256": "b1b83e7c55b073cfcfda7084dc7f779dd0b5e4c1fb08b202aac6f1de249f3e9d"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "说明同步待处理数量与保留历史任务的区别及只读判定边界。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "6f75e41e5c734ef5dd24512685f4787dedd268f4",
+    "target_blobs": {
+      "apps/api/README.md": "0e41db7a3d741326446ed119a6ac9f7969399df8"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "a20d8c5037b8f9aa5c40d77181a35eeb161d6233",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260913-assistant-sync-attention.json",
+      "sha256": "e8b7a1a556202164848b78aa1476a62d8904d55a0000e2dd32ecc97a29e24be7",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M10-SYNC-ATTENTION-01",
+        "M10-SYNC-ATTENTION-02"
+      ],
+      "selected_refs": 11,
+      "excluded_cases": 392
+    },
+    "receipt": {
+      "run_id": "cc21949b34e496b858ada56a107f2ddf",
+      "identity": "8b00c0fa1d39c9ce711232c2b265f5fa45fcb4fee130c93e95785263bc5af53c",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "web-quality",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 4654.86,
+      "plan_inputs": 916.002,
+      "execute_cleanup_and_input_recheck": 32707.578
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "b1b83e7c55b073cfcfda7084dc7f779dd0b5e4c1fb08b202aac6f1de249f3e9d",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-SYNC-ATTENTION-01",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P0",
+            "scenario": "按当前公开版本收录事实判断历史失败是否仍需处理。",
+            "expectations": [
+              {
+                "id": "M10-SYNC-ATTENTION-01-ALLOW",
+                "surface": "response",
+                "statement": "完整当前切片和全文检索及成功记录可消除旧upsert失败提醒，完整重建与后续同步均覆盖。"
+              },
+              {
+                "id": "M10-SYNC-ATTENTION-01-DENY",
+                "surface": "forbidden",
+                "statement": "缺切片、缺FTS、重复FTS、正文或版本不符、无成功事实、运行不可用及删除失败不得隐藏。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_management.py",
+                "kind": "pytest",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[none]",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-ATTENTION-01-ALLOW",
+                  "M10-SYNC-ATTENTION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_management.py",
+                "kind": "pytest",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[incremental]",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-ATTENTION-01-ALLOW",
+                  "M10-SYNC-ATTENTION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_management.py",
+                "kind": "pytest",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[version]",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-ATTENTION-01-ALLOW",
+                  "M10-SYNC-ATTENTION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_management.py",
+                "kind": "pytest",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[chunk]",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-ATTENTION-01-ALLOW",
+                  "M10-SYNC-ATTENTION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_management.py",
+                "kind": "pytest",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[fts]",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-ATTENTION-01-ALLOW",
+                  "M10-SYNC-ATTENTION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_management.py",
+                "kind": "pytest",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[fts_duplicate]",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-ATTENTION-01-ALLOW",
+                  "M10-SYNC-ATTENTION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_management.py",
+                "kind": "pytest",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[body]",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-ATTENTION-01-ALLOW",
+                  "M10-SYNC-ATTENTION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_management.py",
+                "kind": "pytest",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[no_success]",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-ATTENTION-01-ALLOW",
+                  "M10-SYNC-ATTENTION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_management.py",
+                "kind": "pytest",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[offline]",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-ATTENTION-01-ALLOW",
+                  "M10-SYNC-ATTENTION-01-DENY"
+                ]
+              },
+              {
+                "path": "apps/api/tests/test_assistant_management.py",
+                "kind": "pytest",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[delete]",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-ATTENTION-01-ALLOW",
+                  "M10-SYNC-ATTENTION-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "web-quality",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M10-SYNC-ATTENTION-02",
+            "module_id": "M10",
+            "module_name": "问答运营控制面（默认关闭）",
+            "priority": "P0",
+            "scenario": "保留已覆盖的失败历史并区分可操作状态。",
+            "expectations": [
+              {
+                "id": "M10-SYNC-ATTENTION-02-ALLOW",
+                "surface": "response",
+                "statement": "历史列表保持原失败及unknown供应商状态，标记当前已收录；UI显示历史失败并禁用重试。"
+              },
+              {
+                "id": "M10-SYNC-ATTENTION-02-DENY",
+                "surface": "forbidden",
+                "statement": "禁止改写任务/费用或在管理读取时调用模型/向量服务，未解决失败不得标为已收录。"
+              }
+            ],
+            "required_gates": [
+              "api-tests",
+              "web-quality"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_assistant_management.py",
+                "kind": "pytest",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[none]",
+                "gate": "api-tests",
+                "covers": [
+                  "M10-SYNC-ATTENTION-02-ALLOW",
+                  "M10-SYNC-ATTENTION-02-DENY"
+                ]
+              },
+              {
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "kind": "vitest",
+                "name": "labels covered failures as history and never retries them",
+                "gate": "web-quality",
+                "covers": [
+                  "M10-SYNC-ATTENTION-02-ALLOW",
+                  "M10-SYNC-ATTENTION-02-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              },
+              {
+                "gate": "web-quality",
+                "satisfied_by": "web-quality",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 5.436,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "237 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 452.582,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 123.026,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.918,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "2204 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 3159.42,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "365 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 121.104,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 395 cases, 800 expectations, 1248 exact test references; contract sha256 b1b83e7c55b0"
+      ],
+      "status": "passed",
+      "duration_ms": 690.941,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.744,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 10.319,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 84.606,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 2834.528,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "cc21949b34e496b858ada56a107f2ddf",
+        "attempt_id": "247be036fbd56a075dd320d1cc4bed88"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260913-assistant-sync-attention --gate api-tests",
+      "status": "passed",
+      "duration_ms": 16823.628,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 2059,
+        "selection_counts": {
+          "collected": 10,
+          "executed": 10
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[none]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[incremental]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[version]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[chunk]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[fts]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[fts_duplicate]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[body]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[no_success]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[offline]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_management.py",
+                "name": "test_sync_attention_uses_current_index_and_preserves_failed_history[delete]"
+              }
+            ],
+            "duration_ms": 16373.684,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\cc21949b34e496b858ada56a107f2ddf\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "cc21949b34e496b858ada56a107f2ddf",
+        "attempt_id": "d4823485146f36f5e81f02e204e866a1"
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260913-assistant-sync-attention --gate web-quality",
+      "status": "passed",
+      "duration_ms": 9204.083,
+      "covers": [
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 1502,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "labels covered failures as history and never retries them"
+              }
+            ],
+            "duration_ms": 3870.124,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "labels covered failures as history and never retries them"
+              }
+            ],
+            "duration_ms": 2353.267
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "vitest",
+                "gate": "web-quality",
+                "path": "apps/web/tests/unit/assistant-management.test.ts",
+                "name": "labels covered failures as history and never retries them",
+                "config": "vitest.config.ts",
+                "project": "",
+                "title_path": [
+                  "assistant management contracts",
+                  "labels covered failures as history and never retries them"
+                ]
+              }
+            ],
+            "duration_ms": 2531.454,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\cc21949b34e496b858ada56a107f2ddf\\web-quality\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "cc21949b34e496b858ada56a107f2ddf",
+        "attempt_id": "6fc0ed52efc308c5b1099ba8045ceb58"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2810.068,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 36324.403,
+    "failures": []
+  },
+  "source_commit": "a20d8c5037b8f9aa5c40d77181a35eeb161d6233"
+}

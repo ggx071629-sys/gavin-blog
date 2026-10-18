@@ -1,0 +1,1924 @@
+{
+  "schema_version": 1,
+  "task_id": "20260912-assistant-feedback",
+  "changes": [
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": []
+    },
+    {
+      "path": "apps/api/app/assistant/admin_operations.py",
+      "owner": "M10.operations",
+      "cases": [
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/admin_schemas.py",
+      "owner": "M10.operations",
+      "cases": [
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/cleanup.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-FEEDBACK-API-01",
+        "M09-FEEDBACK-TTL-01",
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-WEB-01",
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/routes.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-FEEDBACK-API-01",
+        "M09-FEEDBACK-TTL-01",
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-WEB-01",
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/store.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-FEEDBACK-API-01",
+        "M09-FEEDBACK-TTL-01",
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-WEB-01",
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/README.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/assets/css/assistant.css",
+      "owner": "M09.assistant_web",
+      "cases": [
+        "M09-FEEDBACK-WEB-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/AssistantHost.vue",
+      "owner": "M09.assistant_web",
+      "cases": [
+        "M09-FEEDBACK-WEB-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/components/AssistantPanel.vue",
+      "owner": "M09.assistant_web",
+      "cases": [
+        "M09-FEEDBACK-WEB-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/admin/assistant.vue",
+      "owner": "M10.operations_web",
+      "cases": [
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/e2e-assistant/panel.spec.ts",
+      "owner": "M09.assistant_web",
+      "cases": [
+        "M09-FEEDBACK-WEB-01",
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/tests/unit/assistant-admin.test.ts",
+      "owner": "M10.operations_web",
+      "cases": [
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/unit/assistant.test.ts",
+      "owner": "M09.assistant_web",
+      "cases": [
+        "M09-FEEDBACK-WEB-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/types/api.ts",
+      "owner": "M06.web_types",
+      "cases": [
+        "M09-FEEDBACK-WEB-01",
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-WEB-01",
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/utils/assistant-admin.ts",
+      "owner": "M10.operations_web",
+      "cases": [
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/utils/assistant/client.ts",
+      "owner": "M09.assistant_web",
+      "cases": [
+        "M09-FEEDBACK-WEB-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        }
+      ]
+    },
+    {
+      "path": "packages/contracts/README.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": []
+    },
+    {
+      "path": "packages/contracts/api-types.d.ts",
+      "owner": "M06.shared_contracts",
+      "cases": [
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M06.web_types",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-WEB-01",
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.resume_admin_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-WEB-01",
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        }
+      ]
+    },
+    {
+      "path": "packages/contracts/openapi.json",
+      "owner": "M06.shared_contracts",
+      "cases": [
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M06.web_types",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-WEB-01",
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.resume_admin_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.pagination_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.auth_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-WEB-01",
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/feedback.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-FEEDBACK-API-01",
+        "M09-FEEDBACK-TTL-01",
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-WEB-01",
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.transport",
+          "affected": true,
+          "reason": "New feedback endpoint requires explicit bounded PUT allowance and retains identity signing.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Consumes optional feedback and stage observations; explicit parser/API/browser checks cover the changed fields without changing model budgets.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_feedback.py",
+      "owner": "M09.runtime",
+      "cases": [
+        "M09-FEEDBACK-API-01",
+        "M09-FEEDBACK-TTL-01",
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Q3-05 short-lived body-free feedback, generated contract and visible passive diagnostics; README changes describe behavior and no executable rules.",
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M09.providers",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.index",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "Reviewed consumer contracts: no changes to existing account, content, provider, index, capacity, configuration or verification algorithms; additive feedback fields do not alter this consumer behavior."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/server/routes/api/v1/[...path].ts",
+      "owner": "M06.transport",
+      "cases": [
+        "M09-FEEDBACK-ADMIN-01"
+      ],
+      "reason": "Allow only PUT feedback for 32-hex turn IDs with no query or hash, retaining signed identity and existing Origin/CSRF handling.",
+      "dependencies": [
+        {
+          "unit": "M01.indexes",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.navigation",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M01.reading",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M02.editing",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.search_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M03.taxonomy_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.books_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M04.projects_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.content_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M05.media_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.profile_web",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M07.discovery",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Feedback PUT crosses the signed same-origin proxy; public save and passive admin count are covered by the real browser test.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        },
+        {
+          "unit": "M01.home",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "The bounded feedback PUT path leaves this consumer endpoint, methods and transport behavior unchanged."
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": true,
+          "reason": "Feedback PUT crosses the signed same-origin proxy; public save and passive admin count are covered by the real browser test.",
+          "cases": [
+            "M09-FEEDBACK-ADMIN-01"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": 2,
+  "task_id": "20260812-harness-product-verification-gate",
+  "created_at": "2026-08-12T02:47:20.678393+00:00",
+  "command": "python -m tools.harness verify 20260812-harness-product-verification-gate",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5",
+    "AC-6"
+  ],
+  "checks": [
+    {
+      "name": "indexes",
+      "details": [
+        "8 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 42.751
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.579
+    },
+    {
+      "name": "links",
+      "details": [
+        "274 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 2794.967
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "133 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 36.609
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 10.272
+    },
+    {
+      "name": "harness-tests",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\Desktop\\my_blog\\apps\\api\\.venv\\Scripts\\python.exe -m pytest harness/verification/tests",
+      "status": "passed",
+      "duration_ms": 632.629,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5"
+      ],
+      "details": []
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\Desktop\\my_blog\\apps\\api\\.venv\\Scripts\\python.exe -m tools.harness verify",
+      "status": "passed",
+      "duration_ms": 3147.839,
+      "covers": [
+        "AC-1",
+        "AC-4",
+        "AC-5",
+        "AC-6"
+      ],
+      "details": []
+    }
+  ],
+  "source_commit": "e1985bc603f94d13b7820ef2f69268d0b983224e"
+}

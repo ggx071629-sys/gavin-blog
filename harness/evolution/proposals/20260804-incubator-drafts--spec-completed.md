@@ -1,0 +1,26 @@
+---
+id: evolution-20260804-incubator-drafts-spec-completed
+level: L1
+summary: Review evolution event spec.completed for 20260804-incubator-drafts
+load_when:
+  - process-evolution
+  - task:20260804-incubator-drafts
+task_id: 20260804-incubator-drafts
+status: reviewed-no-action
+---
+
+# Evolution proposal: spec.completed
+
+Reason: The active spec passed verification and was deterministically compressed.
+
+## Allowed outcome
+
+After human confirmation, update only relevant L1/L2 sources, templates, workflows, indexes, or checks.
+
+## Forbidden outcome
+
+This proposal must not modify `AGENTS.md` automatically.
+
+## Review outcome
+
+Reviewed by Gavin on 2026-08-11. Completion of this spec did not justify an additional control-plane change, so the proposal is closed with no action.

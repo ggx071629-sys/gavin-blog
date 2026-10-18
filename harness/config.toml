@@ -1,0 +1,276 @@
+schema_version = 1
+
+[project]
+id = "gavin-blog"
+display_name = "Gavin"
+project_root = ".."
+
+[levels]
+l0 = ["../AGENTS.md"]
+routable = ["L1", "L2"]
+
+[metadata]
+required = ["id", "level", "summary", "load_when"]
+project_documents = [
+  "README.md",
+  "apps/web/README.md",
+  "apps/api/README.md",
+  "packages/contracts/README.md",
+]
+optional = [
+  "author",
+  "task_id",
+  "status",
+  "frozen_at",
+  "freeze_reason",
+  "frozen_scope_sha256",
+  "verification_profile",
+  "verification_escalation",
+  "planned_modules",
+  "documentation_impact",
+  "documentation_targets",
+  "documentation_reason",
+  "state_history",
+]
+
+[specs]
+active = "specs/active"
+archive = "specs/archive"
+task_id_pattern = "^[0-9]{8}-[a-z0-9]+(?:-[a-z0-9]+)*$"
+require_git_history_before_close = true
+require_documentation_impact = true
+
+[verification]
+checks = "verification/checks"
+evidence = "verification/evidence"
+heavy_artifacts = "verification/evidence/artifacts"
+required_task_checks = ["module-coverage"]
+source_paths = [
+  "AGENTS.md",
+  "README.md",
+  "apps",
+  "packages",
+  "scripts",
+  "harness/config.toml",
+  "harness/docs/product/brief.md",
+  "harness/tools",
+  "harness/workflows",
+  "harness/specs/_sdd",
+  "harness/specs/active",
+  "harness/specs/INDEX.md",
+  "harness/verification/README.md",
+  "harness/verification/checks",
+  "harness/verification/impact",
+  "harness/verification/qualification-cases",
+  "harness/verification/qualifications",
+  "harness/verification/tests",
+  "harness/verification/vdd",
+]
+
+[verification.impact]
+ownership = "verification/impact/ownership.json"
+plans = "verification/impact"
+reuse = false
+
+[verification.execution]
+identity_version = 3
+# Enable only after symmetric fixture/order checks and paired cost acceptance.
+merge_playwright = false
+shared_test_paths = []
+
+[verification.isolation]
+mode = "git-worktree"
+reuse_paths = ["node_modules", "apps/web/node_modules", "apps/api/.venv"]
+
+[verification.profiles.focused]
+required_gates = []
+
+[verification.profiles.stack]
+required_gates = []
+
+[verification.profiles.release]
+required_gates = ["release"]
+
+
+
+
+
+
+[verification.qualifications]
+directory = "verification/qualifications"
+trusted_public_keys = "verification/qualifications/trusted-public-keys.json"
+runtime_source_prefixes = ["apps/", "packages/", "scripts/"]
+runtime_source_files = [
+  "package.json",
+  "package-lock.json",
+  "apps/api/uv.lock",
+  "apps/api/pyproject.toml",
+  "harness/config.toml",
+  "harness/tools/qualification.py",
+  "harness/tools/qualification_runner.py",
+  "harness/verification/checks/qualification_manifests.py",
+]
+
+[verification.qualifications.tasks.20260830-public-qa-production-qualification]
+manifest = "verification/qualifications/20260830-public-qa-production-qualification.json"
+profile = "verification/qualifications/20260830-public-qa-production-qualification.profile.json"
+case_suite = "verification/qualification-cases/public-qa-conformance-v1.json"
+
+
+[verification.gates.api-lint]
+cwd = "apps/api"
+command = ["{api_python}", "-m", "ruff", "check", "."]
+timeout_seconds = 120
+
+[verification.gates.api-typecheck]
+cwd = "apps/api"
+command = ["{api_python}", "-m", "mypy", "app"]
+timeout_seconds = 300
+
+[verification.gates.api-tests]
+cwd = "apps/api"
+command = ["{api_python}", "-m", "pytest"]
+timeout_seconds = 600
+
+[verification.gates.harness-tests]
+cwd = "."
+command = ["{api_python}", "-m", "pytest", "harness/verification/tests"]
+timeout_seconds = 120
+
+[verification.gates.harness-integrity]
+cwd = "harness"
+command = ["{api_python}", "-m", "tools.harness", "verify"]
+timeout_seconds = 120
+
+[verification.gates.web-quality]
+cwd = "."
+command = ["npm", "run", "quality:web"]
+timeout_seconds = 600
+
+[verification.gates.e2e]
+cwd = "."
+command = ["npm", "run", "test:e2e"]
+timeout_seconds = 600
+
+[verification.gates.release]
+cwd = "."
+command = ["npm", "run", "quality:release"]
+timeout_seconds = 1200
+subsumption_contract = "scripts/release-stage-contract.json"
+
+[change_enforcement]
+risk_prefixes = [
+  ".github/",
+  "apps/",
+  "packages/",
+  "scripts/",
+  "harness/",
+]
+risk_files = [
+  ".gitattributes",
+  ".gitignore",
+  "AGENTS.md",
+  "README.md",
+  "package.json",
+  "package-lock.json",
+]
+
+[telemetry]
+local = "telemetry/local"
+summaries = "telemetry/summaries"
+may_influence_agent = false
+
+[telemetry.health]
+min_samples = 3
+baseline_samples = 3
+recent_samples = 3
+consecutive_failures = 2
+duration_ratio = 1.5
+
+[evolution]
+events = "evolution/events"
+proposals = "evolution/proposals"
+allowed_events = [
+  "spec.completed",
+  "verification.repeated_failure",
+  "architecture.decision",
+  "workflow.friction_confirmed",
+]
+forbidden_targets = ["../AGENTS.md"]
+
+[indexes.docs]
+path = "docs"
+title = "Documentation Index"
+summary = "Product, architecture, domain, operations, and durable decisions."
+load_when = ["project-context", "architecture", "operations"]
+
+[indexes.specs]
+path = "specs"
+title = "Specification Index"
+summary = "SDD policy, active specifications, and compressed archives."
+load_when = ["behavior-change", "api-change", "data-change", "security-change"]
+
+[indexes.workflows]
+path = "workflows"
+title = "Workflow Index"
+summary = "Composable task workflows with explicit inputs and completion signals."
+load_when = ["task-routing"]
+
+[indexes.verification]
+path = "verification"
+title = "Verification Index"
+summary = "VDD guidance, executable checks, and compact evidence."
+load_when = ["implementation", "verification"]
+
+[indexes.telemetry]
+path = "telemetry"
+title = "Telemetry Index"
+summary = "Observation-only schemas and sanitized summaries."
+load_when = ["observability-review"]
+
+[indexes.evolution]
+path = "evolution"
+title = "Evolution Index"
+summary = "Explicit events and human-approved improvement proposals."
+load_when = ["process-evolution"]
+exclude_statuses = ["applied", "reviewed-no-action", "rejected"]
+
+[nested_indexes.vdd]
+path = "verification/vdd"
+title = "VDD Index"
+
+[nested_indexes.evolution_proposals]
+path = "evolution/proposals"
+title = "Evolution Proposal History"
+
+[structure]
+required = [
+  "../AGENTS.md",
+  "../README.md",
+  "../apps/web",
+  "../apps/api",
+  "../packages/contracts",
+  "docs/product",
+  "docs/architecture",
+  "docs/domain",
+  "docs/operations",
+  "docs/decisions",
+  "specs/_sdd",
+  "specs/active",
+  "specs/archive",
+  "workflows",
+  "verification/vdd/tdd",
+  "verification/vdd/contract",
+  "verification/vdd/integration",
+  "verification/vdd/e2e",
+  "verification/vdd/quality",
+  "verification/vdd/INDEX.md",
+  "verification/checks",
+  "verification/evidence",
+  "telemetry/schema",
+  "telemetry/local",
+  "telemetry/summaries",
+  "evolution/events",
+  "evolution/proposals",
+  "tools",
+]

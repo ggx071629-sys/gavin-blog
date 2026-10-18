@@ -1,0 +1,663 @@
+{
+  "schema_version": 2,
+  "task_id": "20260912-book-cover-media-url",
+  "created_at": "2026-09-12T04:54:23.569083+00:00",
+  "command": "python -m tools.harness verify 20260912-book-cover-media-url",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "e2e",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "e2e"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "e0239d30279d83cf2e298f132f889a8f9a124071",
+    "active_spec_sha256": "6608111f52b6cdf89a919f6fd3f499930c1402992dbd122cf9ace4928db083b7",
+    "verification_contract_sha256": "4746bcbbeb3f6f743ebd12fba634abebd2dd20f8e1c5e5cdb5c6bf8315836ed0",
+    "gate_config_sha256": "bcc02858449877d73af5dce32e4ca255deb4ade2a84ed187435dd6cddf5b3e0f",
+    "documentation_contract_sha256": "2738374912c826244d585001c6dac4a53d831d351bc7afc5c560e6db2f1087e6",
+    "documentation_targets_sha256": "6faf074bf09b814485af08df9197fa3ccb7f7d9675341440e559ae3d9acb68e9",
+    "module_contract_sha256": "31e66f536f006d8f5328c820ac3782845aadd79963c867fd2896db4f56fd9617"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "书籍封面地址契约新增受限站内媒体路径，需要在 API 文档中记录可接受形式。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "006396639d11fe95b6ffae4ce22d8f19be9225cd",
+    "target_blobs": {
+      "apps/api/README.md": "524bb0a07e04163f0d1a6c3487a2717b422f63b0"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "2064df110855d6360572ccca873f58013261c3fb",
+    "cleanup_status": "passed",
+    "reused_paths": 3,
+    "impact": {
+      "plan": "harness/verification/impact/20260912-book-cover-media-url.json",
+      "sha256": "dfb3ec2f59aa134fc3a516effd21e7a259de0f50af310baed838923863a979f7",
+      "selected_cases": [
+        "M02-WRITING-FIELD-ERROR-01",
+        "M04-BOOK-COVER-01",
+        "M04-BOOK-COVER-WEB-01",
+        "M08-DOCS-01"
+      ],
+      "selected_refs": 2,
+      "excluded_cases": 333
+    },
+    "receipt": {
+      "run_id": "edd7537ebc2dbe70865dc492876e00e5",
+      "identity": "62038880c5acda812c0ef570e63d3dc70b29265701f57b33bf7627e8417ef587",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "e2e",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 3508.999,
+      "plan_inputs": 1051.132,
+      "execute_cleanup_and_input_recheck": 56557.729
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "31e66f536f006d8f5328c820ac3782845aadd79963c867fd2896db4f56fd9617",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "e2e",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M04-BOOK-COVER-01",
+            "module_id": "M04",
+            "module_name": "项目与读书笔记",
+            "priority": "P1",
+            "scenario": "书籍封面地址契约接受媒体库站内路径并继续拒绝其他相对地址。",
+            "expectations": [
+              {
+                "id": "M04-BOOK-COVER-01-E01",
+                "surface": "response",
+                "statement": "创建与更新接受 /api/v1/media/{id}/webp|avif 并原样返回，http(s) 封面仍可用。"
+              },
+              {
+                "id": "M04-BOOK-COVER-01-E02",
+                "surface": "response",
+                "statement": "显式清空封面仍可保存为空值。"
+              },
+              {
+                "id": "M04-BOOK-COVER-01-E03",
+                "surface": "forbidden",
+                "statement": "其他相对路径、路径穿越、协议相对 URL、查询串及非 HTTP(S) 外部地址必须返回 422。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_projects_books.py",
+                "kind": "pytest",
+                "name": "test_book_cover_accepts_site_media_path_and_keeps_http_urls",
+                "gate": "api-tests",
+                "covers": [
+                  "M04-BOOK-COVER-01-E01",
+                  "M04-BOOK-COVER-01-E02",
+                  "M04-BOOK-COVER-01-E03"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M04-BOOK-COVER-WEB-01",
+            "module_id": "M04",
+            "module_name": "项目与读书笔记",
+            "priority": "P1",
+            "scenario": "媒体库选中的站内封面可保存、刷新保持并在发布后对访客显示同一图片。",
+            "expectations": [
+              {
+                "id": "M04-BOOK-COVER-WEB-01-E01",
+                "surface": "user_visible",
+                "statement": "选择媒体库封面后表单接受站内地址，自动保存与刷新后保持，发布后访客加载同一图片。"
+              },
+              {
+                "id": "M04-BOOK-COVER-WEB-01-E02",
+                "surface": "user_visible",
+                "statement": "既有 http(s) 封面地址仍可通过同一表单校验。"
+              },
+              {
+                "id": "M04-BOOK-COVER-WEB-01-E03",
+                "surface": "forbidden",
+                "statement": "不得要求手填完整 URL 才能完成媒体库选图闭环，也不得让非法地址通过校验。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/book-cover.spec.ts",
+                "kind": "playwright",
+                "name": "book cover chosen from the media library saves, persists, and renders for a visitor",
+                "gate": "e2e",
+                "covers": [
+                  "M04-BOOK-COVER-WEB-01-E01",
+                  "M04-BOOK-COVER-WEB-01-E02",
+                  "M04-BOOK-COVER-WEB-01-E03"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "e2e"
+        ],
+        "cases": [
+          {
+            "id": "M04-BOOK-COVER-01",
+            "module_id": "M04",
+            "module_name": "项目与读书笔记",
+            "priority": "P1",
+            "scenario": "书籍封面地址契约接受媒体库站内路径并继续拒绝其他相对地址。",
+            "expectations": [
+              {
+                "id": "M04-BOOK-COVER-01-E01",
+                "surface": "response",
+                "statement": "创建与更新接受 /api/v1/media/{id}/webp|avif 并原样返回，http(s) 封面仍可用。"
+              },
+              {
+                "id": "M04-BOOK-COVER-01-E02",
+                "surface": "response",
+                "statement": "显式清空封面仍可保存为空值。"
+              },
+              {
+                "id": "M04-BOOK-COVER-01-E03",
+                "surface": "forbidden",
+                "statement": "其他相对路径、路径穿越、协议相对 URL、查询串及非 HTTP(S) 外部地址必须返回 422。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/api/tests/test_projects_books.py",
+                "kind": "pytest",
+                "name": "test_book_cover_accepts_site_media_path_and_keeps_http_urls",
+                "gate": "api-tests",
+                "covers": [
+                  "M04-BOOK-COVER-01-E01",
+                  "M04-BOOK-COVER-01-E02",
+                  "M04-BOOK-COVER-01-E03"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M02-WRITING-FIELD-ERROR-01",
+            "module_id": "M02",
+            "module_name": "文章写作、发布与修订",
+            "priority": "P1",
+            "scenario": "共享写作台支持字段级错误文案覆盖，未标注字段保持原有分类文案。",
+            "expectations": [
+              {
+                "id": "M02-WRITING-FIELD-ERROR-01-E01",
+                "surface": "user_visible",
+                "statement": "标注 data-writing-error 的字段使用字段级文案，未标注字段继续使用原有分类文案。"
+              },
+              {
+                "id": "M02-WRITING-FIELD-ERROR-01-E02",
+                "surface": "user_visible",
+                "statement": "同时接受站内媒体地址的字段显示覆盖后的准确文案。"
+              },
+              {
+                "id": "M02-WRITING-FIELD-ERROR-01-E03",
+                "surface": "forbidden",
+                "statement": "不得让接受站内媒体地址的字段显示仅限 http(s) 的错误文案。"
+              }
+            ],
+            "required_gates": [
+              "e2e"
+            ],
+            "test_refs": [
+              {
+                "path": "apps/web/tests/e2e/book-cover.spec.ts",
+                "kind": "playwright",
+                "name": "book cover chosen from the media library saves, persists, and renders for a visitor",
+                "gate": "e2e",
+                "covers": [
+                  "M02-WRITING-FIELD-ERROR-01-E01",
+                  "M02-WRITING-FIELD-ERROR-01-E02",
+                  "M02-WRITING-FIELD-ERROR-01-E03"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "e2e",
+                "satisfied_by": "e2e",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.593,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "199 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 258.457,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 85.345,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.527,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "1967 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 2399.608,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "325 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 113.615,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 337 cases, 683 expectations, 1112 exact test references; contract sha256 31e66f536f00"
+      ],
+      "status": "passed",
+      "duration_ms": 552.791,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.256,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.29,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 79.485,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1"
+      ],
+      "duration_ms": 2599.961,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "edd7537ebc2dbe70865dc492876e00e5",
+        "attempt_id": "5ead4583786464c9e5df197124ff0574"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-book-cover-media-url --gate api-tests",
+      "status": "passed",
+      "duration_ms": 6917.959,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 377,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_projects_books.py",
+                "name": "test_book_cover_accepts_site_media_path_and_keeps_http_urls"
+              }
+            ],
+            "duration_ms": 6468.897,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\edd7537ebc2dbe70865dc492876e00e5\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "edd7537ebc2dbe70865dc492876e00e5",
+        "attempt_id": "3edc11a84d810be6b94754dde3c7ea31"
+      }
+    },
+    {
+      "name": "e2e",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260912-book-cover-media-url --gate e2e",
+      "status": "passed",
+      "duration_ms": 43942.545,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 2050,
+        "selection_counts": {
+          "collected": 1,
+          "executed": 1
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "initialization",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/book-cover.spec.ts",
+                "name": "book cover chosen from the media library saves, persists, and renders for a visitor"
+              }
+            ],
+            "duration_ms": 3425.919,
+            "prerequisite": "nuxt-prepare",
+            "input_sha256": {
+              "package-lock.json": "b3684b8c67cb0950294ce60c25f5285ab9edeff59655bdea8b1d1d239228711f",
+              "apps/web/nuxt.config.ts": "96a51d4eccc173641bc1e2acd91d7fc5a925ffa81af7f81ccde8ffddc8c2f913",
+              "apps/web/tsconfig.json": "d1fbbdf2bab2e7b75c0ee3efb125b7c091f5efd9ab380c867054677f0e2e6c42"
+            }
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/book-cover.spec.ts",
+                "name": "book cover chosen from the media library saves, persists, and renders for a visitor"
+              }
+            ],
+            "duration_ms": 1540.022
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "collection",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/book-cover.spec.ts",
+                "name": "book cover chosen from the media library saves, persists, and renders for a visitor",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "book cover chosen from the media library saves, persists, and renders for a visitor"
+                ]
+              }
+            ],
+            "duration_ms": 1433.542,
+            "batch_id": "batch-0001"
+          },
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "playwright",
+                "gate": "e2e",
+                "path": "apps/web/tests/e2e/book-cover.spec.ts",
+                "name": "book cover chosen from the media library saves, persists, and renders for a visitor",
+                "config": "playwright.config.ts",
+                "project": "chromium",
+                "title_path": [
+                  "book cover chosen from the media library saves, persists, and renders for a visitor"
+                ]
+              }
+            ],
+            "duration_ms": 37097.865,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\4bb680289a377216f7372c1df5324c4d09097d5221b4b0d5b094641934ed0e02\\artifacts\\edd7537ebc2dbe70865dc492876e00e5\\e2e\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "edd7537ebc2dbe70865dc492876e00e5",
+        "attempt_id": "2c1f0aa13754a4a890bbe3b8551fd219"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2510.346,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "duration_ms": 59476.778,
+    "failures": []
+  },
+  "source_commit": "2064df110855d6360572ccca873f58013261c3fb"
+}

@@ -1,0 +1,688 @@
+{
+  "schema_version": 2,
+  "task_id": "20260911-public-evidence-links",
+  "created_at": "2026-09-11T04:17:43.056171+00:00",
+  "command": "python -m tools.harness verify 20260911-public-evidence-links",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-tests",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "b2b29dd5dab641126fe3adb42d057e7d724bc81e",
+    "active_spec_sha256": "ad275d45dc5a8d4dcb2443226cbc3afec255f2b203c4088732aab92a858856f0",
+    "verification_contract_sha256": "a299191d5cec98d4ed4bdadb717c57d26941c42fba4f3743d675f5a012fda386",
+    "gate_config_sha256": "f85a6e10f45392f7af1e8ef065e7dbe267c0eca44d38f758ebbf40780385d8bd",
+    "documentation_contract_sha256": "d5429a203da86b557dde55c38043f416c92b69dfeab600c783679d53003bff2c",
+    "documentation_targets_sha256": "3aa175fc92d24dde934d009da313b1b99a9065ade89a7e39b364cae2e654e4ae",
+    "module_contract_sha256": "4424ca4a61a57e1067c6201658e063c69ff4542163a119bf64b72027ab8c0567"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "说明完整收录与证据隔离边界及公开文档链接的处理。",
+    "targets": [
+      "apps/api/README.md"
+    ],
+    "baseline_commit": "aa23e68a2ba9f8a88bd31ef39caba9b7017cece1",
+    "target_blobs": {
+      "apps/api/README.md": "593c17dbc5b19271ce7cc139a9c4adae0848e6c2"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "601076a4422d3887946686dce51b52c78a2a9e3b",
+    "cleanup_status": "passed",
+    "reused_paths": 1,
+    "impact": {
+      "plan": "harness/verification/impact/20260911-public-evidence-links.json",
+      "sha256": "b56f2e931f92f126d4b52fc558de6bf45a401e5ff79b2e2ccb3738364ac620e1",
+      "selected_cases": [
+        "M08-DOCS-01",
+        "M09-EVIDENCE-LINKS-01",
+        "M09-EVIDENCE-LINKS-02"
+      ],
+      "selected_refs": 17,
+      "excluded_cases": 307
+    },
+    "receipt": {
+      "run_id": "dd9cd0da2c3e4eb5430e368d396673c2",
+      "identity": "df46086d007240ba168c99e3d80e300f1a4b2a752a1d1c1ee48f3b9aa1b766cd",
+      "plan": [
+        {
+          "gate": "api-tests",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        },
+        {
+          "gate": "harness-integrity",
+          "action": "execute",
+          "state": "fresh-required",
+          "reason": "reuse disabled; execute selected scope",
+          "attempt_id": null
+        }
+      ]
+    },
+    "phase_durations_ms": {
+      "preflight_checks": 1479.931,
+      "plan_inputs": 990.397,
+      "execute_cleanup_and_input_recheck": 9809.893
+    }
+  },
+  "verification_cases": {
+    "schema_version": 1,
+    "contract_id": "gavin-module-coverage-v1",
+    "contract_sha256": "4424ca4a61a57e1067c6201658e063c69ff4542163a119bf64b72027ab8c0567",
+    "criteria": [
+      {
+        "criterion": "AC-1",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-EVIDENCE-LINKS-01",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "正常文档管理路径可用，不丢弃公开教程。",
+            "expectations": [
+              {
+                "id": "M09-EVIDENCE-LINKS-01-ALLOW",
+                "surface": "response",
+                "statement": "普通管理文档路径不触发隔离。"
+              },
+              {
+                "id": "M09-EVIDENCE-LINKS-01-DENY",
+                "surface": "forbidden",
+                "statement": "不得仅因URL路径名称丢弃全文。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_public_documentation_paths_are_usable_evidence[published-tutorial]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-01-ALLOW",
+                  "M09-EVIDENCE-LINKS-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_public_documentation_paths_are_usable_evidence[nested-path]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-01-ALLOW",
+                  "M09-EVIDENCE-LINKS-01-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_public_documentation_paths_are_usable_evidence[secret-management]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-01-ALLOW",
+                  "M09-EVIDENCE-LINKS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          },
+          {
+            "id": "M08-DOCS-01",
+            "module_id": "M08",
+            "module_name": "工程控制面",
+            "priority": "P1",
+            "scenario": "Validate documentation metadata and module contract structure without executing product tests",
+            "expectations": [
+              {
+                "id": "M08-DOCS-01-ALLOW",
+                "surface": "state",
+                "statement": "The module contract structure and referenced source paths are valid."
+              },
+              {
+                "id": "M08-DOCS-01-DENY",
+                "surface": "forbidden",
+                "statement": "Invalid module contract structure cannot pass the structural check."
+              }
+            ],
+            "required_gates": [
+              "harness-integrity"
+            ],
+            "test_refs": [
+              {
+                "kind": "harness-check",
+                "path": "harness/verification/checks/module_coverage.py",
+                "name": "module-coverage",
+                "gate": "harness-integrity",
+                "covers": [
+                  "M08-DOCS-01-ALLOW",
+                  "M08-DOCS-01-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "harness-integrity",
+                "satisfied_by": "harness-integrity",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "criterion": "AC-2",
+        "selected_gates": [
+          "api-tests",
+          "harness-integrity"
+        ],
+        "cases": [
+          {
+            "id": "M09-EVIDENCE-LINKS-02",
+            "module_id": "M09",
+            "module_name": "公开问答消费层（默认关闭）",
+            "priority": "P1",
+            "scenario": "危险内容及用户问题策略保持。",
+            "expectations": [
+              {
+                "id": "M09-EVIDENCE-LINKS-02-ALLOW",
+                "surface": "response",
+                "statement": "原问题凭据链接仍被拒绝。"
+              },
+              {
+                "id": "M09-EVIDENCE-LINKS-02-DENY",
+                "surface": "forbidden",
+                "statement": "不得豁免实际密钥、查询参数或指令。"
+              }
+            ],
+            "required_gates": [
+              "api-tests"
+            ],
+            "test_refs": [
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[prose]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[query]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[fragment]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[userinfo]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[assignment]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[url-key]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[raw-key]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[role]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[dump]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[url-exfil]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[leak]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[tool]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[encoded]",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              },
+              {
+                "kind": "pytest",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_question_credential_link_policy_is_unchanged",
+                "gate": "api-tests",
+                "covers": [
+                  "M09-EVIDENCE-LINKS-02-ALLOW",
+                  "M09-EVIDENCE-LINKS-02-DENY"
+                ]
+              }
+            ],
+            "gate_satisfaction": [
+              {
+                "gate": "api-tests",
+                "satisfied_by": "api-tests",
+                "mode": "direct"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 7 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 4.868,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "186 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 231.216,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 82.704,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.49,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "links",
+      "details": [
+        "1015 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 451.974,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "308 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 107.334,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "module-coverage",
+      "details": [
+        "11 modules, 310 cases, 621 expectations, 1020 exact test references; contract sha256 4424ca4a61a5"
+      ],
+      "status": "passed",
+      "duration_ms": 501.761,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "qualification-manifests",
+      "details": [
+        "configured qualification manifests have valid historical bindings"
+      ],
+      "status": "passed",
+      "duration_ms": 3.176,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.921,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 84.157,
+      "provenance": {
+        "scope": "workspace"
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "{python} -m tools.harness verify",
+      "status": "passed",
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "duration_ms": 2073.752,
+      "details": [],
+      "provenance": {
+        "mode": "executed",
+        "phase": "snapshot",
+        "scope": "committed-snapshot",
+        "run_id": "dd9cd0da2c3e4eb5430e368d396673c2",
+        "attempt_id": "cada091a506bc8e876495cfcf9f43caa"
+      },
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "{api_python} -m harness.tools.selected_tests --task 20260911-public-evidence-links --gate api-tests",
+      "status": "passed",
+      "duration_ms": 5376.354,
+      "covers": [
+        "AC-1",
+        "AC-2"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "output_bytes": 3277,
+        "selection_counts": {
+          "collected": 17,
+          "executed": 17
+        },
+        "stages": [
+          {
+            "version": 3,
+            "source": "selected-runner",
+            "phase": "execution",
+            "status": "passed",
+            "consumers": [
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_public_documentation_paths_are_usable_evidence[published-tutorial]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_public_documentation_paths_are_usable_evidence[nested-path]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_public_documentation_paths_are_usable_evidence[secret-management]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[prose]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[query]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[fragment]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[userinfo]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[assignment]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[url-key]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[raw-key]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[role]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[dump]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[url-exfil]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[leak]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[tool]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_evidence_links_do_not_exempt_instructions_or_credentials[encoded]"
+              },
+              {
+                "kind": "pytest",
+                "gate": "api-tests",
+                "path": "apps/api/tests/test_assistant_evidence_links.py",
+                "name": "test_question_credential_link_policy_is_unchanged"
+              }
+            ],
+            "duration_ms": 4984.051,
+            "batch_id": "batch-0001"
+          }
+        ],
+        "log": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-harness-runs\\ac1b58a76c8590eeb1266ec8338db21c8b84234191504427a6e213fec6fd52a4\\artifacts\\dd9cd0da2c3e4eb5430e368d396673c2\\api-tests\\output.log"
+      },
+      "provenance": {
+        "mode": "executed",
+        "run_id": "dd9cd0da2c3e4eb5430e368d396673c2",
+        "attempt_id": "45b8508c81e5fe0b6c3b964aaaaf28d8"
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 2062.654,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ],
+      "result": {
+        "exit_code": 0
+      }
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 10989.361,
+    "failures": []
+  },
+  "source_commit": "601076a4422d3887946686dce51b52c78a2a9e3b"
+}

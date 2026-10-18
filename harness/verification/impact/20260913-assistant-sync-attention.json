@@ -1,0 +1,357 @@
+{
+  "schema_version": 1,
+  "task_id": "20260913-assistant-sync-attention",
+  "changes": [
+    {
+      "path": "apps/api/app/assistant/sync_attention.py",
+      "owner": "M10.operations",
+      "cases": [
+        "M10-SYNC-ATTENTION-01",
+        "M10-SYNC-ATTENTION-02"
+      ],
+      "reason": "Reconcile committed active source projections and preserve task history; update management consumers and additive API types.",
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Admin summary and historical row rendering consume the revised count and new optional covered marker; verify label and retry suppression.",
+          "cases": [
+            "M10-SYNC-ATTENTION-02"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/admin_operations.py",
+      "owner": "M10.operations",
+      "cases": [
+        "M10-SYNC-ATTENTION-01",
+        "M10-SYNC-ATTENTION-02"
+      ],
+      "reason": "Reconcile committed active source projections and preserve task history; update management consumers and additive API types.",
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Admin summary and historical row rendering consume the revised count and new optional covered marker; verify label and retry suppression.",
+          "cases": [
+            "M10-SYNC-ATTENTION-02"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/management.py",
+      "owner": "M10.operations",
+      "cases": [
+        "M10-SYNC-ATTENTION-01",
+        "M10-SYNC-ATTENTION-02"
+      ],
+      "reason": "Reconcile committed active source projections and preserve task history; update management consumers and additive API types.",
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Admin summary and historical row rendering consume the revised count and new optional covered marker; verify label and retry suppression.",
+          "cases": [
+            "M10-SYNC-ATTENTION-02"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/routes/admin_assistant.py",
+      "owner": "M10.operations",
+      "cases": [
+        "M10-SYNC-ATTENTION-01",
+        "M10-SYNC-ATTENTION-02"
+      ],
+      "reason": "Reconcile committed active source projections and preserve task history; update management consumers and additive API types.",
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Admin summary and historical row rendering consume the revised count and new optional covered marker; verify label and retry suppression.",
+          "cases": [
+            "M10-SYNC-ATTENTION-02"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_assistant_management.py",
+      "owner": "M10.operations",
+      "cases": [
+        "M10-SYNC-ATTENTION-01",
+        "M10-SYNC-ATTENTION-02"
+      ],
+      "reason": "Reconcile committed active source projections and preserve task history; update management consumers and additive API types.",
+      "dependencies": [
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M10.operations_web",
+          "affected": true,
+          "reason": "Admin summary and historical row rendering consume the revised count and new optional covered marker; verify label and retry suppression.",
+          "cases": [
+            "M10-SYNC-ATTENTION-02"
+          ]
+        },
+        {
+          "unit": "M10.capacity",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/pages/admin/assistant.vue",
+      "owner": "M10.operations_web",
+      "cases": [
+        "M10-SYNC-ATTENTION-02"
+      ],
+      "reason": "Reconcile committed active source projections and preserve task history; update management consumers and additive API types.",
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/utils/assistant-management.ts",
+      "owner": "M10.operations_web",
+      "cases": [
+        "M10-SYNC-ATTENTION-02"
+      ],
+      "reason": "Reconcile committed active source projections and preserve task history; update management consumers and additive API types.",
+      "dependencies": []
+    },
+    {
+      "path": "apps/web/tests/unit/assistant-management.test.ts",
+      "owner": "M10.operations_web",
+      "cases": [
+        "M10-SYNC-ATTENTION-02"
+      ],
+      "reason": "Reconcile committed active source projections and preserve task history; update management consumers and additive API types.",
+      "dependencies": []
+    },
+    {
+      "path": "packages/contracts/openapi.json",
+      "owner": "M06.shared_contracts",
+      "cases": [
+        "M10-SYNC-ATTENTION-02"
+      ],
+      "reason": "Reconcile committed active source projections and preserve task history; update management consumers and additive API types.",
+      "dependencies": [
+        {
+          "unit": "M06.web_types",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M06.resume_admin_web",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        }
+      ]
+    },
+    {
+      "path": "packages/contracts/api-types.d.ts",
+      "owner": "M06.shared_contracts",
+      "cases": [
+        "M10-SYNC-ATTENTION-02"
+      ],
+      "reason": "Reconcile committed active source projections and preserve task history; update management consumers and additive API types.",
+      "dependencies": [
+        {
+          "unit": "M06.web_types",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M06.account_ui",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M06.resume_admin_web",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Document passive historical resolution and register focused tests; execution policy unchanged.",
+      "dependencies": []
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Document passive historical resolution and register focused tests; execution policy unchanged.",
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        }
+      ]
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "cases": [
+        "M08-DOCS-01"
+      ],
+      "reason": "Document passive historical resolution and register focused tests; execution policy unchanged.",
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "Reviewed dependency: additive management-only marker and passive alert counting do not change runtime admission, storage models, provider transport, unrelated contract consumers or verification algorithms."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "event_type": "spec.completed",
+  "task_id": "20260905-ui-foundation",
+  "created_at": "2026-09-05T11:55:36.197344+00:00",
+  "source": "lifecycle",
+  "reason": "The active spec passed verification and was deterministically compressed.",
+  "may_modify_agents_md": false,
+  "evidence_sha256": "d0d3e998bfc8cba41659e4e9244dc5d0dd4e929b7abe0f01404db3c6eb82c540"
+}

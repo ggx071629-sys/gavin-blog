@@ -1,0 +1,246 @@
+{
+  "schema_version": 2,
+  "task_id": "20260816-retrieval-unavailable-health",
+  "created_at": "2026-08-16T11:17:09.895690+00:00",
+  "command": "python -m tools.harness verify 20260816-retrieval-unavailable-health",
+  "status": "passed",
+  "acceptance_criteria": [
+    "AC-1",
+    "AC-2",
+    "AC-3",
+    "AC-4",
+    "AC-5"
+  ],
+  "criteria_results": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "gates": [
+        "api-lint",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "gates": [
+        "api-lint",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "status": "passed",
+      "gates": [
+        "api-lint",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "status": "passed",
+      "gates": [
+        "web-quality"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "status": "passed",
+      "gates": [
+        "web-quality",
+        "harness-integrity"
+      ]
+    }
+  ],
+  "verification_profile": "focused",
+  "fingerprints": {
+    "source_tree": "80e686e5fe651b79766903fd6dd5d53cf75e3cf7",
+    "active_spec_sha256": "ad48428db9f9bc297d72df30068beeeb3c2f856c1dfaff41109c8fcc864de795",
+    "verification_contract_sha256": "99c15d12c22af48f0a3cc35034408666fc0b61971dab44078d2a3b07057b9560",
+    "gate_config_sha256": "653bbf704e556eaea62bce03c4750b1552cc4151ee5120be2de07bed66de5995",
+    "documentation_contract_sha256": "145f829f4630e08335852377836de1c5cfd3c5b3e7e930029d6eae85a943769d",
+    "documentation_targets_sha256": "d33ca50d9afe824a1125dc67a584f070796b87b5517d9655314e7dba067df63e"
+  },
+  "documentation": {
+    "impact": "required",
+    "reason": "API 文档把 health 写成稳定态清单，Web 边界写明检索失败不得整页打死详情，两者都需要与新能力态对齐。",
+    "targets": [
+      "apps/api/README.md",
+      "apps/web/README.md"
+    ],
+    "baseline_commit": "c1474696258d4e8639e50981931f81da168dbfc0",
+    "target_blobs": {
+      "apps/api/README.md": "10e4894a190721de0eea3d33011ddd93ceb68fa1",
+      "apps/web/README.md": "06950897eee12784c51f280126ba2620b05a5487"
+    }
+  },
+  "execution": {
+    "mode": "git-worktree",
+    "source_commit": "2c927c14868ee2bca167d70d9c42677f7b337fa5",
+    "cleanup_status": "passed",
+    "reused_paths": 3
+  },
+  "checks": [
+    {
+      "name": "gate-subsumption",
+      "details": [
+        "1 subsumption contracts bind 6 registered child gates"
+      ],
+      "status": "passed",
+      "duration_ms": 3.879
+    },
+    {
+      "name": "history-integrity",
+      "details": [
+        "80 deterministic closes retain archive, evidence, event, and active-spec history"
+      ],
+      "status": "passed",
+      "duration_ms": 90.397
+    },
+    {
+      "name": "indexes",
+      "details": [
+        "9 generated indexes are current"
+      ],
+      "status": "passed",
+      "duration_ms": 48.739
+    },
+    {
+      "name": "l0",
+      "details": [
+        "AGENTS.md is the unique L0 and stays within 60-80 lines"
+      ],
+      "status": "passed",
+      "duration_ms": 0.486
+    },
+    {
+      "name": "links",
+      "details": [
+        "364 local Markdown links resolve without durable active-spec references"
+      ],
+      "status": "passed",
+      "duration_ms": 1272.895
+    },
+    {
+      "name": "metadata",
+      "details": [
+        "169 routed Markdown documents have valid metadata"
+      ],
+      "status": "passed",
+      "duration_ms": 41.468
+    },
+    {
+      "name": "structure",
+      "details": [
+        "28 required paths exist"
+      ],
+      "status": "passed",
+      "duration_ms": 8.132
+    },
+    {
+      "name": "supply-chain",
+      "details": [
+        "1 workflows use immutable actions, least privilege, and locked installs; 2 lockfiles are structurally valid"
+      ],
+      "status": "passed",
+      "duration_ms": 44.849
+    },
+    {
+      "name": "api-lint",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-mc8ltokm\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m ruff check .",
+      "status": "passed",
+      "duration_ms": 210.805,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "api-tests",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-mc8ltokm\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m pytest",
+      "status": "passed",
+      "duration_ms": 207985.855,
+      "covers": [
+        "AC-1",
+        "AC-2",
+        "AC-3"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 306,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "web-quality",
+      "kind": "product",
+      "command": "D:\\Tool\\nodejs\\npm.CMD run quality:web",
+      "status": "passed",
+      "duration_ms": 301947.821,
+      "covers": [
+        "AC-4",
+        "AC-5"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0,
+        "test_counts": {
+          "passed": 155,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "name": "harness-integrity",
+      "kind": "product",
+      "command": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\gavin-task-verify-mc8ltokm\\worktree\\apps\\api\\.venv\\Scripts\\python.exe -m tools.harness verify",
+      "status": "passed",
+      "duration_ms": 3328.064,
+      "covers": [
+        "AC-5"
+      ],
+      "details": [],
+      "result": {
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "isolated-worktree",
+      "kind": "isolation",
+      "command": "git worktree add --detach <temporary> HEAD",
+      "status": "passed",
+      "duration_ms": 1272.184,
+      "covers": [],
+      "details": [
+        "temporary worktree and dependency links were removed"
+      ]
+    }
+  ],
+  "summary": {
+    "checks": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "duration_ms": 516255.574,
+    "failures": [],
+    "test_counts": {
+      "passed": 461,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "source_commit": "2c927c14868ee2bca167d70d9c42677f7b337fa5"
+}

@@ -1,0 +1,3221 @@
+{
+  "schema_version": 1,
+  "task_id": "20260906-local-e5-retrieval",
+  "changes": [
+    {
+      "path": "apps/api/.env.example",
+      "owner": "M06.api_tooling",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/README.md",
+      "owner": "M08.documentation",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "本路径仅登记配置或说明；结构检查和E5执行消费者合同共同验证。"
+    },
+    {
+      "path": "apps/api/app/assistant/graph.py",
+      "owner": "M09.runtime",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant/providers.py",
+      "owner": "M09.providers",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant_index/chunker.py",
+      "owner": "M10.index",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant_index/index_ledger.py",
+      "owner": "M10.index",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/assistant_index/worker.py",
+      "owner": "M10.index",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/config.py",
+      "owner": "M06.runtime_config",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.auth",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/local_embedding/__init__.py",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/local_embedding/artifact.py",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/local_embedding/client.py",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/local_embedding/local.py",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/local_embedding/model.lock.json",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/local_embedding/service.py",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/app/local_embedding/tokenization.py",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/embedding_service/pyproject.toml",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/embedding_service/uv.lock",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/pyproject.toml",
+      "owner": "M06.api_tooling",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/scripts/check_e5_reference.py",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/scripts/download_e5.py",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/scripts/run_e5_service.py",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/tests/test_local_e5.py",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "apps/api/uv.lock",
+      "owner": "M06.api_tooling",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "harness/docs/architecture/boundaries.md",
+      "owner": "M08.documentation",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "本路径仅登记配置或说明；结构检查和E5执行消费者合同共同验证。"
+    },
+    {
+      "path": "harness/docs/decisions/20260906-local-e5-retrieval.md",
+      "owner": "M08.documentation",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [],
+      "dependencies": [],
+      "no_test_reason": "本路径仅登记配置或说明；结构检查和E5执行消费者合同共同验证。"
+    },
+    {
+      "path": "harness/verification/checks/module_coverage.contract.json",
+      "owner": "M08.module_verification",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.impact",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "本路径仅登记配置或说明；结构检查和E5执行消费者合同共同验证。"
+    },
+    {
+      "path": "harness/verification/impact/ownership.json",
+      "owner": "M08.impact",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.isolated_verification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.lifecycle",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.module_verification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.product_verification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.selected_tests",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.verification_resume",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.execution_protocol",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "本路径仅登记配置或说明；结构检查和E5执行消费者合同共同验证。"
+    },
+    {
+      "path": "package.json",
+      "owner": "M08.installation",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [],
+      "dependencies": [
+        {
+          "unit": "M08.browser_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.release",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M08.web_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ],
+      "no_test_reason": "本路径仅登记配置或说明；结构检查和E5执行消费者合同共同验证。"
+    },
+    {
+      "path": "scripts/run-real-retrieval.mjs",
+      "owner": "M10.local_e5",
+      "reason": "E5独立服务、角色身份、token边界及本地检索接入；配置/文档登记同步。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.index",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    },
+    {
+      "path": "build-qa.md",
+      "owner": "M08.documentation",
+      "reason": "记录实际本机推进状态及尚未完成的正式验收，不宣称Chat/生产完成。",
+      "cases": [],
+      "no_test_reason": "仅更新用户计划进度；结构由Harness检查，功能通过E5合同与实测验证。",
+      "dependencies": []
+    },
+    {
+      "path": "apps/api/tests/test_assistant_index.py",
+      "owner": "M10.index",
+      "reason": "测试中模拟API finalize需同步command switched，增加重复rebuild复用ready staging的回归。",
+      "cases": [
+        "M10-E5-ARTIFACT-01",
+        "M10-E5-SERVICE-01",
+        "M09-E5-ADAPTER-01",
+        "M10-E5-CHUNK-01",
+        "M09-E5-QUERY-01",
+        "M10-E5-LOCAL-01"
+      ],
+      "dependencies": [
+        {
+          "unit": "M01.articles",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M02.publishing",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M03.taxonomy",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M04.projects",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M05.portability",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.api_tooling",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.profile",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.development",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.providers",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M09.runtime",
+          "affected": true,
+          "reason": "query、chunk、provider与index链新增E5行为，选择精确回归。",
+          "cases": [
+            "M10-E5-ARTIFACT-01",
+            "M10-E5-SERVICE-01",
+            "M09-E5-ADAPTER-01",
+            "M10-E5-CHUNK-01",
+            "M09-E5-QUERY-01",
+            "M10-E5-LOCAL-01"
+          ]
+        },
+        {
+          "unit": "M10.operations",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M10.qualification",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.persistence",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M06.runtime_config",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        },
+        {
+          "unit": "M09.assistant_web",
+          "affected": false,
+          "reason": "此消费者的公共接口、内容结构、路由及离线默认行为未变。",
+          "cases": []
+        }
+      ]
+    }
+  ]
+}
