@@ -247,7 +247,9 @@ class Services(StrictModel):
 
     @model_validator(mode="after")
     def unique_owners_and_ports(self) -> Services:
-        services = (self.web, self.api, self.index_worker, self.qdrant)
+        services: tuple[ServiceProfile, ...] = (
+            self.web, self.api, self.index_worker, self.qdrant
+        )
         if self.e5 is not None:
             services += (self.e5,)
             if self.e5.startup_order >= min(

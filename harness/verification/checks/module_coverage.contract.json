@@ -2453,7 +2453,7 @@
             {
               "id": "M02-STUDIO-SHELL-01-E01",
               "surface": "user_visible",
-              "statement": "Responsive sidebar dimensions, nine local navigation icons, active paths and both theme colors match the selected shell; controls remain reachable at short heights."
+              "statement": "Responsive sidebar dimensions, ten local navigation icons including account security, active paths and both theme colors match the selected shell; controls remain reachable at short heights."
             },
             {
               "id": "M02-STUDIO-SHELL-01-E02",
@@ -11212,6 +11212,112 @@
               ]
             }
           ]
+        },
+        {
+          "id": "M08-WINDOWS-PATHS-01",
+          "priority": "P1",
+          "scenario": "Nuxt generated tsconfig and ESLint module imports remain usable across Windows drive paths.",
+          "expectations": [
+            {
+              "id": "M08-WINDOWS-PATHS-01-E01",
+              "surface": "state",
+              "statement": "Broken ./D:/ tsconfig paths normalize and generated ESLint Windows imports become encoded file URLs; repeated normalization is idempotent."
+            },
+            {
+              "id": "M08-WINDOWS-PATHS-01-E02",
+              "surface": "forbidden",
+              "statement": "Relative imports, existing file URLs and ordinary data strings cannot be rewritten as module paths."
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_windows_generated_paths.py",
+              "name": "test_windows_generated_paths_preserve_urls_and_encode_eslint_imports",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-WINDOWS-PATHS-01-E01",
+                "M08-WINDOWS-PATHS-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-BROWSER-CONFIG-01",
+          "priority": "P1",
+          "scenario": "Playwright configurations preserve isolated server inputs and validate alternate browser ports.",
+          "expectations": [
+            {
+              "id": "M08-BROWSER-CONFIG-01-E01",
+              "surface": "state",
+              "statement": "Development, failure and assistant browser servers retain explicit build directories, trusted loopback settings and per-run roots; a valid alternate Web port remains usable."
+            },
+            {
+              "id": "M08-BROWSER-CONFIG-01-E02",
+              "surface": "forbidden",
+              "statement": "Ambient server reuse, trusted arbitrary forwarded IPs, invalid ports and API/Web port collisions cannot silently pass the configuration boundary."
+            }
+          ],
+          "required_gates": [
+            "web-quality"
+          ],
+          "test_refs": [
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/playwright-config.test.ts",
+              "name": "keeps isolated worktree servers independent from local state",
+              "gate": "web-quality",
+              "covers": [
+                "M08-BROWSER-CONFIG-01-E01",
+                "M08-BROWSER-CONFIG-01-E02"
+              ]
+            },
+            {
+              "kind": "vitest",
+              "path": "apps/web/tests/unit/playwright-config.test.ts",
+              "name": "accepts an alternate Web port and rejects invalid or conflicting values",
+              "gate": "web-quality",
+              "covers": [
+                "M08-BROWSER-CONFIG-01-E01",
+                "M08-BROWSER-CONFIG-01-E02"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "M08-GIT-UTF8-01",
+          "priority": "P1",
+          "scenario": "Git paths and source drift remain readable under a non-UTF-8 Windows locale.",
+          "expectations": [
+            {
+              "id": "M08-GIT-UTF8-01-E01",
+              "surface": "state",
+              "statement": "A real Git repository with Chinese paths yields exact UTF-8 NUL-separated changed paths, source drift entries and its current commit hash under a cp936 locale."
+            },
+            {
+              "id": "M08-GIT-UTF8-01-E02",
+              "surface": "forbidden",
+              "statement": "The host default encoding cannot corrupt path identities or turn successful Git output into a missing stdout value."
+            }
+          ],
+          "required_gates": [
+            "harness-tests"
+          ],
+          "test_refs": [
+            {
+              "kind": "pytest",
+              "path": "harness/verification/tests/test_product_verification.py",
+              "name": "test_git_text_boundaries_decode_chinese_paths_as_utf8_under_gbk_locale",
+              "gate": "harness-tests",
+              "covers": [
+                "M08-GIT-UTF8-01-E01",
+                "M08-GIT-UTF8-01-E02"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -14527,6 +14633,16 @@
               "id": "M09-LIVE-WORKER-01-E02",
               "surface": "forbidden",
               "statement": "Disabled worker cannot open the database; duplicate ready managers and unowned process termination are forbidden."
+            },
+            {
+              "id": "M09-LIVE-WORKER-01-E03",
+              "surface": "state",
+              "statement": "A launcher invokes the manager spawn exactly once with the hidden Windows and new-process-group flags in both the early-exit and reported-failure paths, including when tests run on another platform."
+            },
+            {
+              "id": "M09-LIVE-WORKER-01-E04",
+              "surface": "forbidden",
+              "statement": "An early manager exit cannot wait through the full startup timeout, and a reported terminal failure cannot be printed more than once."
             }
           ],
           "required_gates": [
@@ -14561,6 +14677,26 @@
               "covers": [
                 "M09-LIVE-WORKER-01-E01",
                 "M09-LIVE-WORKER-01-E02"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_local_launcher.py",
+              "name": "test_manager_early_exit_does_not_wait_four_minutes",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-WORKER-01-E03",
+                "M09-LIVE-WORKER-01-E04"
+              ]
+            },
+            {
+              "kind": "pytest",
+              "path": "apps/api/tests/test_local_launcher.py",
+              "name": "test_start_prints_terminal_failure_once",
+              "gate": "api-tests",
+              "covers": [
+                "M09-LIVE-WORKER-01-E03",
+                "M09-LIVE-WORKER-01-E04"
               ]
             }
           ]

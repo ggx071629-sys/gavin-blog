@@ -1358,3 +1358,40 @@ def test_spec_lint_reuses_contract_checks_without_product_gates(
     assert exit_code == 0
     assert calls == [TASK_ID]
     assert "PASSED" in capsys.readouterr().out
+
+
+def test_git_text_boundaries_decode_chinese_paths_as_utf8_under_gbk_locale(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import locale
+
+    def git(*args: str) -> str:
+        result = subprocess.run(
+            ['git', *args], cwd=tmp_path, capture_output=True, text=True,
+            encoding='utf-8', check=True,
+        )
+        return result.stdout.strip()
+
+    git('init', '-q')
+    git('config', 'core.quotePath', 'false')
+    relative = '说明/账户恢复.md'
+    document = tmp_path / relative
+    document.parent.mkdir()
+    document.write_text('initial\n', encoding='utf-8')
+    git('add', '--', relative)
+    git('-c', 'user.name=Harness', '-c', 'user.email=harness@example.invalid',
+        'commit', '-qm', 'UTF-8 path fixture')
+    expected_head = git('rev-parse', 'HEAD')
+    document.write_text('changed\n', encoding='utf-8')
+
+    monkeypatch.setattr(product_verification, 'project_root', lambda: tmp_path)
+    monkeypatch.setattr(product_verification, 'load_config', lambda: {
+        'verification': {'source_paths': ['说明']},
+    })
+    monkeypatch.setattr(locale, 'getencoding', lambda: 'cp936')
+
+    assert product_verification._git_value(
+        'diff', '--name-only', '-z', 'HEAD',
+    ) == relative + '\0'
+    assert product_verification.source_changes() == [' M ' + relative]
+    assert product_verification.head_commit() == expected_head

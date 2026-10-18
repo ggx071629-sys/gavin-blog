@@ -1,5 +1,6 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
+import { pathToFileURL } from 'node:url'
 
 const nuxtRoot = join(process.cwd(), '.nuxt')
 const brokenWindowsPath = /^\.\/[A-Za-z]:\//
@@ -19,7 +20,7 @@ async function collect(directory) {
       await collect(path)
       continue
     }
-    if (entry.name.endsWith('.json')) files.push(path)
+    if (entry.name.endsWith('.json') || entry.name === 'eslint.config.mjs') files.push(path)
   }
 }
 
@@ -37,6 +38,12 @@ const rewrite = (value) => {
 await collect(nuxtRoot)
 for (const file of files) {
   const original = await readFile(file, 'utf8')
-  const updated = `${JSON.stringify(rewrite(JSON.parse(original)), null, 2)}\n`
+  const updated = file.endsWith('.json')
+    ? `${JSON.stringify(rewrite(JSON.parse(original)), null, 2)}\n`
+    : original.replace(
+        /((?:from\s+|import\s+)['"])(\.\/[A-Za-z]:\/[^'"]+)(['"])/g,
+        (_, prefix, specifier, quote) =>
+          `${prefix}${pathToFileURL(specifier.slice(2), { windows: true }).href}${quote}`,
+      )
   if (updated !== original) await writeFile(file, updated)
 }

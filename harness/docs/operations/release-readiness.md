@@ -30,7 +30,7 @@ API 虚拟环境必须位于 `apps/api/.venv`，并已安装 `.[dev]`。本地�
 
 `quality:release` 在环境变量 `HARNESS_BASE_REF` 存在时，先从 `harness/` 执行 `python -m tools.harness change-check --base <ref> --head <ref>`。该检查只接受同一 Git diff 中的压缩 task archive 与 schema v2 passed evidence，并验证 evidence source commit 位于 base 之后且可从 head 到达。`HARNESS_HEAD_REF` 可选，默认是 `HEAD`。
 
-没有显式基线时，本地 release runner 会清楚报告 change coverage 被跳过。私有 GitHub 仓库 `ggx071629-sys/smart_blog` 的 `Release gate / quality-release` workflow 在面向 `main` 的 pull request、main push 与人工运行中检出完整历史：PR 使用 base SHA，push 使用 before SHA，人工运行使用 HEAD 第一父提交；全零、空、相同或不可解析的 base/head 会在安装依赖前失败。CI 随后以 `npm ci` 安装 Node lock、以固定 SHA 的 setup-uv 安装显式 uv 版本，并在 `apps/api/` 执行 `uv sync --locked --extra dev --python 3.11` 重建 `.venv`；lock 与 `pyproject.toml` 不一致会在 release 前失败。安装 Chromium 后 workflow 只调用权威 `npm run quality:release`，因此远端运行不能进入 local-only coverage skip。
+没有显式基线时，本地 release runner 会清楚报告 change coverage 被跳过。GitHub 仓库 `ggx071629-sys/gavin-blog` 的 `Release gate / quality-release` workflow 在面向 `main` 的 pull request、main push 与人工运行中检出完整历史：PR 使用 base SHA，push 使用 before SHA，人工运行使用 HEAD 第一父提交；全零、空、相同或不可解析的 base/head 会在安装依赖前失败。CI 随后以 `npm ci` 安装 Node lock、以固定 SHA 的 setup-uv 安装显式 uv 版本，并在 `apps/api/` 执行 `uv sync --locked --extra dev --python 3.11` 重建 `.venv`；lock 与 `pyproject.toml` 不一致会在 release 前失败。安装 Chromium 后 workflow 只调用权威 `npm run quality:release`，因此远端运行不能进入 local-only coverage skip。
 
 change coverage 会验证 evidence 的 source commit 从 head 可达，所以 squash/rebase 改写已验证提交后不能复用原 evidence；合并策略必须保留验证过的提交。workflow 文件本身只建立可运行 check，不自动证明 GitHub branch protection 或 ruleset 已将其设为 required；必须在首次远端运行出现 check context 后查询仓库规则并单独确认。即使 CI 与 required check 均生效，也只提升合并质量保证，不解除本页的部署、持久化、备份恢复和生产安全 No-Go。
 
@@ -161,7 +161,7 @@ uv run --locked python scripts/run_assistant_backup_restore.py restore `
 
 北京时间每日 2.00 元人民币只约束按部署价格快照计算的公开 Chat 新调用；query Embedding 与 index Embedding 使用各自独立 cap，三者都以 `settled + reserved` 计算，也都不是供应商总账单保证。已越过 sending 的失 fence 调用仍按价格快照无正文保守结算，异常 usage 可以更高。第四阶段 archive/evidence 只证明当时形式关闭；第五阶段本地运营控制面已经进入当前代码，release evidence 也只证明本地门禁，二者都不等于已上线、对访客开放或 production Go。启用前必须分别检查 API capability、Web launcher、runtime gate 与当前 generation readiness，在 `checkpoints`/`writes` 零残留后签发 receipt，再由管理员显式 enable；generation finalize 会先 fail closed，切换后必须重签 receipt。真实供应商、反向代理 SSE、备份恢复、目标服务器公网安全与 2 vCPU／4 GB 实机验收仍是生产放行条件。
 
-`.run/`、`my_image/` 和复刻项目快照 `my_blog_fork/` 永久排除于 smart_blog Git 历史与 CI checkout；不得通过强制添加、归档上传或 workflow artifact 绕过该边界。
+`.run/`、`my_image/` 和复刻项目快照 `my_blog_fork/` 永久排除于本仓库 Git 历史与 CI checkout；不得通过强制添加、归档上传或 workflow artifact 绕过该边界。
 
 ## Rollback boundary
 
@@ -170,3 +170,18 @@ uv run --locked python scripts/run_assistant_backup_restore.py restore `
 ## Go / no-go
 
 只有上述首发条件全部有可复查证据时才能作出 Go 决策。当前结论为 **No-Go for production deployment**，但可以继续生成和验证本地 release candidate。
+
+
+## 2026-10-18 Harness 完整检出
+
+本次补齐远端检出缺少的公开项目文档、业务测试、测试配置、运行脚本与 `.github/workflows/release.yml`。以远端现有业务实现为基线，保留已经存在的回归测试；不把本地工作树的其他产品修改整体覆盖到远端。
+
+用户最新澄清允许本地代码和测试修复，要求业务规则保持现状，禁止对接、操作或部署实际应用服务器。验证使用本地隔离 fixture；GitHub 代码上传与纯检查 CI 沿用既有授权。本轮类型修复限于保持运行值和调用语义的注解或 cast，不能据此宣称已完成服务器部署或生产验证。
+
+完整性检查从 `harness/` 执行 `python -m tools.harness verify`；它检查全部结构、链接、模块引用、归属、历史完整性和供应链，不能代替产品测试。当前任务的认证结果保存在对应的紧凑 evidence 中。发布候选另外从根目录执行 `npm run quality:release`，远端工作流以可信 base/head 强制检查变更覆盖。
+
+历史计划中指向原始评估输出、数据库、截图、压缩包和其他被忽略材料的路径会明确标为本机产物，不伪造归档。GitHub 只保存公开说明、确定性测试输入、验证代码与紧凑证据；原始材料仍遵守本页的数据边界。
+
+恢复工作流不会自动启用 branch protection，也不会部署或打开公开助手。远端 Actions 的实际运行结果应与本机检查分别记录。
+
+本机已测 API 全套约 5 分 15 秒、Harness 约 1 分 36 秒、Web 构建与质量约 5 分钟，核心 E2E 在 13 分 15 秒时仍未完成 123 项；因此将 CI job 时限从 30 分钟有界提高至 45 分钟，为剩余场景、助手生产构建与首次 CI 冷安装预留余量，现有质量阈值和生产 No-Go 保持不变。

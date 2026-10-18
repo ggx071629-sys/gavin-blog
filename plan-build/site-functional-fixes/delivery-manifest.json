@@ -1,0 +1,80 @@
+{
+  "date": "2026-09-12",
+  "run_id": "20260912-03",
+  "implementation_snapshot": "c31880d93f55ba9f848a1aaee8b2758c7410ec19",
+  "status": "complete",
+  "plan_tasks": "23/23",
+  "fixed_issues": 4,
+  "unresolved_observations": [
+    "O001"
+  ],
+  "specs": [
+    {
+      "issue": "I004",
+      "original_case": "C070",
+      "task_id": "20260912-public-error-recovery",
+      "source_commit": "8d5728e9ae17b2798bed732970801c229adfa756",
+      "selected_refs": 5,
+      "status": "passed-and-closed",
+      "evidence_sha256": "86664ca08ef79be46a2420d02bc07e7962ddabcbbc69915c7b705957e8068a53",
+      "evidence": "harness/verification/evidence/20260912-public-error-recovery.json",
+      "archive": "harness/specs/archive/20260912-public-error-recovery.md",
+      "event": "harness/evolution/events/20260912-public-error-recovery--spec-completed.json"
+    },
+    {
+      "issue": "I003",
+      "original_case": "C031",
+      "task_id": "20260912-about-draft-preserve",
+      "source_commit": "c9ae20a409c60d33df5d813ca12ab8998a74aa75",
+      "selected_refs": 3,
+      "status": "passed-and-closed",
+      "evidence_sha256": "5b6300da3619b363b5e13cf36e31e0b00d244be6f3c6b64b368daae59b6b8c8a",
+      "evidence": "harness/verification/evidence/20260912-about-draft-preserve.json",
+      "archive": "harness/specs/archive/20260912-about-draft-preserve.md",
+      "event": "harness/evolution/events/20260912-about-draft-preserve--spec-completed.json"
+    },
+    {
+      "issue": "I001",
+      "original_case": "C024",
+      "task_id": "20260912-book-cover-media-url",
+      "source_commit": "2064df110855d6360572ccca873f58013261c3fb",
+      "selected_refs": 2,
+      "status": "passed-and-closed",
+      "evidence_sha256": "aa2546789820f034caa41a68bb4a57b1063380bbff45d24b9dbf6bfad19bb81a",
+      "evidence": "harness/verification/evidence/20260912-book-cover-media-url.json",
+      "archive": "harness/specs/archive/20260912-book-cover-media-url.md",
+      "event": "harness/evolution/events/20260912-book-cover-media-url--spec-completed.json"
+    },
+    {
+      "issue": "I002",
+      "original_case": "C045",
+      "task_id": "20260912-markdown-line-endings",
+      "source_commit": "81bdd4877629d0603198f6a720704233ee362456",
+      "selected_refs": 4,
+      "status": "passed-and-closed",
+      "evidence_sha256": "1fcf82995ef2ce07bc08eb7225439f88d9c430c7d735b91cc7d76a12fb4973ee",
+      "evidence": "harness/verification/evidence/20260912-markdown-line-endings.json",
+      "archive": "harness/specs/archive/20260912-markdown-line-endings.md",
+      "event": "harness/evolution/events/20260912-markdown-line-endings--spec-completed.json"
+    }
+  ],
+  "supplementary": {
+    "selected_tests": [
+      "about editor keeps drafts private until explicit publish",
+      "390 filters wrap within the viewport and article rows stack",
+      "books index uses a page-local reading highlight and ledger rows",
+      "idle does not call search, empty copy differs, hits and pagination keep q",
+      "ops duplicate tag slug reports a conflict without a stuck pending state"
+    ],
+    "passed": 5,
+    "source_commit": "c31880d93f55ba9f848a1aaee8b2758c7410ec19",
+    "log_sha256": "ed7e259710f96809948375b8d661c17d0d59221ec68f90c34a151d4817542edf"
+  },
+  "cleanup": {
+    "listening_ports": [],
+    "remaining_task_worktrees": [],
+    "harness_cleanup": "all four passed",
+    "supplementary_data": "retained locally at .run/site-functional-fixes/20260912-03/supplementary-data",
+    "other_worktrees": "preserved"
+  }
+}

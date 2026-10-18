@@ -242,6 +242,9 @@ def download_pdf(
     url: str, trusted_hosts: tuple[str, ...], *, force_refresh: bool = False
 ) -> DownloadedPdf:
     checked_url(url, trusted_hosts)
+    creation_flags = 0
+    if sys.platform == "win32":
+        creation_flags = subprocess.CREATE_NO_WINDOW
     try:
         result = subprocess.run(
             [sys.executable, "-m", "app.assistant_resume.download"],
@@ -253,7 +256,7 @@ def download_pdf(
             timeout=TOTAL_SECONDS,
             cwd=Path(__file__).resolve().parents[2],
             env=worker_environment(),
-            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+            creationflags=creation_flags,
             check=False,
         )
     except subprocess.TimeoutExpired:
@@ -280,6 +283,7 @@ def download_pdf(
 
 
 def main() -> None:
+    result: dict[str, object]
     try:
         request = json.loads(sys.stdin.buffer.read(8192))
         body = fetch_pdf(

@@ -3,7 +3,7 @@ from __future__ import annotations
 import math
 import uuid
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, cast
 
 from qdrant_client import QdrantClient
 from qdrant_client.http.models import (
@@ -72,7 +72,7 @@ class QdrantPointStore:
                 return None
             if not all(isinstance(v, (int, float)) and math.isfinite(v) for v in vector):
                 return None
-            vectors.append(vector)
+            vectors.append(cast(list[float], vector))
         return vectors
 
     def create_collection(self, name: str, *, dimension: int, distance: str = "Cosine") -> None:

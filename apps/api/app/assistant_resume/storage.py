@@ -4,9 +4,11 @@ import hashlib
 import json
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Any, cast
 from uuid import uuid4
 
 from sqlalchemy import delete, exists, select, update
+from sqlalchemy.engine import CursorResult
 from sqlalchemy.orm import Session
 
 from ..models import (
@@ -105,9 +107,11 @@ def guard(db: Session, lease: ResumeLease, now: datetime) -> AssistantResumeSour
         .values(binding_epoch=AssistantResumeSource.binding_epoch),
         execution_options={"synchronize_session": False},
     )
-    if matched.rowcount != 1:
+    if cast(CursorResult[Any], matched).rowcount != 1:
         raise ResumeLeaseLost("resume_lease_lost")
-    return db.get(AssistantResumeSource, 1, populate_existing=True)
+    return cast(
+        AssistantResumeSource, db.get(AssistantResumeSource, 1, populate_existing=True)
+    )
 
 
 def current_version(db: Session, row: AssistantResumeSource) -> AssistantResumeVersion | None:
@@ -133,7 +137,7 @@ def accept_download(
     if version and version.sha256 == pdf.sha256 and version.parser_version == PARSER_VERSION:
         row.enabled = True
         row.state = "indexing"
-        request = db.get(AssistantResumeRequest, lease.request_id)
+        request = cast(AssistantResumeRequest, db.get(AssistantResumeRequest, lease.request_id))
         request.status = "succeeded"
         from ..assistant_index.outbox import enqueue_task
 
@@ -187,7 +191,8 @@ def accept_parsed(
     row.state = "indexing"
     row.error_code = None
     row.last_indexed_at = None
-    db.get(AssistantResumeRequest, lease.request_id).status = "succeeded"
+    request = cast(AssistantResumeRequest, db.get(AssistantResumeRequest, lease.request_id))
+    request.status = "succeeded"
     from ..assistant_index.outbox import enqueue_task
 
     enqueue_task(
@@ -207,7 +212,7 @@ def fail(db: Session, lease: ResumeLease, code: str, *, now: datetime | None = N
     row.error_code = (
         code if code in (DOWNLOAD_CODES | PARSE_CODES | {"index_failed"}) else "download_failed"
     )
-    db.get(AssistantResumeRequest, lease.request_id).status = "failed"
+    cast(AssistantResumeRequest, db.get(AssistantResumeRequest, lease.request_id)).status = "failed"
 
 
 def usable_version(db: Session) -> AssistantResumeVersion | None:

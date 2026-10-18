@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from contextlib import contextmanager
 from datetime import timedelta
+from typing import cast
 from uuid import uuid4
 
 from sqlalchemy import delete, text
@@ -169,10 +170,11 @@ def process_resume_once(runtime) -> bool:
                 accept_parsed(db, lease, downloaded, parsed, now=runtime.now())
         return True
     except (DownloadError, ParseError) as exc:
+        failed_lease = cast(ResumeLease, lease)
         try:
             with _write(runtime) as db:
-                fail(db, lease, exc.code, now=runtime.now())
-                request = db.get(AssistantResumeRequest, lease.request_id)
+                fail(db, failed_lease, exc.code, now=runtime.now())
+                request = db.get(AssistantResumeRequest, failed_lease.request_id)
                 if isinstance(exc, DownloadError) and exc.transient and request.attempt_count < 4:
                     delay = max(BACKOFF_SECONDS[request.attempt_count - 1], exc.retry_after or 0)
                     request.status = "pending"

@@ -3,7 +3,6 @@ from __future__ import annotations
 import base64
 import io
 import json
-import os
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -78,6 +77,9 @@ def parse_pdf(body: bytes) -> ParsedPdf:
         raise ParseError("too_large")
     if not body.startswith(b"%PDF-"):
         raise ParseError("not_pdf")
+    creation_flags = 0
+    if sys.platform == "win32":
+        creation_flags = subprocess.CREATE_NO_WINDOW
     try:
         result = subprocess.run(
             [sys.executable, "-m", "app.assistant_resume.parse"],
@@ -87,7 +89,7 @@ def parse_pdf(body: bytes) -> ParsedPdf:
             timeout=PARSE_SECONDS,
             env=worker_environment(),
             cwd=Path(__file__).resolve().parents[2],
-            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+            creationflags=creation_flags,
             check=False,
         )
     except subprocess.TimeoutExpired:
@@ -116,6 +118,7 @@ def parse_pdf(body: bytes) -> ParsedPdf:
 
 
 def main() -> None:
+    result: dict[str, object]
     try:
         if not limit_memory():
             raise ParseError("parser_unavailable")

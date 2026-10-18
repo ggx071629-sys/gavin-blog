@@ -12,7 +12,7 @@ _job_handles: list[int] = []
 def limit_memory() -> bool:
     """Set an OS-enforced process limit before loading the PDF library."""
     try:
-        if os.name == "nt":
+        if sys.platform == "win32":
             import ctypes
             from ctypes import wintypes
 

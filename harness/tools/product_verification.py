@@ -742,6 +742,7 @@ def _git_value(*args: str) -> str:
         cwd=project_root(),
         capture_output=True,
         text=True,
+        encoding="utf-8",
         check=False,
     )
     if result.returncode != 0:
@@ -836,6 +837,7 @@ def source_changes(extra_paths: list[str] | None = None) -> list[str]:
         cwd=project_root(),
         capture_output=True,
         text=True,
+        encoding="utf-8",
         check=False,
     )
     if result.returncode != 0:
@@ -1553,6 +1555,7 @@ def head_commit() -> str | None:
         cwd=project_root(),
         capture_output=True,
         text=True,
+        encoding="utf-8",
         check=False,
     )
     return result.stdout.strip() if result.returncode == 0 else None

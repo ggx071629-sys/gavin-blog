@@ -88,7 +88,9 @@ def delete_fts_ids(db: Session, chunk_ids: list[str], *, generation_id: int) -> 
     if not chunk_ids:
         return
     placeholders = ", ".join(f":id_{index}" for index in range(len(chunk_ids)))
-    params = {f"id_{index}": chunk_id for index, chunk_id in enumerate(chunk_ids)}
+    params: dict[str, str | int] = {
+        f"id_{index}": chunk_id for index, chunk_id in enumerate(chunk_ids)
+    }
     params["generation_id"] = generation_id
     db.execute(
         text(

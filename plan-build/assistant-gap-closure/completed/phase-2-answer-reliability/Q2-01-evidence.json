@@ -1,0 +1,74 @@
+{
+  "cases": 40,
+  "network": "denied",
+  "live_provider_calls": 0,
+  "dataset_sha256": "dd48f22015c143fa1727ad010f3d647d0581858a08ded247eecdb827b7ea5d06",
+  "strategies": {
+    "current_runtime": {
+      "false_accepts": [
+        "A01-negation",
+        "A02-swapped-numbers",
+        "A03-invented-fact",
+        "A04-chinese-number",
+        "A05-temporal",
+        "A06-invented-named-person",
+        "A07-cross-sentence-denial",
+        "A08-conflicting-source",
+        "A09-english-negation",
+        "A10-universal-claim",
+        "H02-invented-fact",
+        "H04-invented-quantifier",
+        "H06-qualified-dropped",
+        "H08-limit-reversed",
+        "H12-english-denial",
+        "H14-subject-swapped",
+        "H16-time-dropped"
+      ],
+      "false_rejections": [
+        "A11-valid-personal-paraphrase",
+        "A12-valid-relation-paraphrase",
+        "A13-valid-unit-conversion",
+        "A14-valid-enumeration-count",
+        "A15-valid-less-than",
+        "A16-valid-array-index",
+        "H09-distributed-count",
+        "H11-english-paraphrase"
+      ],
+      "elapsed_ms": 2.823
+    },
+    "exact_complete_clause": {
+      "false_accepts": [
+        "A07-cross-sentence-denial",
+        "A08-conflicting-source"
+      ],
+      "false_rejections": [
+        "A11-valid-personal-paraphrase",
+        "A12-valid-relation-paraphrase",
+        "A13-valid-unit-conversion",
+        "A14-valid-enumeration-count",
+        "C01-normal-paraphrase",
+        "C07-current-self-report",
+        "H03-supported-paraphrase",
+        "H09-distributed-count",
+        "H11-english-paraphrase"
+      ],
+      "elapsed_ms": 0.465
+    },
+    "bounded_paraphrase": {
+      "false_accepts": [
+        "A07-cross-sentence-denial",
+        "A08-conflicting-source"
+      ],
+      "false_rejections": [
+        "A13-valid-unit-conversion",
+        "A14-valid-enumeration-count",
+        "C07-current-self-report",
+        "H03-supported-paraphrase",
+        "H09-distributed-count",
+        "H11-english-paraphrase"
+      ],
+      "elapsed_ms": 0.42
+    }
+  },
+  "limits": "Synthetic diagnostic corpus, not independent population accuracy or real-model attack assessment."
+}

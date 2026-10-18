@@ -30,8 +30,22 @@ Ubuntu 22.04 / x86_64 container configuration is provided in [compose.yaml](comp
 Agent 协作入口见 [AGENTS.md](AGENTS.md)，任务路由见 [Harness Index](harness/INDEX.md)。
 确定性 CLI 使用 Python 3.11+ 标准库；从 `harness/` 执行 `python -m tools.harness verify` 检查完整性。
 
-本次补入 Harness 控制面、产品边界文档和静态发布门禁合同；产品发布脚本、CI、完整业务测试及历史 `plan-build/` 参考资料尚未同步。
-因此完整 `verify` 的链接、模块归属及供应链检查仍会报告这些缺口，不能将历史 evidence 当作当前远端的产品验证结果。
+Harness 引用的项目文档、业务测试、测试运行脚本和 GitHub Actions 工作流随仓库提供。历史文档中标明的本机原始产物仍留在 Git 外，不能将历史 evidence 当作当前远端的产品验证结果。
+
+从干净检出准备和验证开发环境：
+
+```sh
+# 在 apps/api/ 执行
+uv sync --locked --extra dev --python 3.11
+# 返回仓库根目录执行
+npm ci
+npx playwright install --with-deps chromium
+npm run quality:release
+# 单独检查 Harness 完整性（在 harness/ 执行）
+python -m tools.harness verify
+```
+
+`Release gate / quality-release` 在面向 main 的 pull request、main push 和手动触发时执行发布候选质量链；Harness 结构通过与整站发布候选通过是两项不同的结果。验证范围和生产边界见 [发布准备说明](harness/docs/operations/release-readiness.md)。
 
 为保留归档前的原始 active spec，Git 历史仅从原本地仓库筛选 `harness/` 和 `AGENTS.md` 后接入；筛选后的提交 SHA 会变化。
 历史 evidence 内的 source commit 和指纹保持原样，仍表示原始本地验证来源。

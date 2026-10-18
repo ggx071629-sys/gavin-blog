@@ -17,7 +17,7 @@ def test_release_workflow_has_bounded_triggers_permissions_and_history() -> None
     assert "permissions:\n  contents: read" in text
     assert "cancel-in-progress: true" in text
     assert "fetch-depth: 0" in text
-    assert "timeout-minutes: 30" in text
+    assert "timeout-minutes: 45" in text
     assert "write" not in text
 
 
